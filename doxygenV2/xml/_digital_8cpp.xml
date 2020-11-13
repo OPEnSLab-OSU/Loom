@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_digital_8cpp" kind="file" language="C++">
+    <compoundname>Digital.cpp</compoundname>
+    <includes refid="_digital_8h" local="yes">Digital.h</includes>
+    <incdepgraph>
+      <node id="4921">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4918">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4919" relation="include">
+        </childnode>
+        <childnode refid="4921" relation="include">
+        </childnode>
+        <childnode refid="4922" relation="include">
+        </childnode>
+        <childnode refid="4923" relation="include">
+        </childnode>
+      </node>
+      <node id="4922">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4920" relation="include">
+        </childnode>
+        <childnode refid="4923" relation="include">
+        </childnode>
+      </node>
+      <node id="4915">
+        <label>src/Sensors/Digital.cpp</label>
+        <link refid="Digital.cpp"/>
+        <childnode refid="4916" relation="include">
+        </childnode>
+      </node>
+      <node id="4919">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4920" relation="include">
+        </childnode>
+      </node>
+      <node id="4916">
+        <label>Digital.h</label>
+        <link refid="_digital_8h"/>
+        <childnode refid="4917" relation="include">
+        </childnode>
+      </node>
+      <node id="4923">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4917">
+        <label>Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="4918" relation="include">
+        </childnode>
+      </node>
+      <node id="4920">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/Digital.cpp"/>
+  </compounddef>
+</doxygen>

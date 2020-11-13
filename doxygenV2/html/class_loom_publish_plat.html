@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LoomPublishPlat class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          LoomPublishPlat <span class="m-thin">class</span>
+        </h1>
+        <p>Abstract internet publishing module, implementing google sheets and mongodb functionality.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>All actuator modules inherit from this class.</p><aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom_publish_plat.html">Module Documentation</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_module.html" class="m-doc">LoomModule</a>
+            </dt>
+            <dd>Abstract root of Loom component modules inheritance hierarchy.</dd>
+          </dl>
+        </section>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom___google_sheets.html" class="m-doc">Loom_GoogleSheets</a>
+            </dt>
+            <dd>Module taking in and translating JSON into data understood by the Google Sheets script API.</dd>
+            <dt>
+              class <a href="class_loom___max_pub.html" class="m-doc">Loom_MaxPub</a>
+            </dt>
+            <dd>Module taking in and translating JSON into data understood by the Google Sheets script API.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a9e07931b084ea022c48485a2df28cc83">
+              <a href="class_loom_internet_plat.html" class="m-doc">LoomInternetPlat</a>* <a href="#a9e07931b084ea022c48485a2df28cc83" class="m-doc-self">m_internet</a>
+            </dt>
+            <dd>Pointer to internet platform to use to publish.</dd>
+            <dt>
+              <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> <a href="#aab697868e61843787893f5509d22b9ed" class="m-doc">internet_type</a>
+            </dt>
+            <dd>Type of internet platform used to publish.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a59b0b76a0a0507c211284f341c0c5b34" class="m-doc">LoomPublishPlat</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> module_type,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> internet_type)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt id="a68870cd02f9de172d4bcf448060ef1ec">
+              <span class="m-doc-wrap-bumper"><a href="#a68870cd02f9de172d4bcf448060ef1ec" class="m-doc-self">~LoomPublishPlat</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+            <dt id="a9be9c86b766a6308fb2851875b50ba56">
+              <span class="m-doc-wrap-bumper">void <a href="#a9be9c86b766a6308fb2851875b50ba56" class="m-doc-self">second_stage_ctor</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Grab the internet platform specified by the ctor parameters.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac8548fef404b55465773513aefce5608" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>No package necessary for publishing platforms.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9be2ccbcaba4d1a5735bcd5bf828eafb" class="m-doc">publish</a>(</span><span class="m-doc-wrap">const JsonObject json) -&gt; bool</span>
+            </dt>
+            <dd>Publish data.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae0c0825a58465f124bfe07e3de8b3b25" class="m-doc">publish_batch</a>(</span><span class="m-doc-wrap">) -&gt; uint8_t</span>
+            </dt>
+            <dd>Publish all the packets stored in the batch.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5a172ded7502cd31fe15596e21dd6cc9" class="m-doc">publish</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Version of log for use with <a href="class_loom_manager.html" class="m-doc">LoomManager</a>.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a0055306a6b0efc49d83f083c1398eea1">
+              <span class="m-doc-wrap-bumper">void <a href="#a0055306a6b0efc49d83f083c1398eea1" class="m-doc-self">print_state</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display current state of the module.</dd>
+            <dt id="a38cc9fe71203a153392fbca807e39434">
+              <span class="m-doc-wrap-bumper">void <a href="#a38cc9fe71203a153392fbca807e39434" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5d54196f11ef28daf8fdf853f215a033" class="m-doc">send_to_internet</a>(</span><span class="m-doc-wrap">const JsonObject json,
+              <a href="class_loom_internet_plat.html" class="m-doc">LoomInternetPlat</a>* plat) -&gt; bool <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Send JSON to the internet, assumes that a valid internet plat was found and can be used.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a59b0b76a0a0507c211284f341c0c5b34"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> LoomPublishPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a59b0b76a0a0507c211284f341c0c5b34" class="m-doc-self">LoomPublishPlat</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> module_type,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> internet_type)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>module_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>String | &lt;&quot;Internet-Plat&quot;&gt; | null | Publish platform module name</td>
+                </tr>
+                <tr>
+                  <td>module_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Type of the module (provided by derived classes)</td>
+                </tr>
+                <tr>
+                  <td>internet_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(LoomModule::Type) | &lt;7001&gt; | {7001(&quot;Ethernet&quot;), 7002(&quot;WiFi&quot;), 7003(&quot;LTE&quot;)} | Code of the desired internet platform.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac8548fef404b55465773513aefce5608"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomPublishPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac8548fef404b55465773513aefce5608" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>No package necessary for publishing platforms.</p>
+<p>Implement with empty body.</p>
+          </div></section>
+          <section class="m-doc-details" id="a9be2ccbcaba4d1a5735bcd5bf828eafb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomPublishPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9be2ccbcaba4d1a5735bcd5bf828eafb" class="m-doc-self">publish</a>(</span><span class="m-doc-wrap">const JsonObject json)</span></span>
+            </h3>
+            <p>Publish data.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>JSON object to publish. MUST be formatted as { &quot;contents&quot; : [ { &quot;module&quot;: &quot;module_name&quot;, &quot;data&quot; : {...} }, ... ], &quot;timestamp&quot;(optional) : {...} }</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Whether or not the publish succeded</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae0c0825a58465f124bfe07e3de8b3b25"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint8_t LoomPublishPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae0c0825a58465f124bfe07e3de8b3b25" class="m-doc-self">publish_batch</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Publish all the packets stored in the batch.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether or not the publishes succeded or not</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5a172ded7502cd31fe15596e21dd6cc9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomPublishPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5a172ded7502cd31fe15596e21dd6cc9" class="m-doc-self">publish</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Version of log for use with <a href="class_loom_manager.html" class="m-doc">LoomManager</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Accesses Json from <a href="class_loom_manager.html" class="m-doc">LoomManager</a></p>
+          </div></section>
+          <section class="m-doc-details" id="a5d54196f11ef28daf8fdf853f215a033"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomPublishPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5d54196f11ef28daf8fdf853f215a033" class="m-doc-self">send_to_internet</a>(</span><span class="m-doc-wrap">const JsonObject json,
+              <a href="class_loom_internet_plat.html" class="m-doc">LoomInternetPlat</a>* plat) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Send JSON to the internet, assumes that a valid internet plat was found and can be used.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Json object to send</td>
+                </tr>
+                <tr>
+                  <td>plat&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Internet platform to send on</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="aab697868e61843787893f5509d22b9ed"><div>
+            <h3>
+              <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> LoomPublishPlat::<wbr /><a href="#aab697868e61843787893f5509d22b9ed" class="m-doc-self">internet_type</a> <span class="m-label m-warning">protected</span>
+            </h3>
+            <p>Type of internet platform used to publish.</p>
+<p>Needed because finding the module for m_internet happens in <a href="class_loom_publish_plat.html#a9be9c86b766a6308fb2851875b50ba56" class="m-doc">second_<wbr />stage_<wbr />ctor()</a>, rather than the regular constructor.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

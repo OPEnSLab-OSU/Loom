@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_m_m_a8451_8cpp" kind="file" language="C++">
+    <compoundname>MMA8451.cpp</compoundname>
+    <includes refid="_m_m_a8451_8h" local="yes">MMA8451.h</includes>
+    <incdepgraph>
+      <node id="5245">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5242">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5243" relation="include">
+        </childnode>
+        <childnode refid="5245" relation="include">
+        </childnode>
+        <childnode refid="5246" relation="include">
+        </childnode>
+        <childnode refid="5247" relation="include">
+        </childnode>
+      </node>
+      <node id="5246">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5244" relation="include">
+        </childnode>
+        <childnode refid="5247" relation="include">
+        </childnode>
+      </node>
+      <node id="5238">
+        <label>src/Sensors/I2C/MMA8451.cpp</label>
+        <link refid="MMA8451.cpp"/>
+        <childnode refid="5239" relation="include">
+        </childnode>
+      </node>
+      <node id="5239">
+        <label>MMA8451.h</label>
+        <link refid="_m_m_a8451_8h"/>
+        <childnode refid="5240" relation="include">
+        </childnode>
+        <childnode refid="5249" relation="include">
+        </childnode>
+        <childnode refid="5250" relation="include">
+        </childnode>
+      </node>
+      <node id="5243">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5244" relation="include">
+        </childnode>
+      </node>
+      <node id="5248">
+        <label>Wire.h</label>
+      </node>
+      <node id="5247">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5250">
+        <label>Adafruit_MMA8451.h</label>
+      </node>
+      <node id="5241">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5242" relation="include">
+        </childnode>
+      </node>
+      <node id="5249">
+        <label>Adafruit_Sensor.h</label>
+      </node>
+      <node id="5244">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5240">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5241" relation="include">
+        </childnode>
+        <childnode refid="5248" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/MMA8451.cpp"/>
+  </compounddef>
+</doxygen>

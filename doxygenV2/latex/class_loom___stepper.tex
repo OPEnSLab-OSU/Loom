@@ -1,0 +1,215 @@
+\hypertarget{class_loom___stepper}{}\section{Loom\+\_\+\+Stepper Class Reference}
+\label{class_loom___stepper}\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+
+
+Stepper actuator module.  
+
+
+
+
+{\ttfamily \#include $<$Stepper.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Stepper\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{class_loom___stepper__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___stepper_ac9847c8759e5409bc3083ed6bc979d86}{Loom\+\_\+\+Stepper} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___stepper_a1d104675960461e390b21a4f8494fd71}{Loom\+\_\+\+Stepper} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___stepper_a927d6418e8900ffde9d2801f03741018}{$\sim$\+Loom\+\_\+\+Stepper} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___stepper_ae2500cbc8029c5b3878d5465dfc01c22}{dispatch} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Route command to driver. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___stepper_a5413b50ce475e1f14773c3dfa8af0b59}{add\+\_\+config} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Add configuration information to Json\+Object. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___stepper_a691c9d6fd64d5ffe72b2e2ece42a02c9}{move\+\_\+steps} (const uint8\+\_\+t motor, const uint16\+\_\+t steps, const uint8\+\_\+t speed, const bool clockwise)
+\begin{DoxyCompactList}\small\item\em Move specified stepper specified steps, speed, and direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___stepper_a8aaf4b82032fc4b4cdd1ea1b9f289de1}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Override with empty body as no state to print. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+Motor\+Shield $\ast$ \hyperlink{class_loom___stepper_a6e1cef0a5db1d2d69c1fb09f1046770a}{A\+F\+MS}
+\begin{DoxyCompactList}\small\item\em Underlying motor shield controller. \end{DoxyCompactList}\item 
+Adafruit\+\_\+\+Stepper\+Motor $\ast$ \hyperlink{class_loom___stepper_a208acec02d1249fb449a17ca5e334cee}{motors} \mbox{[}\hyperlink{_stepper_8h_ae3d2a049ddf3e37949151dc679915aa3}{N\+U\+M\+\_\+\+S\+T\+E\+P\+P\+E\+RS}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Array of stepper controllers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Stepper actuator module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___stepper.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/2927}{\tt Product Page\+: Adafruit Stepper Feather}
+\item \href{https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library}{\tt Dependency\+: Adafruit-\/\+P\+W\+M-\/\+Servo-\/\+Driver}
+\item \href{https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library}{\tt Dependency\+: Adafruit\+\_\+\+Motor\+\_\+\+Shield\+\_\+\+V2\+\_\+\+Library}
+\item \href{https://cdn-shop.adafruit.com/datasheets/TB6612FNG_datasheet_en_20121101.pdf}{\tt Datasheet\+: Motor Driver}
+\item \href{https://www.adafruit.com/product/324}{\tt Product Page\+: Adafruit Stepper Motor}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#stepper-motors-dc-motor--stepper-featherwing}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Stepper(\+Loom\+Manager $\ast$manager)}{Loom_Stepper(LoomManager *manager)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Stepper\+::\+Loom\+\_\+\+Stepper (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___stepper_ac9847c8759e5409bc3083ed6bc979d86}{}\label{class_loom___stepper_ac9847c8759e5409bc3083ed6bc979d86}
+
+
+Constructor. 
+
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Stepper(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Stepper(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Stepper\+::\+Loom\+\_\+\+Stepper (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___stepper_a1d104675960461e390b21a4f8494fd71}{}\label{class_loom___stepper_a1d104675960461e390b21a4f8494fd71}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!````~Loom\+\_\+\+Stepper@{$\sim$\+Loom\+\_\+\+Stepper}}
+\index{````~Loom\+\_\+\+Stepper@{$\sim$\+Loom\+\_\+\+Stepper}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Stepper()}{~Loom_Stepper()}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Stepper\+::$\sim$\+Loom\+\_\+\+Stepper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___stepper_a927d6418e8900ffde9d2801f03741018}{}\label{class_loom___stepper_a927d6418e8900ffde9d2801f03741018}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!add\+\_\+config@{add\+\_\+config}}
+\index{add\+\_\+config@{add\+\_\+config}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\subsubsection[{\texorpdfstring{add\+\_\+config(\+Json\+Object json) override}{add_config(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Stepper\+::add\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___stepper_a5413b50ce475e1f14773c3dfa8af0b59}{}\label{class_loom___stepper_a5413b50ce475e1f14773c3dfa8af0b59}
+
+
+Add configuration information to Json\+Object. 
+
+\hyperlink{class_loom_manager}{Loom\+Manager} iterates over modules to build complete configuration 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json configuration object to add to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_a06747f16d76bde35575557c7515adcc0}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\subsubsection[{\texorpdfstring{dispatch(\+Json\+Object json) override}{dispatch(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Stepper\+::dispatch (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___stepper_ae2500cbc8029c5b3878d5465dfc01c22}{}\label{class_loom___stepper_ae2500cbc8029c5b3878d5465dfc01c22}
+
+
+Route command to driver. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!move\+\_\+steps@{move\+\_\+steps}}
+\index{move\+\_\+steps@{move\+\_\+steps}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\subsubsection[{\texorpdfstring{move\+\_\+steps(const uint8\+\_\+t motor, const uint16\+\_\+t steps, const uint8\+\_\+t speed, const bool clockwise)}{move_steps(const uint8_t motor, const uint16_t steps, const uint8_t speed, const bool clockwise)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Stepper\+::move\+\_\+steps (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{motor, }
+\item[{const uint16\+\_\+t}]{steps, }
+\item[{const uint8\+\_\+t}]{speed, }
+\item[{const bool}]{clockwise}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___stepper_a691c9d6fd64d5ffe72b2e2ece42a02c9}{}\label{class_loom___stepper_a691c9d6fd64d5ffe72b2e2ece42a02c9}
+
+
+Move specified stepper specified steps, speed, and direction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em motor} & Which stepper to move (0-\/3) \\
+\hline
+\mbox{\tt in}  & {\em steps} & Number of steps to rotate \\
+\hline
+\mbox{\tt in}  & {\em speed} & Speed to move at (0-\/255) \\
+\hline
+\mbox{\tt in}  & {\em clockwise} & True to rotate clockwise, false for counterclock-\/wise \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Stepper\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___stepper_a8aaf4b82032fc4b4cdd1ea1b9f289de1}{}\label{class_loom___stepper_a8aaf4b82032fc4b4cdd1ea1b9f289de1}
+
+
+Override with empty body as no state to print. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!A\+F\+MS@{A\+F\+MS}}
+\index{A\+F\+MS@{A\+F\+MS}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\subsubsection[{\texorpdfstring{A\+F\+MS}{AFMS}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+Motor\+Shield$\ast$ Loom\+\_\+\+Stepper\+::\+A\+F\+MS\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___stepper_a6e1cef0a5db1d2d69c1fb09f1046770a}{}\label{class_loom___stepper_a6e1cef0a5db1d2d69c1fb09f1046770a}
+
+
+Underlying motor shield controller. 
+
+\index{Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}!motors@{motors}}
+\index{motors@{motors}!Loom\+\_\+\+Stepper@{Loom\+\_\+\+Stepper}}
+\subsubsection[{\texorpdfstring{motors}{motors}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+Stepper\+Motor$\ast$ Loom\+\_\+\+Stepper\+::motors\mbox{[}{\bf N\+U\+M\+\_\+\+S\+T\+E\+P\+P\+E\+RS}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___stepper_a208acec02d1249fb449a17ca5e334cee}{}\label{class_loom___stepper_a208acec02d1249fb449a17ca5e334cee}
+
+
+Array of stepper controllers. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Actuators/\hyperlink{_stepper_8h}{Stepper.\+h}\item 
+src/\+Actuators/\hyperlink{_stepper_8cpp}{Stepper.\+cpp}\end{DoxyCompactItemize}

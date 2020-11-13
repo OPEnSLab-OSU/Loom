@@ -1,0 +1,291 @@
+\hypertarget{class_loom___ethernet}{}\section{Loom\+\_\+\+Ethernet Class Reference}
+\label{class_loom___ethernet}\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+
+
+Internet\+Plat built off of S\+S\+L\+Client running over an Ethernet Featherwing.  
+
+
+
+
+{\ttfamily \#include $<$Internet\+Ethernet.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Ethernet\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=179pt]{class_loom___ethernet__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___ethernet_a7f3a01c22467bb74b4ee421db507d4c8}{Loom\+\_\+\+Ethernet} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}=\char`\"{}Ethernet\char`\"{}, const Json\+Array\+Const mac=Json\+Array(), const Json\+Array\+Const ip=Json\+Array())
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___ethernet_aa03b81c5af2dc257f5a52f4dbe0f6714}{Loom\+\_\+\+Ethernet} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom___ethernet_ab083d7e571e429c5741b7dfa1b3bd5a1}{$\sim$\+Loom\+\_\+\+Ethernet} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___ethernet_a743f6fa201609c3874bded88390a891e}{connect} () override
+\begin{DoxyCompactList}\small\item\em Connect to internet. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___ethernet_a2770d92b9459361acb44e78694f94964}{is\+\_\+connected} () const override
+\begin{DoxyCompactList}\small\item\em Whether or not connected to internet. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_internet_plat_a0b2cc742a6ac5f4f7054b75ea99b345c}{U\+D\+P\+Ptr} \hyperlink{class_loom___ethernet_aadfcbd39770e463dbc0383f8d358d89f}{open\+\_\+socket} (const uint port) override
+\begin{DoxyCompactList}\small\item\em Open a U\+DP socket for sending and recieving incoming data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___ethernet_a79ed8f208e2fe4faf0a71e468d7ba22e}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___ethernet_a1305b086b7e99c98320ad1d280718259}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+S\+S\+L\+Client \& \hyperlink{class_loom___ethernet_a8152295e24d6bbd8f5b9cda6cccc0997}{get\+\_\+client} () override
+\begin{DoxyCompactList}\small\item\em Get the underlying S\+S\+L\+Client implementation, which we will use for all of the other requests. \end{DoxyCompactList}\item 
+const S\+S\+L\+Client \& \hyperlink{class_loom___ethernet_a9223a4328f34b0a6640e1183e1f8ed2c}{get\+\_\+client} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ethernet\+Client \hyperlink{class_loom___ethernet_a9d0214994b52ec9932906ccfb5593a9d}{m\+\_\+base\+\_\+client}
+\item 
+S\+S\+L\+Client \hyperlink{class_loom___ethernet_ade9af6aab7a240375cc4f4786b8b0b04}{m\+\_\+client}
+\begin{DoxyCompactList}\small\item\em Underlying Ethernet S\+S\+Lclient instance. \end{DoxyCompactList}\item 
+byte \hyperlink{class_loom___ethernet_ad3ac39aaf45c0c53965d029e9c1db7a4}{m\+\_\+mac} \mbox{[}6\mbox{]}
+\begin{DoxyCompactList}\small\item\em The Ethernet M\+AC address. \end{DoxyCompactList}\item 
+I\+P\+Address \hyperlink{class_loom___ethernet_ab7b3e7573fa75b43d99d99cec21b6a86}{m\+\_\+ip}
+\begin{DoxyCompactList}\small\item\em The devices IP address. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___ethernet_a383b518b130bb1342bd8e4eae8c01e29}{m\+\_\+is\+\_\+connected}
+\begin{DoxyCompactList}\small\item\em Whether or not ethernet initialized successfully. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Internet\+Plat built off of S\+S\+L\+Client running over an Ethernet Featherwing. 
+
+\begin{DoxyAttention}{Attention}
+Requires 7\+KB of free S\+R\+AM at runtime to use.
+\end{DoxyAttention}
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___ethernet.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/3201}{\tt Product Page\+: Adafruit Ethernet Featherwing}
+\item \href{https://github.com/OPEnSLab-OSU/EthernetLarge}{\tt Dependency\+: Ethernet\+Large} O\+P\+EbS Lab fork of Arduino Ethernet library
+\item \href{https://github.com/OPEnSLab-OSU/SSLClient}{\tt Dependency\+: S\+S\+L\+Client}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ethernet}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Ethernet(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name=""Ethernet"", const Json\+Array\+Const mac=\+Json\+Array(), const Json\+Array\+Const ip=\+Json\+Array())}{Loom_Ethernet(LoomManager *manager, const char *module_name="Ethernet", const JsonArrayConst mac=JsonArray(), const JsonArrayConst ip=JsonArray())}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Ethernet\+::\+Loom\+\_\+\+Ethernet (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name = {\ttfamily \char`\"{}Ethernet\char`\"{}}, }
+\item[{const Json\+Array\+Const}]{mac = {\ttfamily JsonArray()}, }
+\item[{const Json\+Array\+Const}]{ip = {\ttfamily JsonArray()}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___ethernet_a7f3a01c22467bb74b4ee421db507d4c8}{}\label{class_loom___ethernet_a7f3a01c22467bb74b4ee421db507d4c8}
+
+
+Constructor. 
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Ethernet(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Ethernet(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Ethernet\+::\+Loom\+\_\+\+Ethernet (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___ethernet_aa03b81c5af2dc257f5a52f4dbe0f6714}{}\label{class_loom___ethernet_aa03b81c5af2dc257f5a52f4dbe0f6714}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!````~Loom\+\_\+\+Ethernet@{$\sim$\+Loom\+\_\+\+Ethernet}}
+\index{````~Loom\+\_\+\+Ethernet@{$\sim$\+Loom\+\_\+\+Ethernet}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Ethernet()=default}{~Loom_Ethernet()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+\_\+\+Ethernet\+::$\sim$\+Loom\+\_\+\+Ethernet (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom___ethernet_ab083d7e571e429c5741b7dfa1b3bd5a1}{}\label{class_loom___ethernet_ab083d7e571e429c5741b7dfa1b3bd5a1}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!connect@{connect}}
+\index{connect@{connect}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{connect() override}{connect() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Ethernet\+::connect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___ethernet_a743f6fa201609c3874bded88390a891e}{}\label{class_loom___ethernet_a743f6fa201609c3874bded88390a891e}
+
+
+Connect to internet. 
+
+
+
+Implements \hyperlink{class_loom_internet_plat_a24d7c701a3db8e16355b6a33a4e323a6}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!get\+\_\+client@{get\+\_\+client}}
+\index{get\+\_\+client@{get\+\_\+client}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{get\+\_\+client() override}{get_client() override}}]{\setlength{\rightskip}{0pt plus 5cm}S\+S\+L\+Client\& Loom\+\_\+\+Ethernet\+::get\+\_\+client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___ethernet_a8152295e24d6bbd8f5b9cda6cccc0997}{}\label{class_loom___ethernet_a8152295e24d6bbd8f5b9cda6cccc0997}
+
+
+Get the underlying S\+S\+L\+Client implementation, which we will use for all of the other requests. 
+
+
+
+Implements \hyperlink{class_loom_internet_plat_a71bfc232cac5294b1c3e6dbb00029fa7}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!get\+\_\+client@{get\+\_\+client}}
+\index{get\+\_\+client@{get\+\_\+client}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{get\+\_\+client() const }{get_client() const }}]{\setlength{\rightskip}{0pt plus 5cm}const S\+S\+L\+Client\& Loom\+\_\+\+Ethernet\+::get\+\_\+client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___ethernet_a9223a4328f34b0a6640e1183e1f8ed2c}{}\label{class_loom___ethernet_a9223a4328f34b0a6640e1183e1f8ed2c}
+
+
+Implements \hyperlink{class_loom_internet_plat_a3b79a1467f5f239cd740d6ced88cdadf}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!is\+\_\+connected@{is\+\_\+connected}}
+\index{is\+\_\+connected@{is\+\_\+connected}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{is\+\_\+connected() const override}{is_connected() const override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Ethernet\+::is\+\_\+connected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___ethernet_a2770d92b9459361acb44e78694f94964}{}\label{class_loom___ethernet_a2770d92b9459361acb44e78694f94964}
+
+
+Whether or not connected to internet. 
+
+\begin{DoxyReturn}{Returns}
+True if connect, false otherwise 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_internet_plat_af9c5c867598c9951db4d404a6a495ce7}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!open\+\_\+socket@{open\+\_\+socket}}
+\index{open\+\_\+socket@{open\+\_\+socket}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{open\+\_\+socket(const uint port) override}{open_socket(const uint port) override}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat\+::\+U\+D\+P\+Ptr} Loom\+\_\+\+Ethernet\+::open\+\_\+socket (
+\begin{DoxyParamCaption}
+\item[{const uint}]{port}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___ethernet_aadfcbd39770e463dbc0383f8d358d89f}{}\label{class_loom___ethernet_aadfcbd39770e463dbc0383f8d358d89f}
+
+
+Open a U\+DP socket for sending and recieving incoming data. 
+
+\begin{DoxyWarning}{Warning}
+Be careful about recieving data from an open socket! 
+\end{DoxyWarning}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em port} & Port to open socket with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A U\+DP socket for transmitting and recieving, remember to close the socket when you are done! 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_internet_plat_a91204905ec272ff1edc608a3aa250745}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Ethernet\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___ethernet_a79ed8f208e2fe4faf0a71e468d7ba22e}{}\label{class_loom___ethernet_a79ed8f208e2fe4faf0a71e468d7ba22e}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Ethernet\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___ethernet_a1305b086b7e99c98320ad1d280718259}{}\label{class_loom___ethernet_a1305b086b7e99c98320ad1d280718259}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!m\+\_\+base\+\_\+client@{m\+\_\+base\+\_\+client}}
+\index{m\+\_\+base\+\_\+client@{m\+\_\+base\+\_\+client}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{m\+\_\+base\+\_\+client}{m_base_client}}]{\setlength{\rightskip}{0pt plus 5cm}Ethernet\+Client Loom\+\_\+\+Ethernet\+::m\+\_\+base\+\_\+client\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___ethernet_a9d0214994b52ec9932906ccfb5593a9d}{}\label{class_loom___ethernet_a9d0214994b52ec9932906ccfb5593a9d}
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!m\+\_\+client@{m\+\_\+client}}
+\index{m\+\_\+client@{m\+\_\+client}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{m\+\_\+client}{m_client}}]{\setlength{\rightskip}{0pt plus 5cm}S\+S\+L\+Client Loom\+\_\+\+Ethernet\+::m\+\_\+client\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___ethernet_ade9af6aab7a240375cc4f4786b8b0b04}{}\label{class_loom___ethernet_ade9af6aab7a240375cc4f4786b8b0b04}
+
+
+Underlying Ethernet S\+S\+Lclient instance. 
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!m\+\_\+ip@{m\+\_\+ip}}
+\index{m\+\_\+ip@{m\+\_\+ip}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{m\+\_\+ip}{m_ip}}]{\setlength{\rightskip}{0pt plus 5cm}I\+P\+Address Loom\+\_\+\+Ethernet\+::m\+\_\+ip\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___ethernet_ab7b3e7573fa75b43d99d99cec21b6a86}{}\label{class_loom___ethernet_ab7b3e7573fa75b43d99d99cec21b6a86}
+
+
+The devices IP address. 
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!m\+\_\+is\+\_\+connected@{m\+\_\+is\+\_\+connected}}
+\index{m\+\_\+is\+\_\+connected@{m\+\_\+is\+\_\+connected}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{m\+\_\+is\+\_\+connected}{m_is_connected}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Ethernet\+::m\+\_\+is\+\_\+connected\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___ethernet_a383b518b130bb1342bd8e4eae8c01e29}{}\label{class_loom___ethernet_a383b518b130bb1342bd8e4eae8c01e29}
+
+
+Whether or not ethernet initialized successfully. 
+
+\index{Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}!m\+\_\+mac@{m\+\_\+mac}}
+\index{m\+\_\+mac@{m\+\_\+mac}!Loom\+\_\+\+Ethernet@{Loom\+\_\+\+Ethernet}}
+\subsubsection[{\texorpdfstring{m\+\_\+mac}{m_mac}}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+Ethernet\+::m\+\_\+mac\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___ethernet_ad3ac39aaf45c0c53965d029e9c1db7a4}{}\label{class_loom___ethernet_ad3ac39aaf45c0c53965d029e9c1db7a4}
+
+
+The Ethernet M\+AC address. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Internet\+Plats/\hyperlink{_internet_ethernet_8h}{Internet\+Ethernet.\+h}\item 
+src/\+Internet\+Plats/\hyperlink{_internet_ethernet_8cpp}{Internet\+Ethernet.\+cpp}\end{DoxyCompactItemize}

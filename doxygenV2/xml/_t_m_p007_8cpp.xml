@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_t_m_p007_8cpp" kind="file" language="C++">
+    <compoundname>TMP007.cpp</compoundname>
+    <includes refid="_t_m_p007_8h" local="yes">TMP007.h</includes>
+    <incdepgraph>
+      <node id="5392">
+        <label>TMP007.h</label>
+        <link refid="_t_m_p007_8h"/>
+        <childnode refid="5393" relation="include">
+        </childnode>
+        <childnode refid="5402" relation="include">
+        </childnode>
+      </node>
+      <node id="5398">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5395">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5396" relation="include">
+        </childnode>
+        <childnode refid="5398" relation="include">
+        </childnode>
+        <childnode refid="5399" relation="include">
+        </childnode>
+        <childnode refid="5400" relation="include">
+        </childnode>
+      </node>
+      <node id="5399">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5397" relation="include">
+        </childnode>
+        <childnode refid="5400" relation="include">
+        </childnode>
+      </node>
+      <node id="5402">
+        <label>Adafruit_TMP007.h</label>
+      </node>
+      <node id="5396">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5397" relation="include">
+        </childnode>
+      </node>
+      <node id="5401">
+        <label>Wire.h</label>
+      </node>
+      <node id="5400">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5394">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5395" relation="include">
+        </childnode>
+      </node>
+      <node id="5391">
+        <label>src/Sensors/I2C/TMP007.cpp</label>
+        <link refid="TMP007.cpp"/>
+        <childnode refid="5392" relation="include">
+        </childnode>
+      </node>
+      <node id="5397">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5393">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5394" relation="include">
+        </childnode>
+        <childnode refid="5401" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/TMP007.cpp"/>
+  </compounddef>
+</doxygen>

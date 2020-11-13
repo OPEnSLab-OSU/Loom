@@ -1,0 +1,4 @@
+<map id="Loom_Ethernet" name="Loom_Ethernet">
+<area shape="rect" id="node2" href="$class_loom_internet_plat.html" title="Abstract internet communication module. " alt="" coords="5,80,137,107"/>
+<area shape="rect" id="node3" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="19,5,123,32"/>
+</map>

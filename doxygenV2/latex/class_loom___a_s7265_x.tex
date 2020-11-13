@@ -1,0 +1,334 @@
+\hypertarget{class_loom___a_s7265_x}{}\section{Loom\+\_\+\+A\+S7265X Class Reference}
+\label{class_loom___a_s7265_x}\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+
+
+A\+S72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module.  
+
+
+
+
+{\ttfamily \#include $<$A\+S7265\+X.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+A\+S7265X\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_loom___a_s7265_x__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___a_s7265_x_abba5f26f08698ae2cb8e155db12bdec0}{Loom\+\_\+\+A\+S7265X} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}=0x49, const uint8\+\_\+t mux\+\_\+port=255, const bool use\+\_\+bulb=false, const uint8\+\_\+t gain=64, const uint8\+\_\+t mode=\+A\+S7265\+X\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+M\+O\+D\+E\+\_\+6\+C\+H\+A\+N\+\_\+\+O\+N\+E\+\_\+\+S\+H\+O\+T, const uint8\+\_\+t integration\+\_\+time=50)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___a_s7265_x_a89fe71b0299dbf065551014c9a9e2032}{Loom\+\_\+\+A\+S7265X} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___a_s7265_x_a8cbca9f7f1b423fe7c70a5df4b175389}{$\sim$\+Loom\+\_\+\+A\+S7265X} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___a_s7265_x_a070af4692fd32d11aed32069d31c8a1e}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___a_s7265_x_aa6b4502c7486d9aef3277af7287218f0}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___a_s7265_x_a07cd853cf0f22d3290920a3059359e0b}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___a_s7265_x_aff26c05d0ec04a7117e07a91bd6d100e}{enable\+\_\+bulb} (const bool e)
+\begin{DoxyCompactList}\small\item\em Set whether not bulb is used for active light source. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___a_s7265_x_a348d8bfd4d4d90a5c0ac6d2f37be1ac1}{set\+\_\+gain} (const uint8\+\_\+t \hyperlink{class_loom___a_s7265_x_a204831caa774ead3b9ba57495e17bfd9}{gain})
+\begin{DoxyCompactList}\small\item\em Set gain. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___a_s7265_x_a80b09ed31d462def8b4347feb44d3187}{set\+\_\+mode} (const uint8\+\_\+t \hyperlink{class_loom___a_s7265_x_a02bc2eaf8dfea91f9f47a19f49dcc1e9}{mode})
+\begin{DoxyCompactList}\small\item\em Set mode. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___a_s7265_x_a0e952773e0dd008f4ec831f0d8b10e2c}{set\+\_\+integration\+\_\+time} (const uint8\+\_\+t time)
+\begin{DoxyCompactList}\small\item\em Set integration time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+A\+S7265X \hyperlink{class_loom___a_s7265_x_a929b53e4170b78bfe3ca8787525dc4e7}{inst\+\_\+\+A\+S7265X}
+\begin{DoxyCompactList}\small\item\em Underlying A\+S7265X sensor manager instance. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom___a_s7265_x_a0724af751e2f38c7f71fc5828910f6fe}{uv} \mbox{[}6\mbox{]}
+\begin{DoxyCompactList}\small\item\em Measured UV bands values. Units\+: counts / (μ\+W/cm$^\wedge$2) \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom___a_s7265_x_aaf555d167aca2607fa0f13c71341f3b1}{color} \mbox{[}6\mbox{]}
+\begin{DoxyCompactList}\small\item\em Measured color bands values. Units\+: counts / (μ\+W/cm$^\wedge$2) \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom___a_s7265_x_a6f2c89c5aed39f75a275f37ce3ea21bd}{nir} \mbox{[}6\mbox{]}
+\begin{DoxyCompactList}\small\item\em Measured near-\/infra-\/red bands values. Units\+: counts / (μ\+W/cm$^\wedge$2) \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___a_s7265_x_a33831b2827d06b2114225b57862445f7}{use\+\_\+bulb}
+\begin{DoxyCompactList}\small\item\em Whether or not to use the bulb. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___a_s7265_x_a204831caa774ead3b9ba57495e17bfd9}{gain}
+\begin{DoxyCompactList}\small\item\em Gain setting. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___a_s7265_x_a02bc2eaf8dfea91f9f47a19f49dcc1e9}{mode}
+\begin{DoxyCompactList}\small\item\em Sensor mode. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___a_s7265_x_a656e32aedff07ca33e3b9b0dc2768ba8}{integration\+\_\+time}
+\begin{DoxyCompactList}\small\item\em Integration time setting. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A\+S72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___a_s7265_x.html}{\tt Module Documentation}
+\item \href{https://www.sparkfun.com/products/15050}{\tt Product Page\+: Spark\+Fun Triad Spectroscopy Sensor -\/ A\+S7265x}
+\item \href{https://github.com/sparkfun/SparkFun_AS7265x_Arduino_Library}{\tt Dependency\+: Spark\+Fun\+\_\+\+A\+S7265x\+\_\+\+Arduino\+\_\+\+Library}
+\item \href{https://cdn.sparkfun.com/assets/c/2/9/0/a/AS7265x_Datasheet.pdf}{\tt Datasheet\+: A\+S72625X}
+\item \href{https://learn.sparkfun.com/tutorials/spectral-triad-as7265x-hookup-guide}{\tt Hookup Guide\+: Spectral Triad (A\+S7265x)}
+\item \href{https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS7265x}{\tt Hardware Git\+Hub}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7265x-spectral-sensor-triad-visible-near-infrared-ultraviolet}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+A\+S7265\+X(\+Loom\+Manager $\ast$manager, const byte i2c\+\_\+address=0x49, const uint8\+\_\+t mux\+\_\+port=255, const bool use\+\_\+bulb=false, const uint8\+\_\+t gain=64, const uint8\+\_\+t mode=\+A\+S7265\+X\+\_\+\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+M\+O\+D\+E\+\_\+6\+C\+H\+A\+N\+\_\+\+O\+N\+E\+\_\+\+S\+H\+O\+T, const uint8\+\_\+t integration\+\_\+time=50)}{Loom_AS7265X(LoomManager *manager, const byte i2c_address=0x49, const uint8_t mux_port=255, const bool use_bulb=false, const uint8_t gain=64, const uint8_t mode=AS7265X_MEASUREMENT_MODE_6CHAN_ONE_SHOT, const uint8_t integration_time=50)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+A\+S7265\+X\+::\+Loom\+\_\+\+A\+S7265X (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{i2c\+\_\+address = {\ttfamily 0x49}, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}, }
+\item[{const bool}]{use\+\_\+bulb = {\ttfamily false}, }
+\item[{const uint8\+\_\+t}]{gain = {\ttfamily 64}, }
+\item[{const uint8\+\_\+t}]{mode = {\ttfamily AS7265X\+\_\+MEASUREMENT\+\_\+MODE\+\_\+6CHAN\+\_\+ONE\+\_\+SHOT}, }
+\item[{const uint8\+\_\+t}]{integration\+\_\+time = {\ttfamily 50}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___a_s7265_x_abba5f26f08698ae2cb8e155db12bdec0}{}\label{class_loom___a_s7265_x_abba5f26f08698ae2cb8e155db12bdec0}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x49$>$ $\vert$ \{0x49\} $\vert$ I2C address \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+port} & Int $\vert$ $<$255$>$ $\vert$ \mbox{[}0-\/16\mbox{]} $\vert$ Port on multiplexer \\
+\hline
+\mbox{\tt in}  & {\em use\+\_\+bulb} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ Whether or not to use bulb \\
+\hline
+\mbox{\tt in}  & {\em gain} & Set(\+Int) $\vert$ $<$1$>$ $\vert$ \{ 0(\char`\"{}1x\char`\"{}), 1(\char`\"{}3.\+7x\char`\"{}), 2(\char`\"{}16x\char`\"{}), 3(\char`\"{}64x\char`\"{}) \} $\vert$ Gain level \\
+\hline
+\mbox{\tt in}  & {\em mode} & Set(\+Int) $\vert$ $<$3$>$ $\vert$ \{ 0(\char`\"{}4 channels out of 6\char`\"{}), 1(\char`\"{}\+Different 4 channels out of 6\char`\"{}), 2(\char`\"{}\+All 6 channels continuously\char`\"{}), 3(\char`\"{}\+One-\/shot reading of all channels\char`\"{}) \} $\vert$ Read mode \\
+\hline
+\mbox{\tt in}  & {\em integration\+\_\+time} & Int $\vert$ $<$50$>$ $\vert$ \mbox{[}0-\/255\mbox{]} $\vert$ Integration time (time will be 2.\+8ms $\ast$ \mbox{[}integration value\mbox{]}) \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+A\+S7265\+X(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_AS7265X(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+A\+S7265\+X\+::\+Loom\+\_\+\+A\+S7265X (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___a_s7265_x_a89fe71b0299dbf065551014c9a9e2032}{}\label{class_loom___a_s7265_x_a89fe71b0299dbf065551014c9a9e2032}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!````~Loom\+\_\+\+A\+S7265X@{$\sim$\+Loom\+\_\+\+A\+S7265X}}
+\index{````~Loom\+\_\+\+A\+S7265X@{$\sim$\+Loom\+\_\+\+A\+S7265X}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+A\+S7265\+X()=default}{~Loom_AS7265X()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+A\+S7265\+X\+::$\sim$\+Loom\+\_\+\+A\+S7265X (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___a_s7265_x_a8cbca9f7f1b423fe7c70a5df4b175389}{}\label{class_loom___a_s7265_x_a8cbca9f7f1b423fe7c70a5df4b175389}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!enable\+\_\+bulb@{enable\+\_\+bulb}}
+\index{enable\+\_\+bulb@{enable\+\_\+bulb}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{enable\+\_\+bulb(const bool e)}{enable_bulb(const bool e)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+S7265\+X\+::enable\+\_\+bulb (
+\begin{DoxyParamCaption}
+\item[{const bool}]{e}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___a_s7265_x_aff26c05d0ec04a7117e07a91bd6d100e}{}\label{class_loom___a_s7265_x_aff26c05d0ec04a7117e07a91bd6d100e}
+
+
+Set whether not bulb is used for active light source. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em enable} & Whether or not to enable \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+S7265\+X\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___a_s7265_x_a070af4692fd32d11aed32069d31c8a1e}{}\label{class_loom___a_s7265_x_a070af4692fd32d11aed32069d31c8a1e}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+S7265\+X\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___a_s7265_x_aa6b4502c7486d9aef3277af7287218f0}{}\label{class_loom___a_s7265_x_aa6b4502c7486d9aef3277af7287218f0}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+S7265\+X\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___a_s7265_x_a07cd853cf0f22d3290920a3059359e0b}{}\label{class_loom___a_s7265_x_a07cd853cf0f22d3290920a3059359e0b}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!set\+\_\+gain@{set\+\_\+gain}}
+\index{set\+\_\+gain@{set\+\_\+gain}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{set\+\_\+gain(const uint8\+\_\+t gain)}{set_gain(const uint8_t gain)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+S7265\+X\+::set\+\_\+gain (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{gain}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___a_s7265_x_a348d8bfd4d4d90a5c0ac6d2f37be1ac1}{}\label{class_loom___a_s7265_x_a348d8bfd4d4d90a5c0ac6d2f37be1ac1}
+
+
+Set gain. 
+
+0\+: 1x (power-\/on default), 1\+: 3.\+7x, 2\+: 16x, 3\+: 64x 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em gain} & Gain level\+: \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!set\+\_\+integration\+\_\+time@{set\+\_\+integration\+\_\+time}}
+\index{set\+\_\+integration\+\_\+time@{set\+\_\+integration\+\_\+time}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{set\+\_\+integration\+\_\+time(const uint8\+\_\+t time)}{set_integration_time(const uint8_t time)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+S7265\+X\+::set\+\_\+integration\+\_\+time (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___a_s7265_x_a0e952773e0dd008f4ec831f0d8b10e2c}{}\label{class_loom___a_s7265_x_a0e952773e0dd008f4ec831f0d8b10e2c}
+
+
+Set integration time. 
+
+50 $\ast$ 2.\+8ms = 140ms. 0 to 255 is valid. (49 is default) If you use Mode 2 or 3 (all the colors) then integration time is double. 140$\ast$2 = 280ms between readings. \index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!set\+\_\+mode@{set\+\_\+mode}}
+\index{set\+\_\+mode@{set\+\_\+mode}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{set\+\_\+mode(const uint8\+\_\+t mode)}{set_mode(const uint8_t mode)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+S7265\+X\+::set\+\_\+mode (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{mode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___a_s7265_x_a80b09ed31d462def8b4347feb44d3187}{}\label{class_loom___a_s7265_x_a80b09ed31d462def8b4347feb44d3187}
+
+
+Set mode. 
+
+4 channel, other 4 channel, 6 chan, or 6 chan one shot. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mode} & Mode \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!color@{color}}
+\index{color@{color}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{color}{color}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+A\+S7265\+X\+::color\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_s7265_x_aaf555d167aca2607fa0f13c71341f3b1}{}\label{class_loom___a_s7265_x_aaf555d167aca2607fa0f13c71341f3b1}
+
+
+Measured color bands values. Units\+: counts / (μ\+W/cm$^\wedge$2) 
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!gain@{gain}}
+\index{gain@{gain}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{gain}{gain}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+A\+S7265\+X\+::gain\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_s7265_x_a204831caa774ead3b9ba57495e17bfd9}{}\label{class_loom___a_s7265_x_a204831caa774ead3b9ba57495e17bfd9}
+
+
+Gain setting. 
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!inst\+\_\+\+A\+S7265X@{inst\+\_\+\+A\+S7265X}}
+\index{inst\+\_\+\+A\+S7265X@{inst\+\_\+\+A\+S7265X}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{inst\+\_\+\+A\+S7265X}{inst_AS7265X}}]{\setlength{\rightskip}{0pt plus 5cm}A\+S7265X Loom\+\_\+\+A\+S7265\+X\+::inst\+\_\+\+A\+S7265X\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_s7265_x_a929b53e4170b78bfe3ca8787525dc4e7}{}\label{class_loom___a_s7265_x_a929b53e4170b78bfe3ca8787525dc4e7}
+
+
+Underlying A\+S7265X sensor manager instance. 
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!integration\+\_\+time@{integration\+\_\+time}}
+\index{integration\+\_\+time@{integration\+\_\+time}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{integration\+\_\+time}{integration_time}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+A\+S7265\+X\+::integration\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_s7265_x_a656e32aedff07ca33e3b9b0dc2768ba8}{}\label{class_loom___a_s7265_x_a656e32aedff07ca33e3b9b0dc2768ba8}
+
+
+Integration time setting. 
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!mode@{mode}}
+\index{mode@{mode}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{mode}{mode}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+A\+S7265\+X\+::mode\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_s7265_x_a02bc2eaf8dfea91f9f47a19f49dcc1e9}{}\label{class_loom___a_s7265_x_a02bc2eaf8dfea91f9f47a19f49dcc1e9}
+
+
+Sensor mode. 
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!nir@{nir}}
+\index{nir@{nir}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{nir}{nir}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+A\+S7265\+X\+::nir\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_s7265_x_a6f2c89c5aed39f75a275f37ce3ea21bd}{}\label{class_loom___a_s7265_x_a6f2c89c5aed39f75a275f37ce3ea21bd}
+
+
+Measured near-\/infra-\/red bands values. Units\+: counts / (μ\+W/cm$^\wedge$2) 
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!use\+\_\+bulb@{use\+\_\+bulb}}
+\index{use\+\_\+bulb@{use\+\_\+bulb}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{use\+\_\+bulb}{use_bulb}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+A\+S7265\+X\+::use\+\_\+bulb\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_s7265_x_a33831b2827d06b2114225b57862445f7}{}\label{class_loom___a_s7265_x_a33831b2827d06b2114225b57862445f7}
+
+
+Whether or not to use the bulb. 
+
+\index{Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}!uv@{uv}}
+\index{uv@{uv}!Loom\+\_\+\+A\+S7265X@{Loom\+\_\+\+A\+S7265X}}
+\subsubsection[{\texorpdfstring{uv}{uv}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+A\+S7265\+X\+::uv\mbox{[}6\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_s7265_x_a0724af751e2f38c7f71fc5828910f6fe}{}\label{class_loom___a_s7265_x_a0724af751e2f38c7f71fc5828910f6fe}
+
+
+Measured UV bands values. Units\+: counts / (μ\+W/cm$^\wedge$2) 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_a_s7265_x_8h}{A\+S7265\+X.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_a_s7265_x_8cpp}{A\+S7265\+X.\+cpp}\end{DoxyCompactItemize}

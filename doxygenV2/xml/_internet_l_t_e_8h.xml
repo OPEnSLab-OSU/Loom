@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_internet_l_t_e_8h" kind="file" language="C++">
+    <compoundname>InternetLTE.h</compoundname>
+    <includes local="no">TinyGsmClient.h</includes>
+    <includes local="no">ArduinoHttpClient.h</includes>
+    <includes local="yes">SSLClient.h</includes>
+    <includes refid="_internet_plat_8h" local="yes">InternetPlat.h</includes>
+    <includes refid="_trust___anchors_8h" local="yes">Trust_Anchors.h</includes>
+    <includedby refid="_internet_l_t_e_8cpp" local="yes">src/InternetPlats/InternetLTE.cpp</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="3332">
+        <label>InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="3333" relation="include">
+        </childnode>
+        <childnode refid="3339" relation="include">
+        </childnode>
+        <childnode refid="3340" relation="include">
+        </childnode>
+        <childnode refid="3331" relation="include">
+        </childnode>
+        <childnode refid="3341" relation="include">
+        </childnode>
+      </node>
+      <node id="3340">
+        <label>Udp.h</label>
+      </node>
+      <node id="3336">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3329">
+        <label>TinyGsmClient.h</label>
+      </node>
+      <node id="3333">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3334" relation="include">
+        </childnode>
+        <childnode refid="3336" relation="include">
+        </childnode>
+        <childnode refid="3337" relation="include">
+        </childnode>
+        <childnode refid="3338" relation="include">
+        </childnode>
+      </node>
+      <node id="3339">
+        <label>Client.h</label>
+      </node>
+      <node id="3337">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3335" relation="include">
+        </childnode>
+        <childnode refid="3338" relation="include">
+        </childnode>
+      </node>
+      <node id="3330">
+        <label>ArduinoHttpClient.h</label>
+      </node>
+      <node id="3334">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3335" relation="include">
+        </childnode>
+      </node>
+      <node id="3328">
+        <label>src/InternetPlats/InternetLTE.h</label>
+        <link refid="InternetLTE.h"/>
+        <childnode refid="3329" relation="include">
+        </childnode>
+        <childnode refid="3330" relation="include">
+        </childnode>
+        <childnode refid="3331" relation="include">
+        </childnode>
+        <childnode refid="3332" relation="include">
+        </childnode>
+        <childnode refid="3342" relation="include">
+        </childnode>
+      </node>
+      <node id="3338">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3335">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3342">
+        <label>Trust_Anchors.h</label>
+        <link refid="_trust___anchors_8h"/>
+      </node>
+      <node id="3331">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="3341">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3345">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3346" relation="include">
+        </childnode>
+        <childnode refid="3347" relation="include">
+        </childnode>
+      </node>
+      <node id="3344">
+        <label>src/InternetPlats/InternetLTE.cpp</label>
+        <link refid="_internet_l_t_e_8cpp"/>
+      </node>
+      <node id="3343">
+        <label>src/InternetPlats/InternetLTE.h</label>
+        <link refid="InternetLTE.h"/>
+        <childnode refid="3344" relation="include">
+        </childnode>
+        <childnode refid="3345" relation="include">
+        </childnode>
+      </node>
+      <node id="3346">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3347">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___l_t_e" prot="public">Loom_LTE</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_internet_l_t_e_8h_1a9689aa7b4321ad953f21c727e348aca9" prot="public" static="no">
+        <name>TINY_GSM_MODEM_SARAR4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="13" column="9" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/InternetPlats/InternetLTE.h"/>
+  </compounddef>
+</doxygen>

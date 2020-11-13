@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___ethernet" kind="class" language="C++" prot="public">
+    <compoundname>Loom_Ethernet</compoundname>
+    <basecompoundref refid="class_loom_internet_plat" prot="public" virt="non-virtual">LoomInternetPlat</basecompoundref>
+    <includes refid="_internet_ethernet_8h" local="no">InternetEthernet.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___ethernet_1a7f3a01c22467bb74b4ee421db507d4c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Ethernet::Loom_Ethernet</definition>
+        <argsstring>(LoomManager *manager, const char *module_name=&quot;Ethernet&quot;, const JsonArrayConst mac=JsonArray(), const JsonArrayConst ip=JsonArray())</argsstring>
+        <name>Loom_Ethernet</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+          <defval>&quot;Ethernet&quot;</defval>
+        </param>
+        <param>
+          <type>const JsonArrayConst</type>
+          <declname>mac</declname>
+          <defval>JsonArray()</defval>
+        </param>
+        <param>
+          <type>const JsonArrayConst</type>
+          <declname>ip</declname>
+          <defval>JsonArray()</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="57" column="1" bodyfile="src/InternetPlats/InternetEthernet.cpp" bodystart="15" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___ethernet_1aa03b81c5af2dc257f5a52f4dbe0f6714" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Ethernet::Loom_Ethernet</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_Ethernet</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="67" column="1" bodyfile="src/InternetPlats/InternetEthernet.cpp" bodystart="46" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___ethernet_1ab083d7e571e429c5741b7dfa1b3bd5a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Loom_Ethernet::~Loom_Ethernet</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_Ethernet</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="70" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___ethernet_1a743f6fa201609c3874bded88390a891e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Ethernet::connect</definition>
+        <argsstring>() override</argsstring>
+        <name>connect</name>
+        <reimplements refid="class_loom_internet_plat_1a24d7c701a3db8e16355b6a33a4e323a6">connect</reimplements>
+        <briefdescription>
+<para>Connect to internet. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="76" column="1" bodyfile="src/InternetPlats/InternetEthernet.cpp" bodystart="73" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___ethernet_1a2770d92b9459361acb44e78694f94964" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_Ethernet::is_connected</definition>
+        <argsstring>() const override</argsstring>
+        <name>is_connected</name>
+        <reimplements refid="class_loom_internet_plat_1af9c5c867598c9951db4d404a6a495ce7">is_connected</reimplements>
+        <briefdescription>
+<para>Whether or not connected to internet. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if connect, false otherwise </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="81" column="1" bodyfile="src/InternetPlats/InternetEthernet.h" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___ethernet_1aadfcbd39770e463dbc0383f8d358d89f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="class_loom_internet_plat_1a0b2cc742a6ac5f4f7054b75ea99b345c" kindref="member">UDPPtr</ref></type>
+        <definition>LoomInternetPlat::UDPPtr Loom_Ethernet::open_socket</definition>
+        <argsstring>(const uint port) override</argsstring>
+        <name>open_socket</name>
+        <reimplements refid="class_loom_internet_plat_1a91204905ec272ff1edc608a3aa250745">open_socket</reimplements>
+        <param>
+          <type>const uint</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Open a UDP socket for sending and recieving incoming data. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Be careful about recieving data from an open socket! </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port to open socket with </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A UDP socket for transmitting and recieving, remember to close the socket when you are done! </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="87" column="1" bodyfile="src/InternetPlats/InternetEthernet.cpp" bodystart="96" bodyend="106"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___ethernet_1a79ed8f208e2fe4faf0a71e468d7ba22e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Ethernet::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="93" column="1" bodyfile="src/InternetPlats/InternetEthernet.cpp" bodystart="50" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___ethernet_1a1305b086b7e99c98320ad1d280718259" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Ethernet::print_state</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_state</name>
+        <reimplements refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7">print_state</reimplements>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="94" column="1" bodyfile="src/InternetPlats/InternetEthernet.cpp" bodystart="66" bodyend="70"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___ethernet_1a9d0214994b52ec9932906ccfb5593a9d" prot="protected" static="no" mutable="no">
+        <type>EthernetClient</type>
+        <definition>EthernetClient Loom_Ethernet::m_base_client</definition>
+        <argsstring></argsstring>
+        <name>m_base_client</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="39" column="1" bodyfile="src/InternetPlats/InternetEthernet.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___ethernet_1ade9af6aab7a240375cc4f4786b8b0b04" prot="protected" static="no" mutable="no">
+        <type>SSLClient</type>
+        <definition>SSLClient Loom_Ethernet::m_client</definition>
+        <argsstring></argsstring>
+        <name>m_client</name>
+        <briefdescription>
+<para>Underlying Ethernet SSLclient instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="40" column="1" bodyfile="src/InternetPlats/InternetEthernet.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___ethernet_1ad3ac39aaf45c0c53965d029e9c1db7a4" prot="protected" static="no" mutable="no">
+        <type>byte</type>
+        <definition>byte Loom_Ethernet::m_mac[6]</definition>
+        <argsstring>[6]</argsstring>
+        <name>m_mac</name>
+        <briefdescription>
+<para>The Ethernet MAC address. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="42" column="1" bodyfile="src/InternetPlats/InternetEthernet.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___ethernet_1ab7b3e7573fa75b43d99d99cec21b6a86" prot="protected" static="no" mutable="no">
+        <type>IPAddress</type>
+        <definition>IPAddress Loom_Ethernet::m_ip</definition>
+        <argsstring></argsstring>
+        <name>m_ip</name>
+        <briefdescription>
+<para>The devices IP address. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="43" column="1" bodyfile="src/InternetPlats/InternetEthernet.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___ethernet_1a383b518b130bb1342bd8e4eae8c01e29" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Ethernet::m_is_connected</definition>
+        <argsstring></argsstring>
+        <name>m_is_connected</name>
+        <briefdescription>
+<para>Whether or not ethernet initialized successfully. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="45" column="1" bodyfile="src/InternetPlats/InternetEthernet.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_loom___ethernet_1a8152295e24d6bbd8f5b9cda6cccc0997" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SSLClient &amp;</type>
+        <definition>SSLClient&amp; Loom_Ethernet::get_client</definition>
+        <argsstring>() override</argsstring>
+        <name>get_client</name>
+        <reimplements refid="class_loom_internet_plat_1a71bfc232cac5294b1c3e6dbb00029fa7">get_client</reimplements>
+        <briefdescription>
+<para>Get the underlying SSLClient implementation, which we will use for all of the other requests. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="47" column="1" bodyfile="src/InternetPlats/InternetEthernet.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___ethernet_1a9223a4328f34b0a6640e1183e1f8ed2c" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>const SSLClient &amp;</type>
+        <definition>const SSLClient&amp; Loom_Ethernet::get_client</definition>
+        <argsstring>() const </argsstring>
+        <name>get_client</name>
+        <reimplements refid="class_loom_internet_plat_1a3b79a1467f5f239cd740d6ced88cdadf">get_client</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetEthernet.h" line="48" column="1" bodyfile="src/InternetPlats/InternetEthernet.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>InternetPlat built off of SSLClient running over an Ethernet Featherwing. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="attention"><para>Requires 7KB of free SRAM at runtime to use.</para></simplesect>
+<simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___ethernet.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/3201">Product Page: Adafruit Ethernet Featherwing</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/EthernetLarge">Dependency: EthernetLarge</ulink> OPEbS Lab fork of Arduino Ethernet library</para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/SSLClient">Dependency: SSLClient</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ethernet">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="514">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="513">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="514" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="512">
+        <label>Loom_Ethernet</label>
+        <link refid="class_loom___ethernet"/>
+        <childnode refid="513" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="522">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="518">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="519" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="520" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="525" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="521" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="517">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="518" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="526">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="521">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="517" relation="public-inheritance">
+        </childnode>
+        <childnode refid="522" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="523" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="520" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="524" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="525" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="526" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="520">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="517" relation="public-inheritance">
+        </childnode>
+        <childnode refid="521" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="516">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="517" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="519">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="517" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="525">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="517" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="523">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="524">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+      <node id="515">
+        <label>Loom_Ethernet</label>
+        <link refid="class_loom___ethernet"/>
+        <childnode refid="516" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/InternetPlats/InternetEthernet.h" line="35" column="1" bodyfile="src/InternetPlats/InternetEthernet.h" bodystart="34" bodyend="95"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>category</name></member>
+      <member refid="class_loom_internet_plat_1a7044d4ef42ec9181d519e6d37365789d" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>ClientSession</name></member>
+      <member refid="class_loom___ethernet_1a743f6fa201609c3874bded88390a891e" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>connect</name></member>
+      <member refid="class_loom_internet_plat_1aa89a42b49465a6924a674be2e9dac709" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>connect_to_domain</name></member>
+      <member refid="class_loom_internet_plat_1aebfc1c711a7fa0eb781e545d7fc757cf" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>connect_to_ip</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>device_manager</name></member>
+      <member refid="class_loom_internet_plat_1a32af1196a982d84a18e53f8d97e358a1" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>disconnect</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>get_active</name></member>
+      <member refid="class_loom___ethernet_1a8152295e24d6bbd8f5b9cda6cccc0997" prot="protected" virt="virtual"><scope>Loom_Ethernet</scope><name>get_client</name></member>
+      <member refid="class_loom___ethernet_1a9223a4328f34b0a6640e1183e1f8ed2c" prot="protected" virt="virtual"><scope>Loom_Ethernet</scope><name>get_client</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_internet_plat_1a17807cb51c969dbdba980a4d704aef33" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>get_time</name></member>
+      <member refid="class_loom_internet_plat_1ad1a855e6ed61aa2c40ff0b8f477df57f" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>http_get_request</name></member>
+      <member refid="class_loom_internet_plat_1aeac1140fb30e60c0f845f36d2ff02cd8" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>http_post_request</name></member>
+      <member refid="class_loom_internet_plat_1a01a61bd1d5ec547b2619c620abbfd983" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>http_request</name></member>
+      <member refid="class_loom___ethernet_1a2770d92b9459361acb44e78694f94964" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>is_connected</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___ethernet_1a7f3a01c22467bb74b4ee421db507d4c8" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>Loom_Ethernet</name></member>
+      <member refid="class_loom___ethernet_1aa03b81c5af2dc257f5a52f4dbe0f6714" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>Loom_Ethernet</name></member>
+      <member refid="class_loom_internet_plat_1a357f426519f563931cf6793bca0ae397" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>LoomInternetPlat</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>LoomModule</name></member>
+      <member refid="class_loom___ethernet_1a9d0214994b52ec9932906ccfb5593a9d" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>m_base_client</name></member>
+      <member refid="class_loom___ethernet_1ade9af6aab7a240375cc4f4786b8b0b04" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>m_client</name></member>
+      <member refid="class_loom___ethernet_1ab7b3e7573fa75b43d99d99cec21b6a86" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>m_ip</name></member>
+      <member refid="class_loom___ethernet_1a383b518b130bb1342bd8e4eae8c01e29" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>m_is_connected</name></member>
+      <member refid="class_loom___ethernet_1ad3ac39aaf45c0c53965d029e9c1db7a4" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>m_mac</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>module_type</name></member>
+      <member refid="class_loom___ethernet_1aadfcbd39770e463dbc0383f8d358d89f" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>open_socket</name></member>
+      <member refid="class_loom_internet_plat_1ae9cbe7ba64e4d597fe7084110f646dec" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>power_up</name></member>
+      <member refid="class_loom___ethernet_1a79ed8f208e2fe4faf0a71e468d7ba22e" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>print_module_label</name></member>
+      <member refid="class_loom___ethernet_1a1305b086b7e99c98320ad1d280718259" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>Type</name></member>
+      <member refid="class_loom_internet_plat_1a0b2cc742a6ac5f4f7054b75ea99b345c" prot="public" virt="non-virtual"><scope>Loom_Ethernet</scope><name>UDPPtr</name></member>
+      <member refid="class_loom_internet_plat_1a2a6ca5f5f807f420c445dd5ff53aed41" prot="protected" virt="non-virtual"><scope>Loom_Ethernet</scope><name>write_http_request</name></member>
+      <member refid="class_loom___ethernet_1ab083d7e571e429c5741b7dfa1b3bd5a1" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>~Loom_Ethernet</name></member>
+      <member refid="class_loom_internet_plat_1a36f9cc600e5ee1a916c330da914a3b11" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>~LoomInternetPlat</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_Ethernet</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

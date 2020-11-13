@@ -1,0 +1,142 @@
+\hypertarget{_macros_8h}{}\section{src/\+Macros.h File Reference}
+\label{_macros_8h}\index{src/\+Macros.\+h@{src/\+Macros.\+h}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_macros_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_macros_8h_af953fc3838a0c36eb07ce729e0f5087f}{L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}~1
+\begin{DoxyCompactList}\small\item\em 1 to enable debug prints (and all \hyperlink{_macros_8h_a653b8521977a25f34d50305a6d54fd4d}{L\+Print()}, \hyperlink{_macros_8h_a5313168de29fbf2fb4d051517d47f49e}{L\+Println()} calls), 0 to disable \end{DoxyCompactList}\item 
+\#define \hyperlink{_macros_8h_a66efbb27153bb6e495a84dcec8ef6e6d}{E\+X\+P\+A\+N\+D\+\_\+\+A\+R\+R\+AY}(x,  i)~E\+X\+P\+A\+N\+D\+\_\+\+A\+R\+R\+AY\#\#i(x)
+\begin{DoxyCompactList}\small\item\em Expand an array into individual arguments. \end{DoxyCompactList}\item 
+\#define \hyperlink{_macros_8h_ad99b7fc2fb7c5a61258fb5060e2fcf30}{L\+Print\+\_\+\+Hex}(X)~(\hyperlink{_macros_8h_af953fc3838a0c36eb07ce729e0f5087f}{L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}==0) ? \+:  Serial.\+print(X, H\+EX)
+\begin{DoxyCompactList}\small\item\em L\+Print Hexadeximal number to Serial if L\+O\+O\+M\+\_\+\+D\+E\+B\+UG enabled, no newline. \end{DoxyCompactList}\item 
+\#define \hyperlink{_macros_8h_aa3464f85f340628d434486624347ae7a}{L\+Println\+\_\+\+Hex}(X)~(\hyperlink{_macros_8h_af953fc3838a0c36eb07ce729e0f5087f}{L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}==0) ? \+:  Serial.\+println(X, H\+EX)
+\begin{DoxyCompactList}\small\item\em L\+Print Hexadeximal number to Serial if L\+O\+O\+M\+\_\+\+D\+E\+B\+UG enabled, newline added. \end{DoxyCompactList}\item 
+\#define \hyperlink{_macros_8h_a68b43ff77f45c4e9bfe4dff8d9bd4e05}{L\+Print\+\_\+\+Dec\+\_\+\+Hex}(X)~(\hyperlink{_macros_8h_af953fc3838a0c36eb07ce729e0f5087f}{L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}==0) ? \+:  Serial.\+print(X); Serial.\+print(\char`\"{} (0x\char`\"{}); Serial.\+print(\+X, H\+E\+X); Serial.\+print(\char`\"{})\char`\"{})
+\begin{DoxyCompactList}\small\item\em L\+Print Hexadeximal number to Serial in form\+: D\+EC (0x\+H\+EX) if L\+O\+O\+M\+\_\+\+D\+E\+B\+UG enabled, newline added. \end{DoxyCompactList}\item 
+\#define \hyperlink{_macros_8h_a18341f6d346bd56ade798a48ae7e3273}{L\+Println\+\_\+\+Dec\+\_\+\+Hex}(X)~(\hyperlink{_macros_8h_af953fc3838a0c36eb07ce729e0f5087f}{L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}==0) ? \+:  Serial.\+print(X); Serial.\+print(\char`\"{} (0x\char`\"{}); Serial.\+print(\+X, H\+E\+X); Serial.\+println(\char`\"{})\char`\"{})
+\begin{DoxyCompactList}\small\item\em L\+Print Hexadeximal number to Serial in form\+: D\+EC (0x\+H\+EX) if L\+O\+O\+M\+\_\+\+D\+E\+B\+UG enabled, newline added. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename... Types$>$ }\\void \hyperlink{_macros_8h_a653b8521977a25f34d50305a6d54fd4d}{L\+Print} (Types...\+vars)
+\begin{DoxyCompactList}\small\item\em Print variable number of arguments (no newline) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Types$>$ }\\void \hyperlink{_macros_8h_a5313168de29fbf2fb4d051517d47f49e}{L\+Println} (Types...\+vars)
+\begin{DoxyCompactList}\small\item\em Print variable number of arguments with newline after last element. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Types$>$ }\\void \hyperlink{_macros_8h_a091a10acbaa0b07d6cbcef290253b636}{L\+Println\+All} (Types...\+vars)
+\begin{DoxyCompactList}\small\item\em Print variable number of arguments with newline after each element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Macros.\+h@{Macros.\+h}!E\+X\+P\+A\+N\+D\+\_\+\+A\+R\+R\+AY@{E\+X\+P\+A\+N\+D\+\_\+\+A\+R\+R\+AY}}
+\index{E\+X\+P\+A\+N\+D\+\_\+\+A\+R\+R\+AY@{E\+X\+P\+A\+N\+D\+\_\+\+A\+R\+R\+AY}!Macros.\+h@{Macros.\+h}}
+\subsubsection[{\texorpdfstring{E\+X\+P\+A\+N\+D\+\_\+\+A\+R\+R\+AY}{EXPAND_ARRAY}}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\+X\+P\+A\+N\+D\+\_\+\+A\+R\+R\+AY(
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{i}
+\end{DoxyParamCaption}
+)~E\+X\+P\+A\+N\+D\+\_\+\+A\+R\+R\+AY\#\#i(x)}\hypertarget{_macros_8h_a66efbb27153bb6e495a84dcec8ef6e6d}{}\label{_macros_8h_a66efbb27153bb6e495a84dcec8ef6e6d}
+
+
+Expand an array into individual arguments. 
+
+Use by module constructors, expanding the Json\+Array into arguments to Call regular constructor with. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em x} & Array to expand \\
+\hline
+\mbox{\tt in}  & {\em i} & Number of elements to expand. Do not use with a value larger than the size of the array \\
+\hline
+\end{DoxyParams}
+\index{Macros.\+h@{Macros.\+h}!L\+O\+O\+M\+\_\+\+D\+E\+B\+UG@{L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}}
+\index{L\+O\+O\+M\+\_\+\+D\+E\+B\+UG@{L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}!Macros.\+h@{Macros.\+h}}
+\subsubsection[{\texorpdfstring{L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}{LOOM_DEBUG}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+O\+O\+M\+\_\+\+D\+E\+B\+UG~1}\hypertarget{_macros_8h_af953fc3838a0c36eb07ce729e0f5087f}{}\label{_macros_8h_af953fc3838a0c36eb07ce729e0f5087f}
+
+
+1 to enable debug prints (and all \hyperlink{_macros_8h_a653b8521977a25f34d50305a6d54fd4d}{L\+Print()}, \hyperlink{_macros_8h_a5313168de29fbf2fb4d051517d47f49e}{L\+Println()} calls), 0 to disable 
+
+\index{Macros.\+h@{Macros.\+h}!L\+Print\+\_\+\+Dec\+\_\+\+Hex@{L\+Print\+\_\+\+Dec\+\_\+\+Hex}}
+\index{L\+Print\+\_\+\+Dec\+\_\+\+Hex@{L\+Print\+\_\+\+Dec\+\_\+\+Hex}!Macros.\+h@{Macros.\+h}}
+\subsubsection[{\texorpdfstring{L\+Print\+\_\+\+Dec\+\_\+\+Hex}{LPrint_Dec_Hex}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+Print\+\_\+\+Dec\+\_\+\+Hex(
+\begin{DoxyParamCaption}
+\item[{}]{X}
+\end{DoxyParamCaption}
+)~({\bf L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}==0) ? \+:  Serial.\+print(X); Serial.\+print(\char`\"{} (0x\char`\"{}); Serial.\+print(\+X, H\+E\+X); Serial.\+print(\char`\"{})\char`\"{})}\hypertarget{_macros_8h_a68b43ff77f45c4e9bfe4dff8d9bd4e05}{}\label{_macros_8h_a68b43ff77f45c4e9bfe4dff8d9bd4e05}
+
+
+L\+Print Hexadeximal number to Serial in form\+: D\+EC (0x\+H\+EX) if L\+O\+O\+M\+\_\+\+D\+E\+B\+UG enabled, newline added. 
+
+\index{Macros.\+h@{Macros.\+h}!L\+Print\+\_\+\+Hex@{L\+Print\+\_\+\+Hex}}
+\index{L\+Print\+\_\+\+Hex@{L\+Print\+\_\+\+Hex}!Macros.\+h@{Macros.\+h}}
+\subsubsection[{\texorpdfstring{L\+Print\+\_\+\+Hex}{LPrint_Hex}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+Print\+\_\+\+Hex(
+\begin{DoxyParamCaption}
+\item[{}]{X}
+\end{DoxyParamCaption}
+)~({\bf L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}==0) ? \+:  Serial.\+print(X, H\+EX)}\hypertarget{_macros_8h_ad99b7fc2fb7c5a61258fb5060e2fcf30}{}\label{_macros_8h_ad99b7fc2fb7c5a61258fb5060e2fcf30}
+
+
+L\+Print Hexadeximal number to Serial if L\+O\+O\+M\+\_\+\+D\+E\+B\+UG enabled, no newline. 
+
+\index{Macros.\+h@{Macros.\+h}!L\+Println\+\_\+\+Dec\+\_\+\+Hex@{L\+Println\+\_\+\+Dec\+\_\+\+Hex}}
+\index{L\+Println\+\_\+\+Dec\+\_\+\+Hex@{L\+Println\+\_\+\+Dec\+\_\+\+Hex}!Macros.\+h@{Macros.\+h}}
+\subsubsection[{\texorpdfstring{L\+Println\+\_\+\+Dec\+\_\+\+Hex}{LPrintln_Dec_Hex}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+Println\+\_\+\+Dec\+\_\+\+Hex(
+\begin{DoxyParamCaption}
+\item[{}]{X}
+\end{DoxyParamCaption}
+)~({\bf L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}==0) ? \+:  Serial.\+print(X); Serial.\+print(\char`\"{} (0x\char`\"{}); Serial.\+print(\+X, H\+E\+X); Serial.\+println(\char`\"{})\char`\"{})}\hypertarget{_macros_8h_a18341f6d346bd56ade798a48ae7e3273}{}\label{_macros_8h_a18341f6d346bd56ade798a48ae7e3273}
+
+
+L\+Print Hexadeximal number to Serial in form\+: D\+EC (0x\+H\+EX) if L\+O\+O\+M\+\_\+\+D\+E\+B\+UG enabled, newline added. 
+
+\index{Macros.\+h@{Macros.\+h}!L\+Println\+\_\+\+Hex@{L\+Println\+\_\+\+Hex}}
+\index{L\+Println\+\_\+\+Hex@{L\+Println\+\_\+\+Hex}!Macros.\+h@{Macros.\+h}}
+\subsubsection[{\texorpdfstring{L\+Println\+\_\+\+Hex}{LPrintln_Hex}}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\+Println\+\_\+\+Hex(
+\begin{DoxyParamCaption}
+\item[{}]{X}
+\end{DoxyParamCaption}
+)~({\bf L\+O\+O\+M\+\_\+\+D\+E\+B\+UG}==0) ? \+:  Serial.\+println(X, H\+EX)}\hypertarget{_macros_8h_aa3464f85f340628d434486624347ae7a}{}\label{_macros_8h_aa3464f85f340628d434486624347ae7a}
+
+
+L\+Print Hexadeximal number to Serial if L\+O\+O\+M\+\_\+\+D\+E\+B\+UG enabled, newline added. 
+
+
+
+\subsection{Function Documentation}
+\index{Macros.\+h@{Macros.\+h}!L\+Print@{L\+Print}}
+\index{L\+Print@{L\+Print}!Macros.\+h@{Macros.\+h}}
+\subsubsection[{\texorpdfstring{L\+Print(\+Types...\+vars)}{LPrint(Types...vars)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Types$>$ void L\+Print (
+\begin{DoxyParamCaption}
+\item[{Types...}]{vars}
+\end{DoxyParamCaption}
+)}\hypertarget{_macros_8h_a653b8521977a25f34d50305a6d54fd4d}{}\label{_macros_8h_a653b8521977a25f34d50305a6d54fd4d}
+
+
+Print variable number of arguments (no newline) 
+
+\index{Macros.\+h@{Macros.\+h}!L\+Println@{L\+Println}}
+\index{L\+Println@{L\+Println}!Macros.\+h@{Macros.\+h}}
+\subsubsection[{\texorpdfstring{L\+Println(\+Types...\+vars)}{LPrintln(Types...vars)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Types$>$ void L\+Println (
+\begin{DoxyParamCaption}
+\item[{Types...}]{vars}
+\end{DoxyParamCaption}
+)}\hypertarget{_macros_8h_a5313168de29fbf2fb4d051517d47f49e}{}\label{_macros_8h_a5313168de29fbf2fb4d051517d47f49e}
+
+
+Print variable number of arguments with newline after last element. 
+
+\index{Macros.\+h@{Macros.\+h}!L\+Println\+All@{L\+Println\+All}}
+\index{L\+Println\+All@{L\+Println\+All}!Macros.\+h@{Macros.\+h}}
+\subsubsection[{\texorpdfstring{L\+Println\+All(\+Types...\+vars)}{LPrintlnAll(Types...vars)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename... Types$>$ void L\+Println\+All (
+\begin{DoxyParamCaption}
+\item[{Types...}]{vars}
+\end{DoxyParamCaption}
+)}\hypertarget{_macros_8h_a091a10acbaa0b07d6cbcef290253b636}{}\label{_macros_8h_a091a10acbaa0b07d6cbcef290253b636}
+
+
+Print variable number of arguments with newline after each element. 
+

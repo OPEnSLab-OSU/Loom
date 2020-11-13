@@ -1,0 +1,164 @@
+\hypertarget{class_loom___google_sheets}{}\section{Loom\+\_\+\+Google\+Sheets Class Reference}
+\label{class_loom___google_sheets}\index{Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}}
+
+
+Module taking in and translating J\+S\+ON into data understood by the Google Sheets script A\+PI.  
+
+
+
+
+{\ttfamily \#include $<$Google\+Sheets.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Google\+Sheets\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{class_loom___google_sheets__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___google_sheets_abe3f15347cdb097a36d761a0764a1f3b}{Loom\+\_\+\+Google\+Sheets} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_publish_plat_aab697868e61843787893f5509d22b9ed}{internet\+\_\+type}, const char $\ast$script\+\_\+url, const char $\ast$sheet\+\_\+id, const bool tab\+\_\+matches\+\_\+dev\+\_\+id, const char $\ast$tab\+\_\+id=\char`\"{}Data\char`\"{})
+\begin{DoxyCompactList}\small\item\em Loom Google Sheets Platform module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___google_sheets_afbf17bbfb3bd62bfd8e79a107e8caf3b}{Loom\+\_\+\+Google\+Sheets} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___google_sheets_a2d9b1d435c045e0dc4d9a889daef0e4a}{$\sim$\+Loom\+\_\+\+Google\+Sheets} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___google_sheets_a83066e82b742c1f273bf7b009a1490d4}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___google_sheets_af446a27796d495a5489543323f4cc505}{send\+\_\+to\+\_\+internet} (const Json\+Object json, \hyperlink{class_loom_internet_plat}{Loom\+Internet\+Plat} $\ast$plat) override
+\begin{DoxyCompactList}\small\item\em Send J\+S\+ON data to a google sheet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Module taking in and translating J\+S\+ON into data understood by the Google Sheets script A\+PI. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___google_sheets.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets}{\tt wiki\+: Using Loom with Google Sheets} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}!Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}}
+\index{Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}!Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Google\+Sheets(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type internet\+\_\+type, const char $\ast$script\+\_\+url, const char $\ast$sheet\+\_\+id, const bool tab\+\_\+matches\+\_\+dev\+\_\+id, const char $\ast$tab\+\_\+id=""Data"")}{Loom_GoogleSheets(LoomManager *manager, const char *module_name, const LoomModule::Type internet_type, const char *script_url, const char *sheet_id, const bool tab_matches_dev_id, const char *tab_id="Data")}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Google\+Sheets\+::\+Loom\+\_\+\+Google\+Sheets (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{internet\+\_\+type, }
+\item[{const char $\ast$}]{script\+\_\+url, }
+\item[{const char $\ast$}]{sheet\+\_\+id, }
+\item[{const bool}]{tab\+\_\+matches\+\_\+dev\+\_\+id, }
+\item[{const char $\ast$}]{tab\+\_\+id = {\ttfamily \char`\"{}Data\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___google_sheets_abe3f15347cdb097a36d761a0764a1f3b}{}\label{class_loom___google_sheets_abe3f15347cdb097a36d761a0764a1f3b}
+
+
+Loom Google Sheets Platform module constructor. 
+
+Check out \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets}{\tt https\+://github.\+com/\+O\+P\+En\+S\+Lab-\/\+O\+S\+U/\+Loom/wiki/\+Using-\/\+Loom-\/with-\/\+Google-\/\+Sheets} (or \href{http://www.open-sensing.org/evaporometerblog/datalog}{\tt http\+://www.\+open-\/sensing.\+org/evaporometerblog/datalog}) for more information on these parameters. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & String $\vert$ $<$\char`\"{}\+Internet-\/\+Plat\char`\"{}$>$ $\vert$ null $\vert$ Publish platform module name. \\
+\hline
+\mbox{\tt in}  & {\em internet\+\_\+type} & Set(\+Loom\+Module\+::\+Type) $\vert$ $<$7001$>$ $\vert$ \{7001(\char`\"{}\+Ethernet\char`\"{}), 7002(\char`\"{}\+Wi\+Fi\char`\"{}), 7003(\char`\"{}\+L\+T\+E\char`\"{})\} $\vert$ Code of the desired internet platform. \\
+\hline
+\mbox{\tt in}  & {\em script\+\_\+url} & String $\vert$ $<$\char`\"{}\char`\"{}$>$ $\vert$ null $\vert$ U\+RL where the google sheets script is hosted, without domain (ex. /macros/s/\+A\+Kfycby$<$more letters=\char`\"{}\char`\"{} here$>$=\char`\"{}\char`\"{}$>$\+\_\+k0n/exec). \\
+\hline
+\mbox{\tt in}  & {\em sheet\+\_\+id} & String $\vert$ $<$\char`\"{}\char`\"{}$>$ $\vert$ null $\vert$\+ID Of the spreadsheet to put data in (script must have edit access). \\
+\hline
+\mbox{\tt in}  & {\em tab\+\_\+matches\+\_\+dev\+\_\+id} & Bool $\vert$ $<$true$>$ $\vert$ null $\vert$ Override tab\+\_\+id with the name+instance number of the device. \\
+\hline
+\mbox{\tt in}  & {\em tab\+\_\+id} & String $\vert$ $<$\char`\"{}\+Data\char`\"{}$>$ $\vert$ null $\vert$ Name of the tab that the device will put data into. \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}!Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}}
+\index{Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}!Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Google\+Sheets(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_GoogleSheets(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Google\+Sheets\+::\+Loom\+\_\+\+Google\+Sheets (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___google_sheets_afbf17bbfb3bd62bfd8e79a107e8caf3b}{}\label{class_loom___google_sheets_afbf17bbfb3bd62bfd8e79a107e8caf3b}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}!````~Loom\+\_\+\+Google\+Sheets@{$\sim$\+Loom\+\_\+\+Google\+Sheets}}
+\index{````~Loom\+\_\+\+Google\+Sheets@{$\sim$\+Loom\+\_\+\+Google\+Sheets}!Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Google\+Sheets()=default}{~Loom_GoogleSheets()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Google\+Sheets\+::$\sim$\+Loom\+\_\+\+Google\+Sheets (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___google_sheets_a2d9b1d435c045e0dc4d9a889daef0e4a}{}\label{class_loom___google_sheets_a2d9b1d435c045e0dc4d9a889daef0e4a}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Google\+Sheets\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___google_sheets_a83066e82b742c1f273bf7b009a1490d4}{}\label{class_loom___google_sheets_a83066e82b742c1f273bf7b009a1490d4}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_publish_plat_a38cc9fe71203a153392fbca807e39434}{Loom\+Publish\+Plat}.
+
+\index{Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}!send\+\_\+to\+\_\+internet@{send\+\_\+to\+\_\+internet}}
+\index{send\+\_\+to\+\_\+internet@{send\+\_\+to\+\_\+internet}!Loom\+\_\+\+Google\+Sheets@{Loom\+\_\+\+Google\+Sheets}}
+\subsubsection[{\texorpdfstring{send\+\_\+to\+\_\+internet(const Json\+Object json, Loom\+Internet\+Plat $\ast$plat) override}{send_to_internet(const JsonObject json, LoomInternetPlat *plat) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Google\+Sheets\+::send\+\_\+to\+\_\+internet (
+\begin{DoxyParamCaption}
+\item[{const Json\+Object}]{json, }
+\item[{{\bf Loom\+Internet\+Plat} $\ast$}]{plat}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___google_sheets_af446a27796d495a5489543323f4cc505}{}\label{class_loom___google_sheets_af446a27796d495a5489543323f4cc505}
+
+
+Send J\+S\+ON data to a google sheet. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & The J\+S\+ON data, formatted according to \hyperlink{class_loom_publish_plat_a5a172ded7502cd31fe15596e21dd6cc9}{publish()}; \\
+\hline
+\mbox{\tt in}  & {\em plat} & A pointer to an internet platform \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_publish_plat_a5d54196f11ef28daf8fdf853f215a033}{Loom\+Publish\+Plat}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Publish\+Plats/\hyperlink{_google_sheets_8h}{Google\+Sheets.\+h}\item 
+src/\+Publish\+Plats/\hyperlink{_google_sheets_8cpp}{Google\+Sheets.\+cpp}\end{DoxyCompactItemize}

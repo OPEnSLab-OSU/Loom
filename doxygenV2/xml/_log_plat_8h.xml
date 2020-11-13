@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_log_plat_8h" kind="file" language="C++">
+    <compoundname>LogPlat.h</compoundname>
+    <includes refid="_module_8h" local="yes">Module.h</includes>
+    <includedby refid="_batch_s_d_8h" local="yes">src/LogPlats/BatchSD.h</includedby>
+    <includedby refid="_log_plat_8cpp" local="yes">src/LogPlats/LogPlat.cpp</includedby>
+    <includedby refid="_o_l_e_d_8h" local="yes">src/LogPlats/OLED.h</includedby>
+    <includedby refid="_s_d_8h" local="yes">src/LogPlats/SD.h</includedby>
+    <includedby refid="_manager_8cpp" local="yes">src/Manager.cpp</includedby>
+    <incdepgraph>
+      <node id="3537">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3533">
+        <label>src/LogPlats/LogPlat.h</label>
+        <link refid="LogPlat.h"/>
+        <childnode refid="3534" relation="include">
+        </childnode>
+      </node>
+      <node id="3534">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3535" relation="include">
+        </childnode>
+        <childnode refid="3537" relation="include">
+        </childnode>
+        <childnode refid="3538" relation="include">
+        </childnode>
+        <childnode refid="3539" relation="include">
+        </childnode>
+      </node>
+      <node id="3538">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3536" relation="include">
+        </childnode>
+        <childnode refid="3539" relation="include">
+        </childnode>
+      </node>
+      <node id="3535">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3536" relation="include">
+        </childnode>
+      </node>
+      <node id="3539">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3536">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3544">
+        <label>src/CommPlats/Bluetooth.cpp</label>
+        <link refid="_bluetooth_8cpp"/>
+      </node>
+      <node id="3553">
+        <label>src/LogPlats/BatchSD.cpp</label>
+        <link refid="_batch_s_d_8cpp"/>
+      </node>
+      <node id="3545">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3546" relation="include">
+        </childnode>
+        <childnode refid="3547" relation="include">
+        </childnode>
+      </node>
+      <node id="3562">
+        <label>src/LogPlats/OLED.cpp</label>
+        <link refid="_o_l_e_d_8cpp"/>
+      </node>
+      <node id="3564">
+        <label>src/LogPlats/SD.cpp</label>
+        <link refid="_s_d_8cpp"/>
+      </node>
+      <node id="3554">
+        <label>src/PublishPlats/PublishPlat.h</label>
+        <link refid="_publish_plat_8h"/>
+        <childnode refid="3555" relation="include">
+        </childnode>
+        <childnode refid="3557" relation="include">
+        </childnode>
+        <childnode refid="3547" relation="include">
+        </childnode>
+        <childnode refid="3559" relation="include">
+        </childnode>
+      </node>
+      <node id="3540">
+        <label>src/LogPlats/LogPlat.h</label>
+        <link refid="LogPlat.h"/>
+        <childnode refid="3541" relation="include">
+        </childnode>
+        <childnode refid="3560" relation="include">
+        </childnode>
+        <childnode refid="3561" relation="include">
+        </childnode>
+        <childnode refid="3563" relation="include">
+        </childnode>
+        <childnode refid="3547" relation="include">
+        </childnode>
+      </node>
+      <node id="3557">
+        <label>src/PublishPlats/Max_Pub.h</label>
+        <link refid="_max___pub_8h"/>
+        <childnode refid="3545" relation="include">
+        </childnode>
+        <childnode refid="3558" relation="include">
+        </childnode>
+      </node>
+      <node id="3543">
+        <label>src/CommPlats/Bluetooth.h</label>
+        <link refid="_bluetooth_8h"/>
+        <childnode refid="3544" relation="include">
+        </childnode>
+        <childnode refid="3545" relation="include">
+        </childnode>
+      </node>
+      <node id="3556">
+        <label>src/PublishPlats/GoogleSheets.cpp</label>
+        <link refid="_google_sheets_8cpp"/>
+      </node>
+      <node id="3560">
+        <label>src/LogPlats/LogPlat.cpp</label>
+        <link refid="_log_plat_8cpp"/>
+      </node>
+      <node id="3549">
+        <label>src/CommPlats/LoRa.h</label>
+        <link refid="_lo_ra_8h"/>
+        <childnode refid="3550" relation="include">
+        </childnode>
+        <childnode refid="3545" relation="include">
+        </childnode>
+      </node>
+      <node id="3550">
+        <label>src/CommPlats/LoRa.cpp</label>
+        <link refid="_lo_ra_8cpp"/>
+      </node>
+      <node id="3563">
+        <label>src/LogPlats/SD.h</label>
+        <link refid="_s_d_8h"/>
+        <childnode refid="3564" relation="include">
+        </childnode>
+        <childnode refid="3545" relation="include">
+        </childnode>
+      </node>
+      <node id="3548">
+        <label>src/CommPlats/CommPlat.cpp</label>
+        <link refid="_comm_plat_8cpp"/>
+      </node>
+      <node id="3559">
+        <label>src/PublishPlats/PublishPlat.cpp</label>
+        <link refid="_publish_plat_8cpp"/>
+      </node>
+      <node id="3558">
+        <label>src/PublishPlats/Max_Pub.cpp</label>
+        <link refid="_max___pub_8cpp"/>
+      </node>
+      <node id="3541">
+        <label>src/LogPlats/BatchSD.h</label>
+        <link refid="_batch_s_d_8h"/>
+        <childnode refid="3542" relation="include">
+        </childnode>
+        <childnode refid="3553" relation="include">
+        </childnode>
+        <childnode refid="3554" relation="include">
+        </childnode>
+        <childnode refid="3545" relation="include">
+        </childnode>
+      </node>
+      <node id="3561">
+        <label>src/LogPlats/OLED.h</label>
+        <link refid="_o_l_e_d_8h"/>
+        <childnode refid="3562" relation="include">
+        </childnode>
+        <childnode refid="3545" relation="include">
+        </childnode>
+      </node>
+      <node id="3546">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3547">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="3542">
+        <label>src/CommPlats/CommPlat.h</label>
+        <link refid="_comm_plat_8h"/>
+        <childnode refid="3543" relation="include">
+        </childnode>
+        <childnode refid="3548" relation="include">
+        </childnode>
+        <childnode refid="3549" relation="include">
+        </childnode>
+        <childnode refid="3551" relation="include">
+        </childnode>
+        <childnode refid="3547" relation="include">
+        </childnode>
+      </node>
+      <node id="3555">
+        <label>src/PublishPlats/GoogleSheets.h</label>
+        <link refid="_google_sheets_8h"/>
+        <childnode refid="3545" relation="include">
+        </childnode>
+        <childnode refid="3556" relation="include">
+        </childnode>
+      </node>
+      <node id="3552">
+        <label>src/CommPlats/nRF.cpp</label>
+        <link refid="n_r_f_8cpp"/>
+      </node>
+      <node id="3551">
+        <label>src/CommPlats/nRF.h</label>
+        <link refid="n_r_f_8h"/>
+        <childnode refid="3552" relation="include">
+        </childnode>
+        <childnode refid="3545" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom_log_plat" prot="public">LoomLogPlat</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/LogPlats/LogPlat.h"/>
+  </compounddef>
+</doxygen>

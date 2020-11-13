@@ -1,0 +1,5 @@
+<map id="Loom_DecagonGS3" name="Loom_DecagonGS3">
+<area shape="rect" id="node2" href="$class_loom_s_d_i12_sensor.html" title="Abstract base class for SDI12 sensor modules. " alt="" coords="9,155,151,181"/>
+<area shape="rect" id="node3" href="$class_loom_sensor.html" title="Abstract root of Loom sensor modules hierarchy. " alt="" coords="29,80,131,107"/>
+<area shape="rect" id="node4" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="28,5,132,32"/>
+</map>

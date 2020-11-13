@@ -1,0 +1,1612 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___interrupt___manager" kind="class" language="C++" prot="public">
+    <compoundname>Loom_Interrupt_Manager</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <includes refid="_interrupt___manager_8h" local="no">Interrupt_Manager.h</includes>
+    <innerclass refid="struct_loom___interrupt___manager_1_1_int_details" prot="private">Loom_Interrupt_Manager::IntDetails</innerclass>
+    <innerclass refid="struct_loom___interrupt___manager_1_1_internal_timer_details" prot="private">Loom_Interrupt_Manager::InternalTimerDetails</innerclass>
+    <innerclass refid="struct_loom___interrupt___manager_1_1_stop_watch_details" prot="private">Loom_Interrupt_Manager::StopWatchDetails</innerclass>
+    <innerclass refid="struct_loom___interrupt___manager_1_1_timer_details" prot="private">Loom_Interrupt_Manager::TimerDetails</innerclass>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a5b12fcb72f0f5da323d63ab9a6ca95a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Interrupt_Manager::Loom_Interrupt_Manager</definition>
+        <argsstring>(LoomManager *manager, LoomRTC *RTC_Inst=nullptr)</argsstring>
+        <name>Loom_Interrupt_Manager</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type><ref refid="class_loom_r_t_c" kindref="compound">LoomRTC</ref> *</type>
+          <declname>RTC_Inst</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Interrupt Manager module constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">RTC_Inst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;0&gt; | {0(&quot;Null&quot;)} | OLED module name </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="137" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="48" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a5b23954e2888942d6370f82e2f790d6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Interrupt_Manager::Loom_Interrupt_Manager</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_Interrupt_Manager</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="145" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="78" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a0a389cd37e3266ab844ff0eed146082a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Interrupt_Manager::~Loom_Interrupt_Manager</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_Interrupt_Manager</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="148" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a5acb7bf173619dbd1a459800182767e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>No package necessary. </para>        </briefdescription>
+        <detaileddescription>
+<para>Implement with empty body. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="156" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="156" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1ada590ee9e56b82b39a6cf443c6038efd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::run_pending_ISRs</definition>
+        <argsstring>()</argsstring>
+        <name>run_pending_ISRs</name>
+        <briefdescription>
+<para>Run any waiting ISRs. </para>        </briefdescription>
+        <detaileddescription>
+<para>Flag was set by a top half ISR </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="160" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="161" bodyend="168"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>EXTERNAL INTERRUPT METHODS</header>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a2d10238301b261b7cc98f5392c2d8cff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::register_ISR</definition>
+        <argsstring>(const uint32_t pin, ISRFuncPtr ISR, const uint32_t signal_type, ISR_Type run_type)</argsstring>
+        <name>register_ISR</name>
+        <param>
+          <type>const uint32_t</type>
+          <declname>pin</declname>
+        </param>
+        <param>
+          <type><ref refid="_interrupt___manager_8h_1a21adc8a9b6cc2505b5b1317ca9f74cf3" kindref="member">ISRFuncPtr</ref></type>
+          <declname>ISR</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>signal_type</declname>
+        </param>
+        <param>
+          <type><ref refid="_interrupt___manager_8h_1a1cb40265e710cbdf07f99beb6c4020d1" kindref="member">ISR_Type</ref></type>
+          <declname>run_type</declname>
+        </param>
+        <briefdescription>
+<para>Register an ISR to an interrupt pin and its configuration. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Which pin to connect the interrupt on </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ISR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISR function (Null if no interrupt linked) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">signal_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Low, High, Change, Falling, Rising </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">run_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="171" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="187" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1abbf112a7a515088c543e76f5ad2a8bea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::reconnect_interrupt</definition>
+        <argsstring>(const uint32_t pin)</argsstring>
+        <name>reconnect_interrupt</name>
+        <param>
+          <type>const uint32_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>If an ISR dettaches interrupt, use this to reattach according to previous settings. </para>        </briefdescription>
+        <detaileddescription>
+<para>Effectively to running register_ISR with previous settings <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Which pin to reconnect the interrupt on </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="177" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="232" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a314bdba78fd288871bea3421ba6ec022" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::unregister_ISR</definition>
+        <argsstring>(const uint32_t pin, const uint32_t signal_type=LOW)</argsstring>
+        <name>unregister_ISR</name>
+        <param>
+          <type>const uint32_t</type>
+          <declname>pin</declname>
+        </param>
+        <param>
+          <type>const uint32_t</type>
+          <declname>signal_type</declname>
+          <defval>LOW</defval>
+        </param>
+        <briefdescription>
+<para>Restores pin to default ISR, disables interrupt. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pin to unregister ISRs for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">signal_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>What signal to configure default ISR to (default LOW) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="183" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="262" bodyend="266"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a05ba1bf76145681fecb787374358711f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::interrupt_reset</definition>
+        <argsstring>(const uint32_t pin)</argsstring>
+        <name>interrupt_reset</name>
+        <param>
+          <type>const uint32_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>Detaches then reattacheds interrupt according to settings. </para>        </briefdescription>
+        <detaileddescription>
+<para>used to clear pending interrupts <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pin to reset interrupts for ... </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="188" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="302" bodyend="323"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>RTC ALARM METHODS</header>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1ac188b3f03d32bcfdfe5caf4eae31f33d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::RTC_alarm_duration</definition>
+        <argsstring>(const TimeSpan duration)</argsstring>
+        <name>RTC_alarm_duration</name>
+        <param>
+          <type>const TimeSpan</type>
+          <declname>duration</declname>
+        </param>
+        <briefdescription>
+<para>Set RTC alarm an amount of time from now. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How long before the alarm should go off </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="199" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="326" bodyend="329"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1abde5c47ed6021fe7280c14891b1a1c31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::RTC_alarm_duration</definition>
+        <argsstring>(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds)</argsstring>
+        <name>RTC_alarm_duration</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>days</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>hours</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>minutes</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>Set RTC alarm an amount of time from now. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">days</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Days into the future the alarm should be set </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">hours</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hours into the future the alarm should be set </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">minutes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minutes into the future the alarm should be set </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Seconds into the future the alarm should be set </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="206" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="332" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1afca2eade7f1520c97add8dbffe1247df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::RTC_alarm_at</definition>
+        <argsstring>(DateTime future_time)</argsstring>
+        <name>RTC_alarm_at</name>
+        <param>
+          <type>DateTime</type>
+          <declname>future_time</declname>
+        </param>
+        <briefdescription>
+<para>Set RTC alarm for a specific time. </para>        </briefdescription>
+        <detaileddescription>
+<para>Increments to next day at given hour, min, sec if specified time is in past <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">future_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time to set alarm for </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="212" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="338" bodyend="374"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1abbfb010ec889658a10d596ac4d096069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::RTC_alarm_at</definition>
+        <argsstring>(const uint8_t hour, const uint8_t minute, const uint8_t second)</argsstring>
+        <name>RTC_alarm_at</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>hour</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>minute</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>second</declname>
+        </param>
+        <briefdescription>
+<para>Set RTC alarm for a specific time. </para>        </briefdescription>
+        <detaileddescription>
+<para>Forwards to RTC_alarm_at that takes DateTime object <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">hour</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hour to set alarm for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">minute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minute to set alarm for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">second</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second to set alarm for </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="219" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="377" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1aef46cb9e0c3aee294ef5eacd5685be72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::RTC_alarm_duration_from_last</definition>
+        <argsstring>(const TimeSpan duration)</argsstring>
+        <name>RTC_alarm_duration_from_last</name>
+        <param>
+          <type>const TimeSpan</type>
+          <declname>duration</declname>
+        </param>
+        <briefdescription>
+<para>Set RTC alarm an amount of time from last alarm time. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How long before the alarm should go off </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="224" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="391" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a254c240e87b74e465acb4ed36e9fc2b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::RTC_alarm_duration_from_last</definition>
+        <argsstring>(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds)</argsstring>
+        <name>RTC_alarm_duration_from_last</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>days</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>hours</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>minutes</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>Set RTC alarm an amount of time from last alarm time. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">days</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Days into the future the alarm should be set </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">hours</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hours into the future the alarm should be set </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">minutes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minutes into the future the alarm should be set </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Seconds into the future the alarm should be set </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="231" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="397" bodyend="400"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>ASYNCDELAY TIMER METHODS</header>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1af5b0647e08c81406eefd25c3d4cc54f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::check_timers</definition>
+        <argsstring>()</argsstring>
+        <name>check_timers</name>
+        <briefdescription>
+<para>Check if timers have elapsed, if so run associated &apos;ISR&apos;. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="241" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="403" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a1b921c29326cfc93dd4e2e405d50bbdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::register_timer</definition>
+        <argsstring>(const uint8_t timer_num, const unsigned long duration, const ISRFuncPtr ISR, const bool repeat)</argsstring>
+        <name>register_timer</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>timer_num</declname>
+        </param>
+        <param>
+          <type>const unsigned long</type>
+          <declname>duration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="_interrupt___manager_8h_1a21adc8a9b6cc2505b5b1317ca9f74cf3" kindref="member">ISRFuncPtr</ref></type>
+          <declname>ISR</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>repeat</declname>
+        </param>
+        <briefdescription>
+<para>Configure specified timer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">timer_num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Timer to set </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How long timer should take (seconds) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ISR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISR to run after timer goes off </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">repeat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether or not to be a repeating alarm </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="248" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="423" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a1f52e9304f3b8b1fc93225f6d2e55785" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::clear_timer</definition>
+        <argsstring>(const uint8_t timer_num)</argsstring>
+        <name>clear_timer</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>timer_num</declname>
+        </param>
+        <briefdescription>
+<para>Clear specified timer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">timer_num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Timer to clear </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="252" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="435" bodyend="448"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>INTERNAL TIMER METHODS</header>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a61330d0a7d555fd77f0ecfa9e8d2d68e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::register_internal_timer</definition>
+        <argsstring>(const uint duration, const ISRFuncPtr ISR, const bool repeat, const ISR_Type run_type)</argsstring>
+        <name>register_internal_timer</name>
+        <param>
+          <type>const uint</type>
+          <declname>duration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="_interrupt___manager_8h_1a21adc8a9b6cc2505b5b1317ca9f74cf3" kindref="member">ISRFuncPtr</ref></type>
+          <declname>ISR</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>repeat</declname>
+        </param>
+        <param>
+          <type>const <ref refid="_interrupt___manager_8h_1a1cb40265e710cbdf07f99beb6c4020d1" kindref="member">ISR_Type</ref></type>
+          <declname>run_type</declname>
+        </param>
+        <briefdescription>
+<para>Configure internal timer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How long timer should take (seconds) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ISR</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISR to run after timer goes off </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">repeat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether or not to be a repeating alarm </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">run_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="270" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="451" bodyend="471"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a62c7686cecf790cfa0b05b704dd331b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::run_pending_internal_timer_ISR</definition>
+        <argsstring>()</argsstring>
+        <name>run_pending_internal_timer_ISR</name>
+        <briefdescription>
+<para>Run a delayed (flag based) ISR if the interal timer elapsed. </para>        </briefdescription>
+        <detaileddescription>
+<para>Is not needed if using <ref refid="_interrupt___manager_8h_1a1cb40265e710cbdf07f99beb6c4020d1ae35884a2445bc4ae2df52f188763273c" kindref="member">ISR_Type::IMMEDIATE</ref> ISR <simplesect kind="return"><para>True if flag was set and ISR run </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="275" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="474" bodyend="485"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a0dce3fcaa0a20ebb67e6ff723cf6ac3d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::get_internal_timer_flag</definition>
+        <argsstring>() const </argsstring>
+        <name>get_internal_timer_flag</name>
+        <briefdescription>
+<para>Get whether the internal timer has elapsed. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if timer elapsed, false otherwise </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="279" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="279" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1acd8fc9dcdf5711155cde0b1ac6a3da15" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::clear_internal_timer_flag</definition>
+        <argsstring>() const </argsstring>
+        <name>clear_internal_timer_flag</name>
+        <briefdescription>
+<para>Clear internal timer flag. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="282" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="282" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a1264d1fc1bbb0d8c82e791d174e37007" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::internal_timer_enable</definition>
+        <argsstring>(const bool enable)</argsstring>
+        <name>internal_timer_enable</name>
+        <param>
+          <type>const bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="namespace_enable" kindref="compound">Enable</ref> or disable internal timer. </para>        </briefdescription>
+        <detaileddescription>
+<para>Disabling does not remove settings, use unregister_interal_timer for that behavior <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True to enable timer, false to disable </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="287" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="488" bodyend="503"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1ac70690464b0311ad8758bf9cde3887d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::unregister_internal_timer</definition>
+        <argsstring>()</argsstring>
+        <name>unregister_internal_timer</name>
+        <briefdescription>
+<para>Clear and disable internal timer, remove ISR. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="290" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="506" bodyend="516"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a6b7a28e4b7a150016e2975165581f7e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="296" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="82" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1ae9dde4f4da0e50a0bc19e2ae3453c3cb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::print_state</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_state</name>
+        <reimplements refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7">print_state</reimplements>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="297" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="124" bodyend="127"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a647e6a07bcfcf479a5510d29f11fd1e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::get_interrupts_enabled</definition>
+        <argsstring>() const </argsstring>
+        <name>get_interrupts_enabled</name>
+        <briefdescription>
+<para>Get global interrupt enable state. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Global interrupt enable state </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="305" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="305" bodyend="305"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a947b7bc935f50e33f2483ab315188709" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::get_enable_interrupt</definition>
+        <argsstring>(const uint32_t pin) const </argsstring>
+        <name>get_enable_interrupt</name>
+        <param>
+          <type>const uint32_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>Get pin interrupt enable state. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pin to the the enable state of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The enable state </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="310" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="310" bodyend="310"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a7d27c7a5b0c7f7d8c26f043656cb28a7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom_r_t_c" kindref="compound">LoomRTC</ref> *</type>
+        <definition>LoomRTC* Loom_Interrupt_Manager::get_RTC_module</definition>
+        <argsstring>() const </argsstring>
+        <name>get_RTC_module</name>
+        <briefdescription>
+<para>Return pointer to the currently linked RTC object. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Current RTC object </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="314" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="314" bodyend="314"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a7415a4ffbeda1358639936cc62969605" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::link_device_manager</definition>
+        <argsstring>(LoomManager *LM) override</argsstring>
+        <name>link_device_manager</name>
+        <reimplements refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396">link_device_manager</reimplements>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>LM</declname>
+        </param>
+        <briefdescription>
+<para>Link a device manager. </para>        </briefdescription>
+        <detaileddescription>
+<para>Overrides default by getting RTC pointer from device manager if possible <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">LM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Manager to link </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="324" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="130" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a794ec2babdedb928f17862c93b772215" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::link_sleep_manager</definition>
+        <argsstring>(Loom_Sleep_Manager *SM)</argsstring>
+        <name>link_sleep_manager</name>
+        <param>
+          <type><ref refid="class_loom___sleep___manager" kindref="compound">Loom_Sleep_Manager</ref> *</type>
+          <declname>SM</declname>
+        </param>
+        <briefdescription>
+<para>Set pointer to sleep Manager. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">SM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to sleep manager </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="328" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="155" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a179034c16493d648ad3108ae1152e86b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::set_interrupts_enabled</definition>
+        <argsstring>(const bool state)</argsstring>
+        <name>set_interrupts_enabled</name>
+        <param>
+          <type>const bool</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>All interrupts enable/disable. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="namespace_enable" kindref="compound">Enable</ref> state to apply to all interrupts </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="332" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="332" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1ac3551b3ce17a6eb7db6885689510be60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::set_enable_interrupt</definition>
+        <argsstring>(const uint32_t pin, const bool state)</argsstring>
+        <name>set_enable_interrupt</name>
+        <param>
+          <type>const uint32_t</type>
+          <declname>pin</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Per interrupt enable. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interrupt pin to change enable state of </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The enable state to set pin to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="337" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="171" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a971175f7e1109e0317041bde9824591d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::set_RTC_module</definition>
+        <argsstring>(LoomRTC *RTC_Inst)</argsstring>
+        <name>set_RTC_module</name>
+        <param>
+          <type><ref refid="class_loom_r_t_c" kindref="compound">LoomRTC</ref> *</type>
+          <declname>RTC_Inst</declname>
+        </param>
+        <briefdescription>
+<para>Set the RTC module to use for timers. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">RTC_Inst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the RTC object </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="341" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="341" bodyend="341"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MISCELLANEOUS</header>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1aff3d5e9c3754228fd2986c4c90b2134b" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="_interrupt___manager_8h_1a21adc8a9b6cc2505b5b1317ca9f74cf3" kindref="member">ISRFuncPtr</ref></type>
+        <definition>const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs</definition>
+        <argsstring>[InteruptRange]</argsstring>
+        <name>default_ISRs</name>
+        <initializer>=
+{
+	default_ISR_0,  default_ISR_1,  default_ISR_2,  default_ISR_3,
+	default_ISR_4,  default_ISR_5,  default_ISR_6,  default_ISR_7,
+	default_ISR_8,  default_ISR_9,  default_ISR_10, default_ISR_11,
+	default_ISR_12, default_ISR_13, default_ISR_14, default_ISR_15
+}</initializer>
+        <briefdescription>
+<para>Array of the default ISRs that set flags. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="384" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="376" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a212f9cf070fb64c56d9ff675139278a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t Loom_Interrupt_Manager::pin_to_interrupt</definition>
+        <argsstring>(uint32_t pin)</argsstring>
+        <name>pin_to_interrupt</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="352" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="519" bodyend="534"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a9627a5c793fa172b25c4ff0078fe7193" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * Loom_Interrupt_Manager::interrupt_type_to_string</definition>
+        <argsstring>(const uint8_t type)</argsstring>
+        <name>interrupt_type_to_string</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Get c-string of name associated with interrupt type enum. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interrupt type </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>C-string of interrupt type </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="350" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="35" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1ab55fe5d5cf76dee9c837eace69d286a3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Interrupt_Manager::run_ISR_bottom_halves</definition>
+        <argsstring>()</argsstring>
+        <name>run_ISR_bottom_halves</name>
+        <briefdescription>
+<para>Checks the flags set by default ISRs, calls pending bottom half ISRs. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="358" column="1" bodyfile="src/Interrupt_Manager.cpp" bodystart="269" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a888160f46d2bb63f1583198167a1386b" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_0</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="361" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="361" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1aac4944d09630a07a486050577ffadb03" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_1</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="362" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="362" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a54f0a6a5d3b2940c710f38e8f13c850d" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_2</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="363" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="363" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a640526cf786463012d78f725cc13bcda" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_3</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="364" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="364" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1aa052ca628b752ce824bc99df47e4edeb" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_4</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="365" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="365" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1ad842992f6ffa234f197396efa431e41c" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_5</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_5</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="366" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="366" bodyend="366"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a400058c3ff1465afaaf16f2ac1b7e3eb" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_6</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_6</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="367" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="367" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a0f37d11ba62c1f95f6182c9410a0fc9e" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_7</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_7</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="368" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="368" bodyend="368"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a245ef4d58f0482ed4c05494498af363e" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_8</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_8</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="369" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="369" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1aefa0e89b3d5e15c9f148c0c13b32cbdc" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_9</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_9</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="370" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="370" bodyend="370"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1ab42a98571f3e54864ffc6c4b7356afbb" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_10</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_10</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="371" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="371" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1ae573c849261475621baf89e74b065784" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_11</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_11</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="372" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="372" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1adc8b6e4f2324d0769ed7a601ebe31648" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_12</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_12</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="373" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="373" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a413b2cee832168d8d6f0def188992ef8" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_13</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_13</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="374" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="374" bodyend="374"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a0198add7bfc1eef09b87f53f7c7586ac" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_14</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_14</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="375" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="375" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___interrupt___manager_1a2f297f6ff7f07df012d73a4a954b03e1" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void Loom_Interrupt_Manager::default_ISR_15</definition>
+        <argsstring>()</argsstring>
+        <name>default_ISR_15</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="376" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="376" bodyend="376"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1af209a82a1929466fa1d00a14733120c6" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_r_t_c" kindref="compound">LoomRTC</ref> *</type>
+        <definition>LoomRTC* Loom_Interrupt_Manager::RTC_Inst</definition>
+        <argsstring></argsstring>
+        <name>RTC_Inst</name>
+        <briefdescription>
+<para>Pointer to an RTC object for managing timers / timed interrupts. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="90" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1a1afa84cd52b350fcc4a48ec2e45431a9" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___sleep___manager" kindref="compound">Loom_Sleep_Manager</ref> *</type>
+        <definition>Loom_Sleep_Manager* Loom_Interrupt_Manager::Sleep_Manager</definition>
+        <argsstring></argsstring>
+        <name>Sleep_Manager</name>
+        <briefdescription>
+<para>Pointer to a Sleep Manager object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="93" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1a8b625720d3238492bc51a301e4e9b09a" prot="protected" static="no" mutable="no">
+        <type>IntDetails</type>
+        <definition>IntDetails Loom_Interrupt_Manager::int_settings[InteruptRange]</definition>
+        <argsstring>[InteruptRange]</argsstring>
+        <name>int_settings</name>
+        <briefdescription>
+<para>List of interrupts configurations. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="98" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1a0c79ea059f94d9ec26c4b58d3c945754" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Interrupt_Manager::int_count</definition>
+        <argsstring></argsstring>
+        <name>int_count</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="100" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1a042032ad0c2ed2748e1d2849dcae1a2f" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::interrupts_enabled</definition>
+        <argsstring></argsstring>
+        <name>interrupts_enabled</name>
+        <briefdescription>
+<para><ref refid="namespace_enable" kindref="compound">Enable</ref> or disable all interrupts <ndash/> currently only disables bottom halves. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="107" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1a9a00f26aff65a7294699d3518a3b7e74" prot="protected" static="no" mutable="no">
+        <type>InternalTimerDetails</type>
+        <definition>InternalTimerDetails Loom_Interrupt_Manager::internal_timer</definition>
+        <argsstring></argsstring>
+        <name>internal_timer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="111" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1a099eebe8ec30cee46432701945b0e758" prot="protected" static="no" mutable="no">
+        <type>DateTime</type>
+        <definition>DateTime Loom_Interrupt_Manager::last_alarm_time</definition>
+        <argsstring></argsstring>
+        <name>last_alarm_time</name>
+        <briefdescription>
+<para>Last time an alarm went off. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="116" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1aee0fc09dd7023b4d740932bb44a705c4" prot="protected" static="no" mutable="no">
+        <type>AsyncDelay</type>
+        <definition>AsyncDelay Loom_Interrupt_Manager::timers[MaxTimerCount]</definition>
+        <argsstring>[MaxTimerCount]</argsstring>
+        <name>timers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="119" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1a77b5bb21e151ca476b9e9cf8e45eaad6" prot="protected" static="no" mutable="no">
+        <type>TimerDetails</type>
+        <definition>TimerDetails Loom_Interrupt_Manager::timer_settings[MaxTimerCount]</definition>
+        <argsstring>[MaxTimerCount]</argsstring>
+        <name>timer_settings</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="120" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1a70c3fa86880738c1090071003b76cdc5" prot="protected" static="no" mutable="no">
+        <type>StopWatchDetails</type>
+        <definition>StopWatchDetails Loom_Interrupt_Manager::stopwatch_settings[MaxStopWatchCount]</definition>
+        <argsstring>[MaxStopWatchCount]</argsstring>
+        <name>stopwatch_settings</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="124" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="class_loom___interrupt___manager_1a12c988c69d8e14c845a736e032ac3575" prot="protected" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::interrupt_triggered</definition>
+        <argsstring>[InteruptRange]</argsstring>
+        <name>interrupt_triggered</name>
+        <initializer>= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}</initializer>
+        <briefdescription>
+<para>Flags set by interrupts, indicating ISR bottom half should be called if not Null. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="104" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Submanager for managing interrupts, timers, and stopwatches. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html">Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="578">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="577">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="578" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="585">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="581">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="582" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="583" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="584" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="579" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="580">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="581" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="588">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="579">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="580" relation="public-inheritance">
+        </childnode>
+        <childnode refid="585" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="586" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="583" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="587" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="584" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="588" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="583">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="580" relation="public-inheritance">
+        </childnode>
+        <childnode refid="579" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="582">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="580" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="584">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="580" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="586">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="587">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Interrupt_Manager.h" line="51" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="50" bodyend="386"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>category</name></member>
+      <member refid="class_loom___interrupt___manager_1af5b0647e08c81406eefd25c3d4cc54f3" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>check_timers</name></member>
+      <member refid="class_loom___interrupt___manager_1acd8fc9dcdf5711155cde0b1ac6a3da15" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>clear_internal_timer_flag</name></member>
+      <member refid="class_loom___interrupt___manager_1a1f52e9304f3b8b1fc93225f6d2e55785" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>clear_timer</name></member>
+      <member refid="class_loom___interrupt___manager_1a888160f46d2bb63f1583198167a1386b" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_0</name></member>
+      <member refid="class_loom___interrupt___manager_1aac4944d09630a07a486050577ffadb03" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_1</name></member>
+      <member refid="class_loom___interrupt___manager_1ab42a98571f3e54864ffc6c4b7356afbb" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_10</name></member>
+      <member refid="class_loom___interrupt___manager_1ae573c849261475621baf89e74b065784" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_11</name></member>
+      <member refid="class_loom___interrupt___manager_1adc8b6e4f2324d0769ed7a601ebe31648" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_12</name></member>
+      <member refid="class_loom___interrupt___manager_1a413b2cee832168d8d6f0def188992ef8" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_13</name></member>
+      <member refid="class_loom___interrupt___manager_1a0198add7bfc1eef09b87f53f7c7586ac" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_14</name></member>
+      <member refid="class_loom___interrupt___manager_1a2f297f6ff7f07df012d73a4a954b03e1" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_15</name></member>
+      <member refid="class_loom___interrupt___manager_1a54f0a6a5d3b2940c710f38e8f13c850d" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_2</name></member>
+      <member refid="class_loom___interrupt___manager_1a640526cf786463012d78f725cc13bcda" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_3</name></member>
+      <member refid="class_loom___interrupt___manager_1aa052ca628b752ce824bc99df47e4edeb" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_4</name></member>
+      <member refid="class_loom___interrupt___manager_1ad842992f6ffa234f197396efa431e41c" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_5</name></member>
+      <member refid="class_loom___interrupt___manager_1a400058c3ff1465afaaf16f2ac1b7e3eb" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_6</name></member>
+      <member refid="class_loom___interrupt___manager_1a0f37d11ba62c1f95f6182c9410a0fc9e" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_7</name></member>
+      <member refid="class_loom___interrupt___manager_1a245ef4d58f0482ed4c05494498af363e" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_8</name></member>
+      <member refid="class_loom___interrupt___manager_1aefa0e89b3d5e15c9f148c0c13b32cbdc" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISR_9</name></member>
+      <member refid="class_loom___interrupt___manager_1aff3d5e9c3754228fd2986c4c90b2134b" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>default_ISRs</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_device_manager</name></member>
+      <member refid="class_loom___interrupt___manager_1a947b7bc935f50e33f2483ab315188709" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_enable_interrupt</name></member>
+      <member refid="class_loom___interrupt___manager_1a0dce3fcaa0a20ebb67e6ff723cf6ac3d" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_internal_timer_flag</name></member>
+      <member refid="class_loom___interrupt___manager_1a647e6a07bcfcf479a5510d29f11fd1e6" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_interrupts_enabled</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom___interrupt___manager_1a7d27c7a5b0c7f7d8c26f043656cb28a7" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>get_RTC_module</name></member>
+      <member refid="class_loom___interrupt___manager_1a0c79ea059f94d9ec26c4b58d3c945754" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>int_count</name></member>
+      <member refid="class_loom___interrupt___manager_1a8b625720d3238492bc51a301e4e9b09a" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>int_settings</name></member>
+      <member refid="class_loom___interrupt___manager_1a9a00f26aff65a7294699d3518a3b7e74" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>internal_timer</name></member>
+      <member refid="class_loom___interrupt___manager_1a1264d1fc1bbb0d8c82e791d174e37007" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>internal_timer_enable</name></member>
+      <member refid="class_loom___interrupt___manager_1a05ba1bf76145681fecb787374358711f" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>interrupt_reset</name></member>
+      <member refid="class_loom___interrupt___manager_1a12c988c69d8e14c845a736e032ac3575" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>interrupt_triggered</name></member>
+      <member refid="class_loom___interrupt___manager_1a9627a5c793fa172b25c4ff0078fe7193" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>interrupt_type_to_string</name></member>
+      <member refid="class_loom___interrupt___manager_1a042032ad0c2ed2748e1d2849dcae1a2f" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>interrupts_enabled</name></member>
+      <member refid="class_loom___interrupt___manager_1a099eebe8ec30cee46432701945b0e758" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>last_alarm_time</name></member>
+      <member refid="class_loom___interrupt___manager_1a7415a4ffbeda1358639936cc62969605" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___interrupt___manager_1a794ec2babdedb928f17862c93b772215" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>link_sleep_manager</name></member>
+      <member refid="class_loom___interrupt___manager_1a5b12fcb72f0f5da323d63ab9a6ca95a5" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>Loom_Interrupt_Manager</name></member>
+      <member refid="class_loom___interrupt___manager_1a5b23954e2888942d6370f82e2f790d6d" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>Loom_Interrupt_Manager</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>LoomModule</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>module_type</name></member>
+      <member refid="class_loom___interrupt___manager_1a5acb7bf173619dbd1a459800182767e6" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___interrupt___manager_1a212f9cf070fb64c56d9ff675139278a4" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>pin_to_interrupt</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>power_up</name></member>
+      <member refid="class_loom___interrupt___manager_1a6b7a28e4b7a150016e2975165581f7e9" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>print_module_label</name></member>
+      <member refid="class_loom___interrupt___manager_1ae9dde4f4da0e50a0bc19e2ae3453c3cb" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>print_verbosity</name></member>
+      <member refid="class_loom___interrupt___manager_1abbf112a7a515088c543e76f5ad2a8bea" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>reconnect_interrupt</name></member>
+      <member refid="class_loom___interrupt___manager_1a61330d0a7d555fd77f0ecfa9e8d2d68e" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>register_internal_timer</name></member>
+      <member refid="class_loom___interrupt___manager_1a2d10238301b261b7cc98f5392c2d8cff" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>register_ISR</name></member>
+      <member refid="class_loom___interrupt___manager_1a1b921c29326cfc93dd4e2e405d50bbdd" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>register_timer</name></member>
+      <member refid="class_loom___interrupt___manager_1afca2eade7f1520c97add8dbffe1247df" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>RTC_alarm_at</name></member>
+      <member refid="class_loom___interrupt___manager_1abbfb010ec889658a10d596ac4d096069" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>RTC_alarm_at</name></member>
+      <member refid="class_loom___interrupt___manager_1ac188b3f03d32bcfdfe5caf4eae31f33d" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>RTC_alarm_duration</name></member>
+      <member refid="class_loom___interrupt___manager_1abde5c47ed6021fe7280c14891b1a1c31" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>RTC_alarm_duration</name></member>
+      <member refid="class_loom___interrupt___manager_1aef46cb9e0c3aee294ef5eacd5685be72" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>RTC_alarm_duration_from_last</name></member>
+      <member refid="class_loom___interrupt___manager_1a254c240e87b74e465acb4ed36e9fc2b8" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>RTC_alarm_duration_from_last</name></member>
+      <member refid="class_loom___interrupt___manager_1af209a82a1929466fa1d00a14733120c6" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>RTC_Inst</name></member>
+      <member refid="class_loom___interrupt___manager_1ab55fe5d5cf76dee9c837eace69d286a3" prot="private" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>run_ISR_bottom_halves</name></member>
+      <member refid="class_loom___interrupt___manager_1a62c7686cecf790cfa0b05b704dd331b7" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>run_pending_internal_timer_ISR</name></member>
+      <member refid="class_loom___interrupt___manager_1ada590ee9e56b82b39a6cf443c6038efd" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>run_pending_ISRs</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>set_active</name></member>
+      <member refid="class_loom___interrupt___manager_1ac3551b3ce17a6eb7db6885689510be60" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>set_enable_interrupt</name></member>
+      <member refid="class_loom___interrupt___manager_1a179034c16493d648ad3108ae1152e86b" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>set_interrupts_enabled</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___interrupt___manager_1a971175f7e1109e0317041bde9824591d" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>set_RTC_module</name></member>
+      <member refid="class_loom___interrupt___manager_1a1afa84cd52b350fcc4a48ec2e45431a9" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>Sleep_Manager</name></member>
+      <member refid="class_loom___interrupt___manager_1a70c3fa86880738c1090071003b76cdc5" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>stopwatch_settings</name></member>
+      <member refid="class_loom___interrupt___manager_1a77b5bb21e151ca476b9e9cf8e45eaad6" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>timer_settings</name></member>
+      <member refid="class_loom___interrupt___manager_1aee0fc09dd7023b4d740932bb44a705c4" prot="protected" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>timers</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>Type</name></member>
+      <member refid="class_loom___interrupt___manager_1ac70690464b0311ad8758bf9cde3887d9" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>unregister_internal_timer</name></member>
+      <member refid="class_loom___interrupt___manager_1a314bdba78fd288871bea3421ba6ec022" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>unregister_ISR</name></member>
+      <member refid="class_loom___interrupt___manager_1a0a389cd37e3266ab844ff0eed146082a" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager</scope><name>~Loom_Interrupt_Manager</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_Interrupt_Manager</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

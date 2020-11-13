@@ -1,0 +1,4 @@
+<map id="Loom_Digital" name="Loom_Digital">
+<area shape="rect" id="node2" href="$class_loom_sensor.html" title="Abstract root of Loom sensor modules hierarchy. " alt="" coords="7,80,109,107"/>
+<area shape="rect" id="node3" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="6,5,110,32"/>
+</map>

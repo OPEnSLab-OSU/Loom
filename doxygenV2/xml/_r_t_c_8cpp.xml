@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_r_t_c_8cpp" kind="file" language="C++">
+    <compoundname>RTC.cpp</compoundname>
+    <includes refid="_r_t_c_8h" local="yes">RTC.h</includes>
+    <includes refid="_manager_8h" local="yes">Manager.h</includes>
+    <includes refid="_internet_plat_8h" local="yes">../InternetPlats/InternetPlat.h</includes>
+    <includes refid="_interrupt___manager_8h" local="yes">../Interrupt_Manager.h</includes>
+    <includes local="no">EnableInterrupt.h</includes>
+    <incdepgraph>
+      <node id="4857">
+        <label>../InternetPlats/InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="4848" relation="include">
+        </childnode>
+        <childnode refid="4858" relation="include">
+        </childnode>
+        <childnode refid="4859" relation="include">
+        </childnode>
+        <childnode refid="4860" relation="include">
+        </childnode>
+        <childnode refid="4861" relation="include">
+        </childnode>
+      </node>
+      <node id="4859">
+        <label>Udp.h</label>
+      </node>
+      <node id="4851">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4848">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4849" relation="include">
+        </childnode>
+        <childnode refid="4851" relation="include">
+        </childnode>
+        <childnode refid="4852" relation="include">
+        </childnode>
+        <childnode refid="4853" relation="include">
+        </childnode>
+      </node>
+      <node id="4865">
+        <label>EnableInterrupt.h</label>
+      </node>
+      <node id="4858">
+        <label>Client.h</label>
+      </node>
+      <node id="4852">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4850" relation="include">
+        </childnode>
+        <childnode refid="4853" relation="include">
+        </childnode>
+      </node>
+      <node id="4847">
+        <label>RTC.h</label>
+        <link refid="_r_t_c_8h"/>
+        <childnode refid="4848" relation="include">
+        </childnode>
+        <childnode refid="4854" relation="include">
+        </childnode>
+      </node>
+      <node id="4864">
+        <label>RTCCounter.h</label>
+      </node>
+      <node id="4849">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4850" relation="include">
+        </childnode>
+      </node>
+      <node id="4854">
+        <label>OPEnS_RTC.h</label>
+      </node>
+      <node id="4856">
+        <label>vector</label>
+      </node>
+      <node id="4853">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4850">
+        <label>Arduino.h</label>
+      </node>
+      <node id="4846">
+        <label>src/RTC/RTC.cpp</label>
+        <link refid="RTC.cpp"/>
+        <childnode refid="4847" relation="include">
+        </childnode>
+        <childnode refid="4855" relation="include">
+        </childnode>
+        <childnode refid="4857" relation="include">
+        </childnode>
+        <childnode refid="4862" relation="include">
+        </childnode>
+        <childnode refid="4865" relation="include">
+        </childnode>
+      </node>
+      <node id="4862">
+        <label>../Interrupt_Manager.h</label>
+        <link refid="_interrupt___manager_8h"/>
+        <childnode refid="4848" relation="include">
+        </childnode>
+        <childnode refid="4854" relation="include">
+        </childnode>
+        <childnode refid="4863" relation="include">
+        </childnode>
+        <childnode refid="4864" relation="include">
+        </childnode>
+      </node>
+      <node id="4860">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="4855">
+        <label>Manager.h</label>
+        <link refid="_manager_8h"/>
+        <childnode refid="4849" relation="include">
+        </childnode>
+        <childnode refid="4853" relation="include">
+        </childnode>
+        <childnode refid="4856" relation="include">
+        </childnode>
+      </node>
+      <node id="4861">
+        <label>memory</label>
+      </node>
+      <node id="4863">
+        <label>AsyncDelay.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_r_t_c_8cpp_1a2396abb44099eab116541e9c06b9a769" prot="public" static="no">
+        <name>EI_NOTEXTERNAL</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/RTC.cpp" line="16" column="9" bodyfile="src/RTC/RTC.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/RTC/RTC.cpp"/>
+  </compounddef>
+</doxygen>

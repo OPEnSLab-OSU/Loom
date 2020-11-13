@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_09e80382a18e25c2dcfcfbe9cab72448" kind="dir">
+    <compoundname>src/CommPlats</compoundname>
+    <innerfile refid="_bluetooth_8cpp">Bluetooth.cpp</innerfile>
+    <innerfile refid="_bluetooth_8h">Bluetooth.h</innerfile>
+    <innerfile refid="_comm_plat_8cpp">CommPlat.cpp</innerfile>
+    <innerfile refid="_comm_plat_8h">CommPlat.h</innerfile>
+    <innerfile refid="_lo_ra_8cpp">LoRa.cpp</innerfile>
+    <innerfile refid="_lo_ra_8h">LoRa.h</innerfile>
+    <innerfile refid="n_r_f_8cpp">nRF.cpp</innerfile>
+    <innerfile refid="n_r_f_8h">nRF.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/CommPlats/"/>
+  </compounddef>
+</doxygen>

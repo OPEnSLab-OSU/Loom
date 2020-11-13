@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="struct_loom___interrupt___manager_1_1_int_details" kind="struct" language="C++" prot="private">
+    <compoundname>Loom_Interrupt_Manager::IntDetails</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_int_details_1a73a3b848be6b70844b0d4df710e128b4" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Loom_Interrupt_Manager::IntDetails::pin</definition>
+        <argsstring></argsstring>
+        <name>pin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="57" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_int_details_1a0a43a2092b0b18ad9dd5d9a643ea59f3" prot="public" static="no" mutable="no">
+        <type><ref refid="_interrupt___manager_8h_1a21adc8a9b6cc2505b5b1317ca9f74cf3" kindref="member">ISRFuncPtr</ref></type>
+        <definition>ISRFuncPtr Loom_Interrupt_Manager::IntDetails::ISR</definition>
+        <argsstring></argsstring>
+        <name>ISR</name>
+        <briefdescription>
+<para>Function pointer to ISR. Set null if no interrupt linked. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="58" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_int_details_1aee6cd6b8b0604df205f8b1daf469beff" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Loom_Interrupt_Manager::IntDetails::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>Interrupt signal type to detect. LOW: 0, HIGH: 1, CHANGE: 2, FALLING: 3, INT_RISING: 4. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="59" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_int_details_1a2fd24dd5227a5a2265680caa352eda1a" prot="public" static="no" mutable="no">
+        <type><ref refid="_interrupt___manager_8h_1a1cb40265e710cbdf07f99beb6c4020d1" kindref="member">ISR_Type</ref></type>
+        <definition>ISR_Type Loom_Interrupt_Manager::IntDetails::run_type</definition>
+        <argsstring></argsstring>
+        <name>run_type</name>
+        <briefdescription>
+<para>True if ISR is called directly upon interrupt, false if called next check of flags. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="60" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_int_details_1a60fe1d1f7de76f29f563461eeaaa7ba0" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::IntDetails::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <briefdescription>
+<para>Whether or not this interrupt is enabled. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="61" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains information defining an interrupt&apos;s configuration. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Interrupt_Manager.h" line="56" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="56" bodyend="62"/>
+    <listofallmembers>
+      <member refid="struct_loom___interrupt___manager_1_1_int_details_1a60fe1d1f7de76f29f563461eeaaa7ba0" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::IntDetails</scope><name>enabled</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_int_details_1a0a43a2092b0b18ad9dd5d9a643ea59f3" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::IntDetails</scope><name>ISR</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_int_details_1a73a3b848be6b70844b0d4df710e128b4" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::IntDetails</scope><name>pin</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_int_details_1a2fd24dd5227a5a2265680caa352eda1a" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::IntDetails</scope><name>run_type</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_int_details_1aee6cd6b8b0604df205f8b1daf469beff" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::IntDetails</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

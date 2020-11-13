@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_i2_c___sensor_8cpp" kind="file" language="C++">
+    <compoundname>I2C_Sensor.cpp</compoundname>
+    <includes refid="_i2_c___sensor_8h" local="yes">I2C_Sensor.h</includes>
+    <incdepgraph>
+      <node id="5125">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5122">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5123" relation="include">
+        </childnode>
+        <childnode refid="5125" relation="include">
+        </childnode>
+        <childnode refid="5126" relation="include">
+        </childnode>
+        <childnode refid="5127" relation="include">
+        </childnode>
+      </node>
+      <node id="5126">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5124" relation="include">
+        </childnode>
+        <childnode refid="5127" relation="include">
+        </childnode>
+      </node>
+      <node id="5119">
+        <label>src/Sensors/I2C/I2C_Sensor.cpp</label>
+        <link refid="I2C_Sensor.cpp"/>
+        <childnode refid="5120" relation="include">
+        </childnode>
+      </node>
+      <node id="5123">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5124" relation="include">
+        </childnode>
+      </node>
+      <node id="5128">
+        <label>Wire.h</label>
+      </node>
+      <node id="5127">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5121">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5122" relation="include">
+        </childnode>
+      </node>
+      <node id="5124">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5120">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5121" relation="include">
+        </childnode>
+        <childnode refid="5128" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/I2C_Sensor.cpp"/>
+  </compounddef>
+</doxygen>

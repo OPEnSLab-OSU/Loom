@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_AS7262 class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_AS7262 <span class="m-thin">class</span>
+        </h1>
+        <p>AS7262 Visible spectrum spectral sensor module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___a_s7262.html">Module Documentation</a></li><li><a href="https://www.sparkfun.com/products/14347">Product Page: SparkFun Spectral Sensor Breakout - AS7262 Visible</a></li><li><a href="https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X/tree/master/Libraries/Arduino">Dependency: Sparkfun AS726X Arduino Library</a></li><li><a href="https://learn.sparkfun.com/tutorials/as726x-nirvi">Hookup Guide: AS726X NIR/VIS Spectral Sensor</a></li><li><a href="https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X">Hardware GitHub</a></li><li><a href="https://cdn.sparkfun.com/assets/f/b/c/c/f/AS7262.pdf">Datasheet: AS7262</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7262-spectral-sensor-visible">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_i2_c_sensor.html" class="m-doc">LoomI2CSensor</a>
+            </dt>
+            <dd>Abstract root for I2C sensor modules.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a601df5126c5cf248fa51dace2596aa2f">
+              AS726X <a href="#a601df5126c5cf248fa51dace2596aa2f" class="m-doc-self">inst_AS7262</a>
+            </dt>
+            <dd>Underlying AS7262 sensor manager instance.</dd>
+            <dt>
+              uint16_t <a href="#a951df5e3e0154cc32f79b3d4156109b7" class="m-doc">color_vals</a>
+            </dt>
+            <dd>Measured color band values (violet, blue, green, yellow, orange, red).</dd>
+            <dt id="a2fa9b5aeb99ac06738a52c3716053a89">
+              bool <a href="#a2fa9b5aeb99ac06738a52c3716053a89" class="m-doc-self">use_bulb</a>
+            </dt>
+            <dd>Whether or not to use bulb.</dd>
+            <dt id="a3a9fc889a169e21181fa703ea152147d">
+              uint8_t <a href="#a3a9fc889a169e21181fa703ea152147d" class="m-doc-self">gain</a>
+            </dt>
+            <dd>Gain setting.</dd>
+            <dt id="afae9fa2dc1e8bac95947f957449212f2">
+              uint8_t <a href="#afae9fa2dc1e8bac95947f957449212f2" class="m-doc-self">mode</a>
+            </dt>
+            <dd>Sensor read mode.</dd>
+            <dt id="aa8b8b093c0eabd30a7534270accae5c0">
+              uint8_t <a href="#aa8b8b093c0eabd30a7534270accae5c0" class="m-doc-self">integration_time</a>
+            </dt>
+            <dd>Integration time setting.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aa2520f32d63b534ceffe3f4348966f2b" class="m-doc">Loom_AS7262</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x49,
+              const uint8_t mux_port = 255,
+              const bool use_bulb = false,
+              const uint8_t gain = 1,
+              const uint8_t mode = 3,
+              const uint8_t integration_time = 50)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a3b3bb211be2a318531600601d1a7ed33" class="m-doc">Loom_AS7262</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="a1b66df2745f0d55e23d934027039647c">
+              <span class="m-doc-wrap-bumper"><a href="#a1b66df2745f0d55e23d934027039647c" class="m-doc-self">~Loom_AS7262</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a4aa32d83a2fbbaa9622d5b567742a1a5">
+              <span class="m-doc-wrap-bumper">void <a href="#a4aa32d83a2fbbaa9622d5b567742a1a5" class="m-doc-self">measure</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Take any relevant measurements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a943cf5569f3f583da3049d8d64e7da76" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Package a modules measurements or state.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a29aef77c6d06feb46bc840f4407abba7">
+              <span class="m-doc-wrap-bumper">void <a href="#a29aef77c6d06feb46bc840f4407abba7" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a684921cffa4f3ab9457138e05d8f4b88" class="m-doc">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Print the last set of measurements taken.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa0f5c88f3b0568e88353eb97064b9109" class="m-doc">enable_bulb</a>(</span><span class="m-doc-wrap">const bool enable)</span>
+            </dt>
+            <dd>Set whether not bulb is used for active light source.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a67adc6edbb6889372491c4c2b5e88bee" class="m-doc">set_gain</a>(</span><span class="m-doc-wrap">const uint8_t gain)</span>
+            </dt>
+            <dd>Set gain.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7ce8591d9d8ad10202d375f49b27db2c" class="m-doc">set_mode</a>(</span><span class="m-doc-wrap">const uint8_t mode)</span>
+            </dt>
+            <dd>Set mode.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a6df02eb46ccb2226bad6c2be58e5ace1" class="m-doc">set_integration_time</a>(</span><span class="m-doc-wrap">const uint8_t time)</span>
+            </dt>
+            <dd>Set integration time.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aa2520f32d63b534ceffe3f4348966f2b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />AS7262::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa2520f32d63b534ceffe3f4348966f2b" class="m-doc-self">Loom_AS7262</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x49,
+              const uint8_t mux_port = 255,
+              const bool use_bulb = false,
+              const uint8_t gain = 1,
+              const uint8_t mode = 3,
+              const uint8_t integration_time = 50)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>i2c_address&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;0x49&gt; | {0x49} | I2C address</td>
+                </tr>
+                <tr>
+                  <td>mux_port&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;255&gt; | [0-16] | Port on multiplexer</td>
+                </tr>
+                <tr>
+                  <td>use_bulb&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;false&gt; | {true, false} | Whether or not to use bulb</td>
+                </tr>
+                <tr>
+                  <td>gain&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;1&gt; | { 0(&quot;1x&quot;), 1(&quot;3.7x&quot;), 2(&quot;16x&quot;), 3(&quot;64x&quot;) } | Gain level</td>
+                </tr>
+                <tr>
+                  <td>mode&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;3&gt; | { 0(&quot;Continuous reading of VBGY&quot;), 1(&quot;Continuous reading of GYOR&quot;), 2(&quot;Continuous reading all channels&quot;), 3(&quot;One-shot reading of all channels&quot;) } | Read mode</td>
+                </tr>
+                <tr>
+                  <td>integration_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;50&gt; | [0-255] | Integration time (time will be 2.8ms * [integration value])</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3b3bb211be2a318531600601d1a7ed33"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />AS7262::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3b3bb211be2a318531600601d1a7ed33" class="m-doc-self">Loom_AS7262</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a943cf5569f3f583da3049d8d64e7da76"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />AS7262::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a943cf5569f3f583da3049d8d64e7da76" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Package a modules measurements or state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Object to put data into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a684921cffa4f3ab9457138e05d8f4b88"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />AS7262::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a684921cffa4f3ab9457138e05d8f4b88" class="m-doc-self">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Print the last set of measurements taken.</p>
+<p>Does not package the data.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa0f5c88f3b0568e88353eb97064b9109"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />AS7262::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0f5c88f3b0568e88353eb97064b9109" class="m-doc-self">enable_bulb</a>(</span><span class="m-doc-wrap">const bool enable)</span></span>
+            </h3>
+            <p>Set whether not bulb is used for active light source.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">enable&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Whether or not to enable</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a67adc6edbb6889372491c4c2b5e88bee"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />AS7262::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a67adc6edbb6889372491c4c2b5e88bee" class="m-doc-self">set_gain</a>(</span><span class="m-doc-wrap">const uint8_t gain)</span></span>
+            </h3>
+            <p>Set gain.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">gain&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Gain level: 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7ce8591d9d8ad10202d375f49b27db2c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />AS7262::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7ce8591d9d8ad10202d375f49b27db2c" class="m-doc-self">set_mode</a>(</span><span class="m-doc-wrap">const uint8_t mode)</span></span>
+            </h3>
+            <p>Set mode.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">mode&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Mode. 0: Continuous reading of VBGY 1: Continuous reading of GYOR 2: Continuous reading of all channels (power-on default) 3: One-shot reading of all channels</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6df02eb46ccb2226bad6c2be58e5ace1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />AS7262::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6df02eb46ccb2226bad6c2be58e5ace1" class="m-doc-self">set_integration_time</a>(</span><span class="m-doc-wrap">const uint8_t time)</span></span>
+            </h3>
+            <p>Set integration time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Integration time</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Time will be 2.8ms * [integration value] (0-255), 50 is default</p>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a951df5e3e0154cc32f79b3d4156109b7"><div>
+            <h3>
+              uint16_t Loom_<wbr />AS7262::<wbr /><a href="#a951df5e3e0154cc32f79b3d4156109b7" class="m-doc-self">color_vals</a> <span class="m-label m-warning">protected</span>
+            </h3>
+            <p>Measured color band values (violet, blue, green, yellow, orange, red).</p>
+<p>Units: counts / (μW/cm^2).</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

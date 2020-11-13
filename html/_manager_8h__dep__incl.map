@@ -1,0 +1,22 @@
+<map id="src/Manager.h" name="src/Manager.h">
+<area shape="rect" id="node2" href="$_comm_plat_8cpp.html" title="src/CommPlats/CommPlat.cpp" alt="" coords="5,87,223,114"/>
+<area shape="rect" id="node3" href="$_warm_up_8cpp.html" title="src/Components/WarmUp\l/WarmUp.cpp" alt="" coords="247,80,432,121"/>
+<area shape="rect" id="node4" href="$_sleep___manager_8h.html" title="src/Sleep_Manager.h" alt="" coords="909,87,1063,114"/>
+<area shape="rect" id="node5" href="$_interrupt___manager_8cpp.html" title="src/Interrupt_Manager.cpp" alt="" coords="507,177,697,203"/>
+<area shape="rect" id="node7" href="$_loom_8h.html" title="src/Loom.h" alt="" coords="1153,259,1246,285"/>
+<area shape="rect" id="node8" href="$_manager_8cpp.html" title="src/Manager.cpp" alt="" coords="865,259,992,285"/>
+<area shape="rect" id="node9" href="$_manager___module___access_8cpp.html" title="src/Manager_Module\l_Access.cpp" alt="" coords="1145,169,1299,211"/>
+<area shape="rect" id="node11" href="$_batch_s_d_8cpp.html" title="src/LogPlats/BatchSD.cpp" alt="" coords="1249,87,1435,114"/>
+<area shape="rect" id="node12" href="$_log_plat_8cpp.html" title="src/LogPlats/LogPlat.cpp" alt="" coords="1460,87,1637,114"/>
+<area shape="rect" id="node13" href="$_s_d_8cpp.html" title="src/LogPlats/SD.cpp" alt="" coords="1662,87,1811,114"/>
+<area shape="rect" id="node14" href="$_n_t_p___sync_8cpp.html" title="src/NTP_Sync.cpp" alt="" coords="1836,87,1971,114"/>
+<area shape="rect" id="node15" href="$_google_sheets_8cpp.html" title="src/PublishPlats/GoogleSheets.cpp" alt="" coords="1995,87,2238,114"/>
+<area shape="rect" id="node16" href="$_max___pub_8cpp.html" title="src/PublishPlats/Max\l_Pub.cpp" alt="" coords="2263,80,2413,121"/>
+<area shape="rect" id="node17" href="$_publish_plat_8cpp.html" title="src/PublishPlats/Publish\lPlat.cpp" alt="" coords="2438,80,2609,121"/>
+<area shape="rect" id="node18" href="$_r_t_c_8cpp.html" title="src/RTC/RTC.cpp" alt="" coords="2633,87,2753,114"/>
+<area shape="rect" id="node19" href="$_max___sub_8cpp.html" title="src/SubscribePlats\l/Max_Sub.cpp" alt="" coords="2777,80,2915,121"/>
+<area shape="rect" id="node20" href="$_subscribe_plat_8cpp.html" title="src/SubscribePlats\l/SubscribePlat.cpp" alt="" coords="2940,80,3080,121"/>
+<area shape="rect" id="node21" href="$_temperature___sync_8cpp.html" title="src/Temperature_Sync.cpp" alt="" coords="3104,87,3295,114"/>
+<area shape="rect" id="node6" href="$_module___factory_8h.html" title="src/Module_Factory.h" alt="" coords="966,177,1121,203"/>
+<area shape="rect" id="node10" href="$_sleep___manager_8cpp.html" title="src/Sleep_Manager.cpp" alt="" coords="721,177,891,203"/>
+</map>

@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_bluetooth_8cpp" kind="file" language="C++">
+    <compoundname>Bluetooth.cpp</compoundname>
+    <includes refid="_bluetooth_8h" local="yes">Bluetooth.h</includes>
+    <incdepgraph>
+      <node id="3100">
+        <label>src/CommPlats/Bluetooth.cpp</label>
+        <link refid="Bluetooth.cpp"/>
+        <childnode refid="3101" relation="include">
+        </childnode>
+      </node>
+      <node id="3106">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3110">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="3103" relation="include">
+        </childnode>
+      </node>
+      <node id="3103">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3104" relation="include">
+        </childnode>
+        <childnode refid="3106" relation="include">
+        </childnode>
+        <childnode refid="3107" relation="include">
+        </childnode>
+        <childnode refid="3108" relation="include">
+        </childnode>
+      </node>
+      <node id="3107">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3105" relation="include">
+        </childnode>
+        <childnode refid="3108" relation="include">
+        </childnode>
+      </node>
+      <node id="3101">
+        <label>Bluetooth.h</label>
+        <link refid="_bluetooth_8h"/>
+        <childnode refid="3102" relation="include">
+        </childnode>
+        <childnode refid="3112" relation="include">
+        </childnode>
+        <childnode refid="3113" relation="include">
+        </childnode>
+      </node>
+      <node id="3104">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3105" relation="include">
+        </childnode>
+      </node>
+      <node id="3111">
+        <label>SdFat.h</label>
+      </node>
+      <node id="3108">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3105">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3109">
+        <label>../LogPlats/BatchSD.h</label>
+        <link refid="_batch_s_d_8h"/>
+        <childnode refid="3110" relation="include">
+        </childnode>
+        <childnode refid="3111" relation="include">
+        </childnode>
+      </node>
+      <node id="3102">
+        <label>CommPlat.h</label>
+        <link refid="_comm_plat_8h"/>
+        <childnode refid="3103" relation="include">
+        </childnode>
+        <childnode refid="3109" relation="include">
+        </childnode>
+        <childnode refid="3105" relation="include">
+        </childnode>
+        <childnode refid="3108" relation="include">
+        </childnode>
+      </node>
+      <node id="3113">
+        <label>Adafruit_BluefruitLE_UART.h</label>
+      </node>
+      <node id="3112">
+        <label>Adafruit_BluefruitLE_SPI.h</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/CommPlats/Bluetooth.cpp"/>
+  </compounddef>
+</doxygen>

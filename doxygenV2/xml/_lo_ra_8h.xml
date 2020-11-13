@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_lo_ra_8h" kind="file" language="C++">
+    <compoundname>LoRa.h</compoundname>
+    <includes refid="_comm_plat_8h" local="yes">CommPlat.h</includes>
+    <includes local="no">RH_RF95.h</includes>
+    <includes local="no">RHReliableDatagram.h</includes>
+    <includedby refid="_lo_ra_8cpp" local="yes">src/CommPlats/LoRa.cpp</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="3188">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3192">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="3185" relation="include">
+        </childnode>
+      </node>
+      <node id="3185">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3186" relation="include">
+        </childnode>
+        <childnode refid="3188" relation="include">
+        </childnode>
+        <childnode refid="3189" relation="include">
+        </childnode>
+        <childnode refid="3190" relation="include">
+        </childnode>
+      </node>
+      <node id="3189">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3187" relation="include">
+        </childnode>
+        <childnode refid="3190" relation="include">
+        </childnode>
+      </node>
+      <node id="3194">
+        <label>RH_RF95.h</label>
+      </node>
+      <node id="3186">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3187" relation="include">
+        </childnode>
+      </node>
+      <node id="3195">
+        <label>RHReliableDatagram.h</label>
+      </node>
+      <node id="3183">
+        <label>src/CommPlats/LoRa.h</label>
+        <link refid="LoRa.h"/>
+        <childnode refid="3184" relation="include">
+        </childnode>
+        <childnode refid="3194" relation="include">
+        </childnode>
+        <childnode refid="3195" relation="include">
+        </childnode>
+      </node>
+      <node id="3193">
+        <label>SdFat.h</label>
+      </node>
+      <node id="3190">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3187">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3191">
+        <label>../LogPlats/BatchSD.h</label>
+        <link refid="_batch_s_d_8h"/>
+        <childnode refid="3192" relation="include">
+        </childnode>
+        <childnode refid="3193" relation="include">
+        </childnode>
+      </node>
+      <node id="3184">
+        <label>CommPlat.h</label>
+        <link refid="_comm_plat_8h"/>
+        <childnode refid="3185" relation="include">
+        </childnode>
+        <childnode refid="3191" relation="include">
+        </childnode>
+        <childnode refid="3187" relation="include">
+        </childnode>
+        <childnode refid="3190" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3198">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3199" relation="include">
+        </childnode>
+        <childnode refid="3200" relation="include">
+        </childnode>
+      </node>
+      <node id="3196">
+        <label>src/CommPlats/LoRa.h</label>
+        <link refid="LoRa.h"/>
+        <childnode refid="3197" relation="include">
+        </childnode>
+        <childnode refid="3198" relation="include">
+        </childnode>
+      </node>
+      <node id="3197">
+        <label>src/CommPlats/LoRa.cpp</label>
+        <link refid="_lo_ra_8cpp"/>
+      </node>
+      <node id="3199">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3200">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___lo_ra" prot="public">Loom_LoRa</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_lo_ra_8h_1aa8ae373073fa3ada6d166d5c25cd7356" prot="public" static="no">
+        <name>RFM95_CS</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/LoRa.h" line="20" column="9" bodyfile="src/CommPlats/LoRa.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_lo_ra_8h_1abcdca75c517767d477ef9180388fd26e" prot="public" static="no">
+        <name>RFM95_RST</name>
+        <initializer>4</initializer>
+        <briefdescription>
+<para>LoRa reset pin. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/LoRa.h" line="21" column="9" bodyfile="src/CommPlats/LoRa.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_lo_ra_8h_1af9478379e8d7a1778fff84e6d94fd0d6" prot="public" static="no">
+        <name>RFM95_INT</name>
+        <initializer>3</initializer>
+        <briefdescription>
+<para>LoRa interrupt pin. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/LoRa.h" line="22" column="9" bodyfile="src/CommPlats/LoRa.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_lo_ra_8h_1a2240e28a2e7f70d896b1a46ea3c5ce39" prot="public" static="no">
+        <name>RF95_FREQ</name>
+        <initializer>915.0</initializer>
+        <briefdescription>
+<para>LoRa radio frequence. </para>        </briefdescription>
+        <detaileddescription>
+<para>Hardware specific, Tx must match Rx </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/LoRa.h" line="26" column="9" bodyfile="src/CommPlats/LoRa.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/CommPlats/LoRa.h"/>
+  </compounddef>
+</doxygen>

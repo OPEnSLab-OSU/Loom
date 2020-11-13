@@ -1,0 +1,5 @@
+<map id="Loom_FXAS21002" name="Loom_FXAS21002">
+<area shape="rect" id="node2" href="$class_loom_i2_c_sensor.html" title="Abstract root for I2C sensor modules. " alt="" coords="13,155,136,181"/>
+<area shape="rect" id="node3" href="$class_loom_sensor.html" title="Abstract root of Loom sensor modules hierarchy. " alt="" coords="23,80,126,107"/>
+<area shape="rect" id="node4" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="23,5,127,32"/>
+</map>

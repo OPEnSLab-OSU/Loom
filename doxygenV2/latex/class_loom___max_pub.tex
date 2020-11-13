@@ -1,0 +1,294 @@
+\hypertarget{class_loom___max_pub}{}\section{Loom\+\_\+\+Max\+Pub Class Reference}
+\label{class_loom___max_pub}\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+
+
+Module taking in and translating J\+S\+ON into data understood by the Google Sheets script A\+PI.  
+
+
+
+
+{\ttfamily \#include $<$Max\+\_\+\+Pub.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Max\+Pub\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{class_loom___max_pub__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___max_pub_aa000de565cb6a5e06d03a6ff65f6f9e5}{Loom\+\_\+\+Max\+Pub} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_publish_plat_aab697868e61843787893f5509d22b9ed}{internet\+\_\+type})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___max_pub_a14324e11a518e6c64d92c0623d572765}{Loom\+\_\+\+Max\+Pub} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___max_pub_a86cecc2a45d660c5f1cc1d6b720b1739}{second\+\_\+stage\+\_\+ctor} () override
+\begin{DoxyCompactList}\small\item\em Second stage construction. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___max_pub_a1cb4e999495f70425a920003dc78d99d}{$\sim$\+Loom\+\_\+\+Max\+Pub} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___max_pub_a5d824f56b133288fc9dcb0d62379ca35}{dispatch} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Route command to driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___max_pub_a9286db7e281484d00233dc4d86012197}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{class_loom___max_pub_aadc82ca62997907eda950c8f9d3dd4a8}{get\+\_\+port} () const 
+\begin{DoxyCompactList}\small\item\em Get U\+DP port device is listening on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{class_loom___max_pub_aabdb739b93a98972610d836d2f4ace19}{U\+D\+P\+\_\+port}
+\begin{DoxyCompactList}\small\item\em Which U\+DP port to transmit on. \end{DoxyCompactList}\item 
+I\+P\+Address \hyperlink{class_loom___max_pub_a61f53dddbf95967c3e34f19a159e9e15}{remote\+IP}
+\begin{DoxyCompactList}\small\item\em Which IP address to send to. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_internet_plat_a0b2cc742a6ac5f4f7054b75ea99b345c}{Loom\+Internet\+Plat\+::\+U\+D\+P\+Ptr} \hyperlink{class_loom___max_pub_a39f9cb9d6c5bc08bc4f2c164ab834620}{U\+D\+P\+\_\+\+Inst}
+\begin{DoxyCompactList}\small\item\em Pointer to U\+DP object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{S\+E\+T\+T\+E\+RS}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___max_pub_ab0d598913fba6f06773495806533da81}{set\+\_\+port} (const uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Set the U\+DP port to send on. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___max_pub_a34d82217de5608ee475e73c5d1a13868}{set\+\_\+ip} (const I\+P\+Address ip)
+\begin{DoxyCompactList}\small\item\em Set the IP address to send to. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___max_pub_a873dd6ccd99520c4e63207cb371799f4}{set\+\_\+ip} ()
+\begin{DoxyCompactList}\small\item\em Set the IP addres to send to by getting remote IP from Max\+Sub if available. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___max_pub_aa0a82d79ac37d01ba3bb2add3061a235}{send\+\_\+to\+\_\+internet} (const Json\+Object json, \hyperlink{class_loom_internet_plat}{Loom\+Internet\+Plat} $\ast$plat) override
+\begin{DoxyCompactList}\small\item\em Send J\+S\+ON to the internet, assumes that a valid internet plat was found and can be used. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Module taking in and translating J\+S\+ON into data understood by the Google Sheets script A\+PI. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___max_pub.html}{\tt Module Documentation}
+\item \href{https://cycling74.com}{\tt Max 8}
+\item \href{https://github.com/OPEnSLab-OSU/Max-Loom2}{\tt Loom Max Patches} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Max\+Pub(\+Loom\+Manager $\ast$manager, const Loom\+Module\+::\+Type internet\+\_\+type)}{Loom_MaxPub(LoomManager *manager, const LoomModule::Type internet_type)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Max\+Pub\+::\+Loom\+\_\+\+Max\+Pub (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{internet\+\_\+type}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___max_pub_aa000de565cb6a5e06d03a6ff65f6f9e5}{}\label{class_loom___max_pub_aa000de565cb6a5e06d03a6ff65f6f9e5}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em internet\+\_\+type} & Set(\+Loom\+Module\+::\+Type) $\vert$ $<$7001$>$ $\vert$ \{7001(\char`\"{}\+Ethernet\char`\"{}), 7002(\char`\"{}\+Wi\+Fi\char`\"{}), 7003(\char`\"{}\+L\+T\+E\char`\"{})\} $\vert$ Code of the desired internet platform. \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Max\+Pub(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_MaxPub(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Max\+Pub\+::\+Loom\+\_\+\+Max\+Pub (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___max_pub_a14324e11a518e6c64d92c0623d572765}{}\label{class_loom___max_pub_a14324e11a518e6c64d92c0623d572765}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!````~Loom\+\_\+\+Max\+Pub@{$\sim$\+Loom\+\_\+\+Max\+Pub}}
+\index{````~Loom\+\_\+\+Max\+Pub@{$\sim$\+Loom\+\_\+\+Max\+Pub}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Max\+Pub()}{~Loom_MaxPub()}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Max\+Pub\+::$\sim$\+Loom\+\_\+\+Max\+Pub (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___max_pub_a1cb4e999495f70425a920003dc78d99d}{}\label{class_loom___max_pub_a1cb4e999495f70425a920003dc78d99d}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{dispatch(\+Json\+Object json) override}{dispatch(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Max\+Pub\+::dispatch (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___max_pub_a5d824f56b133288fc9dcb0d62379ca35}{}\label{class_loom___max_pub_a5d824f56b133288fc9dcb0d62379ca35}
+
+
+Route command to driver. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!get\+\_\+port@{get\+\_\+port}}
+\index{get\+\_\+port@{get\+\_\+port}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{get\+\_\+port() const }{get_port() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+Max\+Pub\+::get\+\_\+port (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___max_pub_aadc82ca62997907eda950c8f9d3dd4a8}{}\label{class_loom___max_pub_aadc82ca62997907eda950c8f9d3dd4a8}
+
+
+Get U\+DP port device is listening on. 
+
+\begin{DoxyReturn}{Returns}
+U\+DP port 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Max\+Pub\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___max_pub_a9286db7e281484d00233dc4d86012197}{}\label{class_loom___max_pub_a9286db7e281484d00233dc4d86012197}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_publish_plat_a38cc9fe71203a153392fbca807e39434}{Loom\+Publish\+Plat}.
+
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}}
+\index{second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{second\+\_\+stage\+\_\+ctor() override}{second_stage_ctor() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Max\+Pub\+::second\+\_\+stage\+\_\+ctor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___max_pub_a86cecc2a45d660c5f1cc1d6b720b1739}{}\label{class_loom___max_pub_a86cecc2a45d660c5f1cc1d6b720b1739}
+
+
+Second stage construction. 
+
+Perform any actions that need all of the devices to be initized beforehand -\/ such as looking up an internet platform This function is guranteed to be called A\+F\+T\+ER all modules have been constructed. 
+
+Reimplemented from \hyperlink{class_loom_module_a8dd3704d1bd38868d5774e48c1073d12}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!send\+\_\+to\+\_\+internet@{send\+\_\+to\+\_\+internet}}
+\index{send\+\_\+to\+\_\+internet@{send\+\_\+to\+\_\+internet}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{send\+\_\+to\+\_\+internet(const Json\+Object json, Loom\+Internet\+Plat $\ast$plat) override}{send_to_internet(const JsonObject json, LoomInternetPlat *plat) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Max\+Pub\+::send\+\_\+to\+\_\+internet (
+\begin{DoxyParamCaption}
+\item[{const Json\+Object}]{json, }
+\item[{{\bf Loom\+Internet\+Plat} $\ast$}]{plat}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___max_pub_aa0a82d79ac37d01ba3bb2add3061a235}{}\label{class_loom___max_pub_aa0a82d79ac37d01ba3bb2add3061a235}
+
+
+Send J\+S\+ON to the internet, assumes that a valid internet plat was found and can be used. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json object to send \\
+\hline
+\mbox{\tt in}  & {\em plat} & Internet platform to send on \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_publish_plat_a5d54196f11ef28daf8fdf853f215a033}{Loom\+Publish\+Plat}.
+
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!set\+\_\+ip@{set\+\_\+ip}}
+\index{set\+\_\+ip@{set\+\_\+ip}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{set\+\_\+ip(const I\+P\+Address ip)}{set_ip(const IPAddress ip)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Max\+Pub\+::set\+\_\+ip (
+\begin{DoxyParamCaption}
+\item[{const I\+P\+Address}]{ip}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___max_pub_a34d82217de5608ee475e73c5d1a13868}{}\label{class_loom___max_pub_a34d82217de5608ee475e73c5d1a13868}
+
+
+Set the IP address to send to. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ip} & The IP address to set to \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!set\+\_\+ip@{set\+\_\+ip}}
+\index{set\+\_\+ip@{set\+\_\+ip}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{set\+\_\+ip()}{set_ip()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Max\+Pub\+::set\+\_\+ip (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___max_pub_a873dd6ccd99520c4e63207cb371799f4}{}\label{class_loom___max_pub_a873dd6ccd99520c4e63207cb371799f4}
+
+
+Set the IP addres to send to by getting remote IP from Max\+Sub if available. 
+
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!set\+\_\+port@{set\+\_\+port}}
+\index{set\+\_\+port@{set\+\_\+port}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{set\+\_\+port(const uint16\+\_\+t port)}{set_port(const uint16_t port)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Max\+Pub\+::set\+\_\+port (
+\begin{DoxyParamCaption}
+\item[{const uint16\+\_\+t}]{port}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___max_pub_ab0d598913fba6f06773495806533da81}{}\label{class_loom___max_pub_ab0d598913fba6f06773495806533da81}
+
+
+Set the U\+DP port to send on. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em port} & The U\+DP port to send on \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!remote\+IP@{remote\+IP}}
+\index{remote\+IP@{remote\+IP}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{remote\+IP}{remoteIP}}]{\setlength{\rightskip}{0pt plus 5cm}I\+P\+Address Loom\+\_\+\+Max\+Pub\+::remote\+IP\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___max_pub_a61f53dddbf95967c3e34f19a159e9e15}{}\label{class_loom___max_pub_a61f53dddbf95967c3e34f19a159e9e15}
+
+
+Which IP address to send to. 
+
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!U\+D\+P\+\_\+\+Inst@{U\+D\+P\+\_\+\+Inst}}
+\index{U\+D\+P\+\_\+\+Inst@{U\+D\+P\+\_\+\+Inst}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{U\+D\+P\+\_\+\+Inst}{UDP_Inst}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat\+::\+U\+D\+P\+Ptr} Loom\+\_\+\+Max\+Pub\+::\+U\+D\+P\+\_\+\+Inst\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___max_pub_a39f9cb9d6c5bc08bc4f2c164ab834620}{}\label{class_loom___max_pub_a39f9cb9d6c5bc08bc4f2c164ab834620}
+
+
+Pointer to U\+DP object. 
+
+\index{Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}!U\+D\+P\+\_\+port@{U\+D\+P\+\_\+port}}
+\index{U\+D\+P\+\_\+port@{U\+D\+P\+\_\+port}!Loom\+\_\+\+Max\+Pub@{Loom\+\_\+\+Max\+Pub}}
+\subsubsection[{\texorpdfstring{U\+D\+P\+\_\+port}{UDP_port}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+Max\+Pub\+::\+U\+D\+P\+\_\+port\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___max_pub_aabdb739b93a98972610d836d2f4ace19}{}\label{class_loom___max_pub_aabdb739b93a98972610d836d2f4ace19}
+
+
+Which U\+DP port to transmit on. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Publish\+Plats/\hyperlink{_max___pub_8h}{Max\+\_\+\+Pub.\+h}\item 
+src/\+Publish\+Plats/\hyperlink{_max___pub_8cpp}{Max\+\_\+\+Pub.\+cpp}\end{DoxyCompactItemize}

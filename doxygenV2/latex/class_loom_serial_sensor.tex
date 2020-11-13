@@ -1,0 +1,142 @@
+\hypertarget{class_loom_serial_sensor}{}\section{Loom\+Serial\+Sensor Class Reference}
+\label{class_loom_serial_sensor}\index{Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}}
+
+
+Abstract root for Serial/\+U\+A\+RT sensor modules.  
+
+
+
+
+{\ttfamily \#include $<$Serial\+\_\+\+Sensor.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Serial\+Sensor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{class_loom_serial_sensor__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_serial_sensor_a48be57e79600602ee072a1ae0673611c}{Loom\+Serial\+Sensor} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$Manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}, const uint8\+\_\+t \hyperlink{class_loom_sensor_a0e74ebbaecde15ed1c71e1bb6bc6aebe}{num\+\_\+samples})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_serial_sensor_a7021e88baa9fa7d1e89a960b22b5aa0e}{$\sim$\+Loom\+Serial\+Sensor} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_serial_sensor_ac21a512699c90db3b4287798e1526f0c}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_serial_sensor_a5ad2e2d33d2d371325e9913c85023aa1}{set\+\_\+serial} (Stream $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Set the sensor\textquotesingle{}s serial stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Stream $\ast$ \hyperlink{class_loom_serial_sensor_ab730e24d2b72d7fad0fa7c4af696c799}{sensor\+\_\+serial} = nullptr
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract root for Serial/\+U\+A\+RT sensor modules. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#serial-sensors}{\tt Hardware Support}
+\item \href{https://learn.adafruit.com/using-atsamd21-sercom-to-add-more-spi-i2c-serial-ports/creating-a-new-serial}{\tt Serial Sensor Setup} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}!Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}}
+\index{Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}!Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}}
+\subsubsection[{\texorpdfstring{Loom\+Serial\+Sensor(\+Loom\+Manager $\ast$\+Manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type, const uint8\+\_\+t num\+\_\+samples)}{LoomSerialSensor(LoomManager *Manager, const char *module_name, const LoomModule::Type module_type, const uint8_t num_samples)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Serial\+Sensor\+::\+Loom\+Serial\+Sensor (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{Manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type, }
+\item[{const uint8\+\_\+t}]{num\+\_\+samples}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_serial_sensor_a48be57e79600602ee072a1ae0673611c}{}\label{class_loom_serial_sensor_a48be57e79600602ee072a1ae0673611c}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em num\+\_\+samples} & The number of samples to take and average \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}!````~Loom\+Serial\+Sensor@{$\sim$\+Loom\+Serial\+Sensor}}
+\index{````~Loom\+Serial\+Sensor@{$\sim$\+Loom\+Serial\+Sensor}!Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Serial\+Sensor()}{~LoomSerialSensor()}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Serial\+Sensor\+::$\sim$\+Loom\+Serial\+Sensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_loom_serial_sensor_a7021e88baa9fa7d1e89a960b22b5aa0e}{}\label{class_loom_serial_sensor_a7021e88baa9fa7d1e89a960b22b5aa0e}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Serial\+Sensor\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_serial_sensor_ac21a512699c90db3b4287798e1526f0c}{}\label{class_loom_serial_sensor_ac21a512699c90db3b4287798e1526f0c}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_sensor_aaa3bb2a2165029906c4ee815e790c89e}{Loom\+Sensor}.
+
+\index{Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}!set\+\_\+serial@{set\+\_\+serial}}
+\index{set\+\_\+serial@{set\+\_\+serial}!Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}}
+\subsubsection[{\texorpdfstring{set\+\_\+serial(\+Stream $\ast$stream)}{set_serial(Stream *stream)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Serial\+Sensor\+::set\+\_\+serial (
+\begin{DoxyParamCaption}
+\item[{Stream $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_serial_sensor_a5ad2e2d33d2d371325e9913c85023aa1}{}\label{class_loom_serial_sensor_a5ad2e2d33d2d371325e9913c85023aa1}
+
+
+Set the sensor\textquotesingle{}s serial stream. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em stream} & A serial stream to read sensor data from \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}!sensor\+\_\+serial@{sensor\+\_\+serial}}
+\index{sensor\+\_\+serial@{sensor\+\_\+serial}!Loom\+Serial\+Sensor@{Loom\+Serial\+Sensor}}
+\subsubsection[{\texorpdfstring{sensor\+\_\+serial}{sensor_serial}}]{\setlength{\rightskip}{0pt plus 5cm}Stream$\ast$ Loom\+Serial\+Sensor\+::sensor\+\_\+serial = nullptr\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_serial_sensor_ab730e24d2b72d7fad0fa7c4af696c799}{}\label{class_loom_serial_sensor_ab730e24d2b72d7fad0fa7c4af696c799}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+S\+E\+R\+I\+A\+L/\hyperlink{_serial___sensor_8h}{Serial\+\_\+\+Sensor.\+h}\item 
+src/\+Sensors/\+S\+E\+R\+I\+A\+L/\hyperlink{_serial___sensor_8cpp}{Serial\+\_\+\+Sensor.\+cpp}\end{DoxyCompactItemize}

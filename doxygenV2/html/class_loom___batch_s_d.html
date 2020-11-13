@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_BatchSD class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_BatchSD <span class="m-thin">class</span>
+        </h1>
+        <p>Batch SD logging platform module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___s_d.html">Module Documentation</a></li><li><a href="https://www.adafruit.com/product/2922">Product Page: Adafruit Adalogger Featherwing</a></li><li><a href="https://www.adafruit.com/product/254">Product Page: Adafruit SD Breakout</a></li><li><a href="https://github.com/arduino-libraries/SD">Dependency: SD</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_log_plat.html" class="m-doc">LoomLogPlat</a>
+            </dt>
+            <dd>Abstract base of logging platforms.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a26a8fecb120202e86c5c884d055ad8ae">
+              SdFat <a href="#a26a8fecb120202e86c5c884d055ad8ae" class="m-doc-self">sd</a>
+            </dt>
+            <dd>File System Object.</dd>
+            <dt id="abe9e47bc3e511e89056b2da32f580eed">
+              const byte <a href="#abe9e47bc3e511e89056b2da32f580eed" class="m-doc-self">chip_select</a>
+            </dt>
+            <dd>Chip select pin.</dd>
+            <dt id="aac325ca5667cd8d81409072f890be678">
+              int <a href="#aac325ca5667cd8d81409072f890be678" class="m-doc-self">batch_counter</a>
+            </dt>
+            <dd>Current batch count value.</dd>
+            <dt id="af26d1091a8d6368edbf1456d016c0b78">
+              int <a href="#af26d1091a8d6368edbf1456d016c0b78" class="m-doc-self">packet_counter</a>
+            </dt>
+            <dd>Current packet count value in a batch.</dd>
+            <dt id="a24ec8915a5e1789b64e1593e6215982a">
+              int <a href="#a24ec8915a5e1789b64e1593e6215982a" class="m-doc-self">drop_count</a>
+            </dt>
+            <dd>Current count of packets that failed to be sent.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a54f3ee7cdf05189de3f43c34c0b30465" class="m-doc">Loom_BatchSD</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const bool enable_rate_filter = true,
+              const uint16_t min_filter_delay = 1000,
+              const byte chip_select = 10)</span>
+            </dt>
+            <dd>SD Module Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a4341896658e6e8ab97a5ff280d9dc254" class="m-doc">Loom_BatchSD</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args.</dd>
+            <dt id="a1b9cea47682085b0eebd8792ceb191fe">
+              <span class="m-doc-wrap-bumper"><a href="#a1b9cea47682085b0eebd8792ceb191fe" class="m-doc-self">~Loom_BatchSD</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3d80d1e31762c8b6328a05485cc8af88" class="m-doc">log</a>(</span><span class="m-doc-wrap">JsonObject json) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Log a Json object.</dd>
+            <dt id="ae2e8856853e8a0ac0a3f92b03900eb40">
+              <span class="m-doc-wrap-bumper">void <a href="#ae2e8856853e8a0ac0a3f92b03900eb40" class="m-doc-self">clear_batch_log</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Clears all the files that are being stored in the batch on the SD card.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af87c1920bf19e06b7585e8bc1bf72059" class="m-doc">store_batch</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Accesses the internal json from Loom Manager to store to batch using store_batch_json.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ade1673f26d7b667571f76a4c7922571b" class="m-doc">store_batch_json</a>(</span><span class="m-doc-wrap">JsonObject json) -&gt; bool</span>
+            </dt>
+            <dd>Uses JsonObject to write file as packet in the batch onto the SD Card.</dd>
+            <dt id="aa847506aab0cba43e0d98e0bb663a915">
+              <span class="m-doc-wrap-bumper">void <a href="#aa847506aab0cba43e0d98e0bb663a915" class="m-doc-self">power_up</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Turn on any hardware.</dd>
+            <dt id="adc78401b4bea4b41c76717e57417c1d5">
+              <span class="m-doc-wrap-bumper">void <a href="#adc78401b4bea4b41c76717e57417c1d5" class="m-doc-self">power_down</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Turn off any hardware.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a738bf5b08c3eba7ec2711b656e6f90bd" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>No package necessary for logging platforms.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="ad1566bbb55d145e3206784df245be710">
+              <span class="m-doc-wrap-bumper">void <a href="#ad1566bbb55d145e3206784df245be710" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#acc8306e790e9068ad418add3186e0aa7" class="m-doc">dump_batch</a>(</span><span class="m-doc-wrap">int index) -&gt; bool</span>
+            </dt>
+            <dd>Prints the contents of a particular packet file in the batch.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af58cee5d0d99bc8e78ade04e0c89baf4" class="m-doc">get_batch_json</a>(</span><span class="m-doc-wrap">int index) -&gt; JsonObject</span>
+            </dt>
+            <dd>Returns a JsonObject of the packet file (.json) in the batch from the SD card.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a97ce51f073f6b4c8394f830edcfd3198" class="m-doc">get_packet_counter</a>(</span><span class="m-doc-wrap">) -&gt; int</span>
+            </dt>
+            <dd>Get the current amount of packets that are being stored in the batch.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#abf19bc992530ae56cd658661926fb2f3" class="m-doc">add_drop_count</a>(</span><span class="m-doc-wrap">uint8_t dropped)</span>
+            </dt>
+            <dd>Updates the count of packets that have failed to send.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a54f3ee7cdf05189de3f43c34c0b30465"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a54f3ee7cdf05189de3f43c34c0b30465" class="m-doc-self">Loom_BatchSD</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const bool enable_rate_filter = true,
+              const uint16_t min_filter_delay = 1000,
+              const byte chip_select = 10)</span></span>
+            </h3>
+            <p>SD Module Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>enable_rate_filter&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | Whether or not to impose maximum update rate</td>
+                </tr>
+                <tr>
+                  <td>min_filter_delay&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;1000&gt; | [100-5000] | Minimum update delay, if enable_rate_filter enabled</td>
+                </tr>
+                <tr>
+                  <td>chip_select&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;10&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin to use for chip select</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4341896658e6e8ab97a5ff280d9dc254"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4341896658e6e8ab97a5ff280d9dc254" class="m-doc-self">Loom_BatchSD</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+<p>and delegates to regular constructor</p>
+          </div></section>
+          <section class="m-doc-details" id="a3d80d1e31762c8b6328a05485cc8af88"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3d80d1e31762c8b6328a05485cc8af88" class="m-doc-self">log</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Log a Json object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Json Object to log</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af87c1920bf19e06b7585e8bc1bf72059"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af87c1920bf19e06b7585e8bc1bf72059" class="m-doc-self">store_batch</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Accesses the internal json from Loom Manager to store to batch using store_batch_json.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ade1673f26d7b667571f76a4c7922571b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ade1673f26d7b667571f76a4c7922571b" class="m-doc-self">store_batch_json</a>(</span><span class="m-doc-wrap">JsonObject json)</span></span>
+            </h3>
+            <p>Uses JsonObject to write file as packet in the batch onto the SD Card.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The data to be saved as .json file</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a738bf5b08c3eba7ec2711b656e6f90bd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a738bf5b08c3eba7ec2711b656e6f90bd" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>No package necessary for logging platforms.</p>
+<p>implement with empty body.</p>
+          </div></section>
+          <section class="m-doc-details" id="acc8306e790e9068ad418add3186e0aa7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acc8306e790e9068ad418add3186e0aa7" class="m-doc-self">dump_batch</a>(</span><span class="m-doc-wrap">int index)</span></span>
+            </h3>
+            <p>Prints the contents of a particular packet file in the batch.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The index of file in the batch to print</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af58cee5d0d99bc8e78ade04e0c89baf4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">JsonObject Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af58cee5d0d99bc8e78ade04e0c89baf4" class="m-doc-self">get_batch_json</a>(</span><span class="m-doc-wrap">int index)</span></span>
+            </h3>
+            <p>Returns a JsonObject of the packet file (.json) in the batch from the SD card.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">index&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The index of the file in the batch to retrieve</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The JsonObject stored index</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a97ce51f073f6b4c8394f830edcfd3198"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a97ce51f073f6b4c8394f830edcfd3198" class="m-doc-self">get_packet_counter</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the current amount of packets that are being stored in the batch.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The current number of packets</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abf19bc992530ae56cd658661926fb2f3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />BatchSD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf19bc992530ae56cd658661926fb2f3" class="m-doc-self">add_drop_count</a>(</span><span class="m-doc-wrap">uint8_t dropped)</span></span>
+            </h3>
+            <p>Updates the count of packets that have failed to send.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">dropped&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The amount of packets that have been dropped during transmit</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

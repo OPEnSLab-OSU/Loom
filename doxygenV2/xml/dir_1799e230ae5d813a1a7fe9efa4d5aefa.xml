@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_1799e230ae5d813a1a7fe9efa4d5aefa" kind="dir">
+    <compoundname>src/Actuators</compoundname>
+    <innerfile refid="_actuator_8cpp">Actuator.cpp</innerfile>
+    <innerfile refid="_actuator_8h">Actuator.h</innerfile>
+    <innerfile refid="_neopixel_8cpp">Neopixel.cpp</innerfile>
+    <innerfile refid="_neopixel_8h">Neopixel.h</innerfile>
+    <innerfile refid="_relay_8cpp">Relay.cpp</innerfile>
+    <innerfile refid="_relay_8h">Relay.h</innerfile>
+    <innerfile refid="_servo_8cpp">Servo.cpp</innerfile>
+    <innerfile refid="_servo_8h">Servo.h</innerfile>
+    <innerfile refid="_stepper_8cpp">Stepper.cpp</innerfile>
+    <innerfile refid="_stepper_8h">Stepper.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Actuators/"/>
+  </compounddef>
+</doxygen>

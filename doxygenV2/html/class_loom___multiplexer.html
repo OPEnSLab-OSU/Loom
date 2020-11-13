@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_Multiplexer class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_Multiplexer <span class="m-thin">class</span>
+        </h1>
+        <p>Multiplexer manager for interfacing with multiple I2C sensors.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___multiplexer.html">Documentation</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_module.html" class="m-doc">LoomModule</a>
+            </dt>
+            <dd>Abstract root of Loom component modules inheritance hierarchy.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a1ca4e73888b5d46fef8c09997148a937">
+              <a href="class_loom_i2_c_sensor.html" class="m-doc">LoomI2CSensor</a>** <a href="#a1ca4e73888b5d46fef8c09997148a937" class="m-doc-self">sensors</a>
+            </dt>
+            <dd>Array of I2C sensor objects.</dd>
+            <dt id="af382145cee4e802bbf431e799983423b">
+              byte <a href="#af382145cee4e802bbf431e799983423b" class="m-doc-self">i2c_address</a>
+            </dt>
+            <dd>The multiplexer&#x27;s I2C address.</dd>
+            <dt id="a444e58e98dd2ef120e2bb5a2e6befc45">
+              uint8_t <a href="#a444e58e98dd2ef120e2bb5a2e6befc45" class="m-doc-self">num_ports</a>
+            </dt>
+            <dd>The number of ports on the multiplexer.</dd>
+            <dt id="a90202eb1f078d7448cf0b0763ddbcb3d">
+              bool <a href="#a90202eb1f078d7448cf0b0763ddbcb3d" class="m-doc-self">dynamic_list</a>
+            </dt>
+            <dd>Whether or not sensor list is dynamic (refresh sensor list periodically)</dd>
+            <dt id="a34d6b989ed4a1b5059fd28c277f9b0c9">
+              uint <a href="#a34d6b989ed4a1b5059fd28c277f9b0c9" class="m-doc-self">update_period</a>
+            </dt>
+            <dd>Interval to update sensor list at.</dd>
+            <dt id="a2e924abfa8444f66dc1b9cdf3a3aad47">
+              unsigned long <a href="#a2e924abfa8444f66dc1b9cdf3a3aad47" class="m-doc-self">last_update_time</a>
+            </dt>
+            <dd>When the sensor list was last updated.</dd>
+            <dt id="ab30823612eef6bb3fcd2fc023bc425b3">
+              std::vector&lt;byte&gt; <a href="#ab30823612eef6bb3fcd2fc023bc425b3" class="m-doc-self">i2c_conflicts</a>
+            </dt>
+            <dd>List of I2C address conflicts.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a4409df6598098393b5fa3b3012735d55" class="m-doc">Loom_Multiplexer</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x71,
+              const uint8_t num_ports = 8,
+              const bool dynamic_list = true,
+              const uint update_period = 5000)</span>
+            </dt>
+            <dd>Multiplexer module constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a28e8d5e652d1be8553d0f283ce1c9e38" class="m-doc">Loom_Multiplexer</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="a5db8b4a6043b42b792f6230f96374ef4">
+              <span class="m-doc-wrap-bumper"><a href="#a5db8b4a6043b42b792f6230f96374ef4" class="m-doc-self">~Loom_Multiplexer</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt id="aefd28e7b8fa3faf53ec42cb25419057a">
+              <span class="m-doc-wrap-bumper">void <a href="#aefd28e7b8fa3faf53ec42cb25419057a" class="m-doc-self">measure</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Call measure on all connected sensors.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa09d42f26ce3c4185ae8e9b55e3d851f" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Package a modules measurements or state.</dd>
+            <dt id="abadc1f55ae04c66e761d366325a0804f">
+              <span class="m-doc-wrap-bumper">auto <a href="#abadc1f55ae04c66e761d366325a0804f" class="m-doc-self">dispatch</a>(</span><span class="m-doc-wrap">JsonObject json) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Route command to driver.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a80fd7464a74af9a325cbf830ee51410e" class="m-doc">get_sensor_list</a>(</span><span class="m-doc-wrap">JsonObject json)</span>
+            </dt>
+            <dd>Populate a bundle with a list of sensors currently attached.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac0749b8dc8f72727e7fab5834898d2da" class="m-doc">refresh_sensors</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Update sensor list.</dd>
+            <dt id="aa0745a2b7a8e4f48fb4f74f759e87220">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa0745a2b7a8e4f48fb4f74f759e87220" class="m-doc-self">get_sensor</a>(</span><span class="m-doc-wrap">uint8_t port) const -&gt; <a href="class_loom_i2_c_sensor.html" class="m-doc">LoomI2CSensor</a>*</span>
+            </dt>
+            <dd>Get the sensor object for sensor on provided port.</dd>
+            <dt id="ad09225b1a4c8b70735992cd5eac9a71b">
+              <span class="m-doc-wrap-bumper">void <a href="#ad09225b1a4c8b70735992cd5eac9a71b" class="m-doc-self">power_up</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Turn on any hardware.</dd>
+            <dt id="a8196a461d4b93f39f7b469ae89fa17c7">
+              <span class="m-doc-wrap-bumper">void <a href="#a8196a461d4b93f39f7b469ae89fa17c7" class="m-doc-self">power_down</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Turn off any hardware.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a21759070f77ec1560e9b2a272a0c0640">
+              <span class="m-doc-wrap-bumper">void <a href="#a21759070f77ec1560e9b2a272a0c0640" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt id="a2a60ebefe68aa75a3141015d2aa81955">
+              <span class="m-doc-wrap-bumper">void <a href="#a2a60ebefe68aa75a3141015d2aa81955" class="m-doc-self">print_state</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display current state of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa77642642bfd9f33769f6fd98863e5cc" class="m-doc">print_measurements</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Prints measurements of all connected sensors.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a49c25a8c55ca026c231d59608fc0d6d4" class="m-doc">get_is_dynamic</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Get whether or not sensors are updated dynamically.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a40688a6e7c1ad60472d6ce148245ac13" class="m-doc">get_update_period</a>(</span><span class="m-doc-wrap">) const -&gt; int</span>
+            </dt>
+            <dd>Get the sensor list update period.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad0f1370584caf13e726c623dbbb250e1" class="m-doc">set_is_dynamic</a>(</span><span class="m-doc-wrap">const bool dynamic)</span>
+            </dt>
+            <dd>Set whether or not to periodically update list of attached sensors.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af2d5ac2ec43d7d9d8e809c26780d4421" class="m-doc">set_update_period</a>(</span><span class="m-doc-wrap">const uint period)</span>
+            </dt>
+            <dd>Set the sensor list update period.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a4409df6598098393b5fa3b3012735d55"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4409df6598098393b5fa3b3012735d55" class="m-doc-self">Loom_Multiplexer</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x71,
+              const uint8_t num_ports = 8,
+              const bool dynamic_list = true,
+              const uint update_period = 5000)</span></span>
+            </h3>
+            <p>Multiplexer module constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>i2c_address&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;0x71&gt; | {0x71} | I2C address</td>
+                </tr>
+                <tr>
+                  <td>num_ports&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;8&gt; | [1-8] | Number of ports available</td>
+                </tr>
+                <tr>
+                  <td>dynamic_list&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | Whether or not to automatically check for new sensors</td>
+                </tr>
+                <tr>
+                  <td>update_period&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;5000&gt; | [500-30000] | The time between sensor list updates (if dynamic_list enabled)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a28e8d5e652d1be8553d0f283ce1c9e38"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28e8d5e652d1be8553d0f283ce1c9e38" class="m-doc-self">Loom_Multiplexer</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa09d42f26ce3c4185ae8e9b55e3d851f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa09d42f26ce3c4185ae8e9b55e3d851f" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Package a modules measurements or state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Object to put data into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a80fd7464a74af9a325cbf830ee51410e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80fd7464a74af9a325cbf830ee51410e" class="m-doc-self">get_sensor_list</a>(</span><span class="m-doc-wrap">JsonObject json)</span></span>
+            </h3>
+            <p>Populate a bundle with a list of sensors currently attached.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Json object to populate with sensor list</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac0749b8dc8f72727e7fab5834898d2da"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac0749b8dc8f72727e7fab5834898d2da" class="m-doc-self">refresh_sensors</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Update sensor list.</p>
+<p>Polls all ports of multiplexer getting sensor on port (if any)</p>
+          </div></section>
+          <section class="m-doc-details" id="aa77642642bfd9f33769f6fd98863e5cc"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa77642642bfd9f33769f6fd98863e5cc" class="m-doc-self">print_measurements</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Prints measurements of all connected sensors.</p>
+<p>Calls implementations of <a href="class_loom_sensor.html#aba2aa35441c2eb1cf27b95a1fc08b288" class="m-doc">LoomI2CSensor::<wbr />print_measurements() const</a></p>
+          </div></section>
+          <section class="m-doc-details" id="a49c25a8c55ca026c231d59608fc0d6d4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a49c25a8c55ca026c231d59608fc0d6d4" class="m-doc-self">get_is_dynamic</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get whether or not sensors are updated dynamically.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if dynamic</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a40688a6e7c1ad60472d6ce148245ac13"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a40688a6e7c1ad60472d6ce148245ac13" class="m-doc-self">get_update_period</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the sensor list update period.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The update period</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad0f1370584caf13e726c623dbbb250e1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0f1370584caf13e726c623dbbb250e1" class="m-doc-self">set_is_dynamic</a>(</span><span class="m-doc-wrap">const bool dynamic)</span></span>
+            </h3>
+            <p>Set whether or not to periodically update list of attached sensors.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">dynamic&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The setting to set</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af2d5ac2ec43d7d9d8e809c26780d4421"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Multiplexer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af2d5ac2ec43d7d9d8e809c26780d4421" class="m-doc-self">set_update_period</a>(</span><span class="m-doc-wrap">const uint period)</span></span>
+            </h3>
+            <p>Set the sensor list update period.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">period&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>New update period</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Requires dynamic_list to be enabled</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_subscribe_plat_8h" kind="file" language="C++">
+    <compoundname>SubscribePlat.h</compoundname>
+    <includes refid="_module_8h" local="yes">Module.h</includes>
+    <includes refid="_internet_plat_8h" local="yes">../InternetPlats/InternetPlat.h</includes>
+    <includedby refid="_max___sub_8h" local="yes">src/SubscribePlats/Max_Sub.h</includedby>
+    <includedby refid="_subscribe_plat_8cpp" local="yes">src/SubscribePlats/SubscribePlat.cpp</includedby>
+    <incdepgraph>
+      <node id="5898">
+        <label>../InternetPlats/InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="5892" relation="include">
+        </childnode>
+        <childnode refid="5899" relation="include">
+        </childnode>
+        <childnode refid="5900" relation="include">
+        </childnode>
+        <childnode refid="5901" relation="include">
+        </childnode>
+        <childnode refid="5902" relation="include">
+        </childnode>
+      </node>
+      <node id="5900">
+        <label>Udp.h</label>
+      </node>
+      <node id="5895">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5892">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5893" relation="include">
+        </childnode>
+        <childnode refid="5895" relation="include">
+        </childnode>
+        <childnode refid="5896" relation="include">
+        </childnode>
+        <childnode refid="5897" relation="include">
+        </childnode>
+      </node>
+      <node id="5899">
+        <label>Client.h</label>
+      </node>
+      <node id="5891">
+        <label>src/SubscribePlats/SubscribePlat.h</label>
+        <link refid="SubscribePlat.h"/>
+        <childnode refid="5892" relation="include">
+        </childnode>
+        <childnode refid="5898" relation="include">
+        </childnode>
+      </node>
+      <node id="5896">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5894" relation="include">
+        </childnode>
+        <childnode refid="5897" relation="include">
+        </childnode>
+      </node>
+      <node id="5893">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5894" relation="include">
+        </childnode>
+      </node>
+      <node id="5897">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5894">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5901">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="5902">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5905">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="5906" relation="include">
+        </childnode>
+        <childnode refid="5907" relation="include">
+        </childnode>
+      </node>
+      <node id="5909">
+        <label>src/SubscribePlats/Max_Sub.cpp</label>
+        <link refid="_max___sub_8cpp"/>
+      </node>
+      <node id="5903">
+        <label>src/SubscribePlats/SubscribePlat.h</label>
+        <link refid="SubscribePlat.h"/>
+        <childnode refid="5904" relation="include">
+        </childnode>
+        <childnode refid="5910" relation="include">
+        </childnode>
+      </node>
+      <node id="5904">
+        <label>src/SubscribePlats/Max_Sub.h</label>
+        <link refid="_max___sub_8h"/>
+        <childnode refid="5905" relation="include">
+        </childnode>
+        <childnode refid="5908" relation="include">
+        </childnode>
+        <childnode refid="5909" relation="include">
+        </childnode>
+      </node>
+      <node id="5908">
+        <label>src/PublishPlats/Max_Pub.cpp</label>
+        <link refid="_max___pub_8cpp"/>
+      </node>
+      <node id="5906">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="5910">
+        <label>src/SubscribePlats/SubscribePlat.cpp</label>
+        <link refid="_subscribe_plat_8cpp"/>
+      </node>
+      <node id="5907">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom_subscribe_plat" prot="public">LoomSubscribePlat</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/SubscribePlats/SubscribePlat.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___warm_up___manager" kind="class" language="C++" prot="public">
+    <compoundname>Loom_WarmUp_Manager</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <includes refid="_warm_up___manager_8h" local="no">WarmUp_Manager.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_loom___warm_up___manager_1ab94aa25b610debe61890a63bb41dd4be" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="class_warm_up" kindref="compound">WarmUp</ref> * &gt;</type>
+        <definition>std::vector&lt;WarmUp*&gt; Loom_WarmUp_Manager::Interfaces</definition>
+        <argsstring></argsstring>
+        <name>Interfaces</name>
+        <briefdescription>
+<para>Collection of LoomModule* cast to WarmUp* to access members in an encapsulated fasion. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="48" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___warm_up___manager_1a3cb96f6c917e052824d837a4a9a2b36b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_WarmUp_Manager::warm</definition>
+        <argsstring></argsstring>
+        <name>warm</name>
+        <briefdescription>
+<para>State of system, either containing &apos;cold&apos; items or completely warmed up. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="51" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___warm_up___manager_1a619f9f5d21ff26e9f5d397956c68fe77" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Loom_WarmUp_Manager::warm_duration</definition>
+        <argsstring></argsstring>
+        <name>warm_duration</name>
+        <briefdescription>
+<para>Lenth of longest items to warm up. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="54" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___warm_up___manager_1af6dd7fa9e76d08f143beeae820106f7d" prot="private" static="no" mutable="no">
+        <type>unsigned long</type>
+        <definition>unsigned long Loom_WarmUp_Manager::start_time</definition>
+        <argsstring></argsstring>
+        <name>start_time</name>
+        <briefdescription>
+<para>Time stamp for begining of warming period. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="57" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_loom___warm_up___manager_1a7e641d24fca0655a17ed0dbefa0fc36f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_WarmUp_Manager::Loom_WarmUp_Manager</definition>
+        <argsstring>(LoomManager *manager)</argsstring>
+        <name>Loom_WarmUp_Manager</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="25" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.cpp" bodystart="14" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___warm_up___manager_1a3172f20e2fdf7b389f7756b9af8b8d80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_WarmUp_Manager::Loom_WarmUp_Manager</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst)</argsstring>
+        <name>Loom_WarmUp_Manager</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="26" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.cpp" bodystart="24" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___warm_up___manager_1aaff8ae9623bc53aef94e91e015c6625e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void Loom_WarmUp_Manager::Register_WarmUp</definition>
+        <argsstring>(T t)</argsstring>
+        <name>Register_WarmUp</name>
+        <param>
+          <type>T</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Registers a module as a <ref refid="class_warm_up" kindref="compound">WarmUp</ref> Interface providing access;. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="30" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.h" bodystart="30" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___warm_up___manager_1ae98e975506dfe72122385e2bc6863ed8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_WarmUp_Manager::warming_Begin</definition>
+        <argsstring>()</argsstring>
+        <name>warming_Begin</name>
+        <briefdescription>
+<para>Start a warming timer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="35" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.cpp" bodystart="29" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___warm_up___manager_1a321968f0ffddad8a8a2e2a138c35ba9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_WarmUp_Manager::warming_Reset</definition>
+        <argsstring>()</argsstring>
+        <name>warming_Reset</name>
+        <briefdescription>
+<para>Reset warming to false, indicates a need to reheat in the near future. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="38" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.cpp" bodystart="39" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___warm_up___manager_1a9932619f9896bbdc06eb7256a231ce13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_WarmUp_Manager::is_warm</definition>
+        <argsstring>()</argsstring>
+        <name>is_warm</name>
+        <briefdescription>
+<para>Updates and returns state. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="41" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.cpp" bodystart="45" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___warm_up___manager_1a82c8cd30f969a681a76b332d3b1c2ce4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_WarmUp_Manager::package</definition>
+        <argsstring>(JsonObject)</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+        </param>
+        <briefdescription>
+<para>An unfortunate consequence of inheriting from a bloated base class. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp_Manager.h" line="44" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1019">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="1018">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1019" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1025">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1022">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1020" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1023" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1028" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1024" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1021">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1022" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1029">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1024">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1021" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1025" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1026" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1023" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1027" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1028" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1029" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1023">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1021" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1024" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1020">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1021" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1028">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1021" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1026">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1027">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Components/WarmUp/WarmUp_Manager.h" line="22" column="1" bodyfile="src/Components/WarmUp/WarmUp_Manager.h" bodystart="22" bodyend="58"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom___warm_up___manager_1ab94aa25b610debe61890a63bb41dd4be" prot="private" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>Interfaces</name></member>
+      <member refid="class_loom___warm_up___manager_1a9932619f9896bbdc06eb7256a231ce13" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>is_warm</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___warm_up___manager_1a7e641d24fca0655a17ed0dbefa0fc36f" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>Loom_WarmUp_Manager</name></member>
+      <member refid="class_loom___warm_up___manager_1a3172f20e2fdf7b389f7756b9af8b8d80" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>Loom_WarmUp_Manager</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>LoomModule</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>module_type</name></member>
+      <member refid="class_loom___warm_up___manager_1a82c8cd30f969a681a76b332d3b1c2ce4" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>power_up</name></member>
+      <member refid="class_loom_module_1a4385842da9226014283136b3e37dde88" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>print_verbosity</name></member>
+      <member refid="class_loom___warm_up___manager_1aaff8ae9623bc53aef94e91e015c6625e" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>Register_WarmUp</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___warm_up___manager_1af6dd7fa9e76d08f143beeae820106f7d" prot="private" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>start_time</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>Type</name></member>
+      <member refid="class_loom___warm_up___manager_1a3cb96f6c917e052824d837a4a9a2b36b" prot="private" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>warm</name></member>
+      <member refid="class_loom___warm_up___manager_1a619f9f5d21ff26e9f5d397956c68fe77" prot="private" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>warm_duration</name></member>
+      <member refid="class_loom___warm_up___manager_1ae98e975506dfe72122385e2bc6863ed8" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>warming_Begin</name></member>
+      <member refid="class_loom___warm_up___manager_1a321968f0ffddad8a8a2e2a138c35ba9f" prot="public" virt="non-virtual"><scope>Loom_WarmUp_Manager</scope><name>warming_Reset</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_WarmUp_Manager</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

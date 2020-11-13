@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_stepper_8h" kind="file" language="C++">
+    <compoundname>Stepper.h</compoundname>
+    <includes refid="_actuator_8h" local="yes">Actuator.h</includes>
+    <includes local="no">Adafruit_MotorShield.h</includes>
+    <includes local="no">Adafruit_PWMServoDriver.h</includes>
+    <includedby refid="_stepper_8cpp" local="yes">src/Actuators/Stepper.cpp</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="3093">
+        <label>Adafruit_MotorShield.h</label>
+      </node>
+      <node id="3085">
+        <label>src/Actuators/Stepper.h</label>
+        <link refid="Stepper.h"/>
+        <childnode refid="3086" relation="include">
+        </childnode>
+        <childnode refid="3093" relation="include">
+        </childnode>
+        <childnode refid="3094" relation="include">
+        </childnode>
+      </node>
+      <node id="3090">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3087">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3088" relation="include">
+        </childnode>
+        <childnode refid="3090" relation="include">
+        </childnode>
+        <childnode refid="3091" relation="include">
+        </childnode>
+        <childnode refid="3092" relation="include">
+        </childnode>
+      </node>
+      <node id="3091">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3089" relation="include">
+        </childnode>
+        <childnode refid="3092" relation="include">
+        </childnode>
+      </node>
+      <node id="3088">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3089" relation="include">
+        </childnode>
+      </node>
+      <node id="3092">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3086">
+        <label>Actuator.h</label>
+        <link refid="_actuator_8h"/>
+        <childnode refid="3087" relation="include">
+        </childnode>
+      </node>
+      <node id="3089">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3094">
+        <label>Adafruit_PWMServoDriver.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3095">
+        <label>src/Actuators/Stepper.h</label>
+        <link refid="Stepper.h"/>
+        <childnode refid="3096" relation="include">
+        </childnode>
+        <childnode refid="3097" relation="include">
+        </childnode>
+      </node>
+      <node id="3097">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3098" relation="include">
+        </childnode>
+        <childnode refid="3099" relation="include">
+        </childnode>
+      </node>
+      <node id="3098">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3099">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="3096">
+        <label>src/Actuators/Stepper.cpp</label>
+        <link refid="_stepper_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___stepper" prot="public">Loom_Stepper</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_stepper_8h_1ae3d2a049ddf3e37949151dc679915aa3" prot="public" static="no">
+        <name>NUM_STEPPERS</name>
+        <initializer>2</initializer>
+        <briefdescription>
+<para>Number of possible steppers. </para>        </briefdescription>
+        <detaileddescription>
+<para>Dependent on stepper controller breakout. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Stepper.h" line="22" column="9" bodyfile="src/Actuators/Stepper.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Actuators/Stepper.h"/>
+  </compounddef>
+</doxygen>

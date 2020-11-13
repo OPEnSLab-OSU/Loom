@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_batch_s_d_8h" kind="file" language="C++">
+    <compoundname>BatchSD.h</compoundname>
+    <includes refid="_log_plat_8h" local="yes">LogPlat.h</includes>
+    <includes local="no">SdFat.h</includes>
+    <includedby refid="_comm_plat_8h" local="yes">src/CommPlats/CommPlat.h</includedby>
+    <includedby refid="_batch_s_d_8cpp" local="yes">src/LogPlats/BatchSD.cpp</includedby>
+    <includedby refid="_publish_plat_8h" local="yes">src/PublishPlats/PublishPlat.h</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="3499">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3495">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="3496" relation="include">
+        </childnode>
+      </node>
+      <node id="3496">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3497" relation="include">
+        </childnode>
+        <childnode refid="3499" relation="include">
+        </childnode>
+        <childnode refid="3500" relation="include">
+        </childnode>
+        <childnode refid="3501" relation="include">
+        </childnode>
+      </node>
+      <node id="3500">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3498" relation="include">
+        </childnode>
+        <childnode refid="3501" relation="include">
+        </childnode>
+      </node>
+      <node id="3497">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3498" relation="include">
+        </childnode>
+      </node>
+      <node id="3502">
+        <label>SdFat.h</label>
+      </node>
+      <node id="3501">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3498">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3494">
+        <label>src/LogPlats/BatchSD.h</label>
+        <link refid="BatchSD.h"/>
+        <childnode refid="3495" relation="include">
+        </childnode>
+        <childnode refid="3502" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3506">
+        <label>src/CommPlats/Bluetooth.cpp</label>
+        <link refid="_bluetooth_8cpp"/>
+      </node>
+      <node id="3515">
+        <label>src/LogPlats/BatchSD.cpp</label>
+        <link refid="_batch_s_d_8cpp"/>
+      </node>
+      <node id="3507">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3508" relation="include">
+        </childnode>
+        <childnode refid="3509" relation="include">
+        </childnode>
+      </node>
+      <node id="3516">
+        <label>src/PublishPlats/PublishPlat.h</label>
+        <link refid="_publish_plat_8h"/>
+        <childnode refid="3517" relation="include">
+        </childnode>
+        <childnode refid="3519" relation="include">
+        </childnode>
+        <childnode refid="3509" relation="include">
+        </childnode>
+        <childnode refid="3521" relation="include">
+        </childnode>
+      </node>
+      <node id="3519">
+        <label>src/PublishPlats/Max_Pub.h</label>
+        <link refid="_max___pub_8h"/>
+        <childnode refid="3507" relation="include">
+        </childnode>
+        <childnode refid="3520" relation="include">
+        </childnode>
+      </node>
+      <node id="3505">
+        <label>src/CommPlats/Bluetooth.h</label>
+        <link refid="_bluetooth_8h"/>
+        <childnode refid="3506" relation="include">
+        </childnode>
+        <childnode refid="3507" relation="include">
+        </childnode>
+      </node>
+      <node id="3518">
+        <label>src/PublishPlats/GoogleSheets.cpp</label>
+        <link refid="_google_sheets_8cpp"/>
+      </node>
+      <node id="3511">
+        <label>src/CommPlats/LoRa.h</label>
+        <link refid="_lo_ra_8h"/>
+        <childnode refid="3512" relation="include">
+        </childnode>
+        <childnode refid="3507" relation="include">
+        </childnode>
+      </node>
+      <node id="3512">
+        <label>src/CommPlats/LoRa.cpp</label>
+        <link refid="_lo_ra_8cpp"/>
+      </node>
+      <node id="3510">
+        <label>src/CommPlats/CommPlat.cpp</label>
+        <link refid="_comm_plat_8cpp"/>
+      </node>
+      <node id="3521">
+        <label>src/PublishPlats/PublishPlat.cpp</label>
+        <link refid="_publish_plat_8cpp"/>
+      </node>
+      <node id="3520">
+        <label>src/PublishPlats/Max_Pub.cpp</label>
+        <link refid="_max___pub_8cpp"/>
+      </node>
+      <node id="3503">
+        <label>src/LogPlats/BatchSD.h</label>
+        <link refid="BatchSD.h"/>
+        <childnode refid="3504" relation="include">
+        </childnode>
+        <childnode refid="3515" relation="include">
+        </childnode>
+        <childnode refid="3516" relation="include">
+        </childnode>
+        <childnode refid="3507" relation="include">
+        </childnode>
+      </node>
+      <node id="3508">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3509">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="3504">
+        <label>src/CommPlats/CommPlat.h</label>
+        <link refid="_comm_plat_8h"/>
+        <childnode refid="3505" relation="include">
+        </childnode>
+        <childnode refid="3510" relation="include">
+        </childnode>
+        <childnode refid="3511" relation="include">
+        </childnode>
+        <childnode refid="3513" relation="include">
+        </childnode>
+        <childnode refid="3509" relation="include">
+        </childnode>
+      </node>
+      <node id="3517">
+        <label>src/PublishPlats/GoogleSheets.h</label>
+        <link refid="_google_sheets_8h"/>
+        <childnode refid="3507" relation="include">
+        </childnode>
+        <childnode refid="3518" relation="include">
+        </childnode>
+      </node>
+      <node id="3514">
+        <label>src/CommPlats/nRF.cpp</label>
+        <link refid="n_r_f_8cpp"/>
+      </node>
+      <node id="3513">
+        <label>src/CommPlats/nRF.h</label>
+        <link refid="n_r_f_8h"/>
+        <childnode refid="3514" relation="include">
+        </childnode>
+        <childnode refid="3507" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___batch_s_d" prot="public">Loom_BatchSD</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/LogPlats/BatchSD.h"/>
+  </compounddef>
+</doxygen>

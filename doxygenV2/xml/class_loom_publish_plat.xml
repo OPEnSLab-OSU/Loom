@@ -1,0 +1,491 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_publish_plat" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>LoomPublishPlat</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <derivedcompoundref refid="class_loom___google_sheets" prot="public" virt="non-virtual">Loom_GoogleSheets</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___max_pub" prot="public" virt="non-virtual">Loom_MaxPub</derivedcompoundref>
+    <includes refid="_publish_plat_8h" local="no">PublishPlat.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom_publish_plat_1a59b0b76a0a0507c211284f341c0c5b34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomPublishPlat::LoomPublishPlat</definition>
+        <argsstring>(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const LoomModule::Type internet_type)</argsstring>
+        <name>LoomPublishPlat</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>module_type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>internet_type</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;Internet-Plat&quot;&gt; | null | Publish platform module name </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">module_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">internet_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(LoomModule::Type) | &lt;7001&gt; | {7001(&quot;Ethernet&quot;), 7002(&quot;WiFi&quot;), 7003(&quot;LTE&quot;)} | Code of the desired internet platform. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="54" column="1" bodyfile="src/PublishPlats/PublishPlat.cpp" bodystart="17" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_publish_plat_1a68870cd02f9de172d4bcf448060ef1ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual LoomPublishPlat::~LoomPublishPlat</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LoomPublishPlat</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="62" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_publish_plat_1a9be9c86b766a6308fb2851875b50ba56" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomPublishPlat::second_stage_ctor</definition>
+        <argsstring>() override</argsstring>
+        <name>second_stage_ctor</name>
+        <reimplements refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12">second_stage_ctor</reimplements>
+        <briefdescription>
+<para>Grab the internet platform specified by the ctor parameters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="65" column="1" bodyfile="src/PublishPlats/PublishPlat.cpp" bodystart="29" bodyend="70"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom_publish_plat_1ac8548fef404b55465773513aefce5608" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void LoomPublishPlat::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>No package necessary for publishing platforms. </para>        </briefdescription>
+        <detaileddescription>
+<para>Implement with empty body. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="73" column="1" bodyfile="src/PublishPlats/PublishPlat.h" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_publish_plat_1a9be2ccbcaba4d1a5735bcd5bf828eafb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomPublishPlat::publish</definition>
+        <argsstring>(const JsonObject json)</argsstring>
+        <name>publish</name>
+        <param>
+          <type>const JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Publish data. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>JSON object to publish. MUST be formatted as { &quot;contents&quot; : [ { &quot;module&quot;: &quot;module_name&quot;, &quot;data&quot; : {...} }, ... ], &quot;timestamp&quot;(optional) : {...} } </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Whether or not the publish succeded </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="79" column="1" bodyfile="src/PublishPlats/PublishPlat.cpp" bodystart="73" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_publish_plat_1ae0c0825a58465f124bfe07e3de8b3b25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t LoomPublishPlat::publish_batch</definition>
+        <argsstring>()</argsstring>
+        <name>publish_batch</name>
+        <briefdescription>
+<para>Publish all the packets stored in the batch. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Whether or not the publishes succeded or not </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="83" column="1" bodyfile="src/PublishPlats/PublishPlat.cpp" bodystart="88" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_publish_plat_1a5a172ded7502cd31fe15596e21dd6cc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomPublishPlat::publish</definition>
+        <argsstring>()</argsstring>
+        <name>publish</name>
+        <briefdescription>
+<para>Version of log for use with <ref refid="class_loom_manager" kindref="compound">LoomManager</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Accesses Json from <ref refid="class_loom_manager" kindref="compound">LoomManager</ref> <simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="88" column="1" bodyfile="src/PublishPlats/PublishPlat.cpp" bodystart="115" bodyend="124"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom_publish_plat_1a0055306a6b0efc49d83f083c1398eea1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomPublishPlat::print_state</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_state</name>
+        <reimplements refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7">print_state</reimplements>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="94" column="1" bodyfile="src/PublishPlats/PublishPlat.cpp" bodystart="134" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_publish_plat_1a38cc9fe71203a153392fbca807e39434" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomPublishPlat::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <reimplementedby refid="class_loom___google_sheets_1a83066e82b742c1f273bf7b009a1490d4">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___max_pub_1a9286db7e281484d00233dc4d86012197">print_config</reimplementedby>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="95" column="1" bodyfile="src/PublishPlats/PublishPlat.cpp" bodystart="127" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_publish_plat_1a5d54196f11ef28daf8fdf853f215a033" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool LoomPublishPlat::send_to_internet</definition>
+        <argsstring>(const JsonObject json, LoomInternetPlat *plat)=0</argsstring>
+        <name>send_to_internet</name>
+        <reimplementedby refid="class_loom___google_sheets_1af446a27796d495a5489543323f4cc505">send_to_internet</reimplementedby>
+        <reimplementedby refid="class_loom___max_pub_1aa0a82d79ac37d01ba3bb2add3061a235">send_to_internet</reimplementedby>
+        <param>
+          <type>const JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type><ref refid="class_loom_internet_plat" kindref="compound">LoomInternetPlat</ref> *</type>
+          <declname>plat</declname>
+        </param>
+        <briefdescription>
+<para>Send JSON to the internet, assumes that a valid internet plat was found and can be used. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json object to send </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">plat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Internet platform to send on </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="103" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_publish_plat_1a0573bd10ef9fadb6dcf12ba0e82bb1c2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomPublishPlat::m_validate_json</definition>
+        <argsstring>(const JsonObjectConst json) const </argsstring>
+        <name>m_validate_json</name>
+        <param>
+          <type>const JsonObjectConst</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Check that the JSON supplied meets the format criteria required by <ref refid="class_loom_publish_plat_1a5a172ded7502cd31fe15596e21dd6cc9" kindref="member">publish()</ref> </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json to validate </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="112" column="1" bodyfile="src/PublishPlats/PublishPlat.cpp" bodystart="141" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_publish_plat_1a545bc5647ea370d8f2ced3fedc2c5da6" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomPublishPlat::m_print_json_error</definition>
+        <argsstring>(const char *str) const </argsstring>
+        <name>m_print_json_error</name>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Print a JSON error. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Error string to print </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="116" column="1" bodyfile="src/PublishPlats/PublishPlat.cpp" bodystart="169" bodyend="173"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom_publish_plat_1a9e07931b084ea022c48485a2df28cc83" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_internet_plat" kindref="compound">LoomInternetPlat</ref> *</type>
+        <definition>LoomInternetPlat* LoomPublishPlat::m_internet</definition>
+        <argsstring></argsstring>
+        <name>m_internet</name>
+        <briefdescription>
+<para>Pointer to internet platform to use to publish. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="36" column="1" bodyfile="src/PublishPlats/PublishPlat.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_publish_plat_1aab697868e61843787893f5509d22b9ed" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+        <definition>LoomModule::Type LoomPublishPlat::internet_type</definition>
+        <argsstring></argsstring>
+        <name>internet_type</name>
+        <briefdescription>
+<para>Type of internet platform used to publish. </para>        </briefdescription>
+        <detaileddescription>
+<para>Needed because finding the module for m_internet happens in <ref refid="class_loom_publish_plat_1a9be9c86b766a6308fb2851875b50ba56" kindref="member">second_stage_ctor()</ref>, rather than the regular constructor. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/PublishPlat.h" line="41" column="1" bodyfile="src/PublishPlats/PublishPlat.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract internet publishing module, implementing google sheets and mongodb functionality. </para>    </briefdescription>
+    <detaileddescription>
+<para>All actuator modules inherit from this class.</para><para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_publish_plat.html">Module Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1261">
+        <label>Loom_MaxPub</label>
+        <link refid="class_loom___max_pub"/>
+        <childnode refid="1258" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1259">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="1260">
+        <label>Loom_GoogleSheets</label>
+        <link refid="class_loom___google_sheets"/>
+        <childnode refid="1258" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1258">
+        <label>LoomPublishPlat</label>
+        <link refid="class_loom_publish_plat"/>
+        <childnode refid="1259" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1268">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1264">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1265" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1266" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1271" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1267" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1263">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1264" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1272">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1267">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1263" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1268" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1269" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1266" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1270" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1271" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1272" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1266">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1263" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1267" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1262">
+        <label>LoomPublishPlat</label>
+        <link refid="class_loom_publish_plat"/>
+        <childnode refid="1263" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1273" relation="usage">
+          <edgelabel>m_internet</edgelabel>
+        </childnode>
+      </node>
+      <node id="1273">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="1263" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1265">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1263" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1271">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1263" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1269">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1270">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/PublishPlats/PublishPlat.h" line="31" column="1" bodyfile="src/PublishPlats/PublishPlat.h" bodystart="30" bodyend="118"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_publish_plat_1aab697868e61843787893f5509d22b9ed" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>internet_type</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>link_device_manager</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>LoomModule</name></member>
+      <member refid="class_loom_publish_plat_1a59b0b76a0a0507c211284f341c0c5b34" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>LoomPublishPlat</name></member>
+      <member refid="class_loom_publish_plat_1a9e07931b084ea022c48485a2df28cc83" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>m_internet</name></member>
+      <member refid="class_loom_publish_plat_1a545bc5647ea370d8f2ced3fedc2c5da6" prot="private" virt="non-virtual"><scope>LoomPublishPlat</scope><name>m_print_json_error</name></member>
+      <member refid="class_loom_publish_plat_1a0573bd10ef9fadb6dcf12ba0e82bb1c2" prot="private" virt="non-virtual"><scope>LoomPublishPlat</scope><name>m_validate_json</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>module_type</name></member>
+      <member refid="class_loom_publish_plat_1ac8548fef404b55465773513aefce5608" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>power_up</name></member>
+      <member refid="class_loom_publish_plat_1a38cc9fe71203a153392fbca807e39434" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>print_module_label</name></member>
+      <member refid="class_loom_publish_plat_1a0055306a6b0efc49d83f083c1398eea1" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>LoomPublishPlat</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_publish_plat_1a9be2ccbcaba4d1a5735bcd5bf828eafb" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>publish</name></member>
+      <member refid="class_loom_publish_plat_1a5a172ded7502cd31fe15596e21dd6cc9" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>publish</name></member>
+      <member refid="class_loom_publish_plat_1ae0c0825a58465f124bfe07e3de8b3b25" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>publish_batch</name></member>
+      <member refid="class_loom_publish_plat_1a9be9c86b766a6308fb2851875b50ba56" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_publish_plat_1a5d54196f11ef28daf8fdf853f215a033" prot="protected" virt="pure-virtual"><scope>LoomPublishPlat</scope><name>send_to_internet</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>LoomPublishPlat</scope><name>Type</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_publish_plat_1a68870cd02f9de172d4bcf448060ef1ec" prot="public" virt="virtual"><scope>LoomPublishPlat</scope><name>~LoomPublishPlat</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

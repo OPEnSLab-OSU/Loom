@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_e3d9e455d318f3fe6255ba494fe99751" kind="dir">
+    <compoundname>src/Components/WarmUp</compoundname>
+    <innerfile refid="_warm_up_8cpp">WarmUp.cpp</innerfile>
+    <innerfile refid="_warm_up_8h">WarmUp.h</innerfile>
+    <innerfile refid="_warm_up___manager_8cpp">WarmUp_Manager.cpp</innerfile>
+    <innerfile refid="_warm_up___manager_8h">WarmUp_Manager.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Components/WarmUp/"/>
+  </compounddef>
+</doxygen>

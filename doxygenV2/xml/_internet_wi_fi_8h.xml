@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_internet_wi_fi_8h" kind="file" language="C++">
+    <compoundname>InternetWiFi.h</compoundname>
+    <includes refid="_internet_plat_8h" local="yes">InternetPlat.h</includes>
+    <includes local="no">WiFi101.h</includes>
+    <includes local="no">WiFiUdp.h</includes>
+    <includes local="yes">SSLClient.h</includes>
+    <includes refid="_trust___anchors_8h" local="yes">Trust_Anchors.h</includes>
+    <includedby refid="_internet_wi_fi_8cpp" local="yes">src/InternetPlats/InternetWiFi.cpp</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="3414">
+        <label>InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="3415" relation="include">
+        </childnode>
+        <childnode refid="3421" relation="include">
+        </childnode>
+        <childnode refid="3422" relation="include">
+        </childnode>
+        <childnode refid="3423" relation="include">
+        </childnode>
+        <childnode refid="3424" relation="include">
+        </childnode>
+      </node>
+      <node id="3422">
+        <label>Udp.h</label>
+      </node>
+      <node id="3418">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3415">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3416" relation="include">
+        </childnode>
+        <childnode refid="3418" relation="include">
+        </childnode>
+        <childnode refid="3419" relation="include">
+        </childnode>
+        <childnode refid="3420" relation="include">
+        </childnode>
+      </node>
+      <node id="3421">
+        <label>Client.h</label>
+      </node>
+      <node id="3419">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3417" relation="include">
+        </childnode>
+        <childnode refid="3420" relation="include">
+        </childnode>
+      </node>
+      <node id="3426">
+        <label>WiFiUdp.h</label>
+      </node>
+      <node id="3416">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3417" relation="include">
+        </childnode>
+      </node>
+      <node id="3413">
+        <label>src/InternetPlats/InternetWiFi.h</label>
+        <link refid="InternetWiFi.h"/>
+        <childnode refid="3414" relation="include">
+        </childnode>
+        <childnode refid="3425" relation="include">
+        </childnode>
+        <childnode refid="3426" relation="include">
+        </childnode>
+        <childnode refid="3423" relation="include">
+        </childnode>
+        <childnode refid="3427" relation="include">
+        </childnode>
+      </node>
+      <node id="3425">
+        <label>WiFi101.h</label>
+      </node>
+      <node id="3420">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3417">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3427">
+        <label>Trust_Anchors.h</label>
+        <link refid="_trust___anchors_8h"/>
+      </node>
+      <node id="3423">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="3424">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3430">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3431" relation="include">
+        </childnode>
+        <childnode refid="3432" relation="include">
+        </childnode>
+      </node>
+      <node id="3428">
+        <label>src/InternetPlats/InternetWiFi.h</label>
+        <link refid="InternetWiFi.h"/>
+        <childnode refid="3429" relation="include">
+        </childnode>
+        <childnode refid="3430" relation="include">
+        </childnode>
+      </node>
+      <node id="3429">
+        <label>src/InternetPlats/InternetWiFi.cpp</label>
+        <link refid="_internet_wi_fi_8cpp"/>
+      </node>
+      <node id="3431">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3432">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___wi_fi" prot="public">Loom_WiFi</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/InternetPlats/InternetWiFi.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,123 @@
+\hypertarget{class_loom___warm_up___manager}{}\section{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager Class Reference}
+\label{class_loom___warm_up___manager}\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+
+
+{\ttfamily \#include $<$Warm\+Up\+\_\+\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Warm\+Up\+\_\+\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{class_loom___warm_up___manager__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___warm_up___manager_a7e641d24fca0655a17ed0dbefa0fc36f}{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___warm_up___manager_a3172f20e2fdf7b389f7756b9af8b8d80}{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \hyperlink{class_loom___warm_up___manager_aaff8ae9623bc53aef94e91e015c6625e}{Register\+\_\+\+Warm\+Up} (T t)
+\begin{DoxyCompactList}\small\item\em Registers a module as a \hyperlink{class_warm_up}{Warm\+Up} Interface providing access;. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___warm_up___manager_ae98e975506dfe72122385e2bc6863ed8}{warming\+\_\+\+Begin} ()
+\begin{DoxyCompactList}\small\item\em Start a warming timer. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___warm_up___manager_a321968f0ffddad8a8a2e2a138c35ba9f}{warming\+\_\+\+Reset} ()
+\begin{DoxyCompactList}\small\item\em Reset warming to false, indicates a need to reheat in the near future. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___warm_up___manager_a9932619f9896bbdc06eb7256a231ce13}{is\+\_\+warm} ()
+\begin{DoxyCompactList}\small\item\em Updates and returns state. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___warm_up___manager_a82c8cd30f969a681a76b332d3b1c2ce4}{package} (Json\+Object)
+\begin{DoxyCompactList}\small\item\em An unfortunate consequence of inheriting from a bloated base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}!Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}!Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager(\+Loom\+Manager $\ast$manager)}{Loom_WarmUp_Manager(LoomManager *manager)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Warm\+Up\+\_\+\+Manager\+::\+Loom\+\_\+\+Warm\+Up\+\_\+\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___warm_up___manager_a7e641d24fca0655a17ed0dbefa0fc36f}{}\label{class_loom___warm_up___manager_a7e641d24fca0655a17ed0dbefa0fc36f}
+
+
+Constructor. 
+
+\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}!Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}!Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager(\+Loom\+Manager $\ast$manager, Json\+Array\+Const)}{Loom_WarmUp_Manager(LoomManager *manager, JsonArrayConst)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Warm\+Up\+\_\+\+Manager\+::\+Loom\+\_\+\+Warm\+Up\+\_\+\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___warm_up___manager_a3172f20e2fdf7b389f7756b9af8b8d80}{}\label{class_loom___warm_up___manager_a3172f20e2fdf7b389f7756b9af8b8d80}
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}!is\+\_\+warm@{is\+\_\+warm}}
+\index{is\+\_\+warm@{is\+\_\+warm}!Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{is\+\_\+warm()}{is_warm()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Warm\+Up\+\_\+\+Manager\+::is\+\_\+warm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___warm_up___manager_a9932619f9896bbdc06eb7256a231ce13}{}\label{class_loom___warm_up___manager_a9932619f9896bbdc06eb7256a231ce13}
+
+
+Updates and returns state. 
+
+\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object)}{package(JsonObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Warm\+Up\+\_\+\+Manager\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_loom___warm_up___manager_a82c8cd30f969a681a76b332d3b1c2ce4}{}\label{class_loom___warm_up___manager_a82c8cd30f969a681a76b332d3b1c2ce4}
+
+
+An unfortunate consequence of inheriting from a bloated base class. 
+
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}!Register\+\_\+\+Warm\+Up@{Register\+\_\+\+Warm\+Up}}
+\index{Register\+\_\+\+Warm\+Up@{Register\+\_\+\+Warm\+Up}!Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{Register\+\_\+\+Warm\+Up(\+T t)}{Register_WarmUp(T t)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void Loom\+\_\+\+Warm\+Up\+\_\+\+Manager\+::\+Register\+\_\+\+Warm\+Up (
+\begin{DoxyParamCaption}
+\item[{T}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___warm_up___manager_aaff8ae9623bc53aef94e91e015c6625e}{}\label{class_loom___warm_up___manager_aaff8ae9623bc53aef94e91e015c6625e}
+
+
+Registers a module as a \hyperlink{class_warm_up}{Warm\+Up} Interface providing access;. 
+
+\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}!warming\+\_\+\+Begin@{warming\+\_\+\+Begin}}
+\index{warming\+\_\+\+Begin@{warming\+\_\+\+Begin}!Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{warming\+\_\+\+Begin()}{warming_Begin()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Warm\+Up\+\_\+\+Manager\+::warming\+\_\+\+Begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___warm_up___manager_ae98e975506dfe72122385e2bc6863ed8}{}\label{class_loom___warm_up___manager_ae98e975506dfe72122385e2bc6863ed8}
+
+
+Start a warming timer. 
+
+\index{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}!warming\+\_\+\+Reset@{warming\+\_\+\+Reset}}
+\index{warming\+\_\+\+Reset@{warming\+\_\+\+Reset}!Loom\+\_\+\+Warm\+Up\+\_\+\+Manager@{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{warming\+\_\+\+Reset()}{warming_Reset()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Warm\+Up\+\_\+\+Manager\+::warming\+\_\+\+Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___warm_up___manager_a321968f0ffddad8a8a2e2a138c35ba9f}{}\label{class_loom___warm_up___manager_a321968f0ffddad8a8a2e2a138c35ba9f}
+
+
+Reset warming to false, indicates a need to reheat in the near future. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Components/\+Warm\+Up/\hyperlink{_warm_up___manager_8h}{Warm\+Up\+\_\+\+Manager.\+h}\item 
+src/\+Components/\+Warm\+Up/\hyperlink{_warm_up___manager_8cpp}{Warm\+Up\+\_\+\+Manager.\+cpp}\end{DoxyCompactItemize}

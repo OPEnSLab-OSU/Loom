@@ -1,0 +1,5 @@
+<map id="Loom_ZXGesture" name="Loom_ZXGesture">
+<area shape="rect" id="node2" href="$class_loom_i2_c_sensor.html" title="Abstract root for I2C sensor modules. " alt="" coords="11,155,134,181"/>
+<area shape="rect" id="node3" href="$class_loom_sensor.html" title="Abstract root of Loom sensor modules hierarchy. " alt="" coords="21,80,124,107"/>
+<area shape="rect" id="node4" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="21,5,125,32"/>
+</map>

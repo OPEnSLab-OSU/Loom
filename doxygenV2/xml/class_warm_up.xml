@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_warm_up" kind="class" language="C++" prot="public">
+    <compoundname>WarmUp</compoundname>
+    <includes refid="_warm_up_8h" local="no">WarmUp.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_warm_up_1a7a2e79a7e5f2d09db200dbe965b310cf" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int WarmUp::period</definition>
+        <argsstring></argsstring>
+        <name>period</name>
+        <briefdescription>
+<para>MS till sensor is ready to take readings. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp.h" line="25" column="1" bodyfile="src/Components/WarmUp/WarmUp.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_warm_up_1ac6297abc9799ea75b43b1040e7f48b7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>WarmUp::WarmUp</definition>
+        <argsstring>(LoomManager *manager, int period=0)</argsstring>
+        <name>WarmUp</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>period</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp.h" line="19" column="1" bodyfile="src/Components/WarmUp/WarmUp.cpp" bodystart="16" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="class_warm_up_1a01e8e6c4d39baa502523a36765810a76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int WarmUp::get_period</definition>
+        <argsstring>()</argsstring>
+        <name>get_period</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Components/WarmUp/WarmUp.h" line="21" column="1" bodyfile="src/Components/WarmUp/WarmUp.cpp" bodystart="21" bodyend="23"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Components/WarmUp/WarmUp.h" line="16" column="1" bodyfile="src/Components/WarmUp/WarmUp.h" bodystart="16" bodyend="27"/>
+    <listofallmembers>
+      <member refid="class_warm_up_1a01e8e6c4d39baa502523a36765810a76" prot="public" virt="non-virtual"><scope>WarmUp</scope><name>get_period</name></member>
+      <member refid="class_warm_up_1a7a2e79a7e5f2d09db200dbe965b310cf" prot="private" virt="non-virtual"><scope>WarmUp</scope><name>period</name></member>
+      <member refid="class_warm_up_1ac6297abc9799ea75b43b1040e7f48b7b" prot="public" virt="non-virtual"><scope>WarmUp</scope><name>WarmUp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

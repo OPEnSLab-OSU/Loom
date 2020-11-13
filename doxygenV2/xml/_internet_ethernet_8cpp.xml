@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_internet_ethernet_8cpp" kind="file" language="C++">
+    <compoundname>InternetEthernet.cpp</compoundname>
+    <includes refid="_internet_ethernet_8h" local="yes">InternetEthernet.h</includes>
+    <includes refid="_trust___anchors_8h" local="yes">Trust_Anchors.h</includes>
+    <incdepgraph>
+      <node id="3278">
+        <label>InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="3279" relation="include">
+        </childnode>
+        <childnode refid="3285" relation="include">
+        </childnode>
+        <childnode refid="3286" relation="include">
+        </childnode>
+        <childnode refid="3287" relation="include">
+        </childnode>
+        <childnode refid="3288" relation="include">
+        </childnode>
+      </node>
+      <node id="3286">
+        <label>Udp.h</label>
+      </node>
+      <node id="3277">
+        <label>InternetEthernet.h</label>
+        <link refid="_internet_ethernet_8h"/>
+        <childnode refid="3278" relation="include">
+        </childnode>
+        <childnode refid="3289" relation="include">
+        </childnode>
+        <childnode refid="3287" relation="include">
+        </childnode>
+        <childnode refid="3290" relation="include">
+        </childnode>
+      </node>
+      <node id="3282">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3279">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3280" relation="include">
+        </childnode>
+        <childnode refid="3282" relation="include">
+        </childnode>
+        <childnode refid="3283" relation="include">
+        </childnode>
+        <childnode refid="3284" relation="include">
+        </childnode>
+      </node>
+      <node id="3276">
+        <label>src/InternetPlats/InternetEthernet.cpp</label>
+        <link refid="InternetEthernet.cpp"/>
+        <childnode refid="3277" relation="include">
+        </childnode>
+        <childnode refid="3290" relation="include">
+        </childnode>
+      </node>
+      <node id="3285">
+        <label>Client.h</label>
+      </node>
+      <node id="3283">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3281" relation="include">
+        </childnode>
+        <childnode refid="3284" relation="include">
+        </childnode>
+      </node>
+      <node id="3280">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3281" relation="include">
+        </childnode>
+      </node>
+      <node id="3289">
+        <label>EthernetLarge.h</label>
+      </node>
+      <node id="3284">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3281">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3290">
+        <label>Trust_Anchors.h</label>
+        <link refid="_trust___anchors_8h"/>
+      </node>
+      <node id="3287">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="3288">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/InternetPlats/InternetEthernet.cpp"/>
+  </compounddef>
+</doxygen>

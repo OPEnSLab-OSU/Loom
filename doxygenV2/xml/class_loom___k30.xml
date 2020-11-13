@@ -1,0 +1,431 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___k30" kind="class" language="C++" prot="public">
+    <compoundname>Loom_K30</compoundname>
+    <basecompoundref refid="class_loom_serial_sensor" prot="public" virt="non-virtual">LoomSerialSensor</basecompoundref>
+    <includes refid="_k30_8h" local="no">K30.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___k30_1adcbe5982ebd5edc1cacb06eca55e4f7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_K30::Loom_K30</definition>
+        <argsstring>(LoomManager *manager, const char *module_name=&quot;K30&quot;, int num_samples=1)</argsstring>
+        <name>Loom_K30</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+          <defval>&quot;K30&quot;</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num_samples</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the module </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">num_samples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of samples to take and average </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="57" column="1" bodyfile="src/Sensors/SERIAL/K30.cpp" bodystart="13" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___k30_1a5177bbcfd75e763efd286d0bbb799475" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_K30::Loom_K30</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_K30</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="62" column="1" bodyfile="src/Sensors/SERIAL/K30.cpp" bodystart="28" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___k30_1a0863089be8f2e4a378e85406838c0b50" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Loom_K30::~Loom_K30</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_K30</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="65" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___k30_1a341fce3e5008b4a7b5bbb0c6d5a5cb71" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_K30::print_measurements</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_measurements</name>
+        <reimplements refid="class_loom_sensor_1aba2aa35441c2eb1cf27b95a1fc08b288">print_measurements</reimplements>
+        <briefdescription>
+<para>Print the last set of measurements taken. </para>        </briefdescription>
+        <detaileddescription>
+<para>Does not package the data. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="71" column="1" bodyfile="src/Sensors/SERIAL/K30.cpp" bodystart="89" bodyend="93"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___k30_1ad13974aee5a993538a0ba43b1e68beac" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_K30::measure</definition>
+        <argsstring>() override</argsstring>
+        <name>measure</name>
+        <reimplements refid="class_loom_sensor_1a390ef79a4d5d6b6386e099c7fe56ed1a">measure</reimplements>
+        <briefdescription>
+<para>Take any relevant measurements. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="78" column="1" bodyfile="src/Sensors/SERIAL/K30.cpp" bodystart="82" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___k30_1a20b989aee8822e204e951edbc6a5969a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_K30::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Package a modules measurements or state. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to put data into </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="79" column="1" bodyfile="src/Sensors/SERIAL/K30.cpp" bodystart="97" bodyend="102"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___k30_1a99216bf4efea0cea4033abbd4f8c4cf8" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Loom_K30::CO2_levels</definition>
+        <argsstring></argsstring>
+        <name>CO2_levels</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="33" column="1" bodyfile="src/Sensors/SERIAL/K30.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___k30_1a0b8f6461001363a009dc206347084264" prot="protected" static="no" mutable="no">
+        <type>byte</type>
+        <definition>byte Loom_K30::read_CO2[7]</definition>
+        <argsstring>[7]</argsstring>
+        <name>read_CO2</name>
+        <initializer>= {0xFE, 0X44, 0X00, 0X08, 0X02, 0X9F, 0X25}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="35" column="1" bodyfile="src/Sensors/SERIAL/K30.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___k30_1a82e7ef99aa9ee1709271bfe491e35632" prot="protected" static="no" mutable="no">
+        <type>byte</type>
+        <definition>byte Loom_K30::sensor_response[7]</definition>
+        <argsstring>[7]</argsstring>
+        <name>sensor_response</name>
+        <initializer>= {0, 0, 0, 0, 0, 0, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="37" column="1" bodyfile="src/Sensors/SERIAL/K30.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___k30_1a6066aba52897fee08390c9e6a5baf688" prot="protected" static="no" mutable="no">
+        <type>Uart *</type>
+        <definition>Uart* Loom_K30::K30_Serial</definition>
+        <argsstring></argsstring>
+        <name>K30_Serial</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="42" column="1" bodyfile="src/Sensors/SERIAL/K30.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_loom___k30_1a0b67390fda29e2e5761d479ef03914a8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_K30::sendSensorRequest</definition>
+        <argsstring>(byte request[7])</argsstring>
+        <name>sendSensorRequest</name>
+        <param>
+          <type>byte</type>
+          <declname>request</declname>
+          <array>[7]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="44" column="1" bodyfile="src/Sensors/SERIAL/K30.cpp" bodystart="34" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___k30_1a73652d3a27632e202f65eb442f3a6a99" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int Loom_K30::readSensorResponse</definition>
+        <argsstring>(byte packet[7])</argsstring>
+        <name>readSensorResponse</name>
+        <param>
+          <type>byte</type>
+          <declname>packet</declname>
+          <array>[7]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SERIAL/K30.h" line="45" column="1" bodyfile="src/Sensors/SERIAL/K30.cpp" bodystart="72" bodyend="78"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>K30 CO2 sensor module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://github.com/OPEnSLab-OSU/OPEnS-Lab-Home/wiki/K30-CO2-Sensor-(SE-0018)">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.co2meter.com/products/k-30-co2-sensor-module?variant=8463942">Product Page: CO2Meter K30 10,000ppm CO2 Sensor</ulink></para></listitem><listitem><para><ulink url="http://co2meters.com/Documentation/Datasheets/DS_SE_0118_CM_0024_Revised9%20(1).pdf">Datasheet: K30</ulink></para></listitem><listitem><para><ulink url="http://co2meters.com/Documentation/Other/AN_SE_0018_AN_126_Revised8.pdf">Arduino UART Interface to K30 Sensor</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#k30-co2-sensor">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="592">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="589">
+        <label>Loom_K30</label>
+        <link refid="class_loom___k30"/>
+        <childnode refid="590" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="590">
+        <label>LoomSerialSensor</label>
+        <link refid="class_loom_serial_sensor"/>
+        <childnode refid="591" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="591">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="592" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="601">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="597">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="598" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="599" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="604" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="600" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="596">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="597" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="605">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="600">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="596" relation="public-inheritance">
+        </childnode>
+        <childnode refid="601" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="602" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="599" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="603" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="604" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="605" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="599">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="596" relation="public-inheritance">
+        </childnode>
+        <childnode refid="600" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="593">
+        <label>Loom_K30</label>
+        <link refid="class_loom___k30"/>
+        <childnode refid="594" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="594">
+        <label>LoomSerialSensor</label>
+        <link refid="class_loom_serial_sensor"/>
+        <childnode refid="595" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="595">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="596" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="598">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="596" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="604">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="596" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="602">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="603">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Sensors/SERIAL/K30.h" line="29" column="1" bodyfile="src/Sensors/SERIAL/K30.h" bodystart="28" bodyend="81"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_K30</scope><name>add_config</name></member>
+      <member refid="class_loom_sensor_1ab75183469715506e8a694b9559b76c35" prot="public" virt="virtual"><scope>Loom_K30</scope><name>calibrate</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>Category</name></member>
+      <member refid="class_loom___k30_1a99216bf4efea0cea4033abbd4f8c4cf8" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>CO2_levels</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_K30</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>get_module_type</name></member>
+      <member refid="class_loom_sensor_1ae9a177765bd3ab79e002e98df6053ce0" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>get_num_samples</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom___k30_1a6066aba52897fee08390c9e6a5baf688" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>K30_Serial</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_K30</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___k30_1adcbe5982ebd5edc1cacb06eca55e4f7b" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>Loom_K30</name></member>
+      <member refid="class_loom___k30_1a5177bbcfd75e763efd286d0bbb799475" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>Loom_K30</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>LoomModule</name></member>
+      <member refid="class_loom_sensor_1acce7ce989a74b5e4b3c8ee51ae55e8a9" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>LoomSensor</name></member>
+      <member refid="class_loom_serial_sensor_1a48be57e79600602ee072a1ae0673611c" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>LoomSerialSensor</name></member>
+      <member refid="class_loom___k30_1ad13974aee5a993538a0ba43b1e68beac" prot="public" virt="virtual"><scope>Loom_K30</scope><name>measure</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>module_type</name></member>
+      <member refid="class_loom_sensor_1a0e74ebbaecde15ed1c71e1bb6bc6aebe" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>num_samples</name></member>
+      <member refid="class_loom___k30_1a20b989aee8822e204e951edbc6a5969a" prot="public" virt="virtual"><scope>Loom_K30</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_K30</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_K30</scope><name>power_up</name></member>
+      <member refid="class_loom_serial_sensor_1ac21a512699c90db3b4287798e1526f0c" prot="public" virt="virtual"><scope>Loom_K30</scope><name>print_config</name></member>
+      <member refid="class_loom___k30_1a341fce3e5008b4a7b5bbb0c6d5a5cb71" prot="public" virt="virtual"><scope>Loom_K30</scope><name>print_measurements</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>Loom_K30</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>print_verbosity</name></member>
+      <member refid="class_loom___k30_1a0b8f6461001363a009dc206347084264" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>read_CO2</name></member>
+      <member refid="class_loom___k30_1a73652d3a27632e202f65eb442f3a6a99" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>readSensorResponse</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_K30</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom___k30_1a0b67390fda29e2e5761d479ef03914a8" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>sendSensorRequest</name></member>
+      <member refid="class_loom___k30_1a82e7ef99aa9ee1709271bfe491e35632" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>sensor_response</name></member>
+      <member refid="class_loom_serial_sensor_1ab730e24d2b72d7fad0fa7c4af696c799" prot="protected" virt="non-virtual"><scope>Loom_K30</scope><name>sensor_serial</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>set_active</name></member>
+      <member refid="class_loom_sensor_1ad02e186edda41d4458246f329641d6f4" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>set_num_samples</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_serial_sensor_1a5ad2e2d33d2d371325e9913c85023aa1" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>set_serial</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_K30</scope><name>Type</name></member>
+      <member refid="class_loom___k30_1a0863089be8f2e4a378e85406838c0b50" prot="public" virt="virtual"><scope>Loom_K30</scope><name>~Loom_K30</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_K30</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_sensor_1aac0541421949a20b91a13583271f6757" prot="public" virt="virtual"><scope>Loom_K30</scope><name>~LoomSensor</name></member>
+      <member refid="class_loom_serial_sensor_1a7021e88baa9fa7d1e89a960b22b5aa0e" prot="public" virt="virtual"><scope>Loom_K30</scope><name>~LoomSerialSensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

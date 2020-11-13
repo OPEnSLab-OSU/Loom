@@ -1,0 +1,186 @@
+\hypertarget{class_loom_temp_sync}{}\section{Loom\+Temp\+Sync Class Reference}
+\label{class_loom_temp_sync}\index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+
+
+Used to synchronize temperatures between sensors that read sensors and modules that need it.  
+
+
+
+
+{\ttfamily \#include $<$Temperature\+\_\+\+Sync.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Temp\+Sync\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_loom_temp_sync__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_temp_sync_a170a1ecdcdc8589f306f7ea40d4878ea}{Loom\+Temp\+Sync} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} source=\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abf2c722c90ddbbd2403395e349a31844}{Loom\+Module\+::\+Type\+::\+M\+S5803}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} dependant=\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a3d953aa7cfa5ffe0fde34551d918c76c}{Loom\+Module\+::\+Type\+::\+Analog})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_temp_sync_aae408072a7ead338db0f3d01b8579b42}{Loom\+Temp\+Sync} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_temp_sync_a8e00454996d6a757235a975dccee2272}{$\sim$\+Loom\+Temp\+Sync} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_temp_sync_a0bc1a857bc87c30482c8175d69876b0a}{second\+\_\+stage\+\_\+ctor} () override
+\begin{DoxyCompactList}\small\item\em Verify that source and dependant modules exist, sync temperatures. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_temp_sync_a11847e2106c869af9644e32c34cd68ea}{measure} ()
+\begin{DoxyCompactList}\small\item\em Sync the temperature. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_temp_sync_aa36abfbdda84295decbfdc962f7344c8}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em No package necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_temp_sync_a7ebfed68ee73f407d698e70a023d5b5d}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Used to synchronize temperatures between sensors that read sensors and modules that need it. 
+
+\begin{DoxyNote}{Note}
+Sources include\+:
+\begin{DoxyItemize}
+\item \hyperlink{class_loom___m_s5803}{Loom\+\_\+\+M\+S5803} (code\+: 2110)
+\item \hyperlink{class_loom___s_h_t31_d}{Loom\+\_\+\+S\+H\+T31D} (code\+: 2111) 
+\end{DoxyItemize}
+
+Dependants include\+:
+\begin{DoxyItemize}
+\item \hyperlink{class_loom___analog}{Loom\+\_\+\+Analog} (code 2001)
+\end{DoxyItemize}
+\end{DoxyNote}
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_temp_sync.html}{\tt Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}!Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+\index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}!Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+\subsubsection[{\texorpdfstring{Loom\+Temp\+Sync(\+Loom\+Manager $\ast$manager, const Loom\+Module\+::\+Type source=\+Loom\+Module\+::\+Type\+::\+M\+S5803, const Loom\+Module\+::\+Type dependant=\+Loom\+Module\+::\+Type\+::\+Analog)}{LoomTempSync(LoomManager *manager, const LoomModule::Type source=LoomModule::Type::MS5803, const LoomModule::Type dependant=LoomModule::Type::Analog)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Temp\+Sync\+::\+Loom\+Temp\+Sync (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{source = {\ttfamily {\bf Loom\+Module\+::\+Type\+::\+M\+S5803}}, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{dependant = {\ttfamily {\bf Loom\+Module\+::\+Type\+::\+Analog}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_temp_sync_a170a1ecdcdc8589f306f7ea40d4878ea}{}\label{class_loom_temp_sync_a170a1ecdcdc8589f306f7ea40d4878ea}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em source} & Module type to get temperature from \\
+\hline
+\mbox{\tt in}  & {\em dependant} & Module type to forward temperature to \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}!Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+\index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}!Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+\subsubsection[{\texorpdfstring{Loom\+Temp\+Sync(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{LoomTempSync(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Temp\+Sync\+::\+Loom\+Temp\+Sync (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_temp_sync_aae408072a7ead338db0f3d01b8579b42}{}\label{class_loom_temp_sync_aae408072a7ead338db0f3d01b8579b42}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}!````~Loom\+Temp\+Sync@{$\sim$\+Loom\+Temp\+Sync}}
+\index{````~Loom\+Temp\+Sync@{$\sim$\+Loom\+Temp\+Sync}!Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Temp\+Sync()=default}{~LoomTempSync()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Temp\+Sync\+::$\sim$\+Loom\+Temp\+Sync (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom_temp_sync_a8e00454996d6a757235a975dccee2272}{}\label{class_loom_temp_sync_a8e00454996d6a757235a975dccee2272}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}!measure@{measure}}
+\index{measure@{measure}!Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+\subsubsection[{\texorpdfstring{measure()}{measure()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Temp\+Sync\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_temp_sync_a11847e2106c869af9644e32c34cd68ea}{}\label{class_loom_temp_sync_a11847e2106c869af9644e32c34cd68ea}
+
+
+Sync the temperature. 
+
+Simply calls synchronization implementation Loom\+Temp\+Sync\+::sync\+\_\+temp(). Allows the module to run regularly by emulating a sensor, which have thier measure methods called regularly. \index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}!package@{package}}
+\index{package@{package}!Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Temp\+Sync\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_temp_sync_aa36abfbdda84295decbfdc962f7344c8}{}\label{class_loom_temp_sync_aa36abfbdda84295decbfdc962f7344c8}
+
+
+No package necessary. 
+
+Implement with empty body. 
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Temp\+Sync\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_temp_sync_a7ebfed68ee73f407d698e70a023d5b5d}{}\label{class_loom_temp_sync_a7ebfed68ee73f407d698e70a023d5b5d}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+\index{Loom\+Temp\+Sync@{Loom\+Temp\+Sync}!second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}}
+\index{second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}!Loom\+Temp\+Sync@{Loom\+Temp\+Sync}}
+\subsubsection[{\texorpdfstring{second\+\_\+stage\+\_\+ctor() override}{second_stage_ctor() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Temp\+Sync\+::second\+\_\+stage\+\_\+ctor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_temp_sync_a0bc1a857bc87c30482c8175d69876b0a}{}\label{class_loom_temp_sync_a0bc1a857bc87c30482c8175d69876b0a}
+
+
+Verify that source and dependant modules exist, sync temperatures. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a8dd3704d1bd38868d5774e48c1073d12}{Loom\+Module}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{_temperature___sync_8h}{Temperature\+\_\+\+Sync.\+h}\item 
+src/\hyperlink{_temperature___sync_8cpp}{Temperature\+\_\+\+Sync.\+cpp}\end{DoxyCompactItemize}

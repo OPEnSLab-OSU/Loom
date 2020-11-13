@@ -1,0 +1,280 @@
+\hypertarget{class_loom___z_x_gesture}{}\section{Loom\+\_\+\+Z\+X\+Gesture Class Reference}
+\label{class_loom___z_x_gesture}\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+
+
+Z\+X\+Gesture position / gesture sensor module.  
+
+
+
+
+{\ttfamily \#include $<$Z\+X\+Gesture.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Z\+X\+Gesture\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_loom___z_x_gesture__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dd}{Mode} \{ \hyperlink{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dda1903f54cd46d54aa3200a4508c948db0}{Mode\+::\+P\+OS}, 
+\hyperlink{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dda503fb1a567801586b5eddc16753a3772}{Mode\+::\+G\+E\+ST}
+ \}\begin{DoxyCompactList}\small\item\em Different modes of the ZX gesture sensor. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___z_x_gesture_ad69121d2a42277299765eb38656882e0}{Loom\+\_\+\+Z\+X\+Gesture} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}=0x10, const uint8\+\_\+t mux\+\_\+port=255, const Mode mode=\+Mode\+::\+P\+O\+S)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___z_x_gesture_a4769782b6838cff67553d07a10ce7e75}{Loom\+\_\+\+Z\+X\+Gesture} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___z_x_gesture_a82f97ae9ec9f2ba8da8f8e29b4f64159}{$\sim$\+Loom\+\_\+\+Z\+X\+Gesture} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___z_x_gesture_a2449b2c665d179dac470623322fe7c7b}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___z_x_gesture_a48153345d472b3e5008c42ddb6f49223}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___z_x_gesture_a7af9796af4c3dfa33a3eedb63de89285}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___z_x_gesture_a54559c9e2ecefad1efcb2a3192233bcb}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Z\+X\+\_\+\+Sensor \hyperlink{class_loom___z_x_gesture_a7b338ec49ed044f2b8faf13384dd19a1}{inst\+\_\+\+ZX}
+\begin{DoxyCompactList}\small\item\em Underlying ZX sensor manager instance. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dd}{Mode} \hyperlink{class_loom___z_x_gesture_a06039a2e005fee4e1542534cc71b1316}{mode}
+\begin{DoxyCompactList}\small\item\em Sensor mode (read positions or gesture -\/ mutually exclusive) \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___z_x_gesture_aceb243194a3f03ca569ddbb4b41ef56c}{pos} \mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em Measured positions (x, y pos). Units\+: mm. \end{DoxyCompactList}\item 
+Gesture\+Type \hyperlink{class_loom___z_x_gesture_ad671101df307f96d5a8c1e281a3eaea9}{gesture}
+\begin{DoxyCompactList}\small\item\em Last read gesture type. \end{DoxyCompactList}\item 
+String \hyperlink{class_loom___z_x_gesture_afc1047aaf8abcbb6e9b155e2c025ddb9}{gesture\+\_\+type}
+\begin{DoxyCompactList}\small\item\em String labelling last read gesture type. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___z_x_gesture_a9236f5979e3a46c0db2164bd343be305}{gesture\+\_\+speed}
+\begin{DoxyCompactList}\small\item\em The speed of the last measured gesture. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Z\+X\+Gesture position / gesture sensor module. 
+
+\begin{DoxyNote}{Note}
+Only position or gestures can be measured at a given time, not both.
+\end{DoxyNote}
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___z_x_gesture.html}{\tt Module Documentation}
+\item \href{https://www.sparkfun.com/products/13162}{\tt Product Page\+: Sparkfun ZX Distance and Gesture Sensor}
+\item \href{https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library}{\tt Dependency\+: Spark\+Fun ZX Distance and Gesture Sensor Arduino Library}
+\item \href{https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf}{\tt Datasheet\+: ZX Spark\+Fun Sensor Datasheet}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#zx-distance-and-gesture-sensor}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!Mode@{Mode}}
+\index{Mode@{Mode}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{Mode}{Mode}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+\_\+\+Z\+X\+Gesture\+::\+Mode}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dd}{}\label{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dd}
+
+
+Different modes of the ZX gesture sensor. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{P\+OS@{P\+OS}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!P\+OS@{P\+OS}}\item[{\em 
+P\+OS\hypertarget{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dda1903f54cd46d54aa3200a4508c948db0}{}\label{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dda1903f54cd46d54aa3200a4508c948db0}
+}]Measure z and x position. \index{G\+E\+ST@{G\+E\+ST}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!G\+E\+ST@{G\+E\+ST}}\item[{\em 
+G\+E\+ST\hypertarget{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dda503fb1a567801586b5eddc16753a3772}{}\label{class_loom___z_x_gesture_a4c381d3f296be2cac6188fd8c5f8b7dda503fb1a567801586b5eddc16753a3772}
+}]Measure gestures. \end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Z\+X\+Gesture(\+Loom\+Manager $\ast$manager, const byte i2c\+\_\+address=0x10, const uint8\+\_\+t mux\+\_\+port=255, const Mode mode=\+Mode\+::\+P\+O\+S)}{Loom_ZXGesture(LoomManager *manager, const byte i2c_address=0x10, const uint8_t mux_port=255, const Mode mode=Mode::POS)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Z\+X\+Gesture\+::\+Loom\+\_\+\+Z\+X\+Gesture (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{i2c\+\_\+address = {\ttfamily 0x10}, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}, }
+\item[{const {\bf Mode}}]{mode = {\ttfamily {\bf Mode\+::\+P\+OS}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___z_x_gesture_ad69121d2a42277299765eb38656882e0}{}\label{class_loom___z_x_gesture_ad69121d2a42277299765eb38656882e0}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x10$>$ $\vert$ \{0x10, 0x11\} $\vert$ I2C address \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+port} & Int $\vert$ $<$255$>$ $\vert$ \mbox{[}0-\/16\mbox{]} $\vert$ Port on multiplexer \\
+\hline
+\mbox{\tt in}  & {\em mode} & Set(\+Z\+X\+Mode) $\vert$ $<$0$>$ $\vert$ \{ 0(\char`\"{}\+Position\char`\"{}), 1(\char`\"{}\+Gesture\char`\"{}) \} $\vert$ Gain level \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Z\+X\+Gesture(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_ZXGesture(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Z\+X\+Gesture\+::\+Loom\+\_\+\+Z\+X\+Gesture (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___z_x_gesture_a4769782b6838cff67553d07a10ce7e75}{}\label{class_loom___z_x_gesture_a4769782b6838cff67553d07a10ce7e75}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!````~Loom\+\_\+\+Z\+X\+Gesture@{$\sim$\+Loom\+\_\+\+Z\+X\+Gesture}}
+\index{````~Loom\+\_\+\+Z\+X\+Gesture@{$\sim$\+Loom\+\_\+\+Z\+X\+Gesture}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Z\+X\+Gesture()=default}{~Loom_ZXGesture()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Z\+X\+Gesture\+::$\sim$\+Loom\+\_\+\+Z\+X\+Gesture (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___z_x_gesture_a82f97ae9ec9f2ba8da8f8e29b4f64159}{}\label{class_loom___z_x_gesture_a82f97ae9ec9f2ba8da8f8e29b4f64159}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Z\+X\+Gesture\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___z_x_gesture_a2449b2c665d179dac470623322fe7c7b}{}\label{class_loom___z_x_gesture_a2449b2c665d179dac470623322fe7c7b}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Z\+X\+Gesture\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___z_x_gesture_a48153345d472b3e5008c42ddb6f49223}{}\label{class_loom___z_x_gesture_a48153345d472b3e5008c42ddb6f49223}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Z\+X\+Gesture\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___z_x_gesture_a7af9796af4c3dfa33a3eedb63de89285}{}\label{class_loom___z_x_gesture_a7af9796af4c3dfa33a3eedb63de89285}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_i2_c_sensor_ab90004ce30a281b7f51ecf3093ca4cea}{Loom\+I2\+C\+Sensor}.
+
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Z\+X\+Gesture\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___z_x_gesture_a54559c9e2ecefad1efcb2a3192233bcb}{}\label{class_loom___z_x_gesture_a54559c9e2ecefad1efcb2a3192233bcb}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!gesture@{gesture}}
+\index{gesture@{gesture}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{gesture}{gesture}}]{\setlength{\rightskip}{0pt plus 5cm}Gesture\+Type Loom\+\_\+\+Z\+X\+Gesture\+::gesture\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___z_x_gesture_ad671101df307f96d5a8c1e281a3eaea9}{}\label{class_loom___z_x_gesture_ad671101df307f96d5a8c1e281a3eaea9}
+
+
+Last read gesture type. 
+
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!gesture\+\_\+speed@{gesture\+\_\+speed}}
+\index{gesture\+\_\+speed@{gesture\+\_\+speed}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{gesture\+\_\+speed}{gesture_speed}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Z\+X\+Gesture\+::gesture\+\_\+speed\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___z_x_gesture_a9236f5979e3a46c0db2164bd343be305}{}\label{class_loom___z_x_gesture_a9236f5979e3a46c0db2164bd343be305}
+
+
+The speed of the last measured gesture. 
+
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!gesture\+\_\+type@{gesture\+\_\+type}}
+\index{gesture\+\_\+type@{gesture\+\_\+type}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{gesture\+\_\+type}{gesture_type}}]{\setlength{\rightskip}{0pt plus 5cm}String Loom\+\_\+\+Z\+X\+Gesture\+::gesture\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___z_x_gesture_afc1047aaf8abcbb6e9b155e2c025ddb9}{}\label{class_loom___z_x_gesture_afc1047aaf8abcbb6e9b155e2c025ddb9}
+
+
+String labelling last read gesture type. 
+
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!inst\+\_\+\+ZX@{inst\+\_\+\+ZX}}
+\index{inst\+\_\+\+ZX@{inst\+\_\+\+ZX}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{inst\+\_\+\+ZX}{inst_ZX}}]{\setlength{\rightskip}{0pt plus 5cm}Z\+X\+\_\+\+Sensor Loom\+\_\+\+Z\+X\+Gesture\+::inst\+\_\+\+ZX\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___z_x_gesture_a7b338ec49ed044f2b8faf13384dd19a1}{}\label{class_loom___z_x_gesture_a7b338ec49ed044f2b8faf13384dd19a1}
+
+
+Underlying ZX sensor manager instance. 
+
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!mode@{mode}}
+\index{mode@{mode}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{mode}{mode}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mode} Loom\+\_\+\+Z\+X\+Gesture\+::mode\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___z_x_gesture_a06039a2e005fee4e1542534cc71b1316}{}\label{class_loom___z_x_gesture_a06039a2e005fee4e1542534cc71b1316}
+
+
+Sensor mode (read positions or gesture -\/ mutually exclusive) 
+
+\index{Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}!pos@{pos}}
+\index{pos@{pos}!Loom\+\_\+\+Z\+X\+Gesture@{Loom\+\_\+\+Z\+X\+Gesture}}
+\subsubsection[{\texorpdfstring{pos}{pos}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Z\+X\+Gesture\+::pos\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___z_x_gesture_aceb243194a3f03ca569ddbb4b41ef56c}{}\label{class_loom___z_x_gesture_aceb243194a3f03ca569ddbb4b41ef56c}
+
+
+Measured positions (x, y pos). Units\+: mm. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_z_x_gesture_8h}{Z\+X\+Gesture.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_z_x_gesture_8cpp}{Z\+X\+Gesture.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,304 @@
+\hypertarget{class_loom___bluetooth}{}\section{Loom\+\_\+\+Bluetooth Class Reference}
+\label{class_loom___bluetooth}\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+
+
+Bluetooth communication platform module.  
+
+
+
+
+{\ttfamily \#include $<$Bluetooth.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Bluetooth\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{class_loom___bluetooth__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___bluetooth_a0e4547eb83e0df8bfee05cbb862959d5}{Loom\+\_\+\+Bluetooth} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const uint16\+\_\+t \hyperlink{class_loom_comm_plat_a2b4f69c2ec15028f5f281c3d1d399dba}{max\+\_\+message\+\_\+len}=120, const uint8\+\_\+t \hyperlink{class_loom___bluetooth_a111aeae48c0ea364b47b3d8f3536bd7c}{spi\+\_\+\+CS}=8, const uint8\+\_\+t \hyperlink{class_loom___bluetooth_a8ef44f1f6220e7272aeca00a0991a3c7}{spi\+\_\+\+I\+RQ}=7, const uint8\+\_\+t \hyperlink{class_loom___bluetooth_a9b7f8f41e29fce31bcd8366e93edd7a6}{spi\+\_\+\+R\+ST}=4)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___bluetooth_a0751e5f9f4eac6bc1f9cba0fbc31c2d9}{Loom\+\_\+\+Bluetooth} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___bluetooth_a14659e58247ac0dab7c21fe10fd512e6}{$\sim$\+Loom\+\_\+\+Bluetooth} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___bluetooth_a6cd69b2bdd618cab4093eed50e0149d4}{add\+\_\+config} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Currently no implementation. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___bluetooth_a1f10df313c782cc98f621b423f9071e6}{connect} (const uint16\+\_\+t connect\+\_\+timeout)
+\begin{DoxyCompactList}\small\item\em Allow a phone to connect. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{class_loom___bluetooth_af99fabadf5dc67ace74a8c6f00b712c2}{get\+Command} (const uint16\+\_\+t max\+\_\+timeout)
+\begin{DoxyCompactList}\small\item\em Receive a command from user. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf T\+E\+S\+T\+I\+NG M\+E\+T\+H\+O\+DS}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___bluetooth_a99a5a57a8774104957919b0adabc9945}{test\+\_\+send} (const uint8\+\_\+t val)
+\item 
+bool \hyperlink{class_loom___bluetooth_a8e2005ed6ef1def9c48169b9fadf5187}{test\+\_\+send\+\_\+str} (const char $\ast$string)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___bluetooth_acf5fbe9ae0476fbc647c742baab183e8}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{class_loom___bluetooth_a05e53b4b58b52d0b7068959b6246e9a2}{get\+\_\+address} () const override
+\begin{DoxyCompactList}\small\item\em Bluetooth currently does not use addresses. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___bluetooth_a963fd394e050a4b1fb12311d6fe8f97f}{set\+\_\+address} (const uint8\+\_\+t addr) override
+\begin{DoxyCompactList}\small\item\em Bluetooth currently does not use addresses. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+Bluefruit\+L\+E\+\_\+\+S\+PI \hyperlink{class_loom___bluetooth_a0f16366fb0573986b0205cfc73f02b7c}{B\+LE}
+\begin{DoxyCompactList}\small\item\em Bluetooth manager instance. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___bluetooth_a111aeae48c0ea364b47b3d8f3536bd7c}{spi\+\_\+\+CS}
+\begin{DoxyCompactList}\small\item\em S\+PI chip select pin. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___bluetooth_a8ef44f1f6220e7272aeca00a0991a3c7}{spi\+\_\+\+I\+RQ}
+\begin{DoxyCompactList}\small\item\em S\+PI I\+RQ pin. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___bluetooth_a9b7f8f41e29fce31bcd8366e93edd7a6}{spi\+\_\+\+R\+ST}
+\begin{DoxyCompactList}\small\item\em S\+PI reset pin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Bluetooth communication platform module. 
+
+Needs more work for complete functionality.
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___bluetooth.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/2995}{\tt Product Page\+: Adafruit Feather M0 Bluefruit LE}
+\item \href{https://github.com/adafruit/Adafruit_BluefruitLE_nRF51}{\tt Dependency\+: Adafruit\+\_\+\+Bluefruit\+L\+E\+\_\+n\+R\+F51}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#bluetooth}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Bluetooth(\+Loom\+Manager $\ast$manager, const uint16\+\_\+t max\+\_\+message\+\_\+len=120, const uint8\+\_\+t spi\+\_\+\+C\+S=8, const uint8\+\_\+t spi\+\_\+\+I\+R\+Q=7, const uint8\+\_\+t spi\+\_\+\+R\+S\+T=4)}{Loom_Bluetooth(LoomManager *manager, const uint16_t max_message_len=120, const uint8_t spi_CS=8, const uint8_t spi_IRQ=7, const uint8_t spi_RST=4)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Bluetooth\+::\+Loom\+\_\+\+Bluetooth (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const uint16\+\_\+t}]{max\+\_\+message\+\_\+len = {\ttfamily 120}, }
+\item[{const uint8\+\_\+t}]{spi\+\_\+\+CS = {\ttfamily 8}, }
+\item[{const uint8\+\_\+t}]{spi\+\_\+\+I\+RQ = {\ttfamily 7}, }
+\item[{const uint8\+\_\+t}]{spi\+\_\+\+R\+ST = {\ttfamily 4}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___bluetooth_a0e4547eb83e0df8bfee05cbb862959d5}{}\label{class_loom___bluetooth_a0e4547eb83e0df8bfee05cbb862959d5}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em max\+\_\+message\+\_\+len} & The maximum possible message length \\
+\hline
+\mbox{\tt in}  & {\em spi\+\_\+\+CS} & S\+PI chip select pin \\
+\hline
+\mbox{\tt in}  & {\em spi\+\_\+\+I\+RQ} & S\+PI I\+RQ pin \\
+\hline
+\mbox{\tt in}  & {\em spi\+\_\+\+R\+ST} & S\+PI reset pin \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Bluetooth(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Bluetooth(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Bluetooth\+::\+Loom\+\_\+\+Bluetooth (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___bluetooth_a0751e5f9f4eac6bc1f9cba0fbc31c2d9}{}\label{class_loom___bluetooth_a0751e5f9f4eac6bc1f9cba0fbc31c2d9}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!````~Loom\+\_\+\+Bluetooth@{$\sim$\+Loom\+\_\+\+Bluetooth}}
+\index{````~Loom\+\_\+\+Bluetooth@{$\sim$\+Loom\+\_\+\+Bluetooth}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Bluetooth()=default}{~Loom_Bluetooth()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Bluetooth\+::$\sim$\+Loom\+\_\+\+Bluetooth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___bluetooth_a14659e58247ac0dab7c21fe10fd512e6}{}\label{class_loom___bluetooth_a14659e58247ac0dab7c21fe10fd512e6}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!add\+\_\+config@{add\+\_\+config}}
+\index{add\+\_\+config@{add\+\_\+config}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{add\+\_\+config(\+Json\+Object json) override}{add_config(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Bluetooth\+::add\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___bluetooth_a6cd69b2bdd618cab4093eed50e0149d4}{}\label{class_loom___bluetooth_a6cd69b2bdd618cab4093eed50e0149d4}
+
+
+Currently no implementation. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a06747f16d76bde35575557c7515adcc0}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!connect@{connect}}
+\index{connect@{connect}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{connect(const uint16\+\_\+t connect\+\_\+timeout)}{connect(const uint16_t connect_timeout)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Bluetooth\+::connect (
+\begin{DoxyParamCaption}
+\item[{const uint16\+\_\+t}]{connect\+\_\+timeout}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___bluetooth_a1f10df313c782cc98f621b423f9071e6}{}\label{class_loom___bluetooth_a1f10df313c782cc98f621b423f9071e6}
+
+
+Allow a phone to connect. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em connect\+\_\+timeout} & Max time to allow user to try to connect \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!get\+\_\+address@{get\+\_\+address}}
+\index{get\+\_\+address@{get\+\_\+address}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{get\+\_\+address() const override}{get_address() const override}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Bluetooth\+::get\+\_\+address (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___bluetooth_a05e53b4b58b52d0b7068959b6246e9a2}{}\label{class_loom___bluetooth_a05e53b4b58b52d0b7068959b6246e9a2}
+
+
+Bluetooth currently does not use addresses. 
+
+Override with empty body 
+
+Implements \hyperlink{class_loom_comm_plat_afaf204bcf88cb88102cea8c6c1d745f3}{Loom\+Comm\+Plat}.
+
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!get\+Command@{get\+Command}}
+\index{get\+Command@{get\+Command}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{get\+Command(const uint16\+\_\+t max\+\_\+timeout)}{getCommand(const uint16_t max_timeout)}}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Loom\+\_\+\+Bluetooth\+::get\+Command (
+\begin{DoxyParamCaption}
+\item[{const uint16\+\_\+t}]{max\+\_\+timeout}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___bluetooth_af99fabadf5dc67ace74a8c6f00b712c2}{}\label{class_loom___bluetooth_af99fabadf5dc67ace74a8c6f00b712c2}
+
+
+Receive a command from user. 
+
+\begin{DoxyReturn}{Returns}
+Status Gets a command from the ble interface, or times out. This is used in combination with parse\+Command if the return value is valid. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em max\+\_\+timeout} & Maximum number of milliseconds to wait for command \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status where\+: -\/1\+: user never wrote a command, timed out -\/2\+: user entered an invalid command 0 or positive integer\+: index in C\+O\+M\+M\+A\+N\+D\+\_\+\+T\+A\+B\+LE that matches the user-\/entered command 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Bluetooth\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___bluetooth_acf5fbe9ae0476fbc647c742baab183e8}{}\label{class_loom___bluetooth_acf5fbe9ae0476fbc647c742baab183e8}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_comm_plat_a97982022b7e279d4def0246e17a95d61}{Loom\+Comm\+Plat}.
+
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!set\+\_\+address@{set\+\_\+address}}
+\index{set\+\_\+address@{set\+\_\+address}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{set\+\_\+address(const uint8\+\_\+t addr) override}{set_address(const uint8_t addr) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Bluetooth\+::set\+\_\+address (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{addr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___bluetooth_a963fd394e050a4b1fb12311d6fe8f97f}{}\label{class_loom___bluetooth_a963fd394e050a4b1fb12311d6fe8f97f}
+
+
+Bluetooth currently does not use addresses. 
+
+Override with empty body 
+
+Implements \hyperlink{class_loom_comm_plat_afa0f66b4e657effefc34fa5a74363174}{Loom\+Comm\+Plat}.
+
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!test\+\_\+send@{test\+\_\+send}}
+\index{test\+\_\+send@{test\+\_\+send}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{test\+\_\+send(const uint8\+\_\+t val)}{test_send(const uint8_t val)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Bluetooth\+::test\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{val}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___bluetooth_a99a5a57a8774104957919b0adabc9945}{}\label{class_loom___bluetooth_a99a5a57a8774104957919b0adabc9945}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!test\+\_\+send\+\_\+str@{test\+\_\+send\+\_\+str}}
+\index{test\+\_\+send\+\_\+str@{test\+\_\+send\+\_\+str}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{test\+\_\+send\+\_\+str(const char $\ast$string)}{test_send_str(const char *string)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Bluetooth\+::test\+\_\+send\+\_\+str (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{string}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___bluetooth_a8e2005ed6ef1def9c48169b9fadf5187}{}\label{class_loom___bluetooth_a8e2005ed6ef1def9c48169b9fadf5187}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!B\+LE@{B\+LE}}
+\index{B\+LE@{B\+LE}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{B\+LE}{BLE}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+Bluefruit\+L\+E\+\_\+\+S\+PI Loom\+\_\+\+Bluetooth\+::\+B\+LE\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___bluetooth_a0f16366fb0573986b0205cfc73f02b7c}{}\label{class_loom___bluetooth_a0f16366fb0573986b0205cfc73f02b7c}
+
+
+Bluetooth manager instance. 
+
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!spi\+\_\+\+CS@{spi\+\_\+\+CS}}
+\index{spi\+\_\+\+CS@{spi\+\_\+\+CS}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{spi\+\_\+\+CS}{spi_CS}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Bluetooth\+::spi\+\_\+\+CS\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___bluetooth_a111aeae48c0ea364b47b3d8f3536bd7c}{}\label{class_loom___bluetooth_a111aeae48c0ea364b47b3d8f3536bd7c}
+
+
+S\+PI chip select pin. 
+
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!spi\+\_\+\+I\+RQ@{spi\+\_\+\+I\+RQ}}
+\index{spi\+\_\+\+I\+RQ@{spi\+\_\+\+I\+RQ}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{spi\+\_\+\+I\+RQ}{spi_IRQ}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Bluetooth\+::spi\+\_\+\+I\+RQ\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___bluetooth_a8ef44f1f6220e7272aeca00a0991a3c7}{}\label{class_loom___bluetooth_a8ef44f1f6220e7272aeca00a0991a3c7}
+
+
+S\+PI I\+RQ pin. 
+
+\index{Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}!spi\+\_\+\+R\+ST@{spi\+\_\+\+R\+ST}}
+\index{spi\+\_\+\+R\+ST@{spi\+\_\+\+R\+ST}!Loom\+\_\+\+Bluetooth@{Loom\+\_\+\+Bluetooth}}
+\subsubsection[{\texorpdfstring{spi\+\_\+\+R\+ST}{spi_RST}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Bluetooth\+::spi\+\_\+\+R\+ST\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___bluetooth_a9b7f8f41e29fce31bcd8366e93edd7a6}{}\label{class_loom___bluetooth_a9b7f8f41e29fce31bcd8366e93edd7a6}
+
+
+S\+PI reset pin. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Comm\+Plats/\hyperlink{_bluetooth_8h}{Bluetooth.\+h}\item 
+src/\+Comm\+Plats/\hyperlink{_bluetooth_8cpp}{Bluetooth.\+cpp}\end{DoxyCompactItemize}

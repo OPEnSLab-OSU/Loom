@@ -1,0 +1,12 @@
+<map id="src/CommPlats/CommPlat.h" name="src/CommPlats/CommPlat.h">
+<area shape="rect" id="node2" href="$_bluetooth_8h.html" title="src/CommPlats/Bluetooth.h" alt="" coords="219,80,417,107"/>
+<area shape="rect" id="node6" href="$_manager_8cpp.html" title="src/Manager.cpp" alt="" coords="683,229,809,256"/>
+<area shape="rect" id="node7" href="$_comm_plat_8cpp.html" title="src/CommPlats/CommPlat.cpp" alt="" coords="872,80,1089,107"/>
+<area shape="rect" id="node8" href="$_lo_ra_8h.html" title="src/CommPlats/LoRa.h" alt="" coords="441,80,608,107"/>
+<area shape="rect" id="node10" href="$n_r_f_8h.html" title="src/CommPlats/nRF.h" alt="" coords="632,80,788,107"/>
+<area shape="rect" id="node3" href="$_bluetooth_8cpp.html" title="src/CommPlats/Bluetooth.cpp" alt="" coords="5,155,217,181"/>
+<area shape="rect" id="node4" href="$_module___factory_8h.html" title="src/Module_Factory.h" alt="" coords="447,155,602,181"/>
+<area shape="rect" id="node5" href="$_loom_8h.html" title="src/Loom.h" alt="" coords="478,229,571,256"/>
+<area shape="rect" id="node9" href="$_lo_ra_8cpp.html" title="src/CommPlats/LoRa.cpp" alt="" coords="242,155,423,181"/>
+<area shape="rect" id="node11" href="$n_r_f_8cpp.html" title="src/CommPlats/nRF.cpp" alt="" coords="626,155,797,181"/>
+</map>

@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_s_d_8h" kind="file" language="C++">
+    <compoundname>SD.h</compoundname>
+    <includes refid="_log_plat_8h" local="yes">LogPlat.h</includes>
+    <includes local="no">SdFat.h</includes>
+    <includes refid="_r_t_c_8h" local="yes">../RTC/RTC.h</includes>
+    <includedby refid="_s_d_8cpp" local="yes">src/LogPlats/SD.cpp</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="3612">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3608">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="3609" relation="include">
+        </childnode>
+      </node>
+      <node id="3609">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3610" relation="include">
+        </childnode>
+        <childnode refid="3612" relation="include">
+        </childnode>
+        <childnode refid="3613" relation="include">
+        </childnode>
+        <childnode refid="3614" relation="include">
+        </childnode>
+      </node>
+      <node id="3613">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3611" relation="include">
+        </childnode>
+        <childnode refid="3614" relation="include">
+        </childnode>
+      </node>
+      <node id="3616">
+        <label>../RTC/RTC.h</label>
+        <link refid="_r_t_c_8h"/>
+        <childnode refid="3609" relation="include">
+        </childnode>
+        <childnode refid="3617" relation="include">
+        </childnode>
+      </node>
+      <node id="3610">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3611" relation="include">
+        </childnode>
+      </node>
+      <node id="3617">
+        <label>OPEnS_RTC.h</label>
+      </node>
+      <node id="3615">
+        <label>SdFat.h</label>
+      </node>
+      <node id="3607">
+        <label>src/LogPlats/SD.h</label>
+        <link refid="SD.h"/>
+        <childnode refid="3608" relation="include">
+        </childnode>
+        <childnode refid="3615" relation="include">
+        </childnode>
+        <childnode refid="3616" relation="include">
+        </childnode>
+      </node>
+      <node id="3614">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3611">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3620">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3621" relation="include">
+        </childnode>
+        <childnode refid="3622" relation="include">
+        </childnode>
+      </node>
+      <node id="3619">
+        <label>src/LogPlats/SD.cpp</label>
+        <link refid="_s_d_8cpp"/>
+      </node>
+      <node id="3618">
+        <label>src/LogPlats/SD.h</label>
+        <link refid="SD.h"/>
+        <childnode refid="3619" relation="include">
+        </childnode>
+        <childnode refid="3620" relation="include">
+        </childnode>
+      </node>
+      <node id="3621">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3622">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___s_d" prot="public">Loom_SD</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/LogPlats/SD.h"/>
+  </compounddef>
+</doxygen>

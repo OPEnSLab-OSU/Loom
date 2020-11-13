@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LoomI2CSensor class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          LoomI2CSensor <span class="m-thin">class</span>
+        </h1>
+        <p>Abstract root for I2C sensor modules.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom_i2_c_sensor.html">Module Documentation</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#i2c-sensors">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_sensor.html" class="m-doc">LoomSensor</a>
+            </dt>
+            <dd>Abstract root of Loom sensor modules hierarchy.</dd>
+          </dl>
+        </section>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom___a_d_s1115.html" class="m-doc">Loom_ADS1115</a>
+            </dt>
+            <dd>ADS1115 External ADC sensor module.</dd>
+            <dt>
+              class <a href="class_loom___a_s7262.html" class="m-doc">Loom_AS7262</a>
+            </dt>
+            <dd>AS7262 Visible spectrum spectral sensor module.</dd>
+            <dt>
+              class <a href="class_loom___a_s7263.html" class="m-doc">Loom_AS7263</a>
+            </dt>
+            <dd>AS7263 Near Infrared spectrum spectral sensor module.</dd>
+            <dt>
+              class <a href="class_loom___a_s7265_x.html" class="m-doc">Loom_AS7265X</a>
+            </dt>
+            <dd>AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module.</dd>
+            <dt>
+              class <a href="class_loom___f_x_a_s21002.html" class="m-doc">Loom_FXAS21002</a>
+            </dt>
+            <dd>FXAS21002 3-Axis Gyroscope sensor module.</dd>
+            <dt>
+              class <a href="class_loom___f_x_o_s8700.html" class="m-doc">Loom_FXOS8700</a>
+            </dt>
+            <dd>FXOS8700 3-Axis Acceleromter/Magnetometer sensor module.</dd>
+            <dt>
+              class <a href="class_loom___l_i_s3_d_h.html" class="m-doc">Loom_LIS3DH</a>
+            </dt>
+            <dd>LIS3DH Accelerometer sensor module.</dd>
+            <dt>
+              class <a href="class_loom___m_b1232.html" class="m-doc">Loom_MB1232</a>
+            </dt>
+            <dd>MB1232 Sonar sensor module.</dd>
+            <dt>
+              class <a href="class_loom___m_m_a8451.html" class="m-doc">Loom_MMA8451</a>
+            </dt>
+            <dd>MMA8451 accelerometer sensor module.</dd>
+            <dt>
+              class <a href="class_loom___m_p_u6050.html" class="m-doc">Loom_MPU6050</a>
+            </dt>
+            <dd>MPU6050 6 axis gyroscope and accelerometer sensor module.</dd>
+            <dt>
+              class <a href="class_loom___m_s5803.html" class="m-doc">Loom_MS5803</a>
+            </dt>
+            <dd>MS5803 Atmospheric Pressure / Temperature sensor module.</dd>
+            <dt>
+              class <a href="class_loom___s_h_t31_d.html" class="m-doc">Loom_SHT31D</a>
+            </dt>
+            <dd>SHT31D Temperature / Humidty sensor module.</dd>
+            <dt>
+              class <a href="class_loom___s_t_e_m_m_a.html" class="m-doc">Loom_STEMMA</a>
+            </dt>
+            <dd>Adafruit Stemma soil moisture sensor.</dd>
+            <dt>
+              class <a href="class_loom___t_m_p007.html" class="m-doc">Loom_TMP007</a>
+            </dt>
+            <dd>TMP007 thermopile temperature sensor module.</dd>
+            <dt>
+              class <a href="class_loom___t_s_l2561.html" class="m-doc">Loom_TSL2561</a>
+            </dt>
+            <dd>TSL2561 Luminosity sensor module.</dd>
+            <dt>
+              class <a href="class_loom___t_s_l2591.html" class="m-doc">Loom_TSL2591</a>
+            </dt>
+            <dd>TSL2591 Lux sensor module.</dd>
+            <dt>
+              class <a href="class_loom___z_x_gesture.html" class="m-doc">Loom_ZXGesture</a>
+            </dt>
+            <dd>ZXGesture position / gesture sensor module.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              const byte <a href="#a6ff389c1f015152a9ebfccb037d3d90e" class="m-doc">i2c_address</a>
+            </dt>
+            <dd>The sensor&#x27;s I2C address.</dd>
+            <dt id="ab5c61951a994a76a2aa2e5400089dad1">
+              const uint8_t <a href="#ab5c61951a994a76a2aa2e5400089dad1" class="m-doc-self">port_num</a>
+            </dt>
+            <dd>Used with multiplexer, keep track of port it is on.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a974180c199ef01753afc67bc59c1e2c2" class="m-doc">LoomI2CSensor</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> module_type,
+              const byte i2c_address,
+              const uint8_t mux_port = 255,
+              const uint8_t num_samples = 1)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt id="ac27cd8c9d81b92b2c0dcb8f8808a530e">
+              <span class="m-doc-wrap-bumper"><a href="#ac27cd8c9d81b92b2c0dcb8f8808a530e" class="m-doc-self">~LoomI2CSensor</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="ab90004ce30a281b7f51ecf3093ca4cea">
+              <span class="m-doc-wrap-bumper">void <a href="#ab90004ce30a281b7f51ecf3093ca4cea" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a22a0afe0a2d1f13cdac37e9208fdce2b" class="m-doc">get_i2c_address</a>(</span><span class="m-doc-wrap">) const -&gt; byte</span>
+            </dt>
+            <dd>Get the sensor&#x27;s I2C address.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a974180c199ef01753afc67bc59c1e2c2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> LoomI2CSensor::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a974180c199ef01753afc67bc59c1e2c2" class="m-doc-self">LoomI2CSensor</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> module_type,
+              const byte i2c_address,
+              const uint8_t mux_port = 255,
+              const uint8_t num_samples = 1)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>module_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Name of the module (provided by derived classes)</td>
+                </tr>
+                <tr>
+                  <td>module_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Type of the module (provided by derived classes)</td>
+                </tr>
+                <tr>
+                  <td>i2c_address&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The i2c address of the sensor</td>
+                </tr>
+                <tr>
+                  <td>mux_port</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>num_samples&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The number of samples to take and average</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a22a0afe0a2d1f13cdac37e9208fdce2b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">byte LoomI2CSensor::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a22a0afe0a2d1f13cdac37e9208fdce2b" class="m-doc-self">get_i2c_address</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the sensor&#x27;s I2C address.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The sensor&#x27;s I2C address</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a6ff389c1f015152a9ebfccb037d3d90e"><div>
+            <h3>
+              const byte LoomI2CSensor::<wbr /><a href="#a6ff389c1f015152a9ebfccb037d3d90e" class="m-doc-self">i2c_address</a> <span class="m-label m-warning">protected</span>
+            </h3>
+            <p>The sensor&#x27;s I2C address.</p>
+<p>If the sensor supports mutliple, make sure this matches the current configuration of the i2c address</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

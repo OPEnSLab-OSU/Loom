@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LoomNTPSync class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          LoomNTPSync <span class="m-thin">class</span>
+        </h1>
+        <p>Glue code to synchronize an RTC using an InternetPlat.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>Always synchronizes the RTC from <a href="class_loom___interrupt___manager.html#a7d27c7a5b0c7f7d8c26f043656cb28a7" class="m-doc">Loom_Interrupt_Manager::<wbr />get_RTC_module()</a>.</p><aside class="m-note m-info"><h4>Note</h4><p>Requires a <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a> and <a href="class_loom_internet_plat.html" class="m-doc">LoomInternetPlat</a> module to work.</p></aside><aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom_n_t_p_sync.html">Documentation</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_module.html" class="m-doc">LoomModule</a>
+            </dt>
+            <dd>Abstract root of Loom component modules inheritance hierarchy.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a022444628c2923c9285cdf496c4485e6" class="m-doc">LoomNTPSync</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const uint sync_interval_hours = 0)</span>
+            </dt>
+            <dd>NTP Sync module constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a0475c092a7fadd3d0615258560da3225" class="m-doc">LoomNTPSync</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="a78ac0f9bcfdf4bb2e283bfcfc19c1983">
+              <span class="m-doc-wrap-bumper"><a href="#a78ac0f9bcfdf4bb2e283bfcfc19c1983" class="m-doc-self">~LoomNTPSync</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+            <dt id="ad4a9843c49172a83f4c7bcb310f4b177">
+              <span class="m-doc-wrap-bumper">void <a href="#ad4a9843c49172a83f4c7bcb310f4b177" class="m-doc-self">second_stage_ctor</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Sync the RTC using NTP from the internet platform specified.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a59671fae8c01482a2643cadaef3fd73d" class="m-doc">measure</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Sync the time if necessary or enabled.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a99820eea8c86bbeb299a12fa2164fdad" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Package a modules measurements or state.</dd>
+            <dt id="aab638db55b31b1233fe697117d3e3330">
+              <span class="m-doc-wrap-bumper">auto <a href="#aab638db55b31b1233fe697117d3e3330" class="m-doc-self">dispatch</a>(</span><span class="m-doc-wrap">JsonObject json) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Route command to driver.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a74e8a09ef57afea52d5b909e521a8b78" class="m-doc">Error</a> { </span><span class="m-doc-wrap"><a href="#a74e8a09ef57afea52d5b909e521a8b78ae0aa021e21dddbd6d8cecec71e9cf564" class="m-doc">OK</a>,
+              <a href="#a74e8a09ef57afea52d5b909e521a8b78acaf90866679ea7271c462525abc066fd" class="m-doc">INVAL_DEVICE_MANAGE</a>,
+              <a href="#a74e8a09ef57afea52d5b909e521a8b78a05c7fbcc8d76c8161fce367dcd4bb625" class="m-doc">INVAL_INTERNET</a>,
+              <a href="#a74e8a09ef57afea52d5b909e521a8b78a1c29f374f7255644ba3582f83a93096f" class="m-doc">INVAL_TIME</a>,
+              <a href="#a74e8a09ef57afea52d5b909e521a8b78a88f31b4c5e8bd353d14d599ecfb8ccec" class="m-doc">INVAL_RTC</a>,
+              <a href="#a74e8a09ef57afea52d5b909e521a8b78af84d0499fde21b092b1c82b50e2ae4d1" class="m-doc">NON_START</a>,
+              <a href="#a74e8a09ef57afea52d5b909e521a8b78a9dafba0f78599e40537aec876c30325b" class="m-doc">NO_CONNECTION</a> }</span>
+            </dt>
+            <dd>enumerate errors</dd>
+            <dt id="abf2233f0c60d6621dd7c3820ea3848ff">
+              const uint <a href="#abf2233f0c60d6621dd7c3820ea3848ff" class="m-doc-self">m_sync_interval</a>
+            </dt>
+            <dd>Store the sync interval, in hours.</dd>
+            <dt id="a30926d716f25c130a3f04de28ac12614">
+              <a href="class_loom_internet_plat.html" class="m-doc">LoomInternetPlat</a>* <a href="#a30926d716f25c130a3f04de28ac12614" class="m-doc-self">m_internet</a>
+            </dt>
+            <dd>Store the Internet Plat from second stage contsruction.</dd>
+            <dt id="ab7d9104b5c9ade558c3b3133fadabecc">
+              <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* <a href="#ab7d9104b5c9ade558c3b3133fadabecc" class="m-doc-self">m_rtc</a>
+            </dt>
+            <dd>Store the RTC pointer so we can check the time.</dd>
+            <dt id="aa1541f3013e8f76b19a10e9d5d857318">
+              DateTime <a href="#aa1541f3013e8f76b19a10e9d5d857318" class="m-doc-self">m_next_sync</a>
+            </dt>
+            <dd>Store when next to change the RTC.</dd>
+            <dt id="a40701a51b8eca8f31933bd13a684c190">
+              Error <a href="#a40701a51b8eca8f31933bd13a684c190" class="m-doc-self">m_last_error</a>
+            </dt>
+            <dd>Store if we&#x27;ve successfully accomplished our task.</dd>
+            <dt id="af683546f2b20799e3afbcf61eaabfc2b">
+              <span class="m-doc-wrap-bumper">void <a href="#af683546f2b20799e3afbcf61eaabfc2b" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt id="ad33806de76e81d80f9868951e83a8191">
+              <span class="m-doc-wrap-bumper">void <a href="#ad33806de76e81d80f9868951e83a8191" class="m-doc-self">print_state</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display current state of the module.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a74e8a09ef57afea52d5b909e521a8b78"><div>
+            <h3>
+              enum LoomNTPSync::<wbr /><a href="#a74e8a09ef57afea52d5b909e521a8b78" class="m-doc-self">Error</a>
+            </h3>
+            <p>enumerate errors</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a74e8a09ef57afea52d5b909e521a8b78ae0aa021e21dddbd6d8cecec71e9cf564" class="m-doc-self" id="a74e8a09ef57afea52d5b909e521a8b78ae0aa021e21dddbd6d8cecec71e9cf564">OK</a></td>
+                  <td>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a74e8a09ef57afea52d5b909e521a8b78acaf90866679ea7271c462525abc066fd" class="m-doc-self" id="a74e8a09ef57afea52d5b909e521a8b78acaf90866679ea7271c462525abc066fd">INVAL_DEVICE_MANAGE</a></td>
+                  <td>
+                  <p>Failed to receive a Loom Device Manager.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a74e8a09ef57afea52d5b909e521a8b78a05c7fbcc8d76c8161fce367dcd4bb625" class="m-doc-self" id="a74e8a09ef57afea52d5b909e521a8b78a05c7fbcc8d76c8161fce367dcd4bb625">INVAL_INTERNET</a></td>
+                  <td>
+                  <p>Failed to find the correct internet object.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a74e8a09ef57afea52d5b909e521a8b78a1c29f374f7255644ba3582f83a93096f" class="m-doc-self" id="a74e8a09ef57afea52d5b909e521a8b78a1c29f374f7255644ba3582f83a93096f">INVAL_TIME</a></td>
+                  <td>
+                  <p>Retrieved a time that was invalid.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a74e8a09ef57afea52d5b909e521a8b78a88f31b4c5e8bd353d14d599ecfb8ccec" class="m-doc-self" id="a74e8a09ef57afea52d5b909e521a8b78a88f31b4c5e8bd353d14d599ecfb8ccec">INVAL_RTC</a></td>
+                  <td>
+                  <p>Failed to find a RTC.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a74e8a09ef57afea52d5b909e521a8b78af84d0499fde21b092b1c82b50e2ae4d1" class="m-doc-self" id="a74e8a09ef57afea52d5b909e521a8b78af84d0499fde21b092b1c82b50e2ae4d1">NON_START</a></td>
+                  <td>
+                  <p>No attempt was made to sync.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a74e8a09ef57afea52d5b909e521a8b78a9dafba0f78599e40537aec876c30325b" class="m-doc-self" id="a74e8a09ef57afea52d5b909e521a8b78a9dafba0f78599e40537aec876c30325b">NO_CONNECTION</a></td>
+                  <td>
+                  <p>Repeated attempts were made to sync, but there was no response.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a022444628c2923c9285cdf496c4485e6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> LoomNTPSync::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a022444628c2923c9285cdf496c4485e6" class="m-doc-self">LoomNTPSync</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const uint sync_interval_hours = 0)</span></span>
+            </h3>
+            <p>NTP Sync module constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>sync_interval_hours&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;0&gt; | [0-999] | What hourly period to sync the RTC, zero for once on startup.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0475c092a7fadd3d0615258560da3225"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> LoomNTPSync::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0475c092a7fadd3d0615258560da3225" class="m-doc-self">LoomNTPSync</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a59671fae8c01482a2643cadaef3fd73d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomNTPSync::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a59671fae8c01482a2643cadaef3fd73d" class="m-doc-self">measure</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Sync the time if necessary or enabled.</p>
+<p>Allows the module to run regularly by emulating a sensor, which have thier measure methods called regularly.</p>
+          </div></section>
+          <section class="m-doc-details" id="a99820eea8c86bbeb299a12fa2164fdad"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomNTPSync::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a99820eea8c86bbeb299a12fa2164fdad" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Package a modules measurements or state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Object to put data into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___servo" kind="class" language="C++" prot="public">
+    <compoundname>Loom_Servo</compoundname>
+    <basecompoundref refid="class_loom_actuator" prot="public" virt="non-virtual">LoomActuator</basecompoundref>
+    <includes refid="_servo_8h" local="no">Servo.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___servo_1aa3e32332e83beb6aaf86d5023d42553b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Servo::Loom_Servo</definition>
+        <argsstring>(LoomManager *manager)</argsstring>
+        <name>Loom_Servo</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="53" column="1" bodyfile="src/Actuators/Servo.cpp" bodystart="19" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___servo_1a9e75b4ccc8df31566706ab885b38d124" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Servo::Loom_Servo</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_Servo</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="58" column="1" bodyfile="src/Actuators/Servo.cpp" bodystart="28" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___servo_1a3c2df2b679a2074288ea31a2fed39897" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Servo::~Loom_Servo</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_Servo</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="61" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___servo_1a0162afa4dade96bb86340fb567b43820" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Servo::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_actuator_1abf895d8f41379ff53dff666d9d2791a2">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Not all actuators need a package method, implement with empty body. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="67" column="1" bodyfile="src/Actuators/Servo.cpp" bodystart="50" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___servo_1ad24074bb212a1c47ec389379726c7c01" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_Servo::dispatch</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>dispatch</name>
+        <reimplements refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8">dispatch</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Route command to driver. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="68" column="1" bodyfile="src/Actuators/Servo.cpp" bodystart="61" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___servo_1a442e82c30372c4579b3d2bfeeacaccb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Servo::add_config</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>add_config</name>
+        <reimplements refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0">add_config</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Add configuration information to JsonObject. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> iterates over modules to build complete configuration <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json configuration object to add to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="69" column="1" bodyfile="src/Actuators/Servo.cpp" bodystart="32" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___servo_1a1c03e209fcba106541eaf32fd3eba435" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Servo::set_degree</definition>
+        <argsstring>(const uint8_t servo, const uint8_t degree)</argsstring>
+        <name>set_degree</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>servo</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>degree</declname>
+        </param>
+        <briefdescription>
+<para>Set servo position. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">servo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The servo number to control </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">degree</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position to set the servo to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="74" column="1" bodyfile="src/Actuators/Servo.cpp" bodystart="71" bodyend="82"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___servo_1a8b8f085c570773d5008beccf3467cac6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Servo::print_state</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_state</name>
+        <reimplements refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7">print_state</reimplements>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="80" column="1" bodyfile="src/Actuators/Servo.cpp" bodystart="40" bodyend="47"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___servo_1ad002c8ffd5282b4e5b6127fc2c058e9f" prot="protected" static="no" mutable="no">
+        <type>Adafruit_PWMServoDriver</type>
+        <definition>Adafruit_PWMServoDriver Loom_Servo::servo_driver</definition>
+        <argsstring></argsstring>
+        <name>servo_driver</name>
+        <briefdescription>
+<para>Underlying servo driver instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="42" column="1" bodyfile="src/Actuators/Servo.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___servo_1a6e278d382b0a2fd1762b2062921c5fa1" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Servo::positions[NUM_SERVOS]</definition>
+        <argsstring>[NUM_SERVOS]</argsstring>
+        <name>positions</name>
+        <briefdescription>
+<para>Positions of the servos. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.h" line="44" column="1" bodyfile="src/Actuators/Servo.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Servo actuator module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___servo.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/2928">Product Page: Adafruit Servo Featherwing</ulink></para></listitem><listitem><para><ulink url="https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library">Dependency: Adafruit-PWM-Servo-Driver</ulink></para></listitem><listitem><para><ulink url="https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf">Datasheet</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/169">Product Page: Adafruit Servo</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#servos-8-channel-pwm-or-servo-featherwing">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="893">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="892">
+        <label>LoomActuator</label>
+        <link refid="class_loom_actuator"/>
+        <childnode refid="893" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="891">
+        <label>Loom_Servo</label>
+        <link refid="class_loom___servo"/>
+        <childnode refid="892" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="901">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="897">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="898" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="899" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="904" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="900" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="896">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="897" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="905">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="900">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="896" relation="public-inheritance">
+        </childnode>
+        <childnode refid="901" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="902" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="899" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="903" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="904" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="905" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="899">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="896" relation="public-inheritance">
+        </childnode>
+        <childnode refid="900" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="895">
+        <label>LoomActuator</label>
+        <link refid="class_loom_actuator"/>
+        <childnode refid="896" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="898">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="896" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="904">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="896" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="894">
+        <label>Loom_Servo</label>
+        <link refid="class_loom___servo"/>
+        <childnode refid="895" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="902">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="903">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Actuators/Servo.h" line="38" column="1" bodyfile="src/Actuators/Servo.h" bodystart="37" bodyend="84"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>active</name></member>
+      <member refid="class_loom___servo_1a442e82c30372c4579b3d2bfeeacaccb6" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>Category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>device_manager</name></member>
+      <member refid="class_loom___servo_1ad24074bb212a1c47ec389379726c7c01" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___servo_1aa3e32332e83beb6aaf86d5023d42553b" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>Loom_Servo</name></member>
+      <member refid="class_loom___servo_1a9e75b4ccc8df31566706ab885b38d124" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>Loom_Servo</name></member>
+      <member refid="class_loom_actuator_1a3a789588b9092dae071cd236bc72e698" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>LoomActuator</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>LoomModule</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>module_type</name></member>
+      <member refid="class_loom___servo_1a0162afa4dade96bb86340fb567b43820" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___servo_1a6e278d382b0a2fd1762b2062921c5fa1" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>positions</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>power_up</name></member>
+      <member refid="class_loom_module_1a4385842da9226014283136b3e37dde88" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>print_module_label</name></member>
+      <member refid="class_loom___servo_1a8b8f085c570773d5008beccf3467cac6" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom___servo_1ad002c8ffd5282b4e5b6127fc2c058e9f" prot="protected" virt="non-virtual"><scope>Loom_Servo</scope><name>servo_driver</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>set_active</name></member>
+      <member refid="class_loom___servo_1a1c03e209fcba106541eaf32fd3eba435" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>set_degree</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>Type</name></member>
+      <member refid="class_loom___servo_1a3c2df2b679a2074288ea31a2fed39897" prot="public" virt="non-virtual"><scope>Loom_Servo</scope><name>~Loom_Servo</name></member>
+      <member refid="class_loom_actuator_1a397f57e44b59f1705829bd9f44ae6187" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>~LoomActuator</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_Servo</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

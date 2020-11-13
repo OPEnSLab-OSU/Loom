@@ -1,0 +1,430 @@
+\hypertarget{class_loom___s_d}{}\section{Loom\+\_\+\+SD Class Reference}
+\label{class_loom___s_d}\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+
+
+SD logging platform module.  
+
+
+
+
+{\ttfamily \#include $<$S\+D.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+SD\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{class_loom___s_d__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___s_d_ab093eb043634c52abdacf9397b4577d6}{Loom\+\_\+\+SD} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const bool \hyperlink{class_loom_log_plat_a6d343b76b79a1e51572bcf2991966e61}{enable\+\_\+rate\+\_\+filter}=true, const uint16\+\_\+t \hyperlink{class_loom_log_plat_a3d4ffe4204560b9677b8007be7f522be}{min\+\_\+filter\+\_\+delay}=1000, const byte \hyperlink{class_loom___s_d_a404b47d978c23b9426dcfe1fe3a185e1}{chip\+\_\+select}=10, const char $\ast$default\+\_\+file=\char`\"{}test\char`\"{}, const bool number\+\_\+files=true)
+\begin{DoxyCompactList}\small\item\em SD Module Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___s_d_a383cfc7b80778db3cec41992c7aaa9af}{Loom\+\_\+\+SD} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___s_d_af939aa14399dd1f04dae897fbafb3159}{$\sim$\+Loom\+\_\+\+SD} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___s_d_a0f106e4911985253e8ac09bcf953bb6e}{log} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Log a Json object. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___s_d_a9a281c97934fa0f54653408aa84ade6b}{log} (const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Version of logging for use with \hyperlink{class_loom_manager}{Loom\+Manager}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___s_d_af5a463b90af2eb0debe01a24f23a6a4f}{save\+\_\+json} (Json\+Object json, const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Save data to SD card in C\+SV format. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___s_d_adecc011e82fac7f1543b3f588bbf4816}{delete\+\_\+file} (const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Delete a file. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___s_d_aed577fc3915c42de474a992f81c827ac}{empty\+\_\+file} (const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Clear a file (remove contents but not file itself) \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___s_d_a316af7fd9cd88c33aa9aa06755cc37fd}{power\+\_\+up} () override
+\begin{DoxyCompactList}\small\item\em Turn on any hardware. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___s_d_a01d99de8b39b25f562f2aeec3413170e}{power\+\_\+down} () override
+\begin{DoxyCompactList}\small\item\em Turn off any hardware. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___s_d_a4c0c3f46a3479ed8e4a96c0ca4acfa7e}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___s_d_aeeb9d41ad9b91658af6295483b42c55a}{dump\+\_\+file} (const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em List current files on the SD card. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_r_t_c}{Loom\+R\+TC} $\ast$ \hyperlink{class_loom___s_d_a4092a0759777c669914942c3559e6a76}{get\+\_\+\+R\+T\+C\+\_\+module} () const 
+\begin{DoxyCompactList}\small\item\em Return pointer to the currently linked R\+TC object. \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{class_loom___s_d_a5abc30ca684dbd2cedb0e18c3c8a9685}{get\+\_\+default\+\_\+file} () const 
+\begin{DoxyCompactList}\small\item\em Get the current default file to write to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___s_d_ad910296dd33bec7d3ec8a91892aade48}{link\+\_\+device\+\_\+manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$LM) override
+\begin{DoxyCompactList}\small\item\em Add pointer back to device manager. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___s_d_a8704546681d123363d8210ac0c95f293}{set\+\_\+\+R\+T\+C\+\_\+module} (\hyperlink{class_loom_r_t_c}{Loom\+R\+TC} $\ast$\hyperlink{class_loom___s_d_a3dcce942e87eabc4e3912d1af283618c}{R\+T\+C\+\_\+\+Inst})
+\begin{DoxyCompactList}\small\item\em Set the R\+TC module to use for timers. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___s_d_a58416c209f76a591bf85e824240a7659}{set\+\_\+filename} (const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Set default file to write to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Sd\+Fat \hyperlink{class_loom___s_d_a0602d9ef1a9b7f8b31870702bcb692fd}{sd}
+\begin{DoxyCompactList}\small\item\em File system object. \end{DoxyCompactList}\item 
+const byte \hyperlink{class_loom___s_d_a404b47d978c23b9426dcfe1fe3a185e1}{chip\+\_\+select}
+\begin{DoxyCompactList}\small\item\em Chip select pin. \end{DoxyCompactList}\item 
+char \hyperlink{class_loom___s_d_a970a01045c1d73b67f23982842249097}{filename} \mbox{[}13\mbox{]}
+\begin{DoxyCompactList}\small\item\em String of file to write to if not filename explicitly provided (should not exceed 6 characters) \end{DoxyCompactList}\item 
+\hyperlink{class_loom_r_t_c}{Loom\+R\+TC} $\ast$ \hyperlink{class_loom___s_d_a3dcce942e87eabc4e3912d1af283618c}{R\+T\+C\+\_\+\+Inst}
+\begin{DoxyCompactList}\small\item\em Pointer to an R\+TC object for timestamps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+SD logging platform module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___s_d.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/2922}{\tt Product Page\+: Adafruit Adalogger Featherwing}
+\item \href{https://www.adafruit.com/product/254}{\tt Product Page\+: Adafruit SD Breakout}
+\item \href{https://github.com/arduino-libraries/SD}{\tt Dependency\+: SD}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+S\+D(\+Loom\+Manager $\ast$manager, const bool enable\+\_\+rate\+\_\+filter=true, const uint16\+\_\+t min\+\_\+filter\+\_\+delay=1000, const byte chip\+\_\+select=10, const char $\ast$default\+\_\+file=""test"", const bool number\+\_\+files=true)}{Loom_SD(LoomManager *manager, const bool enable_rate_filter=true, const uint16_t min_filter_delay=1000, const byte chip_select=10, const char *default_file="test", const bool number_files=true)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+S\+D\+::\+Loom\+\_\+\+SD (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const bool}]{enable\+\_\+rate\+\_\+filter = {\ttfamily true}, }
+\item[{const uint16\+\_\+t}]{min\+\_\+filter\+\_\+delay = {\ttfamily 1000}, }
+\item[{const byte}]{chip\+\_\+select = {\ttfamily 10}, }
+\item[{const char $\ast$}]{default\+\_\+file = {\ttfamily \char`\"{}test\char`\"{}}, }
+\item[{const bool}]{number\+\_\+files = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___s_d_ab093eb043634c52abdacf9397b4577d6}{}\label{class_loom___s_d_ab093eb043634c52abdacf9397b4577d6}
+
+
+SD Module Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em enable\+\_\+rate\+\_\+filter} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ Whether or not to impose maximum update rate \\
+\hline
+\mbox{\tt in}  & {\em min\+\_\+filter\+\_\+delay} & Int $\vert$ $<$1000$>$ $\vert$ \mbox{[}100-\/5000\mbox{]} $\vert$ Minimum update delay, if enable\+\_\+rate\+\_\+filter enabled \\
+\hline
+\mbox{\tt in}  & {\em chip\+\_\+select} & Set(\+Int) $\vert$ $<$10$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin to use for chip select \\
+\hline
+\mbox{\tt in}  & {\em default\+\_\+file\+\_\+base} & String $\vert$ $<$\char`\"{}test\char`\"{}$>$ $\vert$ null $\vert$ File to write to if none explicity provided (should be $<$= 6 characters, don\textquotesingle{}t add extension) \\
+\hline
+\mbox{\tt in}  & {\em number\+\_\+files} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ True to number files with run number, false to not. \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+S\+D(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_SD(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+S\+D\+::\+Loom\+\_\+\+SD (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___s_d_a383cfc7b80778db3cec41992c7aaa9af}{}\label{class_loom___s_d_a383cfc7b80778db3cec41992c7aaa9af}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!````~Loom\+\_\+\+SD@{$\sim$\+Loom\+\_\+\+SD}}
+\index{````~Loom\+\_\+\+SD@{$\sim$\+Loom\+\_\+\+SD}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+S\+D()=default}{~Loom_SD()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+S\+D\+::$\sim$\+Loom\+\_\+\+SD (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___s_d_af939aa14399dd1f04dae897fbafb3159}{}\label{class_loom___s_d_af939aa14399dd1f04dae897fbafb3159}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!delete\+\_\+file@{delete\+\_\+file}}
+\index{delete\+\_\+file@{delete\+\_\+file}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{delete\+\_\+file(const char $\ast$name)}{delete_file(const char *name)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+D\+::delete\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___s_d_adecc011e82fac7f1543b3f588bbf4816}{}\label{class_loom___s_d_adecc011e82fac7f1543b3f588bbf4816}
+
+
+Delete a file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & Name of file to delete \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!dump\+\_\+file@{dump\+\_\+file}}
+\index{dump\+\_\+file@{dump\+\_\+file}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{dump\+\_\+file(const char $\ast$name)}{dump_file(const char *name)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+S\+D\+::dump\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___s_d_aeeb9d41ad9b91658af6295483b42c55a}{}\label{class_loom___s_d_aeeb9d41ad9b91658af6295483b42c55a}
+
+
+List current files on the SD card. 
+
+Print the contents of a particular file 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & Name of file to print \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!empty\+\_\+file@{empty\+\_\+file}}
+\index{empty\+\_\+file@{empty\+\_\+file}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{empty\+\_\+file(const char $\ast$name)}{empty_file(const char *name)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+D\+::empty\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___s_d_aed577fc3915c42de474a992f81c827ac}{}\label{class_loom___s_d_aed577fc3915c42de474a992f81c827ac}
+
+
+Clear a file (remove contents but not file itself) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & Name of file to empty \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!get\+\_\+default\+\_\+file@{get\+\_\+default\+\_\+file}}
+\index{get\+\_\+default\+\_\+file@{get\+\_\+default\+\_\+file}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{get\+\_\+default\+\_\+file() const }{get_default_file() const }}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Loom\+\_\+\+S\+D\+::get\+\_\+default\+\_\+file (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___s_d_a5abc30ca684dbd2cedb0e18c3c8a9685}{}\label{class_loom___s_d_a5abc30ca684dbd2cedb0e18c3c8a9685}
+
+
+Get the current default file to write to. 
+
+\begin{DoxyReturn}{Returns}
+Default file 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!get\+\_\+\+R\+T\+C\+\_\+module@{get\+\_\+\+R\+T\+C\+\_\+module}}
+\index{get\+\_\+\+R\+T\+C\+\_\+module@{get\+\_\+\+R\+T\+C\+\_\+module}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{get\+\_\+\+R\+T\+C\+\_\+module() const }{get_RTC_module() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+R\+TC}$\ast$ Loom\+\_\+\+S\+D\+::get\+\_\+\+R\+T\+C\+\_\+module (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___s_d_a4092a0759777c669914942c3559e6a76}{}\label{class_loom___s_d_a4092a0759777c669914942c3559e6a76}
+
+
+Return pointer to the currently linked R\+TC object. 
+
+\begin{DoxyReturn}{Returns}
+Current R\+TC object 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}}
+\index{link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{link\+\_\+device\+\_\+manager(\+Loom\+Manager $\ast$\+L\+M) override}{link_device_manager(LoomManager *LM) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+D\+::link\+\_\+device\+\_\+manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{LM}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___s_d_ad910296dd33bec7d3ec8a91892aade48}{}\label{class_loom___s_d_ad910296dd33bec7d3ec8a91892aade48}
+
+
+Add pointer back to device manager. 
+
+Generally only called when device manager links module to provide pointer both directions 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em LM} & \hyperlink{class_loom_manager}{Loom\+Manager} to point to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_adc08f87bf7c0c0988decee196a714396}{Loom\+Module}.
+
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!log@{log}}
+\index{log@{log}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{log(\+Json\+Object json) override}{log(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+S\+D\+::log (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___s_d_a0f106e4911985253e8ac09bcf953bb6e}{}\label{class_loom___s_d_a0f106e4911985253e8ac09bcf953bb6e}
+
+
+Log a Json object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json Object to log \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_log_plat_accace14ed45817c98ef5ccc15fd79004}{Loom\+Log\+Plat}.
+
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!log@{log}}
+\index{log@{log}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{log(const char $\ast$name)}{log(const char *name)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+S\+D\+::log (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___s_d_a9a281c97934fa0f54653408aa84ade6b}{}\label{class_loom___s_d_a9a281c97934fa0f54653408aa84ade6b}
+
+
+Version of logging for use with \hyperlink{class_loom_manager}{Loom\+Manager}. 
+
+Accesses Json from \hyperlink{class_loom_manager}{Loom\+Manager} 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & Name of file to write to \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!power\+\_\+down@{power\+\_\+down}}
+\index{power\+\_\+down@{power\+\_\+down}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{power\+\_\+down() override}{power_down() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+D\+::power\+\_\+down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___s_d_a01d99de8b39b25f562f2aeec3413170e}{}\label{class_loom___s_d_a01d99de8b39b25f562f2aeec3413170e}
+
+
+Turn off any hardware. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a31ea02275e356c6ce0d01fdb6d4190df}{Loom\+Module}.
+
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!power\+\_\+up@{power\+\_\+up}}
+\index{power\+\_\+up@{power\+\_\+up}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{power\+\_\+up() override}{power_up() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+D\+::power\+\_\+up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___s_d_a316af7fd9cd88c33aa9aa06755cc37fd}{}\label{class_loom___s_d_a316af7fd9cd88c33aa9aa06755cc37fd}
+
+
+Turn on any hardware. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa0683cb24ce1cc49273440e79f035e23}{Loom\+Module}.
+
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+D\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___s_d_a4c0c3f46a3479ed8e4a96c0ca4acfa7e}{}\label{class_loom___s_d_a4c0c3f46a3479ed8e4a96c0ca4acfa7e}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_log_plat_afd1780573d350f46ce26d237a4ade43b}{Loom\+Log\+Plat}.
+
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!save\+\_\+json@{save\+\_\+json}}
+\index{save\+\_\+json@{save\+\_\+json}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{save\+\_\+json(\+Json\+Object json, const char $\ast$name)}{save_json(JsonObject json, const char *name)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+S\+D\+::save\+\_\+json (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___s_d_af5a463b90af2eb0debe01a24f23a6a4f}{}\label{class_loom___s_d_af5a463b90af2eb0debe01a24f23a6a4f}
+
+
+Save data to SD card in C\+SV format. 
+
+Format\+: Identification Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ... 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & The data to be saved \\
+\hline
+\mbox{\tt in}  & {\em filename} & The file to save to \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!set\+\_\+filename@{set\+\_\+filename}}
+\index{set\+\_\+filename@{set\+\_\+filename}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{set\+\_\+filename(const char $\ast$name)}{set_filename(const char *name)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+D\+::set\+\_\+filename (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___s_d_a58416c209f76a591bf85e824240a7659}{}\label{class_loom___s_d_a58416c209f76a591bf85e824240a7659}
+
+
+Set default file to write to. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em filename} & New default file (max 8 characters excluding extension) \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!set\+\_\+\+R\+T\+C\+\_\+module@{set\+\_\+\+R\+T\+C\+\_\+module}}
+\index{set\+\_\+\+R\+T\+C\+\_\+module@{set\+\_\+\+R\+T\+C\+\_\+module}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{set\+\_\+\+R\+T\+C\+\_\+module(\+Loom\+R\+T\+C $\ast$\+R\+T\+C\+\_\+\+Inst)}{set_RTC_module(LoomRTC *RTC_Inst)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+D\+::set\+\_\+\+R\+T\+C\+\_\+module (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+R\+TC} $\ast$}]{R\+T\+C\+\_\+\+Inst}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___s_d_a8704546681d123363d8210ac0c95f293}{}\label{class_loom___s_d_a8704546681d123363d8210ac0c95f293}
+
+
+Set the R\+TC module to use for timers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em R\+T\+C\+\_\+\+Inst} & Pointer to the R\+TC object \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!chip\+\_\+select@{chip\+\_\+select}}
+\index{chip\+\_\+select@{chip\+\_\+select}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{chip\+\_\+select}{chip_select}}]{\setlength{\rightskip}{0pt plus 5cm}const byte Loom\+\_\+\+S\+D\+::chip\+\_\+select\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___s_d_a404b47d978c23b9426dcfe1fe3a185e1}{}\label{class_loom___s_d_a404b47d978c23b9426dcfe1fe3a185e1}
+
+
+Chip select pin. 
+
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!filename@{filename}}
+\index{filename@{filename}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{filename}{filename}}]{\setlength{\rightskip}{0pt plus 5cm}char Loom\+\_\+\+S\+D\+::filename\mbox{[}13\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___s_d_a970a01045c1d73b67f23982842249097}{}\label{class_loom___s_d_a970a01045c1d73b67f23982842249097}
+
+
+String of file to write to if not filename explicitly provided (should not exceed 6 characters) 
+
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!R\+T\+C\+\_\+\+Inst@{R\+T\+C\+\_\+\+Inst}}
+\index{R\+T\+C\+\_\+\+Inst@{R\+T\+C\+\_\+\+Inst}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{R\+T\+C\+\_\+\+Inst}{RTC_Inst}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+R\+TC}$\ast$ Loom\+\_\+\+S\+D\+::\+R\+T\+C\+\_\+\+Inst\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___s_d_a3dcce942e87eabc4e3912d1af283618c}{}\label{class_loom___s_d_a3dcce942e87eabc4e3912d1af283618c}
+
+
+Pointer to an R\+TC object for timestamps. 
+
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!sd@{sd}}
+\index{sd@{sd}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\subsubsection[{\texorpdfstring{sd}{sd}}]{\setlength{\rightskip}{0pt plus 5cm}Sd\+Fat Loom\+\_\+\+S\+D\+::sd\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___s_d_a0602d9ef1a9b7f8b31870702bcb692fd}{}\label{class_loom___s_d_a0602d9ef1a9b7f8b31870702bcb692fd}
+
+
+File system object. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Log\+Plats/\hyperlink{_s_d_8h}{S\+D.\+h}\item 
+src/\+Log\+Plats/\hyperlink{_s_d_8cpp}{S\+D.\+cpp}\end{DoxyCompactItemize}

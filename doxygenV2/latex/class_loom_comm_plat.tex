@@ -1,0 +1,802 @@
+\hypertarget{class_loom_comm_plat}{}\section{Loom\+Comm\+Plat Class Reference}
+\label{class_loom_comm_plat}\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+
+
+Abstract base of communication platform modules.  
+
+
+
+
+{\ttfamily \#include $<$Comm\+Plat.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Comm\+Plat\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_loom_comm_plat__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_comm_plat_ae977f58b40bd6f292fc7e5a20b319ca4}{Loom\+Comm\+Plat} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}, const uint16\+\_\+t \hyperlink{class_loom_comm_plat_a2b4f69c2ec15028f5f281c3d1d399dba}{max\+\_\+message\+\_\+len})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_comm_plat_a88da37ecf287280aa166e25f4f947b37}{$\sim$\+Loom\+Comm\+Plat} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_comm_plat_a4cc05ef1f12c5b15fc6516dc75f070d4}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_a15fb6d65a9454154ac899f3560c67a6f}{receive\+\_\+blocking} (Json\+Object json, uint max\+\_\+wait\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Receive, but block until packet received, or timeout reached. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_a7d5af29f4053627979c15928f284446f}{receive} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Build json from packet if any exists. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_ab59a3e7ed1aa0c3997506bf77b1176e6}{receive\+\_\+batch} ()
+\begin{DoxyCompactList}\small\item\em Receive and immediately create a batch file from J\+S\+ON receieved. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_a84aa23d66457ffe78053d3d0cbd1e7b1}{receive\+\_\+batch\+\_\+blocking} (uint max\+\_\+wait\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Receive, and block until packet recieved or timeout, and immediately create a batch file from J\+S\+ON receieved. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_abe9a506341e7e5dd3dde40210d7c3904}{receive} ()
+\begin{DoxyCompactList}\small\item\em Version of receive for use with \hyperlink{class_loom_manager}{Loom\+Manager}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_a5a16f4a2a37ddf593f7a3c0dd9e5f692}{receive\+\_\+blocking} (const uint max\+\_\+wait\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Version of receive\+\_\+blocking for use with \hyperlink{class_loom_manager}{Loom\+Manager}. \end{DoxyCompactList}\item 
+Json\+Object \hyperlink{class_loom_comm_plat_a727f88000d237c0f413a17600fc261a6}{pre\+\_\+merge\+\_\+receive\+\_\+blocking} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Giving the header of the Package from the other board. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_a3505da17f54272de95f4d92a3c0caf49}{merge\+\_\+json} (Json\+Object json, const uint8\+\_\+t loop)
+\begin{DoxyCompactList}\small\item\em It will merge all the small packages into one big package. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_a503a10dbf3add366f1cd3bf4c274f907}{send} (Json\+Object json, const uint8\+\_\+t destination)
+\begin{DoxyCompactList}\small\item\em Send json to a specific address. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_ae1a86dffbfd638cd56b8be47af9964ab}{send} (const uint8\+\_\+t destination)
+\begin{DoxyCompactList}\small\item\em Version of send for use with \hyperlink{class_loom_manager}{Loom\+Manager}. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom_comm_plat_a4cd103d035644901828bf4959cd7a9c9}{send\+\_\+batch} (const uint8\+\_\+t destination, int delay\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Sends all the jsons stored in the batch. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom_comm_plat_ab8fd85c99d07244665b818610edde993}{determine\+\_\+json\+\_\+size} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Return the size of the json to determing wether to send as split or not. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_abc9ba333b93167dda5dd721eb4a04d02}{split\+\_\+send\+\_\+notification} (Json\+Object json, const uint8\+\_\+t destination)
+\begin{DoxyCompactList}\small\item\em If the json is over 251, then it let the user the know that it will be sending small mulitple jsons with how many will it be splited into. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_a7a0d2c230d977bfb8f286aab7bd8469e}{split\+\_\+send} (Json\+Object json, const uint8\+\_\+t destination, const uint8\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em The actual processing spliting into small json. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_comm_plat_a5098505add4d65102472aeeb7dc442bb}{broadcast} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Broadcast data to all that can receive. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_comm_plat_a30796b7e6bbeb5f0c9cbf112b578c27f}{broadcast} ()
+\begin{DoxyCompactList}\small\item\em Version of send for use with \hyperlink{class_loom_manager}{Loom\+Manager}. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_comm_plat_a9fdc18392e011fe3bd41b37a5d3d8999}{broadcast\+\_\+batch} (int delay\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Broadcasts all the jsons stored in the batch. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_comm_plat_a97982022b7e279d4def0246e17a95d61}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_comm_plat_a2a3336599f8b56c2cbb223a386d797ec}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual uint8\+\_\+t \hyperlink{class_loom_comm_plat_afaf204bcf88cb88102cea8c6c1d745f3}{get\+\_\+address} () const =0
+\begin{DoxyCompactList}\small\item\em Get the address of this device. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom_comm_plat_ad55b5a20b503ea93789159f075677d9f}{get\+\_\+drop\+\_\+rate} () const 
+\begin{DoxyCompactList}\small\item\em Get the packet drop rate since the start of operation. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom_comm_plat_a5c21c70637e43f0731d97173b59200cf}{get\+\_\+last\+\_\+ten\+\_\+drop\+\_\+rate} () const 
+\begin{DoxyCompactList}\small\item\em Get the packet drop rate of the last ten \hyperlink{class_loom_comm_plat_a503a10dbf3add366f1cd3bf4c274f907}{send()} calls. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Member Functions}
+\begin{Indent}{\bf R\+A\+D\+IO I\+M\+P\+L\+E\+M\+E\+N\+T\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{class_loom_comm_plat_acc447dd60751ea7536f0c96b4390fdd8}{receive\+\_\+blocking\+\_\+impl} (Json\+Object json, uint max\+\_\+wait\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Receive, but block until packet received, or timeout reached. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_loom_comm_plat_a28f40393c7d50d3bf30eff3add02d6fc}{send\+\_\+impl} (Json\+Object json, const uint8\+\_\+t destination)
+\begin{DoxyCompactList}\small\item\em Send json to a specific address. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_comm_plat_ae88689d0db8ab91d1e672f0b5c358945}{broadcast\+\_\+impl} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Broadcast data to all that can receive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{class_loom_comm_plat_a2b4f69c2ec15028f5f281c3d1d399dba}{max\+\_\+message\+\_\+len}
+\begin{DoxyCompactList}\small\item\em The maximum message length. \end{DoxyCompactList}\item 
+int16\+\_\+t \hyperlink{class_loom_comm_plat_a20b6f639d308b8b2f05cea41597bd6d3}{signal\+\_\+strength}
+\begin{DoxyCompactList}\small\item\em R\+S\+SI for Lora (need to determine what the other platforms use) \end{DoxyCompactList}\item 
+Static\+Json\+Document$<$ 1500 $>$ \hyperlink{class_loom_comm_plat_a065bda8c5f83a087359bda645b51c87e}{message\+Json}
+\begin{DoxyCompactList}\small\item\em Document to read incoming data into. \end{DoxyCompactList}\item 
+Dynamic\+Json\+Document \hyperlink{class_loom_comm_plat_a9dbf2f13eafb03ae9078e10af47ca8cf}{merge\+Json}
+\item 
+uint32\+\_\+t \hyperlink{class_loom_comm_plat_afacaa3247078d09dd953371cfb929094}{total\+\_\+packet\+\_\+count}
+\item 
+uint32\+\_\+t \hyperlink{class_loom_comm_plat_a731d3f9f16e8a2647f0ef81e477ef2a7}{total\+\_\+drop\+\_\+count}
+\item 
+bool \hyperlink{class_loom_comm_plat_a447e99f2f727936f4aff95257ca98b62}{last\+\_\+ten\+\_\+dropped} \mbox{[}10\mbox{]}
+\item 
+uint8\+\_\+t \hyperlink{class_loom_comm_plat_a790dbad03d48713072716c23d515c6c0}{last\+\_\+ten\+\_\+dropped\+\_\+idx}
+\end{DoxyCompactItemize}
+\subsection*{S\+E\+T\+T\+E\+RS}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom_comm_plat_af5030b99e3398396af535558efa82279}{json\+\_\+to\+\_\+msgpack\+\_\+buffer} (Json\+Object\+Const json, char $\ast$buffer, const uint16\+\_\+t max\+\_\+len) const 
+\begin{DoxyCompactList}\small\item\em Serialize a Json\+Object into a Message\+Pack buffer. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_comm_plat_ae6b8468f5345cf30d857e3229d3f5aa3}{msgpack\+\_\+buffer\+\_\+to\+\_\+json} (const char $\ast$buffer, Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Deserialize a Message\+Pack buffer into a Json\+Object. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_comm_plat_a7053c8475d0f2c00507fe0806f1d37bc}{add\+\_\+packet\+\_\+result} (const bool did\+\_\+drop)
+\begin{DoxyCompactList}\small\item\em Add the result of a packet to the drop\+\_\+rate tracker. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_comm_plat_afa0f66b4e657effefc34fa5a74363174}{set\+\_\+address} (const uint8\+\_\+t a)=0
+\begin{DoxyCompactList}\small\item\em Set the address of this device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract base of communication platform modules. 
+
+All communication platform modules inherit from this class.
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_comm_plat.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#telecommunication-capabilities}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{Loom\+Comm\+Plat(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type, const uint16\+\_\+t max\+\_\+message\+\_\+len)}{LoomCommPlat(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const uint16_t max_message_len)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Comm\+Plat\+::\+Loom\+Comm\+Plat (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type, }
+\item[{const uint16\+\_\+t}]{max\+\_\+message\+\_\+len}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_ae977f58b40bd6f292fc7e5a20b319ca4}{}\label{class_loom_comm_plat_ae977f58b40bd6f292fc7e5a20b319ca4}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em max\+\_\+message\+\_\+len} & The maximum possible message length \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!````~Loom\+Comm\+Plat@{$\sim$\+Loom\+Comm\+Plat}}
+\index{````~Loom\+Comm\+Plat@{$\sim$\+Loom\+Comm\+Plat}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Comm\+Plat()=default}{~LoomCommPlat()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+Comm\+Plat\+::$\sim$\+Loom\+Comm\+Plat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_comm_plat_a88da37ecf287280aa166e25f4f947b37}{}\label{class_loom_comm_plat_a88da37ecf287280aa166e25f4f947b37}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!add\+\_\+packet\+\_\+result@{add\+\_\+packet\+\_\+result}}
+\index{add\+\_\+packet\+\_\+result@{add\+\_\+packet\+\_\+result}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{add\+\_\+packet\+\_\+result(const bool did\+\_\+drop)}{add_packet_result(const bool did_drop)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Comm\+Plat\+::add\+\_\+packet\+\_\+result (
+\begin{DoxyParamCaption}
+\item[{const bool}]{did\+\_\+drop}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_a7053c8475d0f2c00507fe0806f1d37bc}{}\label{class_loom_comm_plat_a7053c8475d0f2c00507fe0806f1d37bc}
+
+
+Add the result of a packet to the drop\+\_\+rate tracker. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em did\+\_\+drop} & Whether or not the packet dropped during transmission. \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!broadcast@{broadcast}}
+\index{broadcast@{broadcast}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{broadcast(\+Json\+Object json)}{broadcast(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Comm\+Plat\+::broadcast (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_comm_plat_a5098505add4d65102472aeeb7dc442bb}{}\label{class_loom_comm_plat_a5098505add4d65102472aeeb7dc442bb}
+
+
+Broadcast data to all that can receive. 
+
+Derived classes can optionally provide an implementation for this, As supported by the radio/platform\textquotesingle{}s library 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json object to send \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!broadcast@{broadcast}}
+\index{broadcast@{broadcast}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{broadcast()}{broadcast()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Comm\+Plat\+::broadcast (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a30796b7e6bbeb5f0c9cbf112b578c27f}{}\label{class_loom_comm_plat_a30796b7e6bbeb5f0c9cbf112b578c27f}
+
+
+Version of send for use with \hyperlink{class_loom_manager}{Loom\+Manager}. 
+
+Accesses Json from \hyperlink{class_loom_manager}{Loom\+Manager} \index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!broadcast\+\_\+batch@{broadcast\+\_\+batch}}
+\index{broadcast\+\_\+batch@{broadcast\+\_\+batch}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{broadcast\+\_\+batch(int delay\+\_\+time)}{broadcast_batch(int delay_time)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Comm\+Plat\+::broadcast\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{delay\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a9fdc18392e011fe3bd41b37a5d3d8999}{}\label{class_loom_comm_plat_a9fdc18392e011fe3bd41b37a5d3d8999}
+
+
+Broadcasts all the jsons stored in the batch. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em delay\+\_\+time} & The amount of time between each packet in the batch being broadcasted \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!broadcast\+\_\+impl@{broadcast\+\_\+impl}}
+\index{broadcast\+\_\+impl@{broadcast\+\_\+impl}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{broadcast\+\_\+impl(\+Json\+Object json)}{broadcast_impl(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Comm\+Plat\+::broadcast\+\_\+impl (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom_comm_plat_ae88689d0db8ab91d1e672f0b5c358945}{}\label{class_loom_comm_plat_ae88689d0db8ab91d1e672f0b5c358945}
+
+
+Broadcast data to all that can receive. 
+
+Derived classes can optionally provide an implementation for this, As supported by the radio/platform\textquotesingle{}s library 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json object to send \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{class_loom__n_r_f_a3e4d0db03fde19d29311338d5f3a979a}{Loom\+\_\+n\+RF}.
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!determine\+\_\+json\+\_\+size@{determine\+\_\+json\+\_\+size}}
+\index{determine\+\_\+json\+\_\+size@{determine\+\_\+json\+\_\+size}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{determine\+\_\+json\+\_\+size(\+Json\+Object json)}{determine_json_size(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+Comm\+Plat\+::determine\+\_\+json\+\_\+size (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_ab8fd85c99d07244665b818610edde993}{}\label{class_loom_comm_plat_ab8fd85c99d07244665b818610edde993}
+
+
+Return the size of the json to determing wether to send as split or not. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json that will the measurement of the size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t of the value of the json size 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!get\+\_\+address@{get\+\_\+address}}
+\index{get\+\_\+address@{get\+\_\+address}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{get\+\_\+address() const =0}{get_address() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual uint8\+\_\+t Loom\+Comm\+Plat\+::get\+\_\+address (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_comm_plat_afaf204bcf88cb88102cea8c6c1d745f3}{}\label{class_loom_comm_plat_afaf204bcf88cb88102cea8c6c1d745f3}
+
+
+Get the address of this device. 
+
+Each platform may have a different addressing scheme \begin{DoxyReturn}{Returns}
+The address of this device 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_loom___lo_ra_acbb8f093b6c0ed07ca5816cfc4b75175}{Loom\+\_\+\+Lo\+Ra}, \hyperlink{class_loom__n_r_f_ae1140949b48b908ed1733fb8b3e7ae69}{Loom\+\_\+n\+RF}, and \hyperlink{class_loom___bluetooth_a05e53b4b58b52d0b7068959b6246e9a2}{Loom\+\_\+\+Bluetooth}.
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!get\+\_\+drop\+\_\+rate@{get\+\_\+drop\+\_\+rate}}
+\index{get\+\_\+drop\+\_\+rate@{get\+\_\+drop\+\_\+rate}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{get\+\_\+drop\+\_\+rate() const }{get_drop_rate() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+Comm\+Plat\+::get\+\_\+drop\+\_\+rate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_comm_plat_ad55b5a20b503ea93789159f075677d9f}{}\label{class_loom_comm_plat_ad55b5a20b503ea93789159f075677d9f}
+
+
+Get the packet drop rate since the start of operation. 
+
+Keep in mind that this drop rate will not account for retransmissions done internally by Radio\+Head (ex Reliable datagram), but rather will count data packets that were discarded. This rate will also ignore broadcasts, since they are nearly impossible to quantify. \begin{DoxyReturn}{Returns}
+The drop rate from 0 (no drops) to 100 (100\% drop) 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!get\+\_\+last\+\_\+ten\+\_\+drop\+\_\+rate@{get\+\_\+last\+\_\+ten\+\_\+drop\+\_\+rate}}
+\index{get\+\_\+last\+\_\+ten\+\_\+drop\+\_\+rate@{get\+\_\+last\+\_\+ten\+\_\+drop\+\_\+rate}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{get\+\_\+last\+\_\+ten\+\_\+drop\+\_\+rate() const }{get_last_ten_drop_rate() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+Comm\+Plat\+::get\+\_\+last\+\_\+ten\+\_\+drop\+\_\+rate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_comm_plat_a5c21c70637e43f0731d97173b59200cf}{}\label{class_loom_comm_plat_a5c21c70637e43f0731d97173b59200cf}
+
+
+Get the packet drop rate of the last ten \hyperlink{class_loom_comm_plat_a503a10dbf3add366f1cd3bf4c274f907}{send()} calls. 
+
+Keep in mind that this drop rate will not account for retransmissions done internally by Radio\+Head (ex Reliable datagram), but rather will count data packets that were discarded. This rate will also ignore broadcasts, since they are nearly impossible to quantify. \begin{DoxyReturn}{Returns}
+The drop rate from 0 (no drops) to 100 (100\% drop) 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!json\+\_\+to\+\_\+msgpack\+\_\+buffer@{json\+\_\+to\+\_\+msgpack\+\_\+buffer}}
+\index{json\+\_\+to\+\_\+msgpack\+\_\+buffer@{json\+\_\+to\+\_\+msgpack\+\_\+buffer}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{json\+\_\+to\+\_\+msgpack\+\_\+buffer(\+Json\+Object\+Const json, char $\ast$buffer, const uint16\+\_\+t max\+\_\+len) const }{json_to_msgpack_buffer(JsonObjectConst json, char *buffer, const uint16_t max_len) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::json\+\_\+to\+\_\+msgpack\+\_\+buffer (
+\begin{DoxyParamCaption}
+\item[{Json\+Object\+Const}]{json, }
+\item[{char $\ast$}]{buffer, }
+\item[{const uint16\+\_\+t}]{max\+\_\+len}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_af5030b99e3398396af535558efa82279}{}\label{class_loom_comm_plat_af5030b99e3398396af535558efa82279}
+
+
+Serialize a Json\+Object into a Message\+Pack buffer. 
+
+Also contains buffer memsetting and print statements 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json\+Object to serialize \\
+\hline
+\mbox{\tt out}  & {\em buffer} & Buffer to fill with Message\+Pack of json \\
+\hline
+\mbox{\tt in}  & {\em max\+\_\+len} & Length of buffer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!merge\+\_\+json@{merge\+\_\+json}}
+\index{merge\+\_\+json@{merge\+\_\+json}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{merge\+\_\+json(\+Json\+Object json, const uint8\+\_\+t loop)}{merge_json(JsonObject json, const uint8_t loop)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::merge\+\_\+json (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const uint8\+\_\+t}]{loop}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a3505da17f54272de95f4d92a3c0caf49}{}\label{class_loom_comm_plat_a3505da17f54272de95f4d92a3c0caf49}
+
+
+It will merge all the small packages into one big package. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & The header of the package \\
+\hline
+\mbox{\tt in}  & {\em loop} & How many small packages are coming \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if all package are receive and merged, false otherwise 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!msgpack\+\_\+buffer\+\_\+to\+\_\+json@{msgpack\+\_\+buffer\+\_\+to\+\_\+json}}
+\index{msgpack\+\_\+buffer\+\_\+to\+\_\+json@{msgpack\+\_\+buffer\+\_\+to\+\_\+json}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{msgpack\+\_\+buffer\+\_\+to\+\_\+json(const char $\ast$buffer, Json\+Object json)}{msgpack_buffer_to_json(const char *buffer, JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::msgpack\+\_\+buffer\+\_\+to\+\_\+json (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{buffer, }
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_ae6b8468f5345cf30d857e3229d3f5aa3}{}\label{class_loom_comm_plat_ae6b8468f5345cf30d857e3229d3f5aa3}
+
+
+Deserialize a Message\+Pack buffer into a Json\+Object. 
+
+Also clears the json, contains prints and error checks. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buffer} & Buffer to deserialize \\
+\hline
+\mbox{\tt out}  & {\em json} & Json\+Object to deserialize into \\
+\hline
+\mbox{\tt in}  & {\em max\+\_\+len} & Length of buffer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!package@{package}}
+\index{package@{package}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Comm\+Plat\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_comm_plat_a4cc05ef1f12c5b15fc6516dc75f070d4}{}\label{class_loom_comm_plat_a4cc05ef1f12c5b15fc6516dc75f070d4}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!pre\+\_\+merge\+\_\+receive\+\_\+blocking@{pre\+\_\+merge\+\_\+receive\+\_\+blocking}}
+\index{pre\+\_\+merge\+\_\+receive\+\_\+blocking@{pre\+\_\+merge\+\_\+receive\+\_\+blocking}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{pre\+\_\+merge\+\_\+receive\+\_\+blocking(\+Json\+Object json)}{pre_merge_receive_blocking(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}Json\+Object Loom\+Comm\+Plat\+::pre\+\_\+merge\+\_\+receive\+\_\+blocking (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a727f88000d237c0f413a17600fc261a6}{}\label{class_loom_comm_plat_a727f88000d237c0f413a17600fc261a6}
+
+
+Giving the header of the Package from the other board. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & json of the headers if it came in split \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Json\+Object it will return the headers of the package 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Comm\+Plat\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_comm_plat_a97982022b7e279d4def0246e17a95d61}{}\label{class_loom_comm_plat_a97982022b7e279d4def0246e17a95d61}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+
+
+Reimplemented in \hyperlink{class_loom___lo_ra_a2d73e0aa394de9db046621c86ea644c0}{Loom\+\_\+\+Lo\+Ra}, \hyperlink{class_loom__n_r_f_ad8a85a3ce2d9e2d7d12dec310a1c6615}{Loom\+\_\+n\+RF}, and \hyperlink{class_loom___bluetooth_acf5fbe9ae0476fbc647c742baab183e8}{Loom\+\_\+\+Bluetooth}.
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Comm\+Plat\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_comm_plat_a2a3336599f8b56c2cbb223a386d797ec}{}\label{class_loom_comm_plat_a2a3336599f8b56c2cbb223a386d797ec}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!receive@{receive}}
+\index{receive@{receive}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{receive(\+Json\+Object json)}{receive(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::receive (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_comm_plat_a7d5af29f4053627979c15928f284446f}{}\label{class_loom_comm_plat_a7d5af29f4053627979c15928f284446f}
+
+
+Build json from packet if any exists. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Json object to fill with incoming data \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!receive@{receive}}
+\index{receive@{receive}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{receive()}{receive()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::receive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_abe9a506341e7e5dd3dde40210d7c3904}{}\label{class_loom_comm_plat_abe9a506341e7e5dd3dde40210d7c3904}
+
+
+Version of receive for use with \hyperlink{class_loom_manager}{Loom\+Manager}. 
+
+Accesses Json from \hyperlink{class_loom_manager}{Loom\+Manager} \begin{DoxyReturn}{Returns}
+True if packet received 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!receive\+\_\+batch@{receive\+\_\+batch}}
+\index{receive\+\_\+batch@{receive\+\_\+batch}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{receive\+\_\+batch()}{receive_batch()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::receive\+\_\+batch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_comm_plat_ab59a3e7ed1aa0c3997506bf77b1176e6}{}\label{class_loom_comm_plat_ab59a3e7ed1aa0c3997506bf77b1176e6}
+
+
+Receive and immediately create a batch file from J\+S\+ON receieved. 
+
+\begin{DoxyReturn}{Returns}
+True if packet was recieved and stored in batch 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!receive\+\_\+batch\+\_\+blocking@{receive\+\_\+batch\+\_\+blocking}}
+\index{receive\+\_\+batch\+\_\+blocking@{receive\+\_\+batch\+\_\+blocking}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{receive\+\_\+batch\+\_\+blocking(uint max\+\_\+wait\+\_\+time)}{receive_batch_blocking(uint max_wait_time)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::receive\+\_\+batch\+\_\+blocking (
+\begin{DoxyParamCaption}
+\item[{uint}]{max\+\_\+wait\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a84aa23d66457ffe78053d3d0cbd1e7b1}{}\label{class_loom_comm_plat_a84aa23d66457ffe78053d3d0cbd1e7b1}
+
+
+Receive, and block until packet recieved or timeout, and immediately create a batch file from J\+S\+ON receieved. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em max\+\_\+wait\+\_\+time} & Maximum number of milliseconds to block for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if packet was recieved and stored in batch 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!receive\+\_\+blocking@{receive\+\_\+blocking}}
+\index{receive\+\_\+blocking@{receive\+\_\+blocking}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{receive\+\_\+blocking(\+Json\+Object json, uint max\+\_\+wait\+\_\+time)}{receive_blocking(JsonObject json, uint max_wait_time)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::receive\+\_\+blocking (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{uint}]{max\+\_\+wait\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a15fb6d65a9454154ac899f3560c67a6f}{}\label{class_loom_comm_plat_a15fb6d65a9454154ac899f3560c67a6f}
+
+
+Receive, but block until packet received, or timeout reached. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Json object to fill with incoming data \\
+\hline
+\mbox{\tt in}  & {\em max\+\_\+wait\+\_\+time} & Maximum number of milliseconds to block for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if packet received 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!receive\+\_\+blocking@{receive\+\_\+blocking}}
+\index{receive\+\_\+blocking@{receive\+\_\+blocking}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{receive\+\_\+blocking(const uint max\+\_\+wait\+\_\+time)}{receive_blocking(const uint max_wait_time)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::receive\+\_\+blocking (
+\begin{DoxyParamCaption}
+\item[{const uint}]{max\+\_\+wait\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a5a16f4a2a37ddf593f7a3c0dd9e5f692}{}\label{class_loom_comm_plat_a5a16f4a2a37ddf593f7a3c0dd9e5f692}
+
+
+Version of receive\+\_\+blocking for use with \hyperlink{class_loom_manager}{Loom\+Manager}. 
+
+Accesses Json from \hyperlink{class_loom_manager}{Loom\+Manager} 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em max\+\_\+wait\+\_\+time} & Maximum number of milliseconds to block for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if packet received 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!receive\+\_\+blocking\+\_\+impl@{receive\+\_\+blocking\+\_\+impl}}
+\index{receive\+\_\+blocking\+\_\+impl@{receive\+\_\+blocking\+\_\+impl}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{receive\+\_\+blocking\+\_\+impl(\+Json\+Object json, uint max\+\_\+wait\+\_\+time)}{receive_blocking_impl(JsonObject json, uint max_wait_time)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Loom\+Comm\+Plat\+::receive\+\_\+blocking\+\_\+impl (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{uint}]{max\+\_\+wait\+\_\+time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom_comm_plat_acc447dd60751ea7536f0c96b4390fdd8}{}\label{class_loom_comm_plat_acc447dd60751ea7536f0c96b4390fdd8}
+
+
+Receive, but block until packet received, or timeout reached. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Json object to fill with incoming data \\
+\hline
+\mbox{\tt out}  & {\em max\+\_\+wait\+\_\+time} & Maximum number of milliseconds to block for (can be zero for non-\/blocking) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if packet received 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_loom___lo_ra_a62143785c09b5e48a31cc3643398d1f8}{Loom\+\_\+\+Lo\+Ra}, and \hyperlink{class_loom__n_r_f_a8f4a184813d9aed777997f63e9835e42}{Loom\+\_\+n\+RF}.
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!send@{send}}
+\index{send@{send}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{send(\+Json\+Object json, const uint8\+\_\+t destination)}{send(JsonObject json, const uint8_t destination)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::send (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const uint8\+\_\+t}]{destination}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a503a10dbf3add366f1cd3bf4c274f907}{}\label{class_loom_comm_plat_a503a10dbf3add366f1cd3bf4c274f907}
+
+
+Send json to a specific address. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json package to send \\
+\hline
+\mbox{\tt in}  & {\em destination} & Device to send to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if packet sent successfully 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!send@{send}}
+\index{send@{send}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{send(const uint8\+\_\+t destination)}{send(const uint8_t destination)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::send (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{destination}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_ae1a86dffbfd638cd56b8be47af9964ab}{}\label{class_loom_comm_plat_ae1a86dffbfd638cd56b8be47af9964ab}
+
+
+Version of send for use with \hyperlink{class_loom_manager}{Loom\+Manager}. 
+
+Accesses Json from \hyperlink{class_loom_manager}{Loom\+Manager} 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em destination} & Address of destination device \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if packet sent successfully, false otherwise 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!send\+\_\+batch@{send\+\_\+batch}}
+\index{send\+\_\+batch@{send\+\_\+batch}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{send\+\_\+batch(const uint8\+\_\+t destination, int delay\+\_\+time)}{send_batch(const uint8_t destination, int delay_time)}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+Comm\+Plat\+::send\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{destination, }
+\item[{int}]{delay\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a4cd103d035644901828bf4959cd7a9c9}{}\label{class_loom_comm_plat_a4cd103d035644901828bf4959cd7a9c9}
+
+
+Sends all the jsons stored in the batch. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em destination} & Address of destination device \\
+\hline
+\mbox{\tt in}  & {\em delay\+\_\+time} & The amount of time between each packet in the batch being sent \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the packet sent successfully 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!send\+\_\+impl@{send\+\_\+impl}}
+\index{send\+\_\+impl@{send\+\_\+impl}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{send\+\_\+impl(\+Json\+Object json, const uint8\+\_\+t destination)}{send_impl(JsonObject json, const uint8_t destination)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Loom\+Comm\+Plat\+::send\+\_\+impl (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const uint8\+\_\+t}]{destination}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom_comm_plat_a28f40393c7d50d3bf30eff3add02d6fc}{}\label{class_loom_comm_plat_a28f40393c7d50d3bf30eff3add02d6fc}
+
+
+Send json to a specific address. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json package to send \\
+\hline
+\mbox{\tt in}  & {\em destination} & Device to send to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if packet sent successfully 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_loom___lo_ra_ac349e4d3e3b6408c83b9c8020c501023}{Loom\+\_\+\+Lo\+Ra}, and \hyperlink{class_loom__n_r_f_ad63d064b8ae495e699627a3bc2c57fa4}{Loom\+\_\+n\+RF}.
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!set\+\_\+address@{set\+\_\+address}}
+\index{set\+\_\+address@{set\+\_\+address}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{set\+\_\+address(const uint8\+\_\+t a)=0}{set_address(const uint8_t a)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Comm\+Plat\+::set\+\_\+address (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_comm_plat_afa0f66b4e657effefc34fa5a74363174}{}\label{class_loom_comm_plat_afa0f66b4e657effefc34fa5a74363174}
+
+
+Set the address of this device. 
+
+Each platform may have a different addressing scheme. Changing the device\textquotesingle{}s address is not recommended. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & The address to set this device to \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_loom___lo_ra_abeb44544dc17bbc4d762ac53015c0e94}{Loom\+\_\+\+Lo\+Ra}, \hyperlink{class_loom__n_r_f_ab1020ef07ac5be037991ae48a5a6b682}{Loom\+\_\+n\+RF}, and \hyperlink{class_loom___bluetooth_a963fd394e050a4b1fb12311d6fe8f97f}{Loom\+\_\+\+Bluetooth}.
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!split\+\_\+send@{split\+\_\+send}}
+\index{split\+\_\+send@{split\+\_\+send}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{split\+\_\+send(\+Json\+Object json, const uint8\+\_\+t destination, const uint8\+\_\+t index)}{split_send(JsonObject json, const uint8_t destination, const uint8_t index)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::split\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const uint8\+\_\+t}]{destination, }
+\item[{const uint8\+\_\+t}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_a7a0d2c230d977bfb8f286aab7bd8469e}{}\label{class_loom_comm_plat_a7a0d2c230d977bfb8f286aab7bd8469e}
+
+
+The actual processing spliting into small json. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & The original message package \\
+\hline
+\mbox{\tt in}  & {\em destination} & Address of destination device \\
+\hline
+\mbox{\tt in}  & {\em index} & Json array Contents part location \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if all of them send completely, false otherwise 
+\end{DoxyReturn}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!split\+\_\+send\+\_\+notification@{split\+\_\+send\+\_\+notification}}
+\index{split\+\_\+send\+\_\+notification@{split\+\_\+send\+\_\+notification}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{split\+\_\+send\+\_\+notification(\+Json\+Object json, const uint8\+\_\+t destination)}{split_send_notification(JsonObject json, const uint8_t destination)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::split\+\_\+send\+\_\+notification (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const uint8\+\_\+t}]{destination}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_comm_plat_abc9ba333b93167dda5dd721eb4a04d02}{}\label{class_loom_comm_plat_abc9ba333b93167dda5dd721eb4a04d02}
+
+
+If the json is over 251, then it let the user the know that it will be sending small mulitple jsons with how many will it be splited into. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & The original message pacakge \\
+\hline
+\mbox{\tt in}  & {\em destination} & Address of destination device \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if able to send notification to the other board, false otherwise 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!last\+\_\+ten\+\_\+dropped@{last\+\_\+ten\+\_\+dropped}}
+\index{last\+\_\+ten\+\_\+dropped@{last\+\_\+ten\+\_\+dropped}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{last\+\_\+ten\+\_\+dropped}{last_ten_dropped}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Comm\+Plat\+::last\+\_\+ten\+\_\+dropped\mbox{[}10\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_a447e99f2f727936f4aff95257ca98b62}{}\label{class_loom_comm_plat_a447e99f2f727936f4aff95257ca98b62}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!last\+\_\+ten\+\_\+dropped\+\_\+idx@{last\+\_\+ten\+\_\+dropped\+\_\+idx}}
+\index{last\+\_\+ten\+\_\+dropped\+\_\+idx@{last\+\_\+ten\+\_\+dropped\+\_\+idx}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{last\+\_\+ten\+\_\+dropped\+\_\+idx}{last_ten_dropped_idx}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+Comm\+Plat\+::last\+\_\+ten\+\_\+dropped\+\_\+idx\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_a790dbad03d48713072716c23d515c6c0}{}\label{class_loom_comm_plat_a790dbad03d48713072716c23d515c6c0}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!max\+\_\+message\+\_\+len@{max\+\_\+message\+\_\+len}}
+\index{max\+\_\+message\+\_\+len@{max\+\_\+message\+\_\+len}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{max\+\_\+message\+\_\+len}{max_message_len}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+Comm\+Plat\+::max\+\_\+message\+\_\+len\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_a2b4f69c2ec15028f5f281c3d1d399dba}{}\label{class_loom_comm_plat_a2b4f69c2ec15028f5f281c3d1d399dba}
+
+
+The maximum message length. 
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!merge\+Json@{merge\+Json}}
+\index{merge\+Json@{merge\+Json}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{merge\+Json}{mergeJson}}]{\setlength{\rightskip}{0pt plus 5cm}Dynamic\+Json\+Document Loom\+Comm\+Plat\+::merge\+Json\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_a9dbf2f13eafb03ae9078e10af47ca8cf}{}\label{class_loom_comm_plat_a9dbf2f13eafb03ae9078e10af47ca8cf}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!message\+Json@{message\+Json}}
+\index{message\+Json@{message\+Json}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{message\+Json}{messageJson}}]{\setlength{\rightskip}{0pt plus 5cm}Static\+Json\+Document$<$1500$>$ Loom\+Comm\+Plat\+::message\+Json\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_a065bda8c5f83a087359bda645b51c87e}{}\label{class_loom_comm_plat_a065bda8c5f83a087359bda645b51c87e}
+
+
+Document to read incoming data into. 
+
+Comm\+Platforms need their own Json\+Document because an incoming message can only be deserialized into Json\+Documents, not Json\+Objects. And it seemed bad design to pass around references to the \hyperlink{class_loom_manager}{Loom\+Manager}\textquotesingle{}s internal Json\+Document. Especially as the \hyperlink{class_loom_manager}{Loom\+Manager} is intended to be non-\/mandatory for usage of Loom \index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!signal\+\_\+strength@{signal\+\_\+strength}}
+\index{signal\+\_\+strength@{signal\+\_\+strength}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{signal\+\_\+strength}{signal_strength}}]{\setlength{\rightskip}{0pt plus 5cm}int16\+\_\+t Loom\+Comm\+Plat\+::signal\+\_\+strength\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_a20b6f639d308b8b2f05cea41597bd6d3}{}\label{class_loom_comm_plat_a20b6f639d308b8b2f05cea41597bd6d3}
+
+
+R\+S\+SI for Lora (need to determine what the other platforms use) 
+
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!total\+\_\+drop\+\_\+count@{total\+\_\+drop\+\_\+count}}
+\index{total\+\_\+drop\+\_\+count@{total\+\_\+drop\+\_\+count}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{total\+\_\+drop\+\_\+count}{total_drop_count}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Loom\+Comm\+Plat\+::total\+\_\+drop\+\_\+count\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_a731d3f9f16e8a2647f0ef81e477ef2a7}{}\label{class_loom_comm_plat_a731d3f9f16e8a2647f0ef81e477ef2a7}
+\index{Loom\+Comm\+Plat@{Loom\+Comm\+Plat}!total\+\_\+packet\+\_\+count@{total\+\_\+packet\+\_\+count}}
+\index{total\+\_\+packet\+\_\+count@{total\+\_\+packet\+\_\+count}!Loom\+Comm\+Plat@{Loom\+Comm\+Plat}}
+\subsubsection[{\texorpdfstring{total\+\_\+packet\+\_\+count}{total_packet_count}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Loom\+Comm\+Plat\+::total\+\_\+packet\+\_\+count\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_comm_plat_afacaa3247078d09dd953371cfb929094}{}\label{class_loom_comm_plat_afacaa3247078d09dd953371cfb929094}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Comm\+Plats/\hyperlink{_comm_plat_8h}{Comm\+Plat.\+h}\item 
+src/\+Comm\+Plats/\hyperlink{_comm_plat_8cpp}{Comm\+Plat.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_google_sheets_8h" kind="file" language="C++">
+    <compoundname>GoogleSheets.h</compoundname>
+    <includes refid="_publish_plat_8h" local="yes">PublishPlat.h</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_google_sheets_8cpp" local="yes">src/PublishPlats/GoogleSheets.cpp</includedby>
+    <incdepgraph>
+      <node id="4697">
+        <label>../InternetPlats/InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="4691" relation="include">
+        </childnode>
+        <childnode refid="4698" relation="include">
+        </childnode>
+        <childnode refid="4699" relation="include">
+        </childnode>
+        <childnode refid="4700" relation="include">
+        </childnode>
+        <childnode refid="4701" relation="include">
+        </childnode>
+      </node>
+      <node id="4699">
+        <label>Udp.h</label>
+      </node>
+      <node id="4690">
+        <label>PublishPlat.h</label>
+        <link refid="_publish_plat_8h"/>
+        <childnode refid="4691" relation="include">
+        </childnode>
+        <childnode refid="4697" relation="include">
+        </childnode>
+        <childnode refid="4702" relation="include">
+        </childnode>
+      </node>
+      <node id="4694">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4703">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="4691" relation="include">
+        </childnode>
+      </node>
+      <node id="4691">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4692" relation="include">
+        </childnode>
+        <childnode refid="4694" relation="include">
+        </childnode>
+        <childnode refid="4695" relation="include">
+        </childnode>
+        <childnode refid="4696" relation="include">
+        </childnode>
+      </node>
+      <node id="4698">
+        <label>Client.h</label>
+      </node>
+      <node id="4695">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4693" relation="include">
+        </childnode>
+        <childnode refid="4696" relation="include">
+        </childnode>
+      </node>
+      <node id="4692">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4693" relation="include">
+        </childnode>
+      </node>
+      <node id="4704">
+        <label>SdFat.h</label>
+      </node>
+      <node id="4696">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4693">
+        <label>Arduino.h</label>
+      </node>
+      <node id="4702">
+        <label>../LogPlats/BatchSD.h</label>
+        <link refid="_batch_s_d_8h"/>
+        <childnode refid="4703" relation="include">
+        </childnode>
+        <childnode refid="4704" relation="include">
+        </childnode>
+      </node>
+      <node id="4689">
+        <label>src/PublishPlats/GoogleSheets.h</label>
+        <link refid="GoogleSheets.h"/>
+        <childnode refid="4690" relation="include">
+        </childnode>
+      </node>
+      <node id="4700">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="4701">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4706">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="4707" relation="include">
+        </childnode>
+        <childnode refid="4708" relation="include">
+        </childnode>
+      </node>
+      <node id="4709">
+        <label>src/PublishPlats/GoogleSheets.cpp</label>
+        <link refid="_google_sheets_8cpp"/>
+      </node>
+      <node id="4707">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="4708">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="4705">
+        <label>src/PublishPlats/GoogleSheets.h</label>
+        <link refid="GoogleSheets.h"/>
+        <childnode refid="4706" relation="include">
+        </childnode>
+        <childnode refid="4709" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___google_sheets" prot="public">Loom_GoogleSheets</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/PublishPlats/GoogleSheets.h"/>
+  </compounddef>
+</doxygen>

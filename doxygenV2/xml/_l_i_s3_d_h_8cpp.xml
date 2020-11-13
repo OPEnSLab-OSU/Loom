@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_l_i_s3_d_h_8cpp" kind="file" language="C++">
+    <compoundname>LIS3DH.cpp</compoundname>
+    <includes refid="_l_i_s3_d_h_8h" local="yes">LIS3DH.h</includes>
+    <incdepgraph>
+      <node id="5187">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5184">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5185" relation="include">
+        </childnode>
+        <childnode refid="5187" relation="include">
+        </childnode>
+        <childnode refid="5188" relation="include">
+        </childnode>
+        <childnode refid="5189" relation="include">
+        </childnode>
+      </node>
+      <node id="5188">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5186" relation="include">
+        </childnode>
+        <childnode refid="5189" relation="include">
+        </childnode>
+      </node>
+      <node id="5181">
+        <label>LIS3DH.h</label>
+        <link refid="_l_i_s3_d_h_8h"/>
+        <childnode refid="5182" relation="include">
+        </childnode>
+        <childnode refid="5191" relation="include">
+        </childnode>
+      </node>
+      <node id="5185">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5186" relation="include">
+        </childnode>
+      </node>
+      <node id="5191">
+        <label>SparkFunLIS3DH.h</label>
+      </node>
+      <node id="5190">
+        <label>Wire.h</label>
+      </node>
+      <node id="5189">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5183">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5184" relation="include">
+        </childnode>
+      </node>
+      <node id="5186">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5182">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5183" relation="include">
+        </childnode>
+        <childnode refid="5190" relation="include">
+        </childnode>
+      </node>
+      <node id="5180">
+        <label>src/Sensors/I2C/LIS3DH.cpp</label>
+        <link refid="LIS3DH.cpp"/>
+        <childnode refid="5181" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/LIS3DH.cpp"/>
+  </compounddef>
+</doxygen>

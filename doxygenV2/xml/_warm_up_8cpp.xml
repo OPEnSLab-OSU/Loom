@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_warm_up_8cpp" kind="file" language="C++">
+    <compoundname>WarmUp.cpp</compoundname>
+    <includes refid="_warm_up_8h" local="yes">WarmUp.h</includes>
+    <includes refid="_warm_up___manager_8h" local="yes">WarmUp_Manager.h</includes>
+    <includes refid="_manager_8h" local="yes">Manager.h</includes>
+    <incdepgraph>
+      <node id="3234">
+        <label>src/Components/WarmUp/WarmUp.cpp</label>
+        <link refid="WarmUp.cpp"/>
+        <childnode refid="3235" relation="include">
+        </childnode>
+        <childnode refid="3236" relation="include">
+        </childnode>
+        <childnode refid="3244" relation="include">
+        </childnode>
+      </node>
+      <node id="3240">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3237">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3238" relation="include">
+        </childnode>
+        <childnode refid="3240" relation="include">
+        </childnode>
+        <childnode refid="3241" relation="include">
+        </childnode>
+        <childnode refid="3242" relation="include">
+        </childnode>
+      </node>
+      <node id="3236">
+        <label>WarmUp_Manager.h</label>
+        <link refid="_warm_up___manager_8h"/>
+        <childnode refid="3237" relation="include">
+        </childnode>
+        <childnode refid="3242" relation="include">
+        </childnode>
+        <childnode refid="3243" relation="include">
+        </childnode>
+      </node>
+      <node id="3241">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3239" relation="include">
+        </childnode>
+        <childnode refid="3242" relation="include">
+        </childnode>
+      </node>
+      <node id="3238">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3239" relation="include">
+        </childnode>
+      </node>
+      <node id="3243">
+        <label>vector</label>
+      </node>
+      <node id="3242">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3239">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3244">
+        <label>Manager.h</label>
+        <link refid="_manager_8h"/>
+        <childnode refid="3238" relation="include">
+        </childnode>
+        <childnode refid="3242" relation="include">
+        </childnode>
+        <childnode refid="3243" relation="include">
+        </childnode>
+      </node>
+      <node id="3235">
+        <label>WarmUp.h</label>
+        <link refid="_warm_up_8h"/>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Components/WarmUp/WarmUp.cpp"/>
+  </compounddef>
+</doxygen>

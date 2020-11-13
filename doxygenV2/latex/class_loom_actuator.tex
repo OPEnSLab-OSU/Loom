@@ -1,0 +1,112 @@
+\hypertarget{class_loom_actuator}{}\section{Loom\+Actuator Class Reference}
+\label{class_loom_actuator}\index{Loom\+Actuator@{Loom\+Actuator}}
+
+
+Abstract base class of actuator modules.  
+
+
+
+
+{\ttfamily \#include $<$Actuator.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Actuator\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_loom_actuator__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_actuator_a3a789588b9092dae071cd236bc72e698}{Loom\+Actuator} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_actuator_a397f57e44b59f1705829bd9f44ae6187}{$\sim$\+Loom\+Actuator} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_actuator_abf895d8f41379ff53dff666d9d2791a2}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Not all actuators need a package method, implement with empty body. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract base class of actuator modules. 
+
+All actuator modules inherit from this class.
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_actuator.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#actuators}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Actuator@{Loom\+Actuator}!Loom\+Actuator@{Loom\+Actuator}}
+\index{Loom\+Actuator@{Loom\+Actuator}!Loom\+Actuator@{Loom\+Actuator}}
+\subsubsection[{\texorpdfstring{Loom\+Actuator(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type)}{LoomActuator(LoomManager *manager, const char *module_name, const LoomModule::Type module_type)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Actuator\+::\+Loom\+Actuator (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_actuator_a3a789588b9092dae071cd236bc72e698}{}\label{class_loom_actuator_a3a789588b9092dae071cd236bc72e698}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Actuator@{Loom\+Actuator}!````~Loom\+Actuator@{$\sim$\+Loom\+Actuator}}
+\index{````~Loom\+Actuator@{$\sim$\+Loom\+Actuator}!Loom\+Actuator@{Loom\+Actuator}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Actuator()=default}{~LoomActuator()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+Actuator\+::$\sim$\+Loom\+Actuator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_actuator_a397f57e44b59f1705829bd9f44ae6187}{}\label{class_loom_actuator_a397f57e44b59f1705829bd9f44ae6187}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Actuator@{Loom\+Actuator}!package@{package}}
+\index{package@{package}!Loom\+Actuator@{Loom\+Actuator}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Actuator\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_actuator_abf895d8f41379ff53dff666d9d2791a2}{}\label{class_loom_actuator_abf895d8f41379ff53dff666d9d2791a2}
+
+
+Not all actuators need a package method, implement with empty body. 
+
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+
+
+Reimplemented in \hyperlink{class_loom___servo_a0162afa4dade96bb86340fb567b43820}{Loom\+\_\+\+Servo}, and \hyperlink{class_loom___relay_ae3c0ac05a26917c832196205a7c2d7a9}{Loom\+\_\+\+Relay}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Actuators/\hyperlink{_actuator_8h}{Actuator.\+h}\item 
+src/\+Actuators/\hyperlink{_actuator_8cpp}{Actuator.\+cpp}\end{DoxyCompactItemize}

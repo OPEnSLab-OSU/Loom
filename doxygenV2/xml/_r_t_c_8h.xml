@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_r_t_c_8h" kind="file" language="C++">
+    <compoundname>RTC.h</compoundname>
+    <includes refid="_module_8h" local="yes">Module.h</includes>
+    <includes local="no">OPEnS_RTC.h</includes>
+    <includedby refid="_interrupt___manager_8cpp" local="yes">src/Interrupt_Manager.cpp</includedby>
+    <includedby refid="_s_d_8h" local="yes">src/LogPlats/SD.h</includedby>
+    <includedby refid="_d_s3231_8h" local="yes">src/RTC/DS3231.h</includedby>
+    <includedby refid="_p_c_f8523_8h" local="yes">src/RTC/PCF8523.h</includedby>
+    <includedby refid="_n_t_p___sync_8h" local="yes">src/NTP_Sync.h</includedby>
+    <includedby refid="_manager_8cpp" local="yes">src/Manager.cpp</includedby>
+    <includedby refid="_manager___module___access_8cpp" local="yes">src/Manager_Module_Access.cpp</includedby>
+    <includedby refid="_r_t_c_8cpp" local="yes">src/RTC/RTC.cpp</includedby>
+    <includedby refid="_sleep___manager_8cpp" local="yes">src/Sleep_Manager.cpp</includedby>
+    <incdepgraph>
+      <node id="4871">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4868">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4869" relation="include">
+        </childnode>
+        <childnode refid="4871" relation="include">
+        </childnode>
+        <childnode refid="4872" relation="include">
+        </childnode>
+        <childnode refid="4873" relation="include">
+        </childnode>
+      </node>
+      <node id="4872">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4870" relation="include">
+        </childnode>
+        <childnode refid="4873" relation="include">
+        </childnode>
+      </node>
+      <node id="4867">
+        <label>src/RTC/RTC.h</label>
+        <link refid="RTC.h"/>
+        <childnode refid="4868" relation="include">
+        </childnode>
+        <childnode refid="4874" relation="include">
+        </childnode>
+      </node>
+      <node id="4869">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4870" relation="include">
+        </childnode>
+      </node>
+      <node id="4874">
+        <label>OPEnS_RTC.h</label>
+      </node>
+      <node id="4873">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4870">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4890">
+        <label>src/Sleep_Manager.cpp</label>
+        <link refid="_sleep___manager_8cpp"/>
+      </node>
+      <node id="4879">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="4880" relation="include">
+        </childnode>
+        <childnode refid="4881" relation="include">
+        </childnode>
+      </node>
+      <node id="4887">
+        <label>src/NTP_Sync.cpp</label>
+        <link refid="_n_t_p___sync_8cpp"/>
+      </node>
+      <node id="4878">
+        <label>src/LogPlats/SD.cpp</label>
+        <link refid="_s_d_8cpp"/>
+      </node>
+      <node id="4885">
+        <label>src/RTC/PCF8523.cpp</label>
+        <link refid="_p_c_f8523_8cpp"/>
+      </node>
+      <node id="4875">
+        <label>src/RTC/RTC.h</label>
+        <link refid="RTC.h"/>
+        <childnode refid="4876" relation="include">
+        </childnode>
+        <childnode refid="4877" relation="include">
+        </childnode>
+        <childnode refid="4882" relation="include">
+        </childnode>
+        <childnode refid="4884" relation="include">
+        </childnode>
+        <childnode refid="4886" relation="include">
+        </childnode>
+        <childnode refid="4881" relation="include">
+        </childnode>
+        <childnode refid="4888" relation="include">
+        </childnode>
+        <childnode refid="4889" relation="include">
+        </childnode>
+        <childnode refid="4890" relation="include">
+        </childnode>
+      </node>
+      <node id="4877">
+        <label>src/LogPlats/SD.h</label>
+        <link refid="_s_d_8h"/>
+        <childnode refid="4878" relation="include">
+        </childnode>
+        <childnode refid="4879" relation="include">
+        </childnode>
+      </node>
+      <node id="4888">
+        <label>src/Manager_Module_Access.cpp</label>
+        <link refid="_manager___module___access_8cpp"/>
+      </node>
+      <node id="4876">
+        <label>src/Interrupt_Manager.cpp</label>
+        <link refid="_interrupt___manager_8cpp"/>
+      </node>
+      <node id="4883">
+        <label>src/RTC/DS3231.cpp</label>
+        <link refid="_d_s3231_8cpp"/>
+      </node>
+      <node id="4884">
+        <label>src/RTC/PCF8523.h</label>
+        <link refid="_p_c_f8523_8h"/>
+        <childnode refid="4879" relation="include">
+        </childnode>
+        <childnode refid="4885" relation="include">
+        </childnode>
+      </node>
+      <node id="4886">
+        <label>src/NTP_Sync.h</label>
+        <link refid="_n_t_p___sync_8h"/>
+        <childnode refid="4879" relation="include">
+        </childnode>
+        <childnode refid="4881" relation="include">
+        </childnode>
+        <childnode refid="4887" relation="include">
+        </childnode>
+      </node>
+      <node id="4880">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="4889">
+        <label>src/RTC/RTC.cpp</label>
+        <link refid="_r_t_c_8cpp"/>
+      </node>
+      <node id="4881">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="4882">
+        <label>src/RTC/DS3231.h</label>
+        <link refid="_d_s3231_8h"/>
+        <childnode refid="4879" relation="include">
+        </childnode>
+        <childnode refid="4883" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom_r_t_c" prot="public">LoomRTC</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/RTC/RTC.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,280 @@
+\hypertarget{class_loom___max_sub}{}\section{Loom\+\_\+\+Max\+Sub Class Reference}
+\label{class_loom___max_sub}\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+
+
+Module for receiving data from Max.  
+
+
+
+
+{\ttfamily \#include $<$Max\+\_\+\+Sub.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Max\+Sub\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=189pt]{class_loom___max_sub__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___max_sub_a9d30bf2d064970e8513009c8556aabc2}{Loom\+\_\+\+Max\+Sub} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_subscribe_plat_ac1f89a414dd68151b156c3d76a5cbffe}{internet\+\_\+type}, const bool \hyperlink{class_loom___max_sub_adb1bf0c7394ff4ebaa1e893fb55356ff}{auto\+\_\+dispatch})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___max_sub_abbdefe05ce2bf306fe224d56f2b67aa9}{Loom\+\_\+\+Max\+Sub} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___max_sub_a8cc7cbe1313118bd7773e5f023eb7bb2}{second\+\_\+stage\+\_\+ctor} () override
+\begin{DoxyCompactList}\small\item\em Second stage construction. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___max_sub_a9f34cd71b9fbace2702d25c49ef64c00}{$\sim$\+Loom\+\_\+\+Max\+Sub} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___max_sub_a7680cb0286f2320c68ab26242643fe64}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em No package necessary for subscribe platforms. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___max_sub_ac108a85356fe7d05d7754cb56f5957b7}{subscribe} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Request / try to receive data from platform subscribed to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___max_sub_a86ebb385b46bd7d1052d98b525216657}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{class_loom___max_sub_a3ecdeac19cc208c2dc0efdcf1006c2d3}{get\+\_\+port} () const 
+\begin{DoxyCompactList}\small\item\em Get the U\+DP port currently receiving on. \end{DoxyCompactList}\item 
+I\+P\+Address \hyperlink{class_loom___max_sub_a8f7485cb80d7784362f265ee54a2c39e}{get\+\_\+remote\+\_\+\+IP} () const 
+\begin{DoxyCompactList}\small\item\em Get the last IP address received from. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___max_sub_a68aeec383e7bc3d7fd5886d32eb21409}{set\+\_\+port} (const uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Set the U\+DP port to receive on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{class_loom___max_sub_a0b60c2de2c1a5e2259cc5723edd9d51c}{U\+D\+P\+\_\+port}
+\begin{DoxyCompactList}\small\item\em Which U\+DP port to receive on. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___max_sub_adb1bf0c7394ff4ebaa1e893fb55356ff}{auto\+\_\+dispatch}
+\begin{DoxyCompactList}\small\item\em True to immediately call \hyperlink{class_loom_manager_a80fb13974b3bde9b0cedcd43732d7226}{Loom\+Manager\+::dispatch()} when packet received. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_internet_plat_a0b2cc742a6ac5f4f7054b75ea99b345c}{Loom\+Internet\+Plat\+::\+U\+D\+P\+Ptr} \hyperlink{class_loom___max_sub_aa41703fadde1c5aca2c265eba0e2d13e}{U\+D\+P\+\_\+\+Inst}
+\begin{DoxyCompactList}\small\item\em Pointer to U\+DP object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Module for receiving data from Max. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___max_sub.html}{\tt Module Documentation}
+\item \href{https://cycling74.com}{\tt Max 8}
+\item \href{https://github.com/OPEnSLab-OSU/Max-Loom2}{\tt Loom Max Patches} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Max\+Sub(\+Loom\+Manager $\ast$manager, const Loom\+Module\+::\+Type internet\+\_\+type, const bool auto\+\_\+dispatch)}{Loom_MaxSub(LoomManager *manager, const LoomModule::Type internet_type, const bool auto_dispatch)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Max\+Sub\+::\+Loom\+\_\+\+Max\+Sub (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{internet\+\_\+type, }
+\item[{const bool}]{auto\+\_\+dispatch}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___max_sub_a9d30bf2d064970e8513009c8556aabc2}{}\label{class_loom___max_sub_a9d30bf2d064970e8513009c8556aabc2}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em internet\+\_\+type} & Set(\+Loom\+Module\+::\+Type) $\vert$ $<$7001$>$ $\vert$ \{7001(\char`\"{}\+Ethernet\char`\"{}), 7002(\char`\"{}\+Wi\+Fi\char`\"{})\} $\vert$ Code of the desired internet platform. \\
+\hline
+\mbox{\tt in}  & {\em auto\+\_\+dispatch} & True to immediately call \hyperlink{class_loom_manager_a80fb13974b3bde9b0cedcd43732d7226}{Loom\+Manager\+::dispatch()} when packet received \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Max\+Sub(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_MaxSub(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Max\+Sub\+::\+Loom\+\_\+\+Max\+Sub (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___max_sub_abbdefe05ce2bf306fe224d56f2b67aa9}{}\label{class_loom___max_sub_abbdefe05ce2bf306fe224d56f2b67aa9}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!````~Loom\+\_\+\+Max\+Sub@{$\sim$\+Loom\+\_\+\+Max\+Sub}}
+\index{````~Loom\+\_\+\+Max\+Sub@{$\sim$\+Loom\+\_\+\+Max\+Sub}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Max\+Sub()}{~Loom_MaxSub()}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Max\+Sub\+::$\sim$\+Loom\+\_\+\+Max\+Sub (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___max_sub_a9f34cd71b9fbace2702d25c49ef64c00}{}\label{class_loom___max_sub_a9f34cd71b9fbace2702d25c49ef64c00}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!get\+\_\+port@{get\+\_\+port}}
+\index{get\+\_\+port@{get\+\_\+port}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{get\+\_\+port() const }{get_port() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+Max\+Sub\+::get\+\_\+port (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___max_sub_a3ecdeac19cc208c2dc0efdcf1006c2d3}{}\label{class_loom___max_sub_a3ecdeac19cc208c2dc0efdcf1006c2d3}
+
+
+Get the U\+DP port currently receiving on. 
+
+\begin{DoxyReturn}{Returns}
+U\+DP port being used 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!get\+\_\+remote\+\_\+\+IP@{get\+\_\+remote\+\_\+\+IP}}
+\index{get\+\_\+remote\+\_\+\+IP@{get\+\_\+remote\+\_\+\+IP}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{get\+\_\+remote\+\_\+\+I\+P() const }{get_remote_IP() const }}]{\setlength{\rightskip}{0pt plus 5cm}I\+P\+Address Loom\+\_\+\+Max\+Sub\+::get\+\_\+remote\+\_\+\+IP (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___max_sub_a8f7485cb80d7784362f265ee54a2c39e}{}\label{class_loom___max_sub_a8f7485cb80d7784362f265ee54a2c39e}
+
+
+Get the last IP address received from. 
+
+\begin{DoxyReturn}{Returns}
+Last IP address 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Max\+Sub\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___max_sub_a7680cb0286f2320c68ab26242643fe64}{}\label{class_loom___max_sub_a7680cb0286f2320c68ab26242643fe64}
+
+
+No package necessary for subscribe platforms. 
+
+Implement with empty body. 
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Max\+Sub\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___max_sub_a86ebb385b46bd7d1052d98b525216657}{}\label{class_loom___max_sub_a86ebb385b46bd7d1052d98b525216657}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_subscribe_plat_a574b062d74e998a12cdb54d265c36972}{Loom\+Subscribe\+Plat}.
+
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}}
+\index{second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{second\+\_\+stage\+\_\+ctor() override}{second_stage_ctor() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Max\+Sub\+::second\+\_\+stage\+\_\+ctor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___max_sub_a8cc7cbe1313118bd7773e5f023eb7bb2}{}\label{class_loom___max_sub_a8cc7cbe1313118bd7773e5f023eb7bb2}
+
+
+Second stage construction. 
+
+Perform any actions that need all of the devices to be initized beforehand -\/ such as looking up an internet platform This function is guranteed to be called A\+F\+T\+ER all modules have been constructed. 
+
+Reimplemented from \hyperlink{class_loom_module_a8dd3704d1bd38868d5774e48c1073d12}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!set\+\_\+port@{set\+\_\+port}}
+\index{set\+\_\+port@{set\+\_\+port}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{set\+\_\+port(const uint16\+\_\+t port)}{set_port(const uint16_t port)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Max\+Sub\+::set\+\_\+port (
+\begin{DoxyParamCaption}
+\item[{const uint16\+\_\+t}]{port}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___max_sub_a68aeec383e7bc3d7fd5886d32eb21409}{}\label{class_loom___max_sub_a68aeec383e7bc3d7fd5886d32eb21409}
+
+
+Set the U\+DP port to receive on. 
+
+Changing the port from automatic port setting (based on instance number) may make the device stop receiving from Max M\+SP 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em port} & Port to set to \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!subscribe@{subscribe}}
+\index{subscribe@{subscribe}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{subscribe(\+Json\+Object json) override}{subscribe(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Max\+Sub\+::subscribe (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___max_sub_ac108a85356fe7d05d7754cb56f5957b7}{}\label{class_loom___max_sub_ac108a85356fe7d05d7754cb56f5957b7}
+
+
+Request / try to receive data from platform subscribed to. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Received data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if received anything 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_subscribe_plat_ad80fe04ecc6d8d1c2c5f093b9c4e9b72}{Loom\+Subscribe\+Plat}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!auto\+\_\+dispatch@{auto\+\_\+dispatch}}
+\index{auto\+\_\+dispatch@{auto\+\_\+dispatch}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{auto\+\_\+dispatch}{auto_dispatch}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Max\+Sub\+::auto\+\_\+dispatch\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___max_sub_adb1bf0c7394ff4ebaa1e893fb55356ff}{}\label{class_loom___max_sub_adb1bf0c7394ff4ebaa1e893fb55356ff}
+
+
+True to immediately call \hyperlink{class_loom_manager_a80fb13974b3bde9b0cedcd43732d7226}{Loom\+Manager\+::dispatch()} when packet received. 
+
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!U\+D\+P\+\_\+\+Inst@{U\+D\+P\+\_\+\+Inst}}
+\index{U\+D\+P\+\_\+\+Inst@{U\+D\+P\+\_\+\+Inst}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{U\+D\+P\+\_\+\+Inst}{UDP_Inst}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat\+::\+U\+D\+P\+Ptr} Loom\+\_\+\+Max\+Sub\+::\+U\+D\+P\+\_\+\+Inst\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___max_sub_aa41703fadde1c5aca2c265eba0e2d13e}{}\label{class_loom___max_sub_aa41703fadde1c5aca2c265eba0e2d13e}
+
+
+Pointer to U\+DP object. 
+
+\index{Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}!U\+D\+P\+\_\+port@{U\+D\+P\+\_\+port}}
+\index{U\+D\+P\+\_\+port@{U\+D\+P\+\_\+port}!Loom\+\_\+\+Max\+Sub@{Loom\+\_\+\+Max\+Sub}}
+\subsubsection[{\texorpdfstring{U\+D\+P\+\_\+port}{UDP_port}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+Max\+Sub\+::\+U\+D\+P\+\_\+port\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___max_sub_a0b60c2de2c1a5e2259cc5723edd9d51c}{}\label{class_loom___max_sub_a0b60c2de2c1a5e2259cc5723edd9d51c}
+
+
+Which U\+DP port to receive on. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Subscribe\+Plats/\hyperlink{_max___sub_8h}{Max\+\_\+\+Sub.\+h}\item 
+src/\+Subscribe\+Plats/\hyperlink{_max___sub_8cpp}{Max\+\_\+\+Sub.\+cpp}\end{DoxyCompactItemize}

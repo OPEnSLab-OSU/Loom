@@ -1,0 +1,7 @@
+<map id="LoomActuator" name="LoomActuator">
+<area shape="rect" id="node3" href="$class_loom___neopixel.html" title="Neopixel tri&#45;color LED actuator module. " alt="" coords="5,155,125,181"/>
+<area shape="rect" id="node4" href="$class_loom___relay.html" title="Relay actuator module. " alt="" coords="149,155,248,181"/>
+<area shape="rect" id="node5" href="$class_loom___servo.html" title="Servo actuator module. " alt="" coords="273,155,375,181"/>
+<area shape="rect" id="node6" href="$class_loom___stepper.html" title="Stepper actuator module. " alt="" coords="399,155,515,181"/>
+<area shape="rect" id="node2" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="209,5,313,32"/>
+</map>

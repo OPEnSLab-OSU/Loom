@@ -1,0 +1,174 @@
+\hypertarget{class_loom_i2_c_sensor}{}\section{Loom\+I2\+C\+Sensor Class Reference}
+\label{class_loom_i2_c_sensor}\index{Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}}
+
+
+Abstract root for I2C sensor modules.  
+
+
+
+
+{\ttfamily \#include $<$I2\+C\+\_\+\+Sensor.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+I2\+C\+Sensor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_loom_i2_c_sensor__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_i2_c_sensor_a974180c199ef01753afc67bc59c1e2c2}{Loom\+I2\+C\+Sensor} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}, const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}, const uint8\+\_\+t mux\+\_\+port=255, const uint8\+\_\+t \hyperlink{class_loom_sensor_a0e74ebbaecde15ed1c71e1bb6bc6aebe}{num\+\_\+samples}=1)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_i2_c_sensor_ac27cd8c9d81b92b2c0dcb8f8808a530e}{$\sim$\+Loom\+I2\+C\+Sensor} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_i2_c_sensor_ab90004ce30a281b7f51ecf3093ca4cea}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}
+\begin{DoxyCompactList}\small\item\em The sensor\textquotesingle{}s I2C address. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \hyperlink{class_loom_i2_c_sensor_ab5c61951a994a76a2aa2e5400089dad1}{port\+\_\+num}
+\begin{DoxyCompactList}\small\item\em Used with multiplexer, keep track of port it is on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{G\+E\+T\+T\+E\+RS}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_loom_i2_c_sensor_af2e72949edeee6c1a837d695ca3f3302}{Loom\+\_\+\+Multiplexer}
+\begin{DoxyCompactList}\small\item\em Allow Multiplexer to access private methods of I2C sensor modules. \end{DoxyCompactList}\item 
+byte \hyperlink{class_loom_i2_c_sensor_a22a0afe0a2d1f13cdac37e9208fdce2b}{get\+\_\+i2c\+\_\+address} () const 
+\begin{DoxyCompactList}\small\item\em Get the sensor\textquotesingle{}s I2C address. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract root for I2C sensor modules. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_i2_c_sensor.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#i2c-sensors}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}!Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}}
+\index{Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}!Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}}
+\subsubsection[{\texorpdfstring{Loom\+I2\+C\+Sensor(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type, const byte i2c\+\_\+address, const uint8\+\_\+t mux\+\_\+port=255, const uint8\+\_\+t num\+\_\+samples=1)}{LoomI2CSensor(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const byte i2c_address, const uint8_t mux_port=255, const uint8_t num_samples=1)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+I2\+C\+Sensor\+::\+Loom\+I2\+C\+Sensor (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type, }
+\item[{const byte}]{i2c\+\_\+address, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}, }
+\item[{const uint8\+\_\+t}]{num\+\_\+samples = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_i2_c_sensor_a974180c199ef01753afc67bc59c1e2c2}{}\label{class_loom_i2_c_sensor_a974180c199ef01753afc67bc59c1e2c2}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em i2c\+\_\+address} & The i2c address of the sensor \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+portx} & The port of the sensor if used with a multiplexer, 255 if not \\
+\hline
+\mbox{\tt in}  & {\em num\+\_\+samples} & The number of samples to take and average \\
+\hline
+\end{DoxyParams}
+\index{Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}!````~Loom\+I2\+C\+Sensor@{$\sim$\+Loom\+I2\+C\+Sensor}}
+\index{````~Loom\+I2\+C\+Sensor@{$\sim$\+Loom\+I2\+C\+Sensor}!Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+I2\+C\+Sensor()=default}{~LoomI2CSensor()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+I2\+C\+Sensor\+::$\sim$\+Loom\+I2\+C\+Sensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_i2_c_sensor_ac27cd8c9d81b92b2c0dcb8f8808a530e}{}\label{class_loom_i2_c_sensor_ac27cd8c9d81b92b2c0dcb8f8808a530e}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}!get\+\_\+i2c\+\_\+address@{get\+\_\+i2c\+\_\+address}}
+\index{get\+\_\+i2c\+\_\+address@{get\+\_\+i2c\+\_\+address}!Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}}
+\subsubsection[{\texorpdfstring{get\+\_\+i2c\+\_\+address() const }{get_i2c_address() const }}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+I2\+C\+Sensor\+::get\+\_\+i2c\+\_\+address (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_i2_c_sensor_a22a0afe0a2d1f13cdac37e9208fdce2b}{}\label{class_loom_i2_c_sensor_a22a0afe0a2d1f13cdac37e9208fdce2b}
+
+
+Get the sensor\textquotesingle{}s I2C address. 
+
+\begin{DoxyReturn}{Returns}
+The sensor\textquotesingle{}s I2C address 
+\end{DoxyReturn}
+\index{Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+I2\+C\+Sensor\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_i2_c_sensor_ab90004ce30a281b7f51ecf3093ca4cea}{}\label{class_loom_i2_c_sensor_ab90004ce30a281b7f51ecf3093ca4cea}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_sensor_aaa3bb2a2165029906c4ee815e790c89e}{Loom\+Sensor}.
+
+
+
+Reimplemented in \hyperlink{class_loom___a_d_s1115_a8c5419d33482990e84be15dfe82b0ea6}{Loom\+\_\+\+A\+D\+S1115}, \hyperlink{class_loom___a_s7263_a19c0c1b6a4ae3ad0454011764cf54c70}{Loom\+\_\+\+A\+S7263}, \hyperlink{class_loom___a_s7262_a29aef77c6d06feb46bc840f4407abba7}{Loom\+\_\+\+A\+S7262}, \hyperlink{class_loom___z_x_gesture_a7af9796af4c3dfa33a3eedb63de89285}{Loom\+\_\+\+Z\+X\+Gesture}, and \hyperlink{class_loom___m_m_a8451_aad7bfbb26c8dd4eadd61e9a4817e6930}{Loom\+\_\+\+M\+M\+A8451}.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Multiplexer}{Loom_Multiplexer}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Loom\+\_\+\+Multiplexer}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{class_loom_i2_c_sensor_af2e72949edeee6c1a837d695ca3f3302}{}\label{class_loom_i2_c_sensor_af2e72949edeee6c1a837d695ca3f3302}
+
+
+Allow Multiplexer to access private methods of I2C sensor modules. 
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}!i2c\+\_\+address@{i2c\+\_\+address}}
+\index{i2c\+\_\+address@{i2c\+\_\+address}!Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}}
+\subsubsection[{\texorpdfstring{i2c\+\_\+address}{i2c_address}}]{\setlength{\rightskip}{0pt plus 5cm}const byte Loom\+I2\+C\+Sensor\+::i2c\+\_\+address\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{}\label{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}
+
+
+The sensor\textquotesingle{}s I2C address. 
+
+If the sensor supports mutliple, make sure this matches the current configuration of the i2c address \index{Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}!port\+\_\+num@{port\+\_\+num}}
+\index{port\+\_\+num@{port\+\_\+num}!Loom\+I2\+C\+Sensor@{Loom\+I2\+C\+Sensor}}
+\subsubsection[{\texorpdfstring{port\+\_\+num}{port_num}}]{\setlength{\rightskip}{0pt plus 5cm}const uint8\+\_\+t Loom\+I2\+C\+Sensor\+::port\+\_\+num\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_i2_c_sensor_ab5c61951a994a76a2aa2e5400089dad1}{}\label{class_loom_i2_c_sensor_ab5c61951a994a76a2aa2e5400089dad1}
+
+
+Used with multiplexer, keep track of port it is on. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_i2_c___sensor_8h}{I2\+C\+\_\+\+Sensor.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_i2_c___sensor_8cpp}{I2\+C\+\_\+\+Sensor.\+cpp}\end{DoxyCompactItemize}

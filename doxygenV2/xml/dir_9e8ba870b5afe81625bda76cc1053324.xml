@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_9e8ba870b5afe81625bda76cc1053324" kind="dir">
+    <compoundname>src/LogPlats</compoundname>
+    <innerfile refid="_batch_s_d_8cpp">BatchSD.cpp</innerfile>
+    <innerfile refid="_batch_s_d_8h">BatchSD.h</innerfile>
+    <innerfile refid="_log_plat_8cpp">LogPlat.cpp</innerfile>
+    <innerfile refid="_log_plat_8h">LogPlat.h</innerfile>
+    <innerfile refid="_o_l_e_d_8cpp">OLED.cpp</innerfile>
+    <innerfile refid="_o_l_e_d_8h">OLED.h</innerfile>
+    <innerfile refid="_s_d_8cpp">SD.cpp</innerfile>
+    <innerfile refid="_s_d_8h">SD.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/LogPlats/"/>
+  </compounddef>
+</doxygen>

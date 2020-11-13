@@ -1,0 +1,225 @@
+\hypertarget{class_loom___servo}{}\section{Loom\+\_\+\+Servo Class Reference}
+\label{class_loom___servo}\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+
+
+Servo actuator module.  
+
+
+
+
+{\ttfamily \#include $<$Servo.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Servo\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{class_loom___servo__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___servo_aa3e32332e83beb6aaf86d5023d42553b}{Loom\+\_\+\+Servo} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___servo_a9e75b4ccc8df31566706ab885b38d124}{Loom\+\_\+\+Servo} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___servo_a3c2df2b679a2074288ea31a2fed39897}{$\sim$\+Loom\+\_\+\+Servo} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___servo_a0162afa4dade96bb86340fb567b43820}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Not all actuators need a package method, implement with empty body. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___servo_ad24074bb212a1c47ec389379726c7c01}{dispatch} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Route command to driver. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___servo_a442e82c30372c4579b3d2bfeeacaccb6}{add\+\_\+config} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Add configuration information to Json\+Object. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___servo_a1c03e209fcba106541eaf32fd3eba435}{set\+\_\+degree} (const uint8\+\_\+t servo, const uint8\+\_\+t degree)
+\begin{DoxyCompactList}\small\item\em Set servo position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___servo_a8b8f085c570773d5008beccf3467cac6}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+P\+W\+M\+Servo\+Driver \hyperlink{class_loom___servo_ad002c8ffd5282b4e5b6127fc2c058e9f}{servo\+\_\+driver}
+\begin{DoxyCompactList}\small\item\em Underlying servo driver instance. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___servo_a6e278d382b0a2fd1762b2062921c5fa1}{positions} \mbox{[}\hyperlink{_servo_8h_a4ad670f00edea29150a5303b470c5385}{N\+U\+M\+\_\+\+S\+E\+R\+V\+OS}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Positions of the servos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Servo actuator module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___servo.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/2928}{\tt Product Page\+: Adafruit Servo Featherwing}
+\item \href{https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library}{\tt Dependency\+: Adafruit-\/\+P\+W\+M-\/\+Servo-\/\+Driver}
+\item \href{https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf}{\tt Datasheet}
+\item \href{https://www.adafruit.com/product/169}{\tt Product Page\+: Adafruit Servo}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#servos-8-channel-pwm-or-servo-featherwing}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Servo(\+Loom\+Manager $\ast$manager)}{Loom_Servo(LoomManager *manager)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Servo\+::\+Loom\+\_\+\+Servo (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___servo_aa3e32332e83beb6aaf86d5023d42553b}{}\label{class_loom___servo_aa3e32332e83beb6aaf86d5023d42553b}
+
+
+Constructor. 
+
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Servo(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Servo(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Servo\+::\+Loom\+\_\+\+Servo (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___servo_a9e75b4ccc8df31566706ab885b38d124}{}\label{class_loom___servo_a9e75b4ccc8df31566706ab885b38d124}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!````~Loom\+\_\+\+Servo@{$\sim$\+Loom\+\_\+\+Servo}}
+\index{````~Loom\+\_\+\+Servo@{$\sim$\+Loom\+\_\+\+Servo}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Servo()=default}{~Loom_Servo()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Servo\+::$\sim$\+Loom\+\_\+\+Servo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___servo_a3c2df2b679a2074288ea31a2fed39897}{}\label{class_loom___servo_a3c2df2b679a2074288ea31a2fed39897}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!add\+\_\+config@{add\+\_\+config}}
+\index{add\+\_\+config@{add\+\_\+config}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{add\+\_\+config(\+Json\+Object json) override}{add_config(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Servo\+::add\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___servo_a442e82c30372c4579b3d2bfeeacaccb6}{}\label{class_loom___servo_a442e82c30372c4579b3d2bfeeacaccb6}
+
+
+Add configuration information to Json\+Object. 
+
+\hyperlink{class_loom_manager}{Loom\+Manager} iterates over modules to build complete configuration 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json configuration object to add to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_a06747f16d76bde35575557c7515adcc0}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{dispatch(\+Json\+Object json) override}{dispatch(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Servo\+::dispatch (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___servo_ad24074bb212a1c47ec389379726c7c01}{}\label{class_loom___servo_ad24074bb212a1c47ec389379726c7c01}
+
+
+Route command to driver. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Servo\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___servo_a0162afa4dade96bb86340fb567b43820}{}\label{class_loom___servo_a0162afa4dade96bb86340fb567b43820}
+
+
+Not all actuators need a package method, implement with empty body. 
+
+
+
+Reimplemented from \hyperlink{class_loom_actuator_abf895d8f41379ff53dff666d9d2791a2}{Loom\+Actuator}.
+
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Servo\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___servo_a8b8f085c570773d5008beccf3467cac6}{}\label{class_loom___servo_a8b8f085c570773d5008beccf3467cac6}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!set\+\_\+degree@{set\+\_\+degree}}
+\index{set\+\_\+degree@{set\+\_\+degree}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{set\+\_\+degree(const uint8\+\_\+t servo, const uint8\+\_\+t degree)}{set_degree(const uint8_t servo, const uint8_t degree)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Servo\+::set\+\_\+degree (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{servo, }
+\item[{const uint8\+\_\+t}]{degree}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___servo_a1c03e209fcba106541eaf32fd3eba435}{}\label{class_loom___servo_a1c03e209fcba106541eaf32fd3eba435}
+
+
+Set servo position. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em servo} & The servo number to control \\
+\hline
+\mbox{\tt in}  & {\em degree} & The position to set the servo to \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!positions@{positions}}
+\index{positions@{positions}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{positions}{positions}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Servo\+::positions\mbox{[}{\bf N\+U\+M\+\_\+\+S\+E\+R\+V\+OS}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___servo_a6e278d382b0a2fd1762b2062921c5fa1}{}\label{class_loom___servo_a6e278d382b0a2fd1762b2062921c5fa1}
+
+
+Positions of the servos. 
+
+\index{Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}!servo\+\_\+driver@{servo\+\_\+driver}}
+\index{servo\+\_\+driver@{servo\+\_\+driver}!Loom\+\_\+\+Servo@{Loom\+\_\+\+Servo}}
+\subsubsection[{\texorpdfstring{servo\+\_\+driver}{servo_driver}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+P\+W\+M\+Servo\+Driver Loom\+\_\+\+Servo\+::servo\+\_\+driver\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___servo_ad002c8ffd5282b4e5b6127fc2c058e9f}{}\label{class_loom___servo_ad002c8ffd5282b4e5b6127fc2c058e9f}
+
+
+Underlying servo driver instance. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Actuators/\hyperlink{_servo_8h}{Servo.\+h}\item 
+src/\+Actuators/\hyperlink{_servo_8cpp}{Servo.\+cpp}\end{DoxyCompactItemize}

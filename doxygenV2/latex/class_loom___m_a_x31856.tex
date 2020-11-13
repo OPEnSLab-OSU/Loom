@@ -1,0 +1,219 @@
+\hypertarget{class_loom___m_a_x31856}{}\section{Loom\+\_\+\+M\+A\+X31856 Class Reference}
+\label{class_loom___m_a_x31856}\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+
+
+M\+A\+X31856 thermocouple module.  
+
+
+
+
+{\ttfamily \#include $<$M\+A\+X31856.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+M\+A\+X31856\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{class_loom___m_a_x31856__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___m_a_x31856_a30691d9af3fdaea41d7ab1a59b82a3ed}{Loom\+\_\+\+M\+A\+X31856} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}=\char`\"{}M\+A\+X31856\char`\"{}, const uint8\+\_\+t \hyperlink{class_loom_sensor_a0e74ebbaecde15ed1c71e1bb6bc6aebe}{num\+\_\+samples}=1, const uint8\+\_\+t C\+S\+\_\+pin=10, const uint8\+\_\+t S\+P\+I\+\_\+a=10, const uint8\+\_\+t S\+P\+I\+\_\+b=11, const uint8\+\_\+t S\+P\+I\+\_\+c=12, const uint8\+\_\+t S\+P\+I\+\_\+d=13)
+\begin{DoxyCompactList}\small\item\em M\+A\+X31856 module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___m_a_x31856_a0bec06c710f5a780dea73e433b4d61a2}{Loom\+\_\+\+M\+A\+X31856} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___m_a_x31856_a2deb67e74947a53023a4ec8afe78bd45}{$\sim$\+Loom\+\_\+\+M\+A\+X31856} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___m_a_x31856_a3f5f043e751a0f3ce3e7090d872637ae}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___m_a_x31856_a7b2d2b233930c75207c1a6521927ee74}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___m_a_x31856_a197dc843c246a5ac17edd62499ed5c60}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+M\+A\+X31856 \hyperlink{class_loom___m_a_x31856_ac4f07d257613a0c750438ebfc33d03a8}{inst\+\_\+max}
+\begin{DoxyCompactList}\small\item\em Underlying M\+A\+X31856 sensor manager instance. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_a_x31856_a108e2bfbf0836dce8b3ec9d4790bf94c}{temperature}
+\begin{DoxyCompactList}\small\item\em Measured temperature. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_a_x31856_af5eb2323d4f26391f72a0a9e81307f51}{cj\+\_\+temp}
+\begin{DoxyCompactList}\small\item\em Measured cold junction temperature. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+M\+A\+X31856 thermocouple module. 
+
+Measures temperature.
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___m_a_x31856.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/3263}{\tt Product Page\+: Adafruit Universal Thermocouple Amplifier M\+A\+X31856 Breakout}
+\item \href{https://github.com/adafruit/Adafruit_MAX31856}{\tt Dependency\+: Adafruit\+\_\+\+M\+A\+X31856} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+M\+A\+X31856(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name=""M\+A\+X31856"", const uint8\+\_\+t num\+\_\+samples=1, const uint8\+\_\+t C\+S\+\_\+pin=10, const uint8\+\_\+t S\+P\+I\+\_\+a=10, const uint8\+\_\+t S\+P\+I\+\_\+b=11, const uint8\+\_\+t S\+P\+I\+\_\+c=12, const uint8\+\_\+t S\+P\+I\+\_\+d=13)}{Loom_MAX31856(LoomManager *manager, const char *module_name="MAX31856", const uint8_t num_samples=1, const uint8_t CS_pin=10, const uint8_t SPI_a=10, const uint8_t SPI_b=11, const uint8_t SPI_c=12, const uint8_t SPI_d=13)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+A\+X31856\+::\+Loom\+\_\+\+M\+A\+X31856 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name = {\ttfamily \char`\"{}MAX31856\char`\"{}}, }
+\item[{const uint8\+\_\+t}]{num\+\_\+samples = {\ttfamily 1}, }
+\item[{const uint8\+\_\+t}]{C\+S\+\_\+pin = {\ttfamily 10}, }
+\item[{const uint8\+\_\+t}]{S\+P\+I\+\_\+a = {\ttfamily 10}, }
+\item[{const uint8\+\_\+t}]{S\+P\+I\+\_\+b = {\ttfamily 11}, }
+\item[{const uint8\+\_\+t}]{S\+P\+I\+\_\+c = {\ttfamily 12}, }
+\item[{const uint8\+\_\+t}]{S\+P\+I\+\_\+d = {\ttfamily 13}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___m_a_x31856_a30691d9af3fdaea41d7ab1a59b82a3ed}{}\label{class_loom___m_a_x31856_a30691d9af3fdaea41d7ab1a59b82a3ed}
+
+
+M\+A\+X31856 module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & String $\vert$ $<$\char`\"{}\+M\+A\+X31856\char`\"{}$>$ $\vert$ null $\vert$ M\+A\+X31856 module name \\
+\hline
+\mbox{\tt in}  & {\em num\+\_\+samples} & Set(\+Int) $\vert$ $<$8$>$ $\vert$ \{1, 2, 4, 8, 16\} $\vert$ How many samples to take and average \\
+\hline
+\mbox{\tt in}  & {\em C\+S\+\_\+pin} & Set(\+Int) $\vert$ $<$10$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin should be used for chip select \\
+\hline
+\mbox{\tt in}  & {\em S\+P\+I\+\_\+a} & Set(\+Int) $\vert$ $<$10$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin should be used for Software Serial a \\
+\hline
+\mbox{\tt in}  & {\em S\+P\+I\+\_\+b} & Set(\+Int) $\vert$ $<$11$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin should be used for Software Serial b \\
+\hline
+\mbox{\tt in}  & {\em S\+P\+I\+\_\+c} & Set(\+Int) $\vert$ $<$12$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin should be used for Software Serial c \\
+\hline
+\mbox{\tt in}  & {\em S\+P\+I\+\_\+d} & Set(\+Int) $\vert$ $<$13$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin should be used for Software Serial d \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+M\+A\+X31856(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_MAX31856(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+A\+X31856\+::\+Loom\+\_\+\+M\+A\+X31856 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___m_a_x31856_a0bec06c710f5a780dea73e433b4d61a2}{}\label{class_loom___m_a_x31856_a0bec06c710f5a780dea73e433b4d61a2}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!````~Loom\+\_\+\+M\+A\+X31856@{$\sim$\+Loom\+\_\+\+M\+A\+X31856}}
+\index{````~Loom\+\_\+\+M\+A\+X31856@{$\sim$\+Loom\+\_\+\+M\+A\+X31856}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+M\+A\+X31856()=default}{~Loom_MAX31856()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+A\+X31856\+::$\sim$\+Loom\+\_\+\+M\+A\+X31856 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___m_a_x31856_a2deb67e74947a53023a4ec8afe78bd45}{}\label{class_loom___m_a_x31856_a2deb67e74947a53023a4ec8afe78bd45}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+A\+X31856\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_a_x31856_a3f5f043e751a0f3ce3e7090d872637ae}{}\label{class_loom___m_a_x31856_a3f5f043e751a0f3ce3e7090d872637ae}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+A\+X31856\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_a_x31856_a7b2d2b233930c75207c1a6521927ee74}{}\label{class_loom___m_a_x31856_a7b2d2b233930c75207c1a6521927ee74}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+A\+X31856\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_a_x31856_a197dc843c246a5ac17edd62499ed5c60}{}\label{class_loom___m_a_x31856_a197dc843c246a5ac17edd62499ed5c60}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_s_p_i_sensor_a9aa10745cef677aad99020c46d3e1ed6}{Loom\+S\+P\+I\+Sensor}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!cj\+\_\+temp@{cj\+\_\+temp}}
+\index{cj\+\_\+temp@{cj\+\_\+temp}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\subsubsection[{\texorpdfstring{cj\+\_\+temp}{cj_temp}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+A\+X31856\+::cj\+\_\+temp\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_a_x31856_af5eb2323d4f26391f72a0a9e81307f51}{}\label{class_loom___m_a_x31856_af5eb2323d4f26391f72a0a9e81307f51}
+
+
+Measured cold junction temperature. 
+
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!inst\+\_\+max@{inst\+\_\+max}}
+\index{inst\+\_\+max@{inst\+\_\+max}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\subsubsection[{\texorpdfstring{inst\+\_\+max}{inst_max}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+M\+A\+X31856 Loom\+\_\+\+M\+A\+X31856\+::inst\+\_\+max\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_a_x31856_ac4f07d257613a0c750438ebfc33d03a8}{}\label{class_loom___m_a_x31856_ac4f07d257613a0c750438ebfc33d03a8}
+
+
+Underlying M\+A\+X31856 sensor manager instance. 
+
+\index{Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}!temperature@{temperature}}
+\index{temperature@{temperature}!Loom\+\_\+\+M\+A\+X31856@{Loom\+\_\+\+M\+A\+X31856}}
+\subsubsection[{\texorpdfstring{temperature}{temperature}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+A\+X31856\+::temperature\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_a_x31856_a108e2bfbf0836dce8b3ec9d4790bf94c}{}\label{class_loom___m_a_x31856_a108e2bfbf0836dce8b3ec9d4790bf94c}
+
+
+Measured temperature. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+S\+P\+I/\hyperlink{_m_a_x31856_8h}{M\+A\+X31856.\+h}\item 
+src/\+Sensors/\+S\+P\+I/\hyperlink{_m_a_x31856_8cpp}{M\+A\+X31856.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_SHT31D class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_SHT31D <span class="m-thin">class</span>
+        </h1>
+        <p>SHT31D Temperature / Humidty sensor module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___s_h_t31_d.html">Module Documentation</a></li><li><a href="https://www.adafruit.com/product/2857">Product Page: Adafruit Sensirion SHT31-D - Temperature &amp; Humidity Sensor</a></li><li><a href="https://github.com/adafruit/Adafruit_SHT31">Dependency: Adafruit_<wbr />SHT31</a></li><li><a href="https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf">Datasheet: Datasheet SHT3x-DIS</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sht31-d-temperature--humidity">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_i2_c_sensor.html" class="m-doc">LoomI2CSensor</a>
+            </dt>
+            <dd>Abstract root for I2C sensor modules.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a83749e1a9e51c760894f9ba0ec097bbf">
+              Adafruit_SHT31 <a href="#a83749e1a9e51c760894f9ba0ec097bbf" class="m-doc-self">inst_sht31d</a>
+            </dt>
+            <dd>Underlying SHT31D sensor manager instance.</dd>
+            <dt id="a3a3d827860de7979d783b9f472379028">
+              float <a href="#a3a3d827860de7979d783b9f472379028" class="m-doc-self">temp</a>
+            </dt>
+            <dd>Measured temperature. Units: C.</dd>
+            <dt id="aa52f9a6c11c80630b8616e5e7c54e803">
+              float <a href="#aa52f9a6c11c80630b8616e5e7c54e803" class="m-doc-self">humid</a>
+            </dt>
+            <dd>Measured humidity Units: %.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ac9816269b6bffad6aa2082953fdc23d0" class="m-doc">Loom_SHT31D</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x44,
+              const uint8_t mux_port = 255)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#abe5fe61b4abf126db72ca93e1ead1c37" class="m-doc">Loom_SHT31D</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="af45193126a6098182debaebe705de907">
+              <span class="m-doc-wrap-bumper"><a href="#af45193126a6098182debaebe705de907" class="m-doc-self">~Loom_SHT31D</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt id="aab6d83a01ddb09428aaa8440d7b667a4">
+              <span class="m-doc-wrap-bumper">void <a href="#aab6d83a01ddb09428aaa8440d7b667a4" class="m-doc-self">measure</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Take any relevant measurements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0fd16cdcaf91721d68a7a882656c9551" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Package a modules measurements or state.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4f1fd015893c2de68bce6f68ce9e1a81" class="m-doc">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Print the last set of measurements taken.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0c671dbf6cdb7ce3ec0eee43a7071288" class="m-doc">get_temperature</a>(</span><span class="m-doc-wrap">) const -&gt; float</span>
+            </dt>
+            <dd>Get the temperature reading.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ac9816269b6bffad6aa2082953fdc23d0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />SHT31D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac9816269b6bffad6aa2082953fdc23d0" class="m-doc-self">Loom_SHT31D</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x44,
+              const uint8_t mux_port = 255)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>i2c_address&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;0x44&gt; | {0x44, 0x45} | I2C address</td>
+                </tr>
+                <tr>
+                  <td>mux_port&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;255&gt; | [0-16] | Port on multiplexer</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abe5fe61b4abf126db72ca93e1ead1c37"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />SHT31D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abe5fe61b4abf126db72ca93e1ead1c37" class="m-doc-self">Loom_SHT31D</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0fd16cdcaf91721d68a7a882656c9551"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />SHT31D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0fd16cdcaf91721d68a7a882656c9551" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Package a modules measurements or state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Object to put data into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4f1fd015893c2de68bce6f68ce9e1a81"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />SHT31D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4f1fd015893c2de68bce6f68ce9e1a81" class="m-doc-self">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Print the last set of measurements taken.</p>
+<p>Does not package the data.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0c671dbf6cdb7ce3ec0eee43a7071288"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">float Loom_<wbr />SHT31D::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0c671dbf6cdb7ce3ec0eee43a7071288" class="m-doc-self">get_temperature</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the temperature reading.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The measured temperature</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Used by the <a href="class_loom_temp_sync.html" class="m-doc">LoomTempSync</a> module to provide temperature to other modules.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

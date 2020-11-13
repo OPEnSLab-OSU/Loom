@@ -1,0 +1,4 @@
+<map id="Loom_Neopixel" name="Loom_Neopixel">
+<area shape="rect" id="node2" href="$class_loom_actuator.html" title="Abstract base class of actuator modules. " alt="" coords="9,80,122,107"/>
+<area shape="rect" id="node3" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="13,5,117,32"/>
+</map>

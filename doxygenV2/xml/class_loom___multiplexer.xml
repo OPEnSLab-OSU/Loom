@@ -1,0 +1,906 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___multiplexer" kind="class" language="C++" prot="public">
+    <compoundname>Loom_Multiplexer</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <includes refid="_multiplexer_8h" local="no">Multiplexer.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___multiplexer_1a4409df6598098393b5fa3b3012735d55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Multiplexer::Loom_Multiplexer</definition>
+        <argsstring>(LoomManager *manager, const byte i2c_address=0x71, const uint8_t num_ports=8, const bool dynamic_list=true, const uint update_period=5000)</argsstring>
+        <name>Loom_Multiplexer</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const byte</type>
+          <declname>i2c_address</declname>
+          <defval>0x71</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>num_ports</declname>
+          <defval>8</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>dynamic_list</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const uint</type>
+          <declname>update_period</declname>
+          <defval>5000</defval>
+        </param>
+        <briefdescription>
+<para>Multiplexer module constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">i2c_address</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;0x71&gt; | {0x71} | I2C address </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">num_ports</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;8&gt; | [1-8] | Number of ports available </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dynamic_list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | Whether or not to automatically check for new sensors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">update_period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;5000&gt; | [500-30000] | The time between sensor list updates (if dynamic_list enabled) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="94" column="1" bodyfile="src/Multiplexer.cpp" bodystart="75" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a28e8d5e652d1be8553d0f283ce1c9e38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Multiplexer::Loom_Multiplexer</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_Multiplexer</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="105" column="1" bodyfile="src/Multiplexer.cpp" bodystart="108" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a5db8b4a6043b42b792f6230f96374ef4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Multiplexer::~Loom_Multiplexer</definition>
+        <argsstring>()</argsstring>
+        <name>~Loom_Multiplexer</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="108" column="1" bodyfile="src/Multiplexer.cpp" bodystart="112" bodyend="121"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___multiplexer_1aefd28e7b8fa3faf53ec42cb25419057a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::measure</definition>
+        <argsstring>()</argsstring>
+        <name>measure</name>
+        <briefdescription>
+<para>Call measure on all connected sensors. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="115" column="1" bodyfile="src/Multiplexer.cpp" bodystart="206" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1aa09d42f26ce3c4185ae8e9b55e3d851f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Package a modules measurements or state. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to put data into </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="117" column="1" bodyfile="src/Multiplexer.cpp" bodystart="230" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1abadc1f55ae04c66e761d366325a0804f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_Multiplexer::dispatch</definition>
+        <argsstring>(JsonObject) override</argsstring>
+        <name>dispatch</name>
+        <reimplements refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8">dispatch</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Route command to driver. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="118" column="1" bodyfile="src/Multiplexer.h" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a80fd7464a74af9a325cbf830ee51410e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::get_sensor_list</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>get_sensor_list</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Populate a bundle with a list of sensors currently attached. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json object to populate with sensor list </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="122" column="1" bodyfile="src/Multiplexer.cpp" bodystart="241" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1ac0749b8dc8f72727e7fab5834898d2da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::refresh_sensors</definition>
+        <argsstring>()</argsstring>
+        <name>refresh_sensors</name>
+        <briefdescription>
+<para>Update sensor list. </para>        </briefdescription>
+        <detaileddescription>
+<para>Polls all ports of multiplexer getting sensor on port (if any) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="126" column="1" bodyfile="src/Multiplexer.cpp" bodystart="258" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1aa0745a2b7a8e4f48fb4f74f759e87220" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom_i2_c_sensor" kindref="compound">LoomI2CSensor</ref> *</type>
+        <definition>LoomI2CSensor* Loom_Multiplexer::get_sensor</definition>
+        <argsstring>(uint8_t port) const </argsstring>
+        <name>get_sensor</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Get the sensor object for sensor on provided port. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+</parameternamelist>
+<parameterdescription>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="131" column="1" bodyfile="src/Multiplexer.h" bodystart="131" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1ad09225b1a4c8b70735992cd5eac9a71b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::power_up</definition>
+        <argsstring>() override</argsstring>
+        <name>power_up</name>
+        <reimplements refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23">power_up</reimplements>
+        <briefdescription>
+<para>Turn on any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="133" column="1" bodyfile="src/Multiplexer.cpp" bodystart="402" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a8196a461d4b93f39f7b469ae89fa17c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::power_down</definition>
+        <argsstring>() override</argsstring>
+        <name>power_down</name>
+        <reimplements refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df">power_down</reimplements>
+        <briefdescription>
+<para>Turn off any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="135" column="1" bodyfile="src/Multiplexer.cpp" bodystart="431" bodyend="433"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___multiplexer_1a21759070f77ec1560e9b2a272a0c0640" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="141" column="1" bodyfile="src/Multiplexer.cpp" bodystart="177" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a2a60ebefe68aa75a3141015d2aa81955" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::print_state</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_state</name>
+        <reimplements refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7">print_state</reimplements>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="142" column="1" bodyfile="src/Multiplexer.cpp" bodystart="188" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1aa77642642bfd9f33769f6fd98863e5cc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::print_measurements</definition>
+        <argsstring>() const </argsstring>
+        <name>print_measurements</name>
+        <briefdescription>
+<para>Prints measurements of all connected sensors. </para>        </briefdescription>
+        <detaileddescription>
+<para>Calls implementations of <ref refid="class_loom_sensor_1aba2aa35441c2eb1cf27b95a1fc08b288" kindref="member">LoomI2CSensor::print_measurements() const </ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="146" column="1" bodyfile="src/Multiplexer.cpp" bodystart="219" bodyend="227"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom___multiplexer_1a49c25a8c55ca026c231d59608fc0d6d4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Multiplexer::get_is_dynamic</definition>
+        <argsstring>() const </argsstring>
+        <name>get_is_dynamic</name>
+        <briefdescription>
+<para>Get whether or not sensors are updated dynamically. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if dynamic </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="154" column="1" bodyfile="src/Multiplexer.h" bodystart="154" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a40688a6e7c1ad60472d6ce148245ac13" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int Loom_Multiplexer::get_update_period</definition>
+        <argsstring>() const </argsstring>
+        <name>get_update_period</name>
+        <briefdescription>
+<para>Get the sensor list update period. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The update period </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="158" column="1" bodyfile="src/Multiplexer.h" bodystart="158" bodyend="158"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom___multiplexer_1ad0f1370584caf13e726c623dbbb250e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::set_is_dynamic</definition>
+        <argsstring>(const bool dynamic)</argsstring>
+        <name>set_is_dynamic</name>
+        <param>
+          <type>const bool</type>
+          <declname>dynamic</declname>
+        </param>
+        <briefdescription>
+<para>Set whether or not to periodically update list of attached sensors. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dynamic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The setting to set </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="166" column="1" bodyfile="src/Multiplexer.h" bodystart="166" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1af2d5ac2ec43d7d9d8e809c26780d4421" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::set_update_period</definition>
+        <argsstring>(const uint period)</argsstring>
+        <name>set_update_period</name>
+        <param>
+          <type>const uint</type>
+          <declname>period</declname>
+        </param>
+        <briefdescription>
+<para>Set the sensor list update period. </para>        </briefdescription>
+        <detaileddescription>
+<para>Requires dynamic_list to be enabled <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New update period </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="171" column="1" bodyfile="src/Multiplexer.h" bodystart="171" bodyend="171"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MISCELLANEOUS</header>
+      <memberdef kind="function" id="class_loom___multiplexer_1a7f196c3583edb132fd1531b1ce65d626" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::tca_select</definition>
+        <argsstring>(const uint8_t port) const </argsstring>
+        <name>tca_select</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Select communication with sensor at index port. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The port to open I2C communication on </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="181" column="1" bodyfile="src/Multiplexer.cpp" bodystart="383" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a08f67f6d0d197e8c0668163b5434c50d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Multiplexer::tca_deselect</definition>
+        <argsstring>() const </argsstring>
+        <name>tca_deselect</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="183" column="1" bodyfile="src/Multiplexer.cpp" bodystart="393" bodyend="398"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a7602ce89f4928a3d1dfb356417bcb4d3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom_i2_c_sensor" kindref="compound">LoomI2CSensor</ref> *</type>
+        <definition>LoomI2CSensor * Loom_Multiplexer::generate_sensor_object</definition>
+        <argsstring>(const byte i2c_address, const uint8_t port)</argsstring>
+        <name>generate_sensor_object</name>
+        <param>
+          <type>const byte</type>
+          <declname>i2c_address</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Create appropriate instance to manage sensor. </para>        </briefdescription>
+        <detaileddescription>
+<para>Compares I2C address to known sensors and generates corresponding sensor instance <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">i2c_address</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The I2C address to match to sensor class </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the generated I2C sensor object, Null if no match for that address </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="189" column="1" bodyfile="src/Multiplexer.cpp" bodystart="124" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a7ae9003c4907b3d70339ebb80f663b3f" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>byte</type>
+        <definition>byte Loom_Multiplexer::get_i2c_on_port</definition>
+        <argsstring>(const uint8_t port) const </argsstring>
+        <name>get_i2c_on_port</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Determine the I2C address of the sensor (if any) on port. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The port to get sensor address of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The I2C address of sensor, 0x00 if no sensor found </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="194" column="1" bodyfile="src/Multiplexer.cpp" bodystart="334" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1aeda0fe5e567fbabc20b0ca0728967067" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Multiplexer::i2c_conflict</definition>
+        <argsstring>(byte address) const </argsstring>
+        <name>i2c_conflict</name>
+        <param>
+          <type>byte</type>
+          <declname>address</declname>
+        </param>
+        <briefdescription>
+<para>Checks for an I2C conflict with this address. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">address</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The I2C address to check for conflicts </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if there is a conflict, false otherwise </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="199" column="1" bodyfile="src/Multiplexer.cpp" bodystart="354" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___multiplexer_1a600d8558540af13ea6ddff2b5ef5d907" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; byte &gt;</type>
+        <definition>std::vector&lt; byte &gt; Loom_Multiplexer::find_i2c_conflicts</definition>
+        <argsstring>()</argsstring>
+        <name>find_i2c_conflicts</name>
+        <briefdescription>
+<para>Find all I2C conflicts Loops through known addresses and checks if they are being used outside of the multiplexer. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A vector of conflicting I2C addresses </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="204" column="1" bodyfile="src/Multiplexer.cpp" bodystart="361" bodyend="380"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_loom___multiplexer_1a33b884fb7de7704c99e44f14733c24b4" prot="private" static="yes" mutable="no">
+        <type>const std::array&lt; byte, 21 &gt;</type>
+        <definition>const std::array&lt; byte, 21 &gt; Loom_Multiplexer::known_addresses</definition>
+        <argsstring></argsstring>
+        <name>known_addresses</name>
+        <initializer>= 
+{
+	0x10, 
+	0x11, 
+	0x19, 
+	0x1C, 
+	0x1D, 
+	0x1E, 
+	0x1F, 
+	0x20, 
+	0x21, 
+	0x29, 
+	0x36, 
+	0x39, 
+	0x40, 
+	0x44, 
+	0x45, 
+	0x49, 
+	0x68, 
+	0x69, 
+	0x70, 
+	0x76, 
+	0x77  
+}</initializer>
+        <briefdescription>
+<para>List of known I2C addresses used by Loom. </para>        </briefdescription>
+        <detaileddescription>
+<para>Used to avoid checking addresses that no sensors in Loom use </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="62" column="1" bodyfile="src/Multiplexer.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___multiplexer_1a1ca4e73888b5d46fef8c09997148a937" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_i2_c_sensor" kindref="compound">LoomI2CSensor</ref> **</type>
+        <definition>LoomI2CSensor** Loom_Multiplexer::sensors</definition>
+        <argsstring></argsstring>
+        <name>sensors</name>
+        <briefdescription>
+<para>Array of I2C sensor objects. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="66" column="1" bodyfile="src/Multiplexer.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___multiplexer_1af382145cee4e802bbf431e799983423b" prot="protected" static="no" mutable="no">
+        <type>byte</type>
+        <definition>byte Loom_Multiplexer::i2c_address</definition>
+        <argsstring></argsstring>
+        <name>i2c_address</name>
+        <briefdescription>
+<para>The multiplexer&apos;s I2C address. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="68" column="1" bodyfile="src/Multiplexer.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___multiplexer_1a444e58e98dd2ef120e2bb5a2e6befc45" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Multiplexer::num_ports</definition>
+        <argsstring></argsstring>
+        <name>num_ports</name>
+        <briefdescription>
+<para>The number of ports on the multiplexer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="70" column="1" bodyfile="src/Multiplexer.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___multiplexer_1a90202eb1f078d7448cf0b0763ddbcb3d" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Multiplexer::dynamic_list</definition>
+        <argsstring></argsstring>
+        <name>dynamic_list</name>
+        <briefdescription>
+<para>Whether or not sensor list is dynamic (refresh sensor list periodically) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="71" column="1" bodyfile="src/Multiplexer.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___multiplexer_1a34d6b989ed4a1b5059fd28c277f9b0c9" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint Loom_Multiplexer::update_period</definition>
+        <argsstring></argsstring>
+        <name>update_period</name>
+        <briefdescription>
+<para>Interval to update sensor list at. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="72" column="1" bodyfile="src/Multiplexer.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___multiplexer_1a0b5eae9f338d70f873c04a5c46f6556c" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Multiplexer::control_port</definition>
+        <argsstring></argsstring>
+        <name>control_port</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="74" column="1" bodyfile="src/Multiplexer.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___multiplexer_1a56aa8b81fecbab9d25c7c9fb0e607908" prot="protected" static="no" mutable="no">
+        <type>byte</type>
+        <definition>byte Loom_Multiplexer::control_address</definition>
+        <argsstring></argsstring>
+        <name>control_address</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="75" column="1" bodyfile="src/Multiplexer.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___multiplexer_1a2e924abfa8444f66dc1b9cdf3a3aad47" prot="protected" static="no" mutable="no">
+        <type>unsigned long</type>
+        <definition>unsigned long Loom_Multiplexer::last_update_time</definition>
+        <argsstring></argsstring>
+        <name>last_update_time</name>
+        <briefdescription>
+<para>When the sensor list was last updated. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="77" column="1" bodyfile="src/Multiplexer.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___multiplexer_1ab30823612eef6bb3fcd2fc023bc425b3" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; byte &gt;</type>
+        <definition>std::vector&lt;byte&gt; Loom_Multiplexer::i2c_conflicts</definition>
+        <argsstring></argsstring>
+        <name>i2c_conflicts</name>
+        <briefdescription>
+<para>List of I2C address conflicts. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="78" column="1" bodyfile="src/Multiplexer.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="class_loom___multiplexer_1aa7bed0505f58c0c7ef22fe9c8844d807" prot="protected" static="yes" mutable="no">
+        <type>const std::array&lt; byte, 9 &gt;</type>
+        <definition>const std::array&lt; byte, 9 &gt; Loom_Multiplexer::alt_addresses</definition>
+        <argsstring></argsstring>
+        <name>alt_addresses</name>
+        <initializer>= {
+	0x70,
+	0x71,
+	0x72,
+	0x73,
+	0x74,
+	0x75,
+	0x76,
+	0x77,
+	0x78
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="80" column="1" bodyfile="src/Multiplexer.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Multiplexer manager for interfacing with multiple I2C sensors. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___multiplexer.html">Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="788">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="787">
+        <label>Loom_Multiplexer</label>
+        <link refid="class_loom___multiplexer"/>
+        <childnode refid="788" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="795">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="791">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="792" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="793" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="798" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="794" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="790">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="791" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="799">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="794">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="790" relation="public-inheritance">
+        </childnode>
+        <childnode refid="795" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="796" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="793" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="797" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="798" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="799" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="789">
+        <label>Loom_Multiplexer</label>
+        <link refid="class_loom___multiplexer"/>
+        <childnode refid="790" relation="public-inheritance">
+        </childnode>
+        <childnode refid="800" relation="usage">
+          <edgelabel>sensors</edgelabel>
+        </childnode>
+      </node>
+      <node id="793">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="790" relation="public-inheritance">
+        </childnode>
+        <childnode refid="794" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="800">
+        <label>LoomI2CSensor</label>
+        <link refid="class_loom_i2_c_sensor"/>
+        <childnode refid="801" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="801">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="790" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="792">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="790" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="798">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="790" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="796">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="797">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Multiplexer.h" line="57" column="1" bodyfile="src/Multiplexer.h" bodystart="56" bodyend="205"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>add_config</name></member>
+      <member refid="class_loom___multiplexer_1aa7bed0505f58c0c7ef22fe9c8844d807" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>alt_addresses</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>category</name></member>
+      <member refid="class_loom___multiplexer_1a56aa8b81fecbab9d25c7c9fb0e607908" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>control_address</name></member>
+      <member refid="class_loom___multiplexer_1a0b5eae9f338d70f873c04a5c46f6556c" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>control_port</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>device_manager</name></member>
+      <member refid="class_loom___multiplexer_1abadc1f55ae04c66e761d366325a0804f" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>dispatch</name></member>
+      <member refid="class_loom___multiplexer_1a90202eb1f078d7448cf0b0763ddbcb3d" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>dynamic_list</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom___multiplexer_1a600d8558540af13ea6ddff2b5ef5d907" prot="private" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>find_i2c_conflicts</name></member>
+      <member refid="class_loom___multiplexer_1a7602ce89f4928a3d1dfb356417bcb4d3" prot="private" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>generate_sensor_object</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_device_manager</name></member>
+      <member refid="class_loom___multiplexer_1a7ae9003c4907b3d70339ebb80f663b3f" prot="private" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_i2c_on_port</name></member>
+      <member refid="class_loom___multiplexer_1a49c25a8c55ca026c231d59608fc0d6d4" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_is_dynamic</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom___multiplexer_1aa0745a2b7a8e4f48fb4f74f759e87220" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_sensor</name></member>
+      <member refid="class_loom___multiplexer_1a80fd7464a74af9a325cbf830ee51410e" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_sensor_list</name></member>
+      <member refid="class_loom___multiplexer_1a40688a6e7c1ad60472d6ce148245ac13" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>get_update_period</name></member>
+      <member refid="class_loom___multiplexer_1af382145cee4e802bbf431e799983423b" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>i2c_address</name></member>
+      <member refid="class_loom___multiplexer_1aeda0fe5e567fbabc20b0ca0728967067" prot="private" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>i2c_conflict</name></member>
+      <member refid="class_loom___multiplexer_1ab30823612eef6bb3fcd2fc023bc425b3" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>i2c_conflicts</name></member>
+      <member refid="class_loom___multiplexer_1a33b884fb7de7704c99e44f14733c24b4" prot="private" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>known_addresses</name></member>
+      <member refid="class_loom___multiplexer_1a2e924abfa8444f66dc1b9cdf3a3aad47" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>last_update_time</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___multiplexer_1a4409df6598098393b5fa3b3012735d55" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>Loom_Multiplexer</name></member>
+      <member refid="class_loom___multiplexer_1a28e8d5e652d1be8553d0f283ce1c9e38" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>Loom_Multiplexer</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>LoomModule</name></member>
+      <member refid="class_loom___multiplexer_1aefd28e7b8fa3faf53ec42cb25419057a" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>measure</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>module_type</name></member>
+      <member refid="class_loom___multiplexer_1a444e58e98dd2ef120e2bb5a2e6befc45" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>num_ports</name></member>
+      <member refid="class_loom___multiplexer_1aa09d42f26ce3c4185ae8e9b55e3d851f" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___multiplexer_1a8196a461d4b93f39f7b469ae89fa17c7" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>power_down</name></member>
+      <member refid="class_loom___multiplexer_1ad09225b1a4c8b70735992cd5eac9a71b" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>power_up</name></member>
+      <member refid="class_loom___multiplexer_1a21759070f77ec1560e9b2a272a0c0640" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>print_config</name></member>
+      <member refid="class_loom___multiplexer_1aa77642642bfd9f33769f6fd98863e5cc" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>print_measurements</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>print_module_label</name></member>
+      <member refid="class_loom___multiplexer_1a2a60ebefe68aa75a3141015d2aa81955" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>print_verbosity</name></member>
+      <member refid="class_loom___multiplexer_1ac0749b8dc8f72727e7fab5834898d2da" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>refresh_sensors</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom___multiplexer_1a1ca4e73888b5d46fef8c09997148a937" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>sensors</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>set_active</name></member>
+      <member refid="class_loom___multiplexer_1ad0f1370584caf13e726c623dbbb250e1" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>set_is_dynamic</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___multiplexer_1af2d5ac2ec43d7d9d8e809c26780d4421" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>set_update_period</name></member>
+      <member refid="class_loom___multiplexer_1a08f67f6d0d197e8c0668163b5434c50d" prot="private" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>tca_deselect</name></member>
+      <member refid="class_loom___multiplexer_1a7f196c3583edb132fd1531b1ce65d626" prot="private" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>tca_select</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>Type</name></member>
+      <member refid="class_loom___multiplexer_1a34d6b989ed4a1b5059fd28c277f9b0c9" prot="protected" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>update_period</name></member>
+      <member refid="class_loom___multiplexer_1a5db8b4a6043b42b792f6230f96374ef4" prot="public" virt="non-virtual"><scope>Loom_Multiplexer</scope><name>~Loom_Multiplexer</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_Multiplexer</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

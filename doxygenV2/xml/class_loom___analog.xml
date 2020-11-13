@@ -1,0 +1,1232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___analog" kind="class" language="C++" prot="public">
+    <compoundname>Loom_Analog</compoundname>
+    <basecompoundref refid="class_loom_sensor" prot="public" virt="non-virtual">LoomSensor</basecompoundref>
+    <includes refid="_analog_8h" local="no">Analog.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___analog_1a3ce93ee8e03835045eb176828cc27add" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Analog::Loom_Analog</definition>
+        <argsstring>(LoomManager *manager, const uint8_t num_samples=8, const uint8_t read_resolution=12, const bool enableA0=true, const bool enableA1=true, const bool enableA2=true, const bool enableA3=true, const bool enableA4=true, const bool enableA5=true, const Conversion convertA0=Conversion::NONE, const Conversion convertA1=Conversion::NONE, const Conversion convertA2=Conversion::NONE, const Conversion convertA3=Conversion::NONE, const Conversion convertA4=Conversion::NONE, const Conversion convertA5=Conversion::NONE, const float temperature=25.0)</argsstring>
+        <name>Loom_Analog</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>num_samples</declname>
+          <defval>8</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>read_resolution</declname>
+          <defval>12</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enableA0</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enableA1</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enableA2</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enableA3</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enableA4</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enableA5</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+          <declname>convertA0</declname>
+          <defval><ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" kindref="member">Conversion::NONE</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+          <declname>convertA1</declname>
+          <defval><ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" kindref="member">Conversion::NONE</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+          <declname>convertA2</declname>
+          <defval><ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" kindref="member">Conversion::NONE</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+          <declname>convertA3</declname>
+          <defval><ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" kindref="member">Conversion::NONE</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+          <declname>convertA4</declname>
+          <defval><ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" kindref="member">Conversion::NONE</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+          <declname>convertA5</declname>
+          <defval><ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" kindref="member">Conversion::NONE</ref></defval>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>temperature</declname>
+          <defval>25.0</defval>
+        </param>
+        <briefdescription>
+<para>Analog manager module constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">num_samples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;8&gt; | {1, 2, 4, 8, 16} | How many samples to take and average </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">read_resolution</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;12&gt; | [8-12] | How many bits to read analog values at </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enableA0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | <ref refid="namespace_enable" kindref="compound">Enable</ref> pin A0 for managing </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enableA1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | <ref refid="namespace_enable" kindref="compound">Enable</ref> pin A1 for managing </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enableA2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | <ref refid="namespace_enable" kindref="compound">Enable</ref> pin A2 for managing </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enableA3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | <ref refid="namespace_enable" kindref="compound">Enable</ref> pin A3 for managing </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enableA4</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | <ref refid="namespace_enable" kindref="compound">Enable</ref> pin A4 for managing </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enableA5</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | <ref refid="namespace_enable" kindref="compound">Enable</ref> pin A5 for managing </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">convertA0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">convertA1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">convertA2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">convertA3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A3 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">convertA4</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A4 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">convertA5</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A5 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">temperature</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>float | &lt;25.0&gt; | [0.-100.] | Temperature to using in conversions </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="94" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="14" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a617a6b9c093fb8bb54abd3e55d051c0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Analog::Loom_Analog</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_Analog</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="116" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="76" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1aa8d2a87c4c6ae72c1a943b95c96f2b53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Analog::~Loom_Analog</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_Analog</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="119" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___analog_1afa90bbf4d632fe9b3168567cfc605f77" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::measure</definition>
+        <argsstring>() override</argsstring>
+        <name>measure</name>
+        <reimplements refid="class_loom_sensor_1a390ef79a4d5d6b6386e099c7fe56ed1a">measure</reimplements>
+        <briefdescription>
+<para>Take any relevant measurements. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="125" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="163" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1ab22f3a9b0d5c78feb1e53cf565483385" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Package a modules measurements or state. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to put data into </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="126" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="176" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1ad74305d4a8d7f705072561b92e7b7c68" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::add_config</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>add_config</name>
+        <reimplements refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0">add_config</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Add configuration information to JsonObject. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> iterates over modules to build complete configuration <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json configuration object to add to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="127" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="86" bodyend="99"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___analog_1ae41c9795ceb9079b88a87cb64d7869cf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_sensor_1aaa3bb2a2165029906c4ee815e790c89e">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="133" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="132" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a981f42f7a1358ea77ec087df13859406" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::print_measurements</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_measurements</name>
+        <reimplements refid="class_loom_sensor_1aba2aa35441c2eb1cf27b95a1fc08b288">print_measurements</reimplements>
+        <briefdescription>
+<para>Print the last set of measurements taken. </para>        </briefdescription>
+        <detaileddescription>
+<para>Does not package the data. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="134" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="147" bodyend="160"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom___analog_1ab5f411c342780111457c64234b4d643a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Analog::get_analog_resolution</definition>
+        <argsstring>() const </argsstring>
+        <name>get_analog_resolution</name>
+        <briefdescription>
+<para>Get the current analog read resolution. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Read resolution </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="142" column="1" bodyfile="src/Sensors/Analog.h" bodystart="142" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a8e908b2ba222b3d4f62c7f7e329cbe8e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int Loom_Analog::get_analog_val</definition>
+        <argsstring>(const uint8_t pin) const </argsstring>
+        <name>get_analog_val</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>Get the analog value of specified pin. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pin to read </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The analog value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="147" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="196" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1aa92ebd0ecbf15bc6a4a48b60d7d86b7b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_Analog::get_battery</definition>
+        <argsstring>() const </argsstring>
+        <name>get_battery</name>
+        <briefdescription>
+<para>Get the battery voltage of the device. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The battery voltage </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="151" column="1" bodyfile="src/Sensors/Analog.h" bodystart="151" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1adfbd651535167726deffc2c033f0b725" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Analog::get_pin_enabled</definition>
+        <argsstring>(const uint8_t pin) const </argsstring>
+        <name>get_pin_enabled</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>Get if a pin is enabled in manager. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pin to get enable state of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The enabled state of pin </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="156" column="1" bodyfile="src/Sensors/Analog.h" bodystart="156" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1ac8ac33bb528a34b34c389bb2debfe1e7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+        <definition>Conversion Loom_Analog::get_conversion</definition>
+        <argsstring>(const uint8_t pin) const </argsstring>
+        <name>get_conversion</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>Get the current conversion associated with a pin. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pin to get conversion for </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The current Conversion setting </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="161" column="1" bodyfile="src/Sensors/Analog.h" bodystart="161" bodyend="161"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom___analog_1a5a513390535fd71e06df243a964bab84" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::set_analog_resolution</definition>
+        <argsstring>(const uint8_t res)</argsstring>
+        <name>set_analog_resolution</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>res</declname>
+        </param>
+        <briefdescription>
+<para>Set the analog read resolution. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Resolution to read at (12 bit max) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="170" column="1" bodyfile="src/Sensors/Analog.h" bodystart="170" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a0b6e9a100feed45e710aa05fac607147" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::set_pin_enabled</definition>
+        <argsstring>(const uint8_t pin, const bool e)</argsstring>
+        <name>set_pin_enabled</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>pin</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>Set the enable state of a pin. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pin to set enable state of </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="namespace_enable" kindref="compound">Enable</ref> state </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="175" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="202" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1ad0cd72042cd7a978c7c1fc6761c38cf8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::set_conversion</definition>
+        <argsstring>(const uint8_t pin, const Conversion c)</argsstring>
+        <name>set_conversion</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>pin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>Set the current conversion associated with a pin. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pin to set conversion for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Conversion to use </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="180" column="1" bodyfile="src/Sensors/Analog.h" bodystart="180" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a80761be7bed4d3ae55eb4b9faa26a58c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::set_enable_conversions</definition>
+        <argsstring>(const bool e)</argsstring>
+        <name>set_enable_conversions</name>
+        <param>
+          <type>const bool</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="namespace_enable" kindref="compound">Enable</ref> or disable all conversions. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="namespace_enable" kindref="compound">Enable</ref> state </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="184" column="1" bodyfile="src/Sensors/Analog.h" bodystart="184" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1af7a82f3654bf08974ff95dd8ec90dba7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Analog::set_temperature</definition>
+        <argsstring>(const float temp)</argsstring>
+        <name>set_temperature</name>
+        <param>
+          <type>const float</type>
+          <declname>temp</declname>
+        </param>
+        <briefdescription>
+<para>Set temperature to use in conversions that require temperature compensation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">temp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Temperature to use </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="188" column="1" bodyfile="src/Sensors/Analog.h" bodystart="188" bodyend="188"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MISCELLANEOUS</header>
+      <memberdef kind="function" id="class_loom___analog_1a9bd686a057aaa43611665bd344fd7cac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * Loom_Analog::conversion_name</definition>
+        <argsstring>(const Conversion conversion)</argsstring>
+        <name>conversion_name</name>
+        <param>
+          <type>const <ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+          <declname>conversion</declname>
+        </param>
+        <briefdescription>
+<para>Get string of name associated with conversion enum. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>String of conversion </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="196" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="117" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1ac92bd4f9d0f826e385c7139e963b8799" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t Loom_Analog::read_analog</definition>
+        <argsstring>(const uint8_t chnl) const </argsstring>
+        <name>read_analog</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>chnl</declname>
+        </param>
+        <briefdescription>
+<para>Read analog value of pin. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">chnl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The channel/pin to read </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The analog value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="203" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="211" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a6f8eda1abe5a31a6da40a1c3a92086bd" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_Analog::convert</definition>
+        <argsstring>(const uint8_t pin, const uint16_t analog) const </argsstring>
+        <name>convert</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>pin</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>analog</declname>
+        </param>
+        <briefdescription>
+<para>Apply conversion (if any) to analog value based on associated conversion setting. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pin the analog value is associated with </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">analog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Analog value to convert </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The converted value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="209" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="102" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1aa9930480194ee4e72857fc4268b38f78" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_Analog::convert_voltage</definition>
+        <argsstring>(const uint16_t analog) const </argsstring>
+        <name>convert_voltage</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>analog</declname>
+        </param>
+        <briefdescription>
+<para>Convert analog to voltage. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">analog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Analog value to convert </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Converted value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="214" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="231" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a31415faf3f4666ee999aacd45f54e149" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_Analog::convert_thermistor</definition>
+        <argsstring>(const uint16_t analog) const </argsstring>
+        <name>convert_thermistor</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>analog</declname>
+        </param>
+        <briefdescription>
+<para>Convert analog to temperature of thermistor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">analog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Analog value to convert </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Converted value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="219" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="244" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1ab395894b6612b3af47ba450466fe9b84" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_Analog::convert_pH</definition>
+        <argsstring>(const uint16_t analog) const </argsstring>
+        <name>convert_pH</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>analog</declname>
+        </param>
+        <briefdescription>
+<para>Convert analog to pH. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">analog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Analog value to convert </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Converted value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="224" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="273" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a40115be453d0e1083003df1d60f55f75" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_Analog::convert_turbidity</definition>
+        <argsstring>(const uint16_t analog) const </argsstring>
+        <name>convert_turbidity</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>analog</declname>
+        </param>
+        <briefdescription>
+<para>Convert analog to turbidity. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">analog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Analog value to convert </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Converted value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="229" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="301" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1ac8a09a72a89f03e732e48717d1129101" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_Analog::convert_EC</definition>
+        <argsstring>(const uint16_t analog) const </argsstring>
+        <name>convert_EC</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>analog</declname>
+        </param>
+        <briefdescription>
+<para>Convert analog to electrical conductivity. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">analog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Analog value to convert </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Converted value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="234" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="314" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a6663232a1bb8a4392dee529a890b9924" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_Analog::convert_TDS</definition>
+        <argsstring>(const uint16_t analog) const </argsstring>
+        <name>convert_TDS</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>analog</declname>
+        </param>
+        <briefdescription>
+<para>Convert analog to total dissolved solids. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">analog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Analog value to convert </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Converted value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="239" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="333" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___analog_1a864a71b0da1a1b950200365164d6664b" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_Analog::convert_salinity</definition>
+        <argsstring>(const uint16_t analog) const </argsstring>
+        <name>convert_salinity</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>analog</declname>
+        </param>
+        <briefdescription>
+<para>Convert analog to salinity (total dissolved solids) </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">analog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Analog value to convert </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Converted value </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="244" column="1" bodyfile="src/Sensors/Analog.cpp" bodystart="340" bodyend="344"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="class_loom___analog_1a83079adfd115a272351323429cefad46" prot="public" static="no">
+        <name>Conversion</name>
+        <enumvalue id="class_loom___analog_1a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" prot="public">
+          <name>NONE</name>
+          <briefdescription>
+<para>No conversion applied. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___analog_1a83079adfd115a272351323429cefad46ad19d26898eee98e71fc8b0ad69bb898b" prot="public">
+          <name>VOLTAGE</name>
+          <briefdescription>
+<para>Analog to voltage. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___analog_1a83079adfd115a272351323429cefad46ada003223c47c56d9514ec438a602ae43" prot="public">
+          <name>THERMISTOR</name>
+          <briefdescription>
+<para>Thermistor. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___analog_1a83079adfd115a272351323429cefad46aa25496ebf095e4198da4088449c83ac6" prot="public">
+          <name>PH</name>
+          <briefdescription>
+<para>pH value </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___analog_1a83079adfd115a272351323429cefad46a3a6ff147d93a7b2d56cf875994d33775" prot="public">
+          <name>TURBIDITY</name>
+          <briefdescription>
+<para>Turbidity. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___analog_1a83079adfd115a272351323429cefad46a3fd6b696867d70225deda7868308679b" prot="public">
+          <name>EC</name>
+          <briefdescription>
+<para>Electrical Conductivity. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___analog_1a83079adfd115a272351323429cefad46a7a323371ef1444029ad6c74cd68809dd" prot="public">
+          <name>TDS</name>
+          <briefdescription>
+<para>Total Dissolved Solids. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___analog_1a83079adfd115a272351323429cefad46a8ed43df473ba4db0ebe07e408199d5be" prot="public">
+          <name>SALINITY</name>
+          <briefdescription>
+<para>Salinity. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Different types of conversions from analog to specified unit. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="36" column="1" bodyfile="src/Sensors/Analog.h" bodystart="36" bodyend="46"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___analog_1a8593018496b601b75eec9a1df44574fb" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Analog::read_resolution</definition>
+        <argsstring></argsstring>
+        <name>read_resolution</name>
+        <briefdescription>
+<para>Which resolution to read at (generally use 12 or 10) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="51" column="1" bodyfile="src/Sensors/Analog.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___analog_1a1111168ede4b93a1507e0cd67d849fd7" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Analog::pin_enabled[ANALOG_COUNT]</definition>
+        <argsstring>[ANALOG_COUNT]</argsstring>
+        <name>pin_enabled</name>
+        <briefdescription>
+<para>Whether pins A0-A5 are enabled for analog reading. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="54" column="1" bodyfile="src/Sensors/Analog.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___analog_1a9badecf02377889b100678c8c50ba387" prot="protected" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t Loom_Analog::analog_vals[ANALOG_COUNT]</definition>
+        <argsstring>[ANALOG_COUNT]</argsstring>
+        <name>analog_vals</name>
+        <briefdescription>
+<para>Last known analog readings for pin A0-A5. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="57" column="1" bodyfile="src/Sensors/Analog.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___analog_1a1a1f859c11385e20ff2328f7df868436" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Loom_Analog::battery</definition>
+        <argsstring></argsstring>
+        <name>battery</name>
+        <briefdescription>
+<para>Battery voltage. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="60" column="1" bodyfile="src/Sensors/Analog.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___analog_1ab1be771ab1dfad8ddb955c42ba3a3de6" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Analog::enable_conversions</definition>
+        <argsstring></argsstring>
+        <name>enable_conversions</name>
+        <briefdescription>
+<para><ref refid="namespace_enable" kindref="compound">Enable</ref> or disable all conversions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="63" column="1" bodyfile="src/Sensors/Analog.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___analog_1a3bf07770f1244670cbfaa8d6e563f2ef" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___analog_1a83079adfd115a272351323429cefad46" kindref="member">Conversion</ref></type>
+        <definition>Conversion Loom_Analog::conversions[ANALOG_COUNT]</definition>
+        <argsstring>[ANALOG_COUNT]</argsstring>
+        <name>conversions</name>
+        <briefdescription>
+<para>Conversion (if any) to apply to analog value when printing / packaging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="66" column="1" bodyfile="src/Sensors/Analog.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___analog_1ad01ead292b5fecf5178cd1baf9354ac3" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Loom_Analog::temperature</definition>
+        <argsstring></argsstring>
+        <name>temperature</name>
+        <briefdescription>
+<para>Temperature to use in conversions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.h" line="69" column="1" bodyfile="src/Sensors/Analog.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Analog pin manager module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___analog.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="355">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="353">
+        <label>Loom_Analog</label>
+        <link refid="class_loom___analog"/>
+        <childnode refid="354" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="354">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="355" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="363">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="359">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="360" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="361" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="366" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="362" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="358">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="359" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="367">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="362">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="358" relation="public-inheritance">
+        </childnode>
+        <childnode refid="363" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="364" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="361" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="365" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="366" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="367" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="361">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="358" relation="public-inheritance">
+        </childnode>
+        <childnode refid="362" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="356">
+        <label>Loom_Analog</label>
+        <link refid="class_loom___analog"/>
+        <childnode refid="357" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="357">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="358" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="360">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="358" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="366">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="358" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="364">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="365">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Sensors/Analog.h" line="30" column="1" bodyfile="src/Sensors/Analog.h" bodystart="29" bodyend="246"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>active</name></member>
+      <member refid="class_loom___analog_1ad74305d4a8d7f705072561b92e7b7c68" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>add_config</name></member>
+      <member refid="class_loom___analog_1a9badecf02377889b100678c8c50ba387" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>analog_vals</name></member>
+      <member refid="class_loom___analog_1a1a1f859c11385e20ff2328f7df868436" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>battery</name></member>
+      <member refid="class_loom_sensor_1ab75183469715506e8a694b9559b76c35" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>calibrate</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>Category</name></member>
+      <member refid="class_loom___analog_1a83079adfd115a272351323429cefad46" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>Conversion</name></member>
+      <member refid="class_loom___analog_1a9bd686a057aaa43611665bd344fd7cac" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>conversion_name</name></member>
+      <member refid="class_loom___analog_1a3bf07770f1244670cbfaa8d6e563f2ef" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>conversions</name></member>
+      <member refid="class_loom___analog_1a6f8eda1abe5a31a6da40a1c3a92086bd" prot="private" virt="non-virtual"><scope>Loom_Analog</scope><name>convert</name></member>
+      <member refid="class_loom___analog_1ac8a09a72a89f03e732e48717d1129101" prot="private" virt="non-virtual"><scope>Loom_Analog</scope><name>convert_EC</name></member>
+      <member refid="class_loom___analog_1ab395894b6612b3af47ba450466fe9b84" prot="private" virt="non-virtual"><scope>Loom_Analog</scope><name>convert_pH</name></member>
+      <member refid="class_loom___analog_1a864a71b0da1a1b950200365164d6664b" prot="private" virt="non-virtual"><scope>Loom_Analog</scope><name>convert_salinity</name></member>
+      <member refid="class_loom___analog_1a6663232a1bb8a4392dee529a890b9924" prot="private" virt="non-virtual"><scope>Loom_Analog</scope><name>convert_TDS</name></member>
+      <member refid="class_loom___analog_1a31415faf3f4666ee999aacd45f54e149" prot="private" virt="non-virtual"><scope>Loom_Analog</scope><name>convert_thermistor</name></member>
+      <member refid="class_loom___analog_1a40115be453d0e1083003df1d60f55f75" prot="private" virt="non-virtual"><scope>Loom_Analog</scope><name>convert_turbidity</name></member>
+      <member refid="class_loom___analog_1aa9930480194ee4e72857fc4268b38f78" prot="private" virt="non-virtual"><scope>Loom_Analog</scope><name>convert_voltage</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>dispatch</name></member>
+      <member refid="class_loom___analog_1ab1be771ab1dfad8ddb955c42ba3a3de6" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>enable_conversions</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_active</name></member>
+      <member refid="class_loom___analog_1ab5f411c342780111457c64234b4d643a" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_analog_resolution</name></member>
+      <member refid="class_loom___analog_1a8e908b2ba222b3d4f62c7f7e329cbe8e" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_analog_val</name></member>
+      <member refid="class_loom___analog_1aa92ebd0ecbf15bc6a4a48b60d7d86b7b" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_battery</name></member>
+      <member refid="class_loom___analog_1ac8ac33bb528a34b34c389bb2debfe1e7" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_conversion</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_module_type</name></member>
+      <member refid="class_loom_sensor_1ae9a177765bd3ab79e002e98df6053ce0" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_num_samples</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom___analog_1adfbd651535167726deffc2c033f0b725" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_pin_enabled</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___analog_1a3ce93ee8e03835045eb176828cc27add" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>Loom_Analog</name></member>
+      <member refid="class_loom___analog_1a617a6b9c093fb8bb54abd3e55d051c0a" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>Loom_Analog</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>LoomModule</name></member>
+      <member refid="class_loom_sensor_1acce7ce989a74b5e4b3c8ee51ae55e8a9" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>LoomSensor</name></member>
+      <member refid="class_loom___analog_1afa90bbf4d632fe9b3168567cfc605f77" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>measure</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>module_type</name></member>
+      <member refid="class_loom_sensor_1a0e74ebbaecde15ed1c71e1bb6bc6aebe" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>num_samples</name></member>
+      <member refid="class_loom___analog_1ab22f3a9b0d5c78feb1e53cf565483385" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___analog_1a1111168ede4b93a1507e0cd67d849fd7" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>pin_enabled</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>power_up</name></member>
+      <member refid="class_loom___analog_1ae41c9795ceb9079b88a87cb64d7869cf" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>print_config</name></member>
+      <member refid="class_loom___analog_1a981f42f7a1358ea77ec087df13859406" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>print_measurements</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>print_verbosity</name></member>
+      <member refid="class_loom___analog_1ac92bd4f9d0f826e385c7139e963b8799" prot="private" virt="non-virtual"><scope>Loom_Analog</scope><name>read_analog</name></member>
+      <member refid="class_loom___analog_1a8593018496b601b75eec9a1df44574fb" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>read_resolution</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>set_active</name></member>
+      <member refid="class_loom___analog_1a5a513390535fd71e06df243a964bab84" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>set_analog_resolution</name></member>
+      <member refid="class_loom___analog_1ad0cd72042cd7a978c7c1fc6761c38cf8" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>set_conversion</name></member>
+      <member refid="class_loom___analog_1a80761be7bed4d3ae55eb4b9faa26a58c" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>set_enable_conversions</name></member>
+      <member refid="class_loom_sensor_1ad02e186edda41d4458246f329641d6f4" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>set_num_samples</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom___analog_1a0b6e9a100feed45e710aa05fac607147" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>set_pin_enabled</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___analog_1af7a82f3654bf08974ff95dd8ec90dba7" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>set_temperature</name></member>
+      <member refid="class_loom___analog_1ad01ead292b5fecf5178cd1baf9354ac3" prot="protected" virt="non-virtual"><scope>Loom_Analog</scope><name>temperature</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>Type</name></member>
+      <member refid="class_loom___analog_1aa8d2a87c4c6ae72c1a943b95c96f2b53" prot="public" virt="non-virtual"><scope>Loom_Analog</scope><name>~Loom_Analog</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_sensor_1aac0541421949a20b91a13583271f6757" prot="public" virt="virtual"><scope>Loom_Analog</scope><name>~LoomSensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

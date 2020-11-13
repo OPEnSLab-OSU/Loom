@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_max___sub_8h" kind="file" language="C++">
+    <compoundname>Max_Sub.h</compoundname>
+    <includes refid="_subscribe_plat_8h" local="yes">SubscribePlat.h</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_max___pub_8cpp" local="yes">src/PublishPlats/Max_Pub.cpp</includedby>
+    <includedby refid="_max___sub_8cpp" local="yes">src/SubscribePlats/Max_Sub.cpp</includedby>
+    <incdepgraph>
+      <node id="5864">
+        <label>../InternetPlats/InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="5858" relation="include">
+        </childnode>
+        <childnode refid="5865" relation="include">
+        </childnode>
+        <childnode refid="5866" relation="include">
+        </childnode>
+        <childnode refid="5867" relation="include">
+        </childnode>
+        <childnode refid="5868" relation="include">
+        </childnode>
+      </node>
+      <node id="5866">
+        <label>Udp.h</label>
+      </node>
+      <node id="5861">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5858">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5859" relation="include">
+        </childnode>
+        <childnode refid="5861" relation="include">
+        </childnode>
+        <childnode refid="5862" relation="include">
+        </childnode>
+        <childnode refid="5863" relation="include">
+        </childnode>
+      </node>
+      <node id="5865">
+        <label>Client.h</label>
+      </node>
+      <node id="5857">
+        <label>SubscribePlat.h</label>
+        <link refid="_subscribe_plat_8h"/>
+        <childnode refid="5858" relation="include">
+        </childnode>
+        <childnode refid="5864" relation="include">
+        </childnode>
+      </node>
+      <node id="5862">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5860" relation="include">
+        </childnode>
+        <childnode refid="5863" relation="include">
+        </childnode>
+      </node>
+      <node id="5856">
+        <label>src/SubscribePlats/Max_Sub.h</label>
+        <link refid="Max_Sub.h"/>
+        <childnode refid="5857" relation="include">
+        </childnode>
+      </node>
+      <node id="5859">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5860" relation="include">
+        </childnode>
+      </node>
+      <node id="5863">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5860">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5867">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="5868">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5870">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="5871" relation="include">
+        </childnode>
+        <childnode refid="5872" relation="include">
+        </childnode>
+      </node>
+      <node id="5874">
+        <label>src/SubscribePlats/Max_Sub.cpp</label>
+        <link refid="_max___sub_8cpp"/>
+      </node>
+      <node id="5869">
+        <label>src/SubscribePlats/Max_Sub.h</label>
+        <link refid="Max_Sub.h"/>
+        <childnode refid="5870" relation="include">
+        </childnode>
+        <childnode refid="5873" relation="include">
+        </childnode>
+        <childnode refid="5874" relation="include">
+        </childnode>
+      </node>
+      <node id="5873">
+        <label>src/PublishPlats/Max_Pub.cpp</label>
+        <link refid="_max___pub_8cpp"/>
+      </node>
+      <node id="5871">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="5872">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___max_sub" prot="public">Loom_MaxSub</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_max___sub_8h_1a5fd098da82ec1f15bf68c39a77926c55" prot="public" static="no">
+        <name>UDP_RECEIVE_OFFSET</name>
+        <initializer>9000</initializer>
+        <briefdescription>
+<para>UDP receiving port is this value + device instance number. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/Max_Sub.h" line="17" column="9" bodyfile="src/SubscribePlats/Max_Sub.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/SubscribePlats/Max_Sub.h"/>
+  </compounddef>
+</doxygen>

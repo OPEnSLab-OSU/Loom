@@ -1,0 +1,236 @@
+\hypertarget{class_loom___m_s5803}{}\section{Loom\+\_\+\+M\+S5803 Class Reference}
+\label{class_loom___m_s5803}\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+
+
+M\+S5803 Atmospheric Pressure / Temperature sensor module.  
+
+
+
+
+{\ttfamily \#include $<$M\+S5803.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+M\+S5803\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_loom___m_s5803__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___m_s5803_aa10fe4021a423e9ee4bcfa7879be505a}{Loom\+\_\+\+M\+S5803} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}=0x76, const uint8\+\_\+t mux\+\_\+port=255)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___m_s5803_a26e351679e5e1ec58052a8cc6763053c}{Loom\+\_\+\+M\+S5803} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___m_s5803_a97d45c05c8057838b804e5b94f261ff6}{$\sim$\+Loom\+\_\+\+M\+S5803} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___m_s5803_a6c776fb6cb23d626cf5d6e3094c443a0}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___m_s5803_a994abd7bfb62ece7b47bd595d70603b9}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___m_s5803_a68188af662a98e8324ac267a2d94690a}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_loom___m_s5803_a7297d4cd69e9c44bc10bb6f3edbdff00}{get\+\_\+temperature} () const 
+\begin{DoxyCompactList}\small\item\em Get the temperature reading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+M\+S\+\_\+5803 \hyperlink{class_loom___m_s5803_a51efd19c53ce03744197e05c6c21ec2d}{inst\+\_\+\+M\+S5803}
+\begin{DoxyCompactList}\small\item\em Underlying M\+S5803 sensor manager instance. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom___m_s5803_aef9ff121171d7b27f369a60495666ab7}{M\+S\+\_\+\+P\+R\+OM} \mbox{[}8\mbox{]}
+\begin{DoxyCompactList}\small\item\em Read calibration data stored on sensor. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_s5803_afe0623825dcab69c7f204e32b0fcab56}{pressure}
+\begin{DoxyCompactList}\small\item\em Measure pressure. Units\+: mbar. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_s5803_a12df20babc5ac276523664c7d6607810}{temp}
+\begin{DoxyCompactList}\small\item\em Measured temperature. Units\+: °C. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+M\+S5803 Atmospheric Pressure / Temperature sensor module. 
+
+\begin{DoxyAttention}{Attention}
+Library is modified to support different I2C addresses and will not compile with Loom without the change. The modifed verision can be found in the \href{https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip}{\tt Loom\+\_\+\+Auxiliary} repository
+\end{DoxyAttention}
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___m_s5803.html}{\tt Module Documentation}
+\item \href{https://www.digikey.com/product-detail/en/te-connectivity-measurement-specialties/MS580302BA01-00/223-1624-5-ND/5277629}{\tt Product Page\+: M\+S580302\+B\+A01-\/00 Miniature Altimeter Module}
+\item \href{https://github.com/millerlp/MS5803_02}{\tt Dependency\+: M\+S5803\+\_\+2}
+\item \href{https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=MS5803-02BA&DocType=Data+Sheet&DocLang=English}{\tt Datasheet\+: M\+S5803-\/02\+BA}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ms5803-atmospheric-pressure--temperature-sensor}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+M\+S5803(\+Loom\+Manager $\ast$manager, const byte i2c\+\_\+address=0x76, const uint8\+\_\+t mux\+\_\+port=255)}{Loom_MS5803(LoomManager *manager, const byte i2c_address=0x76, const uint8_t mux_port=255)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+S5803\+::\+Loom\+\_\+\+M\+S5803 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{i2c\+\_\+address = {\ttfamily 0x76}, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___m_s5803_aa10fe4021a423e9ee4bcfa7879be505a}{}\label{class_loom___m_s5803_aa10fe4021a423e9ee4bcfa7879be505a}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x76$>$ $\vert$ \{0x76, 0x77\} $\vert$ I2C address (0x76 if C\+SB (pin 3) is High, 0x77 if C\+SB is Low) \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+port} & Int $\vert$ $<$255$>$ $\vert$ \mbox{[}0-\/16\mbox{]} $\vert$ Port on multiplexer \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+M\+S5803(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_MS5803(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+S5803\+::\+Loom\+\_\+\+M\+S5803 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___m_s5803_a26e351679e5e1ec58052a8cc6763053c}{}\label{class_loom___m_s5803_a26e351679e5e1ec58052a8cc6763053c}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!````~Loom\+\_\+\+M\+S5803@{$\sim$\+Loom\+\_\+\+M\+S5803}}
+\index{````~Loom\+\_\+\+M\+S5803@{$\sim$\+Loom\+\_\+\+M\+S5803}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+M\+S5803()=default}{~Loom_MS5803()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+S5803\+::$\sim$\+Loom\+\_\+\+M\+S5803 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___m_s5803_a97d45c05c8057838b804e5b94f261ff6}{}\label{class_loom___m_s5803_a97d45c05c8057838b804e5b94f261ff6}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!get\+\_\+temperature@{get\+\_\+temperature}}
+\index{get\+\_\+temperature@{get\+\_\+temperature}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{get\+\_\+temperature() const }{get_temperature() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+S5803\+::get\+\_\+temperature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___m_s5803_a7297d4cd69e9c44bc10bb6f3edbdff00}{}\label{class_loom___m_s5803_a7297d4cd69e9c44bc10bb6f3edbdff00}
+
+
+Get the temperature reading. 
+
+Used by the \hyperlink{class_loom_temp_sync}{Loom\+Temp\+Sync} module to provide temperature to other modules. \begin{DoxyReturn}{Returns}
+The measured temperature 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+S5803\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_s5803_a6c776fb6cb23d626cf5d6e3094c443a0}{}\label{class_loom___m_s5803_a6c776fb6cb23d626cf5d6e3094c443a0}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+S5803\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_s5803_a994abd7bfb62ece7b47bd595d70603b9}{}\label{class_loom___m_s5803_a994abd7bfb62ece7b47bd595d70603b9}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+S5803\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_s5803_a68188af662a98e8324ac267a2d94690a}{}\label{class_loom___m_s5803_a68188af662a98e8324ac267a2d94690a}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!inst\+\_\+\+M\+S5803@{inst\+\_\+\+M\+S5803}}
+\index{inst\+\_\+\+M\+S5803@{inst\+\_\+\+M\+S5803}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{inst\+\_\+\+M\+S5803}{inst_MS5803}}]{\setlength{\rightskip}{0pt plus 5cm}M\+S\+\_\+5803 Loom\+\_\+\+M\+S5803\+::inst\+\_\+\+M\+S5803\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_s5803_a51efd19c53ce03744197e05c6c21ec2d}{}\label{class_loom___m_s5803_a51efd19c53ce03744197e05c6c21ec2d}
+
+
+Underlying M\+S5803 sensor manager instance. 
+
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!M\+S\+\_\+\+P\+R\+OM@{M\+S\+\_\+\+P\+R\+OM}}
+\index{M\+S\+\_\+\+P\+R\+OM@{M\+S\+\_\+\+P\+R\+OM}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{M\+S\+\_\+\+P\+R\+OM}{MS_PROM}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+M\+S5803\+::\+M\+S\+\_\+\+P\+R\+OM\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_s5803_aef9ff121171d7b27f369a60495666ab7}{}\label{class_loom___m_s5803_aef9ff121171d7b27f369a60495666ab7}
+
+
+Read calibration data stored on sensor. 
+
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!pressure@{pressure}}
+\index{pressure@{pressure}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{pressure}{pressure}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+S5803\+::pressure\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_s5803_afe0623825dcab69c7f204e32b0fcab56}{}\label{class_loom___m_s5803_afe0623825dcab69c7f204e32b0fcab56}
+
+
+Measure pressure. Units\+: mbar. 
+
+\index{Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}!temp@{temp}}
+\index{temp@{temp}!Loom\+\_\+\+M\+S5803@{Loom\+\_\+\+M\+S5803}}
+\subsubsection[{\texorpdfstring{temp}{temp}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+S5803\+::temp\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_s5803_a12df20babc5ac276523664c7d6607810}{}\label{class_loom___m_s5803_a12df20babc5ac276523664c7d6607810}
+
+
+Measured temperature. Units\+: °C. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_m_s5803_8h}{M\+S5803.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_m_s5803_8cpp}{M\+S5803.\+cpp}\end{DoxyCompactItemize}

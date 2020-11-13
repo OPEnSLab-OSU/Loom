@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_temperature___sync_8h" kind="file" language="C++">
+    <compoundname>Temperature_Sync.h</compoundname>
+    <includes refid="_module_8h" local="yes">Module.h</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_temperature___sync_8cpp" local="yes">src/Temperature_Sync.cpp</includedby>
+    <incdepgraph>
+      <node id="5932">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5929">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5930" relation="include">
+        </childnode>
+        <childnode refid="5932" relation="include">
+        </childnode>
+        <childnode refid="5933" relation="include">
+        </childnode>
+        <childnode refid="5934" relation="include">
+        </childnode>
+      </node>
+      <node id="5933">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5931" relation="include">
+        </childnode>
+        <childnode refid="5934" relation="include">
+        </childnode>
+      </node>
+      <node id="5930">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5931" relation="include">
+        </childnode>
+      </node>
+      <node id="5934">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5931">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5928">
+        <label>src/Temperature_Sync.h</label>
+        <link refid="Temperature_Sync.h"/>
+        <childnode refid="5929" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5939">
+        <label>src/Temperature_Sync.cpp</label>
+        <link refid="_temperature___sync_8cpp"/>
+      </node>
+      <node id="5936">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="5937" relation="include">
+        </childnode>
+        <childnode refid="5938" relation="include">
+        </childnode>
+      </node>
+      <node id="5937">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="5938">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="5935">
+        <label>src/Temperature_Sync.h</label>
+        <link refid="Temperature_Sync.h"/>
+        <childnode refid="5936" relation="include">
+        </childnode>
+        <childnode refid="5939" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom_temp_sync" prot="public">LoomTempSync</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Temperature_Sync.h"/>
+  </compounddef>
+</doxygen>

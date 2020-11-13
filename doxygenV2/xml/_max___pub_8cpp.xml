@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_max___pub_8cpp" kind="file" language="C++">
+    <compoundname>Max_Pub.cpp</compoundname>
+    <includes refid="_max___pub_8h" local="yes">Max_Pub.h</includes>
+    <includes refid="_max___sub_8h" local="yes">../SubscribePlats/Max_Sub.h</includes>
+    <includes refid="_manager_8h" local="yes">../Manager.h</includes>
+    <incdepgraph>
+      <node id="4719">
+        <label>../InternetPlats/InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="4713" relation="include">
+        </childnode>
+        <childnode refid="4720" relation="include">
+        </childnode>
+        <childnode refid="4721" relation="include">
+        </childnode>
+        <childnode refid="4722" relation="include">
+        </childnode>
+        <childnode refid="4723" relation="include">
+        </childnode>
+      </node>
+      <node id="4721">
+        <label>Udp.h</label>
+      </node>
+      <node id="4712">
+        <label>PublishPlat.h</label>
+        <link refid="_publish_plat_8h"/>
+        <childnode refid="4713" relation="include">
+        </childnode>
+        <childnode refid="4719" relation="include">
+        </childnode>
+        <childnode refid="4724" relation="include">
+        </childnode>
+      </node>
+      <node id="4716">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4725">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="4713" relation="include">
+        </childnode>
+      </node>
+      <node id="4713">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4714" relation="include">
+        </childnode>
+        <childnode refid="4716" relation="include">
+        </childnode>
+        <childnode refid="4717" relation="include">
+        </childnode>
+        <childnode refid="4718" relation="include">
+        </childnode>
+      </node>
+      <node id="4720">
+        <label>Client.h</label>
+      </node>
+      <node id="4711">
+        <label>Max_Pub.h</label>
+        <link refid="_max___pub_8h"/>
+        <childnode refid="4712" relation="include">
+        </childnode>
+      </node>
+      <node id="4728">
+        <label>SubscribePlat.h</label>
+        <link refid="_subscribe_plat_8h"/>
+        <childnode refid="4713" relation="include">
+        </childnode>
+        <childnode refid="4719" relation="include">
+        </childnode>
+      </node>
+      <node id="4717">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4715" relation="include">
+        </childnode>
+        <childnode refid="4718" relation="include">
+        </childnode>
+      </node>
+      <node id="4727">
+        <label>../SubscribePlats/Max_Sub.h</label>
+        <link refid="_max___sub_8h"/>
+        <childnode refid="4728" relation="include">
+        </childnode>
+      </node>
+      <node id="4714">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4715" relation="include">
+        </childnode>
+      </node>
+      <node id="4726">
+        <label>SdFat.h</label>
+      </node>
+      <node id="4730">
+        <label>vector</label>
+      </node>
+      <node id="4718">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4715">
+        <label>Arduino.h</label>
+      </node>
+      <node id="4710">
+        <label>src/PublishPlats/Max_Pub.cpp</label>
+        <link refid="Max_Pub.cpp"/>
+        <childnode refid="4711" relation="include">
+        </childnode>
+        <childnode refid="4727" relation="include">
+        </childnode>
+        <childnode refid="4729" relation="include">
+        </childnode>
+      </node>
+      <node id="4724">
+        <label>../LogPlats/BatchSD.h</label>
+        <link refid="_batch_s_d_8h"/>
+        <childnode refid="4725" relation="include">
+        </childnode>
+        <childnode refid="4726" relation="include">
+        </childnode>
+      </node>
+      <node id="4722">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="4729">
+        <label>../Manager.h</label>
+        <link refid="_manager_8h"/>
+        <childnode refid="4714" relation="include">
+        </childnode>
+        <childnode refid="4718" relation="include">
+        </childnode>
+        <childnode refid="4730" relation="include">
+        </childnode>
+      </node>
+      <node id="4723">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/PublishPlats/Max_Pub.cpp"/>
+  </compounddef>
+</doxygen>

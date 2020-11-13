@@ -1,0 +1,839 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___o_l_e_d" kind="class" language="C++" prot="public">
+    <compoundname>Loom_OLED</compoundname>
+    <basecompoundref refid="class_loom_log_plat" prot="public" virt="non-virtual">LoomLogPlat</basecompoundref>
+    <includes refid="_o_l_e_d_8h" local="no">OLED.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1accc63c1437c4d67fa6efbac79d647996" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_OLED::Loom_OLED</definition>
+        <argsstring>(LoomManager *manager, const bool enable_rate_filter=true, const uint16_t min_filter_delay=300, const Version type=Version::FEATHERWING, const byte reset_pin=A2, const Format display_format=Format::SCROLL, const uint16_t scroll_duration=6000, const byte freeze_pin=10, const FreezeType freeze_behavior=FreezeType::SCROLL)</argsstring>
+        <name>Loom_OLED</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enable_rate_filter</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>min_filter_delay</declname>
+          <defval>300</defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___o_l_e_d_1aaf40c7e29901e7130f86046a26cb7400" kindref="member">Version</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="class_loom___o_l_e_d_1aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97" kindref="member">Version::FEATHERWING</ref></defval>
+        </param>
+        <param>
+          <type>const byte</type>
+          <declname>reset_pin</declname>
+          <defval>A2</defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffd" kindref="member">Format</ref></type>
+          <declname>display_format</declname>
+          <defval><ref refid="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25" kindref="member">Format::SCROLL</ref></defval>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>scroll_duration</declname>
+          <defval>6000</defval>
+        </param>
+        <param>
+          <type>const byte</type>
+          <declname>freeze_pin</declname>
+          <defval>10</defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9" kindref="member">FreezeType</ref></type>
+          <declname>freeze_behavior</declname>
+          <defval><ref refid="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25" kindref="member">FreezeType::SCROLL</ref></defval>
+        </param>
+        <briefdescription>
+<para>OLED module constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">enable_rate_filter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | Whether or not to impose maximum update rate </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">min_filter_delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;300&gt; | [50-5000] | Minimum update delay, if enable_rate_filter enabled </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Version) | &lt;0&gt; | {0(&quot;Featherwing&quot;), 1(&quot;Breakout&quot;)} | Which version of the OLED is being used </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">reset_pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;14&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin should be used for reseting. Only applies to breakout version </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">display_format</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Format) | &lt;A0&gt; | {0(&quot;4 pairs&quot;), 1(&quot;8 pairs&quot;), 2(&quot;Scrolling&quot;)} | How to display the key value pairs of a bundle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">scroll_duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;6000&gt; | [500-30000] | The time (ms) to complete full scroll cycle if display_format is SCROLL </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">freeze_pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;10&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin should be used to pause the display </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">freeze_behavior</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(FreezeType) | &lt;2&gt; | {O(&quot;Disable&quot;), 1(&quot;Pause Data&quot;), 2(&quot;Pause Data and Scroll&quot;)} | How freezing the display should behave </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="84" column="1" bodyfile="src/LogPlats/OLED.cpp" bodystart="47" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1abbe56d7e45b4de6ae1ae1296c074d448" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_OLED::Loom_OLED</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_OLED</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="99" column="1" bodyfile="src/LogPlats/OLED.cpp" bodystart="80" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a6970e6d9fa0dd9b40e87cb4f59a01a3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_OLED::~Loom_OLED</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_OLED</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="102" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a288f75a9eb423bda9b65b8cb4c7708b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_OLED::log</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>log</name>
+        <reimplements refid="class_loom_log_plat_1accace14ed45817c98ef5ccc15fd79004">log</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Log a Json object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json Object to log </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="108" column="1" bodyfile="src/LogPlats/OLED.cpp" bodystart="113" bodyend="199"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a20dab0bc2c5bdc139b1b04523a54a78c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_OLED::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_log_plat_1afd1780573d350f46ce26d237a4ade43b">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="119" column="1" bodyfile="src/LogPlats/OLED.cpp" bodystart="84" bodyend="101"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1ac76bb31bcfb46076a0e72f59025ba3cb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffd" kindref="member">Format</ref></type>
+        <definition>Format Loom_OLED::get_display_format</definition>
+        <argsstring>() const </argsstring>
+        <name>get_display_format</name>
+        <briefdescription>
+<para>Get the current OLED display organization. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current Format being used </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="127" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="127" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a1460b24e59ea1dff3dd8605a0a9a9564" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint Loom_OLED::get_scroll_duration</definition>
+        <argsstring>() const </argsstring>
+        <name>get_scroll_duration</name>
+        <briefdescription>
+<para>Get the current scroll duration. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current scroll duration </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="131" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="131" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a6ca6b64ea5c2a5d78733f9675f409efb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>byte</type>
+        <definition>byte Loom_OLED::get_freeze_pin</definition>
+        <argsstring>() const </argsstring>
+        <name>get_freeze_pin</name>
+        <briefdescription>
+<para>Get the digital pin use to freeze the display. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The freeze pin </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="135" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a40d29eabfcdf35863dc2f1f5eca0b945" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9" kindref="member">FreezeType</ref></type>
+        <definition>FreezeType Loom_OLED::get_freeze_behavior</definition>
+        <argsstring>() const </argsstring>
+        <name>get_freeze_behavior</name>
+        <briefdescription>
+<para>Get the current freeze behavior. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current freeze behavior </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="139" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="139" bodyend="139"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a4ce08addf521b1bba3a1f73730d8650b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_OLED::set_display_format</definition>
+        <argsstring>(const Format format)</argsstring>
+        <name>set_display_format</name>
+        <param>
+          <type>const <ref refid="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffd" kindref="member">Format</ref></type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+<para>Set the OLED display organization. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">format</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Format to set to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="147" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="147" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a5e58b03b11b03f79f1d9c98b0247cef0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_OLED::set_scroll_duration</definition>
+        <argsstring>(const uint duration)</argsstring>
+        <name>set_scroll_duration</name>
+        <param>
+          <type>const uint</type>
+          <declname>duration</declname>
+        </param>
+        <briefdescription>
+<para>Set the duration of a complete scroll. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">duration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The duration to set to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="151" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="151" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a13dc4c96f830f9c949c3e6731b2f9318" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_OLED::set_freeze_pin</definition>
+        <argsstring>(const byte pin)</argsstring>
+        <name>set_freeze_pin</name>
+        <param>
+          <type>const byte</type>
+          <declname>pin</declname>
+        </param>
+        <briefdescription>
+<para>Set the digital pin to use to freeze the display. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pin to use </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="155" column="1" bodyfile="src/LogPlats/OLED.cpp" bodystart="104" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a42eea08f2832c5afd31522b62601196b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_OLED::set_freeze_behavior</definition>
+        <argsstring>(const FreezeType behavior)</argsstring>
+        <name>set_freeze_behavior</name>
+        <param>
+          <type>const <ref refid="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9" kindref="member">FreezeType</ref></type>
+          <declname>behavior</declname>
+        </param>
+        <briefdescription>
+<para>Set the freezing behavior of the display. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">behavior</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Which FreezeType type to use </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="159" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="159" bodyend="159"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MISCELLANEOUS</header>
+      <memberdef kind="variable" id="class_loom___o_l_e_d_1a65de6c9daef794f89061d2278ae0d3ad" prot="private" static="no" mutable="no">
+        <type>unsigned long</type>
+        <definition>unsigned long Loom_OLED::previous_time</definition>
+        <argsstring></argsstring>
+        <name>previous_time</name>
+        <briefdescription>
+<para>Last display update time. </para>        </briefdescription>
+        <detaileddescription>
+<para>Used to manage scrolling </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="184" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a34e7751ffe7f5fdfa8d5c3adde2aedd7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * Loom_OLED::enum_oled_version_string</definition>
+        <argsstring>(const Version v)</argsstring>
+        <name>enum_oled_version_string</name>
+        <param>
+          <type>const <ref refid="class_loom___o_l_e_d_1aaf40c7e29901e7130f86046a26cb7400" kindref="member">Version</ref></type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Get c-string of name associated with OLED::Version enum. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OLED::Version value to get string of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>C-string of OLED version </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="168" column="1" bodyfile="src/LogPlats/OLED.cpp" bodystart="18" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a7203f388d5c2eda2dee6aa27c3ab72ad" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * Loom_OLED::enum_oled_format_string</definition>
+        <argsstring>(const Format f)</argsstring>
+        <name>enum_oled_format_string</name>
+        <param>
+          <type>const <ref refid="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffd" kindref="member">Format</ref></type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>Get c-string of name associated with OLED:Format enum. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OLED::Format value to get string of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>C-string of OLED format </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="173" column="1" bodyfile="src/LogPlats/OLED.cpp" bodystart="27" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___o_l_e_d_1a4c44f95a1aeade637a671ae365c13871" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * Loom_OLED::enum_oled_freeze_string</definition>
+        <argsstring>(const FreezeType f)</argsstring>
+        <name>enum_oled_freeze_string</name>
+        <param>
+          <type>const <ref refid="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9" kindref="member">FreezeType</ref></type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>Get c-string of name associated with OLED freeze behavior enum. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>FreezeType to get string of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>C-string of OLED freeze behavior </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="178" column="1" bodyfile="src/LogPlats/OLED.cpp" bodystart="37" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="class_loom___o_l_e_d_1aaf40c7e29901e7130f86046a26cb7400" prot="public" static="no">
+        <name>Version</name>
+        <enumvalue id="class_loom___o_l_e_d_1aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97" prot="public">
+          <name>FEATHERWING</name>
+          <briefdescription>
+<para>FeatherWing OLED. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___o_l_e_d_1aaf40c7e29901e7130f86046a26cb7400aef55538fb1b52e6052c75869be750acc" prot="public">
+          <name>BREAKOUT</name>
+          <briefdescription>
+<para>Breakout board. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Different forms of the OLED display. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="38" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="38" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="enum" id="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffd" prot="public" static="no">
+        <name>Format</name>
+        <enumvalue id="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffda341fee9692a2ed8f09906d40d23fb1f9" prot="public">
+          <name>FOUR</name>
+          <briefdescription>
+<para>4 Key values </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffda960df6d77e65cd185ca4f3501db634eb" prot="public">
+          <name>EIGHT</name>
+          <briefdescription>
+<para>8 Key values </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25" prot="public">
+          <name>SCROLL</name>
+          <briefdescription>
+<para>Scrolling. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Different formats to display information in. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="44" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="44" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="enum" id="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9" prot="public" static="no">
+        <name>FreezeType</name>
+        <enumvalue id="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9afc93ea58f6d27ffed2b6518ffecf3e4e" prot="public">
+          <name>DISABLE</name>
+          <briefdescription>
+<para>Freeze disabled. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9ae44f9e348e41cb272efa87387728571b" prot="public">
+          <name>DATA</name>
+          <briefdescription>
+<para>Screen freezes. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25" prot="public">
+          <name>SCROLL</name>
+          <briefdescription>
+<para>Scroll freezes, data updates. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Differnt freeze behaviors. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="51" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="51" bodyend="55"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___o_l_e_d_1a0cc78f1f1fd95a4c3d16fe32c9d33499" prot="protected" static="no" mutable="no">
+        <type>Adafruit_SSD1306</type>
+        <definition>Adafruit_SSD1306 Loom_OLED::display</definition>
+        <argsstring></argsstring>
+        <name>display</name>
+        <briefdescription>
+<para>Underlying OLED controller. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="59" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___o_l_e_d_1af0bc56c14688195fed9cafb74601bec3" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___o_l_e_d_1aaf40c7e29901e7130f86046a26cb7400" kindref="member">Version</ref></type>
+        <definition>Version Loom_OLED::version</definition>
+        <argsstring></argsstring>
+        <name>version</name>
+        <briefdescription>
+<para>What type the OLED is (FeatherWing or breakout) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="60" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___o_l_e_d_1a8962f61e0211d70d1d1de489d1d6bbfa" prot="protected" static="no" mutable="no">
+        <type>byte</type>
+        <definition>byte Loom_OLED::reset_pin</definition>
+        <argsstring></argsstring>
+        <name>reset_pin</name>
+        <briefdescription>
+<para>The reset pin (only applies to breakout version) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="61" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___o_l_e_d_1a1cfdc8965297ea1f697d8a4d3e44b5fd" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffd" kindref="member">Format</ref></type>
+        <definition>Format Loom_OLED::display_format</definition>
+        <argsstring></argsstring>
+        <name>display_format</name>
+        <briefdescription>
+<para>How to display the data on OLED. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="63" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___o_l_e_d_1ad6893fc088b080440f2f1d5d6f84d461" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint Loom_OLED::scroll_duration</definition>
+        <argsstring></argsstring>
+        <name>scroll_duration</name>
+        <briefdescription>
+<para>The duration to complete a full cycle through a bundle of data (milliseconds)(non-blocking) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="64" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___o_l_e_d_1a693dc20156729cb7d06e877247e914d0" prot="protected" static="no" mutable="no">
+        <type>byte</type>
+        <definition>byte Loom_OLED::freeze_pin</definition>
+        <argsstring></argsstring>
+        <name>freeze_pin</name>
+        <briefdescription>
+<para>Which pin to check if display should freeze. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="65" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___o_l_e_d_1aafea3f7f393170a4cc7c5e7ff8583344" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9" kindref="member">FreezeType</ref></type>
+        <definition>FreezeType Loom_OLED::freeze_behavior</definition>
+        <argsstring></argsstring>
+        <name>freeze_behavior</name>
+        <briefdescription>
+<para>What &apos;freezing&apos; behavior should be followed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/OLED.h" line="66" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>OLED logging platform module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___o_l_e_d.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/2900">Product Page: Adafruit Featherwing OLED – 128x32</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/2927">Product Page: Adafruit Monochrome 128x32 I2C OLED</ulink></para></listitem><listitem><para><ulink url="https://github.com/adafruit/Adafruit_SSD1306">Dependency: Adafruit_SSD1306</ulink></para></listitem><listitem><para><ulink url="https://github.com/adafruit/Adafruit-GFX-Library">Dependency: Adafruit-GFX-Library</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#oled-display">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="834">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="833">
+        <label>LoomLogPlat</label>
+        <link refid="class_loom_log_plat"/>
+        <childnode refid="834" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="832">
+        <label>Loom_OLED</label>
+        <link refid="class_loom___o_l_e_d"/>
+        <childnode refid="833" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="842">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="838">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="839" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="840" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="845" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="841" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="837">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="838" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="836">
+        <label>LoomLogPlat</label>
+        <link refid="class_loom_log_plat"/>
+        <childnode refid="837" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="846">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="835">
+        <label>Loom_OLED</label>
+        <link refid="class_loom___o_l_e_d"/>
+        <childnode refid="836" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="841">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="837" relation="public-inheritance">
+        </childnode>
+        <childnode refid="842" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="843" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="840" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="844" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="845" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="846" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="840">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="837" relation="public-inheritance">
+        </childnode>
+        <childnode refid="841" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="839">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="837" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="845">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="837" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="843">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="844">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/LogPlats/OLED.h" line="33" column="1" bodyfile="src/LogPlats/OLED.h" bodystart="32" bodyend="186"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>category</name></member>
+      <member refid="class_loom_log_plat_1a74520318a9427997df80f98f924a0e48" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>check_millis</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>dispatch</name></member>
+      <member refid="class_loom___o_l_e_d_1a0cc78f1f1fd95a4c3d16fe32c9d33499" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>display</name></member>
+      <member refid="class_loom___o_l_e_d_1a1cfdc8965297ea1f697d8a4d3e44b5fd" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>display_format</name></member>
+      <member refid="class_loom_log_plat_1a6d343b76b79a1e51572bcf2991966e61" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>enable_rate_filter</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>enum_category_string</name></member>
+      <member refid="class_loom___o_l_e_d_1a7203f388d5c2eda2dee6aa27c3ab72ad" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>enum_oled_format_string</name></member>
+      <member refid="class_loom___o_l_e_d_1a4c44f95a1aeade637a671ae365c13871" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>enum_oled_freeze_string</name></member>
+      <member refid="class_loom___o_l_e_d_1a34e7751ffe7f5fdfa8d5c3adde2aedd7" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>enum_oled_version_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom___o_l_e_d_1aade282dab7eb118271f73b3b3bfc0ffd" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>Format</name></member>
+      <member refid="class_loom___o_l_e_d_1aafea3f7f393170a4cc7c5e7ff8583344" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>freeze_behavior</name></member>
+      <member refid="class_loom___o_l_e_d_1a693dc20156729cb7d06e877247e914d0" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>freeze_pin</name></member>
+      <member refid="class_loom___o_l_e_d_1adedc20c1c901fe472d976c722abf0bb9" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>FreezeType</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_device_manager</name></member>
+      <member refid="class_loom___o_l_e_d_1ac76bb31bcfb46076a0e72f59025ba3cb" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_display_format</name></member>
+      <member refid="class_loom___o_l_e_d_1a40d29eabfcdf35863dc2f1f5eca0b945" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_freeze_behavior</name></member>
+      <member refid="class_loom___o_l_e_d_1a6ca6b64ea5c2a5d78733f9675f409efb" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_freeze_pin</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom___o_l_e_d_1a1460b24e59ea1dff3dd8605a0a9a9564" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>get_scroll_duration</name></member>
+      <member refid="class_loom_log_plat_1aa6ad61d7d6c126aa13dcc91debef67e3" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>last_log_millis</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___o_l_e_d_1a288f75a9eb423bda9b65b8cb4c7708b8" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>log</name></member>
+      <member refid="class_loom_log_plat_1adabc1e04a045b91923cff425405c5039" prot="public" virt="non-virtual" ambiguityscope="LoomLogPlat::"><scope>Loom_OLED</scope><name>log</name></member>
+      <member refid="class_loom___o_l_e_d_1accc63c1437c4d67fa6efbac79d647996" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>Loom_OLED</name></member>
+      <member refid="class_loom___o_l_e_d_1abbe56d7e45b4de6ae1ae1296c074d448" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>Loom_OLED</name></member>
+      <member refid="class_loom_log_plat_1a95e7954d4d049c8481908ba248b1e57b" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>LoomLogPlat</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>LoomModule</name></member>
+      <member refid="class_loom_log_plat_1a3d4ffe4204560b9677b8007be7f522be" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>min_filter_delay</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>module_type</name></member>
+      <member refid="class_loom_log_plat_1abddec0fce6ef786577ae008702c9393e" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>power_up</name></member>
+      <member refid="class_loom___o_l_e_d_1a65de6c9daef794f89061d2278ae0d3ad" prot="private" virt="non-virtual"><scope>Loom_OLED</scope><name>previous_time</name></member>
+      <member refid="class_loom___o_l_e_d_1a20dab0bc2c5bdc139b1b04523a54a78c" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>print_verbosity</name></member>
+      <member refid="class_loom___o_l_e_d_1a8962f61e0211d70d1d1de489d1d6bbfa" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>reset_pin</name></member>
+      <member refid="class_loom___o_l_e_d_1ad6893fc088b080440f2f1d5d6f84d461" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>scroll_duration</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>set_active</name></member>
+      <member refid="class_loom___o_l_e_d_1a4ce08addf521b1bba3a1f73730d8650b" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>set_display_format</name></member>
+      <member refid="class_loom___o_l_e_d_1a42eea08f2832c5afd31522b62601196b" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>set_freeze_behavior</name></member>
+      <member refid="class_loom___o_l_e_d_1a13dc4c96f830f9c949c3e6731b2f9318" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>set_freeze_pin</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___o_l_e_d_1a5e58b03b11b03f79f1d9c98b0247cef0" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>set_scroll_duration</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>Type</name></member>
+      <member refid="class_loom___o_l_e_d_1aaf40c7e29901e7130f86046a26cb7400" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>Version</name></member>
+      <member refid="class_loom___o_l_e_d_1af0bc56c14688195fed9cafb74601bec3" prot="protected" virt="non-virtual"><scope>Loom_OLED</scope><name>version</name></member>
+      <member refid="class_loom___o_l_e_d_1a6970e6d9fa0dd9b40e87cb4f59a01a3f" prot="public" virt="non-virtual"><scope>Loom_OLED</scope><name>~Loom_OLED</name></member>
+      <member refid="class_loom_log_plat_1ac05c81b2e83214d22bdc94dfbb8a835c" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>~LoomLogPlat</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_OLED</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

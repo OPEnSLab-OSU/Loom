@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LoomRTC class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          LoomRTC <span class="m-thin">class</span>
+        </h1>
+        <p>Abstract base class of RTC modules.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#miscellaneous">MISCELLANEOUS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom_r_t_c.html">Module Documentation</a></li><li><a href="https://github.com/OPEnSLab-OSU/OPEnS_RTC">Dependency: OPEnS_<wbr />RTC</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_module.html" class="m-doc">LoomModule</a>
+            </dt>
+            <dd>Abstract root of Loom component modules inheritance hierarchy.</dd>
+          </dl>
+        </section>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom___d_s3231.html" class="m-doc">Loom_DS3231</a>
+            </dt>
+            <dd>DS3231 RTC module.</dd>
+            <dt>
+              class <a href="class_loom___p_c_f8523.html" class="m-doc">Loom_PCF8523</a>
+            </dt>
+            <dd>PCF8523 RTC module.</dd>
+          </dl>
+        </section>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a103a9db94b031555185bbce688d2527a">
+              <span class="m-doc-wrap-bumper">enum <a href="#a103a9db94b031555185bbce688d2527a" class="m-doc-self">TimeZone</a> { </span><span class="m-doc-wrap"><a href="#a103a9db94b031555185bbce688d2527aaf07fa492f47b0f5bcdb7ecdbf8995cfb" class="m-doc">WAT</a> = 0,
+              <a href="#a103a9db94b031555185bbce688d2527aafa868488740aa25870ced6b9169951fb" class="m-doc">AT</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa62069089c3b8d9a74b837620d51b7f78" class="m-doc">ADT</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aac77bb0f69e2a80e046a8dc7f0da9320f" class="m-doc">AST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa216e297dfd909447ea57a5713878280b" class="m-doc">EDT</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa33a61062aa4da2b795b7f9616c138b89" class="m-doc">EST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aaa0dccb0ba2b50d84245d30dad465afbd" class="m-doc">CDT</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aab3319f0293b58437972b5976f6c5da0a" class="m-doc">CST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aac9b9ae1b4267024d489995d8371bbb3b" class="m-doc">MDT</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa9b64696be05602589dfa9ea20da1e5fe" class="m-doc">MST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa209b2f8f73156de8ba0d6dd4174f942f" class="m-doc">PDT</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa67d47df7eb52f9e54f467763167398f3" class="m-doc">PST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa0cf9bf0b35fe7eef78559148b52eebc7" class="m-doc">AKDT</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa97255e996f8f823ad1d7954b8739cb57" class="m-doc">AKST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aae9caf392275991bfb3f460147609aafa" class="m-doc">HST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa23f7aea788f73df61e33a6d3653d66fa" class="m-doc">SST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa24fe976b135d343ba350030deee5a543" class="m-doc">GMT</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aaae8200cb4561ad375ed5e7d41071f729" class="m-doc">BST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa7e706fb31ff4653c9554f30ff1ad542c" class="m-doc">CET</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aac12d1178d0aa679ec22a84ce6478d6cc" class="m-doc">EET</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aae2f8b587fc3cef4d84abb81d47769bfd" class="m-doc">EEST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aabd7d04b755f908afa8fe10843ee47b0c" class="m-doc">BRT</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa102aa922f0abf8d921b347c70ec0d58a" class="m-doc">ZP4</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa4d66c937ba14cb3ae79e1c8f3f83f329" class="m-doc">ZP5</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aad29f264c1388a08fc4ea3957555bb5e6" class="m-doc">ZP6</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aaffb099d97f07ae9e8141e3fb33d88fb5" class="m-doc">ZP7</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aad5337ac36144406700f9f1d00c01593d" class="m-doc">AWST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aab85d19b35615f1190c135a148ac836a8" class="m-doc">ACST</a>,
+              <a href="#a103a9db94b031555185bbce688d2527aa638adbca680d4a5274887d082d058ba9" class="m-doc">AEST</a> }</span>
+            </dt>
+            <dd>Different time zones.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a6c1336bf000fd9a385f315d43bbbc5b0">
+              <a href="class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527a" class="m-doc">TimeZone</a> <a href="#a6c1336bf000fd9a385f315d43bbbc5b0" class="m-doc-self">timezone</a>
+            </dt>
+            <dd>The TimeZone to use.</dd>
+            <dt id="a5783620e9af8eb5fa0818aa189483d8e">
+              bool <a href="#a5783620e9af8eb5fa0818aa189483d8e" class="m-doc-self">use_local_time</a>
+            </dt>
+            <dd>Whether or not use local time, else UTC time.</dd>
+            <dt id="a79db2b47bfecccd825519e677bc43a43">
+              bool <a href="#a79db2b47bfecccd825519e677bc43a43" class="m-doc-self">converted</a>
+            </dt>
+            <dd>Whether or not converted daylight saving / summer time or not.</dd>
+            <dt id="ab3d490dd52a5e2d2413d1f0c00944a7b">
+              DateTime <a href="#ab3d490dd52a5e2d2413d1f0c00944a7b" class="m-doc-self">local_time</a>
+            </dt>
+            <dd>DateTime variable for the Local Time.</dd>
+            <dt id="a9692826e2c5093e528645a619fc16bc9">
+              char <a href="#a9692826e2c5093e528645a619fc16bc9" class="m-doc-self">local_datestring</a>
+            </dt>
+            <dd>Latest saved string of Local Date (year/month/day)</dd>
+            <dt id="ae8fe182cd1fc3f7c66ef6b3ee353c51f">
+              char <a href="#ae8fe182cd1fc3f7c66ef6b3ee353c51f" class="m-doc-self">local_timestring</a>
+            </dt>
+            <dd>Latest saved string of Local time (hour:minute:second)</dd>
+            <dt id="a86d3babf565f32bcbdffcf6e2a5efcdd">
+              char <a href="#a86d3babf565f32bcbdffcf6e2a5efcdd" class="m-doc-self">datestring</a>
+            </dt>
+            <dd>Latest saved string of the Date (year/month/day)</dd>
+            <dt id="a30e77eaeb4b0e25c8fde9239e64fe13a">
+              char <a href="#a30e77eaeb4b0e25c8fde9239e64fe13a" class="m-doc-self">timestring</a>
+            </dt>
+            <dd>Latest saved string of the time (hour:minute:second)</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a90ad338511d471757658aa0bff019575" class="m-doc">LoomRTC</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> module_type,
+              <a href="class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527a" class="m-doc">TimeZone</a> timezone,
+              const bool use_local_time,
+              const bool custom_time)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt id="a3077c3988808e9a57605e7c9842114c7">
+              <span class="m-doc-wrap-bumper"><a href="#a3077c3988808e9a57605e7c9842114c7" class="m-doc-self">~LoomRTC</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a13101cb450db89fe15ab77b29dba975e" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Adds a timestamp to the provided data Json.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abef017ad813f2f5fd6559af2b64e409b" class="m-doc">now</a>(</span><span class="m-doc-wrap">) const -&gt; DateTime <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Get DateTime of current time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac25717e8d486c123629973684778348f" class="m-doc">time_adjust</a>(</span><span class="m-doc-wrap">const DateTime time,
+              const bool is_utc = true)</span>
+            </dt>
+            <dd>Set time to provided timezone.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a711641fee9d04f0a9be5537950908f6b" class="m-doc">get_timestamp</a>(</span><span class="m-doc-wrap">char* header,
+              char* timestamp,
+              const char delimiter,
+              const uint8_t format = 3)</span>
+            </dt>
+            <dd>Get timestamp.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a34b7dd8dacbfdb61876cc4aabb79e67e" class="m-doc">set_alarm</a>(</span><span class="m-doc-wrap">DateTime time) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Set an alarm to go off at the specified time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac0576fedce58ab95c864b146494343af" class="m-doc">set_alarm</a>(</span><span class="m-doc-wrap">const TimeSpan duration)</span>
+            </dt>
+            <dd>Set an alarm for a duration.</dd>
+            <dt id="aac5fd7b736ca4732348ca9c99935bfc6">
+              <span class="m-doc-wrap-bumper">void <a href="#aac5fd7b736ca4732348ca9c99935bfc6" class="m-doc-self">clear_alarms</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Clear alarms.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a41c84de7ef49bf7f42069f948a98c30b">
+              <span class="m-doc-wrap-bumper">void <a href="#a41c84de7ef49bf7f42069f948a98c30b" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt id="aaa45a542cfd7b64f79a2c321a29c08f5">
+              <span class="m-doc-wrap-bumper">void <a href="#aaa45a542cfd7b64f79a2c321a29c08f5" class="m-doc-self">print_state</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display current state of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#afa1dcbf39c103215fbc41313c09294d2" class="m-doc">print_time</a>(</span><span class="m-doc-wrap">const bool verbose = false)</span>
+            </dt>
+            <dd>Print the current time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static void <a href="#a4114a95d1dbc89e3ea8e3f27b3250108" class="m-doc">print_DateTime</a>(</span><span class="m-doc-wrap">DateTime time)</span>
+            </dt>
+            <dd>Print an arbitrary DateTime object.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a39b290c0f070c99c83e4794d73f145c1" class="m-doc">get_datestring</a>(</span><span class="m-doc-wrap">) -&gt; const char*</span>
+            </dt>
+            <dd>Get the pin the RTC interrupt is assumed to be connected to.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a358a34b80334df22441db675715d5b14" class="m-doc">get_datestring</a>(</span><span class="m-doc-wrap">char* buf)</span>
+            </dt>
+            <dd>Get string of date.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad899bf3e07f5fe270addb88fafa22016" class="m-doc">get_timestring</a>(</span><span class="m-doc-wrap">) -&gt; const char*</span>
+            </dt>
+            <dd>Get string of time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9a14c5f4a347b64c661e4af6eab969dd" class="m-doc">get_timestring</a>(</span><span class="m-doc-wrap">char* buf)</span>
+            </dt>
+            <dd>Get string of time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9eaffa2c1d312cf13f5f6b66a7bd6067" class="m-doc">get_weekday</a>(</span><span class="m-doc-wrap">) -&gt; const char*</span>
+            </dt>
+            <dd>Get string of weekday.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aeae9084ff1fc9fe0faa81df9c39277fa" class="m-doc">get_weekday</a>(</span><span class="m-doc-wrap">char* buf)</span>
+            </dt>
+            <dd>Get string of weekday.</dd>
+          </dl>
+        </section>
+        <section id="miscellaneous">
+          <h2><a href="#miscellaneous">MISCELLANEOUS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a24c72617d7e275e89740af4f5296e42b" class="m-doc">link_device_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LM) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Add pointer back to device manager.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#ae388e3498ce6b942ccff838c2a4359fb" class="m-doc">enum_timezone_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527a" class="m-doc">TimeZone</a> t) -&gt; char*</span>
+            </dt>
+            <dd>Get string of name associated with time zone enum.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a008e89e23f3650d1e8a9c96fe1d8c857" class="m-doc">init</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Initialize RTC.</dd>
+            <dt id="a748cbec6163eee36ec96346526b8094d">
+              <span class="m-doc-wrap-bumper">void <a href="#a748cbec6163eee36ec96346526b8094d" class="m-doc-self">_adjust</a>(</span><span class="m-doc-wrap">const DateTime time) <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Begin auxiliary function that subclasses need to implement.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a92103dd50b8ed11cd84fc8f08557ab09" class="m-doc">_begin</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Begin auxiliary function that subclasses need to implement.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a601c266811b25f0d16cbe2ae18ec5b41" class="m-doc">_initialized</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Initialization auxiliary function that subclasses need to implement.</dd>
+            <dt id="a7ecd2d763167955581da55aab3602c11">
+              <span class="m-doc-wrap-bumper">void <a href="#a7ecd2d763167955581da55aab3602c11" class="m-doc-self">read_rtc</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Read the RTC, update time and date strings.</dd>
+            <dt id="afd2c4c89a426678d754b7b59643b9d90">
+              <span class="m-doc-wrap-bumper">void <a href="#afd2c4c89a426678d754b7b59643b9d90" class="m-doc-self">local_rtc</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Read local time if local time is enable to read It will be updated on contents array in the data json.</dd>
+            <dt id="a97c2b8e6e8c31f1865feb1ed8e1948df">
+              <span class="m-doc-wrap-bumper">void <a href="#a97c2b8e6e8c31f1865feb1ed8e1948df" class="m-doc-self">set_rtc_to_compile_time</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Set the RTC time to compile time.</dd>
+            <dt id="ab556620d00236ff10f4438f3b80c2636">
+              <span class="m-doc-wrap-bumper">void <a href="#ab556620d00236ff10f4438f3b80c2636" class="m-doc-self">set_rtc_to_computer_time</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Set the RTC time to computer time by user input if the board is connected to computer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a41aa35e0b493300ab85c4028c117b51f" class="m-doc">convert_local_to_utc</a>(</span><span class="m-doc-wrap">const bool to_utc = true) <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Convert time between local and UTC.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6a1bedc03dd44c013cf6b75000533e9f" class="m-doc">rtc_validity_check</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Check if current RTC time is valid (not necessarily correct)</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac2e7b1655fee21edb30e98fb415a92ee" class="m-doc">convert_daylight_to_standard</a>(</span><span class="m-doc-wrap">DateTime local_time) -&gt; DateTime <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Convert time between daylight saving time and standard time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab78edb38537fd80c4fbd1ac1625606b5" class="m-doc">us_daylight_to_standard</a>(</span><span class="m-doc-wrap">DateTime local_time) -&gt; DateTime <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Convert the time in the US daylight saving and standard.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6bde5d91ff867799abc3f635614d0a4e" class="m-doc">eu_daylight_to_standard</a>(</span><span class="m-doc-wrap">DateTime local_time) -&gt; DateTime <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Convert the time in the EU summer time and standard.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a90ad338511d471757658aa0bff019575"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a90ad338511d471757658aa0bff019575" class="m-doc-self">LoomRTC</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> module_type,
+              <a href="class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527a" class="m-doc">TimeZone</a> timezone,
+              const bool use_local_time,
+              const bool custom_time)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>module_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Name of the module (provided by derived classes)</td>
+                </tr>
+                <tr>
+                  <td>module_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Type of the module (provided by derived classes)</td>
+                </tr>
+                <tr>
+                  <td>timezone&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Which timezone device is in</td>
+                </tr>
+                <tr>
+                  <td>use_local_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>True for local time, false for UTC time</td>
+                </tr>
+                <tr>
+                  <td>custom_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>True for user input time, false otherwise</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a13101cb450db89fe15ab77b29dba975e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13101cb450db89fe15ab77b29dba975e" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Adds a timestamp to the provided data Json.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Object to add timestamp to</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abef017ad813f2f5fd6559af2b64e409b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">DateTime LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abef017ad813f2f5fd6559af2b64e409b" class="m-doc-self">now</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Get DateTime of current time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>DateTime</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac25717e8d486c123629973684778348f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac25717e8d486c123629973684778348f" class="m-doc-self">time_adjust</a>(</span><span class="m-doc-wrap">const DateTime time,
+              const bool is_utc = true)</span></span>
+            </h3>
+            <p>Set time to provided timezone.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Time to set to</td>
+                </tr>
+                <tr>
+                  <td>is_utc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>True if &#x27;time&#x27; is in UTC, false if local</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a711641fee9d04f0a9be5537950908f6b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a711641fee9d04f0a9be5537950908f6b" class="m-doc-self">get_timestamp</a>(</span><span class="m-doc-wrap">char* header,
+              char* timestamp,
+              const char delimiter,
+              const uint8_t format = 3)</span></span>
+            </h3>
+            <p>Get timestamp.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">header&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Column header(s) of timestamp element</td>
+                </tr>
+                <tr>
+                  <td>timestamp&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>String to fill with timestamp element(s)</td>
+                </tr>
+                <tr>
+                  <td>delimiter&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Delimiter to use</td>
+                </tr>
+                <tr>
+                  <td>format&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>How to format timestamp (0: no timestamp added, 1: only date added, 2: only time added, 3: both date and time added (two fields), 4: both date and time added (combined field) ),</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a34b7dd8dacbfdb61876cc4aabb79e67e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a34b7dd8dacbfdb61876cc4aabb79e67e" class="m-doc-self">set_alarm</a>(</span><span class="m-doc-wrap">DateTime time) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Set an alarm to go off at the specified time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>DateTime of time alarm should go off</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac0576fedce58ab95c864b146494343af"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac0576fedce58ab95c864b146494343af" class="m-doc-self">set_alarm</a>(</span><span class="m-doc-wrap">const TimeSpan duration)</span></span>
+            </h3>
+            <p>Set an alarm for a duration.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">duration&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>TimeSpan of duration before alarm goes off</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afa1dcbf39c103215fbc41313c09294d2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afa1dcbf39c103215fbc41313c09294d2" class="m-doc-self">print_time</a>(</span><span class="m-doc-wrap">const bool verbose = false)</span></span>
+            </h3>
+            <p>Print the current time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">verbose&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>True for multile lines, false for short display</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4114a95d1dbc89e3ea8e3f27b3250108"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4114a95d1dbc89e3ea8e3f27b3250108" class="m-doc-self">print_DateTime</a>(</span><span class="m-doc-wrap">DateTime time)</span></span>
+            </h3>
+            <p>Print an arbitrary DateTime object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Time to print</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a39b290c0f070c99c83e4794d73f145c1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const char* LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a39b290c0f070c99c83e4794d73f145c1" class="m-doc-self">get_datestring</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the pin the RTC interrupt is assumed to be connected to.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Interrupt pin Get string of date</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a358a34b80334df22441db675715d5b14"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a358a34b80334df22441db675715d5b14" class="m-doc-self">get_datestring</a>(</span><span class="m-doc-wrap">char* buf)</span></span>
+            </h3>
+            <p>Get string of date.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">buf&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Buffer to fill</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad899bf3e07f5fe270addb88fafa22016"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const char* LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad899bf3e07f5fe270addb88fafa22016" class="m-doc-self">get_timestring</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get string of time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Time string</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9a14c5f4a347b64c661e4af6eab969dd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a14c5f4a347b64c661e4af6eab969dd" class="m-doc-self">get_timestring</a>(</span><span class="m-doc-wrap">char* buf)</span></span>
+            </h3>
+            <p>Get string of time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">buf&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Buffer to fill]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9eaffa2c1d312cf13f5f6b66a7bd6067"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const char* LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9eaffa2c1d312cf13f5f6b66a7bd6067" class="m-doc-self">get_weekday</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get string of weekday.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Weekday string</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aeae9084ff1fc9fe0faa81df9c39277fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeae9084ff1fc9fe0faa81df9c39277fa" class="m-doc-self">get_weekday</a>(</span><span class="m-doc-wrap">char* buf)</span></span>
+            </h3>
+            <p>Get string of weekday.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">buf&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Buffer to fill</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a24c72617d7e275e89740af4f5296e42b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a24c72617d7e275e89740af4f5296e42b" class="m-doc-self">link_device_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LM) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Add pointer back to device manager.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">LM&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td><a href="class_loom_manager.html" class="m-doc">LoomManager</a> to point to</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Generally only called when device manager links module to provide pointer both directions. Derived modules may override this for increased function, such as linking a submanager or RTC module.</p>
+          </div></section>
+          <section class="m-doc-details" id="ae388e3498ce6b942ccff838c2a4359fb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static char* LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae388e3498ce6b942ccff838c2a4359fb" class="m-doc-self">enum_timezone_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527a" class="m-doc">TimeZone</a> t)</span></span>
+            </h3>
+            <p>Get string of name associated with time zone enum.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">t&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>TimeZone value to get string of</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>C-string of time zone</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a008e89e23f3650d1e8a9c96fe1d8c857"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a008e89e23f3650d1e8a9c96fe1d8c857" class="m-doc-self">init</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Initialize RTC.</p>
+<p>Called by subclass constructors</p>
+          </div></section>
+          <section class="m-doc-details" id="a92103dd50b8ed11cd84fc8f08557ab09"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92103dd50b8ed11cd84fc8f08557ab09" class="m-doc-self">_begin</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Begin auxiliary function that subclasses need to implement.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if begin worked without issue, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a601c266811b25f0d16cbe2ae18ec5b41"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a601c266811b25f0d16cbe2ae18ec5b41" class="m-doc-self">_initialized</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">pure virtual</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Initialization auxiliary function that subclasses need to implement.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if RTC is initialized / did not lose power</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a41aa35e0b493300ab85c4028c117b51f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a41aa35e0b493300ab85c4028c117b51f" class="m-doc-self">convert_local_to_utc</a>(</span><span class="m-doc-wrap">const bool to_utc = true) <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Convert time between local and UTC.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">to_utc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>True to switch to UTC, false to go to local from UTC</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Uses current timezone setting</p>
+          </div></section>
+          <section class="m-doc-details" id="a6a1bedc03dd44c013cf6b75000533e9f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a1bedc03dd44c013cf6b75000533e9f" class="m-doc-self">rtc_validity_check</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Check if current RTC time is valid (not necessarily correct)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if valid</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac2e7b1655fee21edb30e98fb415a92ee"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">DateTime LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac2e7b1655fee21edb30e98fb415a92ee" class="m-doc-self">convert_daylight_to_standard</a>(</span><span class="m-doc-wrap">DateTime local_time) <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Convert time between daylight saving time and standard time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">local_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The updated version of local time after convertion of daylight saving / summer time or standard time</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab78edb38537fd80c4fbd1ac1625606b5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">DateTime LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab78edb38537fd80c4fbd1ac1625606b5" class="m-doc-self">us_daylight_to_standard</a>(</span><span class="m-doc-wrap">DateTime local_time) <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Convert the time in the US daylight saving and standard.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">local_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The updated local_time based on us daylight saving</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6bde5d91ff867799abc3f635614d0a4e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">DateTime LoomRTC::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6bde5d91ff867799abc3f635614d0a4e" class="m-doc-self">eu_daylight_to_standard</a>(</span><span class="m-doc-wrap">DateTime local_time) <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Convert the time in the EU summer time and standard.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">local_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The updated local_time based on eu summmer time</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

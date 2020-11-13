@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="structmodule__sort__comp" kind="struct" language="C++" prot="public">
+    <compoundname>module_sort_comp</compoundname>
+    <includes refid="_module_8h" local="no">Module.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structmodule__sort__comp_1a2891f383bbfbe96360b7f007b1ee8327" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool module_sort_comp::operator()</definition>
+        <argsstring>(LoomModule *left, LoomModule *right) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *</type>
+          <declname>right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="254" column="1" bodyfile="src/Module.h" bodystart="254" bodyend="256"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Used by <ref refid="class_loom_manager" kindref="compound">LoomManager</ref> to sort modules in its vector. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Module.h" line="253" column="1" bodyfile="src/Module.h" bodystart="253" bodyend="257"/>
+    <listofallmembers>
+      <member refid="structmodule__sort__comp_1a2891f383bbfbe96360b7f007b1ee8327" prot="public" virt="non-virtual"><scope>module_sort_comp</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

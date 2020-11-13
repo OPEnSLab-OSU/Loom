@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_s_p_i___sensor_8h" kind="file" language="C++">
+    <compoundname>SPI_Sensor.h</compoundname>
+    <includes refid="_sensor_8h" local="yes">../Sensor.h</includes>
+    <includedby refid="_m_a_x31855_8h" local="yes">src/Sensors/SPI/MAX31855.h</includedby>
+    <includedby refid="_m_a_x31856_8h" local="yes">src/Sensors/SPI/MAX31856.h</includedby>
+    <includedby refid="_s_p_i___sensor_8cpp" local="yes">src/Sensors/SPI/SPI_Sensor.cpp</includedby>
+    <incdepgraph>
+      <node id="5788">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5785">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5786" relation="include">
+        </childnode>
+        <childnode refid="5788" relation="include">
+        </childnode>
+        <childnode refid="5789" relation="include">
+        </childnode>
+        <childnode refid="5790" relation="include">
+        </childnode>
+      </node>
+      <node id="5789">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5787" relation="include">
+        </childnode>
+        <childnode refid="5790" relation="include">
+        </childnode>
+      </node>
+      <node id="5786">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5787" relation="include">
+        </childnode>
+      </node>
+      <node id="5790">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5784">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5785" relation="include">
+        </childnode>
+      </node>
+      <node id="5783">
+        <label>src/Sensors/SPI/SPI_Sensor.h</label>
+        <link refid="SPI_Sensor.h"/>
+        <childnode refid="5784" relation="include">
+        </childnode>
+      </node>
+      <node id="5787">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5793">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="5794" relation="include">
+        </childnode>
+        <childnode refid="5795" relation="include">
+        </childnode>
+      </node>
+      <node id="5792">
+        <label>src/Sensors/SPI/MAX31855.h</label>
+        <link refid="_m_a_x31855_8h"/>
+        <childnode refid="5793" relation="include">
+        </childnode>
+        <childnode refid="5796" relation="include">
+        </childnode>
+      </node>
+      <node id="5798">
+        <label>src/Sensors/SPI/MAX31856.cpp</label>
+        <link refid="_m_a_x31856_8cpp"/>
+      </node>
+      <node id="5791">
+        <label>src/Sensors/SPI/SPI_Sensor.h</label>
+        <link refid="SPI_Sensor.h"/>
+        <childnode refid="5792" relation="include">
+        </childnode>
+        <childnode refid="5797" relation="include">
+        </childnode>
+        <childnode refid="5799" relation="include">
+        </childnode>
+      </node>
+      <node id="5796">
+        <label>src/Sensors/SPI/MAX31855.cpp</label>
+        <link refid="_m_a_x31855_8cpp"/>
+      </node>
+      <node id="5799">
+        <label>src/Sensors/SPI/SPI_Sensor.cpp</label>
+        <link refid="_s_p_i___sensor_8cpp"/>
+      </node>
+      <node id="5794">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="5795">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="5797">
+        <label>src/Sensors/SPI/MAX31856.h</label>
+        <link refid="_m_a_x31856_8h"/>
+        <childnode refid="5793" relation="include">
+        </childnode>
+        <childnode refid="5798" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom_s_p_i_sensor" prot="public">LoomSPISensor</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/SPI/SPI_Sensor.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,579 @@
+\hypertarget{class_loom___analog}{}\section{Loom\+\_\+\+Analog Class Reference}
+\label{class_loom___analog}\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+
+
+Analog pin manager module.  
+
+
+
+
+{\ttfamily \#include $<$Analog.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Analog\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=162pt]{class_loom___analog__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} \{ \\*
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693}{Conversion\+::\+N\+O\+NE}, 
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46ad19d26898eee98e71fc8b0ad69bb898b}{Conversion\+::\+V\+O\+L\+T\+A\+GE}, 
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46ada003223c47c56d9514ec438a602ae43}{Conversion\+::\+T\+H\+E\+R\+M\+I\+S\+T\+OR}, 
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46aa25496ebf095e4198da4088449c83ac6}{Conversion\+::\+PH}, 
+\\*
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46a3a6ff147d93a7b2d56cf875994d33775}{Conversion\+::\+T\+U\+R\+B\+I\+D\+I\+TY}, 
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46a3fd6b696867d70225deda7868308679b}{Conversion\+::\+EC}, 
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46a7a323371ef1444029ad6c74cd68809dd}{Conversion\+::\+T\+DS}, 
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46a8ed43df473ba4db0ebe07e408199d5be}{Conversion\+::\+S\+A\+L\+I\+N\+I\+TY}
+ \}\begin{DoxyCompactList}\small\item\em Different types of conversions from analog to specified unit. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___analog_a3ce93ee8e03835045eb176828cc27add}{Loom\+\_\+\+Analog} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const uint8\+\_\+t \hyperlink{class_loom_sensor_a0e74ebbaecde15ed1c71e1bb6bc6aebe}{num\+\_\+samples}=8, const uint8\+\_\+t \hyperlink{class_loom___analog_a8593018496b601b75eec9a1df44574fb}{read\+\_\+resolution}=12, const bool enable\+A0=true, const bool enable\+A1=true, const bool enable\+A2=true, const bool enable\+A3=true, const bool enable\+A4=true, const bool enable\+A5=true, const \hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} convert\+A0=\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693}{Conversion\+::\+N\+O\+NE}, const \hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} convert\+A1=\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693}{Conversion\+::\+N\+O\+NE}, const \hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} convert\+A2=\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693}{Conversion\+::\+N\+O\+NE}, const \hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} convert\+A3=\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693}{Conversion\+::\+N\+O\+NE}, const \hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} convert\+A4=\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693}{Conversion\+::\+N\+O\+NE}, const \hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} convert\+A5=\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693}{Conversion\+::\+N\+O\+NE}, const float \hyperlink{class_loom___analog_ad01ead292b5fecf5178cd1baf9354ac3}{temperature}=25.\+0)
+\begin{DoxyCompactList}\small\item\em Analog manager module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___analog_a617a6b9c093fb8bb54abd3e55d051c0a}{Loom\+\_\+\+Analog} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___analog_aa8d2a87c4c6ae72c1a943b95c96f2b53}{$\sim$\+Loom\+\_\+\+Analog} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___analog_afa90bbf4d632fe9b3168567cfc605f77}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___analog_ab22f3a9b0d5c78feb1e53cf565483385}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___analog_ad74305d4a8d7f705072561b92e7b7c68}{add\+\_\+config} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Add configuration information to Json\+Object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___analog_ae41c9795ceb9079b88a87cb64d7869cf}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___analog_a981f42f7a1358ea77ec087df13859406}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{class_loom___analog_ab5f411c342780111457c64234b4d643a}{get\+\_\+analog\+\_\+resolution} () const 
+\begin{DoxyCompactList}\small\item\em Get the current analog read resolution. \end{DoxyCompactList}\item 
+int \hyperlink{class_loom___analog_a8e908b2ba222b3d4f62c7f7e329cbe8e}{get\+\_\+analog\+\_\+val} (const uint8\+\_\+t pin) const 
+\begin{DoxyCompactList}\small\item\em Get the analog value of specified pin. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___analog_aa92ebd0ecbf15bc6a4a48b60d7d86b7b}{get\+\_\+battery} () const 
+\begin{DoxyCompactList}\small\item\em Get the battery voltage of the device. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___analog_adfbd651535167726deffc2c033f0b725}{get\+\_\+pin\+\_\+enabled} (const uint8\+\_\+t pin) const 
+\begin{DoxyCompactList}\small\item\em Get if a pin is enabled in manager. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} \hyperlink{class_loom___analog_ac8ac33bb528a34b34c389bb2debfe1e7}{get\+\_\+conversion} (const uint8\+\_\+t pin) const 
+\begin{DoxyCompactList}\small\item\em Get the current conversion associated with a pin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___analog_a5a513390535fd71e06df243a964bab84}{set\+\_\+analog\+\_\+resolution} (const uint8\+\_\+t res)
+\begin{DoxyCompactList}\small\item\em Set the analog read resolution. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___analog_a0b6e9a100feed45e710aa05fac607147}{set\+\_\+pin\+\_\+enabled} (const uint8\+\_\+t pin, const bool e)
+\begin{DoxyCompactList}\small\item\em Set the enable state of a pin. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___analog_ad0cd72042cd7a978c7c1fc6761c38cf8}{set\+\_\+conversion} (const uint8\+\_\+t pin, const \hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} c)
+\begin{DoxyCompactList}\small\item\em Set the current conversion associated with a pin. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___analog_a80761be7bed4d3ae55eb4b9faa26a58c}{set\+\_\+enable\+\_\+conversions} (const bool e)
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespace_enable}{Enable} or disable all conversions. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___analog_af7a82f3654bf08974ff95dd8ec90dba7}{set\+\_\+temperature} (const float temp)
+\begin{DoxyCompactList}\small\item\em Set temperature to use in conversions that require temperature compensation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{class_loom___analog_a8593018496b601b75eec9a1df44574fb}{read\+\_\+resolution}
+\begin{DoxyCompactList}\small\item\em Which resolution to read at (generally use 12 or 10) \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___analog_a1111168ede4b93a1507e0cd67d849fd7}{pin\+\_\+enabled} \mbox{[}\hyperlink{_analog_8h_a33ca45f6b669c25166a400e7b21999a2}{A\+N\+A\+L\+O\+G\+\_\+\+C\+O\+U\+NT}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Whether pins A0-\/\+A5 are enabled for analog reading. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom___analog_a9badecf02377889b100678c8c50ba387}{analog\+\_\+vals} \mbox{[}\hyperlink{_analog_8h_a33ca45f6b669c25166a400e7b21999a2}{A\+N\+A\+L\+O\+G\+\_\+\+C\+O\+U\+NT}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Last known analog readings for pin A0-\/\+A5. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___analog_a1a1f859c11385e20ff2328f7df868436}{battery}
+\begin{DoxyCompactList}\small\item\em Battery voltage. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___analog_ab1be771ab1dfad8ddb955c42ba3a3de6}{enable\+\_\+conversions}
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespace_enable}{Enable} or disable all conversions. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} \hyperlink{class_loom___analog_a3bf07770f1244670cbfaa8d6e563f2ef}{conversions} \mbox{[}\hyperlink{_analog_8h_a33ca45f6b669c25166a400e7b21999a2}{A\+N\+A\+L\+O\+G\+\_\+\+C\+O\+U\+NT}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Conversion (if any) to apply to analog value when printing / packaging. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___analog_ad01ead292b5fecf5178cd1baf9354ac3}{temperature}
+\begin{DoxyCompactList}\small\item\em Temperature to use in conversions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{M\+I\+S\+C\+E\+L\+L\+A\+N\+E\+O\+US}
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$ \hyperlink{class_loom___analog_a9bd686a057aaa43611665bd344fd7cac}{conversion\+\_\+name} (const \hyperlink{class_loom___analog_a83079adfd115a272351323429cefad46}{Conversion} conversion)
+\begin{DoxyCompactList}\small\item\em Get string of name associated with conversion enum. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Analog pin manager module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___analog.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!Conversion@{Conversion}}
+\index{Conversion@{Conversion}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{Conversion}{Conversion}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+\_\+\+Analog\+::\+Conversion}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom___analog_a83079adfd115a272351323429cefad46}{}\label{class_loom___analog_a83079adfd115a272351323429cefad46}
+
+
+Different types of conversions from analog to specified unit. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\+O\+NE@{N\+O\+NE}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!N\+O\+NE@{N\+O\+NE}}\item[{\em 
+N\+O\+NE\hypertarget{class_loom___analog_a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693}{}\label{class_loom___analog_a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693}
+}]No conversion applied. \index{V\+O\+L\+T\+A\+GE@{V\+O\+L\+T\+A\+GE}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!V\+O\+L\+T\+A\+GE@{V\+O\+L\+T\+A\+GE}}\item[{\em 
+V\+O\+L\+T\+A\+GE\hypertarget{class_loom___analog_a83079adfd115a272351323429cefad46ad19d26898eee98e71fc8b0ad69bb898b}{}\label{class_loom___analog_a83079adfd115a272351323429cefad46ad19d26898eee98e71fc8b0ad69bb898b}
+}]Analog to voltage. \index{T\+H\+E\+R\+M\+I\+S\+T\+OR@{T\+H\+E\+R\+M\+I\+S\+T\+OR}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!T\+H\+E\+R\+M\+I\+S\+T\+OR@{T\+H\+E\+R\+M\+I\+S\+T\+OR}}\item[{\em 
+T\+H\+E\+R\+M\+I\+S\+T\+OR\hypertarget{class_loom___analog_a83079adfd115a272351323429cefad46ada003223c47c56d9514ec438a602ae43}{}\label{class_loom___analog_a83079adfd115a272351323429cefad46ada003223c47c56d9514ec438a602ae43}
+}]Thermistor. \index{PH@{PH}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!PH@{PH}}\item[{\em 
+PH\hypertarget{class_loom___analog_a83079adfd115a272351323429cefad46aa25496ebf095e4198da4088449c83ac6}{}\label{class_loom___analog_a83079adfd115a272351323429cefad46aa25496ebf095e4198da4088449c83ac6}
+}]pH value \index{T\+U\+R\+B\+I\+D\+I\+TY@{T\+U\+R\+B\+I\+D\+I\+TY}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!T\+U\+R\+B\+I\+D\+I\+TY@{T\+U\+R\+B\+I\+D\+I\+TY}}\item[{\em 
+T\+U\+R\+B\+I\+D\+I\+TY\hypertarget{class_loom___analog_a83079adfd115a272351323429cefad46a3a6ff147d93a7b2d56cf875994d33775}{}\label{class_loom___analog_a83079adfd115a272351323429cefad46a3a6ff147d93a7b2d56cf875994d33775}
+}]Turbidity. \index{EC@{EC}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!EC@{EC}}\item[{\em 
+EC\hypertarget{class_loom___analog_a83079adfd115a272351323429cefad46a3fd6b696867d70225deda7868308679b}{}\label{class_loom___analog_a83079adfd115a272351323429cefad46a3fd6b696867d70225deda7868308679b}
+}]Electrical Conductivity. \index{T\+DS@{T\+DS}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!T\+DS@{T\+DS}}\item[{\em 
+T\+DS\hypertarget{class_loom___analog_a83079adfd115a272351323429cefad46a7a323371ef1444029ad6c74cd68809dd}{}\label{class_loom___analog_a83079adfd115a272351323429cefad46a7a323371ef1444029ad6c74cd68809dd}
+}]Total Dissolved Solids. \index{S\+A\+L\+I\+N\+I\+TY@{S\+A\+L\+I\+N\+I\+TY}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!S\+A\+L\+I\+N\+I\+TY@{S\+A\+L\+I\+N\+I\+TY}}\item[{\em 
+S\+A\+L\+I\+N\+I\+TY\hypertarget{class_loom___analog_a83079adfd115a272351323429cefad46a8ed43df473ba4db0ebe07e408199d5be}{}\label{class_loom___analog_a83079adfd115a272351323429cefad46a8ed43df473ba4db0ebe07e408199d5be}
+}]Salinity. \end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Analog(\+Loom\+Manager $\ast$manager, const uint8\+\_\+t num\+\_\+samples=8, const uint8\+\_\+t read\+\_\+resolution=12, const bool enable\+A0=true, const bool enable\+A1=true, const bool enable\+A2=true, const bool enable\+A3=true, const bool enable\+A4=true, const bool enable\+A5=true, const Conversion convert\+A0=\+Conversion\+::\+N\+O\+N\+E, const Conversion convert\+A1=\+Conversion\+::\+N\+O\+N\+E, const Conversion convert\+A2=\+Conversion\+::\+N\+O\+N\+E, const Conversion convert\+A3=\+Conversion\+::\+N\+O\+N\+E, const Conversion convert\+A4=\+Conversion\+::\+N\+O\+N\+E, const Conversion convert\+A5=\+Conversion\+::\+N\+O\+N\+E, const float temperature=25.\+0)}{Loom_Analog(LoomManager *manager, const uint8_t num_samples=8, const uint8_t read_resolution=12, const bool enableA0=true, const bool enableA1=true, const bool enableA2=true, const bool enableA3=true, const bool enableA4=true, const bool enableA5=true, const Conversion convertA0=Conversion::NONE, const Conversion convertA1=Conversion::NONE, const Conversion convertA2=Conversion::NONE, const Conversion convertA3=Conversion::NONE, const Conversion convertA4=Conversion::NONE, const Conversion convertA5=Conversion::NONE, const float temperature=25.0)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Analog\+::\+Loom\+\_\+\+Analog (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const uint8\+\_\+t}]{num\+\_\+samples = {\ttfamily 8}, }
+\item[{const uint8\+\_\+t}]{read\+\_\+resolution = {\ttfamily 12}, }
+\item[{const bool}]{enable\+A0 = {\ttfamily true}, }
+\item[{const bool}]{enable\+A1 = {\ttfamily true}, }
+\item[{const bool}]{enable\+A2 = {\ttfamily true}, }
+\item[{const bool}]{enable\+A3 = {\ttfamily true}, }
+\item[{const bool}]{enable\+A4 = {\ttfamily true}, }
+\item[{const bool}]{enable\+A5 = {\ttfamily true}, }
+\item[{const {\bf Conversion}}]{convert\+A0 = {\ttfamily {\bf Conversion\+::\+N\+O\+NE}}, }
+\item[{const {\bf Conversion}}]{convert\+A1 = {\ttfamily {\bf Conversion\+::\+N\+O\+NE}}, }
+\item[{const {\bf Conversion}}]{convert\+A2 = {\ttfamily {\bf Conversion\+::\+N\+O\+NE}}, }
+\item[{const {\bf Conversion}}]{convert\+A3 = {\ttfamily {\bf Conversion\+::\+N\+O\+NE}}, }
+\item[{const {\bf Conversion}}]{convert\+A4 = {\ttfamily {\bf Conversion\+::\+N\+O\+NE}}, }
+\item[{const {\bf Conversion}}]{convert\+A5 = {\ttfamily {\bf Conversion\+::\+N\+O\+NE}}, }
+\item[{const float}]{temperature = {\ttfamily 25.0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___analog_a3ce93ee8e03835045eb176828cc27add}{}\label{class_loom___analog_a3ce93ee8e03835045eb176828cc27add}
+
+
+Analog manager module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em num\+\_\+samples} & Set(\+Int) $\vert$ $<$8$>$ $\vert$ \{1, 2, 4, 8, 16\} $\vert$ How many samples to take and average \\
+\hline
+\mbox{\tt in}  & {\em read\+\_\+resolution} & Int $\vert$ $<$12$>$ $\vert$ \mbox{[}8-\/12\mbox{]} $\vert$ How many bits to read analog values at \\
+\hline
+\mbox{\tt in}  & {\em enable\+A0} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A0 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A1} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A1 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A2} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A2 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A3} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A3 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A4} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A4 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A5} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A5 for managing \\
+\hline
+\mbox{\tt in}  & {\em convert\+A0} & Set(\+Conversion) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+No conversion\char`\"{}), 1(\char`\"{}\+Analog to voltage\char`\"{}), 2(\char`\"{}\+Thermistor\char`\"{} ), 3(\char`\"{}p\+H\char`\"{}), 4(\char`\"{}\+Turbidity\char`\"{}), 5(\char`\"{}\+Electrical Conductivity\char`\"{}), 6(\char`\"{}\+Total Dissolved Solids\char`\"{}), 7(\char`\"{}\+Salinity\char`\"{})\} $\vert$ Conversion to apply to analog readings on pin A0 \\
+\hline
+\mbox{\tt in}  & {\em convert\+A1} & Set(\+Conversion) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+No conversion\char`\"{}), 1(\char`\"{}\+Analog to voltage\char`\"{}), 2(\char`\"{}\+Thermistor\char`\"{} ), 3(\char`\"{}p\+H\char`\"{}), 4(\char`\"{}\+Turbidity\char`\"{}), 5(\char`\"{}\+Electrical Conductivity\char`\"{}), 6(\char`\"{}\+Total Dissolved Solids\char`\"{}), 7(\char`\"{}\+Salinity\char`\"{})\} $\vert$ Conversion to apply to analog readings on pin A1 \\
+\hline
+\mbox{\tt in}  & {\em convert\+A2} & Set(\+Conversion) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+No conversion\char`\"{}), 1(\char`\"{}\+Analog to voltage\char`\"{}), 2(\char`\"{}\+Thermistor\char`\"{} ), 3(\char`\"{}p\+H\char`\"{}), 4(\char`\"{}\+Turbidity\char`\"{}), 5(\char`\"{}\+Electrical Conductivity\char`\"{}), 6(\char`\"{}\+Total Dissolved Solids\char`\"{}), 7(\char`\"{}\+Salinity\char`\"{})\} $\vert$ Conversion to apply to analog readings on pin A2 \\
+\hline
+\mbox{\tt in}  & {\em convert\+A3} & Set(\+Conversion) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+No conversion\char`\"{}), 1(\char`\"{}\+Analog to voltage\char`\"{}), 2(\char`\"{}\+Thermistor\char`\"{} ), 3(\char`\"{}p\+H\char`\"{}), 4(\char`\"{}\+Turbidity\char`\"{}), 5(\char`\"{}\+Electrical Conductivity\char`\"{}), 6(\char`\"{}\+Total Dissolved Solids\char`\"{}), 7(\char`\"{}\+Salinity\char`\"{})\} $\vert$ Conversion to apply to analog readings on pin A3 \\
+\hline
+\mbox{\tt in}  & {\em convert\+A4} & Set(\+Conversion) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+No conversion\char`\"{}), 1(\char`\"{}\+Analog to voltage\char`\"{}), 2(\char`\"{}\+Thermistor\char`\"{} ), 3(\char`\"{}p\+H\char`\"{}), 4(\char`\"{}\+Turbidity\char`\"{}), 5(\char`\"{}\+Electrical Conductivity\char`\"{}), 6(\char`\"{}\+Total Dissolved Solids\char`\"{}), 7(\char`\"{}\+Salinity\char`\"{})\} $\vert$ Conversion to apply to analog readings on pin A4 \\
+\hline
+\mbox{\tt in}  & {\em convert\+A5} & Set(\+Conversion) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+No conversion\char`\"{}), 1(\char`\"{}\+Analog to voltage\char`\"{}), 2(\char`\"{}\+Thermistor\char`\"{} ), 3(\char`\"{}p\+H\char`\"{}), 4(\char`\"{}\+Turbidity\char`\"{}), 5(\char`\"{}\+Electrical Conductivity\char`\"{}), 6(\char`\"{}\+Total Dissolved Solids\char`\"{}), 7(\char`\"{}\+Salinity\char`\"{})\} $\vert$ Conversion to apply to analog readings on pin A5 \\
+\hline
+\mbox{\tt in}  & {\em temperature} & float $\vert$ $<$25.\+0$>$ $\vert$ \mbox{[}0.-\/100.\mbox{]} $\vert$ Temperature to using in conversions \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Analog(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Analog(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Analog\+::\+Loom\+\_\+\+Analog (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___analog_a617a6b9c093fb8bb54abd3e55d051c0a}{}\label{class_loom___analog_a617a6b9c093fb8bb54abd3e55d051c0a}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!````~Loom\+\_\+\+Analog@{$\sim$\+Loom\+\_\+\+Analog}}
+\index{````~Loom\+\_\+\+Analog@{$\sim$\+Loom\+\_\+\+Analog}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Analog()=default}{~Loom_Analog()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Analog\+::$\sim$\+Loom\+\_\+\+Analog (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___analog_aa8d2a87c4c6ae72c1a943b95c96f2b53}{}\label{class_loom___analog_aa8d2a87c4c6ae72c1a943b95c96f2b53}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!add\+\_\+config@{add\+\_\+config}}
+\index{add\+\_\+config@{add\+\_\+config}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{add\+\_\+config(\+Json\+Object json) override}{add_config(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::add\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___analog_ad74305d4a8d7f705072561b92e7b7c68}{}\label{class_loom___analog_ad74305d4a8d7f705072561b92e7b7c68}
+
+
+Add configuration information to Json\+Object. 
+
+\hyperlink{class_loom_manager}{Loom\+Manager} iterates over modules to build complete configuration 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json configuration object to add to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_a06747f16d76bde35575557c7515adcc0}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!conversion\+\_\+name@{conversion\+\_\+name}}
+\index{conversion\+\_\+name@{conversion\+\_\+name}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{conversion\+\_\+name(const Conversion conversion)}{conversion_name(const Conversion conversion)}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+\_\+\+Analog\+::conversion\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{const {\bf Conversion}}]{conversion}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom___analog_a9bd686a057aaa43611665bd344fd7cac}{}\label{class_loom___analog_a9bd686a057aaa43611665bd344fd7cac}
+
+
+Get string of name associated with conversion enum. 
+
+\begin{DoxyReturn}{Returns}
+String of conversion 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!get\+\_\+analog\+\_\+resolution@{get\+\_\+analog\+\_\+resolution}}
+\index{get\+\_\+analog\+\_\+resolution@{get\+\_\+analog\+\_\+resolution}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{get\+\_\+analog\+\_\+resolution() const }{get_analog_resolution() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Analog\+::get\+\_\+analog\+\_\+resolution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___analog_ab5f411c342780111457c64234b4d643a}{}\label{class_loom___analog_ab5f411c342780111457c64234b4d643a}
+
+
+Get the current analog read resolution. 
+
+\begin{DoxyReturn}{Returns}
+Read resolution 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!get\+\_\+analog\+\_\+val@{get\+\_\+analog\+\_\+val}}
+\index{get\+\_\+analog\+\_\+val@{get\+\_\+analog\+\_\+val}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{get\+\_\+analog\+\_\+val(const uint8\+\_\+t pin) const }{get_analog_val(const uint8_t pin) const }}]{\setlength{\rightskip}{0pt plus 5cm}int Loom\+\_\+\+Analog\+::get\+\_\+analog\+\_\+val (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom___analog_a8e908b2ba222b3d4f62c7f7e329cbe8e}{}\label{class_loom___analog_a8e908b2ba222b3d4f62c7f7e329cbe8e}
+
+
+Get the analog value of specified pin. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Pin to read \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The analog value 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!get\+\_\+battery@{get\+\_\+battery}}
+\index{get\+\_\+battery@{get\+\_\+battery}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{get\+\_\+battery() const }{get_battery() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+Analog\+::get\+\_\+battery (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___analog_aa92ebd0ecbf15bc6a4a48b60d7d86b7b}{}\label{class_loom___analog_aa92ebd0ecbf15bc6a4a48b60d7d86b7b}
+
+
+Get the battery voltage of the device. 
+
+\begin{DoxyReturn}{Returns}
+The battery voltage 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!get\+\_\+conversion@{get\+\_\+conversion}}
+\index{get\+\_\+conversion@{get\+\_\+conversion}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{get\+\_\+conversion(const uint8\+\_\+t pin) const }{get_conversion(const uint8_t pin) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Conversion} Loom\+\_\+\+Analog\+::get\+\_\+conversion (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___analog_ac8ac33bb528a34b34c389bb2debfe1e7}{}\label{class_loom___analog_ac8ac33bb528a34b34c389bb2debfe1e7}
+
+
+Get the current conversion associated with a pin. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & The pin to get conversion for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The current Conversion setting 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!get\+\_\+pin\+\_\+enabled@{get\+\_\+pin\+\_\+enabled}}
+\index{get\+\_\+pin\+\_\+enabled@{get\+\_\+pin\+\_\+enabled}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{get\+\_\+pin\+\_\+enabled(const uint8\+\_\+t pin) const }{get_pin_enabled(const uint8_t pin) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Analog\+::get\+\_\+pin\+\_\+enabled (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___analog_adfbd651535167726deffc2c033f0b725}{}\label{class_loom___analog_adfbd651535167726deffc2c033f0b725}
+
+
+Get if a pin is enabled in manager. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Pin to get enable state of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The enabled state of pin 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___analog_afa90bbf4d632fe9b3168567cfc605f77}{}\label{class_loom___analog_afa90bbf4d632fe9b3168567cfc605f77}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___analog_ab22f3a9b0d5c78feb1e53cf565483385}{}\label{class_loom___analog_ab22f3a9b0d5c78feb1e53cf565483385}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___analog_ae41c9795ceb9079b88a87cb64d7869cf}{}\label{class_loom___analog_ae41c9795ceb9079b88a87cb64d7869cf}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_sensor_aaa3bb2a2165029906c4ee815e790c89e}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___analog_a981f42f7a1358ea77ec087df13859406}{}\label{class_loom___analog_a981f42f7a1358ea77ec087df13859406}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!set\+\_\+analog\+\_\+resolution@{set\+\_\+analog\+\_\+resolution}}
+\index{set\+\_\+analog\+\_\+resolution@{set\+\_\+analog\+\_\+resolution}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{set\+\_\+analog\+\_\+resolution(const uint8\+\_\+t res)}{set_analog_resolution(const uint8_t res)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::set\+\_\+analog\+\_\+resolution (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{res}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___analog_a5a513390535fd71e06df243a964bab84}{}\label{class_loom___analog_a5a513390535fd71e06df243a964bab84}
+
+
+Set the analog read resolution. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em res} & Resolution to read at (12 bit max) \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!set\+\_\+conversion@{set\+\_\+conversion}}
+\index{set\+\_\+conversion@{set\+\_\+conversion}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{set\+\_\+conversion(const uint8\+\_\+t pin, const Conversion c)}{set_conversion(const uint8_t pin, const Conversion c)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::set\+\_\+conversion (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{pin, }
+\item[{const {\bf Conversion}}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___analog_ad0cd72042cd7a978c7c1fc6761c38cf8}{}\label{class_loom___analog_ad0cd72042cd7a978c7c1fc6761c38cf8}
+
+
+Set the current conversion associated with a pin. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & The pin to set conversion for \\
+\hline
+\mbox{\tt in}  & {\em c} & The Conversion to use \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!set\+\_\+enable\+\_\+conversions@{set\+\_\+enable\+\_\+conversions}}
+\index{set\+\_\+enable\+\_\+conversions@{set\+\_\+enable\+\_\+conversions}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{set\+\_\+enable\+\_\+conversions(const bool e)}{set_enable_conversions(const bool e)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::set\+\_\+enable\+\_\+conversions (
+\begin{DoxyParamCaption}
+\item[{const bool}]{e}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___analog_a80761be7bed4d3ae55eb4b9faa26a58c}{}\label{class_loom___analog_a80761be7bed4d3ae55eb4b9faa26a58c}
+
+
+\hyperlink{namespace_enable}{Enable} or disable all conversions. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em e} & \hyperlink{namespace_enable}{Enable} state \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!set\+\_\+pin\+\_\+enabled@{set\+\_\+pin\+\_\+enabled}}
+\index{set\+\_\+pin\+\_\+enabled@{set\+\_\+pin\+\_\+enabled}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{set\+\_\+pin\+\_\+enabled(const uint8\+\_\+t pin, const bool e)}{set_pin_enabled(const uint8_t pin, const bool e)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::set\+\_\+pin\+\_\+enabled (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{pin, }
+\item[{const bool}]{e}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___analog_a0b6e9a100feed45e710aa05fac607147}{}\label{class_loom___analog_a0b6e9a100feed45e710aa05fac607147}
+
+
+Set the enable state of a pin. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & The pin to set enable state of \\
+\hline
+\mbox{\tt in}  & {\em e} & \hyperlink{namespace_enable}{Enable} state \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!set\+\_\+temperature@{set\+\_\+temperature}}
+\index{set\+\_\+temperature@{set\+\_\+temperature}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{set\+\_\+temperature(const float temp)}{set_temperature(const float temp)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Analog\+::set\+\_\+temperature (
+\begin{DoxyParamCaption}
+\item[{const float}]{temp}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___analog_af7a82f3654bf08974ff95dd8ec90dba7}{}\label{class_loom___analog_af7a82f3654bf08974ff95dd8ec90dba7}
+
+
+Set temperature to use in conversions that require temperature compensation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em temp} & Temperature to use \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!analog\+\_\+vals@{analog\+\_\+vals}}
+\index{analog\+\_\+vals@{analog\+\_\+vals}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{analog\+\_\+vals}{analog_vals}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+Analog\+::analog\+\_\+vals\mbox{[}{\bf A\+N\+A\+L\+O\+G\+\_\+\+C\+O\+U\+NT}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___analog_a9badecf02377889b100678c8c50ba387}{}\label{class_loom___analog_a9badecf02377889b100678c8c50ba387}
+
+
+Last known analog readings for pin A0-\/\+A5. 
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!battery@{battery}}
+\index{battery@{battery}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{battery}{battery}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+Analog\+::battery\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___analog_a1a1f859c11385e20ff2328f7df868436}{}\label{class_loom___analog_a1a1f859c11385e20ff2328f7df868436}
+
+
+Battery voltage. 
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!conversions@{conversions}}
+\index{conversions@{conversions}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{conversions}{conversions}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Conversion} Loom\+\_\+\+Analog\+::conversions\mbox{[}{\bf A\+N\+A\+L\+O\+G\+\_\+\+C\+O\+U\+NT}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___analog_a3bf07770f1244670cbfaa8d6e563f2ef}{}\label{class_loom___analog_a3bf07770f1244670cbfaa8d6e563f2ef}
+
+
+Conversion (if any) to apply to analog value when printing / packaging. 
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!enable\+\_\+conversions@{enable\+\_\+conversions}}
+\index{enable\+\_\+conversions@{enable\+\_\+conversions}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{enable\+\_\+conversions}{enable_conversions}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Analog\+::enable\+\_\+conversions\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___analog_ab1be771ab1dfad8ddb955c42ba3a3de6}{}\label{class_loom___analog_ab1be771ab1dfad8ddb955c42ba3a3de6}
+
+
+\hyperlink{namespace_enable}{Enable} or disable all conversions. 
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!pin\+\_\+enabled@{pin\+\_\+enabled}}
+\index{pin\+\_\+enabled@{pin\+\_\+enabled}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{pin\+\_\+enabled}{pin_enabled}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Analog\+::pin\+\_\+enabled\mbox{[}{\bf A\+N\+A\+L\+O\+G\+\_\+\+C\+O\+U\+NT}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___analog_a1111168ede4b93a1507e0cd67d849fd7}{}\label{class_loom___analog_a1111168ede4b93a1507e0cd67d849fd7}
+
+
+Whether pins A0-\/\+A5 are enabled for analog reading. 
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!read\+\_\+resolution@{read\+\_\+resolution}}
+\index{read\+\_\+resolution@{read\+\_\+resolution}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{read\+\_\+resolution}{read_resolution}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Analog\+::read\+\_\+resolution\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___analog_a8593018496b601b75eec9a1df44574fb}{}\label{class_loom___analog_a8593018496b601b75eec9a1df44574fb}
+
+
+Which resolution to read at (generally use 12 or 10) 
+
+\index{Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}!temperature@{temperature}}
+\index{temperature@{temperature}!Loom\+\_\+\+Analog@{Loom\+\_\+\+Analog}}
+\subsubsection[{\texorpdfstring{temperature}{temperature}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+Analog\+::temperature\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___analog_ad01ead292b5fecf5178cd1baf9354ac3}{}\label{class_loom___analog_ad01ead292b5fecf5178cd1baf9354ac3}
+
+
+Temperature to use in conversions. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\hyperlink{_analog_8h}{Analog.\+h}\item 
+src/\+Sensors/\hyperlink{_analog_8cpp}{Analog.\+cpp}\end{DoxyCompactItemize}

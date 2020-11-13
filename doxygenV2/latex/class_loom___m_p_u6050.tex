@@ -1,0 +1,353 @@
+\hypertarget{class_loom___m_p_u6050}{}\section{Loom\+\_\+\+M\+P\+U6050 Class Reference}
+\label{class_loom___m_p_u6050}\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+
+
+M\+P\+U6050 6 axis gyroscope and accelerometer sensor module.  
+
+
+
+
+{\ttfamily \#include $<$M\+P\+U6050.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+M\+P\+U6050\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{class_loom___m_p_u6050__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___m_p_u6050_a433ac12fae38672cfd0bdb19d142d213}{Loom\+\_\+\+M\+P\+U6050} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}=0x69, const uint8\+\_\+t mux\+\_\+port=255, const bool calibrate=true)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___m_p_u6050_a680544122c36712c5b0fe908a284f6b1}{Loom\+\_\+\+M\+P\+U6050} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom___m_p_u6050_a7f416a3e5884ff71537608580259c1c0}{$\sim$\+Loom\+\_\+\+M\+P\+U6050} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___m_p_u6050_ab2e0dc418e3ba9d0a4bb2098f204e46a}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___m_p_u6050_a053f5fd6c8e4d8bc3243f345d68d0f30}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___m_p_u6050_a56d731f0e63bbb4c00c12dab2b785d61}{calibrate} () override
+\begin{DoxyCompactList}\small\item\em Calibration routine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___m_p_u6050_a34dce6c99de2f323287598400499a4c4}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___m_p_u6050_a9b6f6fbf9359caf4b4860c4d26fefde1}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_loom___m_p_u6050_af9c5eb7e6a657f92500dd39df03383b3}{temp}
+\begin{DoxyCompactList}\small\item\em Temperature. Units\+: °C. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_abe1855f17309051bcecddf084a7f2a95}{accX}
+\begin{DoxyCompactList}\small\item\em X-\/axis acceleration value. Units\+: g. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a12e89f1a6d8e9564600e6e85375abca9}{accY}
+\begin{DoxyCompactList}\small\item\em Y-\/axis acceleration value. Units\+: g. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a7d9d3324a3b3bf58f6a11993e8d28b61}{accZ}
+\begin{DoxyCompactList}\small\item\em Z-\/axis acceleration value. Units\+: g. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_afd0b222a584ee71d922532ac12763f9a}{gyroX}
+\begin{DoxyCompactList}\small\item\em X-\/axis gyro value. Units\+: °/s. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a1edb0ae9dd59317f4c1aafad72f3d5ef}{gyroY}
+\begin{DoxyCompactList}\small\item\em Y-\/axis gyro value. Units\+: °/s. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a0e8122d20fc6e686e2952e93e1ff1a89}{gyroZ}
+\begin{DoxyCompactList}\small\item\em Z-\/axis gyro value. Units\+: °/s. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_ab8ccba95253cd13a7505927d07a81abc}{acc\+AngleX}
+\begin{DoxyCompactList}\small\item\em X-\/axis acceleration angle. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a54de31e46d5c353b521483bcb88832c2}{acc\+AngleY}
+\begin{DoxyCompactList}\small\item\em Y-\/axis acceleration angle. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a291abc624cd3687d6120fa406e362391}{gyro\+AngleX}
+\begin{DoxyCompactList}\small\item\em X-\/axis acceleration angle. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a1d1cde22eab898d09d653f4c001c0127}{gyro\+AngleY}
+\begin{DoxyCompactList}\small\item\em Y-\/axis acceleration angle. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a78da02da066a030873cf72ee36026a64}{gyro\+AngleZ}
+\begin{DoxyCompactList}\small\item\em Z-\/axis acceleration angle. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a3f223a2721a44ff4d49a6194189a55c4}{angleX}
+\begin{DoxyCompactList}\small\item\em X-\/axis angle. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_acccd878ef904048c3e770011f2f36a1c}{angleY}
+\begin{DoxyCompactList}\small\item\em Y-\/axis angle. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___m_p_u6050_a8d8c30186abcda908795de978a5f6cd3}{angleZ}
+\begin{DoxyCompactList}\small\item\em Z-\/axis angle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+M\+P\+U6050 6 axis gyroscope and accelerometer sensor module. 
+
+\begin{DoxyAttention}{Attention}
+Need to modify line 7 of M\+P\+U6050\+\_\+tockn.\+h to have I2C address of 0x69
+\end{DoxyAttention}
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___m_p_u6050.html}{\tt Module Documentation}
+\item \href{https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40/}{\tt Product Page\+: Amazon –\+Gy-\/521 M\+P\+U-\/6050 M\+P\+U6050 Module 3 Axis Analog Gyro Sensors+ 3 Axis Accelerometer Module}
+\item \href{https://github.com/tockn/MPU6050_tockn}{\tt Dependency\+: M\+P\+U6050\+\_\+tockn}
+\item \href{https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050}{\tt Previous Dependency\+: M\+P\+U6050}
+\item \href{https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf}{\tt Datasheet\+: M\+P\+U6050}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mpu6050-accelerometer--gyroscope}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+M\+P\+U6050(\+Loom\+Manager $\ast$manager, const byte i2c\+\_\+address=0x69, const uint8\+\_\+t mux\+\_\+port=255, const bool calibrate=true)}{Loom_MPU6050(LoomManager *manager, const byte i2c_address=0x69, const uint8_t mux_port=255, const bool calibrate=true)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+P\+U6050\+::\+Loom\+\_\+\+M\+P\+U6050 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{i2c\+\_\+address = {\ttfamily 0x69}, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}, }
+\item[{const bool}]{calibrate = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___m_p_u6050_a433ac12fae38672cfd0bdb19d142d213}{}\label{class_loom___m_p_u6050_a433ac12fae38672cfd0bdb19d142d213}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x69$>$ $\vert$ \{0x68, 0x69\} $\vert$ I2C address \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+port} & Int $\vert$ $<$255$>$ $\vert$ \mbox{[}0-\/16\mbox{]} $\vert$ Port on multiplexer \\
+\hline
+\mbox{\tt in}  & {\em calibrate} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ Whether or not to calibrate at start \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+M\+P\+U6050(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_MPU6050(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+P\+U6050\+::\+Loom\+\_\+\+M\+P\+U6050 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___m_p_u6050_a680544122c36712c5b0fe908a284f6b1}{}\label{class_loom___m_p_u6050_a680544122c36712c5b0fe908a284f6b1}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!````~Loom\+\_\+\+M\+P\+U6050@{$\sim$\+Loom\+\_\+\+M\+P\+U6050}}
+\index{````~Loom\+\_\+\+M\+P\+U6050@{$\sim$\+Loom\+\_\+\+M\+P\+U6050}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+M\+P\+U6050()=default}{~Loom_MPU6050()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+\_\+\+M\+P\+U6050\+::$\sim$\+Loom\+\_\+\+M\+P\+U6050 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom___m_p_u6050_a7f416a3e5884ff71537608580259c1c0}{}\label{class_loom___m_p_u6050_a7f416a3e5884ff71537608580259c1c0}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!calibrate@{calibrate}}
+\index{calibrate@{calibrate}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{calibrate() override}{calibrate() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+P\+U6050\+::calibrate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_p_u6050_a56d731f0e63bbb4c00c12dab2b785d61}{}\label{class_loom___m_p_u6050_a56d731f0e63bbb4c00c12dab2b785d61}
+
+
+Calibration routine. 
+
+
+
+Reimplemented from \hyperlink{class_loom_sensor_ab75183469715506e8a694b9559b76c35}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+P\+U6050\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_p_u6050_ab2e0dc418e3ba9d0a4bb2098f204e46a}{}\label{class_loom___m_p_u6050_ab2e0dc418e3ba9d0a4bb2098f204e46a}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+P\+U6050\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_p_u6050_a053f5fd6c8e4d8bc3243f345d68d0f30}{}\label{class_loom___m_p_u6050_a053f5fd6c8e4d8bc3243f345d68d0f30}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+P\+U6050\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_p_u6050_a9b6f6fbf9359caf4b4860c4d26fefde1}{}\label{class_loom___m_p_u6050_a9b6f6fbf9359caf4b4860c4d26fefde1}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+P\+U6050\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_p_u6050_a34dce6c99de2f323287598400499a4c4}{}\label{class_loom___m_p_u6050_a34dce6c99de2f323287598400499a4c4}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!acc\+AngleX@{acc\+AngleX}}
+\index{acc\+AngleX@{acc\+AngleX}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{acc\+AngleX}{accAngleX}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::acc\+AngleX\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_ab8ccba95253cd13a7505927d07a81abc}{}\label{class_loom___m_p_u6050_ab8ccba95253cd13a7505927d07a81abc}
+
+
+X-\/axis acceleration angle. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!acc\+AngleY@{acc\+AngleY}}
+\index{acc\+AngleY@{acc\+AngleY}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{acc\+AngleY}{accAngleY}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::acc\+AngleY\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a54de31e46d5c353b521483bcb88832c2}{}\label{class_loom___m_p_u6050_a54de31e46d5c353b521483bcb88832c2}
+
+
+Y-\/axis acceleration angle. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!accX@{accX}}
+\index{accX@{accX}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{accX}{accX}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::accX\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_abe1855f17309051bcecddf084a7f2a95}{}\label{class_loom___m_p_u6050_abe1855f17309051bcecddf084a7f2a95}
+
+
+X-\/axis acceleration value. Units\+: g. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!accY@{accY}}
+\index{accY@{accY}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{accY}{accY}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::accY\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a12e89f1a6d8e9564600e6e85375abca9}{}\label{class_loom___m_p_u6050_a12e89f1a6d8e9564600e6e85375abca9}
+
+
+Y-\/axis acceleration value. Units\+: g. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!accZ@{accZ}}
+\index{accZ@{accZ}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{accZ}{accZ}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::accZ\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a7d9d3324a3b3bf58f6a11993e8d28b61}{}\label{class_loom___m_p_u6050_a7d9d3324a3b3bf58f6a11993e8d28b61}
+
+
+Z-\/axis acceleration value. Units\+: g. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!angleX@{angleX}}
+\index{angleX@{angleX}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{angleX}{angleX}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::angleX\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a3f223a2721a44ff4d49a6194189a55c4}{}\label{class_loom___m_p_u6050_a3f223a2721a44ff4d49a6194189a55c4}
+
+
+X-\/axis angle. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!angleY@{angleY}}
+\index{angleY@{angleY}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{angleY}{angleY}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::angleY\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_acccd878ef904048c3e770011f2f36a1c}{}\label{class_loom___m_p_u6050_acccd878ef904048c3e770011f2f36a1c}
+
+
+Y-\/axis angle. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!angleZ@{angleZ}}
+\index{angleZ@{angleZ}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{angleZ}{angleZ}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::angleZ\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a8d8c30186abcda908795de978a5f6cd3}{}\label{class_loom___m_p_u6050_a8d8c30186abcda908795de978a5f6cd3}
+
+
+Z-\/axis angle. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!gyro\+AngleX@{gyro\+AngleX}}
+\index{gyro\+AngleX@{gyro\+AngleX}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{gyro\+AngleX}{gyroAngleX}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::gyro\+AngleX\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a291abc624cd3687d6120fa406e362391}{}\label{class_loom___m_p_u6050_a291abc624cd3687d6120fa406e362391}
+
+
+X-\/axis acceleration angle. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!gyro\+AngleY@{gyro\+AngleY}}
+\index{gyro\+AngleY@{gyro\+AngleY}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{gyro\+AngleY}{gyroAngleY}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::gyro\+AngleY\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a1d1cde22eab898d09d653f4c001c0127}{}\label{class_loom___m_p_u6050_a1d1cde22eab898d09d653f4c001c0127}
+
+
+Y-\/axis acceleration angle. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!gyro\+AngleZ@{gyro\+AngleZ}}
+\index{gyro\+AngleZ@{gyro\+AngleZ}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{gyro\+AngleZ}{gyroAngleZ}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::gyro\+AngleZ\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a78da02da066a030873cf72ee36026a64}{}\label{class_loom___m_p_u6050_a78da02da066a030873cf72ee36026a64}
+
+
+Z-\/axis acceleration angle. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!gyroX@{gyroX}}
+\index{gyroX@{gyroX}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{gyroX}{gyroX}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::gyroX\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_afd0b222a584ee71d922532ac12763f9a}{}\label{class_loom___m_p_u6050_afd0b222a584ee71d922532ac12763f9a}
+
+
+X-\/axis gyro value. Units\+: °/s. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!gyroY@{gyroY}}
+\index{gyroY@{gyroY}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{gyroY}{gyroY}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::gyroY\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a1edb0ae9dd59317f4c1aafad72f3d5ef}{}\label{class_loom___m_p_u6050_a1edb0ae9dd59317f4c1aafad72f3d5ef}
+
+
+Y-\/axis gyro value. Units\+: °/s. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!gyroZ@{gyroZ}}
+\index{gyroZ@{gyroZ}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{gyroZ}{gyroZ}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::gyroZ\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_a0e8122d20fc6e686e2952e93e1ff1a89}{}\label{class_loom___m_p_u6050_a0e8122d20fc6e686e2952e93e1ff1a89}
+
+
+Z-\/axis gyro value. Units\+: °/s. 
+
+\index{Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}!temp@{temp}}
+\index{temp@{temp}!Loom\+\_\+\+M\+P\+U6050@{Loom\+\_\+\+M\+P\+U6050}}
+\subsubsection[{\texorpdfstring{temp}{temp}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+M\+P\+U6050\+::temp\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_p_u6050_af9c5eb7e6a657f92500dd39df03383b3}{}\label{class_loom___m_p_u6050_af9c5eb7e6a657f92500dd39df03383b3}
+
+
+Temperature. Units\+: °C. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_m_p_u6050_8h}{M\+P\+U6050.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_m_p_u6050_8cpp}{M\+P\+U6050.\+cpp}\end{DoxyCompactItemize}

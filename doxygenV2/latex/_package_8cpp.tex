@@ -1,0 +1,107 @@
+\hypertarget{_package_8cpp}{}\section{src/\+Package.cpp File Reference}
+\label{_package_8cpp}\index{src/\+Package.\+cpp@{src/\+Package.\+cpp}}
+{\ttfamily \#include \char`\"{}Package.\+h\char`\"{}}\\*
+Include dependency graph for Package.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{_package_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Json\+Object \hyperlink{_package_8cpp_afa4b771f3b536999226223c13d00e089}{get\+\_\+module\+\_\+data\+\_\+object} (Json\+Object json, const char $\ast$module\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Add an list of alternating keys and values to a json data object under the specified module. \end{DoxyCompactList}\item 
+void \hyperlink{_package_8cpp_ae6dee320d551bb715e7e4099b742381b}{package\+\_\+json\+\_\+timestamp} (Json\+Object json, const char $\ast$date, const char $\ast$time)
+\begin{DoxyCompactList}\small\item\em Add timestamp to a Json object. \end{DoxyCompactList}\item 
+void \hyperlink{_package_8cpp_a47c6c724dc391e50f5350913b8201924}{flatten\+\_\+json\+\_\+data\+\_\+object} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Convert data in key values in arrays in ojects to keys and values in single object \textquotesingle{}flat\+Obj\textquotesingle{}. \end{DoxyCompactList}\item 
+void \hyperlink{_package_8cpp_a1cadd6f48122b56dc1bbed7df930707b}{flatten\+\_\+json\+\_\+data\+\_\+array} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Convert data in key values in arrays in ojects to alternating keys and values in array \textquotesingle{}flat\+Array\textquotesingle{}. \end{DoxyCompactList}\item 
+Json\+Array \hyperlink{_package_8cpp_a1d3f3a67119474ceffc5799bd40a68d6}{add\+\_\+config\+\_\+temp} (Json\+Object json, const char $\ast$module\+\_\+name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Package.\+cpp@{Package.\+cpp}!add\+\_\+config\+\_\+temp@{add\+\_\+config\+\_\+temp}}
+\index{add\+\_\+config\+\_\+temp@{add\+\_\+config\+\_\+temp}!Package.\+cpp@{Package.\+cpp}}
+\subsubsection[{\texorpdfstring{add\+\_\+config\+\_\+temp(\+Json\+Object json, const char $\ast$module\+\_\+name)}{add_config_temp(JsonObject json, const char *module_name)}}]{\setlength{\rightskip}{0pt plus 5cm}Json\+Array add\+\_\+config\+\_\+temp (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const char $\ast$}]{module\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{_package_8cpp_a1d3f3a67119474ceffc5799bd40a68d6}{}\label{_package_8cpp_a1d3f3a67119474ceffc5799bd40a68d6}
+\index{Package.\+cpp@{Package.\+cpp}!flatten\+\_\+json\+\_\+data\+\_\+array@{flatten\+\_\+json\+\_\+data\+\_\+array}}
+\index{flatten\+\_\+json\+\_\+data\+\_\+array@{flatten\+\_\+json\+\_\+data\+\_\+array}!Package.\+cpp@{Package.\+cpp}}
+\subsubsection[{\texorpdfstring{flatten\+\_\+json\+\_\+data\+\_\+array(\+Json\+Object json)}{flatten_json_data_array(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}void flatten\+\_\+json\+\_\+data\+\_\+array (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{_package_8cpp_a1cadd6f48122b56dc1bbed7df930707b}{}\label{_package_8cpp_a1cadd6f48122b56dc1bbed7df930707b}
+
+
+Convert data in key values in arrays in ojects to alternating keys and values in array \textquotesingle{}flat\+Array\textquotesingle{}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to flatten data of \\
+\hline
+\end{DoxyParams}
+\index{Package.\+cpp@{Package.\+cpp}!flatten\+\_\+json\+\_\+data\+\_\+object@{flatten\+\_\+json\+\_\+data\+\_\+object}}
+\index{flatten\+\_\+json\+\_\+data\+\_\+object@{flatten\+\_\+json\+\_\+data\+\_\+object}!Package.\+cpp@{Package.\+cpp}}
+\subsubsection[{\texorpdfstring{flatten\+\_\+json\+\_\+data\+\_\+object(\+Json\+Object json)}{flatten_json_data_object(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}void flatten\+\_\+json\+\_\+data\+\_\+object (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{_package_8cpp_a47c6c724dc391e50f5350913b8201924}{}\label{_package_8cpp_a47c6c724dc391e50f5350913b8201924}
+
+
+Convert data in key values in arrays in ojects to keys and values in single object \textquotesingle{}flat\+Obj\textquotesingle{}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to flatten data of \\
+\hline
+\end{DoxyParams}
+\index{Package.\+cpp@{Package.\+cpp}!get\+\_\+module\+\_\+data\+\_\+object@{get\+\_\+module\+\_\+data\+\_\+object}}
+\index{get\+\_\+module\+\_\+data\+\_\+object@{get\+\_\+module\+\_\+data\+\_\+object}!Package.\+cpp@{Package.\+cpp}}
+\subsubsection[{\texorpdfstring{get\+\_\+module\+\_\+data\+\_\+object(\+Json\+Object json, const char $\ast$module\+\_\+name)}{get_module_data_object(JsonObject json, const char *module_name)}}]{\setlength{\rightskip}{0pt plus 5cm}Json\+Object get\+\_\+module\+\_\+data\+\_\+object (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const char $\ast$}]{module\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{_package_8cpp_afa4b771f3b536999226223c13d00e089}{}\label{_package_8cpp_afa4b771f3b536999226223c13d00e089}
+
+
+Add an list of alternating keys and values to a json data object under the specified module. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to add data to \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of module calling package \\
+\hline
+\end{DoxyParams}
+\index{Package.\+cpp@{Package.\+cpp}!package\+\_\+json\+\_\+timestamp@{package\+\_\+json\+\_\+timestamp}}
+\index{package\+\_\+json\+\_\+timestamp@{package\+\_\+json\+\_\+timestamp}!Package.\+cpp@{Package.\+cpp}}
+\subsubsection[{\texorpdfstring{package\+\_\+json\+\_\+timestamp(\+Json\+Object json, const char $\ast$date, const char $\ast$time)}{package_json_timestamp(JsonObject json, const char *date, const char *time)}}]{\setlength{\rightskip}{0pt plus 5cm}void package\+\_\+json\+\_\+timestamp (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const char $\ast$}]{date, }
+\item[{const char $\ast$}]{time}
+\end{DoxyParamCaption}
+)}\hypertarget{_package_8cpp_ae6dee320d551bb715e7e4099b742381b}{}\label{_package_8cpp_ae6dee320d551bb715e7e4099b742381b}
+
+
+Add timestamp to a Json object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to add timestamp to \\
+\hline
+\mbox{\tt in}  & {\em date} & Time string of timestamp \\
+\hline
+\mbox{\tt in}  & {\em time} & Date string of timestamp \\
+\hline
+\end{DoxyParams}

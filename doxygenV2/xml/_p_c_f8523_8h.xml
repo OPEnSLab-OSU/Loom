@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_p_c_f8523_8h" kind="file" language="C++">
+    <compoundname>PCF8523.h</compoundname>
+    <includes refid="_r_t_c_8h" local="yes">RTC.h</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_p_c_f8523_8cpp" local="yes">src/RTC/PCF8523.cpp</includedby>
+    <incdepgraph>
+      <node id="4837">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4834">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4835" relation="include">
+        </childnode>
+        <childnode refid="4837" relation="include">
+        </childnode>
+        <childnode refid="4838" relation="include">
+        </childnode>
+        <childnode refid="4839" relation="include">
+        </childnode>
+      </node>
+      <node id="4838">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4836" relation="include">
+        </childnode>
+        <childnode refid="4839" relation="include">
+        </childnode>
+      </node>
+      <node id="4833">
+        <label>RTC.h</label>
+        <link refid="_r_t_c_8h"/>
+        <childnode refid="4834" relation="include">
+        </childnode>
+        <childnode refid="4840" relation="include">
+        </childnode>
+      </node>
+      <node id="4835">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4836" relation="include">
+        </childnode>
+      </node>
+      <node id="4840">
+        <label>OPEnS_RTC.h</label>
+      </node>
+      <node id="4839">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4832">
+        <label>src/RTC/PCF8523.h</label>
+        <link refid="PCF8523.h"/>
+        <childnode refid="4833" relation="include">
+        </childnode>
+      </node>
+      <node id="4836">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4842">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="4843" relation="include">
+        </childnode>
+        <childnode refid="4844" relation="include">
+        </childnode>
+      </node>
+      <node id="4845">
+        <label>src/RTC/PCF8523.cpp</label>
+        <link refid="_p_c_f8523_8cpp"/>
+      </node>
+      <node id="4841">
+        <label>src/RTC/PCF8523.h</label>
+        <link refid="PCF8523.h"/>
+        <childnode refid="4842" relation="include">
+        </childnode>
+        <childnode refid="4845" relation="include">
+        </childnode>
+      </node>
+      <node id="4843">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="4844">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___p_c_f8523" prot="public">Loom_PCF8523</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/RTC/PCF8523.h"/>
+  </compounddef>
+</doxygen>

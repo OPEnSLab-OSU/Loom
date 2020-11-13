@@ -1,0 +1,898 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___s_d" kind="class" language="C++" prot="public">
+    <compoundname>Loom_SD</compoundname>
+    <basecompoundref refid="class_loom_log_plat" prot="public" virt="non-virtual">LoomLogPlat</basecompoundref>
+    <includes refid="_s_d_8h" local="no">SD.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___s_d_1ab093eb043634c52abdacf9397b4577d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_SD::Loom_SD</definition>
+        <argsstring>(LoomManager *manager, const bool enable_rate_filter=true, const uint16_t min_filter_delay=1000, const byte chip_select=10, const char *default_file=&quot;test&quot;, const bool number_files=true)</argsstring>
+        <name>Loom_SD</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enable_rate_filter</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>min_filter_delay</declname>
+          <defval>1000</defval>
+        </param>
+        <param>
+          <type>const byte</type>
+          <declname>chip_select</declname>
+          <defval>10</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>default_file</declname>
+          <defval>&quot;test&quot;</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>number_files</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>SD Module Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">enable_rate_filter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | Whether or not to impose maximum update rate </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">min_filter_delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;1000&gt; | [100-5000] | Minimum update delay, if enable_rate_filter enabled </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">chip_select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;10&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin to use for chip select </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">default_file_base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;test&quot;&gt; | null | File to write to if none explicity provided (should be &lt;= 6 characters, don&apos;t add extension) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">number_files</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | True to number files with run number, false to not. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="64" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="19" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a383cfc7b80778db3cec41992c7aaa9af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_SD::Loom_SD</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_SD</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="79" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="47" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1af939aa14399dd1f04dae897fbafb3159" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_SD::~Loom_SD</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_SD</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="82" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___s_d_1a0f106e4911985253e8ac09bcf953bb6e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_SD::log</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>log</name>
+        <reimplements refid="class_loom_log_plat_1accace14ed45817c98ef5ccc15fd79004">log</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Log a Json object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json Object to log </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="91" column="1" bodyfile="src/LogPlats/SD.h" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a9a281c97934fa0f54653408aa84ade6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_SD::log</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>log</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Version of logging for use with <ref refid="class_loom_manager" kindref="compound">LoomManager</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Accesses Json from <ref refid="class_loom_manager" kindref="compound">LoomManager</ref> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of file to write to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="96" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="177" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1af5a463b90af2eb0debe01a24f23a6a4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_SD::save_json</definition>
+        <argsstring>(JsonObject json, const char *name)</argsstring>
+        <name>save_json</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Save data to SD card in CSV format. </para>        </briefdescription>
+        <detaileddescription>
+<para>Format: Identification Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ... <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data to be saved </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The file to save to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="108" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="189" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1adecc011e82fac7f1543b3f588bbf4816" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_SD::delete_file</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>delete_file</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Delete a file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of file to delete </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="112" column="1" bodyfile="src/LogPlats/SD.h" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1aed577fc3915c42de474a992f81c827ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_SD::empty_file</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>empty_file</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Clear a file (remove contents but not file itself) </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of file to empty </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="116" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="140" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a316af7fd9cd88c33aa9aa06755cc37fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_SD::power_up</definition>
+        <argsstring>() override</argsstring>
+        <name>power_up</name>
+        <reimplements refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23">power_up</reimplements>
+        <briefdescription>
+<para>Turn on any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="118" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="360" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a01d99de8b39b25f562f2aeec3413170e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_SD::power_down</definition>
+        <argsstring>() override</argsstring>
+        <name>power_down</name>
+        <reimplements refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df">power_down</reimplements>
+        <briefdescription>
+<para>Turn off any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="119" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="367" bodyend="369"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___s_d_1a4c0c3f46a3479ed8e4a96c0ca4acfa7e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_SD::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_log_plat_1afd1780573d350f46ce26d237a4ade43b">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="125" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="110" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1aeeb9d41ad9b91658af6295483b42c55a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_SD::dump_file</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>dump_file</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>List current files on the SD card. </para>        </briefdescription>
+        <detaileddescription>
+<para>Print the contents of a particular file <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of file to print </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="132" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="148" bodyend="174"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom___s_d_1a4092a0759777c669914942c3559e6a76" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom_r_t_c" kindref="compound">LoomRTC</ref> *</type>
+        <definition>LoomRTC* Loom_SD::get_RTC_module</definition>
+        <argsstring>() const </argsstring>
+        <name>get_RTC_module</name>
+        <briefdescription>
+<para>Return pointer to the currently linked RTC object. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Current RTC object </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="140" column="1" bodyfile="src/LogPlats/SD.h" bodystart="140" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a5abc30ca684dbd2cedb0e18c3c8a9685" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* Loom_SD::get_default_file</definition>
+        <argsstring>() const </argsstring>
+        <name>get_default_file</name>
+        <briefdescription>
+<para>Get the current default file to write to. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Default file </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="144" column="1" bodyfile="src/LogPlats/SD.h" bodystart="144" bodyend="144"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom___s_d_1ad910296dd33bec7d3ec8a91892aade48" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_SD::link_device_manager</definition>
+        <argsstring>(LoomManager *LM) override</argsstring>
+        <name>link_device_manager</name>
+        <reimplements refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396">link_device_manager</reimplements>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>LM</declname>
+        </param>
+        <briefdescription>
+<para>Add pointer back to device manager. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generally only called when device manager links module to provide pointer both directions <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">LM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> to point to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="154" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="123" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a8704546681d123363d8210ac0c95f293" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_SD::set_RTC_module</definition>
+        <argsstring>(LoomRTC *RTC_Inst)</argsstring>
+        <name>set_RTC_module</name>
+        <param>
+          <type><ref refid="class_loom_r_t_c" kindref="compound">LoomRTC</ref> *</type>
+          <declname>RTC_Inst</declname>
+        </param>
+        <briefdescription>
+<para>Set the RTC module to use for timers. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">RTC_Inst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the RTC object </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="158" column="1" bodyfile="src/LogPlats/SD.h" bodystart="158" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a58416c209f76a591bf85e824240a7659" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_SD::set_filename</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>set_filename</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set default file to write to. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New default file (max 8 characters excluding extension) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="162" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="134" bodyend="137"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MISCELLANEOUS</header>
+      <memberdef kind="function" id="class_loom___s_d_1a1cd246d54a7d829885aa3e553c7f4bf5" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void Loom_SD::SD_print_aux</definition>
+        <argsstring>(File file, T data, const char delimiter, const bool add_space=true) const </argsstring>
+        <name>SD_print_aux</name>
+        <param>
+          <type>File</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>delimiter</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>add_space</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Print the files on the SD card. </para>        </briefdescription>
+        <detaileddescription>
+<para>Recursive for nested folders <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File to treat at root </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numTabs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of tabs to prepend to properly show nesting Auxiliary funcntion to print data element, delimiter, and (optionally) space </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File to write to </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data element to write </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delimiter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Delimiter to use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">add_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True to add space after delimiter </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="183" column="1" bodyfile="src/LogPlats/SD.h" bodystart="183" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1ae02b2c9d5b406be357d8ffb31efbf0d2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_SD::_write_json_header_part1</definition>
+        <argsstring>(File &amp;file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const </argsstring>
+        <name>_write_json_header_part1</name>
+        <param>
+          <type>File &amp;</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>JsonObject</type>
+          <declname>dev_id</declname>
+        </param>
+        <param>
+          <type>JsonObject</type>
+          <declname>timestamp</declname>
+        </param>
+        <param>
+          <type>JsonArray</type>
+          <declname>contents</declname>
+        </param>
+        <briefdescription>
+<para>Aux method to create header row 1 (Categories) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="193" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="246" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a8252b4bc8f7236fa20c695766cbeb879" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_SD::_write_json_header_part2</definition>
+        <argsstring>(File &amp;file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const </argsstring>
+        <name>_write_json_header_part2</name>
+        <param>
+          <type>File &amp;</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>JsonObject</type>
+          <declname>dev_id</declname>
+        </param>
+        <param>
+          <type>JsonObject</type>
+          <declname>timestamp</declname>
+        </param>
+        <param>
+          <type>JsonArray</type>
+          <declname>contents</declname>
+        </param>
+        <briefdescription>
+<para>Aux method to create Header row 2 (Column names) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="195" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="280" bodyend="310"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a5a64d33c3a485c8e2d9e63e7de18589d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_SD::_write_json_data</definition>
+        <argsstring>(File &amp;file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const </argsstring>
+        <name>_write_json_data</name>
+        <param>
+          <type>File &amp;</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>JsonObject</type>
+          <declname>dev_id</declname>
+        </param>
+        <param>
+          <type>JsonObject</type>
+          <declname>timestamp</declname>
+        </param>
+        <param>
+          <type>JsonArray</type>
+          <declname>contents</declname>
+        </param>
+        <briefdescription>
+<para>Aux method to write data values. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="197" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="313" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___s_d_1a29c5843a603b14bc72f1771d61476fba" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_SD::update_filename</definition>
+        <argsstring>(const char *default_file, const bool number_files)</argsstring>
+        <name>update_filename</name>
+        <param>
+          <type>const char *</type>
+          <declname>default_file</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>number_files</declname>
+        </param>
+        <briefdescription>
+<para>When instantiating the SD module, you provide a file name base, to which a number is appended. </para>        </briefdescription>
+        <detaileddescription>
+<para>This number represents the run number, starting at 0. For example, if you use the file name base &apos;data&apos;, the first run will generate a file named: &apos;data00.csv&apos;. The next run of the program will produce &apos;data01.csv&apos; and so on <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">default_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File name base if using file numbers, or complete file name if not using numbers </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">number_files</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True to use numbers and increment number each run. False otherwise. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True is generating filename and opening it works, false otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="206" column="1" bodyfile="src/LogPlats/SD.cpp" bodystart="51" bodyend="107"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___s_d_1a0602d9ef1a9b7f8b31870702bcb692fd" prot="protected" static="no" mutable="no">
+        <type>SdFat</type>
+        <definition>SdFat Loom_SD::sd</definition>
+        <argsstring></argsstring>
+        <name>sd</name>
+        <briefdescription>
+<para>File system object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="41" column="1" bodyfile="src/LogPlats/SD.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___s_d_1a404b47d978c23b9426dcfe1fe3a185e1" prot="protected" static="no" mutable="no">
+        <type>const byte</type>
+        <definition>const byte Loom_SD::chip_select</definition>
+        <argsstring></argsstring>
+        <name>chip_select</name>
+        <briefdescription>
+<para>Chip select pin. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="44" column="1" bodyfile="src/LogPlats/SD.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___s_d_1a970a01045c1d73b67f23982842249097" prot="protected" static="no" mutable="no">
+        <type>char</type>
+        <definition>char Loom_SD::filename[13]</definition>
+        <argsstring>[13]</argsstring>
+        <name>filename</name>
+        <briefdescription>
+<para>String of file to write to if not filename explicitly provided (should not exceed 6 characters) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="45" column="1" bodyfile="src/LogPlats/SD.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___s_d_1a3dcce942e87eabc4e3912d1af283618c" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_r_t_c" kindref="compound">LoomRTC</ref> *</type>
+        <definition>LoomRTC* Loom_SD::RTC_Inst</definition>
+        <argsstring></argsstring>
+        <name>RTC_Inst</name>
+        <briefdescription>
+<para>Pointer to an RTC object for timestamps. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/SD.h" line="46" column="1" bodyfile="src/LogPlats/SD.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>SD logging platform module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___s_d.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/2922">Product Page: Adafruit Adalogger Featherwing</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/254">Product Page: Adafruit SD Breakout</ulink></para></listitem><listitem><para><ulink url="https://github.com/arduino-libraries/SD">Dependency: SD</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="878">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="877">
+        <label>LoomLogPlat</label>
+        <link refid="class_loom_log_plat"/>
+        <childnode refid="878" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="876">
+        <label>Loom_SD</label>
+        <link refid="class_loom___s_d"/>
+        <childnode refid="877" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="886">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="882">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="883" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="884" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="889" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="885" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="881">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="882" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="880">
+        <label>LoomLogPlat</label>
+        <link refid="class_loom_log_plat"/>
+        <childnode refid="881" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="890">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="885">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="881" relation="public-inheritance">
+        </childnode>
+        <childnode refid="886" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="887" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="884" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="888" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="889" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="890" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="884">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="881" relation="public-inheritance">
+        </childnode>
+        <childnode refid="885" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="883">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="881" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="889">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="881" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="887">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="888">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+      <node id="879">
+        <label>Loom_SD</label>
+        <link refid="class_loom___s_d"/>
+        <childnode refid="880" relation="public-inheritance">
+        </childnode>
+        <childnode refid="889" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/LogPlats/SD.h" line="37" column="1" bodyfile="src/LogPlats/SD.h" bodystart="36" bodyend="208"/>
+    <listofallmembers>
+      <member refid="class_loom___s_d_1a5a64d33c3a485c8e2d9e63e7de18589d" prot="private" virt="non-virtual"><scope>Loom_SD</scope><name>_write_json_data</name></member>
+      <member refid="class_loom___s_d_1ae02b2c9d5b406be357d8ffb31efbf0d2" prot="private" virt="non-virtual"><scope>Loom_SD</scope><name>_write_json_header_part1</name></member>
+      <member refid="class_loom___s_d_1a8252b4bc8f7236fa20c695766cbeb879" prot="private" virt="non-virtual"><scope>Loom_SD</scope><name>_write_json_header_part2</name></member>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_SD</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>category</name></member>
+      <member refid="class_loom_log_plat_1a74520318a9427997df80f98f924a0e48" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>check_millis</name></member>
+      <member refid="class_loom___s_d_1a404b47d978c23b9426dcfe1fe3a185e1" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>chip_select</name></member>
+      <member refid="class_loom___s_d_1adecc011e82fac7f1543b3f588bbf4816" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>delete_file</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_SD</scope><name>dispatch</name></member>
+      <member refid="class_loom___s_d_1aeeb9d41ad9b91658af6295483b42c55a" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>dump_file</name></member>
+      <member refid="class_loom___s_d_1aed577fc3915c42de474a992f81c827ac" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>empty_file</name></member>
+      <member refid="class_loom_log_plat_1a6d343b76b79a1e51572bcf2991966e61" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>enable_rate_filter</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom___s_d_1a970a01045c1d73b67f23982842249097" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>filename</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>get_active</name></member>
+      <member refid="class_loom___s_d_1a5abc30ca684dbd2cedb0e18c3c8a9685" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>get_default_file</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom___s_d_1a4092a0759777c669914942c3559e6a76" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>get_RTC_module</name></member>
+      <member refid="class_loom_log_plat_1aa6ad61d7d6c126aa13dcc91debef67e3" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>last_log_millis</name></member>
+      <member refid="class_loom___s_d_1ad910296dd33bec7d3ec8a91892aade48" prot="public" virt="virtual"><scope>Loom_SD</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___s_d_1a0f106e4911985253e8ac09bcf953bb6e" prot="public" virt="virtual"><scope>Loom_SD</scope><name>log</name></member>
+      <member refid="class_loom___s_d_1a9a281c97934fa0f54653408aa84ade6b" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>log</name></member>
+      <member refid="class_loom_log_plat_1adabc1e04a045b91923cff425405c5039" prot="public" virt="non-virtual" ambiguityscope="LoomLogPlat::"><scope>Loom_SD</scope><name>log</name></member>
+      <member refid="class_loom___s_d_1ab093eb043634c52abdacf9397b4577d6" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>Loom_SD</name></member>
+      <member refid="class_loom___s_d_1a383cfc7b80778db3cec41992c7aaa9af" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>Loom_SD</name></member>
+      <member refid="class_loom_log_plat_1a95e7954d4d049c8481908ba248b1e57b" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>LoomLogPlat</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>LoomModule</name></member>
+      <member refid="class_loom_log_plat_1a3d4ffe4204560b9677b8007be7f522be" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>min_filter_delay</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>module_type</name></member>
+      <member refid="class_loom_log_plat_1abddec0fce6ef786577ae008702c9393e" prot="public" virt="virtual"><scope>Loom_SD</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___s_d_1a01d99de8b39b25f562f2aeec3413170e" prot="public" virt="virtual"><scope>Loom_SD</scope><name>power_down</name></member>
+      <member refid="class_loom___s_d_1a316af7fd9cd88c33aa9aa06755cc37fd" prot="public" virt="virtual"><scope>Loom_SD</scope><name>power_up</name></member>
+      <member refid="class_loom___s_d_1a4c0c3f46a3479ed8e4a96c0ca4acfa7e" prot="public" virt="virtual"><scope>Loom_SD</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>Loom_SD</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>print_verbosity</name></member>
+      <member refid="class_loom___s_d_1a3dcce942e87eabc4e3912d1af283618c" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>RTC_Inst</name></member>
+      <member refid="class_loom___s_d_1af5a463b90af2eb0debe01a24f23a6a4f" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>save_json</name></member>
+      <member refid="class_loom___s_d_1a0602d9ef1a9b7f8b31870702bcb692fd" prot="protected" virt="non-virtual"><scope>Loom_SD</scope><name>sd</name></member>
+      <member refid="class_loom___s_d_1a1cd246d54a7d829885aa3e553c7f4bf5" prot="private" virt="non-virtual"><scope>Loom_SD</scope><name>SD_print_aux</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_SD</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>set_active</name></member>
+      <member refid="class_loom___s_d_1a58416c209f76a591bf85e824240a7659" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>set_filename</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___s_d_1a8704546681d123363d8210ac0c95f293" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>set_RTC_module</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>Type</name></member>
+      <member refid="class_loom___s_d_1a29c5843a603b14bc72f1771d61476fba" prot="private" virt="non-virtual"><scope>Loom_SD</scope><name>update_filename</name></member>
+      <member refid="class_loom___s_d_1af939aa14399dd1f04dae897fbafb3159" prot="public" virt="non-virtual"><scope>Loom_SD</scope><name>~Loom_SD</name></member>
+      <member refid="class_loom_log_plat_1ac05c81b2e83214d22bdc94dfbb8a835c" prot="public" virt="virtual"><scope>Loom_SD</scope><name>~LoomLogPlat</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_SD</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

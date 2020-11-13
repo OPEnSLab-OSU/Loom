@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_OLED class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_OLED <span class="m-thin">class</span>
+        </h1>
+        <p>OLED logging platform module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+                <li><a href="#miscellaneous">MISCELLANEOUS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___o_l_e_d.html">Module Documentation</a></li><li><a href="https://www.adafruit.com/product/2900">Product Page: Adafruit Featherwing OLED – 128x32</a></li><li><a href="https://www.adafruit.com/product/2927">Product Page: Adafruit Monochrome 128x32 I2C OLED</a></li><li><a href="https://github.com/adafruit/Adafruit_SSD1306">Dependency: Adafruit_<wbr />SSD1306</a></li><li><a href="https://github.com/adafruit/Adafruit-GFX-Library">Dependency: Adafruit-GFX-Library</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#oled-display">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_log_plat.html" class="m-doc">LoomLogPlat</a>
+            </dt>
+            <dd>Abstract base of logging platforms.</dd>
+          </dl>
+        </section>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#aaf40c7e29901e7130f86046a26cb7400" class="m-doc">Version</a> { </span><span class="m-doc-wrap"><a href="#aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97" class="m-doc">FEATHERWING</a>,
+              <a href="#aaf40c7e29901e7130f86046a26cb7400aef55538fb1b52e6052c75869be750acc" class="m-doc">BREAKOUT</a> }</span>
+            </dt>
+            <dd>Different forms of the OLED display.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a> { </span><span class="m-doc-wrap"><a href="#aade282dab7eb118271f73b3b3bfc0ffda341fee9692a2ed8f09906d40d23fb1f9" class="m-doc">FOUR</a>,
+              <a href="#aade282dab7eb118271f73b3b3bfc0ffda960df6d77e65cd185ca4f3501db634eb" class="m-doc">EIGHT</a>,
+              <a href="#aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25" class="m-doc">SCROLL</a> }</span>
+            </dt>
+            <dd>Different formats to display information in.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a> { </span><span class="m-doc-wrap"><a href="#adedc20c1c901fe472d976c722abf0bb9afc93ea58f6d27ffed2b6518ffecf3e4e" class="m-doc">DISABLE</a>,
+              <a href="#adedc20c1c901fe472d976c722abf0bb9ae44f9e348e41cb272efa87387728571b" class="m-doc">DATA</a>,
+              <a href="#adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25" class="m-doc">SCROLL</a> }</span>
+            </dt>
+            <dd>Differnt freeze behaviors.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a0cc78f1f1fd95a4c3d16fe32c9d33499">
+              Adafruit_SSD1306 <a href="#a0cc78f1f1fd95a4c3d16fe32c9d33499" class="m-doc-self">display</a>
+            </dt>
+            <dd>Underlying OLED controller.</dd>
+            <dt id="af0bc56c14688195fed9cafb74601bec3">
+              <a href="class_loom___o_l_e_d.html#aaf40c7e29901e7130f86046a26cb7400" class="m-doc">Version</a> <a href="#af0bc56c14688195fed9cafb74601bec3" class="m-doc-self">version</a>
+            </dt>
+            <dd>What type the OLED is (FeatherWing or breakout)</dd>
+            <dt id="a8962f61e0211d70d1d1de489d1d6bbfa">
+              byte <a href="#a8962f61e0211d70d1d1de489d1d6bbfa" class="m-doc-self">reset_pin</a>
+            </dt>
+            <dd>The reset pin (only applies to breakout version)</dd>
+            <dt id="a1cfdc8965297ea1f697d8a4d3e44b5fd">
+              <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a> <a href="#a1cfdc8965297ea1f697d8a4d3e44b5fd" class="m-doc-self">display_format</a>
+            </dt>
+            <dd>How to display the data on OLED.</dd>
+            <dt id="ad6893fc088b080440f2f1d5d6f84d461">
+              uint <a href="#ad6893fc088b080440f2f1d5d6f84d461" class="m-doc-self">scroll_duration</a>
+            </dt>
+            <dd>The duration to complete a full cycle through a bundle of data (milliseconds)(non-blocking)</dd>
+            <dt id="a693dc20156729cb7d06e877247e914d0">
+              byte <a href="#a693dc20156729cb7d06e877247e914d0" class="m-doc-self">freeze_pin</a>
+            </dt>
+            <dd>Which pin to check if display should freeze.</dd>
+            <dt id="aafea3f7f393170a4cc7c5e7ff8583344">
+              <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a> <a href="#aafea3f7f393170a4cc7c5e7ff8583344" class="m-doc-self">freeze_behavior</a>
+            </dt>
+            <dd>What &#x27;freezing&#x27; behavior should be followed.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#accc63c1437c4d67fa6efbac79d647996" class="m-doc">Loom_OLED</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const bool enable_rate_filter = true,
+              const uint16_t min_filter_delay = 300,
+              const <a href="class_loom___o_l_e_d.html#aaf40c7e29901e7130f86046a26cb7400" class="m-doc">Version</a> type = <a href="class_loom___o_l_e_d.html#aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97" class="m-doc">Version::<wbr />FEATHERWING</a>,
+              const byte reset_pin = A2,
+              const <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a> display_format = <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25" class="m-doc">Format::<wbr />SCROLL</a>,
+              const uint16_t scroll_duration = 6000,
+              const byte freeze_pin = 10,
+              const <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a> freeze_behavior = <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25" class="m-doc">FreezeType::<wbr />SCROLL</a>)</span>
+            </dt>
+            <dd>OLED module constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#abbe56d7e45b4de6ae1ae1296c074d448" class="m-doc">Loom_OLED</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="a6970e6d9fa0dd9b40e87cb4f59a01a3f">
+              <span class="m-doc-wrap-bumper"><a href="#a6970e6d9fa0dd9b40e87cb4f59a01a3f" class="m-doc-self">~Loom_OLED</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a288f75a9eb423bda9b65b8cb4c7708b8" class="m-doc">log</a>(</span><span class="m-doc-wrap">JsonObject json) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Log a Json object.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a20dab0bc2c5bdc139b1b04523a54a78c">
+              <span class="m-doc-wrap-bumper">void <a href="#a20dab0bc2c5bdc139b1b04523a54a78c" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac76bb31bcfb46076a0e72f59025ba3cb" class="m-doc">get_display_format</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a></span>
+            </dt>
+            <dd>Get the current OLED display organization.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1460b24e59ea1dff3dd8605a0a9a9564" class="m-doc">get_scroll_duration</a>(</span><span class="m-doc-wrap">) const -&gt; uint</span>
+            </dt>
+            <dd>Get the current scroll duration.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6ca6b64ea5c2a5d78733f9675f409efb" class="m-doc">get_freeze_pin</a>(</span><span class="m-doc-wrap">) const -&gt; byte</span>
+            </dt>
+            <dd>Get the digital pin use to freeze the display.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a40d29eabfcdf35863dc2f1f5eca0b945" class="m-doc">get_freeze_behavior</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a></span>
+            </dt>
+            <dd>Get the current freeze behavior.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4ce08addf521b1bba3a1f73730d8650b" class="m-doc">set_display_format</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a> format)</span>
+            </dt>
+            <dd>Set the OLED display organization.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5e58b03b11b03f79f1d9c98b0247cef0" class="m-doc">set_scroll_duration</a>(</span><span class="m-doc-wrap">const uint duration)</span>
+            </dt>
+            <dd>Set the duration of a complete scroll.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a13dc4c96f830f9c949c3e6731b2f9318" class="m-doc">set_freeze_pin</a>(</span><span class="m-doc-wrap">const byte pin)</span>
+            </dt>
+            <dd>Set the digital pin to use to freeze the display.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a42eea08f2832c5afd31522b62601196b" class="m-doc">set_freeze_behavior</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a> behavior)</span>
+            </dt>
+            <dd>Set the freezing behavior of the display.</dd>
+          </dl>
+        </section>
+        <section id="miscellaneous">
+          <h2><a href="#miscellaneous">MISCELLANEOUS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              unsigned long <a href="#a65de6c9daef794f89061d2278ae0d3ad" class="m-doc">previous_time</a>
+            </dt>
+            <dd>Last display update time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a34e7751ffe7f5fdfa8d5c3adde2aedd7" class="m-doc">enum_oled_version_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#aaf40c7e29901e7130f86046a26cb7400" class="m-doc">Version</a> v) -&gt; const char*</span>
+            </dt>
+            <dd>Get c-string of name associated with OLED::Version enum.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a7203f388d5c2eda2dee6aa27c3ab72ad" class="m-doc">enum_oled_format_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a> f) -&gt; const char*</span>
+            </dt>
+            <dd>Get c-string of name associated with OLED:Format enum.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a4c44f95a1aeade637a671ae365c13871" class="m-doc">enum_oled_freeze_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a> f) -&gt; const char*</span>
+            </dt>
+            <dd>Get c-string of name associated with OLED freeze behavior enum.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="aaf40c7e29901e7130f86046a26cb7400"><div>
+            <h3>
+              enum Loom_<wbr />OLED::<wbr /><a href="#aaf40c7e29901e7130f86046a26cb7400" class="m-doc-self">Version</a>
+            </h3>
+            <p>Different forms of the OLED display.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97" class="m-doc-self" id="aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97">FEATHERWING</a></td>
+                  <td>
+                  <p>FeatherWing OLED.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aaf40c7e29901e7130f86046a26cb7400aef55538fb1b52e6052c75869be750acc" class="m-doc-self" id="aaf40c7e29901e7130f86046a26cb7400aef55538fb1b52e6052c75869be750acc">BREAKOUT</a></td>
+                  <td>
+                  <p>Breakout board.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aade282dab7eb118271f73b3b3bfc0ffd"><div>
+            <h3>
+              enum Loom_<wbr />OLED::<wbr /><a href="#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc-self">Format</a>
+            </h3>
+            <p>Different formats to display information in.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#aade282dab7eb118271f73b3b3bfc0ffda341fee9692a2ed8f09906d40d23fb1f9" class="m-doc-self" id="aade282dab7eb118271f73b3b3bfc0ffda341fee9692a2ed8f09906d40d23fb1f9">FOUR</a></td>
+                  <td>
+                  <p>4 Key values</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aade282dab7eb118271f73b3b3bfc0ffda960df6d77e65cd185ca4f3501db634eb" class="m-doc-self" id="aade282dab7eb118271f73b3b3bfc0ffda960df6d77e65cd185ca4f3501db634eb">EIGHT</a></td>
+                  <td>
+                  <p>8 Key values</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25" class="m-doc-self" id="aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25">SCROLL</a></td>
+                  <td>
+                  <p>Scrolling.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adedc20c1c901fe472d976c722abf0bb9"><div>
+            <h3>
+              enum Loom_<wbr />OLED::<wbr /><a href="#adedc20c1c901fe472d976c722abf0bb9" class="m-doc-self">FreezeType</a>
+            </h3>
+            <p>Differnt freeze behaviors.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#adedc20c1c901fe472d976c722abf0bb9afc93ea58f6d27ffed2b6518ffecf3e4e" class="m-doc-self" id="adedc20c1c901fe472d976c722abf0bb9afc93ea58f6d27ffed2b6518ffecf3e4e">DISABLE</a></td>
+                  <td>
+                  <p>Freeze disabled.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#adedc20c1c901fe472d976c722abf0bb9ae44f9e348e41cb272efa87387728571b" class="m-doc-self" id="adedc20c1c901fe472d976c722abf0bb9ae44f9e348e41cb272efa87387728571b">DATA</a></td>
+                  <td>
+                  <p>Screen freezes.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25" class="m-doc-self" id="adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25">SCROLL</a></td>
+                  <td>
+                  <p>Scroll freezes, data updates.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="accc63c1437c4d67fa6efbac79d647996"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#accc63c1437c4d67fa6efbac79d647996" class="m-doc-self">Loom_OLED</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const bool enable_rate_filter = true,
+              const uint16_t min_filter_delay = 300,
+              const <a href="class_loom___o_l_e_d.html#aaf40c7e29901e7130f86046a26cb7400" class="m-doc">Version</a> type = <a href="class_loom___o_l_e_d.html#aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97" class="m-doc">Version::<wbr />FEATHERWING</a>,
+              const byte reset_pin = A2,
+              const <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a> display_format = <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25" class="m-doc">Format::<wbr />SCROLL</a>,
+              const uint16_t scroll_duration = 6000,
+              const byte freeze_pin = 10,
+              const <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a> freeze_behavior = <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25" class="m-doc">FreezeType::<wbr />SCROLL</a>)</span></span>
+            </h3>
+            <p>OLED module constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>enable_rate_filter&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | Whether or not to impose maximum update rate</td>
+                </tr>
+                <tr>
+                  <td>min_filter_delay&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;300&gt; | [50-5000] | Minimum update delay, if enable_rate_filter enabled</td>
+                </tr>
+                <tr>
+                  <td>type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Version) | &lt;0&gt; | {0(&quot;Featherwing&quot;), 1(&quot;Breakout&quot;)} | Which version of the OLED is being used</td>
+                </tr>
+                <tr>
+                  <td>reset_pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;14&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin should be used for reseting. Only applies to breakout version</td>
+                </tr>
+                <tr>
+                  <td>display_format&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Format) | &lt;A0&gt; | {0(&quot;4 pairs&quot;), 1(&quot;8 pairs&quot;), 2(&quot;Scrolling&quot;)} | How to display the key value pairs of a bundle</td>
+                </tr>
+                <tr>
+                  <td>scroll_duration&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;6000&gt; | [500-30000] | The time (ms) to complete full scroll cycle if display_format is SCROLL</td>
+                </tr>
+                <tr>
+                  <td>freeze_pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;10&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin should be used to pause the display</td>
+                </tr>
+                <tr>
+                  <td>freeze_behavior&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(FreezeType) | &lt;2&gt; | {O(&quot;Disable&quot;), 1(&quot;Pause Data&quot;), 2(&quot;Pause Data and Scroll&quot;)} | How freezing the display should behave</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abbe56d7e45b4de6ae1ae1296c074d448"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbe56d7e45b4de6ae1ae1296c074d448" class="m-doc-self">Loom_OLED</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a288f75a9eb423bda9b65b8cb4c7708b8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a288f75a9eb423bda9b65b8cb4c7708b8" class="m-doc-self">log</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Log a Json object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Json Object to log</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac76bb31bcfb46076a0e72f59025ba3cb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a> Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac76bb31bcfb46076a0e72f59025ba3cb" class="m-doc-self">get_display_format</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the current OLED display organization.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The current Format being used</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1460b24e59ea1dff3dd8605a0a9a9564"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1460b24e59ea1dff3dd8605a0a9a9564" class="m-doc-self">get_scroll_duration</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the current scroll duration.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The current scroll duration</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6ca6b64ea5c2a5d78733f9675f409efb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">byte Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6ca6b64ea5c2a5d78733f9675f409efb" class="m-doc-self">get_freeze_pin</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the digital pin use to freeze the display.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The freeze pin</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a40d29eabfcdf35863dc2f1f5eca0b945"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a> Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a40d29eabfcdf35863dc2f1f5eca0b945" class="m-doc-self">get_freeze_behavior</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the current freeze behavior.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The current freeze behavior</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4ce08addf521b1bba3a1f73730d8650b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4ce08addf521b1bba3a1f73730d8650b" class="m-doc-self">set_display_format</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a> format)</span></span>
+            </h3>
+            <p>Set the OLED display organization.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">format&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The Format to set to</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5e58b03b11b03f79f1d9c98b0247cef0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5e58b03b11b03f79f1d9c98b0247cef0" class="m-doc-self">set_scroll_duration</a>(</span><span class="m-doc-wrap">const uint duration)</span></span>
+            </h3>
+            <p>Set the duration of a complete scroll.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">duration&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The duration to set to</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a13dc4c96f830f9c949c3e6731b2f9318"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a13dc4c96f830f9c949c3e6731b2f9318" class="m-doc-self">set_freeze_pin</a>(</span><span class="m-doc-wrap">const byte pin)</span></span>
+            </h3>
+            <p>Set the digital pin to use to freeze the display.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The pin to use</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a42eea08f2832c5afd31522b62601196b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a42eea08f2832c5afd31522b62601196b" class="m-doc-self">set_freeze_behavior</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a> behavior)</span></span>
+            </h3>
+            <p>Set the freezing behavior of the display.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">behavior&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Which FreezeType type to use</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a34e7751ffe7f5fdfa8d5c3adde2aedd7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static const char* Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a34e7751ffe7f5fdfa8d5c3adde2aedd7" class="m-doc-self">enum_oled_version_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#aaf40c7e29901e7130f86046a26cb7400" class="m-doc">Version</a> v)</span></span>
+            </h3>
+            <p>Get c-string of name associated with OLED::Version enum.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">v&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>OLED::Version value to get string of</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>C-string of OLED version</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7203f388d5c2eda2dee6aa27c3ab72ad"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static const char* Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7203f388d5c2eda2dee6aa27c3ab72ad" class="m-doc-self">enum_oled_format_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffd" class="m-doc">Format</a> f)</span></span>
+            </h3>
+            <p>Get c-string of name associated with OLED:Format enum.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">f&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>OLED::Format value to get string of</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>C-string of OLED format</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4c44f95a1aeade637a671ae365c13871"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static const char* Loom_<wbr />OLED::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c44f95a1aeade637a671ae365c13871" class="m-doc-self">enum_oled_freeze_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9" class="m-doc">FreezeType</a> f)</span></span>
+            </h3>
+            <p>Get c-string of name associated with OLED freeze behavior enum.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">f&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>FreezeType to get string of</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>C-string of OLED freeze behavior</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a65de6c9daef794f89061d2278ae0d3ad"><div>
+            <h3>
+              unsigned long Loom_<wbr />OLED::<wbr /><a href="#a65de6c9daef794f89061d2278ae0d3ad" class="m-doc-self">previous_time</a>
+            </h3>
+            <p>Last display update time.</p>
+<p>Used to manage scrolling</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

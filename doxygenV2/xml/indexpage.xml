@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>An Internet of Things Rapid Prototyping System for applications in environmental sensing</title>
+    <detaileddescription>
+<para>This is the Doxygen generated documentation of the Loom library code.</para><sect1 id="index_1resources">
+<title>Resources</title>
+<para><itemizedlist>
+<listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom">Github</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki">Loom Wiki</ulink></para></listitem><listitem><para><ulink url="http://www.open-sensing.org/project-loom">Project Website</ulink> </para></listitem></itemizedlist>
+</para></sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

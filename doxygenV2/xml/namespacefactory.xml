@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="namespacefactory" kind="namespace" language="C++">
+    <compoundname>factory</compoundname>
+    <innerclass refid="structfactory_1_1_name_module_pair" prot="public">factory::NameModulePair</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacefactory_1a3032a25e556f11cb0899c2b3abc95283" prot="public" static="no">
+        <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *(*)(<ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *manager, JsonArrayConst p)</type>
+        <definition>using factory::FactoryPtr = typedef LoomModule* (*)(LoomManager* manager, JsonArrayConst p)</definition>
+        <argsstring></argsstring>
+        <name>FactoryPtr</name>
+        <briefdescription>
+<para>Function pointer to &apos;template&lt;class T&gt; LoomModule* Construct(LoomManager* manager, LoomManager* manager, JsonArrayConst p)&apos;. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="115" column="1" bodyfile="src/Module_Factory.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefactory_1aa63dbcb7fe5c455558ae48b029500d77" prot="public" static="no">
+        <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *(*)(<ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *manager)</type>
+        <definition>using factory::FactoryPtrDefault = typedef LoomModule* (*)(LoomManager* manager)</definition>
+        <argsstring></argsstring>
+        <name>FactoryPtrDefault</name>
+        <briefdescription>
+<para>Function pointer to &apos;template&lt;class T&gt; LoomModule* <ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault()</ref>&apos;. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="118" column="1" bodyfile="src/Module_Factory.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Module_Factory.h" line="112" column="1"/>
+  </compounddef>
+</doxygen>

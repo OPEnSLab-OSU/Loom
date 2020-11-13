@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="struct_loom___interrupt___manager_1_1_internal_timer_details" kind="struct" language="C++" prot="private">
+    <compoundname>Loom_Interrupt_Manager::InternalTimerDetails</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_internal_timer_details_1a662ae43e5d31c8cc1a11b1d54e7ba471" prot="public" static="no" mutable="no">
+        <type><ref refid="_interrupt___manager_8h_1a21adc8a9b6cc2505b5b1317ca9f74cf3" kindref="member">ISRFuncPtr</ref></type>
+        <definition>ISRFuncPtr Loom_Interrupt_Manager::InternalTimerDetails::ISR</definition>
+        <argsstring></argsstring>
+        <name>ISR</name>
+        <briefdescription>
+<para>Function pointer to ISR. Set null if no interrupt linked. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="66" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_internal_timer_details_1aec4faebdbd35178497a45463cde96170" prot="public" static="no" mutable="no">
+        <type><ref refid="_interrupt___manager_8h_1a1cb40265e710cbdf07f99beb6c4020d1" kindref="member">ISR_Type</ref></type>
+        <definition>ISR_Type Loom_Interrupt_Manager::InternalTimerDetails::run_type</definition>
+        <argsstring></argsstring>
+        <name>run_type</name>
+        <briefdescription>
+<para>True if ISR is called directly upon interrupt, false if called next check of flags. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="67" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_internal_timer_details_1ac9867b2ae42107241b4fcda8ba186f6e" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint Loom_Interrupt_Manager::InternalTimerDetails::duration</definition>
+        <argsstring></argsstring>
+        <name>duration</name>
+        <briefdescription>
+<para>The timer duration. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="68" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_internal_timer_details_1a0ca216efba7dcd4ac69d5441f331c260" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::InternalTimerDetails::repeat</definition>
+        <argsstring></argsstring>
+        <name>repeat</name>
+        <briefdescription>
+<para>Whether or not timer should repeat. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="69" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_internal_timer_details_1ad82f818b400d04854930c2b071b218d8" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::InternalTimerDetails::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <briefdescription>
+<para>Whether or not this timer is enabled. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="70" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains information defining a timer&apos;s configuration. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Interrupt_Manager.h" line="65" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="65" bodyend="71"/>
+    <listofallmembers>
+      <member refid="struct_loom___interrupt___manager_1_1_internal_timer_details_1ac9867b2ae42107241b4fcda8ba186f6e" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::InternalTimerDetails</scope><name>duration</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_internal_timer_details_1ad82f818b400d04854930c2b071b218d8" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::InternalTimerDetails</scope><name>enabled</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_internal_timer_details_1a662ae43e5d31c8cc1a11b1d54e7ba471" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::InternalTimerDetails</scope><name>ISR</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_internal_timer_details_1a0ca216efba7dcd4ac69d5441f331c260" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::InternalTimerDetails</scope><name>repeat</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_internal_timer_details_1aec4faebdbd35178497a45463cde96170" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::InternalTimerDetails</scope><name>run_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

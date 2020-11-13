@@ -1,0 +1,320 @@
+\hypertarget{class_loom___wi_fi}{}\section{Loom\+\_\+\+Wi\+Fi Class Reference}
+\label{class_loom___wi_fi}\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+
+
+Wi\+Fi Internet\+Plat.  
+
+
+
+
+{\ttfamily \#include $<$Internet\+Wi\+Fi.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Wi\+Fi\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=179pt]{class_loom___wi_fi__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___wi_fi_aea47b7d7cb8edb95c40be6a66afd8e7b}{Loom\+\_\+\+Wi\+Fi} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$ssid=\char`\"{}\char`\"{}, const char $\ast$\hyperlink{class_loom___wi_fi_a36402713f3a011add130d1b0b8182822}{pass}=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___wi_fi_ac8db313f659033fac297dd3fbc780d8e}{Loom\+\_\+\+Wi\+Fi} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom___wi_fi_a354101fb513f6e8f2d51cfc411b790ef}{$\sim$\+Loom\+\_\+\+Wi\+Fi} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___wi_fi_a741402e5003f248d2c3ed4e7b222a926}{connect} () override
+\begin{DoxyCompactList}\small\item\em Connect to internet. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___wi_fi_a04ff3733be0b54c8bc48aa5cb652a31f}{disconnect} () override
+\begin{DoxyCompactList}\small\item\em Disconnect from the internet. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___wi_fi_a948eb2892e06294750c121d986abf179}{is\+\_\+connected} () const override
+\begin{DoxyCompactList}\small\item\em Whether or not connected to internet. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_internet_plat_a0b2cc742a6ac5f4f7054b75ea99b345c}{U\+D\+P\+Ptr} \hyperlink{class_loom___wi_fi_aca028d9a3a39206d85b1eaac63cf0048}{open\+\_\+socket} (const uint port) override
+\begin{DoxyCompactList}\small\item\em Open a U\+DP socket for sending and recieving incoming data. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___wi_fi_a536247ffb9228c55d5a2473d8df9a58b}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package IP with ID for Max\+M\+SP implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+S\+S\+L\+Client \& \hyperlink{class_loom___wi_fi_afa854fccc5b59f6cfce8751d3223133c}{get\+\_\+client} () override
+\begin{DoxyCompactList}\small\item\em Get the underlying S\+S\+L\+Client implementation, which we will use for all of the other requests. \end{DoxyCompactList}\item 
+const S\+S\+L\+Client \& \hyperlink{class_loom___wi_fi_a115964eb261df0585ab71e796d02f9d4}{get\+\_\+client} () const override
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const String \hyperlink{class_loom___wi_fi_a79239f0be6d0094eef2b2e47cac5e252}{S\+S\+ID}
+\begin{DoxyCompactList}\small\item\em Host Wi\+Fi network name. \end{DoxyCompactList}\item 
+const String \hyperlink{class_loom___wi_fi_a36402713f3a011add130d1b0b8182822}{pass}
+\begin{DoxyCompactList}\small\item\em Host Wi\+Fi network password. \end{DoxyCompactList}\item 
+Wi\+Fi\+Client \hyperlink{class_loom___wi_fi_ac3c4d4aaaea4f70ac9b613a5248a7070}{m\+\_\+base\+\_\+client}
+\begin{DoxyCompactList}\small\item\em S\+S\+L\+Client object for Wi\+Fi. \end{DoxyCompactList}\item 
+S\+S\+L\+Client \hyperlink{class_loom___wi_fi_aece9cee623f146f89ee4d282aa012c79}{m\+\_\+client}
+\begin{DoxyCompactList}\small\item\em Underlying Wifi S\+S\+Lclient instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___wi_fi_acf10d90ceedbe039f216b7d1544eb935}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___wi_fi_ab3663639761f7748602fbddd8c713087}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Wi\+Fi Internet\+Plat. 
+
+\begin{DoxyAttention}{Attention}
+Requires 7\+KB of free S\+R\+AM at runtime to use.
+\end{DoxyAttention}
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___wifi.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/3010}{\tt Product Page\+: Adafruit Feather M0 Wi\+Fi}
+\item \href{https://github.com/OPEnSLab-OSU/WiFi201}{\tt Dependency\+: Wi\+Fi201} O\+P\+EbS Lab fork of Arduino Wi\+Fi101 library
+\item \href{https://github.com/arduino-libraries/WiFi101}{\tt Dependency\+: Wi\+Fi101}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#wifi}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Wi\+Fi(\+Loom\+Manager $\ast$manager, const char $\ast$ssid="""", const char $\ast$pass="""")}{Loom_WiFi(LoomManager *manager, const char *ssid="", const char *pass="")}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Wi\+Fi\+::\+Loom\+\_\+\+Wi\+Fi (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{ssid = {\ttfamily \char`\"{}\char`\"{}}, }
+\item[{const char $\ast$}]{pass = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___wi_fi_aea47b7d7cb8edb95c40be6a66afd8e7b}{}\label{class_loom___wi_fi_aea47b7d7cb8edb95c40be6a66afd8e7b}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ssid} & Wi\+Fi network name \\
+\hline
+\mbox{\tt in}  & {\em pass} & Wi\+Fi network password. Leave as empty string if network has no password. \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Wi\+Fi(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_WiFi(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Wi\+Fi\+::\+Loom\+\_\+\+Wi\+Fi (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___wi_fi_ac8db313f659033fac297dd3fbc780d8e}{}\label{class_loom___wi_fi_ac8db313f659033fac297dd3fbc780d8e}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!````~Loom\+\_\+\+Wi\+Fi@{$\sim$\+Loom\+\_\+\+Wi\+Fi}}
+\index{````~Loom\+\_\+\+Wi\+Fi@{$\sim$\+Loom\+\_\+\+Wi\+Fi}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Wi\+Fi()=default}{~Loom_WiFi()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+\_\+\+Wi\+Fi\+::$\sim$\+Loom\+\_\+\+Wi\+Fi (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom___wi_fi_a354101fb513f6e8f2d51cfc411b790ef}{}\label{class_loom___wi_fi_a354101fb513f6e8f2d51cfc411b790ef}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!connect@{connect}}
+\index{connect@{connect}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{connect() override}{connect() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Wi\+Fi\+::connect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___wi_fi_a741402e5003f248d2c3ed4e7b222a926}{}\label{class_loom___wi_fi_a741402e5003f248d2c3ed4e7b222a926}
+
+
+Connect to internet. 
+
+
+
+Implements \hyperlink{class_loom_internet_plat_a24d7c701a3db8e16355b6a33a4e323a6}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{disconnect() override}{disconnect() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Wi\+Fi\+::disconnect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___wi_fi_a04ff3733be0b54c8bc48aa5cb652a31f}{}\label{class_loom___wi_fi_a04ff3733be0b54c8bc48aa5cb652a31f}
+
+
+Disconnect from the internet. 
+
+
+
+Reimplemented from \hyperlink{class_loom_internet_plat_a32af1196a982d84a18e53f8d97e358a1}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!get\+\_\+client@{get\+\_\+client}}
+\index{get\+\_\+client@{get\+\_\+client}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{get\+\_\+client() override}{get_client() override}}]{\setlength{\rightskip}{0pt plus 5cm}S\+S\+L\+Client\& Loom\+\_\+\+Wi\+Fi\+::get\+\_\+client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___wi_fi_afa854fccc5b59f6cfce8751d3223133c}{}\label{class_loom___wi_fi_afa854fccc5b59f6cfce8751d3223133c}
+
+
+Get the underlying S\+S\+L\+Client implementation, which we will use for all of the other requests. 
+
+
+
+Implements \hyperlink{class_loom_internet_plat_a71bfc232cac5294b1c3e6dbb00029fa7}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!get\+\_\+client@{get\+\_\+client}}
+\index{get\+\_\+client@{get\+\_\+client}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{get\+\_\+client() const override}{get_client() const override}}]{\setlength{\rightskip}{0pt plus 5cm}const S\+S\+L\+Client\& Loom\+\_\+\+Wi\+Fi\+::get\+\_\+client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___wi_fi_a115964eb261df0585ab71e796d02f9d4}{}\label{class_loom___wi_fi_a115964eb261df0585ab71e796d02f9d4}
+
+
+Implements \hyperlink{class_loom_internet_plat_a3b79a1467f5f239cd740d6ced88cdadf}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!is\+\_\+connected@{is\+\_\+connected}}
+\index{is\+\_\+connected@{is\+\_\+connected}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{is\+\_\+connected() const override}{is_connected() const override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Wi\+Fi\+::is\+\_\+connected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___wi_fi_a948eb2892e06294750c121d986abf179}{}\label{class_loom___wi_fi_a948eb2892e06294750c121d986abf179}
+
+
+Whether or not connected to internet. 
+
+\begin{DoxyReturn}{Returns}
+True if connect, false otherwise 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_internet_plat_af9c5c867598c9951db4d404a6a495ce7}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!open\+\_\+socket@{open\+\_\+socket}}
+\index{open\+\_\+socket@{open\+\_\+socket}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{open\+\_\+socket(const uint port) override}{open_socket(const uint port) override}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat\+::\+U\+D\+P\+Ptr} Loom\+\_\+\+Wi\+Fi\+::open\+\_\+socket (
+\begin{DoxyParamCaption}
+\item[{const uint}]{port}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___wi_fi_aca028d9a3a39206d85b1eaac63cf0048}{}\label{class_loom___wi_fi_aca028d9a3a39206d85b1eaac63cf0048}
+
+
+Open a U\+DP socket for sending and recieving incoming data. 
+
+\begin{DoxyWarning}{Warning}
+Be careful about recieving data from an open socket! 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A U\+DP socket for transmitting and recieving, remember to close the socket when you are done! 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_internet_plat_a91204905ec272ff1edc608a3aa250745}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Wi\+Fi\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___wi_fi_a536247ffb9228c55d5a2473d8df9a58b}{}\label{class_loom___wi_fi_a536247ffb9228c55d5a2473d8df9a58b}
+
+
+Package IP with ID for Max\+M\+SP implementation. 
+
+
+
+Reimplemented from \hyperlink{class_loom_internet_plat_ae9cbe7ba64e4d597fe7084110f646dec}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Wi\+Fi\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___wi_fi_acf10d90ceedbe039f216b7d1544eb935}{}\label{class_loom___wi_fi_acf10d90ceedbe039f216b7d1544eb935}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Wi\+Fi\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___wi_fi_ab3663639761f7748602fbddd8c713087}{}\label{class_loom___wi_fi_ab3663639761f7748602fbddd8c713087}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!m\+\_\+base\+\_\+client@{m\+\_\+base\+\_\+client}}
+\index{m\+\_\+base\+\_\+client@{m\+\_\+base\+\_\+client}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{m\+\_\+base\+\_\+client}{m_base_client}}]{\setlength{\rightskip}{0pt plus 5cm}Wi\+Fi\+Client Loom\+\_\+\+Wi\+Fi\+::m\+\_\+base\+\_\+client\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___wi_fi_ac3c4d4aaaea4f70ac9b613a5248a7070}{}\label{class_loom___wi_fi_ac3c4d4aaaea4f70ac9b613a5248a7070}
+
+
+S\+S\+L\+Client object for Wi\+Fi. 
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!m\+\_\+client@{m\+\_\+client}}
+\index{m\+\_\+client@{m\+\_\+client}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{m\+\_\+client}{m_client}}]{\setlength{\rightskip}{0pt plus 5cm}S\+S\+L\+Client Loom\+\_\+\+Wi\+Fi\+::m\+\_\+client\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___wi_fi_aece9cee623f146f89ee4d282aa012c79}{}\label{class_loom___wi_fi_aece9cee623f146f89ee4d282aa012c79}
+
+
+Underlying Wifi S\+S\+Lclient instance. 
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!pass@{pass}}
+\index{pass@{pass}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{pass}{pass}}]{\setlength{\rightskip}{0pt plus 5cm}const String Loom\+\_\+\+Wi\+Fi\+::pass\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___wi_fi_a36402713f3a011add130d1b0b8182822}{}\label{class_loom___wi_fi_a36402713f3a011add130d1b0b8182822}
+
+
+Host Wi\+Fi network password. 
+
+\index{Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}!S\+S\+ID@{S\+S\+ID}}
+\index{S\+S\+ID@{S\+S\+ID}!Loom\+\_\+\+Wi\+Fi@{Loom\+\_\+\+Wi\+Fi}}
+\subsubsection[{\texorpdfstring{S\+S\+ID}{SSID}}]{\setlength{\rightskip}{0pt plus 5cm}const String Loom\+\_\+\+Wi\+Fi\+::\+S\+S\+ID\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___wi_fi_a79239f0be6d0094eef2b2e47cac5e252}{}\label{class_loom___wi_fi_a79239f0be6d0094eef2b2e47cac5e252}
+
+
+Host Wi\+Fi network name. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Internet\+Plats/\hyperlink{_internet_wi_fi_8h}{Internet\+Wi\+Fi.\+h}\item 
+src/\+Internet\+Plats/\hyperlink{_internet_wi_fi_8cpp}{Internet\+Wi\+Fi.\+cpp}\end{DoxyCompactItemize}

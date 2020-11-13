@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_digital_8h" kind="file" language="C++">
+    <compoundname>Digital.h</compoundname>
+    <includes refid="_sensor_8h" local="yes">Sensor.h</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_digital_8cpp" local="yes">src/Sensors/Digital.cpp</includedby>
+    <incdepgraph>
+      <node id="4930">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4927">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4928" relation="include">
+        </childnode>
+        <childnode refid="4930" relation="include">
+        </childnode>
+        <childnode refid="4931" relation="include">
+        </childnode>
+        <childnode refid="4932" relation="include">
+        </childnode>
+      </node>
+      <node id="4931">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4929" relation="include">
+        </childnode>
+        <childnode refid="4932" relation="include">
+        </childnode>
+      </node>
+      <node id="4928">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4929" relation="include">
+        </childnode>
+      </node>
+      <node id="4925">
+        <label>src/Sensors/Digital.h</label>
+        <link refid="Digital.h"/>
+        <childnode refid="4926" relation="include">
+        </childnode>
+      </node>
+      <node id="4932">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4926">
+        <label>Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="4927" relation="include">
+        </childnode>
+      </node>
+      <node id="4929">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4934">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="4935" relation="include">
+        </childnode>
+        <childnode refid="4936" relation="include">
+        </childnode>
+      </node>
+      <node id="4937">
+        <label>src/Sensors/Digital.cpp</label>
+        <link refid="_digital_8cpp"/>
+      </node>
+      <node id="4933">
+        <label>src/Sensors/Digital.h</label>
+        <link refid="Digital.h"/>
+        <childnode refid="4934" relation="include">
+        </childnode>
+        <childnode refid="4937" relation="include">
+        </childnode>
+      </node>
+      <node id="4935">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="4936">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___digital" prot="public">Loom_Digital</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_digital_8h_1ae667578f4adee1cbda0e5e5930bac7f3" prot="public" static="no">
+        <name>DIGITAL_COUNT</name>
+        <initializer>12</initializer>
+        <briefdescription>
+<para>Number of digital pins. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Digital.h" line="17" column="9" bodyfile="src/Sensors/Digital.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/Digital.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,536 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___l_t_e" kind="class" language="C++" prot="public">
+    <compoundname>Loom_LTE</compoundname>
+    <basecompoundref refid="class_loom_internet_plat" prot="public" virt="non-virtual">LoomInternetPlat</basecompoundref>
+    <includes refid="_internet_l_t_e_8h" local="no">InternetLTE.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___l_t_e_1a8d95da5f0fc6bb7362d9bf0b73bb48f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_LTE::Loom_LTE</definition>
+        <argsstring>(LoomManager *manager, const char *APN=&quot;&quot;, const char *gprsUser=&quot;&quot;, const char *gprsPass=&quot;&quot;, const int powerPin=A5)</argsstring>
+        <name>Loom_LTE</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>APN</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>gprsUser</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>gprsPass</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>powerPin</declname>
+          <defval>A5</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">APN</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>LTE network name </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gprsUser</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>GPRS username. Leave as empty unless you have GPRS credentials </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gprsPass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>GPRS password. Leave as empty unless you have GPRS credentials </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">powerPin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>analog pin on the feather M0 that drives pin 5 on LTE shield to power on and off </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="64" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="17" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___l_t_e_1a1c1062a1f31998a98965d09eca65f10d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_LTE::Loom_LTE</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_LTE</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args. </para>        </briefdescription>
+        <detaileddescription>
+<para>and delegates to regular constructor <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="75" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="57" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___l_t_e_1aa087493e3ee9044aeef9fbe3e44946f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Loom_LTE::~Loom_LTE</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_LTE</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="78" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___l_t_e_1ac1a5109706d827b394f350181a8f3698" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_LTE::connect</definition>
+        <argsstring>() override</argsstring>
+        <name>connect</name>
+        <reimplements refid="class_loom_internet_plat_1a24d7c701a3db8e16355b6a33a4e323a6">connect</reimplements>
+        <briefdescription>
+<para>Connect to internet. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="85" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="62" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___l_t_e_1a14b4c6a3cefe05144d3d8a3bee587188" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_LTE::disconnect</definition>
+        <argsstring>() override</argsstring>
+        <name>disconnect</name>
+        <reimplements refid="class_loom_internet_plat_1a32af1196a982d84a18e53f8d97e358a1">disconnect</reimplements>
+        <briefdescription>
+<para>Disconnect from internet. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="88" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="96" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___l_t_e_1a38253137a5dbe6a069e75ca7aa9b872f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_LTE::is_connected</definition>
+        <argsstring>() const override</argsstring>
+        <name>is_connected</name>
+        <reimplements refid="class_loom_internet_plat_1af9c5c867598c9951db4d404a6a495ce7">is_connected</reimplements>
+        <briefdescription>
+<para>Whether or not connected to internet. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if connected, false otherwise </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="92" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="104" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___l_t_e_1a414b0ca17f97103620c7058fb0cb98d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="class_loom_internet_plat_1a0b2cc742a6ac5f4f7054b75ea99b345c" kindref="member">UDPPtr</ref></type>
+        <definition>LoomInternetPlat::UDPPtr Loom_LTE::open_socket</definition>
+        <argsstring>(const uint port) override</argsstring>
+        <name>open_socket</name>
+        <reimplements refid="class_loom_internet_plat_1a91204905ec272ff1edc608a3aa250745">open_socket</reimplements>
+        <param>
+          <type>const uint</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Fails everytime, there is no UDP socket functionality in the TinyGSM library. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a UDP socket for transmitting and recieving </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="96" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="112" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___l_t_e_1a4c2a46142110aa917b0f30bc75c7fec1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_LTE::power_up</definition>
+        <argsstring>() override</argsstring>
+        <name>power_up</name>
+        <reimplements refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23">power_up</reimplements>
+        <briefdescription>
+<para>Turn on any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="98" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="143" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___l_t_e_1a553ab68611ebae383e590ffa3e15a243" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_LTE::power_down</definition>
+        <argsstring>() override</argsstring>
+        <name>power_down</name>
+        <reimplements refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df">power_down</reimplements>
+        <briefdescription>
+<para>Turn off any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="99" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="156" bodyend="163"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___l_t_e_1ae55b43c23da41b673720f5f160804e10" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_LTE::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="105" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="124" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___l_t_e_1a2ca3566bf14efebc81a94d650ebc5236" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_LTE::print_state</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_state</name>
+        <reimplements refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7">print_state</reimplements>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="106" column="1" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="132" bodyend="140"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___l_t_e_1a186a401a887e8fe3d7fdea20ad460647" prot="protected" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Loom_LTE::APN</definition>
+        <argsstring></argsstring>
+        <name>APN</name>
+        <briefdescription>
+<para>LTE Network name. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="41" column="1" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___l_t_e_1aea1ba6a0a9f7ed65081b769f53d683ad" prot="protected" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Loom_LTE::gprsUser</definition>
+        <argsstring></argsstring>
+        <name>gprsUser</name>
+        <briefdescription>
+<para>GPRS username crendtial. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="42" column="1" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___l_t_e_1a30c8118155a3c520b09cc6f4cc3e5281" prot="protected" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* Loom_LTE::gprsPass</definition>
+        <argsstring></argsstring>
+        <name>gprsPass</name>
+        <briefdescription>
+<para>GPRS password credenital. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="43" column="1" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___l_t_e_1a2957c4ed2f16b6e5d5efcf26a54ab6f1" prot="protected" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int Loom_LTE::powerPin</definition>
+        <argsstring></argsstring>
+        <name>powerPin</name>
+        <briefdescription>
+<para>Wired analog pin to power on LTE shield. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="44" column="1" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___l_t_e_1a4413f26e14ac858125124311856a3a04" prot="protected" static="no" mutable="no">
+        <type>TinyGsmClient</type>
+        <definition>TinyGsmClient Loom_LTE::m_base_client</definition>
+        <argsstring></argsstring>
+        <name>m_base_client</name>
+        <briefdescription>
+<para>SSLClient object for LTE. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="46" column="1" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___l_t_e_1a58e7db415a377eae5363ad7e740b4dfb" prot="protected" static="no" mutable="no">
+        <type>SSLClient</type>
+        <definition>SSLClient Loom_LTE::m_client</definition>
+        <argsstring></argsstring>
+        <name>m_client</name>
+        <briefdescription>
+<para>Underlying LTE SSLClient instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="47" column="1" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_loom___l_t_e_1a7f4179803a9db2ccfd306bf37bfdf64e" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>SSLClient &amp;</type>
+        <definition>SSLClient&amp; Loom_LTE::get_client</definition>
+        <argsstring>() override</argsstring>
+        <name>get_client</name>
+        <reimplements refid="class_loom_internet_plat_1a71bfc232cac5294b1c3e6dbb00029fa7">get_client</reimplements>
+        <briefdescription>
+<para>Get the underlying SSLClient implementation, which we will use for all of the other requests. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="49" column="1" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___l_t_e_1a844e09e0ae9b0c6f181d974171dfc10c" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>const SSLClient &amp;</type>
+        <definition>const SSLClient&amp; Loom_LTE::get_client</definition>
+        <argsstring>() const override</argsstring>
+        <name>get_client</name>
+        <reimplements refid="class_loom_internet_plat_1a3b79a1467f5f239cd740d6ced88cdadf">get_client</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.h" line="50" column="1" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>LTE InternetPlat. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="attention"><para>Requires 7KB of free SRAM at runtime to use.</para></simplesect>
+<simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para>[Module Documentation]</para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/2995">Product Page: Adafruit Feather M0 Bluefruit LE</ulink></para></listitem><listitem><para><ulink url="https://github.com/vshymanskyy/TinyGSM">Dependency: TinyGSM</ulink></para></listitem><listitem><para><ulink url="//https://github.com/arduino-libraries/ArduinoHttpClient">Dependency: ArduinoHttpClient</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#cellular">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="638">
+        <label>Loom_LTE</label>
+        <link refid="class_loom___l_t_e"/>
+        <childnode refid="639" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="640">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="639">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="640" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="641">
+        <label>Loom_LTE</label>
+        <link refid="class_loom___l_t_e"/>
+        <childnode refid="642" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="648">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="644">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="645" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="646" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="651" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="647" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="643">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="644" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="652">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="647">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="643" relation="public-inheritance">
+        </childnode>
+        <childnode refid="648" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="649" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="646" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="650" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="651" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="652" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="646">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="643" relation="public-inheritance">
+        </childnode>
+        <childnode refid="647" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="642">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="643" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="645">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="643" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="651">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="643" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="649">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="650">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/InternetPlats/InternetLTE.h" line="37" column="1" bodyfile="src/InternetPlats/InternetLTE.h" bodystart="36" bodyend="109"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>add_config</name></member>
+      <member refid="class_loom___l_t_e_1a186a401a887e8fe3d7fdea20ad460647" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>APN</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>category</name></member>
+      <member refid="class_loom_internet_plat_1a7044d4ef42ec9181d519e6d37365789d" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>ClientSession</name></member>
+      <member refid="class_loom___l_t_e_1ac1a5109706d827b394f350181a8f3698" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>connect</name></member>
+      <member refid="class_loom_internet_plat_1aa89a42b49465a6924a674be2e9dac709" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>connect_to_domain</name></member>
+      <member refid="class_loom_internet_plat_1aebfc1c711a7fa0eb781e545d7fc757cf" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>connect_to_ip</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>device_manager</name></member>
+      <member refid="class_loom___l_t_e_1a14b4c6a3cefe05144d3d8a3bee587188" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>disconnect</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>get_active</name></member>
+      <member refid="class_loom___l_t_e_1a7f4179803a9db2ccfd306bf37bfdf64e" prot="protected" virt="virtual"><scope>Loom_LTE</scope><name>get_client</name></member>
+      <member refid="class_loom___l_t_e_1a844e09e0ae9b0c6f181d974171dfc10c" prot="protected" virt="virtual"><scope>Loom_LTE</scope><name>get_client</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_internet_plat_1a17807cb51c969dbdba980a4d704aef33" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>get_time</name></member>
+      <member refid="class_loom___l_t_e_1a30c8118155a3c520b09cc6f4cc3e5281" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>gprsPass</name></member>
+      <member refid="class_loom___l_t_e_1aea1ba6a0a9f7ed65081b769f53d683ad" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>gprsUser</name></member>
+      <member refid="class_loom_internet_plat_1ad1a855e6ed61aa2c40ff0b8f477df57f" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>http_get_request</name></member>
+      <member refid="class_loom_internet_plat_1aeac1140fb30e60c0f845f36d2ff02cd8" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>http_post_request</name></member>
+      <member refid="class_loom_internet_plat_1a01a61bd1d5ec547b2619c620abbfd983" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>http_request</name></member>
+      <member refid="class_loom___l_t_e_1a38253137a5dbe6a069e75ca7aa9b872f" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>is_connected</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___l_t_e_1a8d95da5f0fc6bb7362d9bf0b73bb48f4" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>Loom_LTE</name></member>
+      <member refid="class_loom___l_t_e_1a1c1062a1f31998a98965d09eca65f10d" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>Loom_LTE</name></member>
+      <member refid="class_loom_internet_plat_1a357f426519f563931cf6793bca0ae397" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>LoomInternetPlat</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>LoomModule</name></member>
+      <member refid="class_loom___l_t_e_1a4413f26e14ac858125124311856a3a04" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>m_base_client</name></member>
+      <member refid="class_loom___l_t_e_1a58e7db415a377eae5363ad7e740b4dfb" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>m_client</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>module_type</name></member>
+      <member refid="class_loom___l_t_e_1a414b0ca17f97103620c7058fb0cb98d2" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>open_socket</name></member>
+      <member refid="class_loom_internet_plat_1ae9cbe7ba64e4d597fe7084110f646dec" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___l_t_e_1a553ab68611ebae383e590ffa3e15a243" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>power_down</name></member>
+      <member refid="class_loom___l_t_e_1a4c2a46142110aa917b0f30bc75c7fec1" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>power_up</name></member>
+      <member refid="class_loom___l_t_e_1a2957c4ed2f16b6e5d5efcf26a54ab6f1" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>powerPin</name></member>
+      <member refid="class_loom___l_t_e_1ae55b43c23da41b673720f5f160804e10" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>print_module_label</name></member>
+      <member refid="class_loom___l_t_e_1a2ca3566bf14efebc81a94d650ebc5236" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>Type</name></member>
+      <member refid="class_loom_internet_plat_1a0b2cc742a6ac5f4f7054b75ea99b345c" prot="public" virt="non-virtual"><scope>Loom_LTE</scope><name>UDPPtr</name></member>
+      <member refid="class_loom_internet_plat_1a2a6ca5f5f807f420c445dd5ff53aed41" prot="protected" virt="non-virtual"><scope>Loom_LTE</scope><name>write_http_request</name></member>
+      <member refid="class_loom___l_t_e_1aa087493e3ee9044aeef9fbe3e44946f8" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>~Loom_LTE</name></member>
+      <member refid="class_loom_internet_plat_1a36f9cc600e5ee1a916c330da914a3b11" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>~LoomInternetPlat</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_LTE</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_servo_8cpp" kind="file" language="C++">
+    <compoundname>Servo.cpp</compoundname>
+    <includes refid="_servo_8h" local="yes">Servo.h</includes>
+    <incdepgraph>
+      <node id="3053">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3050">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3051" relation="include">
+        </childnode>
+        <childnode refid="3053" relation="include">
+        </childnode>
+        <childnode refid="3054" relation="include">
+        </childnode>
+        <childnode refid="3055" relation="include">
+        </childnode>
+      </node>
+      <node id="3047">
+        <label>src/Actuators/Servo.cpp</label>
+        <link refid="Servo.cpp"/>
+        <childnode refid="3048" relation="include">
+        </childnode>
+      </node>
+      <node id="3054">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3052" relation="include">
+        </childnode>
+        <childnode refid="3055" relation="include">
+        </childnode>
+      </node>
+      <node id="3051">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3052" relation="include">
+        </childnode>
+      </node>
+      <node id="3048">
+        <label>Servo.h</label>
+        <link refid="_servo_8h"/>
+        <childnode refid="3049" relation="include">
+        </childnode>
+        <childnode refid="3056" relation="include">
+        </childnode>
+      </node>
+      <node id="3055">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3049">
+        <label>Actuator.h</label>
+        <link refid="_actuator_8h"/>
+        <childnode refid="3050" relation="include">
+        </childnode>
+      </node>
+      <node id="3052">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3056">
+        <label>Adafruit_PWMServoDriver.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_servo_8cpp_1a65ff49a6e78be84de6e478345b32b508" prot="public" static="no">
+        <name>SERVOMIN</name>
+        <initializer>150</initializer>
+        <briefdescription>
+<para>This is the &apos;minimum&apos; pulse length count (out of 4096) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.cpp" line="14" column="9" bodyfile="src/Actuators/Servo.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_servo_8cpp_1a357a7e9fa4e4d8ed2f5ef82f37143836" prot="public" static="no">
+        <name>SERVOMAX</name>
+        <initializer>600</initializer>
+        <briefdescription>
+<para>This is the &apos;maximum&apos; pulse length count (out of 4096) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Servo.cpp" line="15" column="9" bodyfile="src/Actuators/Servo.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Actuators/Servo.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,874 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_manager_8cpp" kind="file" language="C++">
+    <compoundname>Manager.cpp</compoundname>
+    <includes refid="_module_8h" local="yes">Module.h</includes>
+    <includes refid="_manager_8h" local="yes">Manager.h</includes>
+    <includes refid="_module___factory_8h" local="yes">Module_Factory.h</includes>
+    <includes refid="_macros_8h" local="yes">Macros.h</includes>
+    <includes refid="_interrupt___manager_8h" local="yes">Interrupt_Manager.h</includes>
+    <includes refid="_sleep___manager_8h" local="yes">Sleep_Manager.h</includes>
+    <includes refid="_sensor_8h" local="yes">Sensors/Sensor.h</includes>
+    <includes refid="_multiplexer_8h" local="yes">Multiplexer.h</includes>
+    <includes refid="_actuator_8h" local="yes">Actuators/Actuator.h</includes>
+    <includes refid="_comm_plat_8h" local="yes">CommPlats/CommPlat.h</includes>
+    <includes refid="_internet_plat_8h" local="yes">InternetPlats/InternetPlat.h</includes>
+    <includes refid="_log_plat_8h" local="yes">LogPlats/LogPlat.h</includes>
+    <includes refid="_r_t_c_8h" local="yes">RTC/RTC.h</includes>
+    <includes refid="_publish_plat_8h" local="yes">PublishPlats/PublishPlat.h</includes>
+    <includes refid="_n_t_p___sync_8h" local="yes">NTP_Sync.h</includes>
+    <includes local="no">ArduinoJson.h</includes>
+    <includes local="no">SdFat.h</includes>
+    <includes local="no">algorithm</includes>
+    <incdepgraph>
+      <node id="3950">
+        <label>MPU6050_tockn.h</label>
+      </node>
+      <node id="3887">
+        <label>Adafruit_MotorShield.h</label>
+      </node>
+      <node id="3961">
+        <label>Sensors/I2C/ZXGesture.h</label>
+        <link refid="_z_x_gesture_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3962" relation="include">
+        </childnode>
+      </node>
+      <node id="3937">
+        <label>Sensors/I2C/AS7265X.h</label>
+        <link refid="_a_s7265_x_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3938" relation="include">
+        </childnode>
+      </node>
+      <node id="3886">
+        <label>Actuators/Stepper.h</label>
+        <link refid="_stepper_8h"/>
+        <childnode refid="3881" relation="include">
+        </childnode>
+        <childnode refid="3887" relation="include">
+        </childnode>
+        <childnode refid="3885" relation="include">
+        </childnode>
+      </node>
+      <node id="3902">
+        <label>InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3903" relation="include">
+        </childnode>
+        <childnode refid="3904" relation="include">
+        </childnode>
+        <childnode refid="3905" relation="include">
+        </childnode>
+        <childnode refid="3906" relation="include">
+        </childnode>
+      </node>
+      <node id="3942">
+        <label>Adafruit_FXOS8700.h</label>
+      </node>
+      <node id="3879">
+        <label>Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3876" relation="include">
+        </childnode>
+        <childnode refid="3880" relation="include">
+        </childnode>
+        <childnode refid="3883" relation="include">
+        </childnode>
+        <childnode refid="3884" relation="include">
+        </childnode>
+        <childnode refid="3886" relation="include">
+        </childnode>
+        <childnode refid="3888" relation="include">
+        </childnode>
+        <childnode refid="3895" relation="include">
+        </childnode>
+        <childnode refid="3898" relation="include">
+        </childnode>
+        <childnode refid="3901" relation="include">
+        </childnode>
+        <childnode refid="3909" relation="include">
+        </childnode>
+        <childnode refid="3912" relation="include">
+        </childnode>
+        <childnode refid="3915" relation="include">
+        </childnode>
+        <childnode refid="3917" relation="include">
+        </childnode>
+        <childnode refid="3918" relation="include">
+        </childnode>
+        <childnode refid="3920" relation="include">
+        </childnode>
+        <childnode refid="3922" relation="include">
+        </childnode>
+        <childnode refid="3890" relation="include">
+        </childnode>
+        <childnode refid="3925" relation="include">
+        </childnode>
+        <childnode refid="3926" relation="include">
+        </childnode>
+        <childnode refid="3927" relation="include">
+        </childnode>
+        <childnode refid="3929" relation="include">
+        </childnode>
+        <childnode refid="3930" relation="include">
+        </childnode>
+        <childnode refid="3934" relation="include">
+        </childnode>
+        <childnode refid="3936" relation="include">
+        </childnode>
+        <childnode refid="3937" relation="include">
+        </childnode>
+        <childnode refid="3939" relation="include">
+        </childnode>
+        <childnode refid="3941" relation="include">
+        </childnode>
+        <childnode refid="3943" relation="include">
+        </childnode>
+        <childnode refid="3945" relation="include">
+        </childnode>
+        <childnode refid="3946" relation="include">
+        </childnode>
+        <childnode refid="3949" relation="include">
+        </childnode>
+        <childnode refid="3951" relation="include">
+        </childnode>
+        <childnode refid="3953" relation="include">
+        </childnode>
+        <childnode refid="3955" relation="include">
+        </childnode>
+        <childnode refid="3957" relation="include">
+        </childnode>
+        <childnode refid="3959" relation="include">
+        </childnode>
+        <childnode refid="3961" relation="include">
+        </childnode>
+        <childnode refid="3963" relation="include">
+        </childnode>
+        <childnode refid="3965" relation="include">
+        </childnode>
+        <childnode refid="3967" relation="include">
+        </childnode>
+        <childnode refid="3968" relation="include">
+        </childnode>
+        <childnode refid="3971" relation="include">
+        </childnode>
+        <childnode refid="3973" relation="include">
+        </childnode>
+        <childnode refid="3975" relation="include">
+        </childnode>
+        <childnode refid="3976" relation="include">
+        </childnode>
+        <childnode refid="3977" relation="include">
+        </childnode>
+        <childnode refid="3978" relation="include">
+        </childnode>
+        <childnode refid="3981" relation="include">
+        </childnode>
+        <childnode refid="3983" relation="include">
+        </childnode>
+        <childnode refid="3985" relation="include">
+        </childnode>
+      </node>
+      <node id="3904">
+        <label>Udp.h</label>
+      </node>
+      <node id="3955">
+        <label>Sensors/I2C/TMP007.h</label>
+        <link refid="_t_m_p007_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3956" relation="include">
+        </childnode>
+      </node>
+      <node id="3954">
+        <label>Adafruit_SHT31.h</label>
+      </node>
+      <node id="3901">
+        <label>InternetPlats/InternetEthernet.h</label>
+        <link refid="_internet_ethernet_8h"/>
+        <childnode refid="3902" relation="include">
+        </childnode>
+        <childnode refid="3907" relation="include">
+        </childnode>
+        <childnode refid="3905" relation="include">
+        </childnode>
+        <childnode refid="3908" relation="include">
+        </childnode>
+      </node>
+      <node id="3916">
+        <label>PublishPlat.h</label>
+        <link refid="_publish_plat_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3902" relation="include">
+        </childnode>
+        <childnode refid="3890" relation="include">
+        </childnode>
+      </node>
+      <node id="3968">
+        <label>Sensors/SPI/MAX31855.h</label>
+        <link refid="_m_a_x31855_8h"/>
+        <childnode refid="3969" relation="include">
+        </childnode>
+        <childnode refid="3970" relation="include">
+        </childnode>
+      </node>
+      <node id="3934">
+        <label>Sensors/I2C/AS7262.h</label>
+        <link refid="_a_s7262_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3935" relation="include">
+        </childnode>
+      </node>
+      <node id="3874">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3891">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+      </node>
+      <node id="3913">
+        <label>TinyGsmClient.h</label>
+      </node>
+      <node id="3871">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3872" relation="include">
+        </childnode>
+        <childnode refid="3874" relation="include">
+        </childnode>
+        <childnode refid="3875" relation="include">
+        </childnode>
+        <childnode refid="3876" relation="include">
+        </childnode>
+      </node>
+      <node id="3896">
+        <label>RF24Network.h</label>
+      </node>
+      <node id="3965">
+        <label>Sensors/SDI12/Decagon_5TM.h</label>
+        <link refid="_decagon__5_t_m_8h"/>
+        <childnode refid="3966" relation="include">
+        </childnode>
+      </node>
+      <node id="3982">
+        <label>EnableInterrupt.h</label>
+      </node>
+      <node id="3963">
+        <label>Sensors/I2C/STEMMA.h</label>
+        <link refid="_s_t_e_m_m_a_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3964" relation="include">
+        </childnode>
+      </node>
+      <node id="3903">
+        <label>Client.h</label>
+      </node>
+      <node id="3917">
+        <label>PublishPlats/Max_Pub.h</label>
+        <link refid="_max___pub_8h"/>
+        <childnode refid="3916" relation="include">
+        </childnode>
+      </node>
+      <node id="3977">
+        <label>Components/WarmUp/WarmUp_Manager.h</label>
+        <link refid="_warm_up___manager_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3876" relation="include">
+        </childnode>
+        <childnode refid="3878" relation="include">
+        </childnode>
+      </node>
+      <node id="3919">
+        <label>SubscribePlat.h</label>
+        <link refid="_subscribe_plat_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3902" relation="include">
+        </childnode>
+      </node>
+      <node id="3875">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3873" relation="include">
+        </childnode>
+        <childnode refid="3876" relation="include">
+        </childnode>
+      </node>
+      <node id="3918">
+        <label>SubscribePlats/Max_Sub.h</label>
+        <link refid="_max___sub_8h"/>
+        <childnode refid="3919" relation="include">
+        </childnode>
+      </node>
+      <node id="3940">
+        <label>Adafruit_FXAS21002C.h</label>
+      </node>
+      <node id="3927">
+        <label>Sensors/Analog.h</label>
+        <link refid="_analog_8h"/>
+        <childnode refid="3928" relation="include">
+        </childnode>
+      </node>
+      <node id="3921">
+        <label>Adafruit_SSD1306.h</label>
+      </node>
+      <node id="3956">
+        <label>Adafruit_TMP007.h</label>
+      </node>
+      <node id="3923">
+        <label>../RTC/RTC.h</label>
+        <link refid="_r_t_c_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3924" relation="include">
+        </childnode>
+      </node>
+      <node id="3883">
+        <label>Actuators/Relay.h</label>
+        <link refid="_relay_8h"/>
+        <childnode refid="3881" relation="include">
+        </childnode>
+      </node>
+      <node id="3943">
+        <label>Sensors/I2C/LIS3DH.h</label>
+        <link refid="_l_i_s3_d_h_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3944" relation="include">
+        </childnode>
+      </node>
+      <node id="3974">
+        <label>Serial_Sensor.h</label>
+        <link refid="_serial___sensor_8h"/>
+        <childnode refid="3928" relation="include">
+        </childnode>
+      </node>
+      <node id="3898">
+        <label>CommPlats/Bluetooth.h</label>
+        <link refid="_bluetooth_8h"/>
+        <childnode refid="3889" relation="include">
+        </childnode>
+        <childnode refid="3899" relation="include">
+        </childnode>
+        <childnode refid="3900" relation="include">
+        </childnode>
+      </node>
+      <node id="3980">
+        <label>RTCCounter.h</label>
+      </node>
+      <node id="3951">
+        <label>Sensors/I2C/MS5803.h</label>
+        <link refid="_m_s5803_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3952" relation="include">
+        </childnode>
+      </node>
+      <node id="3893">
+        <label>RH_RF95.h</label>
+      </node>
+      <node id="3914">
+        <label>ArduinoHttpClient.h</label>
+      </node>
+      <node id="3970">
+        <label>Adafruit_MAX31855.h</label>
+      </node>
+      <node id="3962">
+        <label>ZX_Sensor.h</label>
+      </node>
+      <node id="3946">
+        <label>Sensors/I2C/MMA8451.h</label>
+        <link refid="_m_m_a8451_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3947" relation="include">
+        </childnode>
+        <childnode refid="3948" relation="include">
+        </childnode>
+      </node>
+      <node id="3911">
+        <label>WiFiUdp.h</label>
+      </node>
+      <node id="3960">
+        <label>Adafruit_TSL2591.h</label>
+      </node>
+      <node id="3966">
+        <label>SDI12_Sensor.h</label>
+        <link refid="_s_d_i12___sensor_8h"/>
+        <childnode refid="3928" relation="include">
+        </childnode>
+      </node>
+      <node id="3949">
+        <label>Sensors/I2C/MPU6050.h</label>
+        <link refid="_m_p_u6050_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3950" relation="include">
+        </childnode>
+      </node>
+      <node id="3872">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3873" relation="include">
+        </childnode>
+      </node>
+      <node id="3938">
+        <label>SparkFun_AS7265X.h</label>
+      </node>
+      <node id="3894">
+        <label>RHReliableDatagram.h</label>
+      </node>
+      <node id="3944">
+        <label>SparkFunLIS3DH.h</label>
+      </node>
+      <node id="3932">
+        <label>Wire.h</label>
+      </node>
+      <node id="3888">
+        <label>CommPlats/LoRa.h</label>
+        <link refid="_lo_ra_8h"/>
+        <childnode refid="3889" relation="include">
+        </childnode>
+        <childnode refid="3893" relation="include">
+        </childnode>
+        <childnode refid="3894" relation="include">
+        </childnode>
+      </node>
+      <node id="3929">
+        <label>Sensors/Digital.h</label>
+        <link refid="_digital_8h"/>
+        <childnode refid="3928" relation="include">
+        </childnode>
+      </node>
+      <node id="3884">
+        <label>Actuators/Servo.h</label>
+        <link refid="_servo_8h"/>
+        <childnode refid="3881" relation="include">
+        </childnode>
+        <childnode refid="3885" relation="include">
+        </childnode>
+      </node>
+      <node id="3986">
+        <label>tuple</label>
+      </node>
+      <node id="3924">
+        <label>OPEnS_RTC.h</label>
+      </node>
+      <node id="3964">
+        <label>Adafruit_seesaw.h</label>
+      </node>
+      <node id="3912">
+        <label>InternetPlats/InternetLTE.h</label>
+        <link refid="_internet_l_t_e_8h"/>
+        <childnode refid="3913" relation="include">
+        </childnode>
+        <childnode refid="3914" relation="include">
+        </childnode>
+        <childnode refid="3905" relation="include">
+        </childnode>
+        <childnode refid="3902" relation="include">
+        </childnode>
+        <childnode refid="3908" relation="include">
+        </childnode>
+      </node>
+      <node id="3907">
+        <label>EthernetLarge.h</label>
+      </node>
+      <node id="3985">
+        <label>Module_Factory_Aux.h</label>
+        <link refid="_module___factory___aux_8h"/>
+        <childnode refid="3984" relation="include">
+        </childnode>
+        <childnode refid="3986" relation="include">
+        </childnode>
+      </node>
+      <node id="3892">
+        <label>SdFat.h</label>
+      </node>
+      <node id="3922">
+        <label>LogPlats/SD.h</label>
+        <link refid="_s_d_8h"/>
+        <childnode refid="3891" relation="include">
+        </childnode>
+        <childnode refid="3892" relation="include">
+        </childnode>
+        <childnode refid="3923" relation="include">
+        </childnode>
+      </node>
+      <node id="3909">
+        <label>InternetPlats/InternetWiFi.h</label>
+        <link refid="_internet_wi_fi_8h"/>
+        <childnode refid="3902" relation="include">
+        </childnode>
+        <childnode refid="3910" relation="include">
+        </childnode>
+        <childnode refid="3911" relation="include">
+        </childnode>
+        <childnode refid="3905" relation="include">
+        </childnode>
+        <childnode refid="3908" relation="include">
+        </childnode>
+      </node>
+      <node id="3878">
+        <label>vector</label>
+      </node>
+      <node id="3910">
+        <label>WiFi101.h</label>
+      </node>
+      <node id="3876">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3948">
+        <label>Adafruit_MMA8451.h</label>
+      </node>
+      <node id="3972">
+        <label>Adafruit_MAX31856.h</label>
+      </node>
+      <node id="3928">
+        <label>Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+      </node>
+      <node id="3984">
+        <label>array</label>
+      </node>
+      <node id="3881">
+        <label>Actuator.h</label>
+        <link refid="_actuator_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+      </node>
+      <node id="3952">
+        <label>MS5803_02.h</label>
+      </node>
+      <node id="3947">
+        <label>Adafruit_Sensor.h</label>
+      </node>
+      <node id="3969">
+        <label>SPI_Sensor.h</label>
+        <link refid="_s_p_i___sensor_8h"/>
+        <childnode refid="3928" relation="include">
+        </childnode>
+      </node>
+      <node id="3957">
+        <label>Sensors/I2C/TSL2561.h</label>
+        <link refid="_t_s_l2561_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3958" relation="include">
+        </childnode>
+      </node>
+      <node id="3926">
+        <label>RTC/PCF8523.h</label>
+        <link refid="_p_c_f8523_8h"/>
+        <childnode refid="3923" relation="include">
+        </childnode>
+      </node>
+      <node id="3939">
+        <label>Sensors/I2C/FXAS21002.h</label>
+        <link refid="_f_x_a_s21002_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3940" relation="include">
+        </childnode>
+      </node>
+      <node id="3873">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3885">
+        <label>Adafruit_PWMServoDriver.h</label>
+      </node>
+      <node id="3975">
+        <label>NTP_Sync.h</label>
+        <link refid="_n_t_p___sync_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3902" relation="include">
+        </childnode>
+        <childnode refid="3923" relation="include">
+        </childnode>
+      </node>
+      <node id="3880">
+        <label>Actuators/Neopixel.h</label>
+        <link refid="_neopixel_8h"/>
+        <childnode refid="3881" relation="include">
+        </childnode>
+        <childnode refid="3882" relation="include">
+        </childnode>
+      </node>
+      <node id="3890">
+        <label>../LogPlats/BatchSD.h</label>
+        <link refid="_batch_s_d_8h"/>
+        <childnode refid="3891" relation="include">
+        </childnode>
+        <childnode refid="3892" relation="include">
+        </childnode>
+      </node>
+      <node id="3920">
+        <label>LogPlats/OLED.h</label>
+        <link refid="_o_l_e_d_8h"/>
+        <childnode refid="3891" relation="include">
+        </childnode>
+        <childnode refid="3921" relation="include">
+        </childnode>
+      </node>
+      <node id="3908">
+        <label>Trust_Anchors.h</label>
+        <link refid="_trust___anchors_8h"/>
+      </node>
+      <node id="3958">
+        <label>Adafruit_TSL2561_U.h</label>
+      </node>
+      <node id="3931">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="3928" relation="include">
+        </childnode>
+        <childnode refid="3932" relation="include">
+        </childnode>
+      </node>
+      <node id="3983">
+        <label>Multiplexer.h</label>
+        <link refid="_multiplexer_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3878" relation="include">
+        </childnode>
+        <childnode refid="3984" relation="include">
+        </childnode>
+      </node>
+      <node id="3870">
+        <label>src/Manager.cpp</label>
+        <link refid="Manager.cpp"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3877" relation="include">
+        </childnode>
+        <childnode refid="3879" relation="include">
+        </childnode>
+        <childnode refid="3874" relation="include">
+        </childnode>
+        <childnode refid="3978" relation="include">
+        </childnode>
+        <childnode refid="3981" relation="include">
+        </childnode>
+        <childnode refid="3928" relation="include">
+        </childnode>
+        <childnode refid="3983" relation="include">
+        </childnode>
+        <childnode refid="3881" relation="include">
+        </childnode>
+        <childnode refid="3889" relation="include">
+        </childnode>
+        <childnode refid="3902" relation="include">
+        </childnode>
+        <childnode refid="3891" relation="include">
+        </childnode>
+        <childnode refid="3923" relation="include">
+        </childnode>
+        <childnode refid="3916" relation="include">
+        </childnode>
+        <childnode refid="3975" relation="include">
+        </childnode>
+        <childnode refid="3876" relation="include">
+        </childnode>
+        <childnode refid="3892" relation="include">
+        </childnode>
+        <childnode refid="3987" relation="include">
+        </childnode>
+      </node>
+      <node id="3978">
+        <label>Interrupt_Manager.h</label>
+        <link refid="_interrupt___manager_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3924" relation="include">
+        </childnode>
+        <childnode refid="3979" relation="include">
+        </childnode>
+        <childnode refid="3980" relation="include">
+        </childnode>
+      </node>
+      <node id="3941">
+        <label>Sensors/I2C/FXOS8700.h</label>
+        <link refid="_f_x_o_s8700_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3942" relation="include">
+        </childnode>
+      </node>
+      <node id="3959">
+        <label>Sensors/I2C/TSL2591.h</label>
+        <link refid="_t_s_l2591_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3960" relation="include">
+        </childnode>
+      </node>
+      <node id="3936">
+        <label>Sensors/I2C/AS7263.h</label>
+        <link refid="_a_s7263_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3935" relation="include">
+        </childnode>
+      </node>
+      <node id="3976">
+        <label>Temperature_Sync.h</label>
+        <link refid="_temperature___sync_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+      </node>
+      <node id="3897">
+        <label>RF24.h</label>
+      </node>
+      <node id="3935">
+        <label>AS726X.h</label>
+      </node>
+      <node id="3930">
+        <label>Sensors/I2C/ADS1115.h</label>
+        <link refid="_a_d_s1115_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3933" relation="include">
+        </childnode>
+      </node>
+      <node id="3971">
+        <label>Sensors/SPI/MAX31856.h</label>
+        <link refid="_m_a_x31856_8h"/>
+        <childnode refid="3969" relation="include">
+        </childnode>
+        <childnode refid="3972" relation="include">
+        </childnode>
+      </node>
+      <node id="3889">
+        <label>CommPlat.h</label>
+        <link refid="_comm_plat_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3890" relation="include">
+        </childnode>
+        <childnode refid="3873" relation="include">
+        </childnode>
+        <childnode refid="3876" relation="include">
+        </childnode>
+      </node>
+      <node id="3925">
+        <label>RTC/DS3231.h</label>
+        <link refid="_d_s3231_8h"/>
+        <childnode refid="3923" relation="include">
+        </childnode>
+      </node>
+      <node id="3933">
+        <label>Adafruit_ADS1015.h</label>
+      </node>
+      <node id="3987">
+        <label>algorithm</label>
+      </node>
+      <node id="3882">
+        <label>Adafruit_NeoPixel.h</label>
+      </node>
+      <node id="3967">
+        <label>Sensors/SDI12/Decagon_GS3.h</label>
+        <link refid="_decagon___g_s3_8h"/>
+        <childnode refid="3966" relation="include">
+        </childnode>
+      </node>
+      <node id="3900">
+        <label>Adafruit_BluefruitLE_UART.h</label>
+      </node>
+      <node id="3981">
+        <label>Sleep_Manager.h</label>
+        <link refid="_sleep___manager_8h"/>
+        <childnode refid="3871" relation="include">
+        </childnode>
+        <childnode refid="3978" relation="include">
+        </childnode>
+        <childnode refid="3877" relation="include">
+        </childnode>
+        <childnode refid="3924" relation="include">
+        </childnode>
+        <childnode refid="3982" relation="include">
+        </childnode>
+      </node>
+      <node id="3915">
+        <label>PublishPlats/GoogleSheets.h</label>
+        <link refid="_google_sheets_8h"/>
+        <childnode refid="3916" relation="include">
+        </childnode>
+      </node>
+      <node id="3945">
+        <label>Sensors/I2C/MB1232.h</label>
+        <link refid="_m_b1232_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+      </node>
+      <node id="3905">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="3899">
+        <label>Adafruit_BluefruitLE_SPI.h</label>
+      </node>
+      <node id="3895">
+        <label>CommPlats/nRF.h</label>
+        <link refid="n_r_f_8h"/>
+        <childnode refid="3889" relation="include">
+        </childnode>
+        <childnode refid="3896" relation="include">
+        </childnode>
+        <childnode refid="3897" relation="include">
+        </childnode>
+      </node>
+      <node id="3877">
+        <label>Manager.h</label>
+        <link refid="_manager_8h"/>
+        <childnode refid="3872" relation="include">
+        </childnode>
+        <childnode refid="3876" relation="include">
+        </childnode>
+        <childnode refid="3878" relation="include">
+        </childnode>
+      </node>
+      <node id="3906">
+        <label>memory</label>
+      </node>
+      <node id="3973">
+        <label>Sensors/SERIAL/K30.h</label>
+        <link refid="_k30_8h"/>
+        <childnode refid="3974" relation="include">
+        </childnode>
+      </node>
+      <node id="3953">
+        <label>Sensors/I2C/SHT31D.h</label>
+        <link refid="_s_h_t31_d_8h"/>
+        <childnode refid="3931" relation="include">
+        </childnode>
+        <childnode refid="3954" relation="include">
+        </childnode>
+      </node>
+      <node id="3979">
+        <label>AsyncDelay.h</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Manager.cpp"/>
+  </compounddef>
+</doxygen>

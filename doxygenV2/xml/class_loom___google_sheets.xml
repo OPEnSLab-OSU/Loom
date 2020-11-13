@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___google_sheets" kind="class" language="C++" prot="public">
+    <compoundname>Loom_GoogleSheets</compoundname>
+    <basecompoundref refid="class_loom_publish_plat" prot="public" virt="non-virtual">LoomPublishPlat</basecompoundref>
+    <includes refid="_google_sheets_8h" local="no">GoogleSheets.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___google_sheets_1abe3f15347cdb097a36d761a0764a1f3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_GoogleSheets::Loom_GoogleSheets</definition>
+        <argsstring>(LoomManager *manager, const char *module_name, const LoomModule::Type internet_type, const char *script_url, const char *sheet_id, const bool tab_matches_dev_id, const char *tab_id=&quot;Data&quot;)</argsstring>
+        <name>Loom_GoogleSheets</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>internet_type</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>script_url</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>sheet_id</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>tab_matches_dev_id</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tab_id</declname>
+          <defval>&quot;Data&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Loom Google Sheets Platform module constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para>Check out <ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets">https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets</ulink> (or <ulink url="http://www.open-sensing.org/evaporometerblog/datalog">http://www.open-sensing.org/evaporometerblog/datalog</ulink>) for more information on these parameters. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;Internet-Plat&quot;&gt; | null | Publish platform module name. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">internet_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(LoomModule::Type) | &lt;7001&gt; | {7001(&quot;Ethernet&quot;), 7002(&quot;WiFi&quot;), 7003(&quot;LTE&quot;)} | Code of the desired internet platform. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">script_url</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;&quot;&gt; | null | URL where the google sheets script is hosted, without domain (ex. /macros/s/AKfycby&lt;more letters=&quot;&quot; here&gt;=&quot;&quot;&gt;_k0n/exec). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sheet_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;&quot;&gt; | null |ID Of the spreadsheet to put data in (script must have edit access). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tab_matches_dev_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | null | Override tab_id with the name+instance number of the device. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tab_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;Data&quot;&gt; | null | Name of the tab that the device will put data into. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="44" column="1" bodyfile="src/PublishPlats/GoogleSheets.cpp" bodystart="17" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___google_sheets_1afbf17bbfb3bd62bfd8e79a107e8caf3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_GoogleSheets::Loom_GoogleSheets</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_GoogleSheets</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="57" column="1" bodyfile="src/PublishPlats/GoogleSheets.cpp" bodystart="38" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___google_sheets_1a2d9b1d435c045e0dc4d9a889daef0e4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_GoogleSheets::~Loom_GoogleSheets</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_GoogleSheets</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="60" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="variable" id="class_loom___google_sheets_1a22807b4f1b15cd931bc32667565b04ab" prot="private" static="no" mutable="no">
+        <type>const String</type>
+        <definition>const String Loom_GoogleSheets::m_script_url</definition>
+        <argsstring></argsstring>
+        <name>m_script_url</name>
+        <briefdescription>
+<para>ID of Google script. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="88" column="1" bodyfile="src/PublishPlats/GoogleSheets.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___google_sheets_1a3e0aaf5088ce0b762cfbd084e6328921" prot="private" static="no" mutable="no">
+        <type>const String</type>
+        <definition>const String Loom_GoogleSheets::m_sheet_id</definition>
+        <argsstring></argsstring>
+        <name>m_sheet_id</name>
+        <briefdescription>
+<para>ID of Google Sheets spreadsheet. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="89" column="1" bodyfile="src/PublishPlats/GoogleSheets.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___google_sheets_1a1d44b087cbf2882f10a85cf5c027970d" prot="private" static="no" mutable="no">
+        <type>const String</type>
+        <definition>const String Loom_GoogleSheets::m_tab_id</definition>
+        <argsstring></argsstring>
+        <name>m_tab_id</name>
+        <briefdescription>
+<para>Name of tab of spreadsheet. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="90" column="1" bodyfile="src/PublishPlats/GoogleSheets.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___google_sheets_1a3e7a43f6ff27268741eda4412fe58f92" prot="private" static="no" mutable="no">
+        <type>const bool</type>
+        <definition>const bool Loom_GoogleSheets::tab_matches_dev_id</definition>
+        <argsstring></argsstring>
+        <name>tab_matches_dev_id</name>
+        <briefdescription>
+<para>Whether or not tab of spreadsheet should be based on device name + instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="92" column="1" bodyfile="src/PublishPlats/GoogleSheets.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___google_sheets_1a83066e82b742c1f273bf7b009a1490d4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_GoogleSheets::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_publish_plat_1a38cc9fe71203a153392fbca807e39434">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="70" column="1" bodyfile="src/PublishPlats/GoogleSheets.cpp" bodystart="42" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___google_sheets_1af446a27796d495a5489543323f4cc505" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_GoogleSheets::send_to_internet</definition>
+        <argsstring>(const JsonObject json, LoomInternetPlat *plat) override</argsstring>
+        <name>send_to_internet</name>
+        <reimplements refid="class_loom_publish_plat_1a5d54196f11ef28daf8fdf853f215a033">send_to_internet</reimplements>
+        <param>
+          <type>const JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type><ref refid="class_loom_internet_plat" kindref="compound">LoomInternetPlat</ref> *</type>
+          <declname>plat</declname>
+        </param>
+        <briefdescription>
+<para>Send JSON data to a google sheet. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The JSON data, formatted according to <ref refid="class_loom_publish_plat_1a5a172ded7502cd31fe15596e21dd6cc9" kindref="member">publish()</ref>; </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">plat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to an internet platform </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="78" column="1" bodyfile="src/PublishPlats/GoogleSheets.cpp" bodystart="51" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___google_sheets_1a437b321c9f0f5cfe838b08146150e952" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_GoogleSheets::m_serialize_internet_impl</definition>
+        <argsstring>(const JsonObject json, Print &amp;write)</argsstring>
+        <name>m_serialize_internet_impl</name>
+        <param>
+          <type>const JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type>Print &amp;</type>
+          <declname>write</declname>
+        </param>
+        <briefdescription>
+<para>Private utility send function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/GoogleSheets.h" line="83" column="1" bodyfile="src/PublishPlats/GoogleSheets.cpp" bodystart="121" bodyend="158"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Module taking in and translating JSON into data understood by the Google Sheets script API. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___google_sheets.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets">wiki: Using Loom with Google Sheets</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="563">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="561">
+        <label>Loom_GoogleSheets</label>
+        <link refid="class_loom___google_sheets"/>
+        <childnode refid="562" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="562">
+        <label>LoomPublishPlat</label>
+        <link refid="class_loom_publish_plat"/>
+        <childnode refid="563" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="571">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="567">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="568" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="569" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="574" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="570" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="566">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="567" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="575">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="564">
+        <label>Loom_GoogleSheets</label>
+        <link refid="class_loom___google_sheets"/>
+        <childnode refid="565" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="570">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="566" relation="public-inheritance">
+        </childnode>
+        <childnode refid="571" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="572" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="569" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="573" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="574" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="575" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="569">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="566" relation="public-inheritance">
+        </childnode>
+        <childnode refid="570" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="565">
+        <label>LoomPublishPlat</label>
+        <link refid="class_loom_publish_plat"/>
+        <childnode refid="566" relation="public-inheritance">
+        </childnode>
+        <childnode refid="576" relation="usage">
+          <edgelabel>m_internet</edgelabel>
+        </childnode>
+      </node>
+      <node id="576">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="566" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="568">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="566" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="574">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="566" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="572">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="573">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/PublishPlats/GoogleSheets.h" line="27" column="1" bodyfile="src/PublishPlats/GoogleSheets.h" bodystart="26" bodyend="94"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>Category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_publish_plat_1aab697868e61843787893f5509d22b9ed" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>internet_type</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___google_sheets_1abe3f15347cdb097a36d761a0764a1f3b" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>Loom_GoogleSheets</name></member>
+      <member refid="class_loom___google_sheets_1afbf17bbfb3bd62bfd8e79a107e8caf3b" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>Loom_GoogleSheets</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>LoomModule</name></member>
+      <member refid="class_loom_publish_plat_1a59b0b76a0a0507c211284f341c0c5b34" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>LoomPublishPlat</name></member>
+      <member refid="class_loom_publish_plat_1a9e07931b084ea022c48485a2df28cc83" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>m_internet</name></member>
+      <member refid="class_loom___google_sheets_1a22807b4f1b15cd931bc32667565b04ab" prot="private" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>m_script_url</name></member>
+      <member refid="class_loom___google_sheets_1a437b321c9f0f5cfe838b08146150e952" prot="private" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>m_serialize_internet_impl</name></member>
+      <member refid="class_loom___google_sheets_1a3e0aaf5088ce0b762cfbd084e6328921" prot="private" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>m_sheet_id</name></member>
+      <member refid="class_loom___google_sheets_1a1d44b087cbf2882f10a85cf5c027970d" prot="private" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>m_tab_id</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>module_type</name></member>
+      <member refid="class_loom_publish_plat_1ac8548fef404b55465773513aefce5608" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>power_up</name></member>
+      <member refid="class_loom___google_sheets_1a83066e82b742c1f273bf7b009a1490d4" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>print_module_label</name></member>
+      <member refid="class_loom_publish_plat_1a0055306a6b0efc49d83f083c1398eea1" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_publish_plat_1a9be2ccbcaba4d1a5735bcd5bf828eafb" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>publish</name></member>
+      <member refid="class_loom_publish_plat_1a5a172ded7502cd31fe15596e21dd6cc9" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>publish</name></member>
+      <member refid="class_loom_publish_plat_1ae0c0825a58465f124bfe07e3de8b3b25" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>publish_batch</name></member>
+      <member refid="class_loom_publish_plat_1a9be9c86b766a6308fb2851875b50ba56" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom___google_sheets_1af446a27796d495a5489543323f4cc505" prot="protected" virt="virtual"><scope>Loom_GoogleSheets</scope><name>send_to_internet</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___google_sheets_1a3e7a43f6ff27268741eda4412fe58f92" prot="private" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>tab_matches_dev_id</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>Type</name></member>
+      <member refid="class_loom___google_sheets_1a2d9b1d435c045e0dc4d9a889daef0e4a" prot="public" virt="non-virtual"><scope>Loom_GoogleSheets</scope><name>~Loom_GoogleSheets</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_publish_plat_1a68870cd02f9de172d4bcf448060ef1ec" prot="public" virt="virtual"><scope>Loom_GoogleSheets</scope><name>~LoomPublishPlat</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_f_x_o_s8700_8cpp" kind="file" language="C++">
+    <compoundname>FXOS8700.cpp</compoundname>
+    <includes refid="_f_x_o_s8700_8h" local="yes">FXOS8700.h</includes>
+    <includes local="no">Adafruit_Sensor.h</includes>
+    <incdepgraph>
+      <node id="5099">
+        <label>Adafruit_FXOS8700.h</label>
+      </node>
+      <node id="5095">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5092">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5093" relation="include">
+        </childnode>
+        <childnode refid="5095" relation="include">
+        </childnode>
+        <childnode refid="5096" relation="include">
+        </childnode>
+        <childnode refid="5097" relation="include">
+        </childnode>
+      </node>
+      <node id="5096">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5094" relation="include">
+        </childnode>
+        <childnode refid="5097" relation="include">
+        </childnode>
+      </node>
+      <node id="5088">
+        <label>src/Sensors/I2C/FXOS8700.cpp</label>
+        <link refid="FXOS8700.cpp"/>
+        <childnode refid="5089" relation="include">
+        </childnode>
+        <childnode refid="5100" relation="include">
+        </childnode>
+      </node>
+      <node id="5093">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5094" relation="include">
+        </childnode>
+      </node>
+      <node id="5098">
+        <label>Wire.h</label>
+      </node>
+      <node id="5097">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5091">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5092" relation="include">
+        </childnode>
+      </node>
+      <node id="5100">
+        <label>Adafruit_Sensor.h</label>
+      </node>
+      <node id="5094">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5090">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5091" relation="include">
+        </childnode>
+        <childnode refid="5098" relation="include">
+        </childnode>
+      </node>
+      <node id="5089">
+        <label>FXOS8700.h</label>
+        <link refid="_f_x_o_s8700_8h"/>
+        <childnode refid="5090" relation="include">
+        </childnode>
+        <childnode refid="5099" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/FXOS8700.cpp"/>
+  </compounddef>
+</doxygen>

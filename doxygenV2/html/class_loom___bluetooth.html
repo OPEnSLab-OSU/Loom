@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_Bluetooth class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_Bluetooth <span class="m-thin">class</span>
+        </h1>
+        <p>Bluetooth communication platform module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>Needs more work for complete functionality.</p><aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___bluetooth.html">Module Documentation</a></li><li><a href="https://www.adafruit.com/product/2995">Product Page: Adafruit Feather M0 Bluefruit LE</a></li><li><a href="https://github.com/adafruit/Adafruit_BluefruitLE_nRF51">Dependency: Adafruit_<wbr />BluefruitLE_<wbr />nRF51</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#bluetooth">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_comm_plat.html" class="m-doc">LoomCommPlat</a>
+            </dt>
+            <dd>Abstract base of communication platform modules.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a0f16366fb0573986b0205cfc73f02b7c">
+              Adafruit_BluefruitLE_SPI <a href="#a0f16366fb0573986b0205cfc73f02b7c" class="m-doc-self">BLE</a>
+            </dt>
+            <dd>Bluetooth manager instance.</dd>
+            <dt id="a111aeae48c0ea364b47b3d8f3536bd7c">
+              uint8_t <a href="#a111aeae48c0ea364b47b3d8f3536bd7c" class="m-doc-self">spi_CS</a>
+            </dt>
+            <dd>SPI chip select pin.</dd>
+            <dt id="a8ef44f1f6220e7272aeca00a0991a3c7">
+              uint8_t <a href="#a8ef44f1f6220e7272aeca00a0991a3c7" class="m-doc-self">spi_IRQ</a>
+            </dt>
+            <dd>SPI IRQ pin.</dd>
+            <dt id="a9b7f8f41e29fce31bcd8366e93edd7a6">
+              uint8_t <a href="#a9b7f8f41e29fce31bcd8366e93edd7a6" class="m-doc-self">spi_RST</a>
+            </dt>
+            <dd>SPI reset pin.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a0e4547eb83e0df8bfee05cbb862959d5" class="m-doc">Loom_Bluetooth</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const uint16_t max_message_len = 120,
+              const uint8_t spi_CS = 8,
+              const uint8_t spi_IRQ = 7,
+              const uint8_t spi_RST = 4)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a0751e5f9f4eac6bc1f9cba0fbc31c2d9" class="m-doc">Loom_Bluetooth</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="a14659e58247ac0dab7c21fe10fd512e6">
+              <span class="m-doc-wrap-bumper"><a href="#a14659e58247ac0dab7c21fe10fd512e6" class="m-doc-self">~Loom_Bluetooth</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a6cd69b2bdd618cab4093eed50e0149d4">
+              <span class="m-doc-wrap-bumper">void <a href="#a6cd69b2bdd618cab4093eed50e0149d4" class="m-doc-self">add_config</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Currently no implementation.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a1f10df313c782cc98f621b423f9071e6" class="m-doc">connect</a>(</span><span class="m-doc-wrap">const uint16_t connect_timeout)</span>
+            </dt>
+            <dd>Allow a phone to connect.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af99fabadf5dc67ace74a8c6f00b712c2" class="m-doc">getCommand</a>(</span><span class="m-doc-wrap">const uint16_t max_timeout) -&gt; int8_t</span>
+            </dt>
+            <dd>Receive a command from user.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="acf5fbe9ae0476fbc647c742baab183e8">
+              <span class="m-doc-wrap-bumper">void <a href="#acf5fbe9ae0476fbc647c742baab183e8" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a05e53b4b58b52d0b7068959b6246e9a2" class="m-doc">get_address</a>(</span><span class="m-doc-wrap">) const -&gt; uint8_t <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Bluetooth currently does not use addresses.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a963fd394e050a4b1fb12311d6fe8f97f" class="m-doc">set_address</a>(</span><span class="m-doc-wrap">const uint8_t addr) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Bluetooth currently does not use addresses.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a0e4547eb83e0df8bfee05cbb862959d5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />Bluetooth::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0e4547eb83e0df8bfee05cbb862959d5" class="m-doc-self">Loom_Bluetooth</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const uint16_t max_message_len = 120,
+              const uint8_t spi_CS = 8,
+              const uint8_t spi_IRQ = 7,
+              const uint8_t spi_RST = 4)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>max_message_len&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The maximum possible message length</td>
+                </tr>
+                <tr>
+                  <td>spi_CS&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>SPI chip select pin</td>
+                </tr>
+                <tr>
+                  <td>spi_IRQ&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>SPI IRQ pin</td>
+                </tr>
+                <tr>
+                  <td>spi_RST&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>SPI reset pin</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0751e5f9f4eac6bc1f9cba0fbc31c2d9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />Bluetooth::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0751e5f9f4eac6bc1f9cba0fbc31c2d9" class="m-doc-self">Loom_Bluetooth</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1f10df313c782cc98f621b423f9071e6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Bluetooth::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f10df313c782cc98f621b423f9071e6" class="m-doc-self">connect</a>(</span><span class="m-doc-wrap">const uint16_t connect_timeout)</span></span>
+            </h3>
+            <p>Allow a phone to connect.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">connect_timeout&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Max time to allow user to try to connect</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af99fabadf5dc67ace74a8c6f00b712c2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int8_t Loom_<wbr />Bluetooth::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af99fabadf5dc67ace74a8c6f00b712c2" class="m-doc-self">getCommand</a>(</span><span class="m-doc-wrap">const uint16_t max_timeout)</span></span>
+            </h3>
+            <p>Receive a command from user.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">max_timeout&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Maximum number of milliseconds to wait for command</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Status Gets a command from the ble interface, or times out. This is used in combination with parseCommand if the return value is valid.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a05e53b4b58b52d0b7068959b6246e9a2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint8_t Loom_<wbr />Bluetooth::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a05e53b4b58b52d0b7068959b6246e9a2" class="m-doc-self">get_address</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Bluetooth currently does not use addresses.</p>
+<p>Override with empty body</p>
+          </div></section>
+          <section class="m-doc-details" id="a963fd394e050a4b1fb12311d6fe8f97f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Bluetooth::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a963fd394e050a4b1fb12311d6fe8f97f" class="m-doc-self">set_address</a>(</span><span class="m-doc-wrap">const uint8_t addr) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Bluetooth currently does not use addresses.</p>
+<p>Override with empty body</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

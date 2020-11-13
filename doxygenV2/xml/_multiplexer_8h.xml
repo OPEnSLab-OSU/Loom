@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_multiplexer_8h" kind="file" language="C++">
+    <compoundname>Multiplexer.h</compoundname>
+    <includes refid="_module_8h" local="yes">Module.h</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">array</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_manager_8cpp" local="yes">src/Manager.cpp</includedby>
+    <includedby refid="_multiplexer_8cpp" local="yes">src/Multiplexer.cpp</includedby>
+    <incdepgraph>
+      <node id="4485">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4482">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4483" relation="include">
+        </childnode>
+        <childnode refid="4485" relation="include">
+        </childnode>
+        <childnode refid="4486" relation="include">
+        </childnode>
+        <childnode refid="4487" relation="include">
+        </childnode>
+      </node>
+      <node id="4486">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4484" relation="include">
+        </childnode>
+        <childnode refid="4487" relation="include">
+        </childnode>
+      </node>
+      <node id="4483">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4484" relation="include">
+        </childnode>
+      </node>
+      <node id="4488">
+        <label>vector</label>
+      </node>
+      <node id="4487">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4489">
+        <label>array</label>
+      </node>
+      <node id="4484">
+        <label>Arduino.h</label>
+      </node>
+      <node id="4481">
+        <label>src/Multiplexer.h</label>
+        <link refid="Multiplexer.h"/>
+        <childnode refid="4482" relation="include">
+        </childnode>
+        <childnode refid="4488" relation="include">
+        </childnode>
+        <childnode refid="4489" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4491">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="4492" relation="include">
+        </childnode>
+        <childnode refid="4493" relation="include">
+        </childnode>
+      </node>
+      <node id="4494">
+        <label>src/Multiplexer.cpp</label>
+        <link refid="_multiplexer_8cpp"/>
+      </node>
+      <node id="4492">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="4490">
+        <label>src/Multiplexer.h</label>
+        <link refid="Multiplexer.h"/>
+        <childnode refid="4491" relation="include">
+        </childnode>
+        <childnode refid="4493" relation="include">
+        </childnode>
+        <childnode refid="4494" relation="include">
+        </childnode>
+      </node>
+      <node id="4493">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___multiplexer" prot="public">Loom_Multiplexer</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879" prot="public" static="no">
+        <name>I2C_Selection</name>
+        <enumvalue id="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879ab32cfc2332e3259d454e058c09ea147b" prot="public">
+          <name>L_TSL2561</name>
+          <briefdescription>
+<para>TSL2561. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a5a7ed0fa1524f2d16d50f6e18ff3f248" prot="public">
+          <name>L_TSL2591</name>
+          <briefdescription>
+<para>TSL2591. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879ac4b9427216b17673c98791f201d9aedd" prot="public">
+          <name>L_AS7262</name>
+          <briefdescription>
+<para>AS7262. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879af3371aca8c2efe835e9fb362985bea19" prot="public">
+          <name>L_AS7263</name>
+          <briefdescription>
+<para>AS7263. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a736449f10b9a5838931a79d95e3415aa" prot="public">
+          <name>L_AS7265X</name>
+          <briefdescription>
+<para>AS7265X. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a80173fb909f49f4b765aeaff5db040a0" prot="public">
+          <name>L_MMA8451</name>
+          <briefdescription>
+<para>MMA8451. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a27cea56370fee967223e7202895365bb" prot="public">
+          <name>L_FXOS8700</name>
+          <briefdescription>
+<para>FXOS8700. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a53137cea8089f4f87ddcbf71a877b4af" prot="public">
+          <name>L_STEMMA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>I2C Address Conflict Selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="26" column="1" bodyfile="src/Multiplexer.h" bodystart="26" bodyend="35"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_multiplexer_8h_1a950a92d7eb3b5a5ff5ad9d6afaef3a6e" prot="public" static="no" mutable="no">
+        <type>const <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879" kindref="member">I2C_Selection</ref></type>
+        <definition>const I2C_Selection i2c_0x1C</definition>
+        <argsstring></argsstring>
+        <name>i2c_0x1C</name>
+        <initializer>= <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a80173fb909f49f4b765aeaff5db040a0" kindref="member">I2C_Selection::L_MMA8451</ref></initializer>
+        <briefdescription>
+<para>TSL2561 / TSL2591. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="39" column="1" bodyfile="src/Multiplexer.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_multiplexer_8h_1a34b483cd8926087d400e0da07a225287" prot="public" static="no" mutable="no">
+        <type>const <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879" kindref="member">I2C_Selection</ref></type>
+        <definition>const I2C_Selection i2c_0x1D</definition>
+        <argsstring></argsstring>
+        <name>i2c_0x1D</name>
+        <initializer>= <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a80173fb909f49f4b765aeaff5db040a0" kindref="member">I2C_Selection::L_MMA8451</ref></initializer>
+        <briefdescription>
+<para>TSL2561 / TSL2591. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="40" column="1" bodyfile="src/Multiplexer.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_multiplexer_8h_1a2dde69bc13a8d6f8679e4735d03606d9" prot="public" static="no" mutable="no">
+        <type>const <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879" kindref="member">I2C_Selection</ref></type>
+        <definition>const I2C_Selection i2c_0x29</definition>
+        <argsstring></argsstring>
+        <name>i2c_0x29</name>
+        <initializer>= <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a5a7ed0fa1524f2d16d50f6e18ff3f248" kindref="member">I2C_Selection::L_TSL2591</ref></initializer>
+        <briefdescription>
+<para>TSL2561 / TSL2591. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="41" column="1" bodyfile="src/Multiplexer.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_multiplexer_8h_1a665017c4844723cda6c66d1bac5f9c2f" prot="public" static="no" mutable="no">
+        <type>const <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879" kindref="member">I2C_Selection</ref></type>
+        <definition>const I2C_Selection i2c_0x49</definition>
+        <argsstring></argsstring>
+        <name>i2c_0x49</name>
+        <initializer>= <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a736449f10b9a5838931a79d95e3415aa" kindref="member">I2C_Selection::L_AS7265X</ref></initializer>
+        <briefdescription>
+<para>TSL2561 / AS7262 / AS7263 / AS7265X. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="42" column="1" bodyfile="src/Multiplexer.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_multiplexer_8h_1a1c62b74c3182a916f6858860f4c622f9" prot="public" static="no" mutable="no">
+        <type>const <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879" kindref="member">I2C_Selection</ref></type>
+        <definition>const I2C_Selection i2c_0x36</definition>
+        <argsstring></argsstring>
+        <name>i2c_0x36</name>
+        <initializer>= <ref refid="_multiplexer_8h_1a6e67d5400d8dcc8e8641765a5a84c879a53137cea8089f4f87ddcbf71a877b4af" kindref="member">I2C_Selection::L_STEMMA</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Multiplexer.h" line="43" column="1" bodyfile="src/Multiplexer.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Multiplexer.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,5 @@
+<map id="Loom_MAX31856" name="Loom_MAX31856">
+<area shape="rect" id="node2" href="$class_loom_s_p_i_sensor.html" title="Abstract base class for SPI sensor modules. " alt="" coords="11,155,133,181"/>
+<area shape="rect" id="node3" href="$class_loom_sensor.html" title="Abstract root of Loom sensor modules hierarchy. " alt="" coords="21,80,123,107"/>
+<area shape="rect" id="node4" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="20,5,124,32"/>
+</map>

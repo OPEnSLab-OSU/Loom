@@ -1,0 +1,4 @@
+<map id="Loom_Stepper" name="Loom_Stepper">
+<area shape="rect" id="node2" href="$class_loom_actuator.html" title="Abstract base class of actuator modules. " alt="" coords="7,80,120,107"/>
+<area shape="rect" id="node3" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="11,5,115,32"/>
+</map>

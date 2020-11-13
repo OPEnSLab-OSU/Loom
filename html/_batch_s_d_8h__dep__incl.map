@@ -1,0 +1,20 @@
+<map id="src/LogPlats/BatchSD.h" name="src/LogPlats/BatchSD.h">
+<area shape="rect" id="node2" href="$_comm_plat_8h.html" title="src/CommPlats/CommPlat.h" alt="" coords="545,87,747,114"/>
+<area shape="rect" id="node5" href="$_module___factory_8h.html" title="src/Module_Factory.h" alt="" coords="675,266,830,293"/>
+<area shape="rect" id="node13" href="$_batch_s_d_8cpp.html" title="src/LogPlats/BatchSD.cpp" alt="" coords="955,87,1142,114"/>
+<area shape="rect" id="node14" href="$_publish_plat_8h.html" title="src/PublishPlats/Publish\lPlat.h" alt="" coords="1197,80,1367,121"/>
+<area shape="rect" id="node3" href="$_bluetooth_8h.html" title="src/CommPlats/Bluetooth.h" alt="" coords="19,177,217,203"/>
+<area shape="rect" id="node7" href="$_manager_8cpp.html" title="src/Manager.cpp" alt="" coords="813,348,940,375"/>
+<area shape="rect" id="node8" href="$_comm_plat_8cpp.html" title="src/CommPlats/CommPlat.cpp" alt="" coords="432,177,649,203"/>
+<area shape="rect" id="node9" href="$_lo_ra_8h.html" title="src/CommPlats/LoRa.h" alt="" coords="241,177,408,203"/>
+<area shape="rect" id="node11" href="$n_r_f_8h.html" title="src/CommPlats/nRF.h" alt="" coords="673,177,829,203"/>
+<area shape="rect" id="node4" href="$_bluetooth_8cpp.html" title="src/CommPlats/Bluetooth.cpp" alt="" coords="5,266,217,293"/>
+<area shape="rect" id="node6" href="$_loom_8h.html" title="src/Loom.h" alt="" coords="695,348,789,375"/>
+<area shape="rect" id="node10" href="$_lo_ra_8cpp.html" title="src/CommPlats/LoRa.cpp" alt="" coords="242,266,423,293"/>
+<area shape="rect" id="node12" href="$n_r_f_8cpp.html" title="src/CommPlats/nRF.cpp" alt="" coords="481,266,651,293"/>
+<area shape="rect" id="node15" href="$_google_sheets_8h.html" title="src/PublishPlats/GoogleSheets.h" alt="" coords="955,177,1182,203"/>
+<area shape="rect" id="node17" href="$_max___pub_8h.html" title="src/PublishPlats/Max\l_Pub.h" alt="" coords="1207,169,1357,211"/>
+<area shape="rect" id="node19" href="$_publish_plat_8cpp.html" title="src/PublishPlats/Publish\lPlat.cpp" alt="" coords="1382,169,1553,211"/>
+<area shape="rect" id="node16" href="$_google_sheets_8cpp.html" title="src/PublishPlats/GoogleSheets.cpp" alt="" coords="943,266,1186,293"/>
+<area shape="rect" id="node18" href="$_max___pub_8cpp.html" title="src/PublishPlats/Max\l_Pub.cpp" alt="" coords="1211,259,1361,300"/>
+</map>

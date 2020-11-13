@@ -1,0 +1,5 @@
+<map id="Loom_AS7263" name="Loom_AS7263">
+<area shape="rect" id="node2" href="$class_loom_i2_c_sensor.html" title="Abstract root for I2C sensor modules. " alt="" coords="5,155,128,181"/>
+<area shape="rect" id="node3" href="$class_loom_sensor.html" title="Abstract root of Loom sensor modules hierarchy. " alt="" coords="15,80,118,107"/>
+<area shape="rect" id="node4" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="15,5,119,32"/>
+</map>

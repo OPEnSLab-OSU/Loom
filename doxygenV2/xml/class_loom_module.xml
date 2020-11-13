@@ -1,0 +1,1776 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_module" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>LoomModule</compoundname>
+    <derivedcompoundref refid="class_loom___interrupt___manager" prot="public" virt="non-virtual">Loom_Interrupt_Manager</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___multiplexer" prot="public" virt="non-virtual">Loom_Multiplexer</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___sleep___manager" prot="public" virt="non-virtual">Loom_Sleep_Manager</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___warm_up___manager" prot="public" virt="non-virtual">Loom_WarmUp_Manager</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_actuator" prot="public" virt="non-virtual">LoomActuator</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_comm_plat" prot="public" virt="non-virtual">LoomCommPlat</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_internet_plat" prot="public" virt="non-virtual">LoomInternetPlat</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_log_plat" prot="public" virt="non-virtual">LoomLogPlat</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_n_t_p_sync" prot="public" virt="non-virtual">LoomNTPSync</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_publish_plat" prot="public" virt="non-virtual">LoomPublishPlat</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_r_t_c" prot="public" virt="non-virtual">LoomRTC</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_sensor" prot="public" virt="non-virtual">LoomSensor</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_subscribe_plat" prot="public" virt="non-virtual">LoomSubscribePlat</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_temp_sync" prot="public" virt="non-virtual">LoomTempSync</derivedcompoundref>
+    <includes refid="_module_8h" local="no">Module.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomModule::LoomModule</definition>
+        <argsstring>(LoomManager *manager, const char *module_name=&quot;Unknown&quot;, const Type module_type=Type::Unknown)</argsstring>
+        <name>LoomModule</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+          <defval>&quot;Unknown&quot;</defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">Type</ref></type>
+          <declname>module_type</declname>
+          <defval><ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a88183b946cc5f0e8c96b2e66e1c74a7e" kindref="member">Type::Unknown</ref></defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">module_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="110" column="1" bodyfile="src/Module.cpp" bodystart="14" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual LoomModule::~LoomModule</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LoomModule</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="117" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void LoomModule::second_stage_ctor</definition>
+        <argsstring>()</argsstring>
+        <name>second_stage_ctor</name>
+        <reimplementedby refid="class_loom_n_t_p_sync_1ad4a9843c49172a83f4c7bcb310f4b177">second_stage_ctor</reimplementedby>
+        <reimplementedby refid="class_loom___max_pub_1a86cecc2a45d660c5f1cc1d6b720b1739">second_stage_ctor</reimplementedby>
+        <reimplementedby refid="class_loom___max_sub_1a8cc7cbe1313118bd7773e5f023eb7bb2">second_stage_ctor</reimplementedby>
+        <reimplementedby refid="class_loom_temp_sync_1a0bc1a857bc87c30482c8175d69876b0a">second_stage_ctor</reimplementedby>
+        <reimplementedby refid="class_loom_publish_plat_1a9be9c86b766a6308fb2851875b50ba56">second_stage_ctor</reimplementedby>
+        <reimplementedby refid="class_loom_subscribe_plat_1a5394d492cec0f9403d0442ea46bce2db">second_stage_ctor</reimplementedby>
+        <briefdescription>
+<para>Second stage construction. </para>        </briefdescription>
+        <detaileddescription>
+<para>Perform any actions that need all of the devices to be initized beforehand - such as looking up an internet platform This function is guranteed to be called AFTER all modules have been constructed. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="124" column="1" bodyfile="src/Module.h" bodystart="124" bodyend="124"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void LoomModule::package</definition>
+        <argsstring>(JsonObject json)=0</argsstring>
+        <name>package</name>
+        <reimplementedby refid="class_loom___warm_up___manager_1a82c8cd30f969a681a76b332d3b1c2ce4">package</reimplementedby>
+        <reimplementedby refid="class_loom_actuator_1abf895d8f41379ff53dff666d9d2791a2">package</reimplementedby>
+        <reimplementedby refid="class_loom___s_t_e_m_m_a_1aaee00fa7deb976da153cd6a90c62eceb">package</reimplementedby>
+        <reimplementedby refid="class_loom___decagon5_t_m_1ac3bd11e1e2fb49b330d355778118886e">package</reimplementedby>
+        <reimplementedby refid="class_loom___decagon_g_s3_1a48b54dffb09f83a82e9ebed32e1c7152">package</reimplementedby>
+        <reimplementedby refid="class_loom___relay_1ae3c0ac05a26917c832196205a7c2d7a9">package</reimplementedby>
+        <reimplementedby refid="class_loom___m_b1232_1ac08f29a40c91d9008dd355324b125bd9">package</reimplementedby>
+        <reimplementedby refid="class_loom_log_plat_1abddec0fce6ef786577ae008702c9393e">package</reimplementedby>
+        <reimplementedby refid="class_loom_n_t_p_sync_1a99820eea8c86bbeb299a12fa2164fdad">package</reimplementedby>
+        <reimplementedby refid="class_loom___servo_1a0162afa4dade96bb86340fb567b43820">package</reimplementedby>
+        <reimplementedby refid="class_loom___m_a_x31855_1ab810ae8d4b02cb1a7326669f359bb56b">package</reimplementedby>
+        <reimplementedby refid="class_loom___t_m_p007_1a15de2056a158e8ec1662b6760ecb66e6">package</reimplementedby>
+        <reimplementedby refid="class_loom___s_h_t31_d_1a0fd16cdcaf91721d68a7a882656c9551">package</reimplementedby>
+        <reimplementedby refid="class_loom___f_x_a_s21002_1aec2655c583a7bfe3b7603534c0e0edcf">package</reimplementedby>
+        <reimplementedby refid="class_loom___max_sub_1a7680cb0286f2320c68ab26242643fe64">package</reimplementedby>
+        <reimplementedby refid="class_loom___f_x_o_s8700_1a0418ea42d1c8764de9a152a4fae96c40">package</reimplementedby>
+        <reimplementedby refid="class_loom___l_i_s3_d_h_1a1e96a7df95de03409692c4194d8300b0">package</reimplementedby>
+        <reimplementedby refid="class_loom_publish_plat_1ac8548fef404b55465773513aefce5608">package</reimplementedby>
+        <reimplementedby refid="class_loom_temp_sync_1aa36abfbdda84295decbfdc962f7344c8">package</reimplementedby>
+        <reimplementedby refid="class_loom___m_m_a8451_1a94a382c80a638f3cba9fb0c7fd4bd232">package</reimplementedby>
+        <reimplementedby refid="class_loom___m_s5803_1a994abd7bfb62ece7b47bd595d70603b9">package</reimplementedby>
+        <reimplementedby refid="class_loom___m_a_x31856_1a7b2d2b233930c75207c1a6521927ee74">package</reimplementedby>
+        <reimplementedby refid="class_loom___t_s_l2561_1a1efaaba6462bd3c2658d169cfc5132b7">package</reimplementedby>
+        <reimplementedby refid="class_loom___k30_1a20b989aee8822e204e951edbc6a5969a">package</reimplementedby>
+        <reimplementedby refid="class_loom___t_s_l2591_1a02b3656a1bccbed969306141c1f06011">package</reimplementedby>
+        <reimplementedby refid="class_loom___z_x_gesture_1a48153345d472b3e5008c42ddb6f49223">package</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7262_1a943cf5569f3f583da3049d8d64e7da76">package</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7263_1ad2003ca203febd1dc34dc19184187631">package</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7265_x_1aa6b4502c7486d9aef3277af7287218f0">package</reimplementedby>
+        <reimplementedby refid="class_loom___digital_1a8cbad6dd375dca45843b459dec8da717">package</reimplementedby>
+        <reimplementedby refid="class_loom___sleep___manager_1acbb98e60458aec76b9bf9ed446f17029">package</reimplementedby>
+        <reimplementedby refid="class_loom___m_p_u6050_1a053f5fd6c8e4d8bc3243f345d68d0f30">package</reimplementedby>
+        <reimplementedby refid="class_loom___wi_fi_1a536247ffb9228c55d5a2473d8df9a58b">package</reimplementedby>
+        <reimplementedby refid="class_loom___batch_s_d_1a738bf5b08c3eba7ec2711b656e6f90bd">package</reimplementedby>
+        <reimplementedby refid="class_loom_r_t_c_1a13101cb450db89fe15ab77b29dba975e">package</reimplementedby>
+        <reimplementedby refid="class_loom___a_d_s1115_1a4c2a1f5b61f51cf5485598d8d36c6e3d">package</reimplementedby>
+        <reimplementedby refid="class_loom_internet_plat_1ae9cbe7ba64e4d597fe7084110f646dec">package</reimplementedby>
+        <reimplementedby refid="class_loom_comm_plat_1a4cc05ef1f12c5b15fc6516dc75f070d4">package</reimplementedby>
+        <reimplementedby refid="class_loom___multiplexer_1aa09d42f26ce3c4185ae8e9b55e3d851f">package</reimplementedby>
+        <reimplementedby refid="class_loom___analog_1ab22f3a9b0d5c78feb1e53cf565483385">package</reimplementedby>
+        <reimplementedby refid="class_loom___interrupt___manager_1a5acb7bf173619dbd1a459800182767e6">package</reimplementedby>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Package a modules measurements or state. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to put data into </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="132" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool LoomModule::dispatch</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>dispatch</name>
+        <reimplementedby refid="class_loom___relay_1a93ddf6a1c30244a81eaeb9332546e465">dispatch</reimplementedby>
+        <reimplementedby refid="class_loom___max_pub_1a5d824f56b133288fc9dcb0d62379ca35">dispatch</reimplementedby>
+        <reimplementedby refid="class_loom_n_t_p_sync_1aab638db55b31b1233fe697117d3e3330">dispatch</reimplementedby>
+        <reimplementedby refid="class_loom___servo_1ad24074bb212a1c47ec389379726c7c01">dispatch</reimplementedby>
+        <reimplementedby refid="class_loom___neopixel_1a89ecb4894b7be0e00657d32aa2374a42">dispatch</reimplementedby>
+        <reimplementedby refid="class_loom___stepper_1ae2500cbc8029c5b3878d5465dfc01c22">dispatch</reimplementedby>
+        <reimplementedby refid="class_loom___multiplexer_1abadc1f55ae04c66e761d366325a0804f">dispatch</reimplementedby>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Route command to driver. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="135" column="1" bodyfile="src/Module.h" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void LoomModule::power_down</definition>
+        <argsstring>()</argsstring>
+        <name>power_down</name>
+        <reimplementedby refid="class_loom___batch_s_d_1adc78401b4bea4b41c76717e57417c1d5">power_down</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1a553ab68611ebae383e590ffa3e15a243">power_down</reimplementedby>
+        <reimplementedby refid="class_loom___s_d_1a01d99de8b39b25f562f2aeec3413170e">power_down</reimplementedby>
+        <reimplementedby refid="class_loom___lo_ra_1a28c3103ea9024475f152e7585cc462df">power_down</reimplementedby>
+        <reimplementedby refid="class_loom___multiplexer_1a8196a461d4b93f39f7b469ae89fa17c7">power_down</reimplementedby>
+        <briefdescription>
+<para>Turn off any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="138" column="1" bodyfile="src/Module.h" bodystart="138" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void LoomModule::power_up</definition>
+        <argsstring>()</argsstring>
+        <name>power_up</name>
+        <reimplementedby refid="class_loom___batch_s_d_1aa847506aab0cba43e0d98e0bb663a915">power_up</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1a4c2a46142110aa917b0f30bc75c7fec1">power_up</reimplementedby>
+        <reimplementedby refid="class_loom___s_d_1a316af7fd9cd88c33aa9aa06755cc37fd">power_up</reimplementedby>
+        <reimplementedby refid="class_loom___lo_ra_1ad94dccb488e41df1492129c81d480ae4">power_up</reimplementedby>
+        <reimplementedby refid="class_loom___multiplexer_1ad09225b1a4c8b70735992cd5eac9a71b">power_up</reimplementedby>
+        <briefdescription>
+<para>Turn on any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="141" column="1" bodyfile="src/Module.h" bodystart="141" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void LoomModule::add_config</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>add_config</name>
+        <reimplementedby refid="class_loom___relay_1a67c8d4bdf2f047917f5c5b05e4f64e58">add_config</reimplementedby>
+        <reimplementedby refid="class_loom___servo_1a442e82c30372c4579b3d2bfeeacaccb6">add_config</reimplementedby>
+        <reimplementedby refid="class_loom___neopixel_1a005ac12c181ff40647657c6c9b2fde2d">add_config</reimplementedby>
+        <reimplementedby refid="class_loom___stepper_1a5413b50ce475e1f14773c3dfa8af0b59">add_config</reimplementedby>
+        <reimplementedby refid="class_loom___bluetooth_1a6cd69b2bdd618cab4093eed50e0149d4">add_config</reimplementedby>
+        <reimplementedby refid="class_loom___digital_1aac57da701cadb9466ff060dc3a26a95f">add_config</reimplementedby>
+        <reimplementedby refid="class_loom__n_r_f_1a17b192fceeb84d4da70c3213ea743228">add_config</reimplementedby>
+        <reimplementedby refid="class_loom___lo_ra_1a0f70fbbfe83db6ab5bc70d5b73e1df5a">add_config</reimplementedby>
+        <reimplementedby refid="class_loom___analog_1ad74305d4a8d7f705072561b92e7b7c68">add_config</reimplementedby>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Add configuration information to JsonObject. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> iterates over modules to build complete configuration <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json configuration object to add to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="146" column="1" bodyfile="src/Module.h" bodystart="146" bodyend="146"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom_module_1a4385842da9226014283136b3e37dde88" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomModule::print_config</definition>
+        <argsstring>() const </argsstring>
+        <name>print_config</name>
+        <reimplementedby refid="class_loom_serial_sensor_1ac21a512699c90db3b4287798e1526f0c">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___decagon5_t_m_1ac402bf4f4ea1e26d9ac38b0572ceade6">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___decagon_g_s3_1a398d5f2c572ae06bc31870fea1ca3e68">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_sensor_1aaa3bb2a2165029906c4ee815e790c89e">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___google_sheets_1a83066e82b742c1f273bf7b009a1490d4">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___d_s3231_1a82be3e8bae268cb80bca455e5fef1289">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_i2_c_sensor_1ab90004ce30a281b7f51ecf3093ca4cea">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___max_pub_1a9286db7e281484d00233dc4d86012197">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_n_t_p_sync_1af683546f2b20799e3afbcf61eaabfc2b">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___p_c_f8523_1a428ddebfaec1b10cbe079f8aa5f64972">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_log_plat_1afd1780573d350f46ce26d237a4ade43b">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_temp_sync_1a7ebfed68ee73f407d698e70a023d5b5d">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___max_sub_1a86ebb385b46bd7d1052d98b525216657">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___m_m_a8451_1aad7bfbb26c8dd4eadd61e9a4817e6930">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___neopixel_1aa1930cfa494ef432bbbf1d1786c6b57d">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_subscribe_plat_1a574b062d74e998a12cdb54d265c36972">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___z_x_gesture_1a7af9796af4c3dfa33a3eedb63de89285">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7262_1a29aef77c6d06feb46bc840f4407abba7">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7263_1a19c0c1b6a4ae3ad0454011764cf54c70">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___ethernet_1a79ed8f208e2fe4faf0a71e468d7ba22e">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___digital_1a8667d980ae3546a96584bbdd9a244a7c">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_publish_plat_1a38cc9fe71203a153392fbca807e39434">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___wi_fi_1acf10d90ceedbe039f216b7d1544eb935">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___sleep___manager_1a862cdfcf8c4cdba3aae5993a8ce0cff1">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___batch_s_d_1ad1566bbb55d145e3206784df245be710">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___a_d_s1115_1a8c5419d33482990e84be15dfe82b0ea6">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1ae55b43c23da41b673720f5f160804e10">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___bluetooth_1acf5fbe9ae0476fbc647c742baab183e8">print_config</reimplementedby>
+        <reimplementedby refid="class_loom__n_r_f_1ad8a85a3ce2d9e2d7d12dec310a1c6615">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___o_l_e_d_1a20dab0bc2c5bdc139b1b04523a54a78c">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___s_d_1a4c0c3f46a3479ed8e4a96c0ca4acfa7e">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___lo_ra_1a2d73e0aa394de9db046621c86ea644c0">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___analog_1ae41c9795ceb9079b88a87cb64d7869cf">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_r_t_c_1a41c84de7ef49bf7f42069f948a98c30b">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___multiplexer_1a21759070f77ec1560e9b2a272a0c0640">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_comm_plat_1a97982022b7e279d4def0246e17a95d61">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___interrupt___manager_1a6b7a28e4b7a150016e2975165581f7e9">print_config</reimplementedby>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="153" column="1" bodyfile="src/Module.cpp" bodystart="42" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomModule::print_state</definition>
+        <argsstring>() const </argsstring>
+        <name>print_state</name>
+        <reimplementedby refid="class_loom___relay_1a001fba3a442b2ef5792fe394eb1d78e4">print_state</reimplementedby>
+        <reimplementedby refid="class_loom_n_t_p_sync_1ad33806de76e81d80f9868951e83a8191">print_state</reimplementedby>
+        <reimplementedby refid="class_loom___servo_1a8b8f085c570773d5008beccf3467cac6">print_state</reimplementedby>
+        <reimplementedby refid="class_loom___stepper_1a8aaf4b82032fc4b4cdd1ea1b9f289de1">print_state</reimplementedby>
+        <reimplementedby refid="class_loom___neopixel_1a0a5e8fd23e4f32b006a52c422551b48e">print_state</reimplementedby>
+        <reimplementedby refid="class_loom_subscribe_plat_1ace7e2ccbd9a8b5155bfabb2fd2e38d33">print_state</reimplementedby>
+        <reimplementedby refid="class_loom_publish_plat_1a0055306a6b0efc49d83f083c1398eea1">print_state</reimplementedby>
+        <reimplementedby refid="class_loom___ethernet_1a1305b086b7e99c98320ad1d280718259">print_state</reimplementedby>
+        <reimplementedby refid="class_loom___m_p_u6050_1a34dce6c99de2f323287598400499a4c4">print_state</reimplementedby>
+        <reimplementedby refid="class_loom___wi_fi_1ab3663639761f7748602fbddd8c713087">print_state</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1a2ca3566bf14efebc81a94d650ebc5236">print_state</reimplementedby>
+        <reimplementedby refid="class_loom_r_t_c_1aaa45a542cfd7b64f79a2c321a29c08f5">print_state</reimplementedby>
+        <reimplementedby refid="class_loom___multiplexer_1a2a60ebefe68aa75a3141015d2aa81955">print_state</reimplementedby>
+        <reimplementedby refid="class_loom_comm_plat_1a2a3336599f8b56c2cbb223a386d797ec">print_state</reimplementedby>
+        <reimplementedby refid="class_loom___interrupt___manager_1ae9dde4f4da0e50a0bc19e2ae3453c3cb">print_state</reimplementedby>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="156" column="1" bodyfile="src/Module.cpp" bodystart="52" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomModule::print_module_label</definition>
+        <argsstring>() const </argsstring>
+        <name>print_module_label</name>
+        <briefdescription>
+<para>Print the module name as a label. </para>        </briefdescription>
+        <detaileddescription>
+<para>Used for matching debug prints to corresponding module </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="240" column="1" bodyfile="src/Module.cpp" bodystart="36" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">Type</ref></type>
+        <definition>Type LoomModule::get_module_type</definition>
+        <argsstring>() const </argsstring>
+        <name>get_module_type</name>
+        <briefdescription>
+<para>Get module type. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Module type </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="164" column="1" bodyfile="src/Module.h" bodystart="164" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+        <definition>LoomManager* LoomModule::get_device_manager</definition>
+        <argsstring>() const </argsstring>
+        <name>get_device_manager</name>
+        <briefdescription>
+<para>Get the device manager class if linked. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Pointer to the <ref refid="class_loom_manager" kindref="compound">LoomManager</ref>, Null if not linked </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="168" column="1" bodyfile="src/Module.h" bodystart="168" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomModule::get_module_name</definition>
+        <argsstring>(char *buf) const </argsstring>
+        <name>get_module_name</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+<para>Copy module name into buffer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer to copy module name into </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="172" column="1" bodyfile="src/Module.cpp" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* LoomModule::get_module_name</definition>
+        <argsstring>() const </argsstring>
+        <name>get_module_name</name>
+        <briefdescription>
+<para>Get module name. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Module name </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="176" column="1" bodyfile="src/Module.h" bodystart="176" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+        <definition>Verbosity LoomModule::get_print_verbosity</definition>
+        <argsstring>() const </argsstring>
+        <name>get_print_verbosity</name>
+        <briefdescription>
+<para>Get print verbosity. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current verbosity setting </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="180" column="1" bodyfile="src/Module.h" bodystart="180" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+        <definition>Verbosity LoomModule::get_package_verbosity</definition>
+        <argsstring>() const </argsstring>
+        <name>get_package_verbosity</name>
+        <briefdescription>
+<para>Get package verbosity. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current verbosity setting </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="184" column="1" bodyfile="src/Module.h" bodystart="184" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomModule::get_active</definition>
+        <argsstring>() const </argsstring>
+        <name>get_active</name>
+        <briefdescription>
+<para>Get whether or not the module should be treated as active. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Whether or not the module is active </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="188" column="1" bodyfile="src/Module.h" bodystart="188" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" kindref="member">Category</ref></type>
+        <definition>LoomModule::Category LoomModule::category</definition>
+        <argsstring>() const </argsstring>
+        <name>category</name>
+        <briefdescription>
+<para>Get the category of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="191" column="1" bodyfile="src/Module.cpp" bodystart="95" bodyend="109"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomModule::link_device_manager</definition>
+        <argsstring>(LoomManager *LM)</argsstring>
+        <name>link_device_manager</name>
+        <reimplementedby refid="class_loom___sleep___manager_1a8b9622388b96fcb7a63b011a5b4e885e">link_device_manager</reimplementedby>
+        <reimplementedby refid="class_loom___s_d_1ad910296dd33bec7d3ec8a91892aade48">link_device_manager</reimplementedby>
+        <reimplementedby refid="class_loom_r_t_c_1a24c72617d7e275e89740af4f5296e42b">link_device_manager</reimplementedby>
+        <reimplementedby refid="class_loom___interrupt___manager_1a7415a4ffbeda1358639936cc62969605">link_device_manager</reimplementedby>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>LM</declname>
+        </param>
+        <briefdescription>
+<para>Add pointer back to device manager. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generally only called when device manager links module to provide pointer both directions. Derived modules may override this for increased function, such as linking a submanager or RTC module. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">LM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> to point to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="203" column="1" bodyfile="src/Module.cpp" bodystart="29" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomModule::set_print_verbosity</definition>
+        <argsstring>(const Verbosity v)</argsstring>
+        <name>set_print_verbosity</name>
+        <param>
+          <type>const <ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Set print verbosity Controlls level of detail included in debug prints. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="207" column="1" bodyfile="src/Module.cpp" bodystart="65" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomModule::set_package_verbosity</definition>
+        <argsstring>(const Verbosity v)</argsstring>
+        <name>set_package_verbosity</name>
+        <param>
+          <type>const <ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Set package verbosity. </para>        </briefdescription>
+        <detaileddescription>
+<para>Controlls level of detail included in bundles <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The verbosity setting </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="212" column="1" bodyfile="src/Module.cpp" bodystart="75" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomModule::set_active</definition>
+        <argsstring>(const bool enable)</argsstring>
+        <name>set_active</name>
+        <param>
+          <type>const bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Set whether or not the module should be treated as active. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether or not to enable module </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="216" column="1" bodyfile="src/Module.h" bodystart="216" bodyend="216"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MISCELLANEOUS</header>
+      <memberdef kind="function" id="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * LoomModule::enum_verbosity_string</definition>
+        <argsstring>(const Verbosity v)</argsstring>
+        <name>enum_verbosity_string</name>
+        <param>
+          <type>const <ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Get string of name associated with verbosity enum. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Verbosity value to get string representation of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>String of verbosity </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="225" column="1" bodyfile="src/Module.cpp" bodystart="85" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * LoomModule::enum_category_string</definition>
+        <argsstring>(const Category c)</argsstring>
+        <name>enum_category_string</name>
+        <param>
+          <type>const <ref refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" kindref="member">Category</ref></type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>Get string of the category associated with a Category. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Category value to get string representation of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>String of category </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="230" column="1" bodyfile="src/Module.cpp" bodystart="112" bodyend="126"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" static="no">
+        <name>Type</name>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a88183b946cc5f0e8c96b2e66e1c74a7e" prot="public">
+          <name>Unknown</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a6311ae17c1ee52b36e68aaf4ad066387" prot="public">
+          <name>Other</name>
+          <initializer>=1000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a4862a5de39e268e2f48baaf4acaa7cdf" prot="public">
+          <name>Interrupt_Manager</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a99431851f2f2612986f845d9b40cacf6" prot="public">
+          <name>Sleep_Manager</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a6667632eb808086429b4ca435a919bf5" prot="public">
+          <name>Multiplexer</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a5c54cb8f927a6c5a90622e1c7bd0bda5" prot="public">
+          <name>NTP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865adce3fb50a4bc330e546fd186739e24ed" prot="public">
+          <name>TempSync</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865acd235875816a9408700833b8c74ab451" prot="public">
+          <name>WarmUp_Manager</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a06b185256c71c1aec263c6e22bf8ef6b" prot="public">
+          <name>Sensor</name>
+          <initializer>=2000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a3d953aa7cfa5ffe0fde34551d918c76c" prot="public">
+          <name>Analog</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a0bb8309239953b782fec18706fe60b4a" prot="public">
+          <name>Digital</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865afb87bf1fc88386ca21395991f90fff95" prot="public">
+          <name>I2C</name>
+          <initializer>=2100</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a6d21d762b94797d22ffe78d6542e61ab" prot="public">
+          <name>ADS1115</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a527de70670a90843118260d9493bcbf4" prot="public">
+          <name>AS7262</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865ad6baeaa4fb2dc6d299c096803c785dbc" prot="public">
+          <name>AS7263</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865ac8a79265342226bcdd6949de5295b273" prot="public">
+          <name>AS7265X</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865afaee4d8a6b8dbeddca64e96e25929b81" prot="public">
+          <name>FXAS21002</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a5178d465d9869c304ec488d1d1d6059a" prot="public">
+          <name>FXOS8700</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a2a81ef230c5c7ad7d81988dd5e4b834c" prot="public">
+          <name>LIS3DH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a428c702f773fc2aa1cefa288bebdb27b" prot="public">
+          <name>MB1232</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a779354713151cb49d14a173bf608926d" prot="public">
+          <name>MMA8451</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865af1c3e607be363407b5eb8e870477a9d7" prot="public">
+          <name>MPU6050</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865abf2c722c90ddbbd2403395e349a31844" prot="public">
+          <name>MS5803</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a705f45d84f6cd36287095af9ecac5efa" prot="public">
+          <name>SHT31D</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865ad00882122977dad77c50e74f60dac3f3" prot="public">
+          <name>TMP007</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865aa9d22d3b656f50802d180ec6d21a7437" prot="public">
+          <name>TSL2561</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a24572bad020934b52809215a48ab057d" prot="public">
+          <name>TSL2591</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a1b6b1307f071478b18dcd7d8714328ff" prot="public">
+          <name>ZXGesture</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865ab266849811ab468397b9980f7a5f6457" prot="public">
+          <name>STEMMA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a637b3bc6a90037a3db249c4d65cd1f1b" prot="public">
+          <name>SDI12</name>
+          <initializer>=2200</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865ada4a393183666f7a62eb7387702bde07" prot="public">
+          <name>Decagon5TM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a03424cb92cab03f739aa963e794c4b92" prot="public">
+          <name>DecagonGS3</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a33dc5312b091968f5a120c2484d40df8" prot="public">
+          <name>SPI</name>
+          <initializer>=2300</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865ab03c58e511fd87c010c7e4b894354990" prot="public">
+          <name>MAX31855</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865ad114b3bc0f0daeb7cd181dda88554c1b" prot="public">
+          <name>MAX31856</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865aff46f35af219adc3daffbb10e205df83" prot="public">
+          <name>L_SERIAL</name>
+          <initializer>=2400</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a92f11b2c64f9b85861d5dcb84b14742e" prot="public">
+          <name>K30</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865afc65b1fe417628d7c6c7bd9ebfbc50c5" prot="public">
+          <name>L_RTC</name>
+          <initializer>=3000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a95e16e1a4c4ff4bfd6e3798969663b0c" prot="public">
+          <name>DS3231</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865abfc5e432a6b2493218ff884dab001482" prot="public">
+          <name>PCF8523</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865aa2ec2ef7ebb614cf7dd5d78b9bbf59b3" prot="public">
+          <name>Actuator</name>
+          <initializer>=4000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865aff8561f7c2a8b57c9eb4eb11ebac161e" prot="public">
+          <name>Neopixel</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a34c4c50fc7bdd0394f3954f73f2be34d" prot="public">
+          <name>Relay</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a365687df33f7052679dca2d38edcfaf7" prot="public">
+          <name>Servo</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a370509b5dfe60deb7be545e0a7aff04c" prot="public">
+          <name>Stepper</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a4e472f8ae62a269048664d59be7081b5" prot="public">
+          <name>LogPlat</name>
+          <initializer>=5000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a0c9b2f3f3530345ea5cd8c586478d2b7" prot="public">
+          <name>OLED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865ac66fbf5395181adce9b08d44876c88f9" prot="public">
+          <name>SDCARD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865acb3aae462c24d74a186926822f40f418" prot="public">
+          <name>BATCHSD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a621ea64935d8300364bc5a479c622a37" prot="public">
+          <name>CommPlat</name>
+          <initializer>=6000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a987f947a83fbf1022695e132547e0e19" prot="public">
+          <name>LoRa</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865ad62c72d62c9a14731ce877d226d7e534" prot="public">
+          <name>nRF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a7deff39593c9cecd401b795d6e1ae04b" prot="public">
+          <name>Bluetooth</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a095cd7ef32631598b47bef1e6070c437" prot="public">
+          <name>InternetPlat</name>
+          <initializer>=7000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865abe2ae05fb04ddcf6efa31e63e0f0e111" prot="public">
+          <name>Ethernet</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a3bf5d41ed0ac852c9a2e2d3a1161e26d" prot="public">
+          <name>WiFi</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865acc981ecc65ecf63ad1673cbec9c64198" prot="public">
+          <name>LTE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a81d5311fa1f8170585d6f4baaa189bc9" prot="public">
+          <name>PublishPlat</name>
+          <initializer>=8000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a1992455436de79b1a1f7f708bee6f037" prot="public">
+          <name>GoogleSheets</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a6b2ed7e0ac3a1ef150971bdc599278f5" prot="public">
+          <name>MaxPub</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a321256c36911eaeef98e3742f4baead2" prot="public">
+          <name>SpoolPub</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a8e3ec8e74532cd668a3f565b737d148f" prot="public">
+          <name>SubscribePlats</name>
+          <initializer>=9000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865abdeb20b27627b3c9604d0f2a568fb906" prot="public">
+          <name>MaxSub</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum to check against to when finding individual component managed by a <ref refid="class_loom_manager" kindref="compound">LoomManager</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Used because we cannot use dynamic_cast to check type of modules (rtti disabled by Arduino IDE) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="41" column="1" bodyfile="src/Module.h" bodystart="41" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="enum" id="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" static="no">
+        <name>Category</name>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068a88183b946cc5f0e8c96b2e66e1c74a7e" prot="public">
+          <name>Unknown</name>
+          <initializer>=0</initializer>
+          <briefdescription>
+<para>Unknown. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068a6311ae17c1ee52b36e68aaf4ad066387" prot="public">
+          <name>Other</name>
+          <initializer>=1</initializer>
+          <briefdescription>
+<para>Other. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068a06b185256c71c1aec263c6e22bf8ef6b" prot="public">
+          <name>Sensor</name>
+          <initializer>=2</initializer>
+          <briefdescription>
+<para>Sensors. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068afc65b1fe417628d7c6c7bd9ebfbc50c5" prot="public">
+          <name>L_RTC</name>
+          <initializer>=3</initializer>
+          <briefdescription>
+<para>RTC. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068aa2ec2ef7ebb614cf7dd5d78b9bbf59b3" prot="public">
+          <name>Actuator</name>
+          <initializer>=4</initializer>
+          <briefdescription>
+<para>Actuators. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068a4e472f8ae62a269048664d59be7081b5" prot="public">
+          <name>LogPlat</name>
+          <initializer>=5</initializer>
+          <briefdescription>
+<para>LogPlats. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068a621ea64935d8300364bc5a479c622a37" prot="public">
+          <name>CommPlat</name>
+          <initializer>=6</initializer>
+          <briefdescription>
+<para>CommPlats. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068a095cd7ef32631598b47bef1e6070c437" prot="public">
+          <name>InternetPlat</name>
+          <initializer>=7</initializer>
+          <briefdescription>
+<para>InternetPlats. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068a81d5311fa1f8170585d6f4baaa189bc9" prot="public">
+          <name>PublishPlat</name>
+          <initializer>=8</initializer>
+          <briefdescription>
+<para>PublishPlats. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_module_1a0c6ecc60315f95af551138dc83567068a6882013ad745e1f86f8ae9ff82746579" prot="public">
+          <name>SubscribePlat</name>
+          <initializer>=9</initializer>
+          <briefdescription>
+<para>SubscribePlats. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum to classify modules. </para>        </briefdescription>
+        <detaileddescription>
+<para>Similar <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref> but represents the astract classes rather than the leaf node modules in the inheritance tree. For a given module, its category often shares a name with the abstract class it is derived from </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="76" column="1" bodyfile="src/Module.h" bodystart="76" bodyend="87"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" static="no" mutable="no">
+        <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">Type</ref></type>
+        <definition>const Type LoomModule::module_type</definition>
+        <argsstring></argsstring>
+        <name>module_type</name>
+        <briefdescription>
+<para>Module type. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="91" column="1" bodyfile="src/Module.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+        <definition>LoomManager* LoomModule::device_manager</definition>
+        <argsstring></argsstring>
+        <name>device_manager</name>
+        <briefdescription>
+<para>Pointer to manager. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> provides to any modules passed to add_module </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="92" column="1" bodyfile="src/Module.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" static="no" mutable="no">
+        <type>const String</type>
+        <definition>const String LoomModule::module_name_base</definition>
+        <argsstring></argsstring>
+        <name>module_name_base</name>
+        <briefdescription>
+<para>The name of the module (Should have a DEFAULT but can be overriden if provided to constructor) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="94" column="1" bodyfile="src/Module.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* LoomModule::module_name</definition>
+        <argsstring></argsstring>
+        <name>module_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="95" column="1" bodyfile="src/Module.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool LoomModule::active</definition>
+        <argsstring></argsstring>
+        <name>active</name>
+        <briefdescription>
+<para>Whether or not the module should be treated as active. </para>        </briefdescription>
+        <detaileddescription>
+<para>If inactive at setup (due to failed initialization, module will be deleted) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="96" column="1" bodyfile="src/Module.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" static="no" mutable="no">
+        <type><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+        <definition>Verbosity LoomModule::print_verbosity</definition>
+        <argsstring></argsstring>
+        <name>print_verbosity</name>
+        <briefdescription>
+<para>Print verbosity. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="98" column="1" bodyfile="src/Module.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" static="no" mutable="no">
+        <type><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+        <definition>Verbosity LoomModule::package_verbosity</definition>
+        <argsstring></argsstring>
+        <name>package_verbosity</name>
+        <briefdescription>
+<para>Package verbosity. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module.h" line="99" column="1" bodyfile="src/Module.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract root of Loom component modules inheritance hierarchy. </para>    </briefdescription>
+    <detaileddescription>
+<para>All modules in Loom inherit from <ref refid="class_loom_module" kindref="compound">LoomModule</ref></para><para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_module.html">LoomModule Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1190">
+        <label>Loom_LTE</label>
+        <link refid="class_loom___l_t_e"/>
+        <childnode refid="1188" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1225">
+        <label>Loom_Decagon5TM</label>
+        <link refid="class_loom___decagon5_t_m"/>
+        <childnode refid="1224" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1191">
+        <label>Loom_WiFi</label>
+        <link refid="class_loom___wi_fi"/>
+        <childnode refid="1188" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1229">
+        <label>LoomSPISensor</label>
+        <link refid="class_loom_s_p_i_sensor"/>
+        <childnode refid="1203" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1210">
+        <label>Loom_AS7265X</label>
+        <link refid="class_loom___a_s7265_x"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1199">
+        <label>Loom_MaxPub</label>
+        <link refid="class_loom___max_pub"/>
+        <childnode refid="1197" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1174">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="1230">
+        <label>Loom_MAX31855</label>
+        <link refid="class_loom___m_a_x31855"/>
+        <childnode refid="1229" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1231">
+        <label>Loom_MAX31856</label>
+        <link refid="class_loom___m_a_x31856"/>
+        <childnode refid="1229" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1215">
+        <label>Loom_MMA8451</label>
+        <link refid="class_loom___m_m_a8451"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1213">
+        <label>Loom_LIS3DH</label>
+        <link refid="class_loom___l_i_s3_d_h"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1218">
+        <label>Loom_SHT31D</label>
+        <link refid="class_loom___s_h_t31_d"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1192">
+        <label>LoomLogPlat</label>
+        <link refid="class_loom_log_plat"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1207">
+        <label>Loom_ADS1115</label>
+        <link refid="class_loom___a_d_s1115"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1194">
+        <label>Loom_OLED</label>
+        <link refid="class_loom___o_l_e_d"/>
+        <childnode refid="1192" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1198">
+        <label>Loom_GoogleSheets</label>
+        <link refid="class_loom___google_sheets"/>
+        <childnode refid="1197" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1202">
+        <label>Loom_PCF8523</label>
+        <link refid="class_loom___p_c_f8523"/>
+        <childnode refid="1200" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1205">
+        <label>Loom_Digital</label>
+        <link refid="class_loom___digital"/>
+        <childnode refid="1203" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1175">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1176">
+        <label>Loom_Multiplexer</label>
+        <link refid="class_loom___multiplexer"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1186">
+        <label>Loom_LoRa</label>
+        <link refid="class_loom___lo_ra"/>
+        <childnode refid="1184" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1232">
+        <label>LoomSubscribePlat</label>
+        <link refid="class_loom_subscribe_plat"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1222">
+        <label>Loom_TSL2591</label>
+        <link refid="class_loom___t_s_l2591"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1212">
+        <label>Loom_FXOS8700</label>
+        <link refid="class_loom___f_x_o_s8700"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1234">
+        <label>LoomTempSync</label>
+        <link refid="class_loom_temp_sync"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1196">
+        <label>LoomNTPSync</label>
+        <link refid="class_loom_n_t_p_sync"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1221">
+        <label>Loom_TSL2561</label>
+        <link refid="class_loom___t_s_l2561"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1177">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1184">
+        <label>LoomCommPlat</label>
+        <link refid="class_loom_comm_plat"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1183">
+        <label>Loom_Stepper</label>
+        <link refid="class_loom___stepper"/>
+        <childnode refid="1179" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1226">
+        <label>Loom_DecagonGS3</label>
+        <link refid="class_loom___decagon_g_s3"/>
+        <childnode refid="1224" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1204">
+        <label>Loom_Analog</label>
+        <link refid="class_loom___analog"/>
+        <childnode refid="1203" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1187">
+        <label>Loom_nRF</label>
+        <link refid="class_loom__n_r_f"/>
+        <childnode refid="1184" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1179">
+        <label>LoomActuator</label>
+        <link refid="class_loom_actuator"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1223">
+        <label>Loom_ZXGesture</label>
+        <link refid="class_loom___z_x_gesture"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1211">
+        <label>Loom_FXAS21002</label>
+        <link refid="class_loom___f_x_a_s21002"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1228">
+        <label>Loom_K30</label>
+        <link refid="class_loom___k30"/>
+        <childnode refid="1227" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1219">
+        <label>Loom_STEMMA</label>
+        <link refid="class_loom___s_t_e_m_m_a"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1197">
+        <label>LoomPublishPlat</label>
+        <link refid="class_loom_publish_plat"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1224">
+        <label>LoomSDI12Sensor</label>
+        <link refid="class_loom_s_d_i12_sensor"/>
+        <childnode refid="1203" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1227">
+        <label>LoomSerialSensor</label>
+        <link refid="class_loom_serial_sensor"/>
+        <childnode refid="1203" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1216">
+        <label>Loom_MPU6050</label>
+        <link refid="class_loom___m_p_u6050"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1217">
+        <label>Loom_MS5803</label>
+        <link refid="class_loom___m_s5803"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1185">
+        <label>Loom_Bluetooth</label>
+        <link refid="class_loom___bluetooth"/>
+        <childnode refid="1184" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1188">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1181">
+        <label>Loom_Relay</label>
+        <link refid="class_loom___relay"/>
+        <childnode refid="1179" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1206">
+        <label>LoomI2CSensor</label>
+        <link refid="class_loom_i2_c_sensor"/>
+        <childnode refid="1203" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1193">
+        <label>Loom_BatchSD</label>
+        <link refid="class_loom___batch_s_d"/>
+        <childnode refid="1192" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1208">
+        <label>Loom_AS7262</label>
+        <link refid="class_loom___a_s7262"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1209">
+        <label>Loom_AS7263</label>
+        <link refid="class_loom___a_s7263"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1203">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1214">
+        <label>Loom_MB1232</label>
+        <link refid="class_loom___m_b1232"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1178">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1200">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1174" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1182">
+        <label>Loom_Servo</label>
+        <link refid="class_loom___servo"/>
+        <childnode refid="1179" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1233">
+        <label>Loom_MaxSub</label>
+        <link refid="class_loom___max_sub"/>
+        <childnode refid="1232" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1220">
+        <label>Loom_TMP007</label>
+        <link refid="class_loom___t_m_p007"/>
+        <childnode refid="1206" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1180">
+        <label>Loom_Neopixel</label>
+        <link refid="class_loom___neopixel"/>
+        <childnode refid="1179" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1201">
+        <label>Loom_DS3231</label>
+        <link refid="class_loom___d_s3231"/>
+        <childnode refid="1200" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1195">
+        <label>Loom_SD</label>
+        <link refid="class_loom___s_d"/>
+        <childnode refid="1192" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1189">
+        <label>Loom_Ethernet</label>
+        <link refid="class_loom___ethernet"/>
+        <childnode refid="1188" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1240">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1236">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1237" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1238" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1243" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1239" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1235">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1236" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1244">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1239">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1235" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1240" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1241" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1238" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1242" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1243" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1244" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1238">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1235" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1239" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1237">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1235" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1243">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1235" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1241">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1242">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Module.h" line="33" column="1" bodyfile="src/Module.h" bodystart="32" bodyend="245"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>LoomModule</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>LoomModule</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>LoomModule</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>LoomModule</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>LoomModule</scope><name>link_device_manager</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>LoomModule</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>LoomModule</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>LoomModule</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>LoomModule</scope><name>module_type</name></member>
+      <member refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53" prot="public" virt="pure-virtual"><scope>LoomModule</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>LoomModule</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>LoomModule</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>LoomModule</scope><name>power_up</name></member>
+      <member refid="class_loom_module_1a4385842da9226014283136b3e37dde88" prot="public" virt="virtual"><scope>LoomModule</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>LoomModule</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>LoomModule</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>LoomModule</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>LoomModule</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>LoomModule</scope><name>Type</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>LoomModule</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

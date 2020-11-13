@@ -1,0 +1,57 @@
+\hypertarget{_manager_8h}{}\section{src/\+Manager.h File Reference}
+\label{_manager_8h}\index{src/\+Manager.\+h@{src/\+Manager.\+h}}
+{\ttfamily \#include \char`\"{}Misc.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$Arduino\+Json.\+h$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+Include dependency graph for Manager.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{_manager_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_manager_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_loom_manager}{Loom\+Manager}
+\begin{DoxyCompactList}\small\item\em Manager to contain Loom modules and provide users with a simpler A\+PI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_manager_8h_a94df10e7efe7613d074c105099c7fd0e}{S\+E\+R\+I\+A\+L\+\_\+\+B\+A\+UD}~115200
+\begin{DoxyCompactList}\small\item\em Serial Baud Rate. \end{DoxyCompactList}\item 
+\#define \hyperlink{_manager_8h_a043830be9011f9891371fdbc4174b115}{M\+A\+X\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+W\+A\+IT}~20000
+\begin{DoxyCompactList}\small\item\em Maximum number of milliseconds to wait for user given \textquotesingle{}begin\+\_\+serial(true)\textquotesingle{}. \end{DoxyCompactList}\item 
+\#define \hyperlink{_manager_8h_a7e2d8ef8f0724f23ce84b1e7d0c171d9}{S\+D\+\_\+\+CS}~10
+\begin{DoxyCompactList}\small\item\em SD chip select used in parse\+\_\+config\+\_\+\+S\+D(). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Manager.\+h@{Manager.\+h}!M\+A\+X\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+W\+A\+IT@{M\+A\+X\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+W\+A\+IT}}
+\index{M\+A\+X\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+W\+A\+IT@{M\+A\+X\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+W\+A\+IT}!Manager.\+h@{Manager.\+h}}
+\subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+W\+A\+IT}{MAX_SERIAL_WAIT}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+W\+A\+IT~20000}\hypertarget{_manager_8h_a043830be9011f9891371fdbc4174b115}{}\label{_manager_8h_a043830be9011f9891371fdbc4174b115}
+
+
+Maximum number of milliseconds to wait for user given \textquotesingle{}begin\+\_\+serial(true)\textquotesingle{}. 
+
+\index{Manager.\+h@{Manager.\+h}!S\+D\+\_\+\+CS@{S\+D\+\_\+\+CS}}
+\index{S\+D\+\_\+\+CS@{S\+D\+\_\+\+CS}!Manager.\+h@{Manager.\+h}}
+\subsubsection[{\texorpdfstring{S\+D\+\_\+\+CS}{SD_CS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+D\+\_\+\+CS~10}\hypertarget{_manager_8h_a7e2d8ef8f0724f23ce84b1e7d0c171d9}{}\label{_manager_8h_a7e2d8ef8f0724f23ce84b1e7d0c171d9}
+
+
+SD chip select used in parse\+\_\+config\+\_\+\+S\+D(). 
+
+You can still instantiate a \hyperlink{class_loom___s_d}{Loom\+\_\+\+SD} module with a different chip select \index{Manager.\+h@{Manager.\+h}!S\+E\+R\+I\+A\+L\+\_\+\+B\+A\+UD@{S\+E\+R\+I\+A\+L\+\_\+\+B\+A\+UD}}
+\index{S\+E\+R\+I\+A\+L\+\_\+\+B\+A\+UD@{S\+E\+R\+I\+A\+L\+\_\+\+B\+A\+UD}!Manager.\+h@{Manager.\+h}}
+\subsubsection[{\texorpdfstring{S\+E\+R\+I\+A\+L\+\_\+\+B\+A\+UD}{SERIAL_BAUD}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+E\+R\+I\+A\+L\+\_\+\+B\+A\+UD~115200}\hypertarget{_manager_8h_a94df10e7efe7613d074c105099c7fd0e}{}\label{_manager_8h_a94df10e7efe7613d074c105099c7fd0e}
+
+
+Serial Baud Rate. 
+

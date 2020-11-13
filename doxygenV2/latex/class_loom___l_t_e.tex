@@ -1,0 +1,359 @@
+\hypertarget{class_loom___l_t_e}{}\section{Loom\+\_\+\+L\+TE Class Reference}
+\label{class_loom___l_t_e}\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+
+
+L\+TE Internet\+Plat.  
+
+
+
+
+{\ttfamily \#include $<$Internet\+L\+T\+E.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+L\+TE\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=179pt]{class_loom___l_t_e__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___l_t_e_a8d95da5f0fc6bb7362d9bf0b73bb48f4}{Loom\+\_\+\+L\+TE} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom___l_t_e_a186a401a887e8fe3d7fdea20ad460647}{A\+PN}=\char`\"{}\char`\"{}, const char $\ast$\hyperlink{class_loom___l_t_e_aea1ba6a0a9f7ed65081b769f53d683ad}{gprs\+User}=\char`\"{}\char`\"{}, const char $\ast$\hyperlink{class_loom___l_t_e_a30c8118155a3c520b09cc6f4cc3e5281}{gprs\+Pass}=\char`\"{}\char`\"{}, const int \hyperlink{class_loom___l_t_e_a2957c4ed2f16b6e5d5efcf26a54ab6f1}{power\+Pin}=A5)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___l_t_e_a1c1062a1f31998a98965d09eca65f10d}{Loom\+\_\+\+L\+TE} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom___l_t_e_aa087493e3ee9044aeef9fbe3e44946f8}{$\sim$\+Loom\+\_\+\+L\+TE} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___l_t_e_ac1a5109706d827b394f350181a8f3698}{connect} () override
+\begin{DoxyCompactList}\small\item\em Connect to internet. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___l_t_e_a14b4c6a3cefe05144d3d8a3bee587188}{disconnect} () override
+\begin{DoxyCompactList}\small\item\em Disconnect from internet. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___l_t_e_a38253137a5dbe6a069e75ca7aa9b872f}{is\+\_\+connected} () const override
+\begin{DoxyCompactList}\small\item\em Whether or not connected to internet. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_internet_plat_a0b2cc742a6ac5f4f7054b75ea99b345c}{U\+D\+P\+Ptr} \hyperlink{class_loom___l_t_e_a414b0ca17f97103620c7058fb0cb98d2}{open\+\_\+socket} (const uint port) override
+\begin{DoxyCompactList}\small\item\em Fails everytime, there is no U\+DP socket functionality in the Tiny\+G\+SM library. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___l_t_e_a4c2a46142110aa917b0f30bc75c7fec1}{power\+\_\+up} () override
+\begin{DoxyCompactList}\small\item\em Turn on any hardware. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___l_t_e_a553ab68611ebae383e590ffa3e15a243}{power\+\_\+down} () override
+\begin{DoxyCompactList}\small\item\em Turn off any hardware. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___l_t_e_ae55b43c23da41b673720f5f160804e10}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___l_t_e_a2ca3566bf14efebc81a94d650ebc5236}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+S\+S\+L\+Client \& \hyperlink{class_loom___l_t_e_a7f4179803a9db2ccfd306bf37bfdf64e}{get\+\_\+client} () override
+\begin{DoxyCompactList}\small\item\em Get the underlying S\+S\+L\+Client implementation, which we will use for all of the other requests. \end{DoxyCompactList}\item 
+const S\+S\+L\+Client \& \hyperlink{class_loom___l_t_e_a844e09e0ae9b0c6f181d974171dfc10c}{get\+\_\+client} () const override
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{class_loom___l_t_e_a186a401a887e8fe3d7fdea20ad460647}{A\+PN}
+\begin{DoxyCompactList}\small\item\em L\+TE Network name. \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{class_loom___l_t_e_aea1ba6a0a9f7ed65081b769f53d683ad}{gprs\+User}
+\begin{DoxyCompactList}\small\item\em G\+P\+RS username crendtial. \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{class_loom___l_t_e_a30c8118155a3c520b09cc6f4cc3e5281}{gprs\+Pass}
+\begin{DoxyCompactList}\small\item\em G\+P\+RS password credenital. \end{DoxyCompactList}\item 
+const int \hyperlink{class_loom___l_t_e_a2957c4ed2f16b6e5d5efcf26a54ab6f1}{power\+Pin}
+\begin{DoxyCompactList}\small\item\em Wired analog pin to power on L\+TE shield. \end{DoxyCompactList}\item 
+Tiny\+Gsm\+Client \hyperlink{class_loom___l_t_e_a4413f26e14ac858125124311856a3a04}{m\+\_\+base\+\_\+client}
+\begin{DoxyCompactList}\small\item\em S\+S\+L\+Client object for L\+TE. \end{DoxyCompactList}\item 
+S\+S\+L\+Client \hyperlink{class_loom___l_t_e_a58e7db415a377eae5363ad7e740b4dfb}{m\+\_\+client}
+\begin{DoxyCompactList}\small\item\em Underlying L\+TE S\+S\+L\+Client instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+L\+TE Internet\+Plat. 
+
+\begin{DoxyAttention}{Attention}
+Requires 7\+KB of free S\+R\+AM at runtime to use.
+\end{DoxyAttention}
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \mbox{[}Module Documentation\mbox{]}
+\item \href{https://www.adafruit.com/product/2995}{\tt Product Page\+: Adafruit Feather M0 Bluefruit LE}
+\item \href{https://github.com/vshymanskyy/TinyGSM}{\tt Dependency\+: Tiny\+G\+SM}
+\item \href{//https://github.com/arduino-libraries/ArduinoHttpClient}{\tt Dependency\+: Arduino\+Http\+Client}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#cellular}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+L\+T\+E(\+Loom\+Manager $\ast$manager, const char $\ast$\+A\+P\+N="""", const char $\ast$gprs\+User="""", const char $\ast$gprs\+Pass="""", const int power\+Pin=\+A5)}{Loom_LTE(LoomManager *manager, const char *APN="", const char *gprsUser="", const char *gprsPass="", const int powerPin=A5)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+L\+T\+E\+::\+Loom\+\_\+\+L\+TE (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{A\+PN = {\ttfamily \char`\"{}\char`\"{}}, }
+\item[{const char $\ast$}]{gprs\+User = {\ttfamily \char`\"{}\char`\"{}}, }
+\item[{const char $\ast$}]{gprs\+Pass = {\ttfamily \char`\"{}\char`\"{}}, }
+\item[{const int}]{power\+Pin = {\ttfamily A5}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___l_t_e_a8d95da5f0fc6bb7362d9bf0b73bb48f4}{}\label{class_loom___l_t_e_a8d95da5f0fc6bb7362d9bf0b73bb48f4}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em A\+PN} & L\+TE network name \\
+\hline
+\mbox{\tt in}  & {\em gprs\+User} & G\+P\+RS username. Leave as empty unless you have G\+P\+RS credentials \\
+\hline
+\mbox{\tt in}  & {\em gprs\+Pass} & G\+P\+RS password. Leave as empty unless you have G\+P\+RS credentials \\
+\hline
+\mbox{\tt in}  & {\em power\+Pin} & analog pin on the feather M0 that drives pin 5 on L\+TE shield to power on and off \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+L\+T\+E(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_LTE(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+L\+T\+E\+::\+Loom\+\_\+\+L\+TE (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___l_t_e_a1c1062a1f31998a98965d09eca65f10d}{}\label{class_loom___l_t_e_a1c1062a1f31998a98965d09eca65f10d}
+
+
+Constructor that takes Json Array, extracts args. 
+
+and delegates to regular constructor 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!````~Loom\+\_\+\+L\+TE@{$\sim$\+Loom\+\_\+\+L\+TE}}
+\index{````~Loom\+\_\+\+L\+TE@{$\sim$\+Loom\+\_\+\+L\+TE}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+L\+T\+E()=default}{~Loom_LTE()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+\_\+\+L\+T\+E\+::$\sim$\+Loom\+\_\+\+L\+TE (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom___l_t_e_aa087493e3ee9044aeef9fbe3e44946f8}{}\label{class_loom___l_t_e_aa087493e3ee9044aeef9fbe3e44946f8}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!connect@{connect}}
+\index{connect@{connect}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{connect() override}{connect() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+L\+T\+E\+::connect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_ac1a5109706d827b394f350181a8f3698}{}\label{class_loom___l_t_e_ac1a5109706d827b394f350181a8f3698}
+
+
+Connect to internet. 
+
+
+
+Implements \hyperlink{class_loom_internet_plat_a24d7c701a3db8e16355b6a33a4e323a6}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{disconnect() override}{disconnect() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+L\+T\+E\+::disconnect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_a14b4c6a3cefe05144d3d8a3bee587188}{}\label{class_loom___l_t_e_a14b4c6a3cefe05144d3d8a3bee587188}
+
+
+Disconnect from internet. 
+
+
+
+Reimplemented from \hyperlink{class_loom_internet_plat_a32af1196a982d84a18e53f8d97e358a1}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!get\+\_\+client@{get\+\_\+client}}
+\index{get\+\_\+client@{get\+\_\+client}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{get\+\_\+client() override}{get_client() override}}]{\setlength{\rightskip}{0pt plus 5cm}S\+S\+L\+Client\& Loom\+\_\+\+L\+T\+E\+::get\+\_\+client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_a7f4179803a9db2ccfd306bf37bfdf64e}{}\label{class_loom___l_t_e_a7f4179803a9db2ccfd306bf37bfdf64e}
+
+
+Get the underlying S\+S\+L\+Client implementation, which we will use for all of the other requests. 
+
+
+
+Implements \hyperlink{class_loom_internet_plat_a71bfc232cac5294b1c3e6dbb00029fa7}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!get\+\_\+client@{get\+\_\+client}}
+\index{get\+\_\+client@{get\+\_\+client}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{get\+\_\+client() const override}{get_client() const override}}]{\setlength{\rightskip}{0pt plus 5cm}const S\+S\+L\+Client\& Loom\+\_\+\+L\+T\+E\+::get\+\_\+client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_a844e09e0ae9b0c6f181d974171dfc10c}{}\label{class_loom___l_t_e_a844e09e0ae9b0c6f181d974171dfc10c}
+
+
+Implements \hyperlink{class_loom_internet_plat_a3b79a1467f5f239cd740d6ced88cdadf}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!is\+\_\+connected@{is\+\_\+connected}}
+\index{is\+\_\+connected@{is\+\_\+connected}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{is\+\_\+connected() const override}{is_connected() const override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+L\+T\+E\+::is\+\_\+connected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_a38253137a5dbe6a069e75ca7aa9b872f}{}\label{class_loom___l_t_e_a38253137a5dbe6a069e75ca7aa9b872f}
+
+
+Whether or not connected to internet. 
+
+\begin{DoxyReturn}{Returns}
+True if connected, false otherwise 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_internet_plat_af9c5c867598c9951db4d404a6a495ce7}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!open\+\_\+socket@{open\+\_\+socket}}
+\index{open\+\_\+socket@{open\+\_\+socket}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{open\+\_\+socket(const uint port) override}{open_socket(const uint port) override}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat\+::\+U\+D\+P\+Ptr} Loom\+\_\+\+L\+T\+E\+::open\+\_\+socket (
+\begin{DoxyParamCaption}
+\item[{const uint}]{port}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_a414b0ca17f97103620c7058fb0cb98d2}{}\label{class_loom___l_t_e_a414b0ca17f97103620c7058fb0cb98d2}
+
+
+Fails everytime, there is no U\+DP socket functionality in the Tiny\+G\+SM library. 
+
+\begin{DoxyReturn}{Returns}
+a U\+DP socket for transmitting and recieving 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_internet_plat_a91204905ec272ff1edc608a3aa250745}{Loom\+Internet\+Plat}.
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!power\+\_\+down@{power\+\_\+down}}
+\index{power\+\_\+down@{power\+\_\+down}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{power\+\_\+down() override}{power_down() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+L\+T\+E\+::power\+\_\+down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_a553ab68611ebae383e590ffa3e15a243}{}\label{class_loom___l_t_e_a553ab68611ebae383e590ffa3e15a243}
+
+
+Turn off any hardware. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a31ea02275e356c6ce0d01fdb6d4190df}{Loom\+Module}.
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!power\+\_\+up@{power\+\_\+up}}
+\index{power\+\_\+up@{power\+\_\+up}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{power\+\_\+up() override}{power_up() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+L\+T\+E\+::power\+\_\+up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_a4c2a46142110aa917b0f30bc75c7fec1}{}\label{class_loom___l_t_e_a4c2a46142110aa917b0f30bc75c7fec1}
+
+
+Turn on any hardware. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa0683cb24ce1cc49273440e79f035e23}{Loom\+Module}.
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+L\+T\+E\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_ae55b43c23da41b673720f5f160804e10}{}\label{class_loom___l_t_e_ae55b43c23da41b673720f5f160804e10}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+L\+T\+E\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___l_t_e_a2ca3566bf14efebc81a94d650ebc5236}{}\label{class_loom___l_t_e_a2ca3566bf14efebc81a94d650ebc5236}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!A\+PN@{A\+PN}}
+\index{A\+PN@{A\+PN}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{A\+PN}{APN}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Loom\+\_\+\+L\+T\+E\+::\+A\+PN\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___l_t_e_a186a401a887e8fe3d7fdea20ad460647}{}\label{class_loom___l_t_e_a186a401a887e8fe3d7fdea20ad460647}
+
+
+L\+TE Network name. 
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!gprs\+Pass@{gprs\+Pass}}
+\index{gprs\+Pass@{gprs\+Pass}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{gprs\+Pass}{gprsPass}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Loom\+\_\+\+L\+T\+E\+::gprs\+Pass\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___l_t_e_a30c8118155a3c520b09cc6f4cc3e5281}{}\label{class_loom___l_t_e_a30c8118155a3c520b09cc6f4cc3e5281}
+
+
+G\+P\+RS password credenital. 
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!gprs\+User@{gprs\+User}}
+\index{gprs\+User@{gprs\+User}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{gprs\+User}{gprsUser}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Loom\+\_\+\+L\+T\+E\+::gprs\+User\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___l_t_e_aea1ba6a0a9f7ed65081b769f53d683ad}{}\label{class_loom___l_t_e_aea1ba6a0a9f7ed65081b769f53d683ad}
+
+
+G\+P\+RS username crendtial. 
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!m\+\_\+base\+\_\+client@{m\+\_\+base\+\_\+client}}
+\index{m\+\_\+base\+\_\+client@{m\+\_\+base\+\_\+client}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{m\+\_\+base\+\_\+client}{m_base_client}}]{\setlength{\rightskip}{0pt plus 5cm}Tiny\+Gsm\+Client Loom\+\_\+\+L\+T\+E\+::m\+\_\+base\+\_\+client\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___l_t_e_a4413f26e14ac858125124311856a3a04}{}\label{class_loom___l_t_e_a4413f26e14ac858125124311856a3a04}
+
+
+S\+S\+L\+Client object for L\+TE. 
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!m\+\_\+client@{m\+\_\+client}}
+\index{m\+\_\+client@{m\+\_\+client}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{m\+\_\+client}{m_client}}]{\setlength{\rightskip}{0pt plus 5cm}S\+S\+L\+Client Loom\+\_\+\+L\+T\+E\+::m\+\_\+client\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___l_t_e_a58e7db415a377eae5363ad7e740b4dfb}{}\label{class_loom___l_t_e_a58e7db415a377eae5363ad7e740b4dfb}
+
+
+Underlying L\+TE S\+S\+L\+Client instance. 
+
+\index{Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}!power\+Pin@{power\+Pin}}
+\index{power\+Pin@{power\+Pin}!Loom\+\_\+\+L\+TE@{Loom\+\_\+\+L\+TE}}
+\subsubsection[{\texorpdfstring{power\+Pin}{powerPin}}]{\setlength{\rightskip}{0pt plus 5cm}const int Loom\+\_\+\+L\+T\+E\+::power\+Pin\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___l_t_e_a2957c4ed2f16b6e5d5efcf26a54ab6f1}{}\label{class_loom___l_t_e_a2957c4ed2f16b6e5d5efcf26a54ab6f1}
+
+
+Wired analog pin to power on L\+TE shield. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Internet\+Plats/\hyperlink{_internet_l_t_e_8h}{Internet\+L\+T\+E.\+h}\item 
+src/\+Internet\+Plats/\hyperlink{_internet_l_t_e_8cpp}{Internet\+L\+T\+E.\+cpp}\end{DoxyCompactItemize}

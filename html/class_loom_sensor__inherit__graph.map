@@ -1,0 +1,31 @@
+<map id="LoomSensor" name="LoomSensor">
+<area shape="rect" id="node3" href="$class_loom___analog.html" title="Analog pin manager module. " alt="" coords="324,385,433,412"/>
+<area shape="rect" id="node4" href="$class_loom___digital.html" title="Digital pin manager module. " alt="" coords="326,436,431,463"/>
+<area shape="rect" id="node5" href="$class_loom_i2_c_sensor.html" title="Abstract root for I2C sensor modules. " alt="" coords="317,487,440,513"/>
+<area shape="rect" id="node23" href="$class_loom_s_d_i12_sensor.html" title="Abstract base class for SDI12 sensor modules. " alt="" coords="308,867,449,893"/>
+<area shape="rect" id="node26" href="$class_loom_serial_sensor.html" title="Abstract root for Serial/UART sensor modules. " alt="" coords="309,943,448,969"/>
+<area shape="rect" id="node28" href="$class_loom_s_p_i_sensor.html" title="Abstract base class for SPI sensor modules. " alt="" coords="317,1019,440,1045"/>
+<area shape="rect" id="node2" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="5,689,109,716"/>
+<area shape="rect" id="node6" href="$class_loom___a_d_s1115.html" title="ADS1115 External ADC sensor module. " alt="" coords="509,5,635,32"/>
+<area shape="rect" id="node7" href="$class_loom___a_s7262.html" title="AS7262 Visible spectrum spectral sensor module. " alt="" coords="515,56,629,83"/>
+<area shape="rect" id="node8" href="$class_loom___a_s7263.html" title="AS7263 Near Infrared spectrum spectral sensor module. " alt="" coords="515,107,629,133"/>
+<area shape="rect" id="node9" href="$class_loom___a_s7265_x.html" title="AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module. " alt="" coords="511,157,633,184"/>
+<area shape="rect" id="node10" href="$class_loom___f_x_a_s21002.html" title="FXAS21002 3&#45;Axis Gyroscope sensor module. " alt="" coords="503,208,641,235"/>
+<area shape="rect" id="node11" href="$class_loom___f_x_o_s8700.html" title="FXOS8700 3&#45;Axis Acceleromter/Magnetometer sensor module. " alt="" coords="507,259,637,285"/>
+<area shape="rect" id="node12" href="$class_loom___l_i_s3_d_h.html" title="LIS3DH Accelerometer sensor module. " alt="" coords="516,309,628,336"/>
+<area shape="rect" id="node13" href="$class_loom___m_b1232.html" title="MB1232 Sonar sensor module. " alt="" coords="513,360,631,387"/>
+<area shape="rect" id="node14" href="$class_loom___m_m_a8451.html" title="MMA8451 accelerometer sensor module. " alt="" coords="508,411,636,437"/>
+<area shape="rect" id="node15" href="$class_loom___m_p_u6050.html" title="MPU6050 6 axis gyroscope and accelerometer sensor module. " alt="" coords="509,461,635,488"/>
+<area shape="rect" id="node16" href="$class_loom___m_s5803.html" title="MS5803 Atmospheric Pressure / Temperature sensor module. " alt="" coords="513,512,631,539"/>
+<area shape="rect" id="node17" href="$class_loom___s_h_t31_d.html" title="SHT31D Temperature / Humidty sensor module. " alt="" coords="513,563,631,589"/>
+<area shape="rect" id="node18" href="$class_loom___s_t_e_m_m_a.html" title="Adafruit Stemma soil moisture sensor. " alt="" coords="512,613,632,640"/>
+<area shape="rect" id="node19" href="$class_loom___t_m_p007.html" title="TMP007 thermopile temperature sensor module. " alt="" coords="515,664,629,691"/>
+<area shape="rect" id="node20" href="$class_loom___t_s_l2561.html" title="TSL2561 Luminosity sensor module. " alt="" coords="512,715,632,741"/>
+<area shape="rect" id="node21" href="$class_loom___t_s_l2591.html" title="TSL2591 Lux sensor module. " alt="" coords="512,765,632,792"/>
+<area shape="rect" id="node22" href="$class_loom___z_x_gesture.html" title="ZXGesture position / gesture sensor module. " alt="" coords="505,816,639,843"/>
+<area shape="rect" id="node24" href="$class_loom___decagon5_t_m.html" title="Decagon 5TM soil moisture sensor module. " alt="" coords="498,867,646,893"/>
+<area shape="rect" id="node25" href="$class_loom___decagon_g_s3.html" title="Decagon GS3 soil moisture sensor module. " alt="" coords="497,917,647,944"/>
+<area shape="rect" id="node27" href="$class_loom___k30.html" title="K30 CO2 sensor module. " alt="" coords="527,968,617,995"/>
+<area shape="rect" id="node29" href="$class_loom___m_a_x31855.html" title="MAX31855 thermocouple temperature module. " alt="" coords="505,1019,639,1045"/>
+<area shape="rect" id="node30" href="$class_loom___m_a_x31856.html" title="MAX31856 thermocouple module. " alt="" coords="505,1069,639,1096"/>
+</map>

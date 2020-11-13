@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_t_s_l2591_8cpp" kind="file" language="C++">
+    <compoundname>TSL2591.cpp</compoundname>
+    <includes refid="_t_s_l2591_8h" local="yes">TSL2591.h</includes>
+    <includes local="no">Adafruit_Sensor.h</includes>
+    <incdepgraph>
+      <node id="5459">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5456">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5457" relation="include">
+        </childnode>
+        <childnode refid="5459" relation="include">
+        </childnode>
+        <childnode refid="5460" relation="include">
+        </childnode>
+        <childnode refid="5461" relation="include">
+        </childnode>
+      </node>
+      <node id="5460">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5458" relation="include">
+        </childnode>
+        <childnode refid="5461" relation="include">
+        </childnode>
+      </node>
+      <node id="5463">
+        <label>Adafruit_TSL2591.h</label>
+      </node>
+      <node id="5457">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5458" relation="include">
+        </childnode>
+      </node>
+      <node id="5462">
+        <label>Wire.h</label>
+      </node>
+      <node id="5461">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5455">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5456" relation="include">
+        </childnode>
+      </node>
+      <node id="5464">
+        <label>Adafruit_Sensor.h</label>
+      </node>
+      <node id="5458">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5454">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5455" relation="include">
+        </childnode>
+        <childnode refid="5462" relation="include">
+        </childnode>
+      </node>
+      <node id="5452">
+        <label>src/Sensors/I2C/TSL2591.cpp</label>
+        <link refid="TSL2591.cpp"/>
+        <childnode refid="5453" relation="include">
+        </childnode>
+        <childnode refid="5464" relation="include">
+        </childnode>
+      </node>
+      <node id="5453">
+        <label>TSL2591.h</label>
+        <link refid="_t_s_l2591_8h"/>
+        <childnode refid="5454" relation="include">
+        </childnode>
+        <childnode refid="5463" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/TSL2591.cpp"/>
+  </compounddef>
+</doxygen>

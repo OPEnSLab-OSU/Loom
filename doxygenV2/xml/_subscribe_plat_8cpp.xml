@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_subscribe_plat_8cpp" kind="file" language="C++">
+    <compoundname>SubscribePlat.cpp</compoundname>
+    <includes refid="_subscribe_plat_8h" local="yes">SubscribePlat.h</includes>
+    <includes refid="_manager_8h" local="yes">Manager.h</includes>
+    <incdepgraph>
+      <node id="5883">
+        <label>../InternetPlats/InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="5877" relation="include">
+        </childnode>
+        <childnode refid="5884" relation="include">
+        </childnode>
+        <childnode refid="5885" relation="include">
+        </childnode>
+        <childnode refid="5886" relation="include">
+        </childnode>
+        <childnode refid="5887" relation="include">
+        </childnode>
+      </node>
+      <node id="5885">
+        <label>Udp.h</label>
+      </node>
+      <node id="5880">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5877">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5880" relation="include">
+        </childnode>
+        <childnode refid="5881" relation="include">
+        </childnode>
+        <childnode refid="5882" relation="include">
+        </childnode>
+      </node>
+      <node id="5884">
+        <label>Client.h</label>
+      </node>
+      <node id="5876">
+        <label>SubscribePlat.h</label>
+        <link refid="_subscribe_plat_8h"/>
+        <childnode refid="5877" relation="include">
+        </childnode>
+        <childnode refid="5883" relation="include">
+        </childnode>
+      </node>
+      <node id="5881">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5879" relation="include">
+        </childnode>
+        <childnode refid="5882" relation="include">
+        </childnode>
+      </node>
+      <node id="5878">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5879" relation="include">
+        </childnode>
+      </node>
+      <node id="5889">
+        <label>vector</label>
+      </node>
+      <node id="5882">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5879">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5875">
+        <label>src/SubscribePlats/SubscribePlat.cpp</label>
+        <link refid="SubscribePlat.cpp"/>
+        <childnode refid="5876" relation="include">
+        </childnode>
+        <childnode refid="5888" relation="include">
+        </childnode>
+      </node>
+      <node id="5886">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="5888">
+        <label>Manager.h</label>
+        <link refid="_manager_8h"/>
+        <childnode refid="5878" relation="include">
+        </childnode>
+        <childnode refid="5882" relation="include">
+        </childnode>
+        <childnode refid="5889" relation="include">
+        </childnode>
+      </node>
+      <node id="5887">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/SubscribePlats/SubscribePlat.cpp"/>
+  </compounddef>
+</doxygen>

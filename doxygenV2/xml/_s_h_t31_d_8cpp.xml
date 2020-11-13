@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_s_h_t31_d_8cpp" kind="file" language="C++">
+    <compoundname>SHT31D.cpp</compoundname>
+    <includes refid="_s_h_t31_d_8h" local="yes">SHT31D.h</includes>
+    <incdepgraph>
+      <node id="5342">
+        <label>Adafruit_SHT31.h</label>
+      </node>
+      <node id="5338">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5335">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5336" relation="include">
+        </childnode>
+        <childnode refid="5338" relation="include">
+        </childnode>
+        <childnode refid="5339" relation="include">
+        </childnode>
+        <childnode refid="5340" relation="include">
+        </childnode>
+      </node>
+      <node id="5339">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5337" relation="include">
+        </childnode>
+        <childnode refid="5340" relation="include">
+        </childnode>
+      </node>
+      <node id="5336">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5337" relation="include">
+        </childnode>
+      </node>
+      <node id="5341">
+        <label>Wire.h</label>
+      </node>
+      <node id="5340">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5334">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5335" relation="include">
+        </childnode>
+      </node>
+      <node id="5337">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5331">
+        <label>src/Sensors/I2C/SHT31D.cpp</label>
+        <link refid="SHT31D.cpp"/>
+        <childnode refid="5332" relation="include">
+        </childnode>
+      </node>
+      <node id="5333">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5334" relation="include">
+        </childnode>
+        <childnode refid="5341" relation="include">
+        </childnode>
+      </node>
+      <node id="5332">
+        <label>SHT31D.h</label>
+        <link refid="_s_h_t31_d_8h"/>
+        <childnode refid="5333" relation="include">
+        </childnode>
+        <childnode refid="5342" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/SHT31D.cpp"/>
+  </compounddef>
+</doxygen>

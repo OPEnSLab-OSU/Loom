@@ -1,0 +1,99 @@
+\hypertarget{_interrupt___manager_8h}{}\section{src/\+Interrupt\+\_\+\+Manager.h File Reference}
+\label{_interrupt___manager_8h}\index{src/\+Interrupt\+\_\+\+Manager.\+h@{src/\+Interrupt\+\_\+\+Manager.\+h}}
+{\ttfamily \#include \char`\"{}Module.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$O\+P\+En\+S\+\_\+\+R\+T\+C.\+h$>$}\\*
+{\ttfamily \#include $<$Async\+Delay.\+h$>$}\\*
+{\ttfamily \#include $<$R\+T\+C\+Counter.\+h$>$}\\*
+Include dependency graph for Interrupt\+\_\+\+Manager.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_interrupt___manager_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_interrupt___manager_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_loom___interrupt___manager}{Loom\+\_\+\+Interrupt\+\_\+\+Manager}
+\begin{DoxyCompactList}\small\item\em Submanager for managing interrupts, timers, and stopwatches. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_interrupt___manager_8h_a3fbf8a43703481c17414cec74c056c5a}{Interupt\+Range}~16
+\begin{DoxyCompactList}\small\item\em Number of interrupts. \end{DoxyCompactList}\item 
+\#define \hyperlink{_interrupt___manager_8h_a36969e07126fb846ed24bde87f6d8f73}{Max\+Timer\+Count}~2
+\begin{DoxyCompactList}\small\item\em Maximum number of timers. \end{DoxyCompactList}\item 
+\#define \hyperlink{_interrupt___manager_8h_a35dff5f1ee3055a319a9a773535b0ecf}{Max\+Stop\+Watch\+Count}~2
+\begin{DoxyCompactList}\small\item\em Maximum numbr of stopwatches. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{_interrupt___manager_8h_a21adc8a9b6cc2505b5b1317ca9f74cf3}{I\+S\+R\+Func\+Ptr}) = void($\ast$)(
+\begin{DoxyCompactList}\small\item\em Used to make function signatures easier to read when returning function pointers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1}{I\+S\+R\+\_\+\+Type} \{ \hyperlink{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1ae35884a2445bc4ae2df52f188763273c}{I\+S\+R\+\_\+\+Type\+::\+I\+M\+M\+E\+D\+I\+A\+TE}, 
+\hyperlink{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1aaf9e8c287542e149c8da0a6ee775d6fd}{I\+S\+R\+\_\+\+Type\+::\+C\+H\+E\+C\+K\+\_\+\+F\+L\+AG}
+ \}\begin{DoxyCompactList}\small\item\em Enum of different I\+SR run behavior. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}!Interupt\+Range@{Interupt\+Range}}
+\index{Interupt\+Range@{Interupt\+Range}!Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}}
+\subsubsection[{\texorpdfstring{Interupt\+Range}{InteruptRange}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Interupt\+Range~16}\hypertarget{_interrupt___manager_8h_a3fbf8a43703481c17414cec74c056c5a}{}\label{_interrupt___manager_8h_a3fbf8a43703481c17414cec74c056c5a}
+
+
+Number of interrupts. 
+
+\index{Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}!Max\+Stop\+Watch\+Count@{Max\+Stop\+Watch\+Count}}
+\index{Max\+Stop\+Watch\+Count@{Max\+Stop\+Watch\+Count}!Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}}
+\subsubsection[{\texorpdfstring{Max\+Stop\+Watch\+Count}{MaxStopWatchCount}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Max\+Stop\+Watch\+Count~2}\hypertarget{_interrupt___manager_8h_a35dff5f1ee3055a319a9a773535b0ecf}{}\label{_interrupt___manager_8h_a35dff5f1ee3055a319a9a773535b0ecf}
+
+
+Maximum numbr of stopwatches. 
+
+\index{Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}!Max\+Timer\+Count@{Max\+Timer\+Count}}
+\index{Max\+Timer\+Count@{Max\+Timer\+Count}!Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}}
+\subsubsection[{\texorpdfstring{Max\+Timer\+Count}{MaxTimerCount}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Max\+Timer\+Count~2}\hypertarget{_interrupt___manager_8h_a36969e07126fb846ed24bde87f6d8f73}{}\label{_interrupt___manager_8h_a36969e07126fb846ed24bde87f6d8f73}
+
+
+Maximum number of timers. 
+
+
+
+\subsection{Typedef Documentation}
+\index{Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}!I\+S\+R\+Func\+Ptr@{I\+S\+R\+Func\+Ptr}}
+\index{I\+S\+R\+Func\+Ptr@{I\+S\+R\+Func\+Ptr}!Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}}
+\subsubsection[{\texorpdfstring{I\+S\+R\+Func\+Ptr}{ISRFuncPtr}}]{\setlength{\rightskip}{0pt plus 5cm}using I\+S\+R\+Func\+Ptr =  void ($\ast$)(}\hypertarget{_interrupt___manager_8h_a21adc8a9b6cc2505b5b1317ca9f74cf3}{}\label{_interrupt___manager_8h_a21adc8a9b6cc2505b5b1317ca9f74cf3}
+
+
+Used to make function signatures easier to read when returning function pointers. 
+
+
+
+\subsection{Enumeration Type Documentation}
+\index{Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}!I\+S\+R\+\_\+\+Type@{I\+S\+R\+\_\+\+Type}}
+\index{I\+S\+R\+\_\+\+Type@{I\+S\+R\+\_\+\+Type}!Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}}
+\subsubsection[{\texorpdfstring{I\+S\+R\+\_\+\+Type}{ISR_Type}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf I\+S\+R\+\_\+\+Type}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1}{}\label{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1}
+
+
+Enum of different I\+SR run behavior. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I\+M\+M\+E\+D\+I\+A\+TE@{I\+M\+M\+E\+D\+I\+A\+TE}!Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}}\index{Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}!I\+M\+M\+E\+D\+I\+A\+TE@{I\+M\+M\+E\+D\+I\+A\+TE}}\item[{\em 
+I\+M\+M\+E\+D\+I\+A\+TE\hypertarget{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1ae35884a2445bc4ae2df52f188763273c}{}\label{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1ae35884a2445bc4ae2df52f188763273c}
+}]Run I\+SR immediately. \index{C\+H\+E\+C\+K\+\_\+\+F\+L\+AG@{C\+H\+E\+C\+K\+\_\+\+F\+L\+AG}!Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}}\index{Interrupt\+\_\+\+Manager.\+h@{Interrupt\+\_\+\+Manager.\+h}!C\+H\+E\+C\+K\+\_\+\+F\+L\+AG@{C\+H\+E\+C\+K\+\_\+\+F\+L\+AG}}\item[{\em 
+C\+H\+E\+C\+K\+\_\+\+F\+L\+AG\hypertarget{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1aaf9e8c287542e149c8da0a6ee775d6fd}{}\label{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1aaf9e8c287542e149c8da0a6ee775d6fd}
+}]Run I\+SR when run\+\_\+pending\+\_\+\+I\+S\+Rs() is called. \end{description}
+\end{Desc}

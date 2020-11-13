@@ -1,0 +1,1535 @@
+\hypertarget{class_loom_manager}{}\section{Loom\+Manager Class Reference}
+\label{class_loom_manager}\index{Loom\+Manager@{Loom\+Manager}}
+
+
+Manager to contain Loom modules and provide users with a simpler A\+PI.  
+
+
+
+
+{\ttfamily \#include $<$Manager.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_loom_manager_a23170d165993ad196a7604fd08b29400}{Device\+Type} \{ \hyperlink{class_loom_manager_a23170d165993ad196a7604fd08b29400a3cc0a3bb62454e5f6414c7adb897b5ff}{Device\+Type\+::\+H\+UB}, 
+\hyperlink{class_loom_manager_a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495}{Device\+Type\+::\+N\+O\+DE}, 
+\hyperlink{class_loom_manager_a23170d165993ad196a7604fd08b29400ad31b9025a6321e1dddf76266123d7e99}{Device\+Type\+::\+R\+E\+P\+E\+A\+T\+ER}
+ \}\begin{DoxyCompactList}\small\item\em Different general types of devices. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_manager_a084222072528d9fe59480b0c9e2f5757}{Loom\+Manager} (const \hyperlink{class_factory_base}{Factory\+Base} $\ast$factory\+\_\+ptr, const char $\ast$\hyperlink{class_loom_manager_aac06e8c17477ab5d8991e782f9ffecca}{device\+\_\+name}=\char`\"{}Device\char`\"{}, const uint8\+\_\+t \hyperlink{class_loom_manager_af2ce718d7f1d10bdd48344acabf47488}{instance}=1, const \hyperlink{class_loom_manager_a23170d165993ad196a7604fd08b29400}{Device\+Type} \hyperlink{class_loom_manager_af280305895cc3b2c5022d4a5fabeb2c4}{device\+\_\+type}=\hyperlink{class_loom_manager_a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495}{Device\+Type\+::\+N\+O\+DE}, const \hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_manager_a00b6fc4d662e25ea1b88a427909b8a94}{print\+\_\+verbosity}=\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313a4cec341dae86f2acc17c82c156c82d13}{Verbosity\+::\+V\+\_\+\+H\+I\+GH}, const \hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_manager_a7e57c09ed534c554f96c457127294f20}{package\+\_\+verbosity}=\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313afb734c04a9e5804353ceb79f5d37a169}{Verbosity\+::\+V\+\_\+\+L\+OW}, const uint16\+\_\+t \hyperlink{class_loom_manager_af5742e2169b750d8b4221778e5c9f629}{interval}=1000)
+\begin{DoxyCompactList}\small\item\em Loom Manager constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_manager_a4dabf340ea6475e6f0ad395e25a56a47}{$\sim$\+Loom\+Manager} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_manager_a315be7f7fe42feb0710b85cc8c023291}{begin\+\_\+\+L\+ED} () const 
+\begin{DoxyCompactList}\small\item\em Begin L\+ED. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_a15a76615e56881a51a78005ad903db24}{begin\+\_\+serial} (const bool wait\+\_\+for\+\_\+monitor=false) const 
+\begin{DoxyCompactList}\small\item\em Begin Serial, optionally wait for user. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_manager_ab06b9f5b623b01cc0966eb84da173238}{parse\+\_\+config} (const char $\ast$json\+\_\+config)
+\begin{DoxyCompactList}\small\item\em Parse a J\+S\+ON configuration string specifying enabled modules. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_manager_adbcbf45453af8fd47dc6c536447540be}{parse\+\_\+config\+\_\+\+SD} (const char $\ast$config\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Parse a J\+S\+ON configuration on SD card specifying enabled modules. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_manager_a22d5a375034b484461a9488889cc348a}{parse\+\_\+config\+\_\+serial} ()
+\item 
+bool \hyperlink{class_loom_manager_a03b417d8a2d39954723dd33ce4856b07}{check\+\_\+serial\+\_\+for\+\_\+config} ()
+\item 
+bool \hyperlink{class_loom_manager_a445ca7e4c6f7db0d7dc7c5f4fa8ffea0}{parse\+\_\+config\+\_\+json} (Json\+Object config)
+\begin{DoxyCompactList}\small\item\em Parse a J\+S\+ON configuration object specifying enabled modules. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_af9666106e7f25c4735b22c70dfaab33f}{get\+\_\+config} ()
+\begin{DoxyCompactList}\small\item\em Get complete configuration of the device. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_a3202f184c7d76abff38a353347c3f457}{measure} ()
+\begin{DoxyCompactList}\small\item\em Measure data of all managed sensors. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_ad09d72a0950ee5df48371e4d49a56e68}{package} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Package data of all modules into provide Json\+Object. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_af62aaa2aea11411f65b3fe1ed2c4c3d7}{record} ()
+\begin{DoxyCompactList}\small\item\em Measure and package data. \end{DoxyCompactList}\item 
+Json\+Object \hyperlink{class_loom_manager_a34666ea29808834e120ef169f389387b}{package} ()
+\begin{DoxyCompactList}\small\item\em Package data of all modules into Json\+Object and return. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_manager_a85bcc5929215f48af9dffed13bd78862}{publish\+\_\+all} (const Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Publish. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_manager_a5cea46f54dd9f891108bc0adf2c2d437}{publish\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Publish. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_manager_a349a86e686c0b71d8613f1e5a58ea2e3}{log\+\_\+all} (const Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Log. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_manager_af59e23602c123c36d4a855e6af6b4d75}{log\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Log. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_affe6f936dd6c9f7f8b489b03786ac83d}{dispatch} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Iterate over list of commands, forwarding to handling module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_a80fb13974b3bde9b0cedcd43732d7226}{dispatch} ()
+\begin{DoxyCompactList}\small\item\em Iterate over list of commands, forwarding to handling module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_a3e57c97dd28717002cf11a1cff794239}{pause} (const uint16\+\_\+t ms) const 
+\begin{DoxyCompactList}\small\item\em Delay milliseconds. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_a8d3dba74d36bf91a7356f08f0012268e}{pause} () const 
+\begin{DoxyCompactList}\small\item\em Delay milliseconds based on interval member. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_abfb3562addd9910ef7957508d5552ea0}{power\+\_\+up} ()
+\begin{DoxyCompactList}\small\item\em Iterate over modules, calling power up method. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_a1c7c446561067b986afc77ed1b4454c9}{power\+\_\+down} ()
+\begin{DoxyCompactList}\small\item\em Iterate over modules, calling power down method. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \hyperlink{class_loom_manager_a4bfaf3aaf89df1f7c9cd8c2142c0cdfd}{add\+\_\+data} (const char $\ast$module, const char $\ast$key, const T val)
+\begin{DoxyCompactList}\small\item\em Append to a Json object of data. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T \hyperlink{class_loom_manager_ace28cae7092408bc96bf66299e4c2f9a}{get\+\_\+data\+\_\+as} (const char $\ast$module, const char $\ast$key)
+\begin{DoxyCompactList}\small\item\em Get a data value from Json object of data. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_manager_a2c8c03e61c5ea0e2d1d86c48179accff}{has\+\_\+module} (const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} type) const 
+\begin{DoxyCompactList}\small\item\em Save current configuration to SD. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_manager_a3dcf9e19b7d583aca8a01cfe9f6ba897}{print\+\_\+config} (const bool print\+\_\+modules\+\_\+config=false)
+\begin{DoxyCompactList}\small\item\em Print the devices current configuration. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_a0c849e257dfa2a1796daea93d0da6f58}{list\+\_\+modules} () const 
+\begin{DoxyCompactList}\small\item\em Print the linked modules. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_a70e8fbf86b96fd3246c2d4422d91139d}{display\+\_\+data} () const 
+\begin{DoxyCompactList}\small\item\em Print out the internal J\+S\+ON object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf A\+DD M\+O\+D\+U\+LE TO M\+A\+N\+A\+G\+ER}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_manager_a4761f8b6d15ed18542d1039e207cd975}{add\+\_\+module} (\hyperlink{class_loom_module}{Loom\+Module} $\ast$module)
+\begin{DoxyCompactList}\small\item\em Add a module to be managed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_manager_a23170d165993ad196a7604fd08b29400}{Device\+Type} \hyperlink{class_loom_manager_a19942faf44a0835356c5d3f04ee77a66}{get\+\_\+device\+\_\+type} () const 
+\begin{DoxyCompactList}\small\item\em Get device type. \end{DoxyCompactList}\item 
+Json\+Object \hyperlink{class_loom_manager_a853b89aea16917b3e7baef7173ef741e}{internal\+\_\+json} (const bool clear=false)
+\begin{DoxyCompactList}\small\item\em Return reference to internal json object. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_a93329cf2288e9467ca5da87059657a21}{get\+\_\+device\+\_\+name} (char $\ast$buf) const 
+\begin{DoxyCompactList}\small\item\em Get the device name, copies into provided buffer. \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{class_loom_manager_a7642ccf7c0faca1e549f0ec2d4d72400}{get\+\_\+device\+\_\+name} () const 
+\begin{DoxyCompactList}\small\item\em Get the device name. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom_manager_af71c96f2e245deb12e8b25eb2e11e4db}{get\+\_\+instance\+\_\+num} () const 
+\begin{DoxyCompactList}\small\item\em Get device instance number. \end{DoxyCompactList}\item 
+\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_manager_aa97a8e46a133c0d32a3dd8c33d5c9b25}{get\+\_\+print\+\_\+verbosity} () const 
+\begin{DoxyCompactList}\small\item\em Get print verbosity. \end{DoxyCompactList}\item 
+\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_manager_afaaaf2cec1d6d372b0b6a71720944690}{get\+\_\+package\+\_\+verbosity} () const 
+\begin{DoxyCompactList}\small\item\em Get package verbosity. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom_manager_a7d282d59fd742664e6bbe33f64241ed3}{get\+\_\+interval} () const 
+\begin{DoxyCompactList}\small\item\em Get sampling interval. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_manager_ab19b6f8d14ddbaf8cdada7e7d4d4a983}{set\+\_\+device\+\_\+name} (const char $\ast$\hyperlink{class_loom_manager_aac06e8c17477ab5d8991e782f9ffecca}{device\+\_\+name})
+\begin{DoxyCompactList}\small\item\em Set the device name. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_ac8bd2ad89162850e9f7615856ba7cd48}{set\+\_\+instance\+\_\+num} (const uint8\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Set device instance number. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_aa537a373b1aab6150915c1e27a691d7a}{set\+\_\+print\+\_\+verbosity} (const \hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} v, const bool set\+\_\+modules=false)
+\begin{DoxyCompactList}\small\item\em Set print verbosity. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_aa9a1e310be9f6c806ac42421648724df}{set\+\_\+package\+\_\+verbosity} (const \hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} v, const bool set\+\_\+modules=false)
+\begin{DoxyCompactList}\small\item\em Set package verbosity. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_aba4da59a1f3bf7422be299e6170b2d1c}{set\+\_\+interval} (const uint16\+\_\+t ms)
+\begin{DoxyCompactList}\small\item\em Set default time to use for .\hyperlink{class_loom_manager_a3e57c97dd28717002cf11a1cff794239}{pause()} \textbackslash{} .delay(). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{class_loom_manager_aac06e8c17477ab5d8991e782f9ffecca}{device\+\_\+name} \mbox{[}20\mbox{]}
+\begin{DoxyCompactList}\small\item\em The name of the device. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom_manager_af2ce718d7f1d10bdd48344acabf47488}{instance}
+\begin{DoxyCompactList}\small\item\em The instance / channel ID within the subnet. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom_manager_af5742e2169b750d8b4221778e5c9f629}{interval}
+\begin{DoxyCompactList}\small\item\em Default value for \hyperlink{class_loom_manager_a3e57c97dd28717002cf11a1cff794239}{pause()} Used so that manager can control interval, rather than code in .ino. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_manager_a23170d165993ad196a7604fd08b29400}{Device\+Type} \hyperlink{class_loom_manager_af280305895cc3b2c5022d4a5fabeb2c4}{device\+\_\+type}
+\begin{DoxyCompactList}\small\item\em Device type (Hub / Node) \end{DoxyCompactList}\item 
+\hyperlink{class_loom___warm_up___manager}{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager} $\ast$ \hyperlink{class_loom_manager_aa5ef4bac083e23282de91ad886ee5c7d}{warmup\+\_\+manager} = nullptr
+\item 
+\hyperlink{class_loom___interrupt___manager}{Loom\+\_\+\+Interrupt\+\_\+\+Manager} $\ast$ \hyperlink{class_loom_manager_a9e706e9a8e7acdd2a92ef77121921a0c}{interrupt\+\_\+manager} = nullptr
+\item 
+\hyperlink{class_loom___sleep___manager}{Loom\+\_\+\+Sleep\+\_\+\+Manager} $\ast$ \hyperlink{class_loom_manager_a2c63f985019cf7ee5766ab503cd7f562}{sleep\+\_\+manager} = nullptr
+\item 
+\hyperlink{class_loom_r_t_c}{Loom\+R\+TC} $\ast$ \hyperlink{class_loom_manager_a5ff1841a189242d33d2f0ff313e8a74a}{rtc\+\_\+module} = nullptr
+\item 
+std\+::vector$<$ \hyperlink{class_loom_module}{Loom\+Module} $\ast$ $>$ \hyperlink{class_loom_manager_a2880117fb788e2210560e87ed655cb8e}{modules}
+\begin{DoxyCompactList}\small\item\em Vectors of \hyperlink{class_loom_module}{Loom\+Module} pointers. \end{DoxyCompactList}\item 
+\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_manager_a00b6fc4d662e25ea1b88a427909b8a94}{print\+\_\+verbosity}
+\begin{DoxyCompactList}\small\item\em Print detail verbosity. \end{DoxyCompactList}\item 
+\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_manager_a7e57c09ed534c554f96c457127294f20}{package\+\_\+verbosity}
+\begin{DoxyCompactList}\small\item\em Package detail verbosity. \end{DoxyCompactList}\item 
+Static\+Json\+Document$<$ 2000 $>$ \hyperlink{class_loom_manager_ac1b761a5c37d853db374c13a1cb3226c}{doc}
+\begin{DoxyCompactList}\small\item\em Json data. \end{DoxyCompactList}\item 
+uint \hyperlink{class_loom_manager_a7537185cd89f2b472d338268fa2418c9}{packet\+\_\+number} = 1
+\begin{DoxyCompactList}\small\item\em Packet number, incremented each time package is called. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{M\+I\+S\+C\+E\+L\+L\+A\+N\+E\+O\+US}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_manager_afbe16976632be98771f6a5ede92ff3fe}{flash\+\_\+\+L\+ED} (const uint8\+\_\+t count, const uint8\+\_\+t time\+\_\+high, const uint8\+\_\+t time\+\_\+low, const bool end\+\_\+high=false) const 
+\begin{DoxyCompactList}\small\item\em Flash the built in L\+ED. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_manager_afcae7948a5a29d179842bcd00de271a0}{flash\+\_\+\+L\+ED} (const uint8\+\_\+t sequence\mbox{[}3\mbox{]}) const 
+\item 
+static const char $\ast$ \hyperlink{class_loom_manager_a2592362f66b24ced03f82e35643d1f12}{enum\+\_\+device\+\_\+type\+\_\+string} (const \hyperlink{class_loom_manager_a23170d165993ad196a7604fd08b29400}{Device\+Type} t)
+\begin{DoxyCompactList}\small\item\em Get c-\/string of name associated with device type enum. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{M\+O\+D\+U\+LE A\+C\+C\+E\+SS}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_loom_manager_a008d5139e80cc67e9facc1611e7e30be}{Loom\+\_\+\+Interrupt\+\_\+\+Manager}
+\item 
+class \hyperlink{class_loom_manager_a9d93d402309f8410307da6ff54acd40d}{Loom\+\_\+\+Sleep\+\_\+\+Manager}
+\item 
+class \hyperlink{class_loom_manager_ad460f63d437defbca6d2c4cf1b03f084}{Loom\+R\+TC}
+\item 
+class \hyperlink{class_loom_manager_a16fed8610f64b07f59a179e88627f381}{Loom\+\_\+\+SD}
+\item 
+class \hyperlink{class_loom_manager_a6e9a09b43cf35fd3138c6787b589f320}{Loom\+\_\+\+Batch\+SD}
+\item 
+class \hyperlink{class_loom_manager_ac23a5e689f21bc3c5dc04a499b9a905b}{Loom\+N\+T\+P\+Sync}
+\item 
+\hyperlink{class_loom_module}{Loom\+Module} $\ast$ \hyperlink{class_loom_manager_a139e842dcaa5ab84587bdb5bc75fd103}{find\+\_\+module} (const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} type, const uint8\+\_\+t idx=0) const 
+\begin{DoxyCompactList}\small\item\em Auxiliary function to search a list of modules for a module of specified type. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_module}{Loom\+Module} $\ast$ \hyperlink{class_loom_manager_af8b532b1efb4ba887ceb09edea2d65a9}{find\+\_\+module\+\_\+by\+\_\+category} (const \hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068}{Loom\+Module\+::\+Category} category, const uint8\+\_\+t idx) const 
+\begin{DoxyCompactList}\small\item\em Auxiliary function to search a list of modules for a module of specified category. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___warm_up___manager}{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager} \& \hyperlink{class_loom_manager_afb0cc398b36594b1389aaceb0873c9e9}{Warm\+Up\+Manager} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___sleep___manager}{Loom\+\_\+\+Sleep\+\_\+\+Manager} \& \hyperlink{class_loom_manager_aa18ec752187b173a50ff1ac4548100a5}{Sleep\+Manager} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___interrupt___manager}{Loom\+\_\+\+Interrupt\+\_\+\+Manager} \& \hyperlink{class_loom_manager_a3f1035d71a04b36efd65f1cbe7d08b78}{Interrupt\+Manager} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___multiplexer}{Loom\+\_\+\+Multiplexer} \& \hyperlink{class_loom_manager_af6d071b9bc9e0654b6f5763db83233b0}{Multiplexer} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom_n_t_p_sync}{Loom\+N\+T\+P\+Sync} \& \hyperlink{class_loom_manager_a51070b9737159a7880072997297959c3}{N\+TP} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom_temp_sync}{Loom\+Temp\+Sync} \& \hyperlink{class_loom_manager_ad80f6ceba81939515ab09f92434bb13e}{Temp\+Sync} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___lo_ra}{Loom\+\_\+\+Lo\+Ra} \& \hyperlink{class_loom_manager_a28246e651c56b8c8cc0f5175f098930f}{Lo\+Ra} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom__n_r_f}{Loom\+\_\+n\+RF} \& \hyperlink{class_loom_manager_a00d23f62214984206a17c4b643f9e4f6}{n\+RF} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___bluetooth}{Loom\+\_\+\+Bluetooth} \& \hyperlink{class_loom_manager_a2186c9c3f21fd48dafda59351c65b9bc}{Bluetooth} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___o_l_e_d}{Loom\+\_\+\+O\+L\+ED} \& \hyperlink{class_loom_manager_a7d3b807d669ad51f35aafc5115c6583a}{O\+L\+ED} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___s_d}{Loom\+\_\+\+SD} \& \hyperlink{class_loom_manager_abbbbfdf6def923bc70d7e5e7d806fe67}{S\+D\+C\+A\+RD} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___batch_s_d}{Loom\+\_\+\+Batch\+SD} \& \hyperlink{class_loom_manager_a9fad8dc02b66ec73bb0247b89edf98c4}{B\+A\+T\+C\+H\+SD} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom_internet_plat}{Loom\+Internet\+Plat} \& \hyperlink{class_loom_manager_ac7f70773b0c757611897f8865f6435ec}{Internet\+Plat} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___ethernet}{Loom\+\_\+\+Ethernet} \& \hyperlink{class_loom_manager_a9727086e76045344ab9f10542cf7ab35}{Ethernet} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___wi_fi}{Loom\+\_\+\+Wi\+Fi} \& \hyperlink{class_loom_manager_a52b36254942ce3e0f91212416258963d}{Wi\+Fi} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___l_t_e}{Loom\+\_\+\+L\+TE} \& \hyperlink{class_loom_manager_a0b5e54f112f357169523e993bc49a547}{L\+TE} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom_publish_plat}{Loom\+Publish\+Plat} \& \hyperlink{class_loom_manager_a302fccc089e8d608548bc58abd8dccca}{Publish\+Plat} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___google_sheets}{Loom\+\_\+\+Google\+Sheets} \& \hyperlink{class_loom_manager_ad21d7fa120541af2e2f20c7e4b59d8c7}{Google\+Sheets} (const uint8\+\_\+t idx=0)
+\item 
+Loom\+\_\+\+Spool\+Publish \& \hyperlink{class_loom_manager_a4ca73cdf90feff2138e037a19e22f9de}{Spool} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___max_pub}{Loom\+\_\+\+Max\+Pub} \& \hyperlink{class_loom_manager_ab2fb9b98506e41d72a1f39b182d7b87b}{Max\+Pub} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___max_sub}{Loom\+\_\+\+Max\+Sub} \& \hyperlink{class_loom_manager_a2a50b8b451f4d9d28cbc702805b9f3dc}{Max\+Sub} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___d_s3231}{Loom\+\_\+\+D\+S3231} \& \hyperlink{class_loom_manager_aab5140dd99b464153284e0a7fb4f2aca}{D\+S3231} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___p_c_f8523}{Loom\+\_\+\+P\+C\+F8523} \& \hyperlink{class_loom_manager_a80eaaf9c4a44b04fb17059d7b739c30f}{P\+C\+F8523} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___neopixel}{Loom\+\_\+\+Neopixel} \& \hyperlink{class_loom_manager_a564de486f940e0ad9f3a75c97bbf29cf}{Neopixel} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___relay}{Loom\+\_\+\+Relay} \& \hyperlink{class_loom_manager_ad4e0fadb443db115e69cb59e191f812f}{Relay} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___servo}{Loom\+\_\+\+Servo} \& \hyperlink{class_loom_manager_a2af6939f38dc800ae338809e64e7941c}{Servo} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___stepper}{Loom\+\_\+\+Stepper} \& \hyperlink{class_loom_manager_a4e1f0a483f7b8e7c94b6e6c6c5e0720d}{Stepper} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___analog}{Loom\+\_\+\+Analog} \& \hyperlink{class_loom_manager_a9d12c1b6aaf4faabfcbf9550be3a7d5e}{Analog} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___digital}{Loom\+\_\+\+Digital} \& \hyperlink{class_loom_manager_ad2d0b7ac9986d5d1d7ba31bb6dc7e096}{Digital} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___a_d_s1115}{Loom\+\_\+\+A\+D\+S1115} \& \hyperlink{class_loom_manager_a8a259936dacb423e41abc6e5c0ddc386}{A\+D\+S1115} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___a_s7262}{Loom\+\_\+\+A\+S7262} \& \hyperlink{class_loom_manager_ab43299769d25ad470ab0a1af78c5cb9b}{A\+S7262} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___a_s7263}{Loom\+\_\+\+A\+S7263} \& \hyperlink{class_loom_manager_aacd2f14847285df52cb1c96bedb1199a}{A\+S7263} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___a_s7265_x}{Loom\+\_\+\+A\+S7265X} \& \hyperlink{class_loom_manager_ab7eb247db4db85bed3233c97bc9a72ed}{A\+S7265X} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___f_x_a_s21002}{Loom\+\_\+\+F\+X\+A\+S21002} \& \hyperlink{class_loom_manager_a551b150bea409c70c39302a03953058b}{F\+X\+A\+S21002} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___f_x_o_s8700}{Loom\+\_\+\+F\+X\+O\+S8700} \& \hyperlink{class_loom_manager_a479be8eb27c108ff4a515e9e6f20b17a}{F\+X\+O\+S8700} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___l_i_s3_d_h}{Loom\+\_\+\+L\+I\+S3\+DH} \& \hyperlink{class_loom_manager_aec4f445bac4549bfacf1e605726a4811}{L\+I\+S3\+DH} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___m_b1232}{Loom\+\_\+\+M\+B1232} \& \hyperlink{class_loom_manager_aa547d240f6e43d8db10e260afe981351}{M\+B1232} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___m_m_a8451}{Loom\+\_\+\+M\+M\+A8451} \& \hyperlink{class_loom_manager_a22e8ddf9132d55c2d4b91e824ce8a2e6}{M\+M\+A8451} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___m_p_u6050}{Loom\+\_\+\+M\+P\+U6050} \& \hyperlink{class_loom_manager_a8ac3c59cd01edc6c26e204eef8fb8ef5}{M\+P\+U6050} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___m_s5803}{Loom\+\_\+\+M\+S5803} \& \hyperlink{class_loom_manager_a49f9c27af1f59622a97dd0d968384bc5}{M\+S5803} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___s_h_t31_d}{Loom\+\_\+\+S\+H\+T31D} \& \hyperlink{class_loom_manager_a4ddebb2814e2c4b42604b7e0a31d84e8}{S\+H\+T31D} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___t_m_p007}{Loom\+\_\+\+T\+M\+P007} \& \hyperlink{class_loom_manager_ae0c9f52e3ec5d968d400e2dd7221c91d}{T\+M\+P007} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___t_s_l2561}{Loom\+\_\+\+T\+S\+L2561} \& \hyperlink{class_loom_manager_a4ba1236ae2fb5fad91a7b7e34270ed7c}{T\+S\+L2561} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___t_s_l2591}{Loom\+\_\+\+T\+S\+L2591} \& \hyperlink{class_loom_manager_a5fdae347776c8fe96de34a082100d354}{T\+S\+L2591} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___z_x_gesture}{Loom\+\_\+\+Z\+X\+Gesture} \& \hyperlink{class_loom_manager_a38313cd58f25f7c3d9766d32bbb5e492}{Z\+X\+Gesture} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___s_t_e_m_m_a}{Loom\+\_\+\+S\+T\+E\+M\+MA} \& \hyperlink{class_loom_manager_abb8191fc02e773c230f73e30309bb8c4}{S\+T\+E\+M\+MA} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___decagon5_t_m}{Loom\+\_\+\+Decagon5\+TM} \& \hyperlink{class_loom_manager_a7a388fa9da1a6108037116b9d2b7c7af}{Decagon5\+TM} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___decagon_g_s3}{Loom\+\_\+\+Decagon\+G\+S3} \& \hyperlink{class_loom_manager_a63e0efbece5fad5b581bef2ee659963a}{Decagon\+G\+S3} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___m_a_x31855}{Loom\+\_\+\+M\+A\+X31855} \& \hyperlink{class_loom_manager_a964d0a8bd49d71696b46197daddfb21f}{M\+A\+X31855} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___m_a_x31856}{Loom\+\_\+\+M\+A\+X31856} \& \hyperlink{class_loom_manager_a12838292e4ca2af73099938e616c8a35}{M\+A\+X31856} (const uint8\+\_\+t idx=0)
+\item 
+\hyperlink{class_loom___k30}{Loom\+\_\+\+K30} \& \hyperlink{class_loom_manager_ab6a569394d7c9c423b359885aa400951}{K30} (const uint8\+\_\+t idx=0)
+\item 
+void \hyperlink{class_loom_manager_a2cbb5e4f1b81ef273b1a07f120cbb06d}{print\+\_\+device\+\_\+label} () const 
+\begin{DoxyCompactList}\small\item\em Print the device name as \textquotesingle{}\mbox{[}device\+\_\+name\mbox{]}\textquotesingle{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manager to contain Loom modules and provide users with a simpler A\+PI. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_manager.html}{\tt Loom\+Manager Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Loom\+Manager@{Loom\+Manager}!Device\+Type@{Device\+Type}}
+\index{Device\+Type@{Device\+Type}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Device\+Type}{DeviceType}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+Manager\+::\+Device\+Type}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom_manager_a23170d165993ad196a7604fd08b29400}{}\label{class_loom_manager_a23170d165993ad196a7604fd08b29400}
+
+
+Different general types of devices. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{H\+UB@{H\+UB}!Loom\+Manager@{Loom\+Manager}}\index{Loom\+Manager@{Loom\+Manager}!H\+UB@{H\+UB}}\item[{\em 
+H\+UB\hypertarget{class_loom_manager_a23170d165993ad196a7604fd08b29400a3cc0a3bb62454e5f6414c7adb897b5ff}{}\label{class_loom_manager_a23170d165993ad196a7604fd08b29400a3cc0a3bb62454e5f6414c7adb897b5ff}
+}]Central device. \index{N\+O\+DE@{N\+O\+DE}!Loom\+Manager@{Loom\+Manager}}\index{Loom\+Manager@{Loom\+Manager}!N\+O\+DE@{N\+O\+DE}}\item[{\em 
+N\+O\+DE\hypertarget{class_loom_manager_a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495}{}\label{class_loom_manager_a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495}
+}]Data collecting / actuating node. \index{R\+E\+P\+E\+A\+T\+ER@{R\+E\+P\+E\+A\+T\+ER}!Loom\+Manager@{Loom\+Manager}}\index{Loom\+Manager@{Loom\+Manager}!R\+E\+P\+E\+A\+T\+ER@{R\+E\+P\+E\+A\+T\+ER}}\item[{\em 
+R\+E\+P\+E\+A\+T\+ER\hypertarget{class_loom_manager_a23170d165993ad196a7604fd08b29400ad31b9025a6321e1dddf76266123d7e99}{}\label{class_loom_manager_a23170d165993ad196a7604fd08b29400ad31b9025a6321e1dddf76266123d7e99}
+}]Forwards messages between other devices. \end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Manager@{Loom\+Manager}!Loom\+Manager@{Loom\+Manager}}
+\index{Loom\+Manager@{Loom\+Manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+Manager(const Factory\+Base $\ast$factory\+\_\+ptr, const char $\ast$device\+\_\+name=""Device"", const uint8\+\_\+t instance=1, const Device\+Type device\+\_\+type=\+Device\+Type\+::\+N\+O\+D\+E, const Verbosity print\+\_\+verbosity=\+Verbosity\+::\+V\+\_\+\+H\+I\+G\+H, const Verbosity package\+\_\+verbosity=\+Verbosity\+::\+V\+\_\+\+L\+O\+W, const uint16\+\_\+t interval=1000)}{LoomManager(const FactoryBase *factory_ptr, const char *device_name="Device", const uint8_t instance=1, const DeviceType device_type=DeviceType::NODE, const Verbosity print_verbosity=Verbosity::V_HIGH, const Verbosity package_verbosity=Verbosity::V_LOW, const uint16_t interval=1000)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Manager\+::\+Loom\+Manager (
+\begin{DoxyParamCaption}
+\item[{const {\bf Factory\+Base} $\ast$}]{factory\+\_\+ptr, }
+\item[{const char $\ast$}]{device\+\_\+name = {\ttfamily \char`\"{}Device\char`\"{}}, }
+\item[{const uint8\+\_\+t}]{instance = {\ttfamily 1}, }
+\item[{const {\bf Device\+Type}}]{device\+\_\+type = {\ttfamily {\bf Device\+Type\+::\+N\+O\+DE}}, }
+\item[{const {\bf Verbosity}}]{print\+\_\+verbosity = {\ttfamily {\bf Verbosity\+::\+V\+\_\+\+H\+I\+GH}}, }
+\item[{const {\bf Verbosity}}]{package\+\_\+verbosity = {\ttfamily {\bf Verbosity\+::\+V\+\_\+\+L\+OW}}, }
+\item[{const uint16\+\_\+t}]{interval = {\ttfamily 1000}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a084222072528d9fe59480b0c9e2f5757}{}\label{class_loom_manager_a084222072528d9fe59480b0c9e2f5757}
+
+
+Loom Manager constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em device\+\_\+name} & String $\vert$ $<$\char`\"{}\+Default\char`\"{}$>$ $\vert$ null $\vert$ Manager name \\
+\hline
+\mbox{\tt in}  & {\em instance} & Int $\vert$ $<$1$>$ $\vert$ \mbox{[}0-\/99\mbox{]} $\vert$ Device instance number on its subnet \\
+\hline
+\mbox{\tt in}  & {\em device\+\_\+type} & Set(\+Device\+Type) $\vert$ $<$1$>$ $\vert$ \{0(\char`\"{}\+Hub\char`\"{}), 1(\char`\"{}\+Node\char`\"{}), 2(\char`\"{}\+Repeater\char`\"{})\} $\vert$ Device\textquotesingle{}s topological type \\
+\hline
+\mbox{\tt in}  & {\em print\+\_\+verbosity} & Set(\+Verbosity) $\vert$ $<$1$>$ $\vert$ \{0(\char`\"{}\+Off\char`\"{}), 1(\char`\"{}\+Low\char`\"{}), 2(\char`\"{}\+High\char`\"{})\} $\vert$ How detailed prints to the Serial Monitor should be \\
+\hline
+\mbox{\tt in}  & {\em package\+\_\+verbosity} & Set(\+Verbosity) $\vert$ $<$2$>$ $\vert$ \{0(\char`\"{}\+Off\char`\"{}), 1(\char`\"{}\+Low\char`\"{}), 2(\char`\"{}\+High\char`\"{})\} $\vert$ How detailed to package data \\
+\hline
+\mbox{\tt in}  & {\em interval} & Int $\vert$ $<$1$>$ $\vert$ \mbox{[}0-\/60000\mbox{]} $\vert$ Default milliseconds to pause \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!````~Loom\+Manager@{$\sim$\+Loom\+Manager}}
+\index{````~Loom\+Manager@{$\sim$\+Loom\+Manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Manager()}{~LoomManager()}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Manager\+::$\sim$\+Loom\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_loom_manager_a4dabf340ea6475e6f0ad395e25a56a47}{}\label{class_loom_manager_a4dabf340ea6475e6f0ad395e25a56a47}
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Manager@{Loom\+Manager}!add\+\_\+data@{add\+\_\+data}}
+\index{add\+\_\+data@{add\+\_\+data}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{add\+\_\+data(const char $\ast$module, const char $\ast$key, const T val)}{add_data(const char *module, const char *key, const T val)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool Loom\+Manager\+::add\+\_\+data (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{module, }
+\item[{const char $\ast$}]{key, }
+\item[{const T}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_a4bfaf3aaf89df1f7c9cd8c2142c0cdfd}{}\label{class_loom_manager_a4bfaf3aaf89df1f7c9cd8c2142c0cdfd}
+
+
+Append to a Json object of data. 
+
+If object is non-\/empty and contains non-\/data, will not add and will return false. Only call this after package, otherwise the data will be overriden 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module} & Which module to add data to (will create if it doesn\textquotesingle{}t exist) \\
+\hline
+\mbox{\tt in}  & {\em key} & Key of data to add \\
+\hline
+\mbox{\tt in}  & {\em val} & Value of data to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!add\+\_\+module@{add\+\_\+module}}
+\index{add\+\_\+module@{add\+\_\+module}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{add\+\_\+module(\+Loom\+Module $\ast$module)}{add_module(LoomModule *module)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::add\+\_\+module (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Module} $\ast$}]{module}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a4761f8b6d15ed18542d1039e207cd975}{}\label{class_loom_manager_a4761f8b6d15ed18542d1039e207cd975}
+
+
+Add a module to be managed. 
+
+\index{Loom\+Manager@{Loom\+Manager}!A\+D\+S1115@{A\+D\+S1115}}
+\index{A\+D\+S1115@{A\+D\+S1115}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{A\+D\+S1115(const uint8\+\_\+t idx=0)}{ADS1115(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+A\+D\+S1115} \& Loom\+Manager\+::\+A\+D\+S1115 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a8a259936dacb423e41abc6e5c0ddc386}{}\label{class_loom_manager_a8a259936dacb423e41abc6e5c0ddc386}
+\index{Loom\+Manager@{Loom\+Manager}!Analog@{Analog}}
+\index{Analog@{Analog}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Analog(const uint8\+\_\+t idx=0)}{Analog(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Analog} \& Loom\+Manager\+::\+Analog (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a9d12c1b6aaf4faabfcbf9550be3a7d5e}{}\label{class_loom_manager_a9d12c1b6aaf4faabfcbf9550be3a7d5e}
+\index{Loom\+Manager@{Loom\+Manager}!A\+S7262@{A\+S7262}}
+\index{A\+S7262@{A\+S7262}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{A\+S7262(const uint8\+\_\+t idx=0)}{AS7262(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+A\+S7262} \& Loom\+Manager\+::\+A\+S7262 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ab43299769d25ad470ab0a1af78c5cb9b}{}\label{class_loom_manager_ab43299769d25ad470ab0a1af78c5cb9b}
+\index{Loom\+Manager@{Loom\+Manager}!A\+S7263@{A\+S7263}}
+\index{A\+S7263@{A\+S7263}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{A\+S7263(const uint8\+\_\+t idx=0)}{AS7263(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+A\+S7263} \& Loom\+Manager\+::\+A\+S7263 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_aacd2f14847285df52cb1c96bedb1199a}{}\label{class_loom_manager_aacd2f14847285df52cb1c96bedb1199a}
+\index{Loom\+Manager@{Loom\+Manager}!A\+S7265X@{A\+S7265X}}
+\index{A\+S7265X@{A\+S7265X}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{A\+S7265\+X(const uint8\+\_\+t idx=0)}{AS7265X(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+A\+S7265X} \& Loom\+Manager\+::\+A\+S7265X (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ab7eb247db4db85bed3233c97bc9a72ed}{}\label{class_loom_manager_ab7eb247db4db85bed3233c97bc9a72ed}
+\index{Loom\+Manager@{Loom\+Manager}!B\+A\+T\+C\+H\+SD@{B\+A\+T\+C\+H\+SD}}
+\index{B\+A\+T\+C\+H\+SD@{B\+A\+T\+C\+H\+SD}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{B\+A\+T\+C\+H\+S\+D(const uint8\+\_\+t idx=0)}{BATCHSD(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Batch\+SD} \& Loom\+Manager\+::\+B\+A\+T\+C\+H\+SD (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a9fad8dc02b66ec73bb0247b89edf98c4}{}\label{class_loom_manager_a9fad8dc02b66ec73bb0247b89edf98c4}
+\index{Loom\+Manager@{Loom\+Manager}!begin\+\_\+\+L\+ED@{begin\+\_\+\+L\+ED}}
+\index{begin\+\_\+\+L\+ED@{begin\+\_\+\+L\+ED}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{begin\+\_\+\+L\+E\+D() const }{begin_LED() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::begin\+\_\+\+L\+ED (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_a315be7f7fe42feb0710b85cc8c023291}{}\label{class_loom_manager_a315be7f7fe42feb0710b85cc8c023291}
+
+
+Begin L\+ED. 
+
+\index{Loom\+Manager@{Loom\+Manager}!begin\+\_\+serial@{begin\+\_\+serial}}
+\index{begin\+\_\+serial@{begin\+\_\+serial}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{begin\+\_\+serial(const bool wait\+\_\+for\+\_\+monitor=false) const }{begin_serial(const bool wait_for_monitor=false) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::begin\+\_\+serial (
+\begin{DoxyParamCaption}
+\item[{const bool}]{wait\+\_\+for\+\_\+monitor = {\ttfamily false}}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_manager_a15a76615e56881a51a78005ad903db24}{}\label{class_loom_manager_a15a76615e56881a51a78005ad903db24}
+
+
+Begin Serial, optionally wait for user. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em wait\+\_\+for\+\_\+monitor} & True to wait for serial monitor to open \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!Bluetooth@{Bluetooth}}
+\index{Bluetooth@{Bluetooth}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Bluetooth(const uint8\+\_\+t idx=0)}{Bluetooth(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Bluetooth} \& Loom\+Manager\+::\+Bluetooth (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a2186c9c3f21fd48dafda59351c65b9bc}{}\label{class_loom_manager_a2186c9c3f21fd48dafda59351c65b9bc}
+\index{Loom\+Manager@{Loom\+Manager}!check\+\_\+serial\+\_\+for\+\_\+config@{check\+\_\+serial\+\_\+for\+\_\+config}}
+\index{check\+\_\+serial\+\_\+for\+\_\+config@{check\+\_\+serial\+\_\+for\+\_\+config}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{check\+\_\+serial\+\_\+for\+\_\+config()}{check_serial_for_config()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::check\+\_\+serial\+\_\+for\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a03b417d8a2d39954723dd33ce4856b07}{}\label{class_loom_manager_a03b417d8a2d39954723dd33ce4856b07}
+\index{Loom\+Manager@{Loom\+Manager}!Decagon5\+TM@{Decagon5\+TM}}
+\index{Decagon5\+TM@{Decagon5\+TM}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Decagon5\+T\+M(const uint8\+\_\+t idx=0)}{Decagon5TM(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Decagon5\+TM} \& Loom\+Manager\+::\+Decagon5\+TM (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a7a388fa9da1a6108037116b9d2b7c7af}{}\label{class_loom_manager_a7a388fa9da1a6108037116b9d2b7c7af}
+\index{Loom\+Manager@{Loom\+Manager}!Decagon\+G\+S3@{Decagon\+G\+S3}}
+\index{Decagon\+G\+S3@{Decagon\+G\+S3}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Decagon\+G\+S3(const uint8\+\_\+t idx=0)}{DecagonGS3(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Decagon\+G\+S3} \& Loom\+Manager\+::\+Decagon\+G\+S3 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a63e0efbece5fad5b581bef2ee659963a}{}\label{class_loom_manager_a63e0efbece5fad5b581bef2ee659963a}
+\index{Loom\+Manager@{Loom\+Manager}!Digital@{Digital}}
+\index{Digital@{Digital}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Digital(const uint8\+\_\+t idx=0)}{Digital(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Digital} \& Loom\+Manager\+::\+Digital (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ad2d0b7ac9986d5d1d7ba31bb6dc7e096}{}\label{class_loom_manager_ad2d0b7ac9986d5d1d7ba31bb6dc7e096}
+\index{Loom\+Manager@{Loom\+Manager}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{dispatch(\+Json\+Object json)}{dispatch(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::dispatch (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_affe6f936dd6c9f7f8b489b03786ac83d}{}\label{class_loom_manager_affe6f936dd6c9f7f8b489b03786ac83d}
+
+
+Iterate over list of commands, forwarding to handling module. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Object containing commands \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{dispatch()}{dispatch()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::dispatch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_a80fb13974b3bde9b0cedcd43732d7226}{}\label{class_loom_manager_a80fb13974b3bde9b0cedcd43732d7226}
+
+
+Iterate over list of commands, forwarding to handling module. 
+
+Uses internal json \index{Loom\+Manager@{Loom\+Manager}!display\+\_\+data@{display\+\_\+data}}
+\index{display\+\_\+data@{display\+\_\+data}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{display\+\_\+data() const }{display_data() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::display\+\_\+data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_manager_a70e8fbf86b96fd3246c2d4422d91139d}{}\label{class_loom_manager_a70e8fbf86b96fd3246c2d4422d91139d}
+
+
+Print out the internal J\+S\+ON object. 
+
+\index{Loom\+Manager@{Loom\+Manager}!D\+S3231@{D\+S3231}}
+\index{D\+S3231@{D\+S3231}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{D\+S3231(const uint8\+\_\+t idx=0)}{DS3231(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+D\+S3231} \& Loom\+Manager\+::\+D\+S3231 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_aab5140dd99b464153284e0a7fb4f2aca}{}\label{class_loom_manager_aab5140dd99b464153284e0a7fb4f2aca}
+\index{Loom\+Manager@{Loom\+Manager}!enum\+\_\+device\+\_\+type\+\_\+string@{enum\+\_\+device\+\_\+type\+\_\+string}}
+\index{enum\+\_\+device\+\_\+type\+\_\+string@{enum\+\_\+device\+\_\+type\+\_\+string}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{enum\+\_\+device\+\_\+type\+\_\+string(const Device\+Type t)}{enum_device_type_string(const DeviceType t)}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+Manager\+::enum\+\_\+device\+\_\+type\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{const {\bf Device\+Type}}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom_manager_a2592362f66b24ced03f82e35643d1f12}{}\label{class_loom_manager_a2592362f66b24ced03f82e35643d1f12}
+
+
+Get c-\/string of name associated with device type enum. 
+
+\begin{DoxyReturn}{Returns}
+C-\/string of device type 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!Ethernet@{Ethernet}}
+\index{Ethernet@{Ethernet}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Ethernet(const uint8\+\_\+t idx=0)}{Ethernet(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Ethernet} \& Loom\+Manager\+::\+Ethernet (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a9727086e76045344ab9f10542cf7ab35}{}\label{class_loom_manager_a9727086e76045344ab9f10542cf7ab35}
+\index{Loom\+Manager@{Loom\+Manager}!find\+\_\+module@{find\+\_\+module}}
+\index{find\+\_\+module@{find\+\_\+module}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{find\+\_\+module(const Loom\+Module\+::\+Type type, const uint8\+\_\+t idx=0) const }{find_module(const LoomModule::Type type, const uint8_t idx=0) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Module} $\ast$ Loom\+Manager\+::find\+\_\+module (
+\begin{DoxyParamCaption}
+\item[{const {\bf Loom\+Module\+::\+Type}}]{type, }
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_manager_a139e842dcaa5ab84587bdb5bc75fd103}{}\label{class_loom_manager_a139e842dcaa5ab84587bdb5bc75fd103}
+
+
+Auxiliary function to search a list of modules for a module of specified type. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em type} & Type to search for \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!find\+\_\+module\+\_\+by\+\_\+category@{find\+\_\+module\+\_\+by\+\_\+category}}
+\index{find\+\_\+module\+\_\+by\+\_\+category@{find\+\_\+module\+\_\+by\+\_\+category}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{find\+\_\+module\+\_\+by\+\_\+category(const Loom\+Module\+::\+Category category, const uint8\+\_\+t idx) const }{find_module_by_category(const LoomModule::Category category, const uint8_t idx) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Module} $\ast$ Loom\+Manager\+::find\+\_\+module\+\_\+by\+\_\+category (
+\begin{DoxyParamCaption}
+\item[{const {\bf Loom\+Module\+::\+Category}}]{category, }
+\item[{const uint8\+\_\+t}]{idx}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_manager_af8b532b1efb4ba887ceb09edea2d65a9}{}\label{class_loom_manager_af8b532b1efb4ba887ceb09edea2d65a9}
+
+
+Auxiliary function to search a list of modules for a module of specified category. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em category} & Category to search for \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!flash\+\_\+\+L\+ED@{flash\+\_\+\+L\+ED}}
+\index{flash\+\_\+\+L\+ED@{flash\+\_\+\+L\+ED}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{flash\+\_\+\+L\+E\+D(const uint8\+\_\+t count, const uint8\+\_\+t time\+\_\+high, const uint8\+\_\+t time\+\_\+low, const bool end\+\_\+high=false) const }{flash_LED(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high=false) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::flash\+\_\+\+L\+ED (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{count, }
+\item[{const uint8\+\_\+t}]{time\+\_\+high, }
+\item[{const uint8\+\_\+t}]{time\+\_\+low, }
+\item[{const bool}]{end\+\_\+high = {\ttfamily false}}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_manager_afbe16976632be98771f6a5ede92ff3fe}{}\label{class_loom_manager_afbe16976632be98771f6a5ede92ff3fe}
+
+
+Flash the built in L\+ED. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em count} & Number of times to flash \\
+\hline
+\mbox{\tt in}  & {\em time\+\_\+high} & Milliseconds to stay on for \\
+\hline
+\mbox{\tt in}  & {\em time\+\_\+low} & Milliseconds to stay off for \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!flash\+\_\+\+L\+ED@{flash\+\_\+\+L\+ED}}
+\index{flash\+\_\+\+L\+ED@{flash\+\_\+\+L\+ED}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{flash\+\_\+\+L\+E\+D(const uint8\+\_\+t sequence[3]) const }{flash_LED(const uint8_t sequence[3]) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::flash\+\_\+\+L\+ED (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{sequence\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_afcae7948a5a29d179842bcd00de271a0}{}\label{class_loom_manager_afcae7948a5a29d179842bcd00de271a0}
+\index{Loom\+Manager@{Loom\+Manager}!F\+X\+A\+S21002@{F\+X\+A\+S21002}}
+\index{F\+X\+A\+S21002@{F\+X\+A\+S21002}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{F\+X\+A\+S21002(const uint8\+\_\+t idx=0)}{FXAS21002(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+F\+X\+A\+S21002} \& Loom\+Manager\+::\+F\+X\+A\+S21002 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a551b150bea409c70c39302a03953058b}{}\label{class_loom_manager_a551b150bea409c70c39302a03953058b}
+\index{Loom\+Manager@{Loom\+Manager}!F\+X\+O\+S8700@{F\+X\+O\+S8700}}
+\index{F\+X\+O\+S8700@{F\+X\+O\+S8700}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{F\+X\+O\+S8700(const uint8\+\_\+t idx=0)}{FXOS8700(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+F\+X\+O\+S8700} \& Loom\+Manager\+::\+F\+X\+O\+S8700 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a479be8eb27c108ff4a515e9e6f20b17a}{}\label{class_loom_manager_a479be8eb27c108ff4a515e9e6f20b17a}
+\index{Loom\+Manager@{Loom\+Manager}!get\+\_\+config@{get\+\_\+config}}
+\index{get\+\_\+config@{get\+\_\+config}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+config()}{get_config()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::get\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_af9666106e7f25c4735b22c70dfaab33f}{}\label{class_loom_manager_af9666106e7f25c4735b22c70dfaab33f}
+
+
+Get complete configuration of the device. 
+
+Generally used to save configuration to SD \index{Loom\+Manager@{Loom\+Manager}!get\+\_\+data\+\_\+as@{get\+\_\+data\+\_\+as}}
+\index{get\+\_\+data\+\_\+as@{get\+\_\+data\+\_\+as}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+data\+\_\+as(const char $\ast$module, const char $\ast$key)}{get_data_as(const char *module, const char *key)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T Loom\+Manager\+::get\+\_\+data\+\_\+as (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{module, }
+\item[{const char $\ast$}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_ace28cae7092408bc96bf66299e4c2f9a}{}\label{class_loom_manager_ace28cae7092408bc96bf66299e4c2f9a}
+
+
+Get a data value from Json object of data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module} & \hyperlink{class_loom_module}{Loom\+Module} key is associated with \\
+\hline
+\mbox{\tt in}  & {\em key} & Key of data value to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Data value if found 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!get\+\_\+device\+\_\+name@{get\+\_\+device\+\_\+name}}
+\index{get\+\_\+device\+\_\+name@{get\+\_\+device\+\_\+name}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+device\+\_\+name(char $\ast$buf) const }{get_device_name(char *buf) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::get\+\_\+device\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buf}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_manager_a93329cf2288e9467ca5da87059657a21}{}\label{class_loom_manager_a93329cf2288e9467ca5da87059657a21}
+
+
+Get the device name, copies into provided buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em buf} & The buffer copy device name into \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!get\+\_\+device\+\_\+name@{get\+\_\+device\+\_\+name}}
+\index{get\+\_\+device\+\_\+name@{get\+\_\+device\+\_\+name}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+device\+\_\+name() const }{get_device_name() const }}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+Manager\+::get\+\_\+device\+\_\+name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_manager_a7642ccf7c0faca1e549f0ec2d4d72400}{}\label{class_loom_manager_a7642ccf7c0faca1e549f0ec2d4d72400}
+
+
+Get the device name. 
+
+\begin{DoxyReturn}{Returns}
+String literal of device name. 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!get\+\_\+device\+\_\+type@{get\+\_\+device\+\_\+type}}
+\index{get\+\_\+device\+\_\+type@{get\+\_\+device\+\_\+type}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+device\+\_\+type() const }{get_device_type() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Device\+Type} Loom\+Manager\+::get\+\_\+device\+\_\+type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_a19942faf44a0835356c5d3f04ee77a66}{}\label{class_loom_manager_a19942faf44a0835356c5d3f04ee77a66}
+
+
+Get device type. 
+
+\begin{DoxyReturn}{Returns}
+Device type (Hub/\+Node) 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!get\+\_\+instance\+\_\+num@{get\+\_\+instance\+\_\+num}}
+\index{get\+\_\+instance\+\_\+num@{get\+\_\+instance\+\_\+num}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+instance\+\_\+num() const }{get_instance_num() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+Manager\+::get\+\_\+instance\+\_\+num (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_af71c96f2e245deb12e8b25eb2e11e4db}{}\label{class_loom_manager_af71c96f2e245deb12e8b25eb2e11e4db}
+
+
+Get device instance number. 
+
+\begin{DoxyReturn}{Returns}
+Family number 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!get\+\_\+interval@{get\+\_\+interval}}
+\index{get\+\_\+interval@{get\+\_\+interval}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+interval() const }{get_interval() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+Manager\+::get\+\_\+interval (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_a7d282d59fd742664e6bbe33f64241ed3}{}\label{class_loom_manager_a7d282d59fd742664e6bbe33f64241ed3}
+
+
+Get sampling interval. 
+
+\begin{DoxyReturn}{Returns}
+sampling interval, in ms 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!get\+\_\+package\+\_\+verbosity@{get\+\_\+package\+\_\+verbosity}}
+\index{get\+\_\+package\+\_\+verbosity@{get\+\_\+package\+\_\+verbosity}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+package\+\_\+verbosity() const }{get_package_verbosity() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Verbosity} Loom\+Manager\+::get\+\_\+package\+\_\+verbosity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_afaaaf2cec1d6d372b0b6a71720944690}{}\label{class_loom_manager_afaaaf2cec1d6d372b0b6a71720944690}
+
+
+Get package verbosity. 
+
+\begin{DoxyReturn}{Returns}
+package verbosity 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!get\+\_\+print\+\_\+verbosity@{get\+\_\+print\+\_\+verbosity}}
+\index{get\+\_\+print\+\_\+verbosity@{get\+\_\+print\+\_\+verbosity}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+print\+\_\+verbosity() const }{get_print_verbosity() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Verbosity} Loom\+Manager\+::get\+\_\+print\+\_\+verbosity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_aa97a8e46a133c0d32a3dd8c33d5c9b25}{}\label{class_loom_manager_aa97a8e46a133c0d32a3dd8c33d5c9b25}
+
+
+Get print verbosity. 
+
+\begin{DoxyReturn}{Returns}
+print verbosity 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!Google\+Sheets@{Google\+Sheets}}
+\index{Google\+Sheets@{Google\+Sheets}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Google\+Sheets(const uint8\+\_\+t idx=0)}{GoogleSheets(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Google\+Sheets} \& Loom\+Manager\+::\+Google\+Sheets (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ad21d7fa120541af2e2f20c7e4b59d8c7}{}\label{class_loom_manager_ad21d7fa120541af2e2f20c7e4b59d8c7}
+\index{Loom\+Manager@{Loom\+Manager}!has\+\_\+module@{has\+\_\+module}}
+\index{has\+\_\+module@{has\+\_\+module}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{has\+\_\+module(const Loom\+Module\+::\+Type type) const }{has_module(const LoomModule::Type type) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::has\+\_\+module (
+\begin{DoxyParamCaption}
+\item[{const {\bf Loom\+Module\+::\+Type}}]{type}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_manager_a2c8c03e61c5ea0e2d1d86c48179accff}{}\label{class_loom_manager_a2c8c03e61c5ea0e2d1d86c48179accff}
+
+
+Save current configuration to SD. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em config\+\_\+file} & File to save configuration to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True is success, false if fail or file not found Determine if the manager has a module of the specified type 
+\end{DoxyReturn}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em type} & Module type to check for \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!internal\+\_\+json@{internal\+\_\+json}}
+\index{internal\+\_\+json@{internal\+\_\+json}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{internal\+\_\+json(const bool clear=false)}{internal_json(const bool clear=false)}}]{\setlength{\rightskip}{0pt plus 5cm}Json\+Object Loom\+Manager\+::internal\+\_\+json (
+\begin{DoxyParamCaption}
+\item[{const bool}]{clear = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a853b89aea16917b3e7baef7173ef741e}{}\label{class_loom_manager_a853b89aea16917b3e7baef7173ef741e}
+
+
+Return reference to internal json object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em clear} & Whether or not to empty Json before returning it \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to internal json object 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!Internet\+Plat@{Internet\+Plat}}
+\index{Internet\+Plat@{Internet\+Plat}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Internet\+Plat(const uint8\+\_\+t idx=0)}{InternetPlat(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat}\& Loom\+Manager\+::\+Internet\+Plat (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ac7f70773b0c757611897f8865f6435ec}{}\label{class_loom_manager_ac7f70773b0c757611897f8865f6435ec}
+\index{Loom\+Manager@{Loom\+Manager}!Interrupt\+Manager@{Interrupt\+Manager}}
+\index{Interrupt\+Manager@{Interrupt\+Manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Interrupt\+Manager(const uint8\+\_\+t idx=0)}{InterruptManager(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Interrupt\+\_\+\+Manager} \& Loom\+Manager\+::\+Interrupt\+Manager (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a3f1035d71a04b36efd65f1cbe7d08b78}{}\label{class_loom_manager_a3f1035d71a04b36efd65f1cbe7d08b78}
+\index{Loom\+Manager@{Loom\+Manager}!K30@{K30}}
+\index{K30@{K30}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{K30(const uint8\+\_\+t idx=0)}{K30(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+K30} \& Loom\+Manager\+::\+K30 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ab6a569394d7c9c423b359885aa400951}{}\label{class_loom_manager_ab6a569394d7c9c423b359885aa400951}
+\index{Loom\+Manager@{Loom\+Manager}!L\+I\+S3\+DH@{L\+I\+S3\+DH}}
+\index{L\+I\+S3\+DH@{L\+I\+S3\+DH}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{L\+I\+S3\+D\+H(const uint8\+\_\+t idx=0)}{LIS3DH(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+L\+I\+S3\+DH} \& Loom\+Manager\+::\+L\+I\+S3\+DH (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_aec4f445bac4549bfacf1e605726a4811}{}\label{class_loom_manager_aec4f445bac4549bfacf1e605726a4811}
+\index{Loom\+Manager@{Loom\+Manager}!list\+\_\+modules@{list\+\_\+modules}}
+\index{list\+\_\+modules@{list\+\_\+modules}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{list\+\_\+modules() const }{list_modules() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::list\+\_\+modules (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_manager_a0c849e257dfa2a1796daea93d0da6f58}{}\label{class_loom_manager_a0c849e257dfa2a1796daea93d0da6f58}
+
+
+Print the linked modules. 
+
+\index{Loom\+Manager@{Loom\+Manager}!log\+\_\+all@{log\+\_\+all}}
+\index{log\+\_\+all@{log\+\_\+all}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{log\+\_\+all(const Json\+Object json)}{log_all(const JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::log\+\_\+all (
+\begin{DoxyParamCaption}
+\item[{const Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a349a86e686c0b71d8613f1e5a58ea2e3}{}\label{class_loom_manager_a349a86e686c0b71d8613f1e5a58ea2e3}
+
+
+Log. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Data object to log \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!log\+\_\+all@{log\+\_\+all}}
+\index{log\+\_\+all@{log\+\_\+all}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{log\+\_\+all()}{log_all()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::log\+\_\+all (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_af59e23602c123c36d4a855e6af6b4d75}{}\label{class_loom_manager_af59e23602c123c36d4a855e6af6b4d75}
+
+
+Log. 
+
+Calls \hyperlink{class_loom_manager_a349a86e686c0b71d8613f1e5a58ea2e3}{log\+\_\+all(const Json\+Object json)} with interal json \begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!Lo\+Ra@{Lo\+Ra}}
+\index{Lo\+Ra@{Lo\+Ra}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Lo\+Ra(const uint8\+\_\+t idx=0)}{LoRa(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Lo\+Ra} \& Loom\+Manager\+::\+Lo\+Ra (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a28246e651c56b8c8cc0f5175f098930f}{}\label{class_loom_manager_a28246e651c56b8c8cc0f5175f098930f}
+\index{Loom\+Manager@{Loom\+Manager}!L\+TE@{L\+TE}}
+\index{L\+TE@{L\+TE}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{L\+T\+E(const uint8\+\_\+t idx=0)}{LTE(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+L\+TE} \& Loom\+Manager\+::\+L\+TE (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a0b5e54f112f357169523e993bc49a547}{}\label{class_loom_manager_a0b5e54f112f357169523e993bc49a547}
+\index{Loom\+Manager@{Loom\+Manager}!M\+A\+X31855@{M\+A\+X31855}}
+\index{M\+A\+X31855@{M\+A\+X31855}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{M\+A\+X31855(const uint8\+\_\+t idx=0)}{MAX31855(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+M\+A\+X31855} \& Loom\+Manager\+::\+M\+A\+X31855 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a964d0a8bd49d71696b46197daddfb21f}{}\label{class_loom_manager_a964d0a8bd49d71696b46197daddfb21f}
+\index{Loom\+Manager@{Loom\+Manager}!M\+A\+X31856@{M\+A\+X31856}}
+\index{M\+A\+X31856@{M\+A\+X31856}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{M\+A\+X31856(const uint8\+\_\+t idx=0)}{MAX31856(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+M\+A\+X31856} \& Loom\+Manager\+::\+M\+A\+X31856 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a12838292e4ca2af73099938e616c8a35}{}\label{class_loom_manager_a12838292e4ca2af73099938e616c8a35}
+\index{Loom\+Manager@{Loom\+Manager}!Max\+Pub@{Max\+Pub}}
+\index{Max\+Pub@{Max\+Pub}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Max\+Pub(const uint8\+\_\+t idx=0)}{MaxPub(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Max\+Pub} \& Loom\+Manager\+::\+Max\+Pub (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ab2fb9b98506e41d72a1f39b182d7b87b}{}\label{class_loom_manager_ab2fb9b98506e41d72a1f39b182d7b87b}
+\index{Loom\+Manager@{Loom\+Manager}!Max\+Sub@{Max\+Sub}}
+\index{Max\+Sub@{Max\+Sub}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Max\+Sub(const uint8\+\_\+t idx=0)}{MaxSub(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Max\+Sub} \& Loom\+Manager\+::\+Max\+Sub (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a2a50b8b451f4d9d28cbc702805b9f3dc}{}\label{class_loom_manager_a2a50b8b451f4d9d28cbc702805b9f3dc}
+\index{Loom\+Manager@{Loom\+Manager}!M\+B1232@{M\+B1232}}
+\index{M\+B1232@{M\+B1232}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{M\+B1232(const uint8\+\_\+t idx=0)}{MB1232(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+M\+B1232} \& Loom\+Manager\+::\+M\+B1232 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_aa547d240f6e43d8db10e260afe981351}{}\label{class_loom_manager_aa547d240f6e43d8db10e260afe981351}
+\index{Loom\+Manager@{Loom\+Manager}!measure@{measure}}
+\index{measure@{measure}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{measure()}{measure()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a3202f184c7d76abff38a353347c3f457}{}\label{class_loom_manager_a3202f184c7d76abff38a353347c3f457}
+
+
+Measure data of all managed sensors. 
+
+\index{Loom\+Manager@{Loom\+Manager}!M\+M\+A8451@{M\+M\+A8451}}
+\index{M\+M\+A8451@{M\+M\+A8451}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{M\+M\+A8451(const uint8\+\_\+t idx=0)}{MMA8451(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+M\+M\+A8451} \& Loom\+Manager\+::\+M\+M\+A8451 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a22e8ddf9132d55c2d4b91e824ce8a2e6}{}\label{class_loom_manager_a22e8ddf9132d55c2d4b91e824ce8a2e6}
+\index{Loom\+Manager@{Loom\+Manager}!M\+P\+U6050@{M\+P\+U6050}}
+\index{M\+P\+U6050@{M\+P\+U6050}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{M\+P\+U6050(const uint8\+\_\+t idx=0)}{MPU6050(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+M\+P\+U6050} \& Loom\+Manager\+::\+M\+P\+U6050 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a8ac3c59cd01edc6c26e204eef8fb8ef5}{}\label{class_loom_manager_a8ac3c59cd01edc6c26e204eef8fb8ef5}
+\index{Loom\+Manager@{Loom\+Manager}!M\+S5803@{M\+S5803}}
+\index{M\+S5803@{M\+S5803}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{M\+S5803(const uint8\+\_\+t idx=0)}{MS5803(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+M\+S5803} \& Loom\+Manager\+::\+M\+S5803 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a49f9c27af1f59622a97dd0d968384bc5}{}\label{class_loom_manager_a49f9c27af1f59622a97dd0d968384bc5}
+\index{Loom\+Manager@{Loom\+Manager}!Multiplexer@{Multiplexer}}
+\index{Multiplexer@{Multiplexer}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Multiplexer(const uint8\+\_\+t idx=0)}{Multiplexer(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Multiplexer} \& Loom\+Manager\+::\+Multiplexer (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_af6d071b9bc9e0654b6f5763db83233b0}{}\label{class_loom_manager_af6d071b9bc9e0654b6f5763db83233b0}
+\index{Loom\+Manager@{Loom\+Manager}!Neopixel@{Neopixel}}
+\index{Neopixel@{Neopixel}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Neopixel(const uint8\+\_\+t idx=0)}{Neopixel(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Neopixel} \& Loom\+Manager\+::\+Neopixel (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a564de486f940e0ad9f3a75c97bbf29cf}{}\label{class_loom_manager_a564de486f940e0ad9f3a75c97bbf29cf}
+\index{Loom\+Manager@{Loom\+Manager}!n\+RF@{n\+RF}}
+\index{n\+RF@{n\+RF}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{n\+R\+F(const uint8\+\_\+t idx=0)}{nRF(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+n\+RF} \& Loom\+Manager\+::n\+RF (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a00d23f62214984206a17c4b643f9e4f6}{}\label{class_loom_manager_a00d23f62214984206a17c4b643f9e4f6}
+\index{Loom\+Manager@{Loom\+Manager}!N\+TP@{N\+TP}}
+\index{N\+TP@{N\+TP}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{N\+T\+P(const uint8\+\_\+t idx=0)}{NTP(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+N\+T\+P\+Sync} \& Loom\+Manager\+::\+N\+TP (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a51070b9737159a7880072997297959c3}{}\label{class_loom_manager_a51070b9737159a7880072997297959c3}
+\index{Loom\+Manager@{Loom\+Manager}!O\+L\+ED@{O\+L\+ED}}
+\index{O\+L\+ED@{O\+L\+ED}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{O\+L\+E\+D(const uint8\+\_\+t idx=0)}{OLED(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+O\+L\+ED} \& Loom\+Manager\+::\+O\+L\+ED (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a7d3b807d669ad51f35aafc5115c6583a}{}\label{class_loom_manager_a7d3b807d669ad51f35aafc5115c6583a}
+\index{Loom\+Manager@{Loom\+Manager}!package@{package}}
+\index{package@{package}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json)}{package(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ad09d72a0950ee5df48371e4d49a56e68}{}\label{class_loom_manager_ad09d72a0950ee5df48371e4d49a56e68}
+
+
+Package data of all modules into provide Json\+Object. 
+
+How detailed data is can be modified with package\+\_\+verbosity 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Json\+Object of packaged data of enabled modules \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!package@{package}}
+\index{package@{package}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{package()}{package()}}]{\setlength{\rightskip}{0pt plus 5cm}Json\+Object Loom\+Manager\+::package (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a34666ea29808834e120ef169f389387b}{}\label{class_loom_manager_a34666ea29808834e120ef169f389387b}
+
+
+Package data of all modules into Json\+Object and return. 
+
+\begin{DoxyReturn}{Returns}
+Json\+Object of packaged data of enabled modules 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!parse\+\_\+config@{parse\+\_\+config}}
+\index{parse\+\_\+config@{parse\+\_\+config}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{parse\+\_\+config(const char $\ast$json\+\_\+config)}{parse_config(const char *json_config)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::parse\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{json\+\_\+config}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ab06b9f5b623b01cc0966eb84da173238}{}\label{class_loom_manager_ab06b9f5b623b01cc0966eb84da173238}
+
+
+Parse a J\+S\+ON configuration string specifying enabled modules. 
+
+Enabled modules are instantiated with specified settings and added to manager lists for managing 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json\+\_\+config} & Configuration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!parse\+\_\+config\+\_\+json@{parse\+\_\+config\+\_\+json}}
+\index{parse\+\_\+config\+\_\+json@{parse\+\_\+config\+\_\+json}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{parse\+\_\+config\+\_\+json(\+Json\+Object config)}{parse_config_json(JsonObject config)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::parse\+\_\+config\+\_\+json (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{config}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a445ca7e4c6f7db0d7dc7c5f4fa8ffea0}{}\label{class_loom_manager_a445ca7e4c6f7db0d7dc7c5f4fa8ffea0}
+
+
+Parse a J\+S\+ON configuration object specifying enabled modules. 
+
+Enabled modules are instantiated with specified settings and added to manager lists for managing. Called by parse\+\_\+config and parse\+\_\+config\+\_\+\+SD 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json\+\_\+config} & Configuration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!parse\+\_\+config\+\_\+\+SD@{parse\+\_\+config\+\_\+\+SD}}
+\index{parse\+\_\+config\+\_\+\+SD@{parse\+\_\+config\+\_\+\+SD}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{parse\+\_\+config\+\_\+\+S\+D(const char $\ast$config\+\_\+file)}{parse_config_SD(const char *config_file)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::parse\+\_\+config\+\_\+\+SD (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{config\+\_\+file}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_adbcbf45453af8fd47dc6c536447540be}{}\label{class_loom_manager_adbcbf45453af8fd47dc6c536447540be}
+
+
+Parse a J\+S\+ON configuration on SD card specifying enabled modules. 
+
+Enabled modules are instantiated with specified settings and added to manager lists for managing. Json should be on a single line in a .txt file. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json\+\_\+config} & Configuration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!parse\+\_\+config\+\_\+serial@{parse\+\_\+config\+\_\+serial}}
+\index{parse\+\_\+config\+\_\+serial@{parse\+\_\+config\+\_\+serial}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{parse\+\_\+config\+\_\+serial()}{parse_config_serial()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::parse\+\_\+config\+\_\+serial (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a22d5a375034b484461a9488889cc348a}{}\label{class_loom_manager_a22d5a375034b484461a9488889cc348a}
+\index{Loom\+Manager@{Loom\+Manager}!pause@{pause}}
+\index{pause@{pause}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{pause(const uint16\+\_\+t ms) const }{pause(const uint16_t ms) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::pause (
+\begin{DoxyParamCaption}
+\item[{const uint16\+\_\+t}]{ms}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_a3e57c97dd28717002cf11a1cff794239}{}\label{class_loom_manager_a3e57c97dd28717002cf11a1cff794239}
+
+
+Delay milliseconds. 
+
+\index{Loom\+Manager@{Loom\+Manager}!pause@{pause}}
+\index{pause@{pause}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{pause() const }{pause() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::pause (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_a8d3dba74d36bf91a7356f08f0012268e}{}\label{class_loom_manager_a8d3dba74d36bf91a7356f08f0012268e}
+
+
+Delay milliseconds based on interval member. 
+
+Uses interval member as value \index{Loom\+Manager@{Loom\+Manager}!P\+C\+F8523@{P\+C\+F8523}}
+\index{P\+C\+F8523@{P\+C\+F8523}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{P\+C\+F8523(const uint8\+\_\+t idx=0)}{PCF8523(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+P\+C\+F8523} \& Loom\+Manager\+::\+P\+C\+F8523 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a80eaaf9c4a44b04fb17059d7b739c30f}{}\label{class_loom_manager_a80eaaf9c4a44b04fb17059d7b739c30f}
+\index{Loom\+Manager@{Loom\+Manager}!power\+\_\+down@{power\+\_\+down}}
+\index{power\+\_\+down@{power\+\_\+down}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{power\+\_\+down()}{power_down()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::power\+\_\+down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a1c7c446561067b986afc77ed1b4454c9}{}\label{class_loom_manager_a1c7c446561067b986afc77ed1b4454c9}
+
+
+Iterate over modules, calling power down method. 
+
+\index{Loom\+Manager@{Loom\+Manager}!power\+\_\+up@{power\+\_\+up}}
+\index{power\+\_\+up@{power\+\_\+up}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{power\+\_\+up()}{power_up()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::power\+\_\+up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_abfb3562addd9910ef7957508d5552ea0}{}\label{class_loom_manager_abfb3562addd9910ef7957508d5552ea0}
+
+
+Iterate over modules, calling power up method. 
+
+\index{Loom\+Manager@{Loom\+Manager}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{print\+\_\+config(const bool print\+\_\+modules\+\_\+config=false)}{print_config(const bool print_modules_config=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{const bool}]{print\+\_\+modules\+\_\+config = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a3dcf9e19b7d583aca8a01cfe9f6ba897}{}\label{class_loom_manager_a3dcf9e19b7d583aca8a01cfe9f6ba897}
+
+
+Print the devices current configuration. 
+
+Lists modules. Optionally also prints configuration of linked modules. \index{Loom\+Manager@{Loom\+Manager}!print\+\_\+device\+\_\+label@{print\+\_\+device\+\_\+label}}
+\index{print\+\_\+device\+\_\+label@{print\+\_\+device\+\_\+label}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{print\+\_\+device\+\_\+label() const }{print_device_label() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::print\+\_\+device\+\_\+label (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{class_loom_manager_a2cbb5e4f1b81ef273b1a07f120cbb06d}{}\label{class_loom_manager_a2cbb5e4f1b81ef273b1a07f120cbb06d}
+
+
+Print the device name as \textquotesingle{}\mbox{[}device\+\_\+name\mbox{]}\textquotesingle{}. 
+
+\index{Loom\+Manager@{Loom\+Manager}!publish\+\_\+all@{publish\+\_\+all}}
+\index{publish\+\_\+all@{publish\+\_\+all}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{publish\+\_\+all(const Json\+Object json)}{publish_all(const JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::publish\+\_\+all (
+\begin{DoxyParamCaption}
+\item[{const Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a85bcc5929215f48af9dffed13bd78862}{}\label{class_loom_manager_a85bcc5929215f48af9dffed13bd78862}
+
+
+Publish. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Data object to publish \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!publish\+\_\+all@{publish\+\_\+all}}
+\index{publish\+\_\+all@{publish\+\_\+all}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{publish\+\_\+all()}{publish_all()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Manager\+::publish\+\_\+all (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_a5cea46f54dd9f891108bc0adf2c2d437}{}\label{class_loom_manager_a5cea46f54dd9f891108bc0adf2c2d437}
+
+
+Publish. 
+
+Calls \hyperlink{class_loom_manager_a85bcc5929215f48af9dffed13bd78862}{publish\+\_\+all(const Json\+Object json)} with interal json \begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Manager@{Loom\+Manager}!Publish\+Plat@{Publish\+Plat}}
+\index{Publish\+Plat@{Publish\+Plat}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Publish\+Plat(const uint8\+\_\+t idx=0)}{PublishPlat(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Publish\+Plat}\& Loom\+Manager\+::\+Publish\+Plat (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a302fccc089e8d608548bc58abd8dccca}{}\label{class_loom_manager_a302fccc089e8d608548bc58abd8dccca}
+\index{Loom\+Manager@{Loom\+Manager}!record@{record}}
+\index{record@{record}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{record()}{record()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::record (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_af62aaa2aea11411f65b3fe1ed2c4c3d7}{}\label{class_loom_manager_af62aaa2aea11411f65b3fe1ed2c4c3d7}
+
+
+Measure and package data. 
+
+Convenience function, current just calls measure then package \index{Loom\+Manager@{Loom\+Manager}!Relay@{Relay}}
+\index{Relay@{Relay}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Relay(const uint8\+\_\+t idx=0)}{Relay(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Relay} \& Loom\+Manager\+::\+Relay (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ad4e0fadb443db115e69cb59e191f812f}{}\label{class_loom_manager_ad4e0fadb443db115e69cb59e191f812f}
+\index{Loom\+Manager@{Loom\+Manager}!S\+D\+C\+A\+RD@{S\+D\+C\+A\+RD}}
+\index{S\+D\+C\+A\+RD@{S\+D\+C\+A\+RD}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{S\+D\+C\+A\+R\+D(const uint8\+\_\+t idx=0)}{SDCARD(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+SD} \& Loom\+Manager\+::\+S\+D\+C\+A\+RD (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_abbbbfdf6def923bc70d7e5e7d806fe67}{}\label{class_loom_manager_abbbbfdf6def923bc70d7e5e7d806fe67}
+\index{Loom\+Manager@{Loom\+Manager}!Servo@{Servo}}
+\index{Servo@{Servo}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Servo(const uint8\+\_\+t idx=0)}{Servo(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Servo} \& Loom\+Manager\+::\+Servo (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a2af6939f38dc800ae338809e64e7941c}{}\label{class_loom_manager_a2af6939f38dc800ae338809e64e7941c}
+\index{Loom\+Manager@{Loom\+Manager}!set\+\_\+device\+\_\+name@{set\+\_\+device\+\_\+name}}
+\index{set\+\_\+device\+\_\+name@{set\+\_\+device\+\_\+name}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+device\+\_\+name(const char $\ast$device\+\_\+name)}{set_device_name(const char *device_name)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::set\+\_\+device\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{device\+\_\+name}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ab19b6f8d14ddbaf8cdada7e7d4d4a983}{}\label{class_loom_manager_ab19b6f8d14ddbaf8cdada7e7d4d4a983}
+
+
+Set the device name. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em device\+\_\+name} & The new device name \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!set\+\_\+instance\+\_\+num@{set\+\_\+instance\+\_\+num}}
+\index{set\+\_\+instance\+\_\+num@{set\+\_\+instance\+\_\+num}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+instance\+\_\+num(const uint8\+\_\+t n)}{set_instance_num(const uint8_t n)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::set\+\_\+instance\+\_\+num (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_manager_ac8bd2ad89162850e9f7615856ba7cd48}{}\label{class_loom_manager_ac8bd2ad89162850e9f7615856ba7cd48}
+
+
+Set device instance number. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n} & New instance number \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!set\+\_\+interval@{set\+\_\+interval}}
+\index{set\+\_\+interval@{set\+\_\+interval}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+interval(const uint16\+\_\+t ms)}{set_interval(const uint16_t ms)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::set\+\_\+interval (
+\begin{DoxyParamCaption}
+\item[{const uint16\+\_\+t}]{ms}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_aba4da59a1f3bf7422be299e6170b2d1c}{}\label{class_loom_manager_aba4da59a1f3bf7422be299e6170b2d1c}
+
+
+Set default time to use for .\hyperlink{class_loom_manager_a3e57c97dd28717002cf11a1cff794239}{pause()} \textbackslash{} .delay(). 
+
+Pause and delay can still take explicit times, but if not provided, this value will be used \index{Loom\+Manager@{Loom\+Manager}!set\+\_\+package\+\_\+verbosity@{set\+\_\+package\+\_\+verbosity}}
+\index{set\+\_\+package\+\_\+verbosity@{set\+\_\+package\+\_\+verbosity}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+package\+\_\+verbosity(const Verbosity v, const bool set\+\_\+modules=false)}{set_package_verbosity(const Verbosity v, const bool set_modules=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::set\+\_\+package\+\_\+verbosity (
+\begin{DoxyParamCaption}
+\item[{const {\bf Verbosity}}]{v, }
+\item[{const bool}]{set\+\_\+modules = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_aa9a1e310be9f6c806ac42421648724df}{}\label{class_loom_manager_aa9a1e310be9f6c806ac42421648724df}
+
+
+Set package verbosity. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em v} & New package verbosity \\
+\hline
+\mbox{\tt in}  & {\em set\+\_\+modules} & Whether or not to also apply setting to modules \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!set\+\_\+print\+\_\+verbosity@{set\+\_\+print\+\_\+verbosity}}
+\index{set\+\_\+print\+\_\+verbosity@{set\+\_\+print\+\_\+verbosity}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+print\+\_\+verbosity(const Verbosity v, const bool set\+\_\+modules=false)}{set_print_verbosity(const Verbosity v, const bool set_modules=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Manager\+::set\+\_\+print\+\_\+verbosity (
+\begin{DoxyParamCaption}
+\item[{const {\bf Verbosity}}]{v, }
+\item[{const bool}]{set\+\_\+modules = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_aa537a373b1aab6150915c1e27a691d7a}{}\label{class_loom_manager_aa537a373b1aab6150915c1e27a691d7a}
+
+
+Set print verbosity. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em v} & New print verbosity \\
+\hline
+\mbox{\tt in}  & {\em set\+\_\+modules} & Whether or not to also apply setting to modules \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Manager@{Loom\+Manager}!S\+H\+T31D@{S\+H\+T31D}}
+\index{S\+H\+T31D@{S\+H\+T31D}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{S\+H\+T31\+D(const uint8\+\_\+t idx=0)}{SHT31D(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+S\+H\+T31D} \& Loom\+Manager\+::\+S\+H\+T31D (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a4ddebb2814e2c4b42604b7e0a31d84e8}{}\label{class_loom_manager_a4ddebb2814e2c4b42604b7e0a31d84e8}
+\index{Loom\+Manager@{Loom\+Manager}!Sleep\+Manager@{Sleep\+Manager}}
+\index{Sleep\+Manager@{Sleep\+Manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Sleep\+Manager(const uint8\+\_\+t idx=0)}{SleepManager(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Sleep\+\_\+\+Manager} \& Loom\+Manager\+::\+Sleep\+Manager (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_aa18ec752187b173a50ff1ac4548100a5}{}\label{class_loom_manager_aa18ec752187b173a50ff1ac4548100a5}
+\index{Loom\+Manager@{Loom\+Manager}!Spool@{Spool}}
+\index{Spool@{Spool}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Spool(const uint8\+\_\+t idx=0)}{Spool(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Spool\+Publish \& Loom\+Manager\+::\+Spool (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a4ca73cdf90feff2138e037a19e22f9de}{}\label{class_loom_manager_a4ca73cdf90feff2138e037a19e22f9de}
+\index{Loom\+Manager@{Loom\+Manager}!S\+T\+E\+M\+MA@{S\+T\+E\+M\+MA}}
+\index{S\+T\+E\+M\+MA@{S\+T\+E\+M\+MA}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{S\+T\+E\+M\+M\+A(const uint8\+\_\+t idx=0)}{STEMMA(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+S\+T\+E\+M\+MA} \& Loom\+Manager\+::\+S\+T\+E\+M\+MA (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_abb8191fc02e773c230f73e30309bb8c4}{}\label{class_loom_manager_abb8191fc02e773c230f73e30309bb8c4}
+\index{Loom\+Manager@{Loom\+Manager}!Stepper@{Stepper}}
+\index{Stepper@{Stepper}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Stepper(const uint8\+\_\+t idx=0)}{Stepper(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Stepper} \& Loom\+Manager\+::\+Stepper (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a4e1f0a483f7b8e7c94b6e6c6c5e0720d}{}\label{class_loom_manager_a4e1f0a483f7b8e7c94b6e6c6c5e0720d}
+\index{Loom\+Manager@{Loom\+Manager}!Temp\+Sync@{Temp\+Sync}}
+\index{Temp\+Sync@{Temp\+Sync}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Temp\+Sync(const uint8\+\_\+t idx=0)}{TempSync(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Temp\+Sync} \& Loom\+Manager\+::\+Temp\+Sync (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ad80f6ceba81939515ab09f92434bb13e}{}\label{class_loom_manager_ad80f6ceba81939515ab09f92434bb13e}
+\index{Loom\+Manager@{Loom\+Manager}!T\+M\+P007@{T\+M\+P007}}
+\index{T\+M\+P007@{T\+M\+P007}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{T\+M\+P007(const uint8\+\_\+t idx=0)}{TMP007(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+T\+M\+P007} \& Loom\+Manager\+::\+T\+M\+P007 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_ae0c9f52e3ec5d968d400e2dd7221c91d}{}\label{class_loom_manager_ae0c9f52e3ec5d968d400e2dd7221c91d}
+\index{Loom\+Manager@{Loom\+Manager}!T\+S\+L2561@{T\+S\+L2561}}
+\index{T\+S\+L2561@{T\+S\+L2561}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{T\+S\+L2561(const uint8\+\_\+t idx=0)}{TSL2561(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+T\+S\+L2561} \& Loom\+Manager\+::\+T\+S\+L2561 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a4ba1236ae2fb5fad91a7b7e34270ed7c}{}\label{class_loom_manager_a4ba1236ae2fb5fad91a7b7e34270ed7c}
+\index{Loom\+Manager@{Loom\+Manager}!T\+S\+L2591@{T\+S\+L2591}}
+\index{T\+S\+L2591@{T\+S\+L2591}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{T\+S\+L2591(const uint8\+\_\+t idx=0)}{TSL2591(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+T\+S\+L2591} \& Loom\+Manager\+::\+T\+S\+L2591 (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a5fdae347776c8fe96de34a082100d354}{}\label{class_loom_manager_a5fdae347776c8fe96de34a082100d354}
+\index{Loom\+Manager@{Loom\+Manager}!Warm\+Up\+Manager@{Warm\+Up\+Manager}}
+\index{Warm\+Up\+Manager@{Warm\+Up\+Manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Warm\+Up\+Manager(const uint8\+\_\+t idx=0)}{WarmUpManager(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Warm\+Up\+\_\+\+Manager} \& Loom\+Manager\+::\+Warm\+Up\+Manager (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_afb0cc398b36594b1389aaceb0873c9e9}{}\label{class_loom_manager_afb0cc398b36594b1389aaceb0873c9e9}
+\index{Loom\+Manager@{Loom\+Manager}!Wi\+Fi@{Wi\+Fi}}
+\index{Wi\+Fi@{Wi\+Fi}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Wi\+Fi(const uint8\+\_\+t idx=0)}{WiFi(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Wi\+Fi} \& Loom\+Manager\+::\+Wi\+Fi (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a52b36254942ce3e0f91212416258963d}{}\label{class_loom_manager_a52b36254942ce3e0f91212416258963d}
+\index{Loom\+Manager@{Loom\+Manager}!Z\+X\+Gesture@{Z\+X\+Gesture}}
+\index{Z\+X\+Gesture@{Z\+X\+Gesture}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Z\+X\+Gesture(const uint8\+\_\+t idx=0)}{ZXGesture(const uint8_t idx=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Z\+X\+Gesture} \& Loom\+Manager\+::\+Z\+X\+Gesture (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{idx = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_manager_a38313cd58f25f7c3d9766d32bbb5e492}{}\label{class_loom_manager_a38313cd58f25f7c3d9766d32bbb5e492}
+
+
+\subsection{Friends And Related Function Documentation}
+\index{Loom\+Manager@{Loom\+Manager}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Batch\+SD}{Loom_BatchSD}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Loom\+\_\+\+Batch\+SD}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{class_loom_manager_a6e9a09b43cf35fd3138c6787b589f320}{}\label{class_loom_manager_a6e9a09b43cf35fd3138c6787b589f320}
+\index{Loom\+Manager@{Loom\+Manager}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Interrupt\+\_\+\+Manager}{Loom_Interrupt_Manager}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Loom\+\_\+\+Interrupt\+\_\+\+Manager}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{class_loom_manager_a008d5139e80cc67e9facc1611e7e30be}{}\label{class_loom_manager_a008d5139e80cc67e9facc1611e7e30be}
+\index{Loom\+Manager@{Loom\+Manager}!Loom\+\_\+\+SD@{Loom\+\_\+\+SD}}
+\index{Loom\+\_\+\+SD@{Loom\+\_\+\+SD}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+SD}{Loom_SD}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Loom\+\_\+\+SD}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{class_loom_manager_a16fed8610f64b07f59a179e88627f381}{}\label{class_loom_manager_a16fed8610f64b07f59a179e88627f381}
+\index{Loom\+Manager@{Loom\+Manager}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Sleep\+\_\+\+Manager}{Loom_Sleep_Manager}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Loom\+\_\+\+Sleep\+\_\+\+Manager}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{class_loom_manager_a9d93d402309f8410307da6ff54acd40d}{}\label{class_loom_manager_a9d93d402309f8410307da6ff54acd40d}
+\index{Loom\+Manager@{Loom\+Manager}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+N\+T\+P\+Sync}{LoomNTPSync}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Loom\+N\+T\+P\+Sync}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{class_loom_manager_ac23a5e689f21bc3c5dc04a499b9a905b}{}\label{class_loom_manager_ac23a5e689f21bc3c5dc04a499b9a905b}
+\index{Loom\+Manager@{Loom\+Manager}!Loom\+R\+TC@{Loom\+R\+TC}}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+R\+TC}{LoomRTC}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Loom\+R\+TC}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{class_loom_manager_ad460f63d437defbca6d2c4cf1b03f084}{}\label{class_loom_manager_ad460f63d437defbca6d2c4cf1b03f084}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+Manager@{Loom\+Manager}!device\+\_\+name@{device\+\_\+name}}
+\index{device\+\_\+name@{device\+\_\+name}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{device\+\_\+name}{device_name}}]{\setlength{\rightskip}{0pt plus 5cm}char Loom\+Manager\+::device\+\_\+name\mbox{[}20\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_aac06e8c17477ab5d8991e782f9ffecca}{}\label{class_loom_manager_aac06e8c17477ab5d8991e782f9ffecca}
+
+
+The name of the device. 
+
+\index{Loom\+Manager@{Loom\+Manager}!device\+\_\+type@{device\+\_\+type}}
+\index{device\+\_\+type@{device\+\_\+type}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{device\+\_\+type}{device_type}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Device\+Type} Loom\+Manager\+::device\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_af280305895cc3b2c5022d4a5fabeb2c4}{}\label{class_loom_manager_af280305895cc3b2c5022d4a5fabeb2c4}
+
+
+Device type (Hub / Node) 
+
+\index{Loom\+Manager@{Loom\+Manager}!doc@{doc}}
+\index{doc@{doc}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{doc}{doc}}]{\setlength{\rightskip}{0pt plus 5cm}Static\+Json\+Document$<$2000$>$ Loom\+Manager\+::doc\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_ac1b761a5c37d853db374c13a1cb3226c}{}\label{class_loom_manager_ac1b761a5c37d853db374c13a1cb3226c}
+
+
+Json data. 
+
+\index{Loom\+Manager@{Loom\+Manager}!instance@{instance}}
+\index{instance@{instance}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{instance}{instance}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+Manager\+::instance\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_af2ce718d7f1d10bdd48344acabf47488}{}\label{class_loom_manager_af2ce718d7f1d10bdd48344acabf47488}
+
+
+The instance / channel ID within the subnet. 
+
+\index{Loom\+Manager@{Loom\+Manager}!interrupt\+\_\+manager@{interrupt\+\_\+manager}}
+\index{interrupt\+\_\+manager@{interrupt\+\_\+manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{interrupt\+\_\+manager}{interrupt_manager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Interrupt\+\_\+\+Manager}$\ast$ Loom\+Manager\+::interrupt\+\_\+manager = nullptr\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_a9e706e9a8e7acdd2a92ef77121921a0c}{}\label{class_loom_manager_a9e706e9a8e7acdd2a92ef77121921a0c}
+\index{Loom\+Manager@{Loom\+Manager}!interval@{interval}}
+\index{interval@{interval}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{interval}{interval}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+Manager\+::interval\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_af5742e2169b750d8b4221778e5c9f629}{}\label{class_loom_manager_af5742e2169b750d8b4221778e5c9f629}
+
+
+Default value for \hyperlink{class_loom_manager_a3e57c97dd28717002cf11a1cff794239}{pause()} Used so that manager can control interval, rather than code in .ino. 
+
+\index{Loom\+Manager@{Loom\+Manager}!modules@{modules}}
+\index{modules@{modules}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{modules}{modules}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Loom\+Module}$\ast$$>$ Loom\+Manager\+::modules\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_a2880117fb788e2210560e87ed655cb8e}{}\label{class_loom_manager_a2880117fb788e2210560e87ed655cb8e}
+
+
+Vectors of \hyperlink{class_loom_module}{Loom\+Module} pointers. 
+
+\index{Loom\+Manager@{Loom\+Manager}!package\+\_\+verbosity@{package\+\_\+verbosity}}
+\index{package\+\_\+verbosity@{package\+\_\+verbosity}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{package\+\_\+verbosity}{package_verbosity}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Verbosity} Loom\+Manager\+::package\+\_\+verbosity\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_a7e57c09ed534c554f96c457127294f20}{}\label{class_loom_manager_a7e57c09ed534c554f96c457127294f20}
+
+
+Package detail verbosity. 
+
+\index{Loom\+Manager@{Loom\+Manager}!packet\+\_\+number@{packet\+\_\+number}}
+\index{packet\+\_\+number@{packet\+\_\+number}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{packet\+\_\+number}{packet_number}}]{\setlength{\rightskip}{0pt plus 5cm}uint Loom\+Manager\+::packet\+\_\+number = 1\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_a7537185cd89f2b472d338268fa2418c9}{}\label{class_loom_manager_a7537185cd89f2b472d338268fa2418c9}
+
+
+Packet number, incremented each time package is called. 
+
+\index{Loom\+Manager@{Loom\+Manager}!print\+\_\+verbosity@{print\+\_\+verbosity}}
+\index{print\+\_\+verbosity@{print\+\_\+verbosity}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{print\+\_\+verbosity}{print_verbosity}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Verbosity} Loom\+Manager\+::print\+\_\+verbosity\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_a00b6fc4d662e25ea1b88a427909b8a94}{}\label{class_loom_manager_a00b6fc4d662e25ea1b88a427909b8a94}
+
+
+Print detail verbosity. 
+
+\index{Loom\+Manager@{Loom\+Manager}!rtc\+\_\+module@{rtc\+\_\+module}}
+\index{rtc\+\_\+module@{rtc\+\_\+module}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{rtc\+\_\+module}{rtc_module}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+R\+TC}$\ast$ Loom\+Manager\+::rtc\+\_\+module = nullptr\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_a5ff1841a189242d33d2f0ff313e8a74a}{}\label{class_loom_manager_a5ff1841a189242d33d2f0ff313e8a74a}
+\index{Loom\+Manager@{Loom\+Manager}!sleep\+\_\+manager@{sleep\+\_\+manager}}
+\index{sleep\+\_\+manager@{sleep\+\_\+manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{sleep\+\_\+manager}{sleep_manager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Sleep\+\_\+\+Manager}$\ast$ Loom\+Manager\+::sleep\+\_\+manager = nullptr\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_a2c63f985019cf7ee5766ab503cd7f562}{}\label{class_loom_manager_a2c63f985019cf7ee5766ab503cd7f562}
+\index{Loom\+Manager@{Loom\+Manager}!warmup\+\_\+manager@{warmup\+\_\+manager}}
+\index{warmup\+\_\+manager@{warmup\+\_\+manager}!Loom\+Manager@{Loom\+Manager}}
+\subsubsection[{\texorpdfstring{warmup\+\_\+manager}{warmup_manager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}$\ast$ Loom\+Manager\+::warmup\+\_\+manager = nullptr\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_manager_aa5ef4bac083e23282de91ad886ee5c7d}{}\label{class_loom_manager_aa5ef4bac083e23282de91ad886ee5c7d}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{_manager_8h}{Manager.\+h}\item 
+src/\hyperlink{_manager_8cpp}{Manager.\+cpp}\item 
+src/\hyperlink{_manager___module___access_8cpp}{Manager\+\_\+\+Module\+\_\+\+Access.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LoomModule class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          LoomModule <span class="m-thin">class</span>
+        </h1>
+        <p>Abstract root of Loom component modules inheritance hierarchy.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+                <li><a href="#miscellaneous">MISCELLANEOUS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>All modules in Loom inherit from <a href="class_loom_module.html" class="m-doc">LoomModule</a></p><aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom_module.html">LoomModule Documentation</a></li></ul></aside>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom___interrupt___manager.html" class="m-doc">Loom_Interrupt_Manager</a>
+            </dt>
+            <dd>Submanager for managing interrupts, timers, and stopwatches.</dd>
+            <dt>
+              class <a href="class_loom___multiplexer.html" class="m-doc">Loom_Multiplexer</a>
+            </dt>
+            <dd>Multiplexer manager for interfacing with multiple I2C sensors.</dd>
+            <dt>
+              class <a href="class_loom___sleep___manager.html" class="m-doc">Loom_Sleep_Manager</a>
+            </dt>
+            <dd>Submanager to manage sleep functionality.</dd>
+            <dt>
+              class <a href="class_loom_actuator.html" class="m-doc">LoomActuator</a>
+            </dt>
+            <dd>Abstract base class of actuator modules.</dd>
+            <dt>
+              class <a href="class_loom_comm_plat.html" class="m-doc">LoomCommPlat</a>
+            </dt>
+            <dd>Abstract base of communication platform modules.</dd>
+            <dt>
+              class <a href="class_loom_internet_plat.html" class="m-doc">LoomInternetPlat</a>
+            </dt>
+            <dd>Abstract internet communication module.</dd>
+            <dt>
+              class <a href="class_loom_log_plat.html" class="m-doc">LoomLogPlat</a>
+            </dt>
+            <dd>Abstract base of logging platforms.</dd>
+            <dt>
+              class <a href="class_loom_n_t_p_sync.html" class="m-doc">LoomNTPSync</a>
+            </dt>
+            <dd>Glue code to synchronize an RTC using an InternetPlat.</dd>
+            <dt>
+              class <a href="class_loom_publish_plat.html" class="m-doc">LoomPublishPlat</a>
+            </dt>
+            <dd>Abstract internet publishing module, implementing google sheets and mongodb functionality.</dd>
+            <dt>
+              class <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>
+            </dt>
+            <dd>Abstract base class of RTC modules.</dd>
+            <dt>
+              class <a href="class_loom_sensor.html" class="m-doc">LoomSensor</a>
+            </dt>
+            <dd>Abstract root of Loom sensor modules hierarchy.</dd>
+            <dt>
+              class <a href="class_loom_subscribe_plat.html" class="m-doc">LoomSubscribePlat</a>
+            </dt>
+            <dd>Abstract subscribe platform module.</dd>
+            <dt>
+              class <a href="class_loom_temp_sync.html" class="m-doc">LoomTempSync</a>
+            </dt>
+            <dd>Used to synchronize temperatures between sensors that read sensors and modules that need it.</dd>
+          </dl>
+        </section>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">Type</a> { </span><span class="m-doc-wrap"><a href="#aee91d0a75140d51ee428fc2d4417d865a88183b946cc5f0e8c96b2e66e1c74a7e" class="m-doc">Unknown</a> = 0,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a6311ae17c1ee52b36e68aaf4ad066387" class="m-doc">Other</a> =1000,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a4862a5de39e268e2f48baaf4acaa7cdf" class="m-doc">Interrupt_Manager</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a99431851f2f2612986f845d9b40cacf6" class="m-doc">Sleep_Manager</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a6667632eb808086429b4ca435a919bf5" class="m-doc">Multiplexer</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a5c54cb8f927a6c5a90622e1c7bd0bda5" class="m-doc">NTP</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865adce3fb50a4bc330e546fd186739e24ed" class="m-doc">TempSync</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865acd235875816a9408700833b8c74ab451" class="m-doc">WarmUp_Manager</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a06b185256c71c1aec263c6e22bf8ef6b" class="m-doc">Sensor</a> =2000,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a3d953aa7cfa5ffe0fde34551d918c76c" class="m-doc">Analog</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a0bb8309239953b782fec18706fe60b4a" class="m-doc">Digital</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865afb87bf1fc88386ca21395991f90fff95" class="m-doc">I2C</a> =2100,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a6d21d762b94797d22ffe78d6542e61ab" class="m-doc">ADS1115</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a527de70670a90843118260d9493bcbf4" class="m-doc">AS7262</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865ad6baeaa4fb2dc6d299c096803c785dbc" class="m-doc">AS7263</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865ac8a79265342226bcdd6949de5295b273" class="m-doc">AS7265X</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865afaee4d8a6b8dbeddca64e96e25929b81" class="m-doc">FXAS21002</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a5178d465d9869c304ec488d1d1d6059a" class="m-doc">FXOS8700</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a2a81ef230c5c7ad7d81988dd5e4b834c" class="m-doc">LIS3DH</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a428c702f773fc2aa1cefa288bebdb27b" class="m-doc">MB1232</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a779354713151cb49d14a173bf608926d" class="m-doc">MMA8451</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865af1c3e607be363407b5eb8e870477a9d7" class="m-doc">MPU6050</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865abf2c722c90ddbbd2403395e349a31844" class="m-doc">MS5803</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a705f45d84f6cd36287095af9ecac5efa" class="m-doc">SHT31D</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865ad00882122977dad77c50e74f60dac3f3" class="m-doc">TMP007</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865aa9d22d3b656f50802d180ec6d21a7437" class="m-doc">TSL2561</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a24572bad020934b52809215a48ab057d" class="m-doc">TSL2591</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a1b6b1307f071478b18dcd7d8714328ff" class="m-doc">ZXGesture</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865ab266849811ab468397b9980f7a5f6457" class="m-doc">STEMMA</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a637b3bc6a90037a3db249c4d65cd1f1b" class="m-doc">SDI12</a> =2200,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865ada4a393183666f7a62eb7387702bde07" class="m-doc">Decagon5TM</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a03424cb92cab03f739aa963e794c4b92" class="m-doc">DecagonGS3</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a33dc5312b091968f5a120c2484d40df8" class="m-doc">SPI</a> =2300,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865ab03c58e511fd87c010c7e4b894354990" class="m-doc">MAX31855</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865ad114b3bc0f0daeb7cd181dda88554c1b" class="m-doc">MAX31856</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865aff46f35af219adc3daffbb10e205df83" class="m-doc">L_SERIAL</a> =2400,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a92f11b2c64f9b85861d5dcb84b14742e" class="m-doc">K30</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865afc65b1fe417628d7c6c7bd9ebfbc50c5" class="m-doc">L_RTC</a> =3000,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a95e16e1a4c4ff4bfd6e3798969663b0c" class="m-doc">DS3231</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865abfc5e432a6b2493218ff884dab001482" class="m-doc">PCF8523</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865aa2ec2ef7ebb614cf7dd5d78b9bbf59b3" class="m-doc">Actuator</a> =4000,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865aff8561f7c2a8b57c9eb4eb11ebac161e" class="m-doc">Neopixel</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a34c4c50fc7bdd0394f3954f73f2be34d" class="m-doc">Relay</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a365687df33f7052679dca2d38edcfaf7" class="m-doc">Servo</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a370509b5dfe60deb7be545e0a7aff04c" class="m-doc">Stepper</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a4e472f8ae62a269048664d59be7081b5" class="m-doc">LogPlat</a> =5000,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a0c9b2f3f3530345ea5cd8c586478d2b7" class="m-doc">OLED</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865ac66fbf5395181adce9b08d44876c88f9" class="m-doc">SDCARD</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865acb3aae462c24d74a186926822f40f418" class="m-doc">BATCHSD</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a621ea64935d8300364bc5a479c622a37" class="m-doc">CommPlat</a> =6000,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a987f947a83fbf1022695e132547e0e19" class="m-doc">LoRa</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865ad62c72d62c9a14731ce877d226d7e534" class="m-doc">nRF</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a7deff39593c9cecd401b795d6e1ae04b" class="m-doc">Bluetooth</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a095cd7ef32631598b47bef1e6070c437" class="m-doc">InternetPlat</a> =7000,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865abe2ae05fb04ddcf6efa31e63e0f0e111" class="m-doc">Ethernet</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a3bf5d41ed0ac852c9a2e2d3a1161e26d" class="m-doc">WiFi</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865acc981ecc65ecf63ad1673cbec9c64198" class="m-doc">LTE</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a81d5311fa1f8170585d6f4baaa189bc9" class="m-doc">PublishPlat</a> =8000,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a1992455436de79b1a1f7f708bee6f037" class="m-doc">GoogleSheets</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a6b2ed7e0ac3a1ef150971bdc599278f5" class="m-doc">MaxPub</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a321256c36911eaeef98e3742f4baead2" class="m-doc">SpoolPub</a>,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865a8e3ec8e74532cd668a3f565b737d148f" class="m-doc">SubscribePlats</a> =9000,
+              <a href="#aee91d0a75140d51ee428fc2d4417d865abdeb20b27627b3c9604d0f2a568fb906" class="m-doc">MaxSub</a> }</span>
+            </dt>
+            <dd>Enum to check against to when finding individual component managed by a <a href="class_loom_manager.html" class="m-doc">LoomManager</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a0c6ecc60315f95af551138dc83567068" class="m-doc">Category</a> { </span><span class="m-doc-wrap"><a href="#a0c6ecc60315f95af551138dc83567068a88183b946cc5f0e8c96b2e66e1c74a7e" class="m-doc">Unknown</a> =0,
+              <a href="#a0c6ecc60315f95af551138dc83567068a6311ae17c1ee52b36e68aaf4ad066387" class="m-doc">Other</a> =1,
+              <a href="#a0c6ecc60315f95af551138dc83567068a06b185256c71c1aec263c6e22bf8ef6b" class="m-doc">Sensor</a> =2,
+              <a href="#a0c6ecc60315f95af551138dc83567068afc65b1fe417628d7c6c7bd9ebfbc50c5" class="m-doc">L_RTC</a> =3,
+              <a href="#a0c6ecc60315f95af551138dc83567068aa2ec2ef7ebb614cf7dd5d78b9bbf59b3" class="m-doc">Actuator</a> =4,
+              <a href="#a0c6ecc60315f95af551138dc83567068a4e472f8ae62a269048664d59be7081b5" class="m-doc">LogPlat</a> =5,
+              <a href="#a0c6ecc60315f95af551138dc83567068a621ea64935d8300364bc5a479c622a37" class="m-doc">CommPlat</a> =6,
+              <a href="#a0c6ecc60315f95af551138dc83567068a095cd7ef32631598b47bef1e6070c437" class="m-doc">InternetPlat</a> =7,
+              <a href="#a0c6ecc60315f95af551138dc83567068a81d5311fa1f8170585d6f4baaa189bc9" class="m-doc">PublishPlat</a> =8,
+              <a href="#a0c6ecc60315f95af551138dc83567068a6882013ad745e1f86f8ae9ff82746579" class="m-doc">SubscribePlat</a> =9 }</span>
+            </dt>
+            <dd>Enum to classify modules.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a152d394f37236a2b159dae19da67eeb0">
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">Type</a> <a href="#a152d394f37236a2b159dae19da67eeb0" class="m-doc-self">module_type</a>
+            </dt>
+            <dd>Module type.</dd>
+            <dt>
+              <a href="class_loom_manager.html" class="m-doc">LoomManager</a>* <a href="#a28fe8b2fb5a9a0d14bebe13ac1c92bdf" class="m-doc">device_manager</a>
+            </dt>
+            <dd>Pointer to manager.</dd>
+            <dt id="a7cb2d5ef593dfc99e938c632f8843c84">
+              const String <a href="#a7cb2d5ef593dfc99e938c632f8843c84" class="m-doc-self">module_name_base</a>
+            </dt>
+            <dd>The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)</dd>
+            <dt>
+              bool <a href="#af61a7b93ef2b9acfc22c7ad7968a45c7" class="m-doc">active</a>
+            </dt>
+            <dd>Whether or not the module should be treated as active.</dd>
+            <dt id="a6e73663a6a5ebdcbe3f92153ca88ce8c">
+              <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> <a href="#a6e73663a6a5ebdcbe3f92153ca88ce8c" class="m-doc-self">print_verbosity</a>
+            </dt>
+            <dd>Print verbosity.</dd>
+            <dt id="aec8db10ee69e265779822792f177f982">
+              <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> <a href="#aec8db10ee69e265779822792f177f982" class="m-doc-self">package_verbosity</a>
+            </dt>
+            <dd>Package verbosity.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a5e0d9e185ade9e2ae5be68fdefb25887" class="m-doc">LoomModule</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name = &quot;Unknown&quot;,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">Type</a> module_type = <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a88183b946cc5f0e8c96b2e66e1c74a7e" class="m-doc">Type::<wbr />Unknown</a>)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt id="aec256a84e0498d723540743849e0166c">
+              <span class="m-doc-wrap-bumper"><a href="#aec256a84e0498d723540743849e0166c" class="m-doc-self">~LoomModule</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8dd3704d1bd38868d5774e48c1073d12" class="m-doc">second_stage_ctor</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Second stage construction.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a84f1c1f3340203a3457b5ffe0bd53a53" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Package a modules measurements or state.</dd>
+            <dt id="aa4e7db1687a95e41ee418c201677fff8">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa4e7db1687a95e41ee418c201677fff8" class="m-doc-self">dispatch</a>(</span><span class="m-doc-wrap">JsonObject json) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Route command to driver.</dd>
+            <dt id="a31ea02275e356c6ce0d01fdb6d4190df">
+              <span class="m-doc-wrap-bumper">void <a href="#a31ea02275e356c6ce0d01fdb6d4190df" class="m-doc-self">power_down</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Turn off any hardware.</dd>
+            <dt id="aa0683cb24ce1cc49273440e79f035e23">
+              <span class="m-doc-wrap-bumper">void <a href="#aa0683cb24ce1cc49273440e79f035e23" class="m-doc-self">power_up</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Turn on any hardware.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a06747f16d76bde35575557c7515adcc0" class="m-doc">add_config</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Add configuration information to JsonObject.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a4385842da9226014283136b3e37dde88">
+              <span class="m-doc-wrap-bumper">void <a href="#a4385842da9226014283136b3e37dde88" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt id="a96505b45f2e712eab5de873b4d49dfc7">
+              <span class="m-doc-wrap-bumper">void <a href="#a96505b45f2e712eab5de873b4d49dfc7" class="m-doc-self">print_state</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Display current state of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a636735282f2208ab71403ae5720622ba" class="m-doc">print_module_label</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Print the module name as a label.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4e040c36df109bfa39d9499828d3df1d" class="m-doc">get_module_type</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">Type</a></span>
+            </dt>
+            <dd>Get module type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4752224a62f535fbaf3777aa486fc3c5" class="m-doc">get_device_manager</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="class_loom_manager.html" class="m-doc">LoomManager</a>*</span>
+            </dt>
+            <dd>Get the device manager class if linked.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7ff57ffb2d8fabc484f6678f7fae8082" class="m-doc">get_module_name</a>(</span><span class="m-doc-wrap">char* buf) const</span>
+            </dt>
+            <dd>Copy module name into buffer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a95fbb30f0ab618f3305659f9e7a4bdaf" class="m-doc">get_module_name</a>(</span><span class="m-doc-wrap">) const -&gt; const char*</span>
+            </dt>
+            <dd>Get module name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab17b0faa49c40c08692714ca6064a8f7" class="m-doc">get_print_verbosity</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a></span>
+            </dt>
+            <dd>Get print verbosity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac259e773fa409b96fa6b43d8edeaa96b" class="m-doc">get_package_verbosity</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a></span>
+            </dt>
+            <dd>Get package verbosity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1bb79ab68994c51851998a31b982da72" class="m-doc">get_active</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Get whether or not the module should be treated as active.</dd>
+            <dt id="abe41c7748d6f6566b6e96918dca12106">
+              <span class="m-doc-wrap-bumper">auto <a href="#abe41c7748d6f6566b6e96918dca12106" class="m-doc-self">category</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="class_loom_module.html#a0c6ecc60315f95af551138dc83567068" class="m-doc">Category</a></span>
+            </dt>
+            <dd>Get the category of the module.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#adc08f87bf7c0c0988decee196a714396" class="m-doc">link_device_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LM) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Add pointer back to device manager.</dd>
+            <dt id="a5008d47cff50ffa2e6fe4f813c3ffa1e">
+              <span class="m-doc-wrap-bumper">void <a href="#a5008d47cff50ffa2e6fe4f813c3ffa1e" class="m-doc-self">set_print_verbosity</a>(</span><span class="m-doc-wrap">const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> v)</span>
+            </dt>
+            <dd>Set print verbosity Controlls level of detail included in debug prints.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a096b13557553a7fb283a32ab3645815b" class="m-doc">set_package_verbosity</a>(</span><span class="m-doc-wrap">const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> v)</span>
+            </dt>
+            <dd>Set package verbosity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aaac9a713ba6389818cefdc740718ad9e" class="m-doc">set_active</a>(</span><span class="m-doc-wrap">const bool enable)</span>
+            </dt>
+            <dd>Set whether or not the module should be treated as active.</dd>
+          </dl>
+        </section>
+        <section id="miscellaneous">
+          <h2><a href="#miscellaneous">MISCELLANEOUS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#aaf32cb6107f0402822c615e9cd38eaef" class="m-doc">enum_verbosity_string</a>(</span><span class="m-doc-wrap">const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> v) -&gt; const char*</span>
+            </dt>
+            <dd>Get string of name associated with verbosity enum.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a7fc17923cdef15e3a60a871a2458eaad" class="m-doc">enum_category_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom_module.html#a0c6ecc60315f95af551138dc83567068" class="m-doc">Category</a> c) -&gt; const char*</span>
+            </dt>
+            <dd>Get string of the category associated with a Category.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="aee91d0a75140d51ee428fc2d4417d865"><div>
+            <h3>
+              enum LoomModule::<wbr /><a href="#aee91d0a75140d51ee428fc2d4417d865" class="m-doc-self">Type</a>
+            </h3>
+            <p>Enum to check against to when finding individual component managed by a <a href="class_loom_manager.html" class="m-doc">LoomManager</a>.</p>
+<p>Used because we cannot use dynamic_cast to check type of modules (rtti disabled by Arduino IDE)</p>
+          </div></section>
+          <section class="m-doc-details" id="a0c6ecc60315f95af551138dc83567068"><div>
+            <h3>
+              enum LoomModule::<wbr /><a href="#a0c6ecc60315f95af551138dc83567068" class="m-doc-self">Category</a>
+            </h3>
+            <p>Enum to classify modules.</p>
+<p>Similar <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> but represents the astract classes rather than the leaf node modules in the inheritance tree. For a given module, its category often shares a name with the abstract class it is derived from</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068a88183b946cc5f0e8c96b2e66e1c74a7e" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068a88183b946cc5f0e8c96b2e66e1c74a7e">Unknown</a></td>
+                  <td>
+                  <p>Unknown.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068a6311ae17c1ee52b36e68aaf4ad066387" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068a6311ae17c1ee52b36e68aaf4ad066387">Other</a></td>
+                  <td>
+                  <p>Other.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068a06b185256c71c1aec263c6e22bf8ef6b" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068a06b185256c71c1aec263c6e22bf8ef6b">Sensor</a></td>
+                  <td>
+                  <p>Sensors.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068afc65b1fe417628d7c6c7bd9ebfbc50c5" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068afc65b1fe417628d7c6c7bd9ebfbc50c5">L_RTC</a></td>
+                  <td>
+                  <p>RTC.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068aa2ec2ef7ebb614cf7dd5d78b9bbf59b3" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068aa2ec2ef7ebb614cf7dd5d78b9bbf59b3">Actuator</a></td>
+                  <td>
+                  <p>Actuators.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068a4e472f8ae62a269048664d59be7081b5" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068a4e472f8ae62a269048664d59be7081b5">LogPlat</a></td>
+                  <td>
+                  <p>LogPlats.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068a621ea64935d8300364bc5a479c622a37" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068a621ea64935d8300364bc5a479c622a37">CommPlat</a></td>
+                  <td>
+                  <p>CommPlats.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068a095cd7ef32631598b47bef1e6070c437" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068a095cd7ef32631598b47bef1e6070c437">InternetPlat</a></td>
+                  <td>
+                  <p>InternetPlats.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068a81d5311fa1f8170585d6f4baaa189bc9" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068a81d5311fa1f8170585d6f4baaa189bc9">PublishPlat</a></td>
+                  <td>
+                  <p>PublishPlats.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a0c6ecc60315f95af551138dc83567068a6882013ad745e1f86f8ae9ff82746579" class="m-doc-self" id="a0c6ecc60315f95af551138dc83567068a6882013ad745e1f86f8ae9ff82746579">SubscribePlat</a></td>
+                  <td>
+                  <p>SubscribePlats.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a5e0d9e185ade9e2ae5be68fdefb25887"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5e0d9e185ade9e2ae5be68fdefb25887" class="m-doc-self">LoomModule</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name = &quot;Unknown&quot;,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">Type</a> module_type = <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a88183b946cc5f0e8c96b2e66e1c74a7e" class="m-doc">Type::<wbr />Unknown</a>)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>module_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Name of the module (provided by derived classes)</td>
+                </tr>
+                <tr>
+                  <td>module_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Type of the module (provided by derived classes)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8dd3704d1bd38868d5774e48c1073d12"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8dd3704d1bd38868d5774e48c1073d12" class="m-doc-self">second_stage_ctor</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Second stage construction.</p>
+<p>Perform any actions that need all of the devices to be initized beforehand - such as looking up an internet platform This function is guranteed to be called AFTER all modules have been constructed.</p>
+          </div></section>
+          <section class="m-doc-details" id="a84f1c1f3340203a3457b5ffe0bd53a53"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a84f1c1f3340203a3457b5ffe0bd53a53" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Package a modules measurements or state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Object to put data into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a06747f16d76bde35575557c7515adcc0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a06747f16d76bde35575557c7515adcc0" class="m-doc-self">add_config</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Add configuration information to JsonObject.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Json configuration object to add to</td>
+                </tr>
+              </tbody>
+            </table>
+<p><a href="class_loom_manager.html" class="m-doc">LoomManager</a> iterates over modules to build complete configuration</p>
+          </div></section>
+          <section class="m-doc-details" id="a636735282f2208ab71403ae5720622ba"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a636735282f2208ab71403ae5720622ba" class="m-doc-self">print_module_label</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Print the module name as a label.</p>
+<p>Used for matching debug prints to corresponding module</p>
+          </div></section>
+          <section class="m-doc-details" id="a4e040c36df109bfa39d9499828d3df1d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">Type</a> LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4e040c36df109bfa39d9499828d3df1d" class="m-doc-self">get_module_type</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get module type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Module type</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4752224a62f535fbaf3777aa486fc3c5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4752224a62f535fbaf3777aa486fc3c5" class="m-doc-self">get_device_manager</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the device manager class if linked.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Pointer to the <a href="class_loom_manager.html" class="m-doc">LoomManager</a>, Null if not linked</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7ff57ffb2d8fabc484f6678f7fae8082"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7ff57ffb2d8fabc484f6678f7fae8082" class="m-doc-self">get_module_name</a>(</span><span class="m-doc-wrap">char* buf) const</span></span>
+            </h3>
+            <p>Copy module name into buffer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">buf&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>The buffer to copy module name into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a95fbb30f0ab618f3305659f9e7a4bdaf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const char* LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a95fbb30f0ab618f3305659f9e7a4bdaf" class="m-doc-self">get_module_name</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get module name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Module name</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab17b0faa49c40c08692714ca6064a8f7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab17b0faa49c40c08692714ca6064a8f7" class="m-doc-self">get_print_verbosity</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get print verbosity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The current verbosity setting</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac259e773fa409b96fa6b43d8edeaa96b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac259e773fa409b96fa6b43d8edeaa96b" class="m-doc-self">get_package_verbosity</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get package verbosity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The current verbosity setting</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1bb79ab68994c51851998a31b982da72"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1bb79ab68994c51851998a31b982da72" class="m-doc-self">get_active</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get whether or not the module should be treated as active.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Whether or not the module is active</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adc08f87bf7c0c0988decee196a714396"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adc08f87bf7c0c0988decee196a714396" class="m-doc-self">link_device_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LM) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Add pointer back to device manager.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">LM&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td><a href="class_loom_manager.html" class="m-doc">LoomManager</a> to point to</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Generally only called when device manager links module to provide pointer both directions. Derived modules may override this for increased function, such as linking a submanager or RTC module.</p>
+          </div></section>
+          <section class="m-doc-details" id="a096b13557553a7fb283a32ab3645815b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a096b13557553a7fb283a32ab3645815b" class="m-doc-self">set_package_verbosity</a>(</span><span class="m-doc-wrap">const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> v)</span></span>
+            </h3>
+            <p>Set package verbosity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">v&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The verbosity setting</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Controlls level of detail included in bundles</p>
+          </div></section>
+          <section class="m-doc-details" id="aaac9a713ba6389818cefdc740718ad9e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaac9a713ba6389818cefdc740718ad9e" class="m-doc-self">set_active</a>(</span><span class="m-doc-wrap">const bool enable)</span></span>
+            </h3>
+            <p>Set whether or not the module should be treated as active.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">enable&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Whether or not to enable module</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aaf32cb6107f0402822c615e9cd38eaef"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static const char* LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaf32cb6107f0402822c615e9cd38eaef" class="m-doc-self">enum_verbosity_string</a>(</span><span class="m-doc-wrap">const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> v)</span></span>
+            </h3>
+            <p>Get string of name associated with verbosity enum.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">v&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Verbosity value to get string representation of</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String of verbosity</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7fc17923cdef15e3a60a871a2458eaad"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static const char* LoomModule::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7fc17923cdef15e3a60a871a2458eaad" class="m-doc-self">enum_category_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom_module.html#a0c6ecc60315f95af551138dc83567068" class="m-doc">Category</a> c)</span></span>
+            </h3>
+            <p>Get string of the category associated with a Category.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">c&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Category value to get string representation of</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>String of category</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a28fe8b2fb5a9a0d14bebe13ac1c92bdf"><div>
+            <h3>
+              <a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LoomModule::<wbr /><a href="#a28fe8b2fb5a9a0d14bebe13ac1c92bdf" class="m-doc-self">device_manager</a> <span class="m-label m-warning">protected</span>
+            </h3>
+            <p>Pointer to manager.</p>
+<p><a href="class_loom_manager.html" class="m-doc">LoomManager</a> provides to any modules passed to add_module</p>
+          </div></section>
+          <section class="m-doc-details" id="af61a7b93ef2b9acfc22c7ad7968a45c7"><div>
+            <h3>
+              bool LoomModule::<wbr /><a href="#af61a7b93ef2b9acfc22c7ad7968a45c7" class="m-doc-self">active</a> <span class="m-label m-warning">protected</span>
+            </h3>
+            <p>Whether or not the module should be treated as active.</p>
+<p>If inactive at setup (due to failed initialization, module will be deleted)</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

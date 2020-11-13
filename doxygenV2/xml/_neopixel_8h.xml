@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_neopixel_8h" kind="file" language="C++">
+    <compoundname>Neopixel.h</compoundname>
+    <includes refid="_actuator_8h" local="yes">Actuator.h</includes>
+    <includes local="no">Adafruit_NeoPixel.h</includes>
+    <includedby refid="_neopixel_8cpp" local="yes">src/Actuators/Neopixel.cpp</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="3015">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3012">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3013" relation="include">
+        </childnode>
+        <childnode refid="3015" relation="include">
+        </childnode>
+        <childnode refid="3016" relation="include">
+        </childnode>
+        <childnode refid="3017" relation="include">
+        </childnode>
+      </node>
+      <node id="3016">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3014" relation="include">
+        </childnode>
+        <childnode refid="3017" relation="include">
+        </childnode>
+      </node>
+      <node id="3013">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3014" relation="include">
+        </childnode>
+      </node>
+      <node id="3017">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3011">
+        <label>Actuator.h</label>
+        <link refid="_actuator_8h"/>
+        <childnode refid="3012" relation="include">
+        </childnode>
+      </node>
+      <node id="3014">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3010">
+        <label>src/Actuators/Neopixel.h</label>
+        <link refid="Neopixel.h"/>
+        <childnode refid="3011" relation="include">
+        </childnode>
+        <childnode refid="3018" relation="include">
+        </childnode>
+      </node>
+      <node id="3018">
+        <label>Adafruit_NeoPixel.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3021">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3022" relation="include">
+        </childnode>
+        <childnode refid="3023" relation="include">
+        </childnode>
+      </node>
+      <node id="3020">
+        <label>src/Actuators/Neopixel.cpp</label>
+        <link refid="_neopixel_8cpp"/>
+      </node>
+      <node id="3019">
+        <label>src/Actuators/Neopixel.h</label>
+        <link refid="Neopixel.h"/>
+        <childnode refid="3020" relation="include">
+        </childnode>
+        <childnode refid="3021" relation="include">
+        </childnode>
+      </node>
+      <node id="3022">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3023">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___neopixel" prot="public">Loom_Neopixel</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Actuators/Neopixel.h"/>
+  </compounddef>
+</doxygen>

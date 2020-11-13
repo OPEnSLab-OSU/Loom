@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_multiplexer_8cpp" kind="file" language="C++">
+    <compoundname>Multiplexer.cpp</compoundname>
+    <includes refid="_multiplexer_8h" local="yes">Multiplexer.h</includes>
+    <includes refid="_a_s7262_8h" local="yes">Sensors/I2C/AS7262.h</includes>
+    <includes refid="_a_s7263_8h" local="yes">Sensors/I2C/AS7263.h</includes>
+    <includes refid="_a_s7265_x_8h" local="yes">Sensors/I2C/AS7265X.h</includes>
+    <includes refid="_f_x_a_s21002_8h" local="yes">Sensors/I2C/FXAS21002.h</includes>
+    <includes refid="_f_x_o_s8700_8h" local="yes">Sensors/I2C/FXOS8700.h</includes>
+    <includes refid="_l_i_s3_d_h_8h" local="yes">Sensors/I2C/LIS3DH.h</includes>
+    <includes refid="_m_b1232_8h" local="yes">Sensors/I2C/MB1232.h</includes>
+    <includes refid="_m_m_a8451_8h" local="yes">Sensors/I2C/MMA8451.h</includes>
+    <includes refid="_m_p_u6050_8h" local="yes">Sensors/I2C/MPU6050.h</includes>
+    <includes refid="_m_s5803_8h" local="yes">Sensors/I2C/MS5803.h</includes>
+    <includes refid="_s_h_t31_d_8h" local="yes">Sensors/I2C/SHT31D.h</includes>
+    <includes refid="_t_m_p007_8h" local="yes">Sensors/I2C/TMP007.h</includes>
+    <includes refid="_t_s_l2561_8h" local="yes">Sensors/I2C/TSL2561.h</includes>
+    <includes refid="_t_s_l2591_8h" local="yes">Sensors/I2C/TSL2591.h</includes>
+    <includes refid="_z_x_gesture_8h" local="yes">Sensors/I2C/ZXGesture.h</includes>
+    <includes refid="_s_t_e_m_m_a_8h" local="yes">Sensors/I2C/STEMMA.h</includes>
+    <includes local="no">Wire.h</includes>
+    <incdepgraph>
+      <node id="4465">
+        <label>MPU6050_tockn.h</label>
+      </node>
+      <node id="4476">
+        <label>Sensors/I2C/ZXGesture.h</label>
+        <link refid="_z_x_gesture_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4477" relation="include">
+        </childnode>
+      </node>
+      <node id="4452">
+        <label>Sensors/I2C/AS7265X.h</label>
+        <link refid="_a_s7265_x_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4453" relation="include">
+        </childnode>
+      </node>
+      <node id="4457">
+        <label>Adafruit_FXOS8700.h</label>
+      </node>
+      <node id="4436">
+        <label>src/Multiplexer.cpp</label>
+        <link refid="Multiplexer.cpp"/>
+        <childnode refid="4437" relation="include">
+        </childnode>
+        <childnode refid="4446" relation="include">
+        </childnode>
+        <childnode refid="4451" relation="include">
+        </childnode>
+        <childnode refid="4452" relation="include">
+        </childnode>
+        <childnode refid="4454" relation="include">
+        </childnode>
+        <childnode refid="4456" relation="include">
+        </childnode>
+        <childnode refid="4458" relation="include">
+        </childnode>
+        <childnode refid="4460" relation="include">
+        </childnode>
+        <childnode refid="4461" relation="include">
+        </childnode>
+        <childnode refid="4464" relation="include">
+        </childnode>
+        <childnode refid="4466" relation="include">
+        </childnode>
+        <childnode refid="4468" relation="include">
+        </childnode>
+        <childnode refid="4470" relation="include">
+        </childnode>
+        <childnode refid="4472" relation="include">
+        </childnode>
+        <childnode refid="4474" relation="include">
+        </childnode>
+        <childnode refid="4476" relation="include">
+        </childnode>
+        <childnode refid="4478" relation="include">
+        </childnode>
+        <childnode refid="4449" relation="include">
+        </childnode>
+      </node>
+      <node id="4470">
+        <label>Sensors/I2C/TMP007.h</label>
+        <link refid="_t_m_p007_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4471" relation="include">
+        </childnode>
+      </node>
+      <node id="4469">
+        <label>Adafruit_SHT31.h</label>
+      </node>
+      <node id="4446">
+        <label>Sensors/I2C/AS7262.h</label>
+        <link refid="_a_s7262_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4450" relation="include">
+        </childnode>
+      </node>
+      <node id="4441">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4438">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4439" relation="include">
+        </childnode>
+        <childnode refid="4441" relation="include">
+        </childnode>
+        <childnode refid="4442" relation="include">
+        </childnode>
+        <childnode refid="4443" relation="include">
+        </childnode>
+      </node>
+      <node id="4478">
+        <label>Sensors/I2C/STEMMA.h</label>
+        <link refid="_s_t_e_m_m_a_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4479" relation="include">
+        </childnode>
+      </node>
+      <node id="4442">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4440" relation="include">
+        </childnode>
+        <childnode refid="4443" relation="include">
+        </childnode>
+      </node>
+      <node id="4455">
+        <label>Adafruit_FXAS21002C.h</label>
+      </node>
+      <node id="4471">
+        <label>Adafruit_TMP007.h</label>
+      </node>
+      <node id="4458">
+        <label>Sensors/I2C/LIS3DH.h</label>
+        <link refid="_l_i_s3_d_h_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4459" relation="include">
+        </childnode>
+      </node>
+      <node id="4466">
+        <label>Sensors/I2C/MS5803.h</label>
+        <link refid="_m_s5803_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4467" relation="include">
+        </childnode>
+      </node>
+      <node id="4477">
+        <label>ZX_Sensor.h</label>
+      </node>
+      <node id="4461">
+        <label>Sensors/I2C/MMA8451.h</label>
+        <link refid="_m_m_a8451_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4462" relation="include">
+        </childnode>
+        <childnode refid="4463" relation="include">
+        </childnode>
+      </node>
+      <node id="4475">
+        <label>Adafruit_TSL2591.h</label>
+      </node>
+      <node id="4464">
+        <label>Sensors/I2C/MPU6050.h</label>
+        <link refid="_m_p_u6050_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4465" relation="include">
+        </childnode>
+      </node>
+      <node id="4439">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4440" relation="include">
+        </childnode>
+      </node>
+      <node id="4453">
+        <label>SparkFun_AS7265X.h</label>
+      </node>
+      <node id="4459">
+        <label>SparkFunLIS3DH.h</label>
+      </node>
+      <node id="4449">
+        <label>Wire.h</label>
+      </node>
+      <node id="4479">
+        <label>Adafruit_seesaw.h</label>
+      </node>
+      <node id="4444">
+        <label>vector</label>
+      </node>
+      <node id="4443">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4463">
+        <label>Adafruit_MMA8451.h</label>
+      </node>
+      <node id="4448">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="4438" relation="include">
+        </childnode>
+      </node>
+      <node id="4445">
+        <label>array</label>
+      </node>
+      <node id="4467">
+        <label>MS5803_02.h</label>
+      </node>
+      <node id="4462">
+        <label>Adafruit_Sensor.h</label>
+      </node>
+      <node id="4472">
+        <label>Sensors/I2C/TSL2561.h</label>
+        <link refid="_t_s_l2561_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4473" relation="include">
+        </childnode>
+      </node>
+      <node id="4454">
+        <label>Sensors/I2C/FXAS21002.h</label>
+        <link refid="_f_x_a_s21002_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4455" relation="include">
+        </childnode>
+      </node>
+      <node id="4440">
+        <label>Arduino.h</label>
+      </node>
+      <node id="4473">
+        <label>Adafruit_TSL2561_U.h</label>
+      </node>
+      <node id="4447">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="4448" relation="include">
+        </childnode>
+        <childnode refid="4449" relation="include">
+        </childnode>
+      </node>
+      <node id="4437">
+        <label>Multiplexer.h</label>
+        <link refid="_multiplexer_8h"/>
+        <childnode refid="4438" relation="include">
+        </childnode>
+        <childnode refid="4444" relation="include">
+        </childnode>
+        <childnode refid="4445" relation="include">
+        </childnode>
+      </node>
+      <node id="4456">
+        <label>Sensors/I2C/FXOS8700.h</label>
+        <link refid="_f_x_o_s8700_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4457" relation="include">
+        </childnode>
+      </node>
+      <node id="4474">
+        <label>Sensors/I2C/TSL2591.h</label>
+        <link refid="_t_s_l2591_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4475" relation="include">
+        </childnode>
+      </node>
+      <node id="4451">
+        <label>Sensors/I2C/AS7263.h</label>
+        <link refid="_a_s7263_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4450" relation="include">
+        </childnode>
+      </node>
+      <node id="4450">
+        <label>AS726X.h</label>
+      </node>
+      <node id="4460">
+        <label>Sensors/I2C/MB1232.h</label>
+        <link refid="_m_b1232_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+      </node>
+      <node id="4468">
+        <label>Sensors/I2C/SHT31D.h</label>
+        <link refid="_s_h_t31_d_8h"/>
+        <childnode refid="4447" relation="include">
+        </childnode>
+        <childnode refid="4469" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Multiplexer.cpp"/>
+  </compounddef>
+</doxygen>

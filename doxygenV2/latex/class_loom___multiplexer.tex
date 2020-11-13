@@ -1,0 +1,476 @@
+\hypertarget{class_loom___multiplexer}{}\section{Loom\+\_\+\+Multiplexer Class Reference}
+\label{class_loom___multiplexer}\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+
+
+Multiplexer manager for interfacing with multiple I2C sensors.  
+
+
+
+
+{\ttfamily \#include $<$Multiplexer.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Multiplexer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_loom___multiplexer__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___multiplexer_a4409df6598098393b5fa3b3012735d55}{Loom\+\_\+\+Multiplexer} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom___multiplexer_af382145cee4e802bbf431e799983423b}{i2c\+\_\+address}=0x71, const uint8\+\_\+t num\+\_\+ports=8, const bool dynamic\+\_\+list=true, const uint update\+\_\+period=5000)
+\begin{DoxyCompactList}\small\item\em Multiplexer module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___multiplexer_a28e8d5e652d1be8553d0f283ce1c9e38}{Loom\+\_\+\+Multiplexer} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___multiplexer_a5db8b4a6043b42b792f6230f96374ef4}{$\sim$\+Loom\+\_\+\+Multiplexer} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___multiplexer_aefd28e7b8fa3faf53ec42cb25419057a}{measure} ()
+\begin{DoxyCompactList}\small\item\em Call measure on all connected sensors. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___multiplexer_aa09d42f26ce3c4185ae8e9b55e3d851f}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___multiplexer_abadc1f55ae04c66e761d366325a0804f}{dispatch} (Json\+Object) override
+\begin{DoxyCompactList}\small\item\em Route command to driver. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___multiplexer_a80fd7464a74af9a325cbf830ee51410e}{get\+\_\+sensor\+\_\+list} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Populate a bundle with a list of sensors currently attached. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___multiplexer_ac0749b8dc8f72727e7fab5834898d2da}{refresh\+\_\+sensors} ()
+\begin{DoxyCompactList}\small\item\em Update sensor list. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_i2_c_sensor}{Loom\+I2\+C\+Sensor} $\ast$ \hyperlink{class_loom___multiplexer_aa0745a2b7a8e4f48fb4f74f759e87220}{get\+\_\+sensor} (uint8\+\_\+t port) const 
+\begin{DoxyCompactList}\small\item\em Get the sensor object for sensor on provided port. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___multiplexer_ad09225b1a4c8b70735992cd5eac9a71b}{power\+\_\+up} () override
+\begin{DoxyCompactList}\small\item\em Turn on any hardware. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___multiplexer_a8196a461d4b93f39f7b469ae89fa17c7}{power\+\_\+down} () override
+\begin{DoxyCompactList}\small\item\em Turn off any hardware. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___multiplexer_a21759070f77ec1560e9b2a272a0c0640}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___multiplexer_a2a60ebefe68aa75a3141015d2aa81955}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___multiplexer_aa77642642bfd9f33769f6fd98863e5cc}{print\+\_\+measurements} () const 
+\begin{DoxyCompactList}\small\item\em Prints measurements of all connected sensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___multiplexer_a49c25a8c55ca026c231d59608fc0d6d4}{get\+\_\+is\+\_\+dynamic} () const 
+\begin{DoxyCompactList}\small\item\em Get whether or not sensors are updated dynamically. \end{DoxyCompactList}\item 
+int \hyperlink{class_loom___multiplexer_a40688a6e7c1ad60472d6ce148245ac13}{get\+\_\+update\+\_\+period} () const 
+\begin{DoxyCompactList}\small\item\em Get the sensor list update period. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___multiplexer_ad0f1370584caf13e726c623dbbb250e1}{set\+\_\+is\+\_\+dynamic} (const bool dynamic)
+\begin{DoxyCompactList}\small\item\em Set whether or not to periodically update list of attached sensors. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___multiplexer_af2d5ac2ec43d7d9d8e809c26780d4421}{set\+\_\+update\+\_\+period} (const uint period)
+\begin{DoxyCompactList}\small\item\em Set the sensor list update period. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_i2_c_sensor}{Loom\+I2\+C\+Sensor} $\ast$$\ast$ \hyperlink{class_loom___multiplexer_a1ca4e73888b5d46fef8c09997148a937}{sensors}
+\begin{DoxyCompactList}\small\item\em Array of I2C sensor objects. \end{DoxyCompactList}\item 
+byte \hyperlink{class_loom___multiplexer_af382145cee4e802bbf431e799983423b}{i2c\+\_\+address}
+\begin{DoxyCompactList}\small\item\em The multiplexer\textquotesingle{}s I2C address. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___multiplexer_a444e58e98dd2ef120e2bb5a2e6befc45}{num\+\_\+ports}
+\begin{DoxyCompactList}\small\item\em The number of ports on the multiplexer. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___multiplexer_a90202eb1f078d7448cf0b0763ddbcb3d}{dynamic\+\_\+list}
+\begin{DoxyCompactList}\small\item\em Whether or not sensor list is dynamic (refresh sensor list periodically) \end{DoxyCompactList}\item 
+uint \hyperlink{class_loom___multiplexer_a34d6b989ed4a1b5059fd28c277f9b0c9}{update\+\_\+period}
+\begin{DoxyCompactList}\small\item\em Interval to update sensor list at. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___multiplexer_a0b5eae9f338d70f873c04a5c46f6556c}{control\+\_\+port}
+\item 
+byte \hyperlink{class_loom___multiplexer_a56aa8b81fecbab9d25c7c9fb0e607908}{control\+\_\+address}
+\item 
+unsigned long \hyperlink{class_loom___multiplexer_a2e924abfa8444f66dc1b9cdf3a3aad47}{last\+\_\+update\+\_\+time}
+\begin{DoxyCompactList}\small\item\em When the sensor list was last updated. \end{DoxyCompactList}\item 
+std\+::vector$<$ byte $>$ \hyperlink{class_loom___multiplexer_ab30823612eef6bb3fcd2fc023bc425b3}{i2c\+\_\+conflicts}
+\begin{DoxyCompactList}\small\item\em List of I2C address conflicts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::array$<$ byte, 9 $>$ \hyperlink{class_loom___multiplexer_aa7bed0505f58c0c7ef22fe9c8844d807}{alt\+\_\+addresses}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Multiplexer manager for interfacing with multiple I2C sensors. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___multiplexer.html}{\tt Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Multiplexer(\+Loom\+Manager $\ast$manager, const byte i2c\+\_\+address=0x71, const uint8\+\_\+t num\+\_\+ports=8, const bool dynamic\+\_\+list=true, const uint update\+\_\+period=5000)}{Loom_Multiplexer(LoomManager *manager, const byte i2c_address=0x71, const uint8_t num_ports=8, const bool dynamic_list=true, const uint update_period=5000)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Multiplexer\+::\+Loom\+\_\+\+Multiplexer (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{i2c\+\_\+address = {\ttfamily 0x71}, }
+\item[{const uint8\+\_\+t}]{num\+\_\+ports = {\ttfamily 8}, }
+\item[{const bool}]{dynamic\+\_\+list = {\ttfamily true}, }
+\item[{const uint}]{update\+\_\+period = {\ttfamily 5000}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___multiplexer_a4409df6598098393b5fa3b3012735d55}{}\label{class_loom___multiplexer_a4409df6598098393b5fa3b3012735d55}
+
+
+Multiplexer module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x71$>$ $\vert$ \{0x71\} $\vert$ I2C address \\
+\hline
+\mbox{\tt in}  & {\em num\+\_\+ports} & Int $\vert$ $<$8$>$ $\vert$ \mbox{[}1-\/8\mbox{]} $\vert$ Number of ports available \\
+\hline
+\mbox{\tt in}  & {\em dynamic\+\_\+list} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ Whether or not to automatically check for new sensors \\
+\hline
+\mbox{\tt in}  & {\em update\+\_\+period} & Int $\vert$ $<$5000$>$ $\vert$ \mbox{[}500-\/30000\mbox{]} $\vert$ The time between sensor list updates (if dynamic\+\_\+list enabled) \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Multiplexer(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Multiplexer(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Multiplexer\+::\+Loom\+\_\+\+Multiplexer (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___multiplexer_a28e8d5e652d1be8553d0f283ce1c9e38}{}\label{class_loom___multiplexer_a28e8d5e652d1be8553d0f283ce1c9e38}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!````~Loom\+\_\+\+Multiplexer@{$\sim$\+Loom\+\_\+\+Multiplexer}}
+\index{````~Loom\+\_\+\+Multiplexer@{$\sim$\+Loom\+\_\+\+Multiplexer}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Multiplexer()}{~Loom_Multiplexer()}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Multiplexer\+::$\sim$\+Loom\+\_\+\+Multiplexer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___multiplexer_a5db8b4a6043b42b792f6230f96374ef4}{}\label{class_loom___multiplexer_a5db8b4a6043b42b792f6230f96374ef4}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{dispatch(\+Json\+Object) override}{dispatch(JsonObject) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Multiplexer\+::dispatch (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___multiplexer_abadc1f55ae04c66e761d366325a0804f}{}\label{class_loom___multiplexer_abadc1f55ae04c66e761d366325a0804f}
+
+
+Route command to driver. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!get\+\_\+is\+\_\+dynamic@{get\+\_\+is\+\_\+dynamic}}
+\index{get\+\_\+is\+\_\+dynamic@{get\+\_\+is\+\_\+dynamic}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{get\+\_\+is\+\_\+dynamic() const }{get_is_dynamic() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Multiplexer\+::get\+\_\+is\+\_\+dynamic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___multiplexer_a49c25a8c55ca026c231d59608fc0d6d4}{}\label{class_loom___multiplexer_a49c25a8c55ca026c231d59608fc0d6d4}
+
+
+Get whether or not sensors are updated dynamically. 
+
+\begin{DoxyReturn}{Returns}
+True if dynamic 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!get\+\_\+sensor@{get\+\_\+sensor}}
+\index{get\+\_\+sensor@{get\+\_\+sensor}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{get\+\_\+sensor(uint8\+\_\+t port) const }{get_sensor(uint8_t port) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+I2\+C\+Sensor}$\ast$ Loom\+\_\+\+Multiplexer\+::get\+\_\+sensor (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{port}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___multiplexer_aa0745a2b7a8e4f48fb4f74f759e87220}{}\label{class_loom___multiplexer_aa0745a2b7a8e4f48fb4f74f759e87220}
+
+
+Get the sensor object for sensor on provided port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!get\+\_\+sensor\+\_\+list@{get\+\_\+sensor\+\_\+list}}
+\index{get\+\_\+sensor\+\_\+list@{get\+\_\+sensor\+\_\+list}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{get\+\_\+sensor\+\_\+list(\+Json\+Object json)}{get_sensor_list(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::get\+\_\+sensor\+\_\+list (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___multiplexer_a80fd7464a74af9a325cbf830ee51410e}{}\label{class_loom___multiplexer_a80fd7464a74af9a325cbf830ee51410e}
+
+
+Populate a bundle with a list of sensors currently attached. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Json object to populate with sensor list \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!get\+\_\+update\+\_\+period@{get\+\_\+update\+\_\+period}}
+\index{get\+\_\+update\+\_\+period@{get\+\_\+update\+\_\+period}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{get\+\_\+update\+\_\+period() const }{get_update_period() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Loom\+\_\+\+Multiplexer\+::get\+\_\+update\+\_\+period (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___multiplexer_a40688a6e7c1ad60472d6ce148245ac13}{}\label{class_loom___multiplexer_a40688a6e7c1ad60472d6ce148245ac13}
+
+
+Get the sensor list update period. 
+
+\begin{DoxyReturn}{Returns}
+The update period 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{measure()}{measure()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___multiplexer_aefd28e7b8fa3faf53ec42cb25419057a}{}\label{class_loom___multiplexer_aefd28e7b8fa3faf53ec42cb25419057a}
+
+
+Call measure on all connected sensors. 
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___multiplexer_aa09d42f26ce3c4185ae8e9b55e3d851f}{}\label{class_loom___multiplexer_aa09d42f26ce3c4185ae8e9b55e3d851f}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!power\+\_\+down@{power\+\_\+down}}
+\index{power\+\_\+down@{power\+\_\+down}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{power\+\_\+down() override}{power_down() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::power\+\_\+down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___multiplexer_a8196a461d4b93f39f7b469ae89fa17c7}{}\label{class_loom___multiplexer_a8196a461d4b93f39f7b469ae89fa17c7}
+
+
+Turn off any hardware. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a31ea02275e356c6ce0d01fdb6d4190df}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!power\+\_\+up@{power\+\_\+up}}
+\index{power\+\_\+up@{power\+\_\+up}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{power\+\_\+up() override}{power_up() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::power\+\_\+up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___multiplexer_ad09225b1a4c8b70735992cd5eac9a71b}{}\label{class_loom___multiplexer_ad09225b1a4c8b70735992cd5eac9a71b}
+
+
+Turn on any hardware. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa0683cb24ce1cc49273440e79f035e23}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___multiplexer_a21759070f77ec1560e9b2a272a0c0640}{}\label{class_loom___multiplexer_a21759070f77ec1560e9b2a272a0c0640}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const }{print_measurements() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom___multiplexer_aa77642642bfd9f33769f6fd98863e5cc}{}\label{class_loom___multiplexer_aa77642642bfd9f33769f6fd98863e5cc}
+
+
+Prints measurements of all connected sensors. 
+
+Calls implementations of \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+I2\+C\+Sensor\+::print\+\_\+measurements() const } \index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___multiplexer_a2a60ebefe68aa75a3141015d2aa81955}{}\label{class_loom___multiplexer_a2a60ebefe68aa75a3141015d2aa81955}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!refresh\+\_\+sensors@{refresh\+\_\+sensors}}
+\index{refresh\+\_\+sensors@{refresh\+\_\+sensors}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{refresh\+\_\+sensors()}{refresh_sensors()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::refresh\+\_\+sensors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___multiplexer_ac0749b8dc8f72727e7fab5834898d2da}{}\label{class_loom___multiplexer_ac0749b8dc8f72727e7fab5834898d2da}
+
+
+Update sensor list. 
+
+Polls all ports of multiplexer getting sensor on port (if any) \index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!set\+\_\+is\+\_\+dynamic@{set\+\_\+is\+\_\+dynamic}}
+\index{set\+\_\+is\+\_\+dynamic@{set\+\_\+is\+\_\+dynamic}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{set\+\_\+is\+\_\+dynamic(const bool dynamic)}{set_is_dynamic(const bool dynamic)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::set\+\_\+is\+\_\+dynamic (
+\begin{DoxyParamCaption}
+\item[{const bool}]{dynamic}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___multiplexer_ad0f1370584caf13e726c623dbbb250e1}{}\label{class_loom___multiplexer_ad0f1370584caf13e726c623dbbb250e1}
+
+
+Set whether or not to periodically update list of attached sensors. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em dynamic} & The setting to set \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!set\+\_\+update\+\_\+period@{set\+\_\+update\+\_\+period}}
+\index{set\+\_\+update\+\_\+period@{set\+\_\+update\+\_\+period}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{set\+\_\+update\+\_\+period(const uint period)}{set_update_period(const uint period)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Multiplexer\+::set\+\_\+update\+\_\+period (
+\begin{DoxyParamCaption}
+\item[{const uint}]{period}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___multiplexer_af2d5ac2ec43d7d9d8e809c26780d4421}{}\label{class_loom___multiplexer_af2d5ac2ec43d7d9d8e809c26780d4421}
+
+
+Set the sensor list update period. 
+
+Requires dynamic\+\_\+list to be enabled 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em period} & New update period \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!alt\+\_\+addresses@{alt\+\_\+addresses}}
+\index{alt\+\_\+addresses@{alt\+\_\+addresses}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{alt\+\_\+addresses}{alt_addresses}}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::array$<$ byte, 9 $>$ Loom\+\_\+\+Multiplexer\+::alt\+\_\+addresses\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_aa7bed0505f58c0c7ef22fe9c8844d807}{}\label{class_loom___multiplexer_aa7bed0505f58c0c7ef22fe9c8844d807}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+    0x70,
+    0x71,
+    0x72,
+    0x73,
+    0x74,
+    0x75,
+    0x76,
+    0x77,
+    0x78
+\}
+\end{DoxyCode}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!control\+\_\+address@{control\+\_\+address}}
+\index{control\+\_\+address@{control\+\_\+address}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{control\+\_\+address}{control_address}}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+Multiplexer\+::control\+\_\+address\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_a56aa8b81fecbab9d25c7c9fb0e607908}{}\label{class_loom___multiplexer_a56aa8b81fecbab9d25c7c9fb0e607908}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!control\+\_\+port@{control\+\_\+port}}
+\index{control\+\_\+port@{control\+\_\+port}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{control\+\_\+port}{control_port}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Multiplexer\+::control\+\_\+port\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_a0b5eae9f338d70f873c04a5c46f6556c}{}\label{class_loom___multiplexer_a0b5eae9f338d70f873c04a5c46f6556c}
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!dynamic\+\_\+list@{dynamic\+\_\+list}}
+\index{dynamic\+\_\+list@{dynamic\+\_\+list}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{dynamic\+\_\+list}{dynamic_list}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Multiplexer\+::dynamic\+\_\+list\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_a90202eb1f078d7448cf0b0763ddbcb3d}{}\label{class_loom___multiplexer_a90202eb1f078d7448cf0b0763ddbcb3d}
+
+
+Whether or not sensor list is dynamic (refresh sensor list periodically) 
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!i2c\+\_\+address@{i2c\+\_\+address}}
+\index{i2c\+\_\+address@{i2c\+\_\+address}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{i2c\+\_\+address}{i2c_address}}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+Multiplexer\+::i2c\+\_\+address\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_af382145cee4e802bbf431e799983423b}{}\label{class_loom___multiplexer_af382145cee4e802bbf431e799983423b}
+
+
+The multiplexer\textquotesingle{}s I2C address. 
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!i2c\+\_\+conflicts@{i2c\+\_\+conflicts}}
+\index{i2c\+\_\+conflicts@{i2c\+\_\+conflicts}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{i2c\+\_\+conflicts}{i2c_conflicts}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$byte$>$ Loom\+\_\+\+Multiplexer\+::i2c\+\_\+conflicts\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_ab30823612eef6bb3fcd2fc023bc425b3}{}\label{class_loom___multiplexer_ab30823612eef6bb3fcd2fc023bc425b3}
+
+
+List of I2C address conflicts. 
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!last\+\_\+update\+\_\+time@{last\+\_\+update\+\_\+time}}
+\index{last\+\_\+update\+\_\+time@{last\+\_\+update\+\_\+time}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{last\+\_\+update\+\_\+time}{last_update_time}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Loom\+\_\+\+Multiplexer\+::last\+\_\+update\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_a2e924abfa8444f66dc1b9cdf3a3aad47}{}\label{class_loom___multiplexer_a2e924abfa8444f66dc1b9cdf3a3aad47}
+
+
+When the sensor list was last updated. 
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!num\+\_\+ports@{num\+\_\+ports}}
+\index{num\+\_\+ports@{num\+\_\+ports}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{num\+\_\+ports}{num_ports}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Multiplexer\+::num\+\_\+ports\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_a444e58e98dd2ef120e2bb5a2e6befc45}{}\label{class_loom___multiplexer_a444e58e98dd2ef120e2bb5a2e6befc45}
+
+
+The number of ports on the multiplexer. 
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!sensors@{sensors}}
+\index{sensors@{sensors}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{sensors}{sensors}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+I2\+C\+Sensor}$\ast$$\ast$ Loom\+\_\+\+Multiplexer\+::sensors\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_a1ca4e73888b5d46fef8c09997148a937}{}\label{class_loom___multiplexer_a1ca4e73888b5d46fef8c09997148a937}
+
+
+Array of I2C sensor objects. 
+
+\index{Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}!update\+\_\+period@{update\+\_\+period}}
+\index{update\+\_\+period@{update\+\_\+period}!Loom\+\_\+\+Multiplexer@{Loom\+\_\+\+Multiplexer}}
+\subsubsection[{\texorpdfstring{update\+\_\+period}{update_period}}]{\setlength{\rightskip}{0pt plus 5cm}uint Loom\+\_\+\+Multiplexer\+::update\+\_\+period\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___multiplexer_a34d6b989ed4a1b5059fd28c277f9b0c9}{}\label{class_loom___multiplexer_a34d6b989ed4a1b5059fd28c277f9b0c9}
+
+
+Interval to update sensor list at. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{_multiplexer_8h}{Multiplexer.\+h}\item 
+src/\hyperlink{_multiplexer_8cpp}{Multiplexer.\+cpp}\end{DoxyCompactItemize}

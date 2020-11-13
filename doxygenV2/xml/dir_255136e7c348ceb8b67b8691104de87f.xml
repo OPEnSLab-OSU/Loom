@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_255136e7c348ceb8b67b8691104de87f" kind="dir">
+    <compoundname>src/RTC</compoundname>
+    <innerfile refid="_d_s3231_8cpp">DS3231.cpp</innerfile>
+    <innerfile refid="_d_s3231_8h">DS3231.h</innerfile>
+    <innerfile refid="_p_c_f8523_8cpp">PCF8523.cpp</innerfile>
+    <innerfile refid="_p_c_f8523_8h">PCF8523.h</innerfile>
+    <innerfile refid="_r_t_c_8cpp">RTC.cpp</innerfile>
+    <innerfile refid="_r_t_c_8h">RTC.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/RTC/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
+    <compoundname>src</compoundname>
+    <innerdir refid="dir_1799e230ae5d813a1a7fe9efa4d5aefa">src/Actuators</innerdir>
+    <innerdir refid="dir_09e80382a18e25c2dcfcfbe9cab72448">src/CommPlats</innerdir>
+    <innerdir refid="dir_c610c8504d46288da7634b3c0b18263f">src/Components</innerdir>
+    <innerdir refid="dir_8cedc271c55b8ce132cf3b3ffd279c7e">src/InternetPlats</innerdir>
+    <innerdir refid="dir_9e8ba870b5afe81625bda76cc1053324">src/LogPlats</innerdir>
+    <innerdir refid="dir_833d9fd41c16b29f2d03f884f0e57aa7">src/PublishPlats</innerdir>
+    <innerdir refid="dir_255136e7c348ceb8b67b8691104de87f">src/RTC</innerdir>
+    <innerdir refid="dir_afe58f6d0ef7eec69c2706509daaefe7">src/Sensors</innerdir>
+    <innerdir refid="dir_a7f1fab18e7dd75522452d69fe6890c6">src/SubscribePlats</innerdir>
+    <innerfile refid="_interrupt___manager_8cpp">Interrupt_Manager.cpp</innerfile>
+    <innerfile refid="_interrupt___manager_8h">Interrupt_Manager.h</innerfile>
+    <innerfile refid="_loom_8h">Loom.h</innerfile>
+    <innerfile refid="_macros_8h">Macros.h</innerfile>
+    <innerfile refid="_manager_8cpp">Manager.cpp</innerfile>
+    <innerfile refid="_manager_8h">Manager.h</innerfile>
+    <innerfile refid="_manager___module___access_8cpp">Manager_Module_Access.cpp</innerfile>
+    <innerfile refid="_misc_8cpp">Misc.cpp</innerfile>
+    <innerfile refid="_misc_8h">Misc.h</innerfile>
+    <innerfile refid="_module_8cpp">Module.cpp</innerfile>
+    <innerfile refid="_module_8h">Module.h</innerfile>
+    <innerfile refid="_module___factory_8h">Module_Factory.h</innerfile>
+    <innerfile refid="_module___factory___aux_8h">Module_Factory_Aux.h</innerfile>
+    <innerfile refid="_multiplexer_8cpp">Multiplexer.cpp</innerfile>
+    <innerfile refid="_multiplexer_8h">Multiplexer.h</innerfile>
+    <innerfile refid="_n_t_p___sync_8cpp">NTP_Sync.cpp</innerfile>
+    <innerfile refid="_n_t_p___sync_8h">NTP_Sync.h</innerfile>
+    <innerfile refid="_package_8cpp">Package.cpp</innerfile>
+    <innerfile refid="_package_8h">Package.h</innerfile>
+    <innerfile refid="_sleep___manager_8cpp">Sleep_Manager.cpp</innerfile>
+    <innerfile refid="_sleep___manager_8h">Sleep_Manager.h</innerfile>
+    <innerfile refid="_temperature___sync_8cpp">Temperature_Sync.cpp</innerfile>
+    <innerfile refid="_temperature___sync_8h">Temperature_Sync.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/"/>
+  </compounddef>
+</doxygen>

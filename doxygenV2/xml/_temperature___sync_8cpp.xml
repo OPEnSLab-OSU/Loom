@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_temperature___sync_8cpp" kind="file" language="C++">
+    <compoundname>Temperature_Sync.cpp</compoundname>
+    <includes refid="_temperature___sync_8h" local="yes">Temperature_Sync.h</includes>
+    <includes refid="_manager_8h" local="yes">Manager.h</includes>
+    <includes refid="_analog_8h" local="yes">Sensors/Analog.h</includes>
+    <includes refid="_m_s5803_8h" local="yes">Sensors/I2C/MS5803.h</includes>
+    <incdepgraph>
+      <node id="5911">
+        <label>src/Temperature_Sync.cpp</label>
+        <link refid="Temperature_Sync.cpp"/>
+        <childnode refid="5912" relation="include">
+        </childnode>
+        <childnode refid="5919" relation="include">
+        </childnode>
+        <childnode refid="5921" relation="include">
+        </childnode>
+        <childnode refid="5923" relation="include">
+        </childnode>
+      </node>
+      <node id="5916">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5913">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5914" relation="include">
+        </childnode>
+        <childnode refid="5916" relation="include">
+        </childnode>
+        <childnode refid="5917" relation="include">
+        </childnode>
+        <childnode refid="5918" relation="include">
+        </childnode>
+      </node>
+      <node id="5917">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5915" relation="include">
+        </childnode>
+        <childnode refid="5918" relation="include">
+        </childnode>
+      </node>
+      <node id="5921">
+        <label>Sensors/Analog.h</label>
+        <link refid="_analog_8h"/>
+        <childnode refid="5922" relation="include">
+        </childnode>
+      </node>
+      <node id="5923">
+        <label>Sensors/I2C/MS5803.h</label>
+        <link refid="_m_s5803_8h"/>
+        <childnode refid="5924" relation="include">
+        </childnode>
+        <childnode refid="5926" relation="include">
+        </childnode>
+      </node>
+      <node id="5914">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5915" relation="include">
+        </childnode>
+      </node>
+      <node id="5925">
+        <label>Wire.h</label>
+      </node>
+      <node id="5920">
+        <label>vector</label>
+      </node>
+      <node id="5918">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5922">
+        <label>Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5913" relation="include">
+        </childnode>
+      </node>
+      <node id="5926">
+        <label>MS5803_02.h</label>
+      </node>
+      <node id="5915">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5924">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5922" relation="include">
+        </childnode>
+        <childnode refid="5925" relation="include">
+        </childnode>
+      </node>
+      <node id="5912">
+        <label>Temperature_Sync.h</label>
+        <link refid="_temperature___sync_8h"/>
+        <childnode refid="5913" relation="include">
+        </childnode>
+      </node>
+      <node id="5919">
+        <label>Manager.h</label>
+        <link refid="_manager_8h"/>
+        <childnode refid="5914" relation="include">
+        </childnode>
+        <childnode refid="5918" relation="include">
+        </childnode>
+        <childnode refid="5920" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Temperature_Sync.cpp"/>
+  </compounddef>
+</doxygen>

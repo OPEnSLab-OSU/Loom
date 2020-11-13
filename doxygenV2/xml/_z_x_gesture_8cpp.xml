@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_z_x_gesture_8cpp" kind="file" language="C++">
+    <compoundname>ZXGesture.cpp</compoundname>
+    <includes refid="_z_x_gesture_8h" local="yes">ZXGesture.h</includes>
+    <incdepgraph>
+      <node id="5484">
+        <label>ZXGesture.h</label>
+        <link refid="_z_x_gesture_8h"/>
+        <childnode refid="5485" relation="include">
+        </childnode>
+        <childnode refid="5494" relation="include">
+        </childnode>
+      </node>
+      <node id="5490">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5487">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5488" relation="include">
+        </childnode>
+        <childnode refid="5490" relation="include">
+        </childnode>
+        <childnode refid="5491" relation="include">
+        </childnode>
+        <childnode refid="5492" relation="include">
+        </childnode>
+      </node>
+      <node id="5491">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5489" relation="include">
+        </childnode>
+        <childnode refid="5492" relation="include">
+        </childnode>
+      </node>
+      <node id="5494">
+        <label>ZX_Sensor.h</label>
+      </node>
+      <node id="5488">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5489" relation="include">
+        </childnode>
+      </node>
+      <node id="5493">
+        <label>Wire.h</label>
+      </node>
+      <node id="5492">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5486">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5487" relation="include">
+        </childnode>
+      </node>
+      <node id="5489">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5483">
+        <label>src/Sensors/I2C/ZXGesture.cpp</label>
+        <link refid="ZXGesture.cpp"/>
+        <childnode refid="5484" relation="include">
+        </childnode>
+      </node>
+      <node id="5485">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5486" relation="include">
+        </childnode>
+        <childnode refid="5493" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/ZXGesture.cpp"/>
+  </compounddef>
+</doxygen>

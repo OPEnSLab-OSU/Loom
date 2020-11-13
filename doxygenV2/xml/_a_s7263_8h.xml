@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_a_s7263_8h" kind="file" language="C++">
+    <compoundname>AS7263.h</compoundname>
+    <includes refid="_i2_c___sensor_8h" local="yes">I2C_Sensor.h</includes>
+    <includes local="no">AS726X.h</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_multiplexer_8cpp" local="yes">src/Multiplexer.cpp</includedby>
+    <includedby refid="_a_s7263_8cpp" local="yes">src/Sensors/I2C/AS7263.cpp</includedby>
+    <incdepgraph>
+      <node id="5016">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5013">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5014" relation="include">
+        </childnode>
+        <childnode refid="5016" relation="include">
+        </childnode>
+        <childnode refid="5017" relation="include">
+        </childnode>
+        <childnode refid="5018" relation="include">
+        </childnode>
+      </node>
+      <node id="5017">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5015" relation="include">
+        </childnode>
+        <childnode refid="5018" relation="include">
+        </childnode>
+      </node>
+      <node id="5014">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5015" relation="include">
+        </childnode>
+      </node>
+      <node id="5019">
+        <label>Wire.h</label>
+      </node>
+      <node id="5018">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5012">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5013" relation="include">
+        </childnode>
+      </node>
+      <node id="5015">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5011">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5012" relation="include">
+        </childnode>
+        <childnode refid="5019" relation="include">
+        </childnode>
+      </node>
+      <node id="5010">
+        <label>src/Sensors/I2C/AS7263.h</label>
+        <link refid="AS7263.h"/>
+        <childnode refid="5011" relation="include">
+        </childnode>
+        <childnode refid="5020" relation="include">
+        </childnode>
+      </node>
+      <node id="5020">
+        <label>AS726X.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5026">
+        <label>src/Sensors/I2C/AS7263.cpp</label>
+        <link refid="_a_s7263_8cpp"/>
+      </node>
+      <node id="5022">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="5023" relation="include">
+        </childnode>
+        <childnode refid="5024" relation="include">
+        </childnode>
+      </node>
+      <node id="5025">
+        <label>src/Multiplexer.cpp</label>
+        <link refid="_multiplexer_8cpp"/>
+      </node>
+      <node id="5023">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="5024">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="5021">
+        <label>src/Sensors/I2C/AS7263.h</label>
+        <link refid="AS7263.h"/>
+        <childnode refid="5022" relation="include">
+        </childnode>
+        <childnode refid="5025" relation="include">
+        </childnode>
+        <childnode refid="5026" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___a_s7263" prot="public">Loom_AS7263</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/AS7263.h"/>
+  </compounddef>
+</doxygen>

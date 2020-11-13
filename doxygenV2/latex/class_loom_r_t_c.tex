@@ -1,0 +1,885 @@
+\hypertarget{class_loom_r_t_c}{}\section{Loom\+R\+TC Class Reference}
+\label{class_loom_r_t_c}\index{Loom\+R\+TC@{Loom\+R\+TC}}
+
+
+Abstract base class of R\+TC modules.  
+
+
+
+
+{\ttfamily \#include $<$R\+T\+C.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+R\+TC\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{class_loom_r_t_c__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527a}{Time\+Zone} \{ \\*
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaf07fa492f47b0f5bcdb7ecdbf8995cfb}{Time\+Zone\+::\+W\+AT} = 0, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aafa868488740aa25870ced6b9169951fb}{Time\+Zone\+::\+AT}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa62069089c3b8d9a74b837620d51b7f78}{Time\+Zone\+::\+A\+DT}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aac77bb0f69e2a80e046a8dc7f0da9320f}{Time\+Zone\+::\+A\+ST}, 
+\\*
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa216e297dfd909447ea57a5713878280b}{Time\+Zone\+::\+E\+DT}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa33a61062aa4da2b795b7f9616c138b89}{Time\+Zone\+::\+E\+ST}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaa0dccb0ba2b50d84245d30dad465afbd}{Time\+Zone\+::\+C\+DT}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aab3319f0293b58437972b5976f6c5da0a}{Time\+Zone\+::\+C\+ST}, 
+\\*
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aac9b9ae1b4267024d489995d8371bbb3b}{Time\+Zone\+::\+M\+DT}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa9b64696be05602589dfa9ea20da1e5fe}{Time\+Zone\+::\+M\+ST}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa209b2f8f73156de8ba0d6dd4174f942f}{Time\+Zone\+::\+P\+DT}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa67d47df7eb52f9e54f467763167398f3}{Time\+Zone\+::\+P\+ST}, 
+\\*
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa0cf9bf0b35fe7eef78559148b52eebc7}{Time\+Zone\+::\+A\+K\+DT}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa97255e996f8f823ad1d7954b8739cb57}{Time\+Zone\+::\+A\+K\+ST}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aae9caf392275991bfb3f460147609aafa}{Time\+Zone\+::\+H\+ST}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa23f7aea788f73df61e33a6d3653d66fa}{Time\+Zone\+::\+S\+ST}, 
+\\*
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa24fe976b135d343ba350030deee5a543}{Time\+Zone\+::\+G\+MT}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaae8200cb4561ad375ed5e7d41071f729}{Time\+Zone\+::\+B\+ST}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa7e706fb31ff4653c9554f30ff1ad542c}{Time\+Zone\+::\+C\+ET}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aac12d1178d0aa679ec22a84ce6478d6cc}{Time\+Zone\+::\+E\+ET}, 
+\\*
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aae2f8b587fc3cef4d84abb81d47769bfd}{Time\+Zone\+::\+E\+E\+ST}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aabd7d04b755f908afa8fe10843ee47b0c}{Time\+Zone\+::\+B\+RT}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa102aa922f0abf8d921b347c70ec0d58a}{Time\+Zone\+::\+Z\+P4}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa4d66c937ba14cb3ae79e1c8f3f83f329}{Time\+Zone\+::\+Z\+P5}, 
+\\*
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aad29f264c1388a08fc4ea3957555bb5e6}{Time\+Zone\+::\+Z\+P6}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaffb099d97f07ae9e8141e3fb33d88fb5}{Time\+Zone\+::\+Z\+P7}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aad5337ac36144406700f9f1d00c01593d}{Time\+Zone\+::\+A\+W\+ST}, 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aab85d19b35615f1190c135a148ac836a8}{Time\+Zone\+::\+A\+C\+ST}, 
+\\*
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa638adbca680d4a5274887d082d058ba9}{Time\+Zone\+::\+A\+E\+ST}
+ \}\begin{DoxyCompactList}\small\item\em Different time zones. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_r_t_c_a90ad338511d471757658aa0bff019575}{Loom\+R\+TC} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}, \hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527a}{Time\+Zone} \hyperlink{class_loom_r_t_c_a6c1336bf000fd9a385f315d43bbbc5b0}{timezone}, const bool \hyperlink{class_loom_r_t_c_a5783620e9af8eb5fa0818aa189483d8e}{use\+\_\+local\+\_\+time}, const bool \hyperlink{class_loom_r_t_c_a91c96be6cc3f0f0f4dedbb038f164e73}{custom\+\_\+time})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_r_t_c_a3077c3988808e9a57605e7c9842114c7}{$\sim$\+Loom\+R\+TC} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_r_t_c_a13101cb450db89fe15ab77b29dba975e}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Adds a timestamp to the provided data Json. \end{DoxyCompactList}\item 
+virtual Date\+Time \hyperlink{class_loom_r_t_c_abef017ad813f2f5fd6559af2b64e409b}{now} () const =0
+\begin{DoxyCompactList}\small\item\em Get Date\+Time of current time. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_ac25717e8d486c123629973684778348f}{time\+\_\+adjust} (const Date\+Time time, const bool is\+\_\+utc=true)
+\begin{DoxyCompactList}\small\item\em Set time to provided timezone. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_a711641fee9d04f0a9be5537950908f6b}{get\+\_\+timestamp} (char $\ast$header, char $\ast$timestamp, const char delimiter, const uint8\+\_\+t format=3)
+\begin{DoxyCompactList}\small\item\em Get timestamp. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_r_t_c_a34b7dd8dacbfdb61876cc4aabb79e67e}{set\+\_\+alarm} (Date\+Time time)=0
+\begin{DoxyCompactList}\small\item\em Set an alarm to go off at the specified time. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_ac0576fedce58ab95c864b146494343af}{set\+\_\+alarm} (const Time\+Span duration)
+\begin{DoxyCompactList}\small\item\em Set an alarm for a duration. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_r_t_c_aac5fd7b736ca4732348ca9c99935bfc6}{clear\+\_\+alarms} ()=0
+\begin{DoxyCompactList}\small\item\em Clear alarms. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{class_loom_r_t_c_a39b290c0f070c99c83e4794d73f145c1}{get\+\_\+datestring} ()
+\begin{DoxyCompactList}\small\item\em Get the pin the R\+TC interrupt is assumed to be connected to. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_a358a34b80334df22441db675715d5b14}{get\+\_\+datestring} (char $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Get string of date. \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{class_loom_r_t_c_ad899bf3e07f5fe270addb88fafa22016}{get\+\_\+timestring} ()
+\begin{DoxyCompactList}\small\item\em Get string of time. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_a9a14c5f4a347b64c661e4af6eab969dd}{get\+\_\+timestring} (char $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Get string of time. \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{class_loom_r_t_c_a9eaffa2c1d312cf13f5f6b66a7bd6067}{get\+\_\+weekday} ()
+\begin{DoxyCompactList}\small\item\em Get string of weekday. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_aeae9084ff1fc9fe0faa81df9c39277fa}{get\+\_\+weekday} (char $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Get string of weekday. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527a}{Time\+Zone} \hyperlink{class_loom_r_t_c_a6c1336bf000fd9a385f315d43bbbc5b0}{timezone}
+\begin{DoxyCompactList}\small\item\em The Time\+Zone to use. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_r_t_c_a5783620e9af8eb5fa0818aa189483d8e}{use\+\_\+local\+\_\+time}
+\begin{DoxyCompactList}\small\item\em Whether or not use local time, else U\+TC time. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_r_t_c_a79db2b47bfecccd825519e677bc43a43}{converted}
+\begin{DoxyCompactList}\small\item\em Whether or not converted daylight saving / summer time or not. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_r_t_c_a91c96be6cc3f0f0f4dedbb038f164e73}{custom\+\_\+time}
+\item 
+Date\+Time \hyperlink{class_loom_r_t_c_ab3d490dd52a5e2d2413d1f0c00944a7b}{local\+\_\+time}
+\begin{DoxyCompactList}\small\item\em Date\+Time variable for the Local Time. \end{DoxyCompactList}\item 
+char \hyperlink{class_loom_r_t_c_a9692826e2c5093e528645a619fc16bc9}{local\+\_\+datestring} \mbox{[}20\mbox{]}
+\begin{DoxyCompactList}\small\item\em Latest saved string of Local Date (year/month/day) \end{DoxyCompactList}\item 
+char \hyperlink{class_loom_r_t_c_ae8fe182cd1fc3f7c66ef6b3ee353c51f}{local\+\_\+timestring} \mbox{[}20\mbox{]}
+\begin{DoxyCompactList}\small\item\em Latest saved string of Local time (hour\+:minute\+:second) \end{DoxyCompactList}\item 
+char \hyperlink{class_loom_r_t_c_a86d3babf565f32bcbdffcf6e2a5efcdd}{datestring} \mbox{[}20\mbox{]}
+\begin{DoxyCompactList}\small\item\em Latest saved string of the Date (year/month/day) \end{DoxyCompactList}\item 
+char \hyperlink{class_loom_r_t_c_a30e77eaeb4b0e25c8fde9239e64fe13a}{timestring} \mbox{[}20\mbox{]}
+\begin{DoxyCompactList}\small\item\em Latest saved string of the time (hour\+:minute\+:second) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_r_t_c_a41c84de7ef49bf7f42069f948a98c30b}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_r_t_c_aaa45a542cfd7b64f79a2c321a29c08f5}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_afa1dcbf39c103215fbc41313c09294d2}{print\+\_\+time} (const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Print the current time. \end{DoxyCompactList}\item 
+static void \hyperlink{class_loom_r_t_c_a4114a95d1dbc89e3ea8e3f27b3250108}{print\+\_\+\+Date\+Time} (Date\+Time time)
+\begin{DoxyCompactList}\small\item\em Print an arbitrary Date\+Time object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{M\+I\+S\+C\+E\+L\+L\+A\+N\+E\+O\+US}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_r_t_c_a24c72617d7e275e89740af4f5296e42b}{link\+\_\+device\+\_\+manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$LM) override
+\begin{DoxyCompactList}\small\item\em Add pointer back to device manager. \end{DoxyCompactList}\item 
+static char $\ast$ \hyperlink{class_loom_r_t_c_ae388e3498ce6b942ccff838c2a4359fb}{enum\+\_\+timezone\+\_\+string} (const \hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527a}{Time\+Zone} t)
+\begin{DoxyCompactList}\small\item\em Get string of name associated with time zone enum. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_a008e89e23f3650d1e8a9c96fe1d8c857}{init} ()
+\begin{DoxyCompactList}\small\item\em Initialize R\+TC. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_r_t_c_a748cbec6163eee36ec96346526b8094d}{\+\_\+adjust} (const Date\+Time time)=0
+\begin{DoxyCompactList}\small\item\em Begin auxiliary function that subclasses need to implement. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_loom_r_t_c_a92103dd50b8ed11cd84fc8f08557ab09}{\+\_\+begin} ()=0
+\begin{DoxyCompactList}\small\item\em Begin auxiliary function that subclasses need to implement. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_loom_r_t_c_a601c266811b25f0d16cbe2ae18ec5b41}{\+\_\+initialized} ()=0
+\begin{DoxyCompactList}\small\item\em Initialization auxiliary function that subclasses need to implement. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_a7ecd2d763167955581da55aab3602c11}{read\+\_\+rtc} ()
+\begin{DoxyCompactList}\small\item\em Read the R\+TC, update time and date strings. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_afd2c4c89a426678d754b7b59643b9d90}{local\+\_\+rtc} ()
+\begin{DoxyCompactList}\small\item\em Read local time if local time is enable to read It will be updated on contents array in the data json. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_a97c2b8e6e8c31f1865feb1ed8e1948df}{set\+\_\+rtc\+\_\+to\+\_\+compile\+\_\+time} ()
+\begin{DoxyCompactList}\small\item\em Set the R\+TC time to compile time. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_ab556620d00236ff10f4438f3b80c2636}{set\+\_\+rtc\+\_\+to\+\_\+computer\+\_\+time} ()
+\begin{DoxyCompactList}\small\item\em Set the R\+TC time to computer time by user input if the board is connected to computer. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_r_t_c_a41aa35e0b493300ab85c4028c117b51f}{convert\+\_\+local\+\_\+to\+\_\+utc} (const bool to\+\_\+utc=true)
+\begin{DoxyCompactList}\small\item\em Convert time between local and U\+TC. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_r_t_c_a6a1bedc03dd44c013cf6b75000533e9f}{rtc\+\_\+validity\+\_\+check} ()
+\begin{DoxyCompactList}\small\item\em Check if current R\+TC time is valid (not necessarily correct) \end{DoxyCompactList}\item 
+Date\+Time \hyperlink{class_loom_r_t_c_ac2e7b1655fee21edb30e98fb415a92ee}{convert\+\_\+daylight\+\_\+to\+\_\+standard} (Date\+Time \hyperlink{class_loom_r_t_c_ab3d490dd52a5e2d2413d1f0c00944a7b}{local\+\_\+time})
+\begin{DoxyCompactList}\small\item\em Convert time between daylight saving time and standard time. \end{DoxyCompactList}\item 
+Date\+Time \hyperlink{class_loom_r_t_c_ab78edb38537fd80c4fbd1ac1625606b5}{us\+\_\+daylight\+\_\+to\+\_\+standard} (Date\+Time \hyperlink{class_loom_r_t_c_ab3d490dd52a5e2d2413d1f0c00944a7b}{local\+\_\+time})
+\begin{DoxyCompactList}\small\item\em Convert the time in the US daylight saving and standard. \end{DoxyCompactList}\item 
+Date\+Time \hyperlink{class_loom_r_t_c_a6bde5d91ff867799abc3f635614d0a4e}{eu\+\_\+daylight\+\_\+to\+\_\+standard} (Date\+Time \hyperlink{class_loom_r_t_c_ab3d490dd52a5e2d2413d1f0c00944a7b}{local\+\_\+time})
+\begin{DoxyCompactList}\small\item\em Convert the time in the EU summer time and standard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract base class of R\+TC modules. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_r_t_c.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/OPEnS_RTC}{\tt Dependency\+: O\+P\+En\+S\+\_\+\+R\+TC}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!Time\+Zone@{Time\+Zone}}
+\index{Time\+Zone@{Time\+Zone}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{Time\+Zone}{TimeZone}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+R\+T\+C\+::\+Time\+Zone}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527a}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527a}
+
+
+Different time zones. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{W\+AT@{W\+AT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!W\+AT@{W\+AT}}\item[{\em 
+W\+AT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaf07fa492f47b0f5bcdb7ecdbf8995cfb}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaf07fa492f47b0f5bcdb7ecdbf8995cfb}
+}]\index{AT@{AT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!AT@{AT}}\item[{\em 
+AT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aafa868488740aa25870ced6b9169951fb}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aafa868488740aa25870ced6b9169951fb}
+}]\index{A\+DT@{A\+DT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!A\+DT@{A\+DT}}\item[{\em 
+A\+DT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa62069089c3b8d9a74b837620d51b7f78}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa62069089c3b8d9a74b837620d51b7f78}
+}]\index{A\+ST@{A\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!A\+ST@{A\+ST}}\item[{\em 
+A\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aac77bb0f69e2a80e046a8dc7f0da9320f}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aac77bb0f69e2a80e046a8dc7f0da9320f}
+}]\index{E\+DT@{E\+DT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!E\+DT@{E\+DT}}\item[{\em 
+E\+DT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa216e297dfd909447ea57a5713878280b}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa216e297dfd909447ea57a5713878280b}
+}]\index{E\+ST@{E\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!E\+ST@{E\+ST}}\item[{\em 
+E\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa33a61062aa4da2b795b7f9616c138b89}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa33a61062aa4da2b795b7f9616c138b89}
+}]\index{C\+DT@{C\+DT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!C\+DT@{C\+DT}}\item[{\em 
+C\+DT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaa0dccb0ba2b50d84245d30dad465afbd}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaa0dccb0ba2b50d84245d30dad465afbd}
+}]\index{C\+ST@{C\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!C\+ST@{C\+ST}}\item[{\em 
+C\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aab3319f0293b58437972b5976f6c5da0a}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aab3319f0293b58437972b5976f6c5da0a}
+}]\index{M\+DT@{M\+DT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!M\+DT@{M\+DT}}\item[{\em 
+M\+DT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aac9b9ae1b4267024d489995d8371bbb3b}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aac9b9ae1b4267024d489995d8371bbb3b}
+}]\index{M\+ST@{M\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!M\+ST@{M\+ST}}\item[{\em 
+M\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa9b64696be05602589dfa9ea20da1e5fe}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa9b64696be05602589dfa9ea20da1e5fe}
+}]\index{P\+DT@{P\+DT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!P\+DT@{P\+DT}}\item[{\em 
+P\+DT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa209b2f8f73156de8ba0d6dd4174f942f}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa209b2f8f73156de8ba0d6dd4174f942f}
+}]\index{P\+ST@{P\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!P\+ST@{P\+ST}}\item[{\em 
+P\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa67d47df7eb52f9e54f467763167398f3}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa67d47df7eb52f9e54f467763167398f3}
+}]\index{A\+K\+DT@{A\+K\+DT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!A\+K\+DT@{A\+K\+DT}}\item[{\em 
+A\+K\+DT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa0cf9bf0b35fe7eef78559148b52eebc7}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa0cf9bf0b35fe7eef78559148b52eebc7}
+}]\index{A\+K\+ST@{A\+K\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!A\+K\+ST@{A\+K\+ST}}\item[{\em 
+A\+K\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa97255e996f8f823ad1d7954b8739cb57}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa97255e996f8f823ad1d7954b8739cb57}
+}]\index{H\+ST@{H\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!H\+ST@{H\+ST}}\item[{\em 
+H\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aae9caf392275991bfb3f460147609aafa}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aae9caf392275991bfb3f460147609aafa}
+}]\index{S\+ST@{S\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!S\+ST@{S\+ST}}\item[{\em 
+S\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa23f7aea788f73df61e33a6d3653d66fa}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa23f7aea788f73df61e33a6d3653d66fa}
+}]\index{G\+MT@{G\+MT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!G\+MT@{G\+MT}}\item[{\em 
+G\+MT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa24fe976b135d343ba350030deee5a543}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa24fe976b135d343ba350030deee5a543}
+}]\index{B\+ST@{B\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!B\+ST@{B\+ST}}\item[{\em 
+B\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaae8200cb4561ad375ed5e7d41071f729}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaae8200cb4561ad375ed5e7d41071f729}
+}]\index{C\+ET@{C\+ET}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!C\+ET@{C\+ET}}\item[{\em 
+C\+ET\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa7e706fb31ff4653c9554f30ff1ad542c}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa7e706fb31ff4653c9554f30ff1ad542c}
+}]\index{E\+ET@{E\+ET}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!E\+ET@{E\+ET}}\item[{\em 
+E\+ET\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aac12d1178d0aa679ec22a84ce6478d6cc}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aac12d1178d0aa679ec22a84ce6478d6cc}
+}]\index{E\+E\+ST@{E\+E\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!E\+E\+ST@{E\+E\+ST}}\item[{\em 
+E\+E\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aae2f8b587fc3cef4d84abb81d47769bfd}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aae2f8b587fc3cef4d84abb81d47769bfd}
+}]\index{B\+RT@{B\+RT}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!B\+RT@{B\+RT}}\item[{\em 
+B\+RT\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aabd7d04b755f908afa8fe10843ee47b0c}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aabd7d04b755f908afa8fe10843ee47b0c}
+}]\index{Z\+P4@{Z\+P4}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!Z\+P4@{Z\+P4}}\item[{\em 
+Z\+P4\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa102aa922f0abf8d921b347c70ec0d58a}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa102aa922f0abf8d921b347c70ec0d58a}
+}]\index{Z\+P5@{Z\+P5}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!Z\+P5@{Z\+P5}}\item[{\em 
+Z\+P5\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa4d66c937ba14cb3ae79e1c8f3f83f329}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa4d66c937ba14cb3ae79e1c8f3f83f329}
+}]\index{Z\+P6@{Z\+P6}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!Z\+P6@{Z\+P6}}\item[{\em 
+Z\+P6\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aad29f264c1388a08fc4ea3957555bb5e6}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aad29f264c1388a08fc4ea3957555bb5e6}
+}]\index{Z\+P7@{Z\+P7}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!Z\+P7@{Z\+P7}}\item[{\em 
+Z\+P7\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaffb099d97f07ae9e8141e3fb33d88fb5}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aaffb099d97f07ae9e8141e3fb33d88fb5}
+}]\index{A\+W\+ST@{A\+W\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!A\+W\+ST@{A\+W\+ST}}\item[{\em 
+A\+W\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aad5337ac36144406700f9f1d00c01593d}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aad5337ac36144406700f9f1d00c01593d}
+}]\index{A\+C\+ST@{A\+C\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!A\+C\+ST@{A\+C\+ST}}\item[{\em 
+A\+C\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aab85d19b35615f1190c135a148ac836a8}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aab85d19b35615f1190c135a148ac836a8}
+}]\index{A\+E\+ST@{A\+E\+ST}!Loom\+R\+TC@{Loom\+R\+TC}}\index{Loom\+R\+TC@{Loom\+R\+TC}!A\+E\+ST@{A\+E\+ST}}\item[{\em 
+A\+E\+ST\hypertarget{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa638adbca680d4a5274887d082d058ba9}{}\label{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa638adbca680d4a5274887d082d058ba9}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!Loom\+R\+TC@{Loom\+R\+TC}}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{Loom\+R\+T\+C(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type, Time\+Zone timezone, const bool use\+\_\+local\+\_\+time, const bool custom\+\_\+time)}{LoomRTC(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, TimeZone timezone, const bool use_local_time, const bool custom_time)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+R\+T\+C\+::\+Loom\+R\+TC (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type, }
+\item[{{\bf Time\+Zone}}]{timezone, }
+\item[{const bool}]{use\+\_\+local\+\_\+time, }
+\item[{const bool}]{custom\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_r_t_c_a90ad338511d471757658aa0bff019575}{}\label{class_loom_r_t_c_a90ad338511d471757658aa0bff019575}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em timezone} & Which timezone device is in \\
+\hline
+\mbox{\tt in}  & {\em use\+\_\+local\+\_\+time} & True for local time, false for U\+TC time \\
+\hline
+\mbox{\tt in}  & {\em custom\+\_\+time} & True for user input time, false otherwise \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!````~Loom\+R\+TC@{$\sim$\+Loom\+R\+TC}}
+\index{````~Loom\+R\+TC@{$\sim$\+Loom\+R\+TC}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+R\+T\+C()=default}{~LoomRTC()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+R\+T\+C\+::$\sim$\+Loom\+R\+TC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_r_t_c_a3077c3988808e9a57605e7c9842114c7}{}\label{class_loom_r_t_c_a3077c3988808e9a57605e7c9842114c7}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!\+\_\+adjust@{\+\_\+adjust}}
+\index{\+\_\+adjust@{\+\_\+adjust}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{\+\_\+adjust(const Date\+Time time)=0}{_adjust(const DateTime time)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+R\+T\+C\+::\+\_\+adjust (
+\begin{DoxyParamCaption}
+\item[{const Date\+Time}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_loom_r_t_c_a748cbec6163eee36ec96346526b8094d}{}\label{class_loom_r_t_c_a748cbec6163eee36ec96346526b8094d}
+
+
+Begin auxiliary function that subclasses need to implement. 
+
+
+
+Implemented in \hyperlink{class_loom___p_c_f8523_a86528ef00f1971a8eee8f93644d638cb}{Loom\+\_\+\+P\+C\+F8523}, and \hyperlink{class_loom___d_s3231_a1f1825fe54a8308bdcea79814d5d7d5c}{Loom\+\_\+\+D\+S3231}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!\+\_\+begin@{\+\_\+begin}}
+\index{\+\_\+begin@{\+\_\+begin}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{\+\_\+begin()=0}{_begin()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Loom\+R\+T\+C\+::\+\_\+begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_loom_r_t_c_a92103dd50b8ed11cd84fc8f08557ab09}{}\label{class_loom_r_t_c_a92103dd50b8ed11cd84fc8f08557ab09}
+
+
+Begin auxiliary function that subclasses need to implement. 
+
+\begin{DoxyReturn}{Returns}
+True if begin worked without issue, false otherwise 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_loom___p_c_f8523_a227ca0224556b60f619fa9c3d662c02f}{Loom\+\_\+\+P\+C\+F8523}, and \hyperlink{class_loom___d_s3231_a204356e5f64a038f14a53c5106d17e9d}{Loom\+\_\+\+D\+S3231}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!\+\_\+initialized@{\+\_\+initialized}}
+\index{\+\_\+initialized@{\+\_\+initialized}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{\+\_\+initialized()=0}{_initialized()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Loom\+R\+T\+C\+::\+\_\+initialized (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_loom_r_t_c_a601c266811b25f0d16cbe2ae18ec5b41}{}\label{class_loom_r_t_c_a601c266811b25f0d16cbe2ae18ec5b41}
+
+
+Initialization auxiliary function that subclasses need to implement. 
+
+\begin{DoxyReturn}{Returns}
+True if R\+TC is initialized / did not lose power 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_loom___p_c_f8523_a3b675c9d7a74ac2ddfa0f83a61073859}{Loom\+\_\+\+P\+C\+F8523}, and \hyperlink{class_loom___d_s3231_a8dd6327294c41f8aaea424660770184e}{Loom\+\_\+\+D\+S3231}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!clear\+\_\+alarms@{clear\+\_\+alarms}}
+\index{clear\+\_\+alarms@{clear\+\_\+alarms}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{clear\+\_\+alarms()=0}{clear_alarms()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+R\+T\+C\+::clear\+\_\+alarms (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_r_t_c_aac5fd7b736ca4732348ca9c99935bfc6}{}\label{class_loom_r_t_c_aac5fd7b736ca4732348ca9c99935bfc6}
+
+
+Clear alarms. 
+
+
+
+Implemented in \hyperlink{class_loom___p_c_f8523_a6b261ca485708b7fb03a01c7933940ed}{Loom\+\_\+\+P\+C\+F8523}, and \hyperlink{class_loom___d_s3231_a013fba4d81a09ad61dabef8e2ffe9669}{Loom\+\_\+\+D\+S3231}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!convert\+\_\+daylight\+\_\+to\+\_\+standard@{convert\+\_\+daylight\+\_\+to\+\_\+standard}}
+\index{convert\+\_\+daylight\+\_\+to\+\_\+standard@{convert\+\_\+daylight\+\_\+to\+\_\+standard}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{convert\+\_\+daylight\+\_\+to\+\_\+standard(\+Date\+Time local\+\_\+time)}{convert_daylight_to_standard(DateTime local_time)}}]{\setlength{\rightskip}{0pt plus 5cm}Date\+Time Loom\+R\+T\+C\+::convert\+\_\+daylight\+\_\+to\+\_\+standard (
+\begin{DoxyParamCaption}
+\item[{Date\+Time}]{local\+\_\+time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_ac2e7b1655fee21edb30e98fb415a92ee}{}\label{class_loom_r_t_c_ac2e7b1655fee21edb30e98fb415a92ee}
+
+
+Convert time between daylight saving time and standard time. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em local\+\_\+time} & The updated version of local time after convertion of daylight saving / summer time or standard time \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!convert\+\_\+local\+\_\+to\+\_\+utc@{convert\+\_\+local\+\_\+to\+\_\+utc}}
+\index{convert\+\_\+local\+\_\+to\+\_\+utc@{convert\+\_\+local\+\_\+to\+\_\+utc}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{convert\+\_\+local\+\_\+to\+\_\+utc(const bool to\+\_\+utc=true)}{convert_local_to_utc(const bool to_utc=true)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::convert\+\_\+local\+\_\+to\+\_\+utc (
+\begin{DoxyParamCaption}
+\item[{const bool}]{to\+\_\+utc = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a41aa35e0b493300ab85c4028c117b51f}{}\label{class_loom_r_t_c_a41aa35e0b493300ab85c4028c117b51f}
+
+
+Convert time between local and U\+TC. 
+
+Uses current timezone setting 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em to\+\_\+utc} & True to switch to U\+TC, false to go to local from U\+TC \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!enum\+\_\+timezone\+\_\+string@{enum\+\_\+timezone\+\_\+string}}
+\index{enum\+\_\+timezone\+\_\+string@{enum\+\_\+timezone\+\_\+string}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{enum\+\_\+timezone\+\_\+string(const Time\+Zone t)}{enum_timezone_string(const TimeZone t)}}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ Loom\+R\+T\+C\+::enum\+\_\+timezone\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{const {\bf Time\+Zone}}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom_r_t_c_ae388e3498ce6b942ccff838c2a4359fb}{}\label{class_loom_r_t_c_ae388e3498ce6b942ccff838c2a4359fb}
+
+
+Get string of name associated with time zone enum. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em t} & Time\+Zone value to get string of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C-\/string of time zone 
+\end{DoxyReturn}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!eu\+\_\+daylight\+\_\+to\+\_\+standard@{eu\+\_\+daylight\+\_\+to\+\_\+standard}}
+\index{eu\+\_\+daylight\+\_\+to\+\_\+standard@{eu\+\_\+daylight\+\_\+to\+\_\+standard}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{eu\+\_\+daylight\+\_\+to\+\_\+standard(\+Date\+Time local\+\_\+time)}{eu_daylight_to_standard(DateTime local_time)}}]{\setlength{\rightskip}{0pt plus 5cm}Date\+Time Loom\+R\+T\+C\+::eu\+\_\+daylight\+\_\+to\+\_\+standard (
+\begin{DoxyParamCaption}
+\item[{Date\+Time}]{local\+\_\+time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a6bde5d91ff867799abc3f635614d0a4e}{}\label{class_loom_r_t_c_a6bde5d91ff867799abc3f635614d0a4e}
+
+
+Convert the time in the EU summer time and standard. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em local\+\_\+time} & The updated local\+\_\+time based on eu summmer time \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!get\+\_\+datestring@{get\+\_\+datestring}}
+\index{get\+\_\+datestring@{get\+\_\+datestring}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{get\+\_\+datestring()}{get_datestring()}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+R\+T\+C\+::get\+\_\+datestring (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_r_t_c_a39b290c0f070c99c83e4794d73f145c1}{}\label{class_loom_r_t_c_a39b290c0f070c99c83e4794d73f145c1}
+
+
+Get the pin the R\+TC interrupt is assumed to be connected to. 
+
+\begin{DoxyReturn}{Returns}
+Interrupt pin Get string of date 
+
+Date string 
+\end{DoxyReturn}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!get\+\_\+datestring@{get\+\_\+datestring}}
+\index{get\+\_\+datestring@{get\+\_\+datestring}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{get\+\_\+datestring(char $\ast$buf)}{get_datestring(char *buf)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::get\+\_\+datestring (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_r_t_c_a358a34b80334df22441db675715d5b14}{}\label{class_loom_r_t_c_a358a34b80334df22441db675715d5b14}
+
+
+Get string of date. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em buf} & Buffer to fill \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!get\+\_\+timestamp@{get\+\_\+timestamp}}
+\index{get\+\_\+timestamp@{get\+\_\+timestamp}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{get\+\_\+timestamp(char $\ast$header, char $\ast$timestamp, const char delimiter, const uint8\+\_\+t format=3)}{get_timestamp(char *header, char *timestamp, const char delimiter, const uint8_t format=3)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::get\+\_\+timestamp (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{header, }
+\item[{char $\ast$}]{timestamp, }
+\item[{const char}]{delimiter, }
+\item[{const uint8\+\_\+t}]{format = {\ttfamily 3}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_r_t_c_a711641fee9d04f0a9be5537950908f6b}{}\label{class_loom_r_t_c_a711641fee9d04f0a9be5537950908f6b}
+
+
+Get timestamp. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em header} & Column header(s) of timestamp element \\
+\hline
+\mbox{\tt out}  & {\em timestamp} & String to fill with timestamp element(s) \\
+\hline
+\mbox{\tt in}  & {\em delimiter} & Delimiter to use \\
+\hline
+\mbox{\tt in}  & {\em format} & How to format timestamp (0\+: no timestamp added, 1\+: only date added, 2\+: only time added, 3\+: both date and time added (two fields), 4\+: both date and time added (combined field) ), \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!get\+\_\+timestring@{get\+\_\+timestring}}
+\index{get\+\_\+timestring@{get\+\_\+timestring}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{get\+\_\+timestring()}{get_timestring()}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+R\+T\+C\+::get\+\_\+timestring (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_r_t_c_ad899bf3e07f5fe270addb88fafa22016}{}\label{class_loom_r_t_c_ad899bf3e07f5fe270addb88fafa22016}
+
+
+Get string of time. 
+
+\begin{DoxyReturn}{Returns}
+Time string 
+\end{DoxyReturn}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!get\+\_\+timestring@{get\+\_\+timestring}}
+\index{get\+\_\+timestring@{get\+\_\+timestring}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{get\+\_\+timestring(char $\ast$buf)}{get_timestring(char *buf)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::get\+\_\+timestring (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_r_t_c_a9a14c5f4a347b64c661e4af6eab969dd}{}\label{class_loom_r_t_c_a9a14c5f4a347b64c661e4af6eab969dd}
+
+
+Get string of time. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em buf} & Buffer to fill\mbox{]} \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!get\+\_\+weekday@{get\+\_\+weekday}}
+\index{get\+\_\+weekday@{get\+\_\+weekday}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{get\+\_\+weekday()}{get_weekday()}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Loom\+R\+T\+C\+::get\+\_\+weekday (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_r_t_c_a9eaffa2c1d312cf13f5f6b66a7bd6067}{}\label{class_loom_r_t_c_a9eaffa2c1d312cf13f5f6b66a7bd6067}
+
+
+Get string of weekday. 
+
+\begin{DoxyReturn}{Returns}
+Weekday string 
+\end{DoxyReturn}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!get\+\_\+weekday@{get\+\_\+weekday}}
+\index{get\+\_\+weekday@{get\+\_\+weekday}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{get\+\_\+weekday(char $\ast$buf)}{get_weekday(char *buf)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::get\+\_\+weekday (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_r_t_c_aeae9084ff1fc9fe0faa81df9c39277fa}{}\label{class_loom_r_t_c_aeae9084ff1fc9fe0faa81df9c39277fa}
+
+
+Get string of weekday. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em buf} & Buffer to fill \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!init@{init}}
+\index{init@{init}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a008e89e23f3650d1e8a9c96fe1d8c857}{}\label{class_loom_r_t_c_a008e89e23f3650d1e8a9c96fe1d8c857}
+
+
+Initialize R\+TC. 
+
+Called by subclass constructors \index{Loom\+R\+TC@{Loom\+R\+TC}!link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}}
+\index{link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{link\+\_\+device\+\_\+manager(\+Loom\+Manager $\ast$\+L\+M) override}{link_device_manager(LoomManager *LM) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::link\+\_\+device\+\_\+manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{LM}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_r_t_c_a24c72617d7e275e89740af4f5296e42b}{}\label{class_loom_r_t_c_a24c72617d7e275e89740af4f5296e42b}
+
+
+Add pointer back to device manager. 
+
+Generally only called when device manager links module to provide pointer both directions. Derived modules may override this for increased function, such as linking a submanager or R\+TC module. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em LM} & \hyperlink{class_loom_manager}{Loom\+Manager} to point to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_adc08f87bf7c0c0988decee196a714396}{Loom\+Module}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!local\+\_\+rtc@{local\+\_\+rtc}}
+\index{local\+\_\+rtc@{local\+\_\+rtc}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{local\+\_\+rtc()}{local_rtc()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::local\+\_\+rtc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_afd2c4c89a426678d754b7b59643b9d90}{}\label{class_loom_r_t_c_afd2c4c89a426678d754b7b59643b9d90}
+
+
+Read local time if local time is enable to read It will be updated on contents array in the data json. 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!now@{now}}
+\index{now@{now}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{now() const =0}{now() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Date\+Time Loom\+R\+T\+C\+::now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_r_t_c_abef017ad813f2f5fd6559af2b64e409b}{}\label{class_loom_r_t_c_abef017ad813f2f5fd6559af2b64e409b}
+
+
+Get Date\+Time of current time. 
+
+\begin{DoxyReturn}{Returns}
+Date\+Time 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_loom___p_c_f8523_a8d39f82dea66cdb0ae2d15a1297d5490}{Loom\+\_\+\+P\+C\+F8523}, and \hyperlink{class_loom___d_s3231_aae43c488ccea88b751d781a3dc920e0b}{Loom\+\_\+\+D\+S3231}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!package@{package}}
+\index{package@{package}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_r_t_c_a13101cb450db89fe15ab77b29dba975e}{}\label{class_loom_r_t_c_a13101cb450db89fe15ab77b29dba975e}
+
+
+Adds a timestamp to the provided data Json. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to add timestamp to \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_r_t_c_a41c84de7ef49bf7f42069f948a98c30b}{}\label{class_loom_r_t_c_a41c84de7ef49bf7f42069f948a98c30b}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+
+
+Reimplemented in \hyperlink{class_loom___p_c_f8523_a428ddebfaec1b10cbe079f8aa5f64972}{Loom\+\_\+\+P\+C\+F8523}, and \hyperlink{class_loom___d_s3231_a82be3e8bae268cb80bca455e5fef1289}{Loom\+\_\+\+D\+S3231}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!print\+\_\+\+Date\+Time@{print\+\_\+\+Date\+Time}}
+\index{print\+\_\+\+Date\+Time@{print\+\_\+\+Date\+Time}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{print\+\_\+\+Date\+Time(\+Date\+Time time)}{print_DateTime(DateTime time)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::print\+\_\+\+Date\+Time (
+\begin{DoxyParamCaption}
+\item[{Date\+Time}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom_r_t_c_a4114a95d1dbc89e3ea8e3f27b3250108}{}\label{class_loom_r_t_c_a4114a95d1dbc89e3ea8e3f27b3250108}
+
+
+Print an arbitrary Date\+Time object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em time} & Time to print \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_r_t_c_aaa45a542cfd7b64f79a2c321a29c08f5}{}\label{class_loom_r_t_c_aaa45a542cfd7b64f79a2c321a29c08f5}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!print\+\_\+time@{print\+\_\+time}}
+\index{print\+\_\+time@{print\+\_\+time}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{print\+\_\+time(const bool verbose=false)}{print_time(const bool verbose=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::print\+\_\+time (
+\begin{DoxyParamCaption}
+\item[{const bool}]{verbose = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_r_t_c_afa1dcbf39c103215fbc41313c09294d2}{}\label{class_loom_r_t_c_afa1dcbf39c103215fbc41313c09294d2}
+
+
+Print the current time. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em verbose} & True for multile lines, false for short display \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!read\+\_\+rtc@{read\+\_\+rtc}}
+\index{read\+\_\+rtc@{read\+\_\+rtc}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{read\+\_\+rtc()}{read_rtc()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::read\+\_\+rtc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a7ecd2d763167955581da55aab3602c11}{}\label{class_loom_r_t_c_a7ecd2d763167955581da55aab3602c11}
+
+
+Read the R\+TC, update time and date strings. 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!rtc\+\_\+validity\+\_\+check@{rtc\+\_\+validity\+\_\+check}}
+\index{rtc\+\_\+validity\+\_\+check@{rtc\+\_\+validity\+\_\+check}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{rtc\+\_\+validity\+\_\+check()}{rtc_validity_check()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+R\+T\+C\+::rtc\+\_\+validity\+\_\+check (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a6a1bedc03dd44c013cf6b75000533e9f}{}\label{class_loom_r_t_c_a6a1bedc03dd44c013cf6b75000533e9f}
+
+
+Check if current R\+TC time is valid (not necessarily correct) 
+
+\begin{DoxyReturn}{Returns}
+True if valid 
+\end{DoxyReturn}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!set\+\_\+alarm@{set\+\_\+alarm}}
+\index{set\+\_\+alarm@{set\+\_\+alarm}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{set\+\_\+alarm(\+Date\+Time time)=0}{set_alarm(DateTime time)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+R\+T\+C\+::set\+\_\+alarm (
+\begin{DoxyParamCaption}
+\item[{Date\+Time}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_r_t_c_a34b7dd8dacbfdb61876cc4aabb79e67e}{}\label{class_loom_r_t_c_a34b7dd8dacbfdb61876cc4aabb79e67e}
+
+
+Set an alarm to go off at the specified time. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em time} & Date\+Time of time alarm should go off \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_loom___p_c_f8523_aaac2d5972d2c7745847ea6c4adc15927}{Loom\+\_\+\+P\+C\+F8523}, and \hyperlink{class_loom___d_s3231_a597444a8d1e4230ab931731986d9af7c}{Loom\+\_\+\+D\+S3231}.
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!set\+\_\+alarm@{set\+\_\+alarm}}
+\index{set\+\_\+alarm@{set\+\_\+alarm}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{set\+\_\+alarm(const Time\+Span duration)}{set_alarm(const TimeSpan duration)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::set\+\_\+alarm (
+\begin{DoxyParamCaption}
+\item[{const Time\+Span}]{duration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_r_t_c_ac0576fedce58ab95c864b146494343af}{}\label{class_loom_r_t_c_ac0576fedce58ab95c864b146494343af}
+
+
+Set an alarm for a duration. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em duration} & Time\+Span of duration before alarm goes off \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!set\+\_\+rtc\+\_\+to\+\_\+compile\+\_\+time@{set\+\_\+rtc\+\_\+to\+\_\+compile\+\_\+time}}
+\index{set\+\_\+rtc\+\_\+to\+\_\+compile\+\_\+time@{set\+\_\+rtc\+\_\+to\+\_\+compile\+\_\+time}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{set\+\_\+rtc\+\_\+to\+\_\+compile\+\_\+time()}{set_rtc_to_compile_time()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::set\+\_\+rtc\+\_\+to\+\_\+compile\+\_\+time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a97c2b8e6e8c31f1865feb1ed8e1948df}{}\label{class_loom_r_t_c_a97c2b8e6e8c31f1865feb1ed8e1948df}
+
+
+Set the R\+TC time to compile time. 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!set\+\_\+rtc\+\_\+to\+\_\+computer\+\_\+time@{set\+\_\+rtc\+\_\+to\+\_\+computer\+\_\+time}}
+\index{set\+\_\+rtc\+\_\+to\+\_\+computer\+\_\+time@{set\+\_\+rtc\+\_\+to\+\_\+computer\+\_\+time}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{set\+\_\+rtc\+\_\+to\+\_\+computer\+\_\+time()}{set_rtc_to_computer_time()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::set\+\_\+rtc\+\_\+to\+\_\+computer\+\_\+time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_ab556620d00236ff10f4438f3b80c2636}{}\label{class_loom_r_t_c_ab556620d00236ff10f4438f3b80c2636}
+
+
+Set the R\+TC time to computer time by user input if the board is connected to computer. 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!time\+\_\+adjust@{time\+\_\+adjust}}
+\index{time\+\_\+adjust@{time\+\_\+adjust}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{time\+\_\+adjust(const Date\+Time time, const bool is\+\_\+utc=true)}{time_adjust(const DateTime time, const bool is_utc=true)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+R\+T\+C\+::time\+\_\+adjust (
+\begin{DoxyParamCaption}
+\item[{const Date\+Time}]{time, }
+\item[{const bool}]{is\+\_\+utc = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_r_t_c_ac25717e8d486c123629973684778348f}{}\label{class_loom_r_t_c_ac25717e8d486c123629973684778348f}
+
+
+Set time to provided timezone. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em time} & Time to set to \\
+\hline
+\mbox{\tt in}  & {\em is\+\_\+utc} & True if \textquotesingle{}time\textquotesingle{} is in U\+TC, false if local \\
+\hline
+\end{DoxyParams}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!us\+\_\+daylight\+\_\+to\+\_\+standard@{us\+\_\+daylight\+\_\+to\+\_\+standard}}
+\index{us\+\_\+daylight\+\_\+to\+\_\+standard@{us\+\_\+daylight\+\_\+to\+\_\+standard}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{us\+\_\+daylight\+\_\+to\+\_\+standard(\+Date\+Time local\+\_\+time)}{us_daylight_to_standard(DateTime local_time)}}]{\setlength{\rightskip}{0pt plus 5cm}Date\+Time Loom\+R\+T\+C\+::us\+\_\+daylight\+\_\+to\+\_\+standard (
+\begin{DoxyParamCaption}
+\item[{Date\+Time}]{local\+\_\+time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_ab78edb38537fd80c4fbd1ac1625606b5}{}\label{class_loom_r_t_c_ab78edb38537fd80c4fbd1ac1625606b5}
+
+
+Convert the time in the US daylight saving and standard. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em local\+\_\+time} & The updated local\+\_\+time based on us daylight saving \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!converted@{converted}}
+\index{converted@{converted}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{converted}{converted}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+R\+T\+C\+::converted\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a79db2b47bfecccd825519e677bc43a43}{}\label{class_loom_r_t_c_a79db2b47bfecccd825519e677bc43a43}
+
+
+Whether or not converted daylight saving / summer time or not. 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!custom\+\_\+time@{custom\+\_\+time}}
+\index{custom\+\_\+time@{custom\+\_\+time}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{custom\+\_\+time}{custom_time}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+R\+T\+C\+::custom\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a91c96be6cc3f0f0f4dedbb038f164e73}{}\label{class_loom_r_t_c_a91c96be6cc3f0f0f4dedbb038f164e73}
+\index{Loom\+R\+TC@{Loom\+R\+TC}!datestring@{datestring}}
+\index{datestring@{datestring}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{datestring}{datestring}}]{\setlength{\rightskip}{0pt plus 5cm}char Loom\+R\+T\+C\+::datestring\mbox{[}20\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a86d3babf565f32bcbdffcf6e2a5efcdd}{}\label{class_loom_r_t_c_a86d3babf565f32bcbdffcf6e2a5efcdd}
+
+
+Latest saved string of the Date (year/month/day) 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!local\+\_\+datestring@{local\+\_\+datestring}}
+\index{local\+\_\+datestring@{local\+\_\+datestring}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{local\+\_\+datestring}{local_datestring}}]{\setlength{\rightskip}{0pt plus 5cm}char Loom\+R\+T\+C\+::local\+\_\+datestring\mbox{[}20\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a9692826e2c5093e528645a619fc16bc9}{}\label{class_loom_r_t_c_a9692826e2c5093e528645a619fc16bc9}
+
+
+Latest saved string of Local Date (year/month/day) 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!local\+\_\+time@{local\+\_\+time}}
+\index{local\+\_\+time@{local\+\_\+time}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{local\+\_\+time}{local_time}}]{\setlength{\rightskip}{0pt plus 5cm}Date\+Time Loom\+R\+T\+C\+::local\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_ab3d490dd52a5e2d2413d1f0c00944a7b}{}\label{class_loom_r_t_c_ab3d490dd52a5e2d2413d1f0c00944a7b}
+
+
+Date\+Time variable for the Local Time. 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!local\+\_\+timestring@{local\+\_\+timestring}}
+\index{local\+\_\+timestring@{local\+\_\+timestring}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{local\+\_\+timestring}{local_timestring}}]{\setlength{\rightskip}{0pt plus 5cm}char Loom\+R\+T\+C\+::local\+\_\+timestring\mbox{[}20\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_ae8fe182cd1fc3f7c66ef6b3ee353c51f}{}\label{class_loom_r_t_c_ae8fe182cd1fc3f7c66ef6b3ee353c51f}
+
+
+Latest saved string of Local time (hour\+:minute\+:second) 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!timestring@{timestring}}
+\index{timestring@{timestring}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{timestring}{timestring}}]{\setlength{\rightskip}{0pt plus 5cm}char Loom\+R\+T\+C\+::timestring\mbox{[}20\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a30e77eaeb4b0e25c8fde9239e64fe13a}{}\label{class_loom_r_t_c_a30e77eaeb4b0e25c8fde9239e64fe13a}
+
+
+Latest saved string of the time (hour\+:minute\+:second) 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!timezone@{timezone}}
+\index{timezone@{timezone}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{timezone}{timezone}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Time\+Zone} Loom\+R\+T\+C\+::timezone\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a6c1336bf000fd9a385f315d43bbbc5b0}{}\label{class_loom_r_t_c_a6c1336bf000fd9a385f315d43bbbc5b0}
+
+
+The Time\+Zone to use. 
+
+\index{Loom\+R\+TC@{Loom\+R\+TC}!use\+\_\+local\+\_\+time@{use\+\_\+local\+\_\+time}}
+\index{use\+\_\+local\+\_\+time@{use\+\_\+local\+\_\+time}!Loom\+R\+TC@{Loom\+R\+TC}}
+\subsubsection[{\texorpdfstring{use\+\_\+local\+\_\+time}{use_local_time}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+R\+T\+C\+::use\+\_\+local\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_r_t_c_a5783620e9af8eb5fa0818aa189483d8e}{}\label{class_loom_r_t_c_a5783620e9af8eb5fa0818aa189483d8e}
+
+
+Whether or not use local time, else U\+TC time. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+R\+T\+C/\hyperlink{_r_t_c_8h}{R\+T\+C.\+h}\item 
+src/\+R\+T\+C/\hyperlink{_r_t_c_8cpp}{R\+T\+C.\+cpp}\end{DoxyCompactItemize}

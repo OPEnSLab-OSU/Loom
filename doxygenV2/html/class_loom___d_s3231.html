@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_DS3231 class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_DS3231 <span class="m-thin">class</span>
+        </h1>
+        <p>DS3231 RTC module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___d_s3231.html">Module Documentation</a></li><li><a href="https://www.adafruit.com/product/3028">Product Page: Adafruit DS3231 Precision RTC FeatherWing</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ds3231-rtc">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>
+            </dt>
+            <dd>Abstract base class of RTC modules.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a3407d04f9e8cd13b2cfee640818f5e4b">
+              RTC_DS3231 <a href="#a3407d04f9e8cd13b2cfee640818f5e4b" class="m-doc-self">rtc_inst</a>
+            </dt>
+            <dd>Underlying DS3231 manager instance.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a92679342b390b9d1339f2e196f064dce" class="m-doc">Loom_DS3231</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              <a href="class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527a" class="m-doc">TimeZone</a> timezone = <a href="class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527aa67d47df7eb52f9e54f467763167398f3" class="m-doc">TimeZone::<wbr />PST</a>,
+              const bool use_local_time = false,
+              const bool custom_time = false)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a903c3cbd251dc82473eec5163f958ba7" class="m-doc">Loom_DS3231</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="aec3af7092dc29fd95f77e068cf4517d7">
+              <span class="m-doc-wrap-bumper"><a href="#aec3af7092dc29fd95f77e068cf4517d7" class="m-doc-self">~Loom_DS3231</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aae43c488ccea88b751d781a3dc920e0b" class="m-doc">now</a>(</span><span class="m-doc-wrap">) const -&gt; DateTime <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Get DateTime of current time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a597444a8d1e4230ab931731986d9af7c" class="m-doc">set_alarm</a>(</span><span class="m-doc-wrap">DateTime time) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Set an alarm to go off at the specified time.</dd>
+            <dt id="a013fba4d81a09ad61dabef8e2ffe9669">
+              <span class="m-doc-wrap-bumper">void <a href="#a013fba4d81a09ad61dabef8e2ffe9669" class="m-doc-self">clear_alarms</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Clear alarms.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a82be3e8bae268cb80bca455e5fef1289">
+              <span class="m-doc-wrap-bumper">void <a href="#a82be3e8bae268cb80bca455e5fef1289" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a204356e5f64a038f14a53c5106d17e9d" class="m-doc">_begin</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Begin auxiliary function that subclasses need to implement.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8dd6327294c41f8aaea424660770184e" class="m-doc">_initialized</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Initialization auxiliary function that subclasses need to implement.</dd>
+            <dt id="a1f1825fe54a8308bdcea79814d5d7d5c">
+              <span class="m-doc-wrap-bumper">void <a href="#a1f1825fe54a8308bdcea79814d5d7d5c" class="m-doc-self">_adjust</a>(</span><span class="m-doc-wrap">const DateTime time) <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Begin auxiliary function that subclasses need to implement.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a92679342b390b9d1339f2e196f064dce"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />DS3231::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a92679342b390b9d1339f2e196f064dce" class="m-doc-self">Loom_DS3231</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              <a href="class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527a" class="m-doc">TimeZone</a> timezone = <a href="class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527aa67d47df7eb52f9e54f467763167398f3" class="m-doc">TimeZone::<wbr />PST</a>,
+              const bool use_local_time = false,
+              const bool custom_time = false)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>timezone&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(TimeZone) | &lt;11&gt; | { 0(&quot;WAT&quot;), 1(&quot;AT&quot;), 2(&quot;ADT&quot;), 3(&quot;AST&quot;), 4(&quot;EDT&quot;), 5(&quot;EST&quot;), 6(&quot;CDT&quot;), 7(&quot;CST&quot;), 8(&quot;MDT&quot;), 9(&quot;MST&quot;), 10(&quot;PDT&quot;), 11(&quot;PST&quot;), 12(&quot;AKDT&quot;), 13(&quot;AKST&quot;), 14(&quot;HST&quot;), 15(&quot;SST&quot;), 16(&quot;GMT&quot;), 17(&quot;BST&quot;), 18(&quot;CET&quot;), 19(&quot;EET&quot;), 20(&quot;EEST&quot;), 21(&quot;BRT&quot;), 22(&quot;ZP4&quot;), 23(&quot;ZP5&quot;), 24(&quot;ZP6&quot;), 25(&quot;ZP7&quot;), 26(&quot;AWST&quot;), 27(&quot;ACST&quot;), 28(&quot;AEST&quot;)} | Which timezone device is in</td>
+                </tr>
+                <tr>
+                  <td>use_local_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;false&gt; | {true, false} | True for local time, false for UTC time</td>
+                </tr>
+                <tr>
+                  <td>custom_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;false&gt; | {true, false} | True for user input local time, false otherwise</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a903c3cbd251dc82473eec5163f958ba7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />DS3231::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a903c3cbd251dc82473eec5163f958ba7" class="m-doc-self">Loom_DS3231</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aae43c488ccea88b751d781a3dc920e0b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">DateTime Loom_<wbr />DS3231::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aae43c488ccea88b751d781a3dc920e0b" class="m-doc-self">now</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Get DateTime of current time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>DateTime</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a597444a8d1e4230ab931731986d9af7c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />DS3231::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a597444a8d1e4230ab931731986d9af7c" class="m-doc-self">set_alarm</a>(</span><span class="m-doc-wrap">DateTime time) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Set an alarm to go off at the specified time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>DateTime of time alarm should go off</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a204356e5f64a038f14a53c5106d17e9d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />DS3231::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a204356e5f64a038f14a53c5106d17e9d" class="m-doc-self">_begin</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Begin auxiliary function that subclasses need to implement.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if begin worked without issue, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8dd6327294c41f8aaea424660770184e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />DS3231::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8dd6327294c41f8aaea424660770184e" class="m-doc-self">_initialized</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Initialization auxiliary function that subclasses need to implement.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if RTC is initialized / did not lose power</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

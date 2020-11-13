@@ -1,0 +1,5 @@
+<map id="LoomSerialSensor" name="LoomSerialSensor">
+<area shape="rect" id="node4" href="$class_loom___k30.html" title="K30 CO2 sensor module. " alt="" coords="30,229,119,256"/>
+<area shape="rect" id="node2" href="$class_loom_sensor.html" title="Abstract root of Loom sensor modules hierarchy. " alt="" coords="23,80,126,107"/>
+<area shape="rect" id="node3" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="23,5,127,32"/>
+</map>

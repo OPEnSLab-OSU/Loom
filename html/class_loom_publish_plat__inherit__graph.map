@@ -1,0 +1,5 @@
+<map id="LoomPublishPlat" name="LoomPublishPlat">
+<area shape="rect" id="node3" href="$class_loom___google_sheets.html" title="Module taking in and translating JSON into data understood by the Google Sheets script API..." alt="" coords="5,155,160,181"/>
+<area shape="rect" id="node4" href="$class_loom___max_pub.html" title="Module taking in and translating JSON into data understood by the Google Sheets script API..." alt="" coords="184,155,299,181"/>
+<area shape="rect" id="node2" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="109,5,213,32"/>
+</map>

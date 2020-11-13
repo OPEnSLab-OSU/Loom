@@ -1,0 +1,655 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_internet_plat" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>LoomInternetPlat</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <derivedcompoundref refid="class_loom___ethernet" prot="public" virt="non-virtual">Loom_Ethernet</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___l_t_e" prot="public" virt="non-virtual">Loom_LTE</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___wi_fi" prot="public" virt="non-virtual">Loom_WiFi</derivedcompoundref>
+    <includes refid="_internet_plat_8h" local="no">InternetPlat.h</includes>
+    <innerclass refid="struct_loom_internet_plat_1_1_client_cleanup" prot="public">LoomInternetPlat::ClientCleanup</innerclass>
+    <innerclass refid="struct_loom_internet_plat_1_1_u_d_p_deletor" prot="public">LoomInternetPlat::UDPDeletor</innerclass>
+      <sectiondef kind="user-defined">
+      <header>TYPES</header>
+      <memberdef kind="typedef" id="class_loom_internet_plat_1a0b2cc742a6ac5f4f7054b75ea99b345c" prot="public" static="no">
+        <type>std::unique_ptr&lt; UDP, <ref refid="struct_loom_internet_plat_1_1_u_d_p_deletor" kindref="compound">UDPDeletor</ref> &gt;</type>
+        <definition>using LoomInternetPlat::UDPPtr =  std::unique_ptr&lt;UDP, UDPDeletor&gt;</definition>
+        <argsstring></argsstring>
+        <name>UDPPtr</name>
+        <briefdescription>
+<para>Cleaner name for UDP smart pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="65" column="1" bodyfile="src/InternetPlats/InternetPlat.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="class_loom_internet_plat_1a7044d4ef42ec9181d519e6d37365789d" prot="public" static="no">
+        <type>std::unique_ptr&lt; Client, <ref refid="struct_loom_internet_plat_1_1_client_cleanup" kindref="compound">ClientCleanup</ref> &gt;</type>
+        <definition>using LoomInternetPlat::ClientSession =  std::unique_ptr&lt;Client, ClientCleanup&gt;</definition>
+        <argsstring></argsstring>
+        <name>ClientSession</name>
+        <briefdescription>
+<para>Cleaner name for Client smart pointer. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="77" column="1" bodyfile="src/InternetPlats/InternetPlat.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom_internet_plat_1a357f426519f563931cf6793bca0ae397" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomInternetPlat::LoomInternetPlat</definition>
+        <argsstring>(LoomManager *manager, const char *module_name, const LoomModule::Type module_type)</argsstring>
+        <name>LoomInternetPlat</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>module_type</declname>
+        </param>
+        <briefdescription>
+<para>Loom Internet Platform module constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;Internet-Plat&quot;&gt; | null | Internet Platform module name </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="86" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="14" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1a36f9cc600e5ee1a916c330da914a3b11" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual LoomInternetPlat::~LoomInternetPlat</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LoomInternetPlat</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="93" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom_internet_plat_1ae9cbe7ba64e4d597fe7084110f646dec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void LoomInternetPlat::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <reimplementedby refid="class_loom___wi_fi_1a536247ffb9228c55d5a2473d8df9a58b">package</reimplementedby>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>No package necessary for internet platforms. </para>        </briefdescription>
+        <detaileddescription>
+<para>implement with empty body. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="101" column="1" bodyfile="src/InternetPlats/InternetPlat.h" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1a01a61bd1d5ec547b2619c620abbfd983" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="class_loom_internet_plat_1a7044d4ef42ec9181d519e6d37365789d" kindref="member">ClientSession</ref></type>
+        <definition>LoomInternetPlat::ClientSession LoomInternetPlat::http_request</definition>
+        <argsstring>(const char *domain, const char *url, const char *body, const char *verb)</argsstring>
+        <name>http_request</name>
+        <param>
+          <type>const char *</type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>url</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>body</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>verb</declname>
+        </param>
+        <briefdescription>
+<para>Make HTTP request. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The domain to connect to (e.g &quot;www.google.com&quot;) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">url</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The URL string to send with the http request, not including the domain (ex. &quot;/arduino?thing=otherthing&quot;). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">body</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The body string to use for the rest of the request, including additional headers. Will be appended directly to the request (right after the last header appended by the library) and will need newlines at the top or between additional headers and body. Example: &quot;some-header: thing\r\nsome-other-header:29\r\n\r\n{\&quot;my-json-body":"nice"}" adds two headers (some-header and some-other-header) and has a simple JSON body. Can be nullptr for none. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">result_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the buffer pointed to by result, in bytes. If the size of the buffer is exceeded, this function will return false. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the buffer to put data returned from the request in. Can be nullptr if result data is to be discarded. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">verb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP verb (&quot;PUT&quot;, &quot;GET&quot;, etc.) to use with this request. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A client session pointer, or a nullptr if the connection failed. When this pointer is destroyed the client will automatically close the connection. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="116" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="22" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1ad1a855e6ed61aa2c40ff0b8f477df57f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom_internet_plat_1a7044d4ef42ec9181d519e6d37365789d" kindref="member">ClientSession</ref></type>
+        <definition>ClientSession LoomInternetPlat::http_get_request</definition>
+        <argsstring>(const char *domain, const char *url, const char *body=nullptr)</argsstring>
+        <name>http_get_request</name>
+        <param>
+          <type>const char *</type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>url</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>body</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Make HTTP GET request. </para>        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="class_loom_internet_plat_1a01a61bd1d5ec547b2619c620abbfd983" kindref="member">http_request()</ref> for parameter and return details. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="120" column="1" bodyfile="src/InternetPlats/InternetPlat.h" bodystart="120" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1aeac1140fb30e60c0f845f36d2ff02cd8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom_internet_plat_1a7044d4ef42ec9181d519e6d37365789d" kindref="member">ClientSession</ref></type>
+        <definition>ClientSession LoomInternetPlat::http_post_request</definition>
+        <argsstring>(const char *domain, const char *url, const char *body=nullptr)</argsstring>
+        <name>http_post_request</name>
+        <param>
+          <type>const char *</type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>url</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>body</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>Make HTTP POST request. </para>        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="class_loom_internet_plat_1a01a61bd1d5ec547b2619c620abbfd983" kindref="member">http_request()</ref> for parameter and return details. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="125" column="1" bodyfile="src/InternetPlats/InternetPlat.h" bodystart="125" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1aa89a42b49465a6924a674be2e9dac709" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="class_loom_internet_plat_1a7044d4ef42ec9181d519e6d37365789d" kindref="member">ClientSession</ref></type>
+        <definition>LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain</definition>
+        <argsstring>(const char *domain)</argsstring>
+        <name>connect_to_domain</name>
+        <param>
+          <type>const char *</type>
+          <declname>domain</declname>
+        </param>
+        <briefdescription>
+<para>Connect to a domain, but don&apos;t write any HTTP stuff, Let the module figure that out. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="attention"><para>Remember to close the socket! </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The domain to connect to &quot;www.google.com&quot; </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A client reference. The client::connected method will return true if the connection succeeded, and false otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="132" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="53" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1aebfc1c711a7fa0eb781e545d7fc757cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="class_loom_internet_plat_1a7044d4ef42ec9181d519e6d37365789d" kindref="member">ClientSession</ref></type>
+        <definition>LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip</definition>
+        <argsstring>(const IPAddress &amp;ip, const uint16_t port)</argsstring>
+        <name>connect_to_ip</name>
+        <param>
+          <type>const IPAddress &amp;</type>
+          <declname>ip</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Connect to a domain, but don&apos;t write any HTTP stuff, Let the module figure that out. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="attention"><para>Remember to close the socket! </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ip</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IPAddress to connect to </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The port to connect to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A client reference. The client::connected method will return true if the connection succeeded, and false otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="139" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="93" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1a91204905ec272ff1edc608a3aa250745" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="class_loom_internet_plat_1a0b2cc742a6ac5f4f7054b75ea99b345c" kindref="member">UDPPtr</ref></type>
+        <definition>virtual UDPPtr LoomInternetPlat::open_socket</definition>
+        <argsstring>(const uint port)=0</argsstring>
+        <name>open_socket</name>
+        <reimplementedby refid="class_loom___ethernet_1aadfcbd39770e463dbc0383f8d358d89f">open_socket</reimplementedby>
+        <reimplementedby refid="class_loom___wi_fi_1aca028d9a3a39206d85b1eaac63cf0048">open_socket</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1a414b0ca17f97103620c7058fb0cb98d2">open_socket</reimplementedby>
+        <param>
+          <type>const uint</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Open a UDP socket for sending and recieving incoming data. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Be careful about recieving data from an open socket! </para></simplesect>
+<simplesect kind="return"><para>A UDP socket for transmitting and recieving, or a nullptr if opening the socket failed. The socket will automatically close when the pointer is destructed. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="145" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1a24d7c701a3db8e16355b6a33a4e323a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void LoomInternetPlat::connect</definition>
+        <argsstring>()=0</argsstring>
+        <name>connect</name>
+        <reimplementedby refid="class_loom___wi_fi_1a741402e5003f248d2c3ed4e7b222a926">connect</reimplementedby>
+        <reimplementedby refid="class_loom___ethernet_1a743f6fa201609c3874bded88390a891e">connect</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1ac1a5109706d827b394f350181a8f3698">connect</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="147" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1a32af1196a982d84a18e53f8d97e358a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void LoomInternetPlat::disconnect</definition>
+        <argsstring>()</argsstring>
+        <name>disconnect</name>
+        <reimplementedby refid="class_loom___wi_fi_1a04ff3733be0b54c8bc48aa5cb652a31f">disconnect</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1a14b4c6a3cefe05144d3d8a3bee587188">disconnect</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="148" column="1" bodyfile="src/InternetPlats/InternetPlat.h" bodystart="148" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1af9c5c867598c9951db4d404a6a495ce7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool LoomInternetPlat::is_connected</definition>
+        <argsstring>() const =0</argsstring>
+        <name>is_connected</name>
+        <reimplementedby refid="class_loom___ethernet_1a2770d92b9459361acb44e78694f94964">is_connected</reimplementedby>
+        <reimplementedby refid="class_loom___wi_fi_1a948eb2892e06294750c121d986abf179">is_connected</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1a38253137a5dbe6a069e75ca7aa9b872f">is_connected</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="149" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1a17807cb51c969dbdba980a4d704aef33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t LoomInternetPlat::get_time</definition>
+        <argsstring>()</argsstring>
+        <name>get_time</name>
+        <briefdescription>
+<para>make NTP request to get UTC time, using the UDP function above </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a unix timestamp if success, or 0 if failure. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="153" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="160" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1aa9db1a0c5ea5f6d0905631bcbbe5484d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomInternetPlat::m_send_NTP_packet</definition>
+        <argsstring>(UDP &amp;udp_dev, byte packet_buffer[]) const </argsstring>
+        <name>m_send_NTP_packet</name>
+        <param>
+          <type>UDP &amp;</type>
+          <declname>udp_dev</declname>
+        </param>
+        <param>
+          <type>byte</type>
+          <declname>packet_buffer</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="158" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="208" bodyend="228"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_loom_internet_plat_1a2a6ca5f5f807f420c445dd5ff53aed41" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomInternetPlat::write_http_request</definition>
+        <argsstring>(Stream &amp;client, const char *domain, const char *url, const char *body, const char *verb)</argsstring>
+        <name>write_http_request</name>
+        <param>
+          <type>Stream &amp;</type>
+          <declname>client</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>domain</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>url</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>body</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>verb</declname>
+        </param>
+        <briefdescription>
+<para>Utility function to write an http reqest based on parameters specified by <ref refid="class_loom_internet_plat_1a01a61bd1d5ec547b2619c620abbfd983" kindref="member">LoomInternetPlat::http_request</ref> to a Client class. </para>        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="class_loom_internet_plat_1a01a61bd1d5ec547b2619c620abbfd983" kindref="member">http_request()</ref> for parameter details. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="42" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="36" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1a71bfc232cac5294b1c3e6dbb00029fa7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>SSLClient &amp;</type>
+        <definition>virtual SSLClient&amp; LoomInternetPlat::get_client</definition>
+        <argsstring>()=0</argsstring>
+        <name>get_client</name>
+        <reimplementedby refid="class_loom___wi_fi_1afa854fccc5b59f6cfce8751d3223133c">get_client</reimplementedby>
+        <reimplementedby refid="class_loom___ethernet_1a8152295e24d6bbd8f5b9cda6cccc0997">get_client</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1a7f4179803a9db2ccfd306bf37bfdf64e">get_client</reimplementedby>
+        <briefdescription>
+<para>Get the underlying SSLClient implementation, which we will use for all of the other requests. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="45" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_internet_plat_1a3b79a1467f5f239cd740d6ced88cdadf" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const SSLClient &amp;</type>
+        <definition>virtual const SSLClient&amp; LoomInternetPlat::get_client</definition>
+        <argsstring>() const =0</argsstring>
+        <name>get_client</name>
+        <reimplementedby refid="class_loom___wi_fi_1a115964eb261df0585ab71e796d02f9d4">get_client</reimplementedby>
+        <reimplementedby refid="class_loom___ethernet_1a9223a4328f34b0a6640e1183e1f8ed2c">get_client</reimplementedby>
+        <reimplementedby refid="class_loom___l_t_e_1a844e09e0ae9b0c6f181d974171dfc10c">get_client</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.h" line="46" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract internet communication module. </para>    </briefdescription>
+    <detaileddescription>
+<para>All internet modules inherit from this class.</para><para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_internet_plat.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#internet-capabilities">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1134">
+        <label>Loom_LTE</label>
+        <link refid="class_loom___l_t_e"/>
+        <childnode refid="1131" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1135">
+        <label>Loom_WiFi</label>
+        <link refid="class_loom___wi_fi"/>
+        <childnode refid="1131" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1132">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="1131">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="1132" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1133">
+        <label>Loom_Ethernet</label>
+        <link refid="class_loom___ethernet"/>
+        <childnode refid="1131" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1142">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1138">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1139" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1140" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1145" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1141" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1137">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1138" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1146">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1141">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1137" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1142" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1143" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1140" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1144" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1145" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1146" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1140">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1137" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1141" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1136">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="1137" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1139">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1137" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1145">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1137" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1143">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1144">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/InternetPlats/InternetPlat.h" line="36" column="1" bodyfile="src/InternetPlats/InternetPlat.h" bodystart="35" bodyend="160"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>LoomInternetPlat</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>Category</name></member>
+      <member refid="class_loom_internet_plat_1a7044d4ef42ec9181d519e6d37365789d" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>ClientSession</name></member>
+      <member refid="class_loom_internet_plat_1a24d7c701a3db8e16355b6a33a4e323a6" prot="public" virt="pure-virtual"><scope>LoomInternetPlat</scope><name>connect</name></member>
+      <member refid="class_loom_internet_plat_1aa89a42b49465a6924a674be2e9dac709" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>connect_to_domain</name></member>
+      <member refid="class_loom_internet_plat_1aebfc1c711a7fa0eb781e545d7fc757cf" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>connect_to_ip</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>LoomInternetPlat</scope><name>device_manager</name></member>
+      <member refid="class_loom_internet_plat_1a32af1196a982d84a18e53f8d97e358a1" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>disconnect</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>get_active</name></member>
+      <member refid="class_loom_internet_plat_1a71bfc232cac5294b1c3e6dbb00029fa7" prot="protected" virt="pure-virtual"><scope>LoomInternetPlat</scope><name>get_client</name></member>
+      <member refid="class_loom_internet_plat_1a3b79a1467f5f239cd740d6ced88cdadf" prot="protected" virt="pure-virtual"><scope>LoomInternetPlat</scope><name>get_client</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_internet_plat_1a17807cb51c969dbdba980a4d704aef33" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>get_time</name></member>
+      <member refid="class_loom_internet_plat_1ad1a855e6ed61aa2c40ff0b8f477df57f" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>http_get_request</name></member>
+      <member refid="class_loom_internet_plat_1aeac1140fb30e60c0f845f36d2ff02cd8" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>http_post_request</name></member>
+      <member refid="class_loom_internet_plat_1a01a61bd1d5ec547b2619c620abbfd983" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>http_request</name></member>
+      <member refid="class_loom_internet_plat_1af9c5c867598c9951db4d404a6a495ce7" prot="public" virt="pure-virtual"><scope>LoomInternetPlat</scope><name>is_connected</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>link_device_manager</name></member>
+      <member refid="class_loom_internet_plat_1a357f426519f563931cf6793bca0ae397" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>LoomInternetPlat</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>LoomModule</name></member>
+      <member refid="class_loom_internet_plat_1aa9db1a0c5ea5f6d0905631bcbbe5484d" prot="private" virt="non-virtual"><scope>LoomInternetPlat</scope><name>m_send_NTP_packet</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>LoomInternetPlat</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>LoomInternetPlat</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>LoomInternetPlat</scope><name>module_type</name></member>
+      <member refid="class_loom_internet_plat_1a91204905ec272ff1edc608a3aa250745" prot="public" virt="pure-virtual"><scope>LoomInternetPlat</scope><name>open_socket</name></member>
+      <member refid="class_loom_internet_plat_1ae9cbe7ba64e4d597fe7084110f646dec" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>LoomInternetPlat</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>power_up</name></member>
+      <member refid="class_loom_module_1a4385842da9226014283136b3e37dde88" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>LoomInternetPlat</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>LoomInternetPlat</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>Type</name></member>
+      <member refid="class_loom_internet_plat_1a0b2cc742a6ac5f4f7054b75ea99b345c" prot="public" virt="non-virtual"><scope>LoomInternetPlat</scope><name>UDPPtr</name></member>
+      <member refid="class_loom_internet_plat_1a2a6ca5f5f807f420c445dd5ff53aed41" prot="protected" virt="non-virtual"><scope>LoomInternetPlat</scope><name>write_http_request</name></member>
+      <member refid="class_loom_internet_plat_1a36f9cc600e5ee1a916c330da914a3b11" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>~LoomInternetPlat</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>LoomInternetPlat</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,226 @@
+\hypertarget{class_loom_log_plat}{}\section{Loom\+Log\+Plat Class Reference}
+\label{class_loom_log_plat}\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+
+
+Abstract base of logging platforms.  
+
+
+
+
+{\ttfamily \#include $<$Log\+Plat.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Log\+Plat\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{class_loom_log_plat__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_log_plat_a95e7954d4d049c8481908ba248b1e57b}{Loom\+Log\+Plat} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}, const bool \hyperlink{class_loom_log_plat_a6d343b76b79a1e51572bcf2991966e61}{enable\+\_\+rate\+\_\+filter}=true, const uint16\+\_\+t \hyperlink{class_loom_log_plat_a3d4ffe4204560b9677b8007be7f522be}{min\+\_\+filter\+\_\+delay}=1000)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_log_plat_ac05c81b2e83214d22bdc94dfbb8a835c}{$\sim$\+Loom\+Log\+Plat} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_log_plat_abddec0fce6ef786577ae008702c9393e}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em No package necessary for logging platforms. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_loom_log_plat_accace14ed45817c98ef5ccc15fd79004}{log} (Json\+Object json)=0
+\begin{DoxyCompactList}\small\item\em Log a Json object. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_log_plat_adabc1e04a045b91923cff425405c5039}{log} ()
+\begin{DoxyCompactList}\small\item\em Version of log for use with \hyperlink{class_loom_manager}{Loom\+Manager}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom_log_plat_a6d343b76b79a1e51572bcf2991966e61}{enable\+\_\+rate\+\_\+filter}
+\begin{DoxyCompactList}\small\item\em Whether or not to enable a minimum delay between logging. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom_log_plat_a3d4ffe4204560b9677b8007be7f522be}{min\+\_\+filter\+\_\+delay}
+\begin{DoxyCompactList}\small\item\em Minimum delay between logging (milliseconds) \end{DoxyCompactList}\item 
+unsigned long \hyperlink{class_loom_log_plat_aa6ad61d7d6c126aa13dcc91debef67e3}{last\+\_\+log\+\_\+millis}
+\begin{DoxyCompactList}\small\item\em Value of millis() at last executed log time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_log_plat_afd1780573d350f46ce26d237a4ade43b}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_log_plat_a74520318a9427997df80f98f924a0e48}{check\+\_\+millis} ()
+\begin{DoxyCompactList}\small\item\em Check against millis to determine if time since last log exceeds min time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract base of logging platforms. 
+
+All logging modules inherit from this class.
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_log_plat.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{Loom\+Log\+Plat(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type, const bool enable\+\_\+rate\+\_\+filter=true, const uint16\+\_\+t min\+\_\+filter\+\_\+delay=1000)}{LoomLogPlat(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const bool enable_rate_filter=true, const uint16_t min_filter_delay=1000)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Log\+Plat\+::\+Loom\+Log\+Plat (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type, }
+\item[{const bool}]{enable\+\_\+rate\+\_\+filter = {\ttfamily true}, }
+\item[{const uint16\+\_\+t}]{min\+\_\+filter\+\_\+delay = {\ttfamily 1000}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_log_plat_a95e7954d4d049c8481908ba248b1e57b}{}\label{class_loom_log_plat_a95e7954d4d049c8481908ba248b1e57b}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em enable\+\_\+rate\+\_\+filter} & Whether or not to impose maximum update rate \\
+\hline
+\mbox{\tt in}  & {\em min\+\_\+filter\+\_\+delay} & Minimum update delay, if enable\+\_\+rate\+\_\+filter enabled \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!````~Loom\+Log\+Plat@{$\sim$\+Loom\+Log\+Plat}}
+\index{````~Loom\+Log\+Plat@{$\sim$\+Loom\+Log\+Plat}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Log\+Plat()=default}{~LoomLogPlat()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+Log\+Plat\+::$\sim$\+Loom\+Log\+Plat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_log_plat_ac05c81b2e83214d22bdc94dfbb8a835c}{}\label{class_loom_log_plat_ac05c81b2e83214d22bdc94dfbb8a835c}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!check\+\_\+millis@{check\+\_\+millis}}
+\index{check\+\_\+millis@{check\+\_\+millis}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{check\+\_\+millis()}{check_millis()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Log\+Plat\+::check\+\_\+millis (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_log_plat_a74520318a9427997df80f98f924a0e48}{}\label{class_loom_log_plat_a74520318a9427997df80f98f924a0e48}
+
+
+Check against millis to determine if time since last log exceeds min time. 
+
+\begin{DoxyReturn}{Returns}
+True if enough time has elapsed 
+\end{DoxyReturn}
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!log@{log}}
+\index{log@{log}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{log(\+Json\+Object json)=0}{log(JsonObject json)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Loom\+Log\+Plat\+::log (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_log_plat_accace14ed45817c98ef5ccc15fd79004}{}\label{class_loom_log_plat_accace14ed45817c98ef5ccc15fd79004}
+
+
+Log a Json object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json Object to log \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_loom___o_l_e_d_a288f75a9eb423bda9b65b8cb4c7708b8}{Loom\+\_\+\+O\+L\+ED}, \hyperlink{class_loom___s_d_a0f106e4911985253e8ac09bcf953bb6e}{Loom\+\_\+\+SD}, and \hyperlink{class_loom___batch_s_d_a3d80d1e31762c8b6328a05485cc8af88}{Loom\+\_\+\+Batch\+SD}.
+
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!log@{log}}
+\index{log@{log}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{log()}{log()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Log\+Plat\+::log (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_log_plat_adabc1e04a045b91923cff425405c5039}{}\label{class_loom_log_plat_adabc1e04a045b91923cff425405c5039}
+
+
+Version of log for use with \hyperlink{class_loom_manager}{Loom\+Manager}. 
+
+Accesses Json from \hyperlink{class_loom_manager}{Loom\+Manager}. Calls derived classes implementations of \hyperlink{class_loom_log_plat_accace14ed45817c98ef5ccc15fd79004}{log(\+Json\+Object json)} \index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!package@{package}}
+\index{package@{package}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Log\+Plat\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_log_plat_abddec0fce6ef786577ae008702c9393e}{}\label{class_loom_log_plat_abddec0fce6ef786577ae008702c9393e}
+
+
+No package necessary for logging platforms. 
+
+implement with empty body. 
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+
+
+Reimplemented in \hyperlink{class_loom___batch_s_d_a738bf5b08c3eba7ec2711b656e6f90bd}{Loom\+\_\+\+Batch\+SD}.
+
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Log\+Plat\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_log_plat_afd1780573d350f46ce26d237a4ade43b}{}\label{class_loom_log_plat_afd1780573d350f46ce26d237a4ade43b}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+
+
+Reimplemented in \hyperlink{class_loom___s_d_a4c0c3f46a3479ed8e4a96c0ca4acfa7e}{Loom\+\_\+\+SD}, \hyperlink{class_loom___o_l_e_d_a20dab0bc2c5bdc139b1b04523a54a78c}{Loom\+\_\+\+O\+L\+ED}, and \hyperlink{class_loom___batch_s_d_ad1566bbb55d145e3206784df245be710}{Loom\+\_\+\+Batch\+SD}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!enable\+\_\+rate\+\_\+filter@{enable\+\_\+rate\+\_\+filter}}
+\index{enable\+\_\+rate\+\_\+filter@{enable\+\_\+rate\+\_\+filter}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{enable\+\_\+rate\+\_\+filter}{enable_rate_filter}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Log\+Plat\+::enable\+\_\+rate\+\_\+filter\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_log_plat_a6d343b76b79a1e51572bcf2991966e61}{}\label{class_loom_log_plat_a6d343b76b79a1e51572bcf2991966e61}
+
+
+Whether or not to enable a minimum delay between logging. 
+
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!last\+\_\+log\+\_\+millis@{last\+\_\+log\+\_\+millis}}
+\index{last\+\_\+log\+\_\+millis@{last\+\_\+log\+\_\+millis}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{last\+\_\+log\+\_\+millis}{last_log_millis}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Loom\+Log\+Plat\+::last\+\_\+log\+\_\+millis\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_log_plat_aa6ad61d7d6c126aa13dcc91debef67e3}{}\label{class_loom_log_plat_aa6ad61d7d6c126aa13dcc91debef67e3}
+
+
+Value of millis() at last executed log time. 
+
+\index{Loom\+Log\+Plat@{Loom\+Log\+Plat}!min\+\_\+filter\+\_\+delay@{min\+\_\+filter\+\_\+delay}}
+\index{min\+\_\+filter\+\_\+delay@{min\+\_\+filter\+\_\+delay}!Loom\+Log\+Plat@{Loom\+Log\+Plat}}
+\subsubsection[{\texorpdfstring{min\+\_\+filter\+\_\+delay}{min_filter_delay}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+Log\+Plat\+::min\+\_\+filter\+\_\+delay\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_log_plat_a3d4ffe4204560b9677b8007be7f522be}{}\label{class_loom_log_plat_a3d4ffe4204560b9677b8007be7f522be}
+
+
+Minimum delay between logging (milliseconds) 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Log\+Plats/\hyperlink{_log_plat_8h}{Log\+Plat.\+h}\item 
+src/\+Log\+Plats/\hyperlink{_log_plat_8cpp}{Log\+Plat.\+cpp}\end{DoxyCompactItemize}

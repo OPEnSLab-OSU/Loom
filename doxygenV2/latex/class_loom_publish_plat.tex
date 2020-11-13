@@ -1,0 +1,273 @@
+\hypertarget{class_loom_publish_plat}{}\section{Loom\+Publish\+Plat Class Reference}
+\label{class_loom_publish_plat}\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+
+
+Abstract internet publishing module, implementing google sheets and mongodb functionality.  
+
+
+
+
+{\ttfamily \#include $<$Publish\+Plat.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Publish\+Plat\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{class_loom_publish_plat__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_publish_plat_a59b0b76a0a0507c211284f341c0c5b34}{Loom\+Publish\+Plat} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_publish_plat_aab697868e61843787893f5509d22b9ed}{internet\+\_\+type})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_publish_plat_a68870cd02f9de172d4bcf448060ef1ec}{$\sim$\+Loom\+Publish\+Plat} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_publish_plat_a9be9c86b766a6308fb2851875b50ba56}{second\+\_\+stage\+\_\+ctor} () override
+\begin{DoxyCompactList}\small\item\em Grab the internet platform specified by the ctor parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_publish_plat_ac8548fef404b55465773513aefce5608}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em No package necessary for publishing platforms. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_publish_plat_a9be2ccbcaba4d1a5735bcd5bf828eafb}{publish} (const Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Publish data. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom_publish_plat_ae0c0825a58465f124bfe07e3de8b3b25}{publish\+\_\+batch} ()
+\begin{DoxyCompactList}\small\item\em Publish all the packets stored in the batch. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_publish_plat_a5a172ded7502cd31fe15596e21dd6cc9}{publish} ()
+\begin{DoxyCompactList}\small\item\em Version of log for use with \hyperlink{class_loom_manager}{Loom\+Manager}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_internet_plat}{Loom\+Internet\+Plat} $\ast$ \hyperlink{class_loom_publish_plat_a9e07931b084ea022c48485a2df28cc83}{m\+\_\+internet}
+\begin{DoxyCompactList}\small\item\em Pointer to internet platform to use to publish. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_publish_plat_aab697868e61843787893f5509d22b9ed}{internet\+\_\+type}
+\begin{DoxyCompactList}\small\item\em Type of internet platform used to publish. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_publish_plat_a0055306a6b0efc49d83f083c1398eea1}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_publish_plat_a38cc9fe71203a153392fbca807e39434}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_loom_publish_plat_a5d54196f11ef28daf8fdf853f215a033}{send\+\_\+to\+\_\+internet} (const Json\+Object json, \hyperlink{class_loom_internet_plat}{Loom\+Internet\+Plat} $\ast$plat)=0
+\begin{DoxyCompactList}\small\item\em Send J\+S\+ON to the internet, assumes that a valid internet plat was found and can be used. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract internet publishing module, implementing google sheets and mongodb functionality. 
+
+All actuator modules inherit from this class.
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_publish_plat.html}{\tt Module Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{Loom\+Publish\+Plat(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type, const Loom\+Module\+::\+Type internet\+\_\+type)}{LoomPublishPlat(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const LoomModule::Type internet_type)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Publish\+Plat\+::\+Loom\+Publish\+Plat (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{internet\+\_\+type}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_publish_plat_a59b0b76a0a0507c211284f341c0c5b34}{}\label{class_loom_publish_plat_a59b0b76a0a0507c211284f341c0c5b34}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & String $\vert$ $<$\char`\"{}\+Internet-\/\+Plat\char`\"{}$>$ $\vert$ null $\vert$ Publish platform module name \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em internet\+\_\+type} & Set(\+Loom\+Module\+::\+Type) $\vert$ $<$7001$>$ $\vert$ \{7001(\char`\"{}\+Ethernet\char`\"{}), 7002(\char`\"{}\+Wi\+Fi\char`\"{}), 7003(\char`\"{}\+L\+T\+E\char`\"{})\} $\vert$ Code of the desired internet platform. \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!````~Loom\+Publish\+Plat@{$\sim$\+Loom\+Publish\+Plat}}
+\index{````~Loom\+Publish\+Plat@{$\sim$\+Loom\+Publish\+Plat}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Publish\+Plat()=default}{~LoomPublishPlat()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+Publish\+Plat\+::$\sim$\+Loom\+Publish\+Plat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_publish_plat_a68870cd02f9de172d4bcf448060ef1ec}{}\label{class_loom_publish_plat_a68870cd02f9de172d4bcf448060ef1ec}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!package@{package}}
+\index{package@{package}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Publish\+Plat\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_publish_plat_ac8548fef404b55465773513aefce5608}{}\label{class_loom_publish_plat_ac8548fef404b55465773513aefce5608}
+
+
+No package necessary for publishing platforms. 
+
+Implement with empty body. 
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Publish\+Plat\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_publish_plat_a38cc9fe71203a153392fbca807e39434}{}\label{class_loom_publish_plat_a38cc9fe71203a153392fbca807e39434}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+
+
+Reimplemented in \hyperlink{class_loom___max_pub_a9286db7e281484d00233dc4d86012197}{Loom\+\_\+\+Max\+Pub}, and \hyperlink{class_loom___google_sheets_a83066e82b742c1f273bf7b009a1490d4}{Loom\+\_\+\+Google\+Sheets}.
+
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Publish\+Plat\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_publish_plat_a0055306a6b0efc49d83f083c1398eea1}{}\label{class_loom_publish_plat_a0055306a6b0efc49d83f083c1398eea1}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!publish@{publish}}
+\index{publish@{publish}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{publish(const Json\+Object json)}{publish(const JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Publish\+Plat\+::publish (
+\begin{DoxyParamCaption}
+\item[{const Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_publish_plat_a9be2ccbcaba4d1a5735bcd5bf828eafb}{}\label{class_loom_publish_plat_a9be2ccbcaba4d1a5735bcd5bf828eafb}
+
+
+Publish data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & J\+S\+ON object to publish. M\+U\+ST be formatted as \{ \char`\"{}contents\char`\"{} \+: \mbox{[} \{ \char`\"{}module\char`\"{}\+: \char`\"{}module\+\_\+name\char`\"{}, \char`\"{}data\char`\"{} \+: \{...\} \}, ... \mbox{]}, \char`\"{}timestamp\char`\"{}(optional) \+: \{...\} \} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether or not the publish succeded 
+\end{DoxyReturn}
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!publish@{publish}}
+\index{publish@{publish}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{publish()}{publish()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Publish\+Plat\+::publish (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_publish_plat_a5a172ded7502cd31fe15596e21dd6cc9}{}\label{class_loom_publish_plat_a5a172ded7502cd31fe15596e21dd6cc9}
+
+
+Version of log for use with \hyperlink{class_loom_manager}{Loom\+Manager}. 
+
+Accesses Json from \hyperlink{class_loom_manager}{Loom\+Manager} \begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!publish\+\_\+batch@{publish\+\_\+batch}}
+\index{publish\+\_\+batch@{publish\+\_\+batch}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{publish\+\_\+batch()}{publish_batch()}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+Publish\+Plat\+::publish\+\_\+batch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_publish_plat_ae0c0825a58465f124bfe07e3de8b3b25}{}\label{class_loom_publish_plat_ae0c0825a58465f124bfe07e3de8b3b25}
+
+
+Publish all the packets stored in the batch. 
+
+\begin{DoxyReturn}{Returns}
+Whether or not the publishes succeded or not 
+\end{DoxyReturn}
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}}
+\index{second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{second\+\_\+stage\+\_\+ctor() override}{second_stage_ctor() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Publish\+Plat\+::second\+\_\+stage\+\_\+ctor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_publish_plat_a9be9c86b766a6308fb2851875b50ba56}{}\label{class_loom_publish_plat_a9be9c86b766a6308fb2851875b50ba56}
+
+
+Grab the internet platform specified by the ctor parameters. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a8dd3704d1bd38868d5774e48c1073d12}{Loom\+Module}.
+
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!send\+\_\+to\+\_\+internet@{send\+\_\+to\+\_\+internet}}
+\index{send\+\_\+to\+\_\+internet@{send\+\_\+to\+\_\+internet}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{send\+\_\+to\+\_\+internet(const Json\+Object json, Loom\+Internet\+Plat $\ast$plat)=0}{send_to_internet(const JsonObject json, LoomInternetPlat *plat)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Loom\+Publish\+Plat\+::send\+\_\+to\+\_\+internet (
+\begin{DoxyParamCaption}
+\item[{const Json\+Object}]{json, }
+\item[{{\bf Loom\+Internet\+Plat} $\ast$}]{plat}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_loom_publish_plat_a5d54196f11ef28daf8fdf853f215a033}{}\label{class_loom_publish_plat_a5d54196f11ef28daf8fdf853f215a033}
+
+
+Send J\+S\+ON to the internet, assumes that a valid internet plat was found and can be used. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json object to send \\
+\hline
+\mbox{\tt in}  & {\em plat} & Internet platform to send on \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_loom___max_pub_aa0a82d79ac37d01ba3bb2add3061a235}{Loom\+\_\+\+Max\+Pub}, and \hyperlink{class_loom___google_sheets_af446a27796d495a5489543323f4cc505}{Loom\+\_\+\+Google\+Sheets}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!internet\+\_\+type@{internet\+\_\+type}}
+\index{internet\+\_\+type@{internet\+\_\+type}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{internet\+\_\+type}{internet_type}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Module\+::\+Type} Loom\+Publish\+Plat\+::internet\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_publish_plat_aab697868e61843787893f5509d22b9ed}{}\label{class_loom_publish_plat_aab697868e61843787893f5509d22b9ed}
+
+
+Type of internet platform used to publish. 
+
+Needed because finding the module for m\+\_\+internet happens in \hyperlink{class_loom_publish_plat_a9be9c86b766a6308fb2851875b50ba56}{second\+\_\+stage\+\_\+ctor()}, rather than the regular constructor. \index{Loom\+Publish\+Plat@{Loom\+Publish\+Plat}!m\+\_\+internet@{m\+\_\+internet}}
+\index{m\+\_\+internet@{m\+\_\+internet}!Loom\+Publish\+Plat@{Loom\+Publish\+Plat}}
+\subsubsection[{\texorpdfstring{m\+\_\+internet}{m_internet}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat}$\ast$ Loom\+Publish\+Plat\+::m\+\_\+internet\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_publish_plat_a9e07931b084ea022c48485a2df28cc83}{}\label{class_loom_publish_plat_a9e07931b084ea022c48485a2df28cc83}
+
+
+Pointer to internet platform to use to publish. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Publish\+Plats/\hyperlink{_publish_plat_8h}{Publish\+Plat.\+h}\item 
+src/\+Publish\+Plats/\hyperlink{_publish_plat_8cpp}{Publish\+Plat.\+cpp}\end{DoxyCompactItemize}

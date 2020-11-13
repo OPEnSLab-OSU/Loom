@@ -1,0 +1,581 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_sensor" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>LoomSensor</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <derivedcompoundref refid="class_loom___analog" prot="public" virt="non-virtual">Loom_Analog</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___digital" prot="public" virt="non-virtual">Loom_Digital</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_i2_c_sensor" prot="public" virt="non-virtual">LoomI2CSensor</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_s_d_i12_sensor" prot="public" virt="non-virtual">LoomSDI12Sensor</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_serial_sensor" prot="public" virt="non-virtual">LoomSerialSensor</derivedcompoundref>
+    <derivedcompoundref refid="class_loom_s_p_i_sensor" prot="public" virt="non-virtual">LoomSPISensor</derivedcompoundref>
+    <includes refid="_sensor_8h" local="no">Sensor.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom_sensor_1acce7ce989a74b5e4b3c8ee51ae55e8a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomSensor::LoomSensor</definition>
+        <argsstring>(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const uint8_t num_samples)</argsstring>
+        <name>LoomSensor</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>module_type</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>num_samples</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">module_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">num_samples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of samples to take and average </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Sensor.h" line="45" column="1" bodyfile="src/Sensors/Sensor.cpp" bodystart="14" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_sensor_1aac0541421949a20b91a13583271f6757" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual LoomSensor::~LoomSensor</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LoomSensor</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Sensor.h" line="53" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom_sensor_1ab75183469715506e8a694b9559b76c35" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void LoomSensor::calibrate</definition>
+        <argsstring>()</argsstring>
+        <name>calibrate</name>
+        <reimplementedby refid="class_loom___m_p_u6050_1a56d731f0e63bbb4c00c12dab2b785d61">calibrate</reimplementedby>
+        <briefdescription>
+<para>Calibration routine. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Sensor.h" line="60" column="1" bodyfile="src/Sensors/Sensor.h" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_sensor_1a390ef79a4d5d6b6386e099c7fe56ed1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void LoomSensor::measure</definition>
+        <argsstring>()=0</argsstring>
+        <name>measure</name>
+        <reimplementedby refid="class_loom___s_t_e_m_m_a_1abdee7585790a9d6d7dcae5abf41448de">measure</reimplementedby>
+        <reimplementedby refid="class_loom___decagon5_t_m_1abca841a531450535673786a5c6156084">measure</reimplementedby>
+        <reimplementedby refid="class_loom___decagon_g_s3_1a355b3ff5a69506a015e77acbaae30c9b">measure</reimplementedby>
+        <reimplementedby refid="class_loom___m_b1232_1a2117216e8004b6fe4e386d6fea6a06fe">measure</reimplementedby>
+        <reimplementedby refid="class_loom___m_a_x31855_1a51f226ce0e210a341cf6c46bebe4e5df">measure</reimplementedby>
+        <reimplementedby refid="class_loom___t_m_p007_1a07ac672973fca3d8e812a26c8233af18">measure</reimplementedby>
+        <reimplementedby refid="class_loom___s_h_t31_d_1aab6d83a01ddb09428aaa8440d7b667a4">measure</reimplementedby>
+        <reimplementedby refid="class_loom___f_x_a_s21002_1ac35903be3f438d0c1ba4eb229feb411e">measure</reimplementedby>
+        <reimplementedby refid="class_loom___f_x_o_s8700_1a229aa45f587d891327e1c2e87d869983">measure</reimplementedby>
+        <reimplementedby refid="class_loom___l_i_s3_d_h_1a03ae5f177043e9e44db23a7ca0fcc4e1">measure</reimplementedby>
+        <reimplementedby refid="class_loom___m_m_a8451_1aa28f476799e177ba1345b04faa121521">measure</reimplementedby>
+        <reimplementedby refid="class_loom___m_s5803_1a6c776fb6cb23d626cf5d6e3094c443a0">measure</reimplementedby>
+        <reimplementedby refid="class_loom___m_a_x31856_1a3f5f043e751a0f3ce3e7090d872637ae">measure</reimplementedby>
+        <reimplementedby refid="class_loom___t_s_l2561_1acbb1c6a57fdf6ef1137f6871f9241d83">measure</reimplementedby>
+        <reimplementedby refid="class_loom___k30_1ad13974aee5a993538a0ba43b1e68beac">measure</reimplementedby>
+        <reimplementedby refid="class_loom___t_s_l2591_1a0830d70d8d094de204b6039947d8f309">measure</reimplementedby>
+        <reimplementedby refid="class_loom___z_x_gesture_1a2449b2c665d179dac470623322fe7c7b">measure</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7262_1a4aa32d83a2fbbaa9622d5b567742a1a5">measure</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7263_1a5bb1bbea6714b129033436b058b7ae49">measure</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7265_x_1a070af4692fd32d11aed32069d31c8a1e">measure</reimplementedby>
+        <reimplementedby refid="class_loom___digital_1a467c3fafc699224f44e144a5749349a1">measure</reimplementedby>
+        <reimplementedby refid="class_loom___m_p_u6050_1ab2e0dc418e3ba9d0a4bb2098f204e46a">measure</reimplementedby>
+        <reimplementedby refid="class_loom___a_d_s1115_1acb67c9e3b562c8a1f03ed5a031dfa3ef">measure</reimplementedby>
+        <reimplementedby refid="class_loom___analog_1afa90bbf4d632fe9b3168567cfc605f77">measure</reimplementedby>
+        <briefdescription>
+<para>Take any relevant measurements. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Sensor.h" line="63" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom_sensor_1aaa3bb2a2165029906c4ee815e790c89e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomSensor::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <reimplementedby refid="class_loom_serial_sensor_1ac21a512699c90db3b4287798e1526f0c">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___decagon5_t_m_1ac402bf4f4ea1e26d9ac38b0572ceade6">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___decagon_g_s3_1a398d5f2c572ae06bc31870fea1ca3e68">print_config</reimplementedby>
+        <reimplementedby refid="class_loom_i2_c_sensor_1ab90004ce30a281b7f51ecf3093ca4cea">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___m_m_a8451_1aad7bfbb26c8dd4eadd61e9a4817e6930">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___z_x_gesture_1a7af9796af4c3dfa33a3eedb63de89285">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7262_1a29aef77c6d06feb46bc840f4407abba7">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7263_1a19c0c1b6a4ae3ad0454011764cf54c70">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___digital_1a8667d980ae3546a96584bbdd9a244a7c">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___a_d_s1115_1a8c5419d33482990e84be15dfe82b0ea6">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___analog_1ae41c9795ceb9079b88a87cb64d7869cf">print_config</reimplementedby>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Sensor.h" line="69" column="1" bodyfile="src/Sensors/Sensor.cpp" bodystart="25" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_sensor_1aba2aa35441c2eb1cf27b95a1fc08b288" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void LoomSensor::print_measurements</definition>
+        <argsstring>() const =0</argsstring>
+        <name>print_measurements</name>
+        <reimplementedby refid="class_loom_s_p_i_sensor_1a9aa10745cef677aad99020c46d3e1ed6">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___s_t_e_m_m_a_1aa7f730c402dfecd8e0401e569ecfe5c3">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___decagon5_t_m_1a2fa519e7787d482a5bdb50ed38e42c33">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___decagon_g_s3_1a070ed45daa73857fd8fafbb0f7bd27a3">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___m_b1232_1afce7df3f692a27fa6b452e3cc3b9cf63">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___k30_1a341fce3e5008b4a7b5bbb0c6d5a5cb71">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___m_a_x31855_1a34e5976fb1efa6b33b2d9714dd359477">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___t_m_p007_1a51880b75b8e1fc2b069acb1899b43e5a">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___s_h_t31_d_1a4f1fd015893c2de68bce6f68ce9e1a81">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___f_x_a_s21002_1a9216501d392e712d886b4164a62cd7b0">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___f_x_o_s8700_1a5f0278c72703e052a5abc0c84770c585">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___l_i_s3_d_h_1acea35697172f7a88b89cd963d12ce145">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___m_s5803_1a68188af662a98e8324ac267a2d94690a">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___m_a_x31856_1a197dc843c246a5ac17edd62499ed5c60">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___t_s_l2561_1ad2b5c1f922a5ecfda4509c0828c04315">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___t_s_l2591_1af7b92a13edb2ad1e769734d054eaeadf">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___m_m_a8451_1a9570d87217ecf046b32ac9d8fa07abcf">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___z_x_gesture_1a54559c9e2ecefad1efcb2a3192233bcb">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7262_1a684921cffa4f3ab9457138e05d8f4b88">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7265_x_1a07cd853cf0f22d3290920a3059359e0b">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7263_1a8b307fae00186fc4581c9e976badf30c">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___digital_1ab721d0f9b457527f1e6fc76e60a92903">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___m_p_u6050_1a9b6f6fbf9359caf4b4860c4d26fefde1">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___a_d_s1115_1a91ac5a218d357d6fa362f028ac922965">print_measurements</reimplementedby>
+        <reimplementedby refid="class_loom___analog_1a981f42f7a1358ea77ec087df13859406">print_measurements</reimplementedby>
+        <briefdescription>
+<para>Print the last set of measurements taken. </para>        </briefdescription>
+        <detaileddescription>
+<para>Does not package the data. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Sensor.h" line="73" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom_sensor_1ae9a177765bd3ab79e002e98df6053ce0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t LoomSensor::get_num_samples</definition>
+        <argsstring>() const </argsstring>
+        <name>get_num_samples</name>
+        <briefdescription>
+<para>Get the number of samples sensor is set to take. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Number of samples </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Sensor.h" line="81" column="1" bodyfile="src/Sensors/Sensor.h" bodystart="81" bodyend="81"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom_sensor_1ad02e186edda41d4458246f329641d6f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomSensor::set_num_samples</definition>
+        <argsstring>(const uint8_t n)</argsstring>
+        <name>set_num_samples</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Set the number of samples to take. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of samples to take </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Sensor.h" line="89" column="1" bodyfile="src/Sensors/Sensor.h" bodystart="89" bodyend="89"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom_sensor_1a0e74ebbaecde15ed1c71e1bb6bc6aebe" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LoomSensor::num_samples</definition>
+        <argsstring></argsstring>
+        <name>num_samples</name>
+        <briefdescription>
+<para>How many samples to take and average each call to <ref refid="class_loom_sensor_1a390ef79a4d5d6b6386e099c7fe56ed1a" kindref="member">measure()</ref> </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Sensor.h" line="33" column="1" bodyfile="src/Sensors/Sensor.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract root of Loom sensor modules hierarchy. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_sensor.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1328">
+        <label>Loom_Decagon5TM</label>
+        <link refid="class_loom___decagon5_t_m"/>
+        <childnode refid="1327" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1332">
+        <label>LoomSPISensor</label>
+        <link refid="class_loom_s_p_i_sensor"/>
+        <childnode refid="1305" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1313">
+        <label>Loom_AS7265X</label>
+        <link refid="class_loom___a_s7265_x"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1306">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="1333">
+        <label>Loom_MAX31855</label>
+        <link refid="class_loom___m_a_x31855"/>
+        <childnode refid="1332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1334">
+        <label>Loom_MAX31856</label>
+        <link refid="class_loom___m_a_x31856"/>
+        <childnode refid="1332" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1318">
+        <label>Loom_MMA8451</label>
+        <link refid="class_loom___m_m_a8451"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1316">
+        <label>Loom_LIS3DH</label>
+        <link refid="class_loom___l_i_s3_d_h"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1321">
+        <label>Loom_SHT31D</label>
+        <link refid="class_loom___s_h_t31_d"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1310">
+        <label>Loom_ADS1115</label>
+        <link refid="class_loom___a_d_s1115"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1308">
+        <label>Loom_Digital</label>
+        <link refid="class_loom___digital"/>
+        <childnode refid="1305" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1325">
+        <label>Loom_TSL2591</label>
+        <link refid="class_loom___t_s_l2591"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1315">
+        <label>Loom_FXOS8700</label>
+        <link refid="class_loom___f_x_o_s8700"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1324">
+        <label>Loom_TSL2561</label>
+        <link refid="class_loom___t_s_l2561"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1329">
+        <label>Loom_DecagonGS3</label>
+        <link refid="class_loom___decagon_g_s3"/>
+        <childnode refid="1327" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1307">
+        <label>Loom_Analog</label>
+        <link refid="class_loom___analog"/>
+        <childnode refid="1305" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1326">
+        <label>Loom_ZXGesture</label>
+        <link refid="class_loom___z_x_gesture"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1314">
+        <label>Loom_FXAS21002</label>
+        <link refid="class_loom___f_x_a_s21002"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1331">
+        <label>Loom_K30</label>
+        <link refid="class_loom___k30"/>
+        <childnode refid="1330" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1322">
+        <label>Loom_STEMMA</label>
+        <link refid="class_loom___s_t_e_m_m_a"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1327">
+        <label>LoomSDI12Sensor</label>
+        <link refid="class_loom_s_d_i12_sensor"/>
+        <childnode refid="1305" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1330">
+        <label>LoomSerialSensor</label>
+        <link refid="class_loom_serial_sensor"/>
+        <childnode refid="1305" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1319">
+        <label>Loom_MPU6050</label>
+        <link refid="class_loom___m_p_u6050"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1320">
+        <label>Loom_MS5803</label>
+        <link refid="class_loom___m_s5803"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1309">
+        <label>LoomI2CSensor</label>
+        <link refid="class_loom_i2_c_sensor"/>
+        <childnode refid="1305" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1311">
+        <label>Loom_AS7262</label>
+        <link refid="class_loom___a_s7262"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1312">
+        <label>Loom_AS7263</label>
+        <link refid="class_loom___a_s7263"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1305">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="1306" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1317">
+        <label>Loom_MB1232</label>
+        <link refid="class_loom___m_b1232"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1323">
+        <label>Loom_TMP007</label>
+        <link refid="class_loom___t_m_p007"/>
+        <childnode refid="1309" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1341">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1337">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1338" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1339" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1344" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1340" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1336">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1337" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1345">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1340">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1336" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1341" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1342" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1339" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1343" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1344" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1345" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1339">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1336" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1340" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1335">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="1336" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1338">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1336" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1344">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1336" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1342">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1343">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Sensors/Sensor.h" line="28" column="1" bodyfile="src/Sensors/Sensor.h" bodystart="27" bodyend="93"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>LoomSensor</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>LoomSensor</scope><name>add_config</name></member>
+      <member refid="class_loom_sensor_1ab75183469715506e8a694b9559b76c35" prot="public" virt="virtual"><scope>LoomSensor</scope><name>calibrate</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>LoomSensor</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>LoomSensor</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>get_module_type</name></member>
+      <member refid="class_loom_sensor_1ae9a177765bd3ab79e002e98df6053ce0" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>get_num_samples</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>LoomSensor</scope><name>link_device_manager</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>LoomModule</name></member>
+      <member refid="class_loom_sensor_1acce7ce989a74b5e4b3c8ee51ae55e8a9" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>LoomSensor</name></member>
+      <member refid="class_loom_sensor_1a390ef79a4d5d6b6386e099c7fe56ed1a" prot="public" virt="pure-virtual"><scope>LoomSensor</scope><name>measure</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>LoomSensor</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>LoomSensor</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>LoomSensor</scope><name>module_type</name></member>
+      <member refid="class_loom_sensor_1a0e74ebbaecde15ed1c71e1bb6bc6aebe" prot="protected" virt="non-virtual"><scope>LoomSensor</scope><name>num_samples</name></member>
+      <member refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53" prot="public" virt="pure-virtual"><scope>LoomSensor</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>LoomSensor</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>LoomSensor</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>LoomSensor</scope><name>power_up</name></member>
+      <member refid="class_loom_sensor_1aaa3bb2a2165029906c4ee815e790c89e" prot="public" virt="virtual"><scope>LoomSensor</scope><name>print_config</name></member>
+      <member refid="class_loom_sensor_1aba2aa35441c2eb1cf27b95a1fc08b288" prot="public" virt="pure-virtual"><scope>LoomSensor</scope><name>print_measurements</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>LoomSensor</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>LoomSensor</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>LoomSensor</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>LoomSensor</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>set_active</name></member>
+      <member refid="class_loom_sensor_1ad02e186edda41d4458246f329641d6f4" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>set_num_samples</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>LoomSensor</scope><name>Type</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>LoomSensor</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_sensor_1aac0541421949a20b91a13583271f6757" prot="public" virt="virtual"><scope>LoomSensor</scope><name>~LoomSensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

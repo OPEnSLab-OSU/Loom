@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_abc44327bd9a62eb36f446d48ca760f8" kind="dir">
+    <compoundname>src/Sensors/I2C</compoundname>
+    <innerfile refid="_a_d_s1115_8cpp">ADS1115.cpp</innerfile>
+    <innerfile refid="_a_d_s1115_8h">ADS1115.h</innerfile>
+    <innerfile refid="_a_s7262_8cpp">AS7262.cpp</innerfile>
+    <innerfile refid="_a_s7262_8h">AS7262.h</innerfile>
+    <innerfile refid="_a_s7263_8cpp">AS7263.cpp</innerfile>
+    <innerfile refid="_a_s7263_8h">AS7263.h</innerfile>
+    <innerfile refid="_a_s7265_x_8cpp">AS7265X.cpp</innerfile>
+    <innerfile refid="_a_s7265_x_8h">AS7265X.h</innerfile>
+    <innerfile refid="_f_x_a_s21002_8cpp">FXAS21002.cpp</innerfile>
+    <innerfile refid="_f_x_a_s21002_8h">FXAS21002.h</innerfile>
+    <innerfile refid="_f_x_o_s8700_8cpp">FXOS8700.cpp</innerfile>
+    <innerfile refid="_f_x_o_s8700_8h">FXOS8700.h</innerfile>
+    <innerfile refid="_i2_c___sensor_8cpp">I2C_Sensor.cpp</innerfile>
+    <innerfile refid="_i2_c___sensor_8h">I2C_Sensor.h</innerfile>
+    <innerfile refid="_l_i_s3_d_h_8cpp">LIS3DH.cpp</innerfile>
+    <innerfile refid="_l_i_s3_d_h_8h">LIS3DH.h</innerfile>
+    <innerfile refid="_m_b1232_8cpp">MB1232.cpp</innerfile>
+    <innerfile refid="_m_b1232_8h">MB1232.h</innerfile>
+    <innerfile refid="_m_m_a8451_8cpp">MMA8451.cpp</innerfile>
+    <innerfile refid="_m_m_a8451_8h">MMA8451.h</innerfile>
+    <innerfile refid="_m_p_u6050_8cpp">MPU6050.cpp</innerfile>
+    <innerfile refid="_m_p_u6050_8h">MPU6050.h</innerfile>
+    <innerfile refid="_m_s5803_8cpp">MS5803.cpp</innerfile>
+    <innerfile refid="_m_s5803_8h">MS5803.h</innerfile>
+    <innerfile refid="_s_h_t31_d_8cpp">SHT31D.cpp</innerfile>
+    <innerfile refid="_s_h_t31_d_8h">SHT31D.h</innerfile>
+    <innerfile refid="_s_t_e_m_m_a_8cpp">STEMMA.cpp</innerfile>
+    <innerfile refid="_s_t_e_m_m_a_8h">STEMMA.h</innerfile>
+    <innerfile refid="_t_m_p007_8cpp">TMP007.cpp</innerfile>
+    <innerfile refid="_t_m_p007_8h">TMP007.h</innerfile>
+    <innerfile refid="_t_s_l2561_8cpp">TSL2561.cpp</innerfile>
+    <innerfile refid="_t_s_l2561_8h">TSL2561.h</innerfile>
+    <innerfile refid="_t_s_l2591_8cpp">TSL2591.cpp</innerfile>
+    <innerfile refid="_t_s_l2591_8h">TSL2591.h</innerfile>
+    <innerfile refid="_z_x_gesture_8cpp">ZXGesture.cpp</innerfile>
+    <innerfile refid="_z_x_gesture_8h">ZXGesture.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/"/>
+  </compounddef>
+</doxygen>

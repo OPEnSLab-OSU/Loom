@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_ZXGesture class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_ZXGesture <span class="m-thin">class</span>
+        </h1>
+        <p>ZXGesture position / gesture sensor module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-info"><h4>Note</h4><p>Only position or gestures can be measured at a given time, not both.</p></aside><aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___z_x_gesture.html">Module Documentation</a></li><li><a href="https://www.sparkfun.com/products/13162">Product Page: Sparkfun ZX Distance and Gesture Sensor</a></li><li><a href="https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library">Dependency: SparkFun ZX Distance and Gesture Sensor Arduino Library</a></li><li><a href="https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf">Datasheet: ZX SparkFun Sensor Datasheet</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#zx-distance-and-gesture-sensor">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_i2_c_sensor.html" class="m-doc">LoomI2CSensor</a>
+            </dt>
+            <dd>Abstract root for I2C sensor modules.</dd>
+          </dl>
+        </section>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a4c381d3f296be2cac6188fd8c5f8b7dd" class="m-doc">Mode</a> { </span><span class="m-doc-wrap"><a href="#a4c381d3f296be2cac6188fd8c5f8b7dda1903f54cd46d54aa3200a4508c948db0" class="m-doc">POS</a>,
+              <a href="#a4c381d3f296be2cac6188fd8c5f8b7dda503fb1a567801586b5eddc16753a3772" class="m-doc">GEST</a> }</span>
+            </dt>
+            <dd>Different modes of the ZX gesture sensor.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a7b338ec49ed044f2b8faf13384dd19a1">
+              ZX_Sensor <a href="#a7b338ec49ed044f2b8faf13384dd19a1" class="m-doc-self">inst_ZX</a>
+            </dt>
+            <dd>Underlying ZX sensor manager instance.</dd>
+            <dt id="a06039a2e005fee4e1542534cc71b1316">
+              <a href="class_loom___z_x_gesture.html#a4c381d3f296be2cac6188fd8c5f8b7dd" class="m-doc">Mode</a> <a href="#a06039a2e005fee4e1542534cc71b1316" class="m-doc-self">mode</a>
+            </dt>
+            <dd>Sensor mode (read positions or gesture - mutually exclusive)</dd>
+            <dt id="aceb243194a3f03ca569ddbb4b41ef56c">
+              uint8_t <a href="#aceb243194a3f03ca569ddbb4b41ef56c" class="m-doc-self">pos</a>
+            </dt>
+            <dd>Measured positions (x, y pos). Units: mm.</dd>
+            <dt id="ad671101df307f96d5a8c1e281a3eaea9">
+              GestureType <a href="#ad671101df307f96d5a8c1e281a3eaea9" class="m-doc-self">gesture</a>
+            </dt>
+            <dd>Last read gesture type.</dd>
+            <dt id="afc1047aaf8abcbb6e9b155e2c025ddb9">
+              String <a href="#afc1047aaf8abcbb6e9b155e2c025ddb9" class="m-doc-self">gesture_type</a>
+            </dt>
+            <dd>String labelling last read gesture type.</dd>
+            <dt id="a9236f5979e3a46c0db2164bd343be305">
+              uint8_t <a href="#a9236f5979e3a46c0db2164bd343be305" class="m-doc-self">gesture_speed</a>
+            </dt>
+            <dd>The speed of the last measured gesture.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ad69121d2a42277299765eb38656882e0" class="m-doc">Loom_ZXGesture</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x10,
+              const uint8_t mux_port = 255,
+              const <a href="class_loom___z_x_gesture.html#a4c381d3f296be2cac6188fd8c5f8b7dd" class="m-doc">Mode</a> mode = <a href="class_loom___z_x_gesture.html#a4c381d3f296be2cac6188fd8c5f8b7dda1903f54cd46d54aa3200a4508c948db0" class="m-doc">Mode::<wbr />POS</a>)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a4769782b6838cff67553d07a10ce7e75" class="m-doc">Loom_ZXGesture</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="a82f97ae9ec9f2ba8da8f8e29b4f64159">
+              <span class="m-doc-wrap-bumper"><a href="#a82f97ae9ec9f2ba8da8f8e29b4f64159" class="m-doc-self">~Loom_ZXGesture</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a2449b2c665d179dac470623322fe7c7b">
+              <span class="m-doc-wrap-bumper">void <a href="#a2449b2c665d179dac470623322fe7c7b" class="m-doc-self">measure</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Take any relevant measurements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a48153345d472b3e5008c42ddb6f49223" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Package a modules measurements or state.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a7af9796af4c3dfa33a3eedb63de89285">
+              <span class="m-doc-wrap-bumper">void <a href="#a7af9796af4c3dfa33a3eedb63de89285" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a54559c9e2ecefad1efcb2a3192233bcb" class="m-doc">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Print the last set of measurements taken.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a4c381d3f296be2cac6188fd8c5f8b7dd"><div>
+            <h3>
+              enum Loom_<wbr />ZXGesture::<wbr /><a href="#a4c381d3f296be2cac6188fd8c5f8b7dd" class="m-doc-self">Mode</a>
+            </h3>
+            <p>Different modes of the ZX gesture sensor.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a4c381d3f296be2cac6188fd8c5f8b7dda1903f54cd46d54aa3200a4508c948db0" class="m-doc-self" id="a4c381d3f296be2cac6188fd8c5f8b7dda1903f54cd46d54aa3200a4508c948db0">POS</a></td>
+                  <td>
+                  <p>Measure z and x position.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a4c381d3f296be2cac6188fd8c5f8b7dda503fb1a567801586b5eddc16753a3772" class="m-doc-self" id="a4c381d3f296be2cac6188fd8c5f8b7dda503fb1a567801586b5eddc16753a3772">GEST</a></td>
+                  <td>
+                  <p>Measure gestures.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ad69121d2a42277299765eb38656882e0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />ZXGesture::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad69121d2a42277299765eb38656882e0" class="m-doc-self">Loom_ZXGesture</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x10,
+              const uint8_t mux_port = 255,
+              const <a href="class_loom___z_x_gesture.html#a4c381d3f296be2cac6188fd8c5f8b7dd" class="m-doc">Mode</a> mode = <a href="class_loom___z_x_gesture.html#a4c381d3f296be2cac6188fd8c5f8b7dda1903f54cd46d54aa3200a4508c948db0" class="m-doc">Mode::<wbr />POS</a>)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>i2c_address&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;0x10&gt; | {0x10, 0x11} | I2C address</td>
+                </tr>
+                <tr>
+                  <td>mux_port&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;255&gt; | [0-16] | Port on multiplexer</td>
+                </tr>
+                <tr>
+                  <td>mode&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(ZXMode) | &lt;0&gt; | { 0(&quot;Position&quot;), 1(&quot;Gesture&quot;) } | Gain level</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4769782b6838cff67553d07a10ce7e75"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />ZXGesture::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4769782b6838cff67553d07a10ce7e75" class="m-doc-self">Loom_ZXGesture</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a48153345d472b3e5008c42ddb6f49223"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />ZXGesture::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a48153345d472b3e5008c42ddb6f49223" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Package a modules measurements or state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Object to put data into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a54559c9e2ecefad1efcb2a3192233bcb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />ZXGesture::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a54559c9e2ecefad1efcb2a3192233bcb" class="m-doc-self">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Print the last set of measurements taken.</p>
+<p>Does not package the data.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

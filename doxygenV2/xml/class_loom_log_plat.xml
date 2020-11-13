@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_log_plat" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>LoomLogPlat</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <derivedcompoundref refid="class_loom___batch_s_d" prot="public" virt="non-virtual">Loom_BatchSD</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___o_l_e_d" prot="public" virt="non-virtual">Loom_OLED</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___s_d" prot="public" virt="non-virtual">Loom_SD</derivedcompoundref>
+    <includes refid="_log_plat_8h" local="no">LogPlat.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom_log_plat_1a95e7954d4d049c8481908ba248b1e57b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomLogPlat::LoomLogPlat</definition>
+        <argsstring>(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const bool enable_rate_filter=true, const uint16_t min_filter_delay=1000)</argsstring>
+        <name>LoomLogPlat</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>module_type</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enable_rate_filter</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>min_filter_delay</declname>
+          <defval>1000</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">module_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enable_rate_filter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether or not to impose maximum update rate </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">min_filter_delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minimum update delay, if enable_rate_filter enabled </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="48" column="1" bodyfile="src/LogPlats/LogPlat.cpp" bodystart="17" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_log_plat_1ac05c81b2e83214d22bdc94dfbb8a835c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual LoomLogPlat::~LoomLogPlat</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LoomLogPlat</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="57" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom_log_plat_1abddec0fce6ef786577ae008702c9393e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void LoomLogPlat::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <reimplementedby refid="class_loom___batch_s_d_1a738bf5b08c3eba7ec2711b656e6f90bd">package</reimplementedby>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>No package necessary for logging platforms. </para>        </briefdescription>
+        <detaileddescription>
+<para>implement with empty body. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="65" column="1" bodyfile="src/LogPlats/LogPlat.h" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_log_plat_1accace14ed45817c98ef5ccc15fd79004" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool LoomLogPlat::log</definition>
+        <argsstring>(JsonObject json)=0</argsstring>
+        <name>log</name>
+        <reimplementedby refid="class_loom___batch_s_d_1a3d80d1e31762c8b6328a05485cc8af88">log</reimplementedby>
+        <reimplementedby refid="class_loom___s_d_1a0f106e4911985253e8ac09bcf953bb6e">log</reimplementedby>
+        <reimplementedby refid="class_loom___o_l_e_d_1a288f75a9eb423bda9b65b8cb4c7708b8">log</reimplementedby>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Log a Json object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json Object to log </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="69" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_log_plat_1adabc1e04a045b91923cff425405c5039" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomLogPlat::log</definition>
+        <argsstring>()</argsstring>
+        <name>log</name>
+        <briefdescription>
+<para>Version of log for use with <ref refid="class_loom_manager" kindref="compound">LoomManager</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Accesses Json from <ref refid="class_loom_manager" kindref="compound">LoomManager</ref>. Calls derived classes implementations of <ref refid="class_loom_log_plat_1accace14ed45817c98ef5ccc15fd79004" kindref="member">log(JsonObject json)</ref> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="74" column="1" bodyfile="src/LogPlats/LogPlat.cpp" bodystart="55" bodyend="64"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom_log_plat_1afd1780573d350f46ce26d237a4ade43b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomLogPlat::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <reimplementedby refid="class_loom___batch_s_d_1ad1566bbb55d145e3206784df245be710">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___o_l_e_d_1a20dab0bc2c5bdc139b1b04523a54a78c">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___s_d_1a4c0c3f46a3479ed8e4a96c0ca4acfa7e">print_config</reimplementedby>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="80" column="1" bodyfile="src/LogPlats/LogPlat.cpp" bodystart="31" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_log_plat_1a74520318a9427997df80f98f924a0e48" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomLogPlat::check_millis</definition>
+        <argsstring>()</argsstring>
+        <name>check_millis</name>
+        <briefdescription>
+<para>Check against millis to determine if time since last log exceeds min time. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if enough time has elapsed </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="87" column="1" bodyfile="src/LogPlats/LogPlat.cpp" bodystart="42" bodyend="52"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom_log_plat_1a6d343b76b79a1e51572bcf2991966e61" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool LoomLogPlat::enable_rate_filter</definition>
+        <argsstring></argsstring>
+        <name>enable_rate_filter</name>
+        <briefdescription>
+<para>Whether or not to enable a minimum delay between logging. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="33" column="1" bodyfile="src/LogPlats/LogPlat.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_log_plat_1a3d4ffe4204560b9677b8007be7f522be" prot="protected" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LoomLogPlat::min_filter_delay</definition>
+        <argsstring></argsstring>
+        <name>min_filter_delay</name>
+        <briefdescription>
+<para>Minimum delay between logging (milliseconds) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="34" column="1" bodyfile="src/LogPlats/LogPlat.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_log_plat_1aa6ad61d7d6c126aa13dcc91debef67e3" prot="protected" static="no" mutable="no">
+        <type>unsigned long</type>
+        <definition>unsigned long LoomLogPlat::last_log_millis</definition>
+        <argsstring></argsstring>
+        <name>last_log_millis</name>
+        <briefdescription>
+<para>Value of millis() at last executed log time. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/LogPlat.h" line="35" column="1" bodyfile="src/LogPlats/LogPlat.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract base of logging platforms. </para>    </briefdescription>
+    <detaileddescription>
+<para>All logging modules inherit from this class.</para><para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_log_plat.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1148">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="1147">
+        <label>LoomLogPlat</label>
+        <link refid="class_loom_log_plat"/>
+        <childnode refid="1148" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1150">
+        <label>Loom_OLED</label>
+        <link refid="class_loom___o_l_e_d"/>
+        <childnode refid="1147" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1149">
+        <label>Loom_BatchSD</label>
+        <link refid="class_loom___batch_s_d"/>
+        <childnode refid="1147" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1151">
+        <label>Loom_SD</label>
+        <link refid="class_loom___s_d"/>
+        <childnode refid="1147" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1158">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1154">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1155" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1156" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1161" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1157" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1153">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1154" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1152">
+        <label>LoomLogPlat</label>
+        <link refid="class_loom_log_plat"/>
+        <childnode refid="1153" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1162">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1157">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1153" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1158" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1159" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1156" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1160" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1161" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1162" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1156">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1153" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1157" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1155">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1153" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1161">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1153" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1159">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1160">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/LogPlats/LogPlat.h" line="29" column="1" bodyfile="src/LogPlats/LogPlat.h" bodystart="28" bodyend="89"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>category</name></member>
+      <member refid="class_loom_log_plat_1a74520318a9427997df80f98f924a0e48" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>check_millis</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>dispatch</name></member>
+      <member refid="class_loom_log_plat_1a6d343b76b79a1e51572bcf2991966e61" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>enable_rate_filter</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_log_plat_1aa6ad61d7d6c126aa13dcc91debef67e3" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>last_log_millis</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>link_device_manager</name></member>
+      <member refid="class_loom_log_plat_1accace14ed45817c98ef5ccc15fd79004" prot="public" virt="pure-virtual"><scope>LoomLogPlat</scope><name>log</name></member>
+      <member refid="class_loom_log_plat_1adabc1e04a045b91923cff425405c5039" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>log</name></member>
+      <member refid="class_loom_log_plat_1a95e7954d4d049c8481908ba248b1e57b" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>LoomLogPlat</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>LoomModule</name></member>
+      <member refid="class_loom_log_plat_1a3d4ffe4204560b9677b8007be7f522be" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>min_filter_delay</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>module_type</name></member>
+      <member refid="class_loom_log_plat_1abddec0fce6ef786577ae008702c9393e" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>power_up</name></member>
+      <member refid="class_loom_log_plat_1afd1780573d350f46ce26d237a4ade43b" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>LoomLogPlat</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>LoomLogPlat</scope><name>Type</name></member>
+      <member refid="class_loom_log_plat_1ac05c81b2e83214d22bdc94dfbb8a835c" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>~LoomLogPlat</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>LoomLogPlat</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

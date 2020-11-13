@@ -1,0 +1,6 @@
+<map id="LoomCommPlat" name="LoomCommPlat">
+<area shape="rect" id="node3" href="$class_loom___bluetooth.html" title="Bluetooth communication platform module. " alt="" coords="5,155,132,181"/>
+<area shape="rect" id="node4" href="$class_loom___lo_ra.html" title="LoRa communication platform module. " alt="" coords="157,155,253,181"/>
+<area shape="rect" id="node5" href="$class_loom__n_r_f.html" title="Nordic Radio communication platform module. " alt="" coords="277,155,365,181"/>
+<area shape="rect" id="node2" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="153,5,257,32"/>
+</map>

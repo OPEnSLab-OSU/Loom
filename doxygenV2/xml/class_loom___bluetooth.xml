@@ -1,0 +1,542 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___bluetooth" kind="class" language="C++" prot="public">
+    <compoundname>Loom_Bluetooth</compoundname>
+    <basecompoundref refid="class_loom_comm_plat" prot="public" virt="non-virtual">LoomCommPlat</basecompoundref>
+    <includes refid="_bluetooth_8h" local="no">Bluetooth.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___bluetooth_1a0e4547eb83e0df8bfee05cbb862959d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Bluetooth::Loom_Bluetooth</definition>
+        <argsstring>(LoomManager *manager, const uint16_t max_message_len=120, const uint8_t spi_CS=8, const uint8_t spi_IRQ=7, const uint8_t spi_RST=4)</argsstring>
+        <name>Loom_Bluetooth</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>max_message_len</declname>
+          <defval>120</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>spi_CS</declname>
+          <defval>8</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>spi_IRQ</declname>
+          <defval>7</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>spi_RST</declname>
+          <defval>4</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">max_message_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum possible message length </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">spi_CS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SPI chip select pin </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">spi_IRQ</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SPI IRQ pin </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">spi_RST</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SPI reset pin </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="56" column="1" bodyfile="src/CommPlats/Bluetooth.cpp" bodystart="14" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___bluetooth_1a0751e5f9f4eac6bc1f9cba0fbc31c2d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Bluetooth::Loom_Bluetooth</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_Bluetooth</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="67" column="1" bodyfile="src/CommPlats/Bluetooth.cpp" bodystart="34" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___bluetooth_1a14659e58247ac0dab7c21fe10fd512e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Bluetooth::~Loom_Bluetooth</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_Bluetooth</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="70" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___bluetooth_1a6cd69b2bdd618cab4093eed50e0149d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Bluetooth::add_config</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>add_config</name>
+        <reimplements refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0">add_config</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Currently no implementation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="77" column="1" bodyfile="src/CommPlats/Bluetooth.cpp" bodystart="38" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___bluetooth_1a1f10df313c782cc98f621b423f9071e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Bluetooth::connect</definition>
+        <argsstring>(const uint16_t connect_timeout)</argsstring>
+        <name>connect</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>connect_timeout</declname>
+        </param>
+        <briefdescription>
+<para>Allow a phone to connect. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">connect_timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Max time to allow user to try to connect </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="81" column="1" bodyfile="src/CommPlats/Bluetooth.cpp" bodystart="53" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___bluetooth_1af99fabadf5dc67ace74a8c6f00b712c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int8_t</type>
+        <definition>int8_t Loom_Bluetooth::getCommand</definition>
+        <argsstring>(const uint16_t max_timeout)</argsstring>
+        <name>getCommand</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>max_timeout</declname>
+        </param>
+        <briefdescription>
+<para>Receive a command from user. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Status Gets a command from the ble interface, or times out. This is used in combination with parseCommand if the return value is valid. </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">max_timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of milliseconds to wait for command </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Status where: -1: user never wrote a command, timed out -2: user entered an invalid command 0 or positive integer: index in COMMAND_TABLE that matches the user-entered command </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="95" column="1" bodyfile="src/CommPlats/Bluetooth.cpp" bodystart="67" bodyend="108"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>TESTING METHODS</header>
+      <memberdef kind="function" id="class_loom___bluetooth_1a99a5a57a8774104957919b0adabc9945" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Bluetooth::test_send</definition>
+        <argsstring>(const uint8_t val)</argsstring>
+        <name>test_send</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="101" column="1" bodyfile="src/CommPlats/Bluetooth.cpp" bodystart="111" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___bluetooth_1a8e2005ed6ef1def9c48169b9fadf5187" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Bluetooth::test_send_str</definition>
+        <argsstring>(const char *string)</argsstring>
+        <name>test_send_str</name>
+        <param>
+          <type>const char *</type>
+          <declname>string</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="102" column="1" bodyfile="src/CommPlats/Bluetooth.cpp" bodystart="122" bodyend="130"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___bluetooth_1acf5fbe9ae0476fbc647c742baab183e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Bluetooth::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_comm_plat_1a97982022b7e279d4def0246e17a95d61">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="108" column="1" bodyfile="src/CommPlats/Bluetooth.cpp" bodystart="47" bodyend="50"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom___bluetooth_1a05e53b4b58b52d0b7068959b6246e9a2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Bluetooth::get_address</definition>
+        <argsstring>() const override</argsstring>
+        <name>get_address</name>
+        <reimplements refid="class_loom_comm_plat_1afaf204bcf88cb88102cea8c6c1d745f3">get_address</reimplements>
+        <briefdescription>
+<para>Bluetooth currently does not use addresses. </para>        </briefdescription>
+        <detaileddescription>
+<para>Override with empty body </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="116" column="1" bodyfile="src/CommPlats/Bluetooth.h" bodystart="116" bodyend="116"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom___bluetooth_1a963fd394e050a4b1fb12311d6fe8f97f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Bluetooth::set_address</definition>
+        <argsstring>(const uint8_t addr) override</argsstring>
+        <name>set_address</name>
+        <reimplements refid="class_loom_comm_plat_1afa0f66b4e657effefc34fa5a74363174">set_address</reimplements>
+        <param>
+          <type>const uint8_t</type>
+          <declname>addr</declname>
+        </param>
+        <briefdescription>
+<para>Bluetooth currently does not use addresses. </para>        </briefdescription>
+        <detaileddescription>
+<para>Override with empty body </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="124" column="1" bodyfile="src/CommPlats/Bluetooth.h" bodystart="124" bodyend="124"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___bluetooth_1a0f16366fb0573986b0205cfc73f02b7c" prot="protected" static="no" mutable="no">
+        <type>Adafruit_BluefruitLE_SPI</type>
+        <definition>Adafruit_BluefruitLE_SPI Loom_Bluetooth::BLE</definition>
+        <argsstring></argsstring>
+        <name>BLE</name>
+        <briefdescription>
+<para>Bluetooth manager instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="38" column="1" bodyfile="src/CommPlats/Bluetooth.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___bluetooth_1a111aeae48c0ea364b47b3d8f3536bd7c" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Bluetooth::spi_CS</definition>
+        <argsstring></argsstring>
+        <name>spi_CS</name>
+        <briefdescription>
+<para>SPI chip select pin. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="40" column="1" bodyfile="src/CommPlats/Bluetooth.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___bluetooth_1a8ef44f1f6220e7272aeca00a0991a3c7" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Bluetooth::spi_IRQ</definition>
+        <argsstring></argsstring>
+        <name>spi_IRQ</name>
+        <briefdescription>
+<para>SPI IRQ pin. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="41" column="1" bodyfile="src/CommPlats/Bluetooth.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___bluetooth_1a9b7f8f41e29fce31bcd8366e93edd7a6" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Bluetooth::spi_RST</definition>
+        <argsstring></argsstring>
+        <name>spi_RST</name>
+        <briefdescription>
+<para>SPI reset pin. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/Bluetooth.h" line="42" column="1" bodyfile="src/CommPlats/Bluetooth.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Bluetooth communication platform module. </para>    </briefdescription>
+    <detaileddescription>
+<para>Needs more work for complete functionality.</para><para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___bluetooth.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/2995">Product Page: Adafruit Feather M0 Bluefruit LE</ulink></para></listitem><listitem><para><ulink url="https://github.com/adafruit/Adafruit_BluefruitLE_nRF51">Dependency: Adafruit_BluefruitLE_nRF51</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#bluetooth">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="436">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="435">
+        <label>LoomCommPlat</label>
+        <link refid="class_loom_comm_plat"/>
+        <childnode refid="436" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="434">
+        <label>Loom_Bluetooth</label>
+        <link refid="class_loom___bluetooth"/>
+        <childnode refid="435" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="444">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="440">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="441" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="442" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="447" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="443" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="439">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="440" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="448">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="443">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="439" relation="public-inheritance">
+        </childnode>
+        <childnode refid="444" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="445" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="442" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="446" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="447" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="448" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="442">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="439" relation="public-inheritance">
+        </childnode>
+        <childnode refid="443" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="438">
+        <label>LoomCommPlat</label>
+        <link refid="class_loom_comm_plat"/>
+        <childnode refid="439" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="437">
+        <label>Loom_Bluetooth</label>
+        <link refid="class_loom___bluetooth"/>
+        <childnode refid="438" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="441">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="439" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="447">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="439" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="445">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="446">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/CommPlats/Bluetooth.h" line="34" column="1" bodyfile="src/CommPlats/Bluetooth.h" bodystart="33" bodyend="128"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>active</name></member>
+      <member refid="class_loom___bluetooth_1a6cd69b2bdd618cab4093eed50e0149d4" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>add_config</name></member>
+      <member refid="class_loom_comm_plat_1a7053c8475d0f2c00507fe0806f1d37bc" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>add_packet_result</name></member>
+      <member refid="class_loom___bluetooth_1a0f16366fb0573986b0205cfc73f02b7c" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>BLE</name></member>
+      <member refid="class_loom_comm_plat_1a5098505add4d65102472aeeb7dc442bb" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>broadcast</name></member>
+      <member refid="class_loom_comm_plat_1a30796b7e6bbeb5f0c9cbf112b578c27f" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>broadcast</name></member>
+      <member refid="class_loom_comm_plat_1a9fdc18392e011fe3bd41b37a5d3d8999" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>broadcast_batch</name></member>
+      <member refid="class_loom_comm_plat_1ae88689d0db8ab91d1e672f0b5c358945" prot="protected" virt="virtual"><scope>Loom_Bluetooth</scope><name>broadcast_impl</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>Category</name></member>
+      <member refid="class_loom___bluetooth_1a1f10df313c782cc98f621b423f9071e6" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>connect</name></member>
+      <member refid="class_loom_comm_plat_1ab8fd85c99d07244665b818610edde993" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>determine_json_size</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>get_active</name></member>
+      <member refid="class_loom___bluetooth_1a05e53b4b58b52d0b7068959b6246e9a2" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>get_address</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_comm_plat_1ad55b5a20b503ea93789159f075677d9f" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>get_drop_rate</name></member>
+      <member refid="class_loom_comm_plat_1a5c21c70637e43f0731d97173b59200cf" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>get_last_ten_drop_rate</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom___bluetooth_1af99fabadf5dc67ace74a8c6f00b712c2" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>getCommand</name></member>
+      <member refid="class_loom_comm_plat_1af5030b99e3398396af535558efa82279" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>json_to_msgpack_buffer</name></member>
+      <member refid="class_loom_comm_plat_1a447e99f2f727936f4aff95257ca98b62" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>last_ten_dropped</name></member>
+      <member refid="class_loom_comm_plat_1a790dbad03d48713072716c23d515c6c0" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>last_ten_dropped_idx</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___bluetooth_1a0e4547eb83e0df8bfee05cbb862959d5" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>Loom_Bluetooth</name></member>
+      <member refid="class_loom___bluetooth_1a0751e5f9f4eac6bc1f9cba0fbc31c2d9" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>Loom_Bluetooth</name></member>
+      <member refid="class_loom_comm_plat_1ae977f58b40bd6f292fc7e5a20b319ca4" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>LoomCommPlat</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>LoomModule</name></member>
+      <member refid="class_loom_comm_plat_1a2b4f69c2ec15028f5f281c3d1d399dba" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>max_message_len</name></member>
+      <member refid="class_loom_comm_plat_1a3505da17f54272de95f4d92a3c0caf49" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>merge_json</name></member>
+      <member refid="class_loom_comm_plat_1a9dbf2f13eafb03ae9078e10af47ca8cf" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>mergeJson</name></member>
+      <member refid="class_loom_comm_plat_1a065bda8c5f83a087359bda645b51c87e" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>messageJson</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>module_type</name></member>
+      <member refid="class_loom_comm_plat_1ae6b8468f5345cf30d857e3229d3f5aa3" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>msgpack_buffer_to_json</name></member>
+      <member refid="class_loom_comm_plat_1a4cc05ef1f12c5b15fc6516dc75f070d4" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>power_up</name></member>
+      <member refid="class_loom_comm_plat_1a727f88000d237c0f413a17600fc261a6" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>pre_merge_receive_blocking</name></member>
+      <member refid="class_loom___bluetooth_1acf5fbe9ae0476fbc647c742baab183e8" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>print_module_label</name></member>
+      <member refid="class_loom_comm_plat_1a2a3336599f8b56c2cbb223a386d797ec" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_comm_plat_1a7d5af29f4053627979c15928f284446f" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>receive</name></member>
+      <member refid="class_loom_comm_plat_1abe9a506341e7e5dd3dde40210d7c3904" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>receive</name></member>
+      <member refid="class_loom_comm_plat_1ab59a3e7ed1aa0c3997506bf77b1176e6" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>receive_batch</name></member>
+      <member refid="class_loom_comm_plat_1a84aa23d66457ffe78053d3d0cbd1e7b1" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>receive_batch_blocking</name></member>
+      <member refid="class_loom_comm_plat_1a15fb6d65a9454154ac899f3560c67a6f" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>receive_blocking</name></member>
+      <member refid="class_loom_comm_plat_1a5a16f4a2a37ddf593f7a3c0dd9e5f692" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>receive_blocking</name></member>
+      <member refid="class_loom_comm_plat_1acc447dd60751ea7536f0c96b4390fdd8" prot="protected" virt="virtual"><scope>Loom_Bluetooth</scope><name>receive_blocking_impl</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_comm_plat_1a503a10dbf3add366f1cd3bf4c274f907" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>send</name></member>
+      <member refid="class_loom_comm_plat_1ae1a86dffbfd638cd56b8be47af9964ab" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>send</name></member>
+      <member refid="class_loom_comm_plat_1a4cd103d035644901828bf4959cd7a9c9" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>send_batch</name></member>
+      <member refid="class_loom_comm_plat_1a28f40393c7d50d3bf30eff3add02d6fc" prot="protected" virt="virtual"><scope>Loom_Bluetooth</scope><name>send_impl</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>set_active</name></member>
+      <member refid="class_loom___bluetooth_1a963fd394e050a4b1fb12311d6fe8f97f" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>set_address</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_comm_plat_1a20b6f639d308b8b2f05cea41597bd6d3" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>signal_strength</name></member>
+      <member refid="class_loom___bluetooth_1a111aeae48c0ea364b47b3d8f3536bd7c" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>spi_CS</name></member>
+      <member refid="class_loom___bluetooth_1a8ef44f1f6220e7272aeca00a0991a3c7" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>spi_IRQ</name></member>
+      <member refid="class_loom___bluetooth_1a9b7f8f41e29fce31bcd8366e93edd7a6" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>spi_RST</name></member>
+      <member refid="class_loom_comm_plat_1a7a0d2c230d977bfb8f286aab7bd8469e" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>split_send</name></member>
+      <member refid="class_loom_comm_plat_1abc9ba333b93167dda5dd721eb4a04d02" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>split_send_notification</name></member>
+      <member refid="class_loom___bluetooth_1a99a5a57a8774104957919b0adabc9945" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>test_send</name></member>
+      <member refid="class_loom___bluetooth_1a8e2005ed6ef1def9c48169b9fadf5187" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>test_send_str</name></member>
+      <member refid="class_loom_comm_plat_1a731d3f9f16e8a2647f0ef81e477ef2a7" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>total_drop_count</name></member>
+      <member refid="class_loom_comm_plat_1afacaa3247078d09dd953371cfb929094" prot="protected" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>total_packet_count</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>Type</name></member>
+      <member refid="class_loom___bluetooth_1a14659e58247ac0dab7c21fe10fd512e6" prot="public" virt="non-virtual"><scope>Loom_Bluetooth</scope><name>~Loom_Bluetooth</name></member>
+      <member refid="class_loom_comm_plat_1a88da37ecf287280aa166e25f4f947b37" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>~LoomCommPlat</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_Bluetooth</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

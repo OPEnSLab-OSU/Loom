@@ -1,0 +1,392 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___m_a_x31855" kind="class" language="C++" prot="public">
+    <compoundname>Loom_MAX31855</compoundname>
+    <basecompoundref refid="class_loom_s_p_i_sensor" prot="public" virt="non-virtual">LoomSPISensor</basecompoundref>
+    <includes refid="_m_a_x31855_8h" local="no">MAX31855.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___m_a_x31855_1a8e8c4207f3e47e0344e7b700bea51092" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_MAX31855::Loom_MAX31855</definition>
+        <argsstring>(LoomManager *manager, const char *module_name=&quot;MAX31855&quot;, const uint8_t num_samples=4, const uint8_t CS_pin=10)</argsstring>
+        <name>Loom_MAX31855</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+          <defval>&quot;MAX31855&quot;</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>num_samples</declname>
+          <defval>4</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>CS_pin</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>MAX31856 module constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;MAX31856&quot;&gt; | null | MAX31856 module name </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">num_samples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;4&gt; | {1, 2, 4, 8, 16} | How many samples to take and average </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">CS_pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;10&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin should be used for chip select </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SPI/MAX31855.h" line="50" column="1" bodyfile="src/Sensors/SPI/MAX31855.cpp" bodystart="16" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___m_a_x31855_1aee3b25b9d70d51abd50add93fb49441e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_MAX31855::Loom_MAX31855</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_MAX31855</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SPI/MAX31855.h" line="60" column="1" bodyfile="src/Sensors/SPI/MAX31855.cpp" bodystart="29" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___m_a_x31855_1ab01cad500c01e090e173f94dfe38f2f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_MAX31855::~Loom_MAX31855</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_MAX31855</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SPI/MAX31855.h" line="63" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___m_a_x31855_1a51f226ce0e210a341cf6c46bebe4e5df" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_MAX31855::measure</definition>
+        <argsstring>() override</argsstring>
+        <name>measure</name>
+        <reimplements refid="class_loom_sensor_1a390ef79a4d5d6b6386e099c7fe56ed1a">measure</reimplements>
+        <briefdescription>
+<para>Take any relevant measurements. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SPI/MAX31855.h" line="69" column="1" bodyfile="src/Sensors/SPI/MAX31855.cpp" bodystart="41" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___m_a_x31855_1ab810ae8d4b02cb1a7326669f359bb56b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_MAX31855::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Package a modules measurements or state. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to put data into </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SPI/MAX31855.h" line="70" column="1" bodyfile="src/Sensors/SPI/MAX31855.cpp" bodystart="63" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___m_a_x31855_1a34e5976fb1efa6b33b2d9714dd359477" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_MAX31855::print_measurements</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_measurements</name>
+        <reimplements refid="class_loom_s_p_i_sensor_1a9aa10745cef677aad99020c46d3e1ed6">print_measurements</reimplements>
+        <briefdescription>
+<para>Print the last set of measurements taken. </para>        </briefdescription>
+        <detaileddescription>
+<para>Does not package the data. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SPI/MAX31855.h" line="76" column="1" bodyfile="src/Sensors/SPI/MAX31855.cpp" bodystart="33" bodyend="38"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___m_a_x31855_1abc8e110d6676a57bb91f64f2c5b1c25e" prot="protected" static="no" mutable="no">
+        <type>Adafruit_MAX31855</type>
+        <definition>Adafruit_MAX31855 Loom_MAX31855::inst_max</definition>
+        <argsstring></argsstring>
+        <name>inst_max</name>
+        <briefdescription>
+<para>Underlying MAX31855 sensor manager instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SPI/MAX31855.h" line="34" column="1" bodyfile="src/Sensors/SPI/MAX31855.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___m_a_x31855_1a1e8c46105fee70cedcd505f25a58d62c" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Loom_MAX31855::temperature</definition>
+        <argsstring></argsstring>
+        <name>temperature</name>
+        <briefdescription>
+<para>Measured temperature. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SPI/MAX31855.h" line="36" column="1" bodyfile="src/Sensors/SPI/MAX31855.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___m_a_x31855_1a02476a27b49d4193d0534b732246fec4" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Loom_MAX31855::internal_temp</definition>
+        <argsstring></argsstring>
+        <name>internal_temp</name>
+        <briefdescription>
+<para>Measured internal temperature. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/SPI/MAX31855.h" line="37" column="1" bodyfile="src/Sensors/SPI/MAX31855.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>MAX31855 thermocouple temperature module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___m_a_x31856.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/269">Product Page: Thermocouple Amplifier MAX31855 breakout board</ulink></para></listitem><listitem><para><ulink url="https://github.com/adafruit/Adafruit-MAX31855-library">Dependency: Adafruit-MAX31855-library</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="654">
+        <label>LoomSPISensor</label>
+        <link refid="class_loom_s_p_i_sensor"/>
+        <childnode refid="655" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="656">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="653">
+        <label>Loom_MAX31855</label>
+        <link refid="class_loom___m_a_x31855"/>
+        <childnode refid="654" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="655">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="656" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="665">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="658">
+        <label>LoomSPISensor</label>
+        <link refid="class_loom_s_p_i_sensor"/>
+        <childnode refid="659" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="661">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="662" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="663" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="668" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="664" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="660">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="661" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="657">
+        <label>Loom_MAX31855</label>
+        <link refid="class_loom___m_a_x31855"/>
+        <childnode refid="658" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="669">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="664">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="660" relation="public-inheritance">
+        </childnode>
+        <childnode refid="665" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="666" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="663" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="667" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="668" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="669" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="663">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="660" relation="public-inheritance">
+        </childnode>
+        <childnode refid="664" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="659">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="660" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="662">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="660" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="668">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="660" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="666">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="667">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Sensors/SPI/MAX31855.h" line="30" column="1" bodyfile="src/Sensors/SPI/MAX31855.h" bodystart="29" bodyend="80"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>add_config</name></member>
+      <member refid="class_loom_sensor_1ab75183469715506e8a694b9559b76c35" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>calibrate</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>get_module_type</name></member>
+      <member refid="class_loom_sensor_1ae9a177765bd3ab79e002e98df6053ce0" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>get_num_samples</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom___m_a_x31855_1abc8e110d6676a57bb91f64f2c5b1c25e" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>inst_max</name></member>
+      <member refid="class_loom___m_a_x31855_1a02476a27b49d4193d0534b732246fec4" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>internal_temp</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___m_a_x31855_1a8e8c4207f3e47e0344e7b700bea51092" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>Loom_MAX31855</name></member>
+      <member refid="class_loom___m_a_x31855_1aee3b25b9d70d51abd50add93fb49441e" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>Loom_MAX31855</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>LoomModule</name></member>
+      <member refid="class_loom_sensor_1acce7ce989a74b5e4b3c8ee51ae55e8a9" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>LoomSensor</name></member>
+      <member refid="class_loom_s_p_i_sensor_1ad233b49ab4866eb00a5be927adb35f99" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>LoomSPISensor</name></member>
+      <member refid="class_loom___m_a_x31855_1a51f226ce0e210a341cf6c46bebe4e5df" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>measure</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>module_type</name></member>
+      <member refid="class_loom_sensor_1a0e74ebbaecde15ed1c71e1bb6bc6aebe" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>num_samples</name></member>
+      <member refid="class_loom___m_a_x31855_1ab810ae8d4b02cb1a7326669f359bb56b" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>power_up</name></member>
+      <member refid="class_loom_sensor_1aaa3bb2a2165029906c4ee815e790c89e" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>print_config</name></member>
+      <member refid="class_loom___m_a_x31855_1a34e5976fb1efa6b33b2d9714dd359477" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>print_measurements</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>set_active</name></member>
+      <member refid="class_loom_sensor_1ad02e186edda41d4458246f329641d6f4" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>set_num_samples</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___m_a_x31855_1a1e8c46105fee70cedcd505f25a58d62c" prot="protected" virt="non-virtual"><scope>Loom_MAX31855</scope><name>temperature</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>Type</name></member>
+      <member refid="class_loom___m_a_x31855_1ab01cad500c01e090e173f94dfe38f2f3" prot="public" virt="non-virtual"><scope>Loom_MAX31855</scope><name>~Loom_MAX31855</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_sensor_1aac0541421949a20b91a13583271f6757" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>~LoomSensor</name></member>
+      <member refid="class_loom_s_p_i_sensor_1ad0b8685af623711042caf9014c2e2863" prot="public" virt="virtual"><scope>Loom_MAX31855</scope><name>~LoomSPISensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

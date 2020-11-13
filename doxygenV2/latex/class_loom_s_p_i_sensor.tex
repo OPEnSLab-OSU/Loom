@@ -1,0 +1,112 @@
+\hypertarget{class_loom_s_p_i_sensor}{}\section{Loom\+S\+P\+I\+Sensor Class Reference}
+\label{class_loom_s_p_i_sensor}\index{Loom\+S\+P\+I\+Sensor@{Loom\+S\+P\+I\+Sensor}}
+
+
+Abstract base class for S\+PI sensor modules.  
+
+
+
+
+{\ttfamily \#include $<$S\+P\+I\+\_\+\+Sensor.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+S\+P\+I\+Sensor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{class_loom_s_p_i_sensor__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_s_p_i_sensor_ad233b49ab4866eb00a5be927adb35f99}{Loom\+S\+P\+I\+Sensor} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}, const uint8\+\_\+t \hyperlink{class_loom_sensor_a0e74ebbaecde15ed1c71e1bb6bc6aebe}{num\+\_\+samples}=1)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_s_p_i_sensor_ad0b8685af623711042caf9014c2e2863}{$\sim$\+Loom\+S\+P\+I\+Sensor} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_s_p_i_sensor_a9aa10745cef677aad99020c46d3e1ed6}{print\+\_\+measurements} () const override=0
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract base class for S\+PI sensor modules. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_s_p_i_sensor.html}{\tt Module Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+S\+P\+I\+Sensor@{Loom\+S\+P\+I\+Sensor}!Loom\+S\+P\+I\+Sensor@{Loom\+S\+P\+I\+Sensor}}
+\index{Loom\+S\+P\+I\+Sensor@{Loom\+S\+P\+I\+Sensor}!Loom\+S\+P\+I\+Sensor@{Loom\+S\+P\+I\+Sensor}}
+\subsubsection[{\texorpdfstring{Loom\+S\+P\+I\+Sensor(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type, const uint8\+\_\+t num\+\_\+samples=1)}{LoomSPISensor(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const uint8_t num_samples=1)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+S\+P\+I\+Sensor\+::\+Loom\+S\+P\+I\+Sensor (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type, }
+\item[{const uint8\+\_\+t}]{num\+\_\+samples = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_s_p_i_sensor_ad233b49ab4866eb00a5be927adb35f99}{}\label{class_loom_s_p_i_sensor_ad233b49ab4866eb00a5be927adb35f99}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em num\+\_\+samples} & The number of samples to take and average \\
+\hline
+\end{DoxyParams}
+\index{Loom\+S\+P\+I\+Sensor@{Loom\+S\+P\+I\+Sensor}!````~Loom\+S\+P\+I\+Sensor@{$\sim$\+Loom\+S\+P\+I\+Sensor}}
+\index{````~Loom\+S\+P\+I\+Sensor@{$\sim$\+Loom\+S\+P\+I\+Sensor}!Loom\+S\+P\+I\+Sensor@{Loom\+S\+P\+I\+Sensor}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+S\+P\+I\+Sensor()=default}{~LoomSPISensor()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+S\+P\+I\+Sensor\+::$\sim$\+Loom\+S\+P\+I\+Sensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_s_p_i_sensor_ad0b8685af623711042caf9014c2e2863}{}\label{class_loom_s_p_i_sensor_ad0b8685af623711042caf9014c2e2863}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+S\+P\+I\+Sensor@{Loom\+S\+P\+I\+Sensor}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+S\+P\+I\+Sensor@{Loom\+S\+P\+I\+Sensor}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override=0}{print_measurements() const override=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+S\+P\+I\+Sensor\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [pure virtual]}}\hypertarget{class_loom_s_p_i_sensor_a9aa10745cef677aad99020c46d3e1ed6}{}\label{class_loom_s_p_i_sensor_a9aa10745cef677aad99020c46d3e1ed6}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+
+
+Implemented in \hyperlink{class_loom___m_a_x31856_a197dc843c246a5ac17edd62499ed5c60}{Loom\+\_\+\+M\+A\+X31856}, and \hyperlink{class_loom___m_a_x31855_a34e5976fb1efa6b33b2d9714dd359477}{Loom\+\_\+\+M\+A\+X31855}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+S\+P\+I/\hyperlink{_s_p_i___sensor_8h}{S\+P\+I\+\_\+\+Sensor.\+h}\item 
+src/\+Sensors/\+S\+P\+I/\hyperlink{_s_p_i___sensor_8cpp}{S\+P\+I\+\_\+\+Sensor.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LoomManager class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          LoomManager <span class="m-thin">class</span>
+        </h1>
+        <p>Manager to contain Loom modules and provide users with a simpler API.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#add-module-to-manager">ADD MODULE TO MANAGER</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+                <li><a href="#miscellaneous">MISCELLANEOUS</a></li>
+                <li><a href="#module-access">MODULE ACCESS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom_manager.html">LoomManager Documentation</a></li></ul></aside>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a23170d165993ad196a7604fd08b29400" class="m-doc">DeviceType</a> { </span><span class="m-doc-wrap"><a href="#a23170d165993ad196a7604fd08b29400a3cc0a3bb62454e5f6414c7adb897b5ff" class="m-doc">HUB</a>,
+              <a href="#a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495" class="m-doc">NODE</a>,
+              <a href="#a23170d165993ad196a7604fd08b29400ad31b9025a6321e1dddf76266123d7e99" class="m-doc">REPEATER</a> }</span>
+            </dt>
+            <dd>Different general types of devices.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="aac06e8c17477ab5d8991e782f9ffecca">
+              char <a href="#aac06e8c17477ab5d8991e782f9ffecca" class="m-doc-self">device_name</a>
+            </dt>
+            <dd>The name of the device.</dd>
+            <dt id="af2ce718d7f1d10bdd48344acabf47488">
+              uint8_t <a href="#af2ce718d7f1d10bdd48344acabf47488" class="m-doc-self">instance</a>
+            </dt>
+            <dd>The instance / channel ID within the subnet.</dd>
+            <dt id="af5742e2169b750d8b4221778e5c9f629">
+              uint16_t <a href="#af5742e2169b750d8b4221778e5c9f629" class="m-doc-self">interval</a>
+            </dt>
+            <dd>Default value for <a href="class_loom_manager.html#a3e57c97dd28717002cf11a1cff794239" class="m-doc">pause()</a> Used so that manager can control interval, rather than code in .ino.</dd>
+            <dt id="af280305895cc3b2c5022d4a5fabeb2c4">
+              <a href="class_loom_manager.html#a23170d165993ad196a7604fd08b29400" class="m-doc">DeviceType</a> <a href="#af280305895cc3b2c5022d4a5fabeb2c4" class="m-doc-self">device_type</a>
+            </dt>
+            <dd>Device type (Hub / Node)</dd>
+            <dt id="a2880117fb788e2210560e87ed655cb8e">
+              std::vector&lt;<a href="class_loom_module.html" class="m-doc">LoomModule</a>*&gt; <a href="#a2880117fb788e2210560e87ed655cb8e" class="m-doc-self">modules</a>
+            </dt>
+            <dd>Vectors of <a href="class_loom_module.html" class="m-doc">LoomModule</a> pointers.</dd>
+            <dt id="a00b6fc4d662e25ea1b88a427909b8a94">
+              <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> <a href="#a00b6fc4d662e25ea1b88a427909b8a94" class="m-doc-self">print_verbosity</a>
+            </dt>
+            <dd>Print detail verbosity.</dd>
+            <dt id="a7e57c09ed534c554f96c457127294f20">
+              <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> <a href="#a7e57c09ed534c554f96c457127294f20" class="m-doc-self">package_verbosity</a>
+            </dt>
+            <dd>Package detail verbosity.</dd>
+            <dt id="ac1b761a5c37d853db374c13a1cb3226c">
+              StaticJsonDocument&lt;2000&gt; <a href="#ac1b761a5c37d853db374c13a1cb3226c" class="m-doc-self">doc</a>
+            </dt>
+            <dd>Json data.</dd>
+            <dt id="a7537185cd89f2b472d338268fa2418c9">
+              uint <a href="#a7537185cd89f2b472d338268fa2418c9" class="m-doc-self">packet_number</a>
+            </dt>
+            <dd>Packet number, incremented each time package is called.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a084222072528d9fe59480b0c9e2f5757" class="m-doc">LoomManager</a>(</span><span class="m-doc-wrap">const <a href="class_factory_base.html" class="m-doc">FactoryBase</a>* factory_ptr,
+              const char* device_name = &quot;Device&quot;,
+              const uint8_t instance = 1,
+              const <a href="class_loom_manager.html#a23170d165993ad196a7604fd08b29400" class="m-doc">DeviceType</a> device_type = <a href="class_loom_manager.html#a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495" class="m-doc">DeviceType::<wbr />NODE</a>,
+              const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> print_verbosity = <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313a4cec341dae86f2acc17c82c156c82d13" class="m-doc">Verbosity::<wbr />V_HIGH</a>,
+              const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> package_verbosity = <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313afb734c04a9e5804353ceb79f5d37a169" class="m-doc">Verbosity::<wbr />V_LOW</a>,
+              const uint16_t interval = 1000)</span>
+            </dt>
+            <dd>Loom Manager constructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a315be7f7fe42feb0710b85cc8c023291">
+              <span class="m-doc-wrap-bumper">void <a href="#a315be7f7fe42feb0710b85cc8c023291" class="m-doc-self">begin_LED</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Begin LED.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a15a76615e56881a51a78005ad903db24" class="m-doc">begin_serial</a>(</span><span class="m-doc-wrap">const bool wait_for_monitor = false) const</span>
+            </dt>
+            <dd>Begin Serial, optionally wait for user.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab06b9f5b623b01cc0966eb84da173238" class="m-doc">parse_config</a>(</span><span class="m-doc-wrap">const char* json_config) -&gt; bool</span>
+            </dt>
+            <dd>Parse a JSON configuration string specifying enabled modules.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adbcbf45453af8fd47dc6c536447540be" class="m-doc">parse_config_SD</a>(</span><span class="m-doc-wrap">const char* config_file) -&gt; bool</span>
+            </dt>
+            <dd>Parse a JSON configuration on SD card specifying enabled modules.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a445ca7e4c6f7db0d7dc7c5f4fa8ffea0" class="m-doc">parse_config_json</a>(</span><span class="m-doc-wrap">JsonObject config) -&gt; bool</span>
+            </dt>
+            <dd>Parse a JSON configuration object specifying enabled modules.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af9666106e7f25c4735b22c70dfaab33f" class="m-doc">get_config</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Get complete configuration of the device.</dd>
+            <dt id="a3202f184c7d76abff38a353347c3f457">
+              <span class="m-doc-wrap-bumper">void <a href="#a3202f184c7d76abff38a353347c3f457" class="m-doc-self">measure</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Measure data of all managed sensors.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad09d72a0950ee5df48371e4d49a56e68" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json)</span>
+            </dt>
+            <dd>Package data of all modules into provide JsonObject.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af62aaa2aea11411f65b3fe1ed2c4c3d7" class="m-doc">record</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Measure and package data.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a34666ea29808834e120ef169f389387b" class="m-doc">package</a>(</span><span class="m-doc-wrap">) -&gt; JsonObject</span>
+            </dt>
+            <dd>Package data of all modules into JsonObject and return.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a85bcc5929215f48af9dffed13bd78862" class="m-doc">publish_all</a>(</span><span class="m-doc-wrap">const JsonObject json) -&gt; bool</span>
+            </dt>
+            <dd>Publish.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5cea46f54dd9f891108bc0adf2c2d437" class="m-doc">publish_all</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Publish.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a349a86e686c0b71d8613f1e5a58ea2e3" class="m-doc">log_all</a>(</span><span class="m-doc-wrap">const JsonObject json) -&gt; bool</span>
+            </dt>
+            <dd>Log.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af59e23602c123c36d4a855e6af6b4d75" class="m-doc">log_all</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Log.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#affe6f936dd6c9f7f8b489b03786ac83d" class="m-doc">dispatch</a>(</span><span class="m-doc-wrap">JsonObject json)</span>
+            </dt>
+            <dd>Iterate over list of commands, forwarding to handling module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a80fb13974b3bde9b0cedcd43732d7226" class="m-doc">dispatch</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Iterate over list of commands, forwarding to handling module.</dd>
+            <dt id="a3e57c97dd28717002cf11a1cff794239">
+              <span class="m-doc-wrap-bumper">void <a href="#a3e57c97dd28717002cf11a1cff794239" class="m-doc-self">pause</a>(</span><span class="m-doc-wrap">const uint16_t ms) const</span>
+            </dt>
+            <dd>Delay milliseconds.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8d3dba74d36bf91a7356f08f0012268e" class="m-doc">pause</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Delay milliseconds based on interval member.</dd>
+            <dt id="abfb3562addd9910ef7957508d5552ea0">
+              <span class="m-doc-wrap-bumper">void <a href="#abfb3562addd9910ef7957508d5552ea0" class="m-doc-self">power_up</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Iterate over modules, calling power up method.</dd>
+            <dt id="a1c7c446561067b986afc77ed1b4454c9">
+              <span class="m-doc-wrap-bumper">void <a href="#a1c7c446561067b986afc77ed1b4454c9" class="m-doc-self">power_down</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Iterate over modules, calling power down method.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4bfaf3aaf89df1f7c9cd8c2142c0cdfd" class="m-doc">add_data</a>(</span><span class="m-doc-wrap">const char* module,
+              const char* key,
+              const T val) -&gt; bool</span>
+            </dt>
+            <dd>Append to a Json object of data.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename T&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ace28cae7092408bc96bf66299e4c2f9a" class="m-doc">get_data_as</a>(</span><span class="m-doc-wrap">const char* module,
+              const char* key) -&gt; T</span>
+            </dt>
+            <dd>Get a data value from Json object of data.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2c8c03e61c5ea0e2d1d86c48179accff" class="m-doc">has_module</a>(</span><span class="m-doc-wrap">const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> type) const -&gt; bool</span>
+            </dt>
+            <dd>Save current configuration to SD.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a3dcf9e19b7d583aca8a01cfe9f6ba897" class="m-doc">print_config</a>(</span><span class="m-doc-wrap">const bool print_modules_config = false)</span>
+            </dt>
+            <dd>Print the devices current configuration.</dd>
+            <dt id="a0c849e257dfa2a1796daea93d0da6f58">
+              <span class="m-doc-wrap-bumper">void <a href="#a0c849e257dfa2a1796daea93d0da6f58" class="m-doc-self">list_modules</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Print the linked modules.</dd>
+            <dt id="a70e8fbf86b96fd3246c2d4422d91139d">
+              <span class="m-doc-wrap-bumper">void <a href="#a70e8fbf86b96fd3246c2d4422d91139d" class="m-doc-self">display_data</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Print out the internal JSON object.</dd>
+          </dl>
+        </section>
+        <section id="add-module-to-manager">
+          <h2><a href="#add-module-to-manager">ADD MODULE TO MANAGER</a></h2>
+          <dl class="m-doc">
+            <dt id="a4761f8b6d15ed18542d1039e207cd975">
+              <span class="m-doc-wrap-bumper">void <a href="#a4761f8b6d15ed18542d1039e207cd975" class="m-doc-self">add_module</a>(</span><span class="m-doc-wrap"><a href="class_loom_module.html" class="m-doc">LoomModule</a>* module)</span>
+            </dt>
+            <dd>Add a module to be managed.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a19942faf44a0835356c5d3f04ee77a66" class="m-doc">get_device_type</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="class_loom_manager.html#a23170d165993ad196a7604fd08b29400" class="m-doc">DeviceType</a></span>
+            </dt>
+            <dd>Get device type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a853b89aea16917b3e7baef7173ef741e" class="m-doc">internal_json</a>(</span><span class="m-doc-wrap">const bool clear = false) -&gt; JsonObject</span>
+            </dt>
+            <dd>Return reference to internal json object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a93329cf2288e9467ca5da87059657a21" class="m-doc">get_device_name</a>(</span><span class="m-doc-wrap">char* buf) const</span>
+            </dt>
+            <dd>Get the device name, copies into provided buffer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7642ccf7c0faca1e549f0ec2d4d72400" class="m-doc">get_device_name</a>(</span><span class="m-doc-wrap">) const -&gt; const char*</span>
+            </dt>
+            <dd>Get the device name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af71c96f2e245deb12e8b25eb2e11e4db" class="m-doc">get_instance_num</a>(</span><span class="m-doc-wrap">) const -&gt; uint8_t</span>
+            </dt>
+            <dd>Get device instance number.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa97a8e46a133c0d32a3dd8c33d5c9b25" class="m-doc">get_print_verbosity</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a></span>
+            </dt>
+            <dd>Get print verbosity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afaaaf2cec1d6d372b0b6a71720944690" class="m-doc">get_package_verbosity</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a></span>
+            </dt>
+            <dd>Get package verbosity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7d282d59fd742664e6bbe33f64241ed3" class="m-doc">get_interval</a>(</span><span class="m-doc-wrap">) const -&gt; uint16_t</span>
+            </dt>
+            <dd>Get sampling interval.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab19b6f8d14ddbaf8cdada7e7d4d4a983" class="m-doc">set_device_name</a>(</span><span class="m-doc-wrap">const char* device_name)</span>
+            </dt>
+            <dd>Set the device name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac8bd2ad89162850e9f7615856ba7cd48" class="m-doc">set_instance_num</a>(</span><span class="m-doc-wrap">const uint8_t n)</span>
+            </dt>
+            <dd>Set device instance number.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa537a373b1aab6150915c1e27a691d7a" class="m-doc">set_print_verbosity</a>(</span><span class="m-doc-wrap">const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> v,
+              const bool set_modules = false)</span>
+            </dt>
+            <dd>Set print verbosity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa9a1e310be9f6c806ac42421648724df" class="m-doc">set_package_verbosity</a>(</span><span class="m-doc-wrap">const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> v,
+              const bool set_modules = false)</span>
+            </dt>
+            <dd>Set package verbosity.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aba4da59a1f3bf7422be299e6170b2d1c" class="m-doc">set_interval</a>(</span><span class="m-doc-wrap">const uint16_t ms)</span>
+            </dt>
+            <dd>Set default time to use for .<a href="class_loom_manager.html#a3e57c97dd28717002cf11a1cff794239" class="m-doc">pause()</a> \ .delay().</dd>
+          </dl>
+        </section>
+        <section id="miscellaneous">
+          <h2><a href="#miscellaneous">MISCELLANEOUS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#afbe16976632be98771f6a5ede92ff3fe" class="m-doc">flash_LED</a>(</span><span class="m-doc-wrap">const uint8_t count,
+              const uint8_t time_high,
+              const uint8_t time_low,
+              const bool end_high = false) const</span>
+            </dt>
+            <dd>Flash the built in LED.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a2592362f66b24ced03f82e35643d1f12" class="m-doc">enum_device_type_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom_manager.html#a23170d165993ad196a7604fd08b29400" class="m-doc">DeviceType</a> t) -&gt; const char*</span>
+            </dt>
+            <dd>Get c-string of name associated with device type enum.</dd>
+          </dl>
+        </section>
+        <section id="module-access">
+          <h2><a href="#module-access">MODULE ACCESS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a139e842dcaa5ab84587bdb5bc75fd103" class="m-doc">find_module</a>(</span><span class="m-doc-wrap">const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> type,
+              const uint8_t idx = 0) const -&gt; <a href="class_loom_module.html" class="m-doc">LoomModule</a>*</span>
+            </dt>
+            <dd>Auxiliary function to search a list of modules for a module of specified type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af8b532b1efb4ba887ceb09edea2d65a9" class="m-doc">find_module_by_category</a>(</span><span class="m-doc-wrap">const <a href="class_loom_module.html#a0c6ecc60315f95af551138dc83567068" class="m-doc">LoomModule::<wbr />Category</a> category,
+              const uint8_t idx) const -&gt; <a href="class_loom_module.html" class="m-doc">LoomModule</a>*</span>
+            </dt>
+            <dd>Auxiliary function to search a list of modules for a module of specified category.</dd>
+            <dt id="a2cbb5e4f1b81ef273b1a07f120cbb06d">
+              <span class="m-doc-wrap-bumper">void <a href="#a2cbb5e4f1b81ef273b1a07f120cbb06d" class="m-doc-self">print_device_label</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">protected</span></span>
+            </dt>
+            <dd>Print the device name as &#x27;[device_name]&#x27;.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a23170d165993ad196a7604fd08b29400"><div>
+            <h3>
+              enum LoomManager::<wbr /><a href="#a23170d165993ad196a7604fd08b29400" class="m-doc-self">DeviceType</a>
+            </h3>
+            <p>Different general types of devices.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a23170d165993ad196a7604fd08b29400a3cc0a3bb62454e5f6414c7adb897b5ff" class="m-doc-self" id="a23170d165993ad196a7604fd08b29400a3cc0a3bb62454e5f6414c7adb897b5ff">HUB</a></td>
+                  <td>
+                  <p>Central device.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495" class="m-doc-self" id="a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495">NODE</a></td>
+                  <td>
+                  <p>Data collecting / actuating node.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a23170d165993ad196a7604fd08b29400ad31b9025a6321e1dddf76266123d7e99" class="m-doc-self" id="a23170d165993ad196a7604fd08b29400ad31b9025a6321e1dddf76266123d7e99">REPEATER</a></td>
+                  <td>
+                  <p>Forwards messages between other devices.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a084222072528d9fe59480b0c9e2f5757"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a084222072528d9fe59480b0c9e2f5757" class="m-doc-self">LoomManager</a>(</span><span class="m-doc-wrap">const <a href="class_factory_base.html" class="m-doc">FactoryBase</a>* factory_ptr,
+              const char* device_name = &quot;Device&quot;,
+              const uint8_t instance = 1,
+              const <a href="class_loom_manager.html#a23170d165993ad196a7604fd08b29400" class="m-doc">DeviceType</a> device_type = <a href="class_loom_manager.html#a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495" class="m-doc">DeviceType::<wbr />NODE</a>,
+              const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> print_verbosity = <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313a4cec341dae86f2acc17c82c156c82d13" class="m-doc">Verbosity::<wbr />V_HIGH</a>,
+              const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> package_verbosity = <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313afb734c04a9e5804353ceb79f5d37a169" class="m-doc">Verbosity::<wbr />V_LOW</a>,
+              const uint16_t interval = 1000)</span></span>
+            </h3>
+            <p>Loom Manager constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">factory_ptr</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>device_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>String | &lt;&quot;Default&quot;&gt; | null | Manager name</td>
+                </tr>
+                <tr>
+                  <td>instance&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;1&gt; | [0-99] | Device instance number on its subnet</td>
+                </tr>
+                <tr>
+                  <td>device_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(DeviceType) | &lt;1&gt; | {0(&quot;Hub&quot;), 1(&quot;Node&quot;), 2(&quot;Repeater&quot;)} | Device&#x27;s topological type</td>
+                </tr>
+                <tr>
+                  <td>print_verbosity&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Verbosity) | &lt;1&gt; | {0(&quot;Off&quot;), 1(&quot;Low&quot;), 2(&quot;High&quot;)} | How detailed prints to the Serial Monitor should be</td>
+                </tr>
+                <tr>
+                  <td>package_verbosity&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Verbosity) | &lt;2&gt; | {0(&quot;Off&quot;), 1(&quot;Low&quot;), 2(&quot;High&quot;)} | How detailed to package data</td>
+                </tr>
+                <tr>
+                  <td>interval&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;1&gt; | [0-60000] | Default milliseconds to pause</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a15a76615e56881a51a78005ad903db24"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15a76615e56881a51a78005ad903db24" class="m-doc-self">begin_serial</a>(</span><span class="m-doc-wrap">const bool wait_for_monitor = false) const</span></span>
+            </h3>
+            <p>Begin Serial, optionally wait for user.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">wait_for_monitor&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>True to wait for serial monitor to open</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab06b9f5b623b01cc0966eb84da173238"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab06b9f5b623b01cc0966eb84da173238" class="m-doc-self">parse_config</a>(</span><span class="m-doc-wrap">const char* json_config)</span></span>
+            </h3>
+            <p>Parse a JSON configuration string specifying enabled modules.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json_config&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Configuration</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Enabled modules are instantiated with specified settings and added to manager lists for managing</p>
+          </div></section>
+          <section class="m-doc-details" id="adbcbf45453af8fd47dc6c536447540be"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adbcbf45453af8fd47dc6c536447540be" class="m-doc-self">parse_config_SD</a>(</span><span class="m-doc-wrap">const char* config_file)</span></span>
+            </h3>
+            <p>Parse a JSON configuration on SD card specifying enabled modules.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Enabled modules are instantiated with specified settings and added to manager lists for managing. Json should be on a single line in a .txt file.</p>
+          </div></section>
+          <section class="m-doc-details" id="a445ca7e4c6f7db0d7dc7c5f4fa8ffea0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a445ca7e4c6f7db0d7dc7c5f4fa8ffea0" class="m-doc-self">parse_config_json</a>(</span><span class="m-doc-wrap">JsonObject config)</span></span>
+            </h3>
+            <p>Parse a JSON configuration object specifying enabled modules.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Enabled modules are instantiated with specified settings and added to manager lists for managing. Called by parse_config and parse_config_SD</p>
+          </div></section>
+          <section class="m-doc-details" id="af9666106e7f25c4735b22c70dfaab33f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af9666106e7f25c4735b22c70dfaab33f" class="m-doc-self">get_config</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get complete configuration of the device.</p>
+<p>Generally used to save configuration to SD</p>
+          </div></section>
+          <section class="m-doc-details" id="ad09d72a0950ee5df48371e4d49a56e68"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad09d72a0950ee5df48371e4d49a56e68" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json)</span></span>
+            </h3>
+            <p>Package data of all modules into provide JsonObject.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>JsonObject of packaged data of enabled modules</td>
+                </tr>
+              </tbody>
+            </table>
+<p>How detailed data is can be modified with package_verbosity</p>
+          </div></section>
+          <section class="m-doc-details" id="af62aaa2aea11411f65b3fe1ed2c4c3d7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af62aaa2aea11411f65b3fe1ed2c4c3d7" class="m-doc-self">record</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Measure and package data.</p>
+<p>Convenience function, current just calls measure then package</p>
+          </div></section>
+          <section class="m-doc-details" id="a34666ea29808834e120ef169f389387b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">JsonObject LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a34666ea29808834e120ef169f389387b" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Package data of all modules into JsonObject and return.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>JsonObject of packaged data of enabled modules</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a85bcc5929215f48af9dffed13bd78862"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a85bcc5929215f48af9dffed13bd78862" class="m-doc-self">publish_all</a>(</span><span class="m-doc-wrap">const JsonObject json)</span></span>
+            </h3>
+            <p>Publish.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Data object to publish</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5cea46f54dd9f891108bc0adf2c2d437"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5cea46f54dd9f891108bc0adf2c2d437" class="m-doc-self">publish_all</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Publish.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Calls <a href="class_loom_manager.html#a85bcc5929215f48af9dffed13bd78862" class="m-doc">publish_<wbr />all(const JsonObject json)</a> with interal json</p>
+          </div></section>
+          <section class="m-doc-details" id="a349a86e686c0b71d8613f1e5a58ea2e3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a349a86e686c0b71d8613f1e5a58ea2e3" class="m-doc-self">log_all</a>(</span><span class="m-doc-wrap">const JsonObject json)</span></span>
+            </h3>
+            <p>Log.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Data object to log</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af59e23602c123c36d4a855e6af6b4d75"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af59e23602c123c36d4a855e6af6b4d75" class="m-doc-self">log_all</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Log.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Calls <a href="class_loom_manager.html#a349a86e686c0b71d8613f1e5a58ea2e3" class="m-doc">log_<wbr />all(const JsonObject json)</a> with interal json</p>
+          </div></section>
+          <section class="m-doc-details" id="affe6f936dd6c9f7f8b489b03786ac83d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#affe6f936dd6c9f7f8b489b03786ac83d" class="m-doc-self">dispatch</a>(</span><span class="m-doc-wrap">JsonObject json)</span></span>
+            </h3>
+            <p>Iterate over list of commands, forwarding to handling module.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Object containing commands</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a80fb13974b3bde9b0cedcd43732d7226"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80fb13974b3bde9b0cedcd43732d7226" class="m-doc-self">dispatch</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Iterate over list of commands, forwarding to handling module.</p>
+<p>Uses internal json</p>
+          </div></section>
+          <section class="m-doc-details" id="a8d3dba74d36bf91a7356f08f0012268e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8d3dba74d36bf91a7356f08f0012268e" class="m-doc-self">pause</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Delay milliseconds based on interval member.</p>
+<p>Uses interval member as value</p>
+          </div></section>
+          <section class="m-doc-details" id="a4bfaf3aaf89df1f7c9cd8c2142c0cdfd"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4bfaf3aaf89df1f7c9cd8c2142c0cdfd" class="m-doc-self">add_data</a>(</span><span class="m-doc-wrap">const char* module,
+              const char* key,
+              const T val)</span></span>
+            </h3>
+            <p>Append to a Json object of data.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">module&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Which module to add data to (will create if it doesn&#x27;t exist)</td>
+                </tr>
+                <tr>
+                  <td>key&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Key of data to add</td>
+                </tr>
+                <tr>
+                  <td>val&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Value of data to add</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if success</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If object is non-empty and contains non-data, will not add and will return false. Only call this after package, otherwise the data will be overriden</p>
+          </div></section>
+          <section class="m-doc-details" id="ace28cae7092408bc96bf66299e4c2f9a"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;typename T&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">T LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ace28cae7092408bc96bf66299e4c2f9a" class="m-doc-self">get_data_as</a>(</span><span class="m-doc-wrap">const char* module,
+              const char* key)</span></span>
+            </h3>
+            <p>Get a data value from Json object of data.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">module&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td><a href="class_loom_module.html" class="m-doc">LoomModule</a> key is associated with</td>
+                </tr>
+                <tr>
+                  <td>key&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Key of data value to find</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Data value if found</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2c8c03e61c5ea0e2d1d86c48179accff"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2c8c03e61c5ea0e2d1d86c48179accff" class="m-doc-self">has_module</a>(</span><span class="m-doc-wrap">const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> type) const</span></span>
+            </h3>
+            <p>Save current configuration to SD.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Module type to check for</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True is success, false if fail or file not found Determine if the manager has a module of the specified type</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3dcf9e19b7d583aca8a01cfe9f6ba897"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3dcf9e19b7d583aca8a01cfe9f6ba897" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">const bool print_modules_config = false)</span></span>
+            </h3>
+            <p>Print the devices current configuration.</p>
+<p>Lists modules. Optionally also prints configuration of linked modules.</p>
+          </div></section>
+          <section class="m-doc-details" id="a19942faf44a0835356c5d3f04ee77a66"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_manager.html#a23170d165993ad196a7604fd08b29400" class="m-doc">DeviceType</a> LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a19942faf44a0835356c5d3f04ee77a66" class="m-doc-self">get_device_type</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get device type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Device type (Hub/Node)</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a853b89aea16917b3e7baef7173ef741e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">JsonObject LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a853b89aea16917b3e7baef7173ef741e" class="m-doc-self">internal_json</a>(</span><span class="m-doc-wrap">const bool clear = false)</span></span>
+            </h3>
+            <p>Return reference to internal json object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">clear&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Whether or not to empty Json before returning it</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>Reference to internal json object</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a93329cf2288e9467ca5da87059657a21"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a93329cf2288e9467ca5da87059657a21" class="m-doc-self">get_device_name</a>(</span><span class="m-doc-wrap">char* buf) const</span></span>
+            </h3>
+            <p>Get the device name, copies into provided buffer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">buf&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>The buffer copy device name into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7642ccf7c0faca1e549f0ec2d4d72400"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const char* LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7642ccf7c0faca1e549f0ec2d4d72400" class="m-doc-self">get_device_name</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the device name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>String literal of device name.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af71c96f2e245deb12e8b25eb2e11e4db"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint8_t LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af71c96f2e245deb12e8b25eb2e11e4db" class="m-doc-self">get_instance_num</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get device instance number.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Family number</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa97a8e46a133c0d32a3dd8c33d5c9b25"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa97a8e46a133c0d32a3dd8c33d5c9b25" class="m-doc-self">get_print_verbosity</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get print verbosity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>print verbosity</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afaaaf2cec1d6d372b0b6a71720944690"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afaaaf2cec1d6d372b0b6a71720944690" class="m-doc-self">get_package_verbosity</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get package verbosity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>package verbosity</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7d282d59fd742664e6bbe33f64241ed3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint16_t LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d282d59fd742664e6bbe33f64241ed3" class="m-doc-self">get_interval</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get sampling interval.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>sampling interval, in ms</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab19b6f8d14ddbaf8cdada7e7d4d4a983"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab19b6f8d14ddbaf8cdada7e7d4d4a983" class="m-doc-self">set_device_name</a>(</span><span class="m-doc-wrap">const char* device_name)</span></span>
+            </h3>
+            <p>Set the device name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">device_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The new device name</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac8bd2ad89162850e9f7615856ba7cd48"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac8bd2ad89162850e9f7615856ba7cd48" class="m-doc-self">set_instance_num</a>(</span><span class="m-doc-wrap">const uint8_t n)</span></span>
+            </h3>
+            <p>Set device instance number.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">n&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>New instance number</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa537a373b1aab6150915c1e27a691d7a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa537a373b1aab6150915c1e27a691d7a" class="m-doc-self">set_print_verbosity</a>(</span><span class="m-doc-wrap">const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> v,
+              const bool set_modules = false)</span></span>
+            </h3>
+            <p>Set print verbosity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">v&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>New print verbosity</td>
+                </tr>
+                <tr>
+                  <td>set_modules&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Whether or not to also apply setting to modules</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa9a1e310be9f6c806ac42421648724df"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa9a1e310be9f6c806ac42421648724df" class="m-doc-self">set_package_verbosity</a>(</span><span class="m-doc-wrap">const <a href="_misc_8h.html#abf3be10d03894afb391f3a2935e3b313" class="m-doc">Verbosity</a> v,
+              const bool set_modules = false)</span></span>
+            </h3>
+            <p>Set package verbosity.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">v&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>New package verbosity</td>
+                </tr>
+                <tr>
+                  <td>set_modules&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Whether or not to also apply setting to modules</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aba4da59a1f3bf7422be299e6170b2d1c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aba4da59a1f3bf7422be299e6170b2d1c" class="m-doc-self">set_interval</a>(</span><span class="m-doc-wrap">const uint16_t ms)</span></span>
+            </h3>
+            <p>Set default time to use for .<a href="class_loom_manager.html#a3e57c97dd28717002cf11a1cff794239" class="m-doc">pause()</a> \ .delay().</p>
+<p>Pause and delay can still take explicit times, but if not provided, this value will be used</p>
+          </div></section>
+          <section class="m-doc-details" id="afbe16976632be98771f6a5ede92ff3fe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afbe16976632be98771f6a5ede92ff3fe" class="m-doc-self">flash_LED</a>(</span><span class="m-doc-wrap">const uint8_t count,
+              const uint8_t time_high,
+              const uint8_t time_low,
+              const bool end_high = false) const</span></span>
+            </h3>
+            <p>Flash the built in LED.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">count&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Number of times to flash</td>
+                </tr>
+                <tr>
+                  <td>time_high&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Milliseconds to stay on for</td>
+                </tr>
+                <tr>
+                  <td>time_low&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Milliseconds to stay off for</td>
+                </tr>
+                <tr>
+                  <td>end_high</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2592362f66b24ced03f82e35643d1f12"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static const char* LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2592362f66b24ced03f82e35643d1f12" class="m-doc-self">enum_device_type_string</a>(</span><span class="m-doc-wrap">const <a href="class_loom_manager.html#a23170d165993ad196a7604fd08b29400" class="m-doc">DeviceType</a> t)</span></span>
+            </h3>
+            <p>Get c-string of name associated with device type enum.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>C-string of device type</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a139e842dcaa5ab84587bdb5bc75fd103"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_module.html" class="m-doc">LoomModule</a>* LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a139e842dcaa5ab84587bdb5bc75fd103" class="m-doc-self">find_module</a>(</span><span class="m-doc-wrap">const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> type,
+              const uint8_t idx = 0) const</span></span>
+            </h3>
+            <p>Auxiliary function to search a list of modules for a module of specified type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Type to search for</td>
+                </tr>
+                <tr>
+                  <td>idx</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af8b532b1efb4ba887ceb09edea2d65a9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_module.html" class="m-doc">LoomModule</a>* LoomManager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8b532b1efb4ba887ceb09edea2d65a9" class="m-doc-self">find_module_by_category</a>(</span><span class="m-doc-wrap">const <a href="class_loom_module.html#a0c6ecc60315f95af551138dc83567068" class="m-doc">LoomModule::<wbr />Category</a> category,
+              const uint8_t idx) const</span></span>
+            </h3>
+            <p>Auxiliary function to search a list of modules for a module of specified category.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">category&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Category to search for</td>
+                </tr>
+                <tr>
+                  <td>idx</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

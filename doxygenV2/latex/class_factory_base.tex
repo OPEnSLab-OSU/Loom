@@ -1,0 +1,90 @@
+\hypertarget{class_factory_base}{}\section{Factory\+Base Class Reference}
+\label{class_factory_base}\index{Factory\+Base@{Factory\+Base}}
+
+
+Base class that factory is derived from.  
+
+
+
+
+{\ttfamily \#include $<$Module\+\_\+\+Factory.\+h$>$}
+
+
+
+Inheritance diagram for Factory\+Base\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{class_factory_base__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_factory_base_a96c50a015c8e2b0e6cc4a8ee48ae2a12}{print\+\_\+table} () const =0
+\item 
+virtual \hyperlink{class_loom_module}{Loom\+Module} $\ast$ \hyperlink{class_factory_base_a1a3356d8729b56634c3bca85c7530223}{Create} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Variant module) const =0
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\static T $\ast$ \hyperlink{class_factory_base_a4d5751e4e588002b1f5390124bfc1351}{Create\+Default} ()
+\begin{DoxyCompactList}\small\item\em Creates a \hyperlink{class_loom_module}{Loom\+Module} with its default parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class that factory is derived from. 
+
+Purpose is to allow Loom\+Manger to have a pointer to a \hyperlink{class_loom_factory}{Loom\+Factory}, which it cannot do directly because different parameter selections result in different factory classes
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_factory_base.html}{\tt Factory\+Base Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Function Documentation}
+\index{Factory\+Base@{Factory\+Base}!Create@{Create}}
+\index{Create@{Create}!Factory\+Base@{Factory\+Base}}
+\subsubsection[{\texorpdfstring{Create(\+Loom\+Manager $\ast$manager, Json\+Variant module) const =0}{Create(LoomManager *manager, JsonVariant module) const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Loom\+Module}$\ast$ Factory\+Base\+::\+Create (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Variant}]{module}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_factory_base_a1a3356d8729b56634c3bca85c7530223}{}\label{class_factory_base_a1a3356d8729b56634c3bca85c7530223}
+
+
+Implemented in \hyperlink{class_loom_factory_a16952c39558fd8fcb317e251e9f02266}{Loom\+Factory$<$ I\+N\+T\+E\+R\+N\+E\+T, S\+E\+N\+S\+O\+R\+S, R\+A\+D\+I\+O\+S, A\+C\+T\+U\+A\+T\+O\+R\+S, M\+A\+X $>$}.
+
+\index{Factory\+Base@{Factory\+Base}!Create\+Default@{Create\+Default}}
+\index{Create\+Default@{Create\+Default}!Factory\+Base@{Factory\+Base}}
+\subsubsection[{\texorpdfstring{Create\+Default()}{CreateDefault()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ static T$\ast$ Factory\+Base\+::\+Create\+Default (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{class_factory_base_a4d5751e4e588002b1f5390124bfc1351}{}\label{class_factory_base_a4d5751e4e588002b1f5390124bfc1351}
+
+
+Creates a \hyperlink{class_loom_module}{Loom\+Module} with its default parameters. 
+
+Usage example\+: \hyperlink{class_loom___relay}{Loom\+\_\+\+Relay} r = Factory\+Inst.\+Create\+Default$<$\+Loom\+\_\+\+Relay$>$(); \begin{DoxyReturn}{Returns}
+The created \hyperlink{class_loom_module}{Loom\+Module} 
+\end{DoxyReturn}
+\index{Factory\+Base@{Factory\+Base}!print\+\_\+table@{print\+\_\+table}}
+\index{print\+\_\+table@{print\+\_\+table}!Factory\+Base@{Factory\+Base}}
+\subsubsection[{\texorpdfstring{print\+\_\+table() const =0}{print_table() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Factory\+Base\+::print\+\_\+table (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_factory_base_a96c50a015c8e2b0e6cc4a8ee48ae2a12}{}\label{class_factory_base_a96c50a015c8e2b0e6cc4a8ee48ae2a12}
+
+
+Implemented in \hyperlink{class_loom_factory_a9a81e69b81e801e055a7d2b86e24d59b}{Loom\+Factory$<$ I\+N\+T\+E\+R\+N\+E\+T, S\+E\+N\+S\+O\+R\+S, R\+A\+D\+I\+O\+S, A\+C\+T\+U\+A\+T\+O\+R\+S, M\+A\+X $>$}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{_module___factory_8h}{Module\+\_\+\+Factory.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,394 @@
+\hypertarget{class_loom___batch_s_d}{}\section{Loom\+\_\+\+Batch\+SD Class Reference}
+\label{class_loom___batch_s_d}\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+
+
+Batch SD logging platform module.  
+
+
+
+
+{\ttfamily \#include $<$Batch\+S\+D.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Batch\+SD\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{class_loom___batch_s_d__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___batch_s_d_a54f3ee7cdf05189de3f43c34c0b30465}{Loom\+\_\+\+Batch\+SD} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const bool \hyperlink{class_loom_log_plat_a6d343b76b79a1e51572bcf2991966e61}{enable\+\_\+rate\+\_\+filter}=true, const uint16\+\_\+t \hyperlink{class_loom_log_plat_a3d4ffe4204560b9677b8007be7f522be}{min\+\_\+filter\+\_\+delay}=1000, const byte \hyperlink{class_loom___batch_s_d_abe9e47bc3e511e89056b2da32f580eed}{chip\+\_\+select}=10)
+\begin{DoxyCompactList}\small\item\em SD Module Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___batch_s_d_a4341896658e6e8ab97a5ff280d9dc254}{Loom\+\_\+\+Batch\+SD} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___batch_s_d_a1b9cea47682085b0eebd8792ceb191fe}{$\sim$\+Loom\+\_\+\+Batch\+SD} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___batch_s_d_a3d80d1e31762c8b6328a05485cc8af88}{log} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Log a Json object. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___batch_s_d_ae2e8856853e8a0ac0a3f92b03900eb40}{clear\+\_\+batch\+\_\+log} ()
+\begin{DoxyCompactList}\small\item\em Clears all the files that are being stored in the batch on the SD card. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___batch_s_d_af87c1920bf19e06b7585e8bc1bf72059}{store\+\_\+batch} ()
+\begin{DoxyCompactList}\small\item\em Accesses the internal json from Loom Manager to store to batch using store\+\_\+batch\+\_\+json. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___batch_s_d_ade1673f26d7b667571f76a4c7922571b}{store\+\_\+batch\+\_\+json} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Uses Json\+Object to write file as packet in the batch onto the SD Card. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___batch_s_d_aa847506aab0cba43e0d98e0bb663a915}{power\+\_\+up} () override
+\begin{DoxyCompactList}\small\item\em Turn on any hardware. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___batch_s_d_adc78401b4bea4b41c76717e57417c1d5}{power\+\_\+down} () override
+\begin{DoxyCompactList}\small\item\em Turn off any hardware. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___batch_s_d_a738bf5b08c3eba7ec2711b656e6f90bd}{package} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em No package necessary for logging platforms. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___batch_s_d_ad1566bbb55d145e3206784df245be710}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___batch_s_d_acc8306e790e9068ad418add3186e0aa7}{dump\+\_\+batch} (int index)
+\begin{DoxyCompactList}\small\item\em Prints the contents of a particular packet file in the batch. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+Json\+Object \hyperlink{class_loom___batch_s_d_af58cee5d0d99bc8e78ade04e0c89baf4}{get\+\_\+batch\+\_\+json} (int index)
+\begin{DoxyCompactList}\small\item\em Returns a Json\+Object of the packet file (.json) in the batch from the SD card. \end{DoxyCompactList}\item 
+int \hyperlink{class_loom___batch_s_d_a97ce51f073f6b4c8394f830edcfd3198}{get\+\_\+packet\+\_\+counter} ()
+\begin{DoxyCompactList}\small\item\em Get the current amount of packets that are being stored in the batch. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___batch_s_d_abf19bc992530ae56cd658661926fb2f3}{add\+\_\+drop\+\_\+count} (uint8\+\_\+t dropped)
+\begin{DoxyCompactList}\small\item\em Updates the count of packets that have failed to send. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Sd\+Fat \hyperlink{class_loom___batch_s_d_a26a8fecb120202e86c5c884d055ad8ae}{sd}
+\begin{DoxyCompactList}\small\item\em File System Object. \end{DoxyCompactList}\item 
+const byte \hyperlink{class_loom___batch_s_d_abe9e47bc3e511e89056b2da32f580eed}{chip\+\_\+select}
+\begin{DoxyCompactList}\small\item\em Chip select pin. \end{DoxyCompactList}\item 
+int \hyperlink{class_loom___batch_s_d_aac325ca5667cd8d81409072f890be678}{batch\+\_\+counter}
+\begin{DoxyCompactList}\small\item\em Current batch count value. \end{DoxyCompactList}\item 
+int \hyperlink{class_loom___batch_s_d_af26d1091a8d6368edbf1456d016c0b78}{packet\+\_\+counter}
+\begin{DoxyCompactList}\small\item\em Current packet count value in a batch. \end{DoxyCompactList}\item 
+int \hyperlink{class_loom___batch_s_d_a24ec8915a5e1789b64e1593e6215982a}{drop\+\_\+count}
+\begin{DoxyCompactList}\small\item\em Current count of packets that failed to be sent. \end{DoxyCompactList}\item 
+Dynamic\+Json\+Document \hyperlink{class_loom___batch_s_d_a06ca96fe43ddf77a2f20ca2877be7e85}{doc}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Batch SD logging platform module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___s_d.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/2922}{\tt Product Page\+: Adafruit Adalogger Featherwing}
+\item \href{https://www.adafruit.com/product/254}{\tt Product Page\+: Adafruit SD Breakout}
+\item \href{https://github.com/arduino-libraries/SD}{\tt Dependency\+: SD}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Batch\+S\+D(\+Loom\+Manager $\ast$manager, const bool enable\+\_\+rate\+\_\+filter=true, const uint16\+\_\+t min\+\_\+filter\+\_\+delay=1000, const byte chip\+\_\+select=10)}{Loom_BatchSD(LoomManager *manager, const bool enable_rate_filter=true, const uint16_t min_filter_delay=1000, const byte chip_select=10)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Batch\+S\+D\+::\+Loom\+\_\+\+Batch\+SD (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const bool}]{enable\+\_\+rate\+\_\+filter = {\ttfamily true}, }
+\item[{const uint16\+\_\+t}]{min\+\_\+filter\+\_\+delay = {\ttfamily 1000}, }
+\item[{const byte}]{chip\+\_\+select = {\ttfamily 10}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___batch_s_d_a54f3ee7cdf05189de3f43c34c0b30465}{}\label{class_loom___batch_s_d_a54f3ee7cdf05189de3f43c34c0b30465}
+
+
+SD Module Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em enable\+\_\+rate\+\_\+filter} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ Whether or not to impose maximum update rate \\
+\hline
+\mbox{\tt in}  & {\em min\+\_\+filter\+\_\+delay} & Int $\vert$ $<$1000$>$ $\vert$ \mbox{[}100-\/5000\mbox{]} $\vert$ Minimum update delay, if enable\+\_\+rate\+\_\+filter enabled \\
+\hline
+\mbox{\tt in}  & {\em chip\+\_\+select} & Set(\+Int) $\vert$ $<$10$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin to use for chip select \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Batch\+S\+D(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_BatchSD(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Batch\+S\+D\+::\+Loom\+\_\+\+Batch\+SD (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___batch_s_d_a4341896658e6e8ab97a5ff280d9dc254}{}\label{class_loom___batch_s_d_a4341896658e6e8ab97a5ff280d9dc254}
+
+
+Constructor that takes Json Array, extracts args. 
+
+and delegates to regular constructor 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!````~Loom\+\_\+\+Batch\+SD@{$\sim$\+Loom\+\_\+\+Batch\+SD}}
+\index{````~Loom\+\_\+\+Batch\+SD@{$\sim$\+Loom\+\_\+\+Batch\+SD}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Batch\+S\+D()=default}{~Loom_BatchSD()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Batch\+S\+D\+::$\sim$\+Loom\+\_\+\+Batch\+SD (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___batch_s_d_a1b9cea47682085b0eebd8792ceb191fe}{}\label{class_loom___batch_s_d_a1b9cea47682085b0eebd8792ceb191fe}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!add\+\_\+drop\+\_\+count@{add\+\_\+drop\+\_\+count}}
+\index{add\+\_\+drop\+\_\+count@{add\+\_\+drop\+\_\+count}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{add\+\_\+drop\+\_\+count(uint8\+\_\+t dropped)}{add_drop_count(uint8_t dropped)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Batch\+S\+D\+::add\+\_\+drop\+\_\+count (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{dropped}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___batch_s_d_abf19bc992530ae56cd658661926fb2f3}{}\label{class_loom___batch_s_d_abf19bc992530ae56cd658661926fb2f3}
+
+
+Updates the count of packets that have failed to send. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em dropped} & The amount of packets that have been dropped during transmit \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!clear\+\_\+batch\+\_\+log@{clear\+\_\+batch\+\_\+log}}
+\index{clear\+\_\+batch\+\_\+log@{clear\+\_\+batch\+\_\+log}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{clear\+\_\+batch\+\_\+log()}{clear_batch_log()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Batch\+S\+D\+::clear\+\_\+batch\+\_\+log (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___batch_s_d_ae2e8856853e8a0ac0a3f92b03900eb40}{}\label{class_loom___batch_s_d_ae2e8856853e8a0ac0a3f92b03900eb40}
+
+
+Clears all the files that are being stored in the batch on the SD card. 
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!dump\+\_\+batch@{dump\+\_\+batch}}
+\index{dump\+\_\+batch@{dump\+\_\+batch}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{dump\+\_\+batch(int index)}{dump_batch(int index)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Batch\+S\+D\+::dump\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___batch_s_d_acc8306e790e9068ad418add3186e0aa7}{}\label{class_loom___batch_s_d_acc8306e790e9068ad418add3186e0aa7}
+
+
+Prints the contents of a particular packet file in the batch. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em index} & The index of file in the batch to print \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!get\+\_\+batch\+\_\+json@{get\+\_\+batch\+\_\+json}}
+\index{get\+\_\+batch\+\_\+json@{get\+\_\+batch\+\_\+json}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{get\+\_\+batch\+\_\+json(int index)}{get_batch_json(int index)}}]{\setlength{\rightskip}{0pt plus 5cm}Json\+Object Loom\+\_\+\+Batch\+S\+D\+::get\+\_\+batch\+\_\+json (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___batch_s_d_af58cee5d0d99bc8e78ade04e0c89baf4}{}\label{class_loom___batch_s_d_af58cee5d0d99bc8e78ade04e0c89baf4}
+
+
+Returns a Json\+Object of the packet file (.json) in the batch from the SD card. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em index} & The index of the file in the batch to retrieve \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Json\+Object stored index 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!get\+\_\+packet\+\_\+counter@{get\+\_\+packet\+\_\+counter}}
+\index{get\+\_\+packet\+\_\+counter@{get\+\_\+packet\+\_\+counter}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{get\+\_\+packet\+\_\+counter()}{get_packet_counter()}}]{\setlength{\rightskip}{0pt plus 5cm}int Loom\+\_\+\+Batch\+S\+D\+::get\+\_\+packet\+\_\+counter (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___batch_s_d_a97ce51f073f6b4c8394f830edcfd3198}{}\label{class_loom___batch_s_d_a97ce51f073f6b4c8394f830edcfd3198}
+
+
+Get the current amount of packets that are being stored in the batch. 
+
+\begin{DoxyReturn}{Returns}
+The current number of packets 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!log@{log}}
+\index{log@{log}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{log(\+Json\+Object json) override}{log(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Batch\+S\+D\+::log (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___batch_s_d_a3d80d1e31762c8b6328a05485cc8af88}{}\label{class_loom___batch_s_d_a3d80d1e31762c8b6328a05485cc8af88}
+
+
+Log a Json object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json Object to log \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_log_plat_accace14ed45817c98ef5ccc15fd79004}{Loom\+Log\+Plat}.
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json)}{package(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Batch\+S\+D\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_loom___batch_s_d_a738bf5b08c3eba7ec2711b656e6f90bd}{}\label{class_loom___batch_s_d_a738bf5b08c3eba7ec2711b656e6f90bd}
+
+
+No package necessary for logging platforms. 
+
+implement with empty body. 
+
+Reimplemented from \hyperlink{class_loom_log_plat_abddec0fce6ef786577ae008702c9393e}{Loom\+Log\+Plat}.
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!power\+\_\+down@{power\+\_\+down}}
+\index{power\+\_\+down@{power\+\_\+down}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{power\+\_\+down() override}{power_down() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Batch\+S\+D\+::power\+\_\+down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___batch_s_d_adc78401b4bea4b41c76717e57417c1d5}{}\label{class_loom___batch_s_d_adc78401b4bea4b41c76717e57417c1d5}
+
+
+Turn off any hardware. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a31ea02275e356c6ce0d01fdb6d4190df}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!power\+\_\+up@{power\+\_\+up}}
+\index{power\+\_\+up@{power\+\_\+up}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{power\+\_\+up() override}{power_up() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Batch\+S\+D\+::power\+\_\+up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___batch_s_d_aa847506aab0cba43e0d98e0bb663a915}{}\label{class_loom___batch_s_d_aa847506aab0cba43e0d98e0bb663a915}
+
+
+Turn on any hardware. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa0683cb24ce1cc49273440e79f035e23}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Batch\+S\+D\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___batch_s_d_ad1566bbb55d145e3206784df245be710}{}\label{class_loom___batch_s_d_ad1566bbb55d145e3206784df245be710}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_log_plat_afd1780573d350f46ce26d237a4ade43b}{Loom\+Log\+Plat}.
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!store\+\_\+batch@{store\+\_\+batch}}
+\index{store\+\_\+batch@{store\+\_\+batch}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{store\+\_\+batch()}{store_batch()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Batch\+S\+D\+::store\+\_\+batch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___batch_s_d_af87c1920bf19e06b7585e8bc1bf72059}{}\label{class_loom___batch_s_d_af87c1920bf19e06b7585e8bc1bf72059}
+
+
+Accesses the internal json from Loom Manager to store to batch using store\+\_\+batch\+\_\+json. 
+
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!store\+\_\+batch\+\_\+json@{store\+\_\+batch\+\_\+json}}
+\index{store\+\_\+batch\+\_\+json@{store\+\_\+batch\+\_\+json}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{store\+\_\+batch\+\_\+json(\+Json\+Object json)}{store_batch_json(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Batch\+S\+D\+::store\+\_\+batch\+\_\+json (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___batch_s_d_ade1673f26d7b667571f76a4c7922571b}{}\label{class_loom___batch_s_d_ade1673f26d7b667571f76a4c7922571b}
+
+
+Uses Json\+Object to write file as packet in the batch onto the SD Card. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & The data to be saved as .json file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if success 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!batch\+\_\+counter@{batch\+\_\+counter}}
+\index{batch\+\_\+counter@{batch\+\_\+counter}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{batch\+\_\+counter}{batch_counter}}]{\setlength{\rightskip}{0pt plus 5cm}int Loom\+\_\+\+Batch\+S\+D\+::batch\+\_\+counter\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___batch_s_d_aac325ca5667cd8d81409072f890be678}{}\label{class_loom___batch_s_d_aac325ca5667cd8d81409072f890be678}
+
+
+Current batch count value. 
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!chip\+\_\+select@{chip\+\_\+select}}
+\index{chip\+\_\+select@{chip\+\_\+select}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{chip\+\_\+select}{chip_select}}]{\setlength{\rightskip}{0pt plus 5cm}const byte Loom\+\_\+\+Batch\+S\+D\+::chip\+\_\+select\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___batch_s_d_abe9e47bc3e511e89056b2da32f580eed}{}\label{class_loom___batch_s_d_abe9e47bc3e511e89056b2da32f580eed}
+
+
+Chip select pin. 
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!doc@{doc}}
+\index{doc@{doc}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{doc}{doc}}]{\setlength{\rightskip}{0pt plus 5cm}Dynamic\+Json\+Document Loom\+\_\+\+Batch\+S\+D\+::doc\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___batch_s_d_a06ca96fe43ddf77a2f20ca2877be7e85}{}\label{class_loom___batch_s_d_a06ca96fe43ddf77a2f20ca2877be7e85}
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!drop\+\_\+count@{drop\+\_\+count}}
+\index{drop\+\_\+count@{drop\+\_\+count}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{drop\+\_\+count}{drop_count}}]{\setlength{\rightskip}{0pt plus 5cm}int Loom\+\_\+\+Batch\+S\+D\+::drop\+\_\+count\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___batch_s_d_a24ec8915a5e1789b64e1593e6215982a}{}\label{class_loom___batch_s_d_a24ec8915a5e1789b64e1593e6215982a}
+
+
+Current count of packets that failed to be sent. 
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!packet\+\_\+counter@{packet\+\_\+counter}}
+\index{packet\+\_\+counter@{packet\+\_\+counter}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{packet\+\_\+counter}{packet_counter}}]{\setlength{\rightskip}{0pt plus 5cm}int Loom\+\_\+\+Batch\+S\+D\+::packet\+\_\+counter\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___batch_s_d_af26d1091a8d6368edbf1456d016c0b78}{}\label{class_loom___batch_s_d_af26d1091a8d6368edbf1456d016c0b78}
+
+
+Current packet count value in a batch. 
+
+\index{Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}!sd@{sd}}
+\index{sd@{sd}!Loom\+\_\+\+Batch\+SD@{Loom\+\_\+\+Batch\+SD}}
+\subsubsection[{\texorpdfstring{sd}{sd}}]{\setlength{\rightskip}{0pt plus 5cm}Sd\+Fat Loom\+\_\+\+Batch\+S\+D\+::sd\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___batch_s_d_a26a8fecb120202e86c5c884d055ad8ae}{}\label{class_loom___batch_s_d_a26a8fecb120202e86c5c884d055ad8ae}
+
+
+File System Object. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Log\+Plats/\hyperlink{_batch_s_d_8h}{Batch\+S\+D.\+h}\item 
+src/\+Log\+Plats/\hyperlink{_batch_s_d_8cpp}{Batch\+S\+D.\+cpp}\end{DoxyCompactItemize}

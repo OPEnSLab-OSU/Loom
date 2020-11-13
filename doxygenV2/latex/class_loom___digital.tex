@@ -1,0 +1,344 @@
+\hypertarget{class_loom___digital}{}\section{Loom\+\_\+\+Digital Class Reference}
+\label{class_loom___digital}\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+
+
+Digital pin manager module.  
+
+
+
+
+{\ttfamily \#include $<$Digital.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Digital\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{class_loom___digital__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___digital_adc24701149576d87752190f0ebb6cb59}{Loom\+\_\+\+Digital} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const bool enable5=true, const bool enable6=true, const bool enable9=false, const bool enable10=false, const bool enable11=false, const bool enable12=false, const bool enable\+A0=false, const bool enable\+A1=false, const bool enable\+A2=false, const bool enable\+A3=false, const bool enable\+A4=false, const bool enable\+A5=false)
+\begin{DoxyCompactList}\small\item\em Digital manager module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___digital_a6fd9bb5377ab457d4f41033815ae6d45}{Loom\+\_\+\+Digital} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___digital_a126ee351dfddb85be6b7f1984afb1577}{$\sim$\+Loom\+\_\+\+Digital} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___digital_a467c3fafc699224f44e144a5749349a1}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___digital_a8cbad6dd375dca45843b459dec8da717}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___digital_aac57da701cadb9466ff060dc3a26a95f}{add\+\_\+config} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Add configuration information to Json\+Object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___digital_a8667d980ae3546a96584bbdd9a244a7c}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___digital_ab721d0f9b457527f1e6fc76e60a92903}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___digital_a96a8539a0c35d2f9d7c629238f140d58}{get\+\_\+digital\+\_\+val} (const uint8\+\_\+t pin) const 
+\begin{DoxyCompactList}\small\item\em Get value on digital pin. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___digital_acb19202710905340beef9790d9db1a99}{get\+\_\+pin\+\_\+enabled} (const uint8\+\_\+t pin) const 
+\begin{DoxyCompactList}\small\item\em Get if pin is enabled in manager. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___digital_a55f8c126c2bba909d412aebfefc024de}{pin\+\_\+enabled} \mbox{[}\hyperlink{_digital_8h_ae667578f4adee1cbda0e5e5930bac7f3}{D\+I\+G\+I\+T\+A\+L\+\_\+\+C\+O\+U\+NT}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Array of which pins are enabled. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___digital_a34b30d1136b394a78e0ba09868cfbf35}{digital\+\_\+vals} \mbox{[}\hyperlink{_digital_8h_ae667578f4adee1cbda0e5e5930bac7f3}{D\+I\+G\+I\+T\+A\+L\+\_\+\+C\+O\+U\+NT}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Array of last read digital values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{S\+E\+T\+T\+E\+RS}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___digital_a5d34db812f5eb0e8ea824db4f03f9ee5}{set\+\_\+digital\+\_\+val} (const uint8\+\_\+t pin, const bool state)
+\begin{DoxyCompactList}\small\item\em Set digital value of pin. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___digital_a27f176ab66e8a1c4403ffe583c592812}{set\+\_\+pin\+\_\+enabled} (const uint8\+\_\+t pin, const bool e)
+\begin{DoxyCompactList}\small\item\em Set pin enable state in manager. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Digital pin manager module. 
+
+Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18), A5(19)
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___digital.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Digital(\+Loom\+Manager $\ast$manager, const bool enable5=true, const bool enable6=true, const bool enable9=false, const bool enable10=false, const bool enable11=false, const bool enable12=false, const bool enable\+A0=false, const bool enable\+A1=false, const bool enable\+A2=false, const bool enable\+A3=false, const bool enable\+A4=false, const bool enable\+A5=false)}{Loom_Digital(LoomManager *manager, const bool enable5=true, const bool enable6=true, const bool enable9=false, const bool enable10=false, const bool enable11=false, const bool enable12=false, const bool enableA0=false, const bool enableA1=false, const bool enableA2=false, const bool enableA3=false, const bool enableA4=false, const bool enableA5=false)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Digital\+::\+Loom\+\_\+\+Digital (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const bool}]{enable5 = {\ttfamily true}, }
+\item[{const bool}]{enable6 = {\ttfamily true}, }
+\item[{const bool}]{enable9 = {\ttfamily false}, }
+\item[{const bool}]{enable10 = {\ttfamily false}, }
+\item[{const bool}]{enable11 = {\ttfamily false}, }
+\item[{const bool}]{enable12 = {\ttfamily false}, }
+\item[{const bool}]{enable\+A0 = {\ttfamily false}, }
+\item[{const bool}]{enable\+A1 = {\ttfamily false}, }
+\item[{const bool}]{enable\+A2 = {\ttfamily false}, }
+\item[{const bool}]{enable\+A3 = {\ttfamily false}, }
+\item[{const bool}]{enable\+A4 = {\ttfamily false}, }
+\item[{const bool}]{enable\+A5 = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___digital_adc24701149576d87752190f0ebb6cb59}{}\label{class_loom___digital_adc24701149576d87752190f0ebb6cb59}
+
+
+Digital manager module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em enable5} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin 5 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable6} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin 6 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable9} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin 9 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable10} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin 10 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable11} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin 11 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable12} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin 12 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A0} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A0 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A1} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A1 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A2} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A2 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A3} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A3 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A4} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A4 for managing \\
+\hline
+\mbox{\tt in}  & {\em enable\+A5} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} pin A5 for managing \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Digital(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Digital(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Digital\+::\+Loom\+\_\+\+Digital (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___digital_a6fd9bb5377ab457d4f41033815ae6d45}{}\label{class_loom___digital_a6fd9bb5377ab457d4f41033815ae6d45}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!````~Loom\+\_\+\+Digital@{$\sim$\+Loom\+\_\+\+Digital}}
+\index{````~Loom\+\_\+\+Digital@{$\sim$\+Loom\+\_\+\+Digital}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Digital()=default}{~Loom_Digital()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Digital\+::$\sim$\+Loom\+\_\+\+Digital (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___digital_a126ee351dfddb85be6b7f1984afb1577}{}\label{class_loom___digital_a126ee351dfddb85be6b7f1984afb1577}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!add\+\_\+config@{add\+\_\+config}}
+\index{add\+\_\+config@{add\+\_\+config}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{add\+\_\+config(\+Json\+Object json) override}{add_config(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Digital\+::add\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___digital_aac57da701cadb9466ff060dc3a26a95f}{}\label{class_loom___digital_aac57da701cadb9466ff060dc3a26a95f}
+
+
+Add configuration information to Json\+Object. 
+
+\hyperlink{class_loom_manager}{Loom\+Manager} iterates over modules to build complete configuration 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json configuration object to add to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_a06747f16d76bde35575557c7515adcc0}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!get\+\_\+digital\+\_\+val@{get\+\_\+digital\+\_\+val}}
+\index{get\+\_\+digital\+\_\+val@{get\+\_\+digital\+\_\+val}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{get\+\_\+digital\+\_\+val(const uint8\+\_\+t pin) const }{get_digital_val(const uint8_t pin) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Digital\+::get\+\_\+digital\+\_\+val (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom___digital_a96a8539a0c35d2f9d7c629238f140d58}{}\label{class_loom___digital_a96a8539a0c35d2f9d7c629238f140d58}
+
+
+Get value on digital pin. 
+
+\begin{DoxyReturn}{Returns}
+True if H\+I\+GH, false if L\+OW 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!get\+\_\+pin\+\_\+enabled@{get\+\_\+pin\+\_\+enabled}}
+\index{get\+\_\+pin\+\_\+enabled@{get\+\_\+pin\+\_\+enabled}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{get\+\_\+pin\+\_\+enabled(const uint8\+\_\+t pin) const }{get_pin_enabled(const uint8_t pin) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Digital\+::get\+\_\+pin\+\_\+enabled (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom___digital_acb19202710905340beef9790d9db1a99}{}\label{class_loom___digital_acb19202710905340beef9790d9db1a99}
+
+
+Get if pin is enabled in manager. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{namespace_enable}{Enable} state of pin 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Digital\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___digital_a467c3fafc699224f44e144a5749349a1}{}\label{class_loom___digital_a467c3fafc699224f44e144a5749349a1}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Digital\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___digital_a8cbad6dd375dca45843b459dec8da717}{}\label{class_loom___digital_a8cbad6dd375dca45843b459dec8da717}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Digital\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___digital_a8667d980ae3546a96584bbdd9a244a7c}{}\label{class_loom___digital_a8667d980ae3546a96584bbdd9a244a7c}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_sensor_aaa3bb2a2165029906c4ee815e790c89e}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Digital\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___digital_ab721d0f9b457527f1e6fc76e60a92903}{}\label{class_loom___digital_ab721d0f9b457527f1e6fc76e60a92903}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!set\+\_\+digital\+\_\+val@{set\+\_\+digital\+\_\+val}}
+\index{set\+\_\+digital\+\_\+val@{set\+\_\+digital\+\_\+val}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{set\+\_\+digital\+\_\+val(const uint8\+\_\+t pin, const bool state)}{set_digital_val(const uint8_t pin, const bool state)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Digital\+::set\+\_\+digital\+\_\+val (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{pin, }
+\item[{const bool}]{state}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___digital_a5d34db812f5eb0e8ea824db4f03f9ee5}{}\label{class_loom___digital_a5d34db812f5eb0e8ea824db4f03f9ee5}
+
+
+Set digital value of pin. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Pin to set value of \\
+\hline
+\mbox{\tt in}  & {\em state} & State to set pin to \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!set\+\_\+pin\+\_\+enabled@{set\+\_\+pin\+\_\+enabled}}
+\index{set\+\_\+pin\+\_\+enabled@{set\+\_\+pin\+\_\+enabled}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{set\+\_\+pin\+\_\+enabled(const uint8\+\_\+t pin, const bool e)}{set_pin_enabled(const uint8_t pin, const bool e)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Digital\+::set\+\_\+pin\+\_\+enabled (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{pin, }
+\item[{const bool}]{e}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___digital_a27f176ab66e8a1c4403ffe583c592812}{}\label{class_loom___digital_a27f176ab66e8a1c4403ffe583c592812}
+
+
+Set pin enable state in manager. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Pin to set enable state of \\
+\hline
+\mbox{\tt in}  & {\em e} & \hyperlink{namespace_enable}{Enable} state to set to \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!digital\+\_\+vals@{digital\+\_\+vals}}
+\index{digital\+\_\+vals@{digital\+\_\+vals}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{digital\+\_\+vals}{digital_vals}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Digital\+::digital\+\_\+vals\mbox{[}{\bf D\+I\+G\+I\+T\+A\+L\+\_\+\+C\+O\+U\+NT}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___digital_a34b30d1136b394a78e0ba09868cfbf35}{}\label{class_loom___digital_a34b30d1136b394a78e0ba09868cfbf35}
+
+
+Array of last read digital values. 
+
+\index{Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}!pin\+\_\+enabled@{pin\+\_\+enabled}}
+\index{pin\+\_\+enabled@{pin\+\_\+enabled}!Loom\+\_\+\+Digital@{Loom\+\_\+\+Digital}}
+\subsubsection[{\texorpdfstring{pin\+\_\+enabled}{pin_enabled}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Digital\+::pin\+\_\+enabled\mbox{[}{\bf D\+I\+G\+I\+T\+A\+L\+\_\+\+C\+O\+U\+NT}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___digital_a55f8c126c2bba909d412aebfefc024de}{}\label{class_loom___digital_a55f8c126c2bba909d412aebfefc024de}
+
+
+Array of which pins are enabled. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\hyperlink{_digital_8h}{Digital.\+h}\item 
+src/\+Sensors/\hyperlink{_digital_8cpp}{Digital.\+cpp}\end{DoxyCompactItemize}

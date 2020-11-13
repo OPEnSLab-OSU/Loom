@@ -1,0 +1,655 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___batch_s_d" kind="class" language="C++" prot="public">
+    <compoundname>Loom_BatchSD</compoundname>
+    <basecompoundref refid="class_loom_log_plat" prot="public" virt="non-virtual">LoomLogPlat</basecompoundref>
+    <includes refid="_batch_s_d_8h" local="no">BatchSD.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___batch_s_d_1a54f3ee7cdf05189de3f43c34c0b30465" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_BatchSD::Loom_BatchSD</definition>
+        <argsstring>(LoomManager *manager, const bool enable_rate_filter=true, const uint16_t min_filter_delay=1000, const byte chip_select=10)</argsstring>
+        <name>Loom_BatchSD</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enable_rate_filter</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>min_filter_delay</declname>
+          <defval>1000</defval>
+        </param>
+        <param>
+          <type>const byte</type>
+          <declname>chip_select</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>SD Module Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">enable_rate_filter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | Whether or not to impose maximum update rate </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">min_filter_delay</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;1000&gt; | [100-5000] | Minimum update delay, if enable_rate_filter enabled </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">chip_select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;10&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin to use for chip select </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="53" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="19" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1a4341896658e6e8ab97a5ff280d9dc254" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_BatchSD::Loom_BatchSD</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_BatchSD</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args. </para>        </briefdescription>
+        <detaileddescription>
+<para>and delegates to regular constructor <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="63" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="47" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1a1b9cea47682085b0eebd8792ceb191fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_BatchSD::~Loom_BatchSD</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_BatchSD</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="66" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___batch_s_d_1a3d80d1e31762c8b6328a05485cc8af88" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_BatchSD::log</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>log</name>
+        <reimplements refid="class_loom_log_plat_1accace14ed45817c98ef5ccc15fd79004">log</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Log a Json object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json Object to log </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="72" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1ae2e8856853e8a0ac0a3f92b03900eb40" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_BatchSD::clear_batch_log</definition>
+        <argsstring>()</argsstring>
+        <name>clear_batch_log</name>
+        <briefdescription>
+<para>Clears all the files that are being stored in the batch on the SD card. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="81" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="92" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1af87c1920bf19e06b7585e8bc1bf72059" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_BatchSD::store_batch</definition>
+        <argsstring>()</argsstring>
+        <name>store_batch</name>
+        <briefdescription>
+<para>Accesses the internal json from Loom Manager to store to batch using store_batch_json. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="85" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="112" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1ade1673f26d7b667571f76a4c7922571b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_BatchSD::store_batch_json</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>store_batch_json</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Uses JsonObject to write file as packet in the batch onto the SD Card. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data to be saved as .json file </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="90" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="119" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1aa847506aab0cba43e0d98e0bb663a915" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_BatchSD::power_up</definition>
+        <argsstring>() override</argsstring>
+        <name>power_up</name>
+        <reimplements refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23">power_up</reimplements>
+        <briefdescription>
+<para>Turn on any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="93" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="195" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1adc78401b4bea4b41c76717e57417c1d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_BatchSD::power_down</definition>
+        <argsstring>() override</argsstring>
+        <name>power_down</name>
+        <reimplements refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df">power_down</reimplements>
+        <briefdescription>
+<para>Turn off any hardware. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="94" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="201" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1a738bf5b08c3eba7ec2711b656e6f90bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_BatchSD::package</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_log_plat_1abddec0fce6ef786577ae008702c9393e">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>No package necessary for logging platforms. </para>        </briefdescription>
+        <detaileddescription>
+<para>implement with empty body. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="96" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="224" bodyend="228"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___batch_s_d_1ad1566bbb55d145e3206784df245be710" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_BatchSD::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_log_plat_1afd1780573d350f46ce26d237a4ade43b">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="102" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="51" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1acc8306e790e9068ad418add3186e0aa7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_BatchSD::dump_batch</definition>
+        <argsstring>(int index)</argsstring>
+        <name>dump_batch</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Prints the contents of a particular packet file in the batch. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of file in the batch to print </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="107" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="61" bodyend="89"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom___batch_s_d_1af58cee5d0d99bc8e78ade04e0c89baf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>JsonObject</type>
+        <definition>JsonObject Loom_BatchSD::get_batch_json</definition>
+        <argsstring>(int index)</argsstring>
+        <name>get_batch_json</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Returns a JsonObject of the packet file (.json) in the batch from the SD card. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the file in the batch to retrieve </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The JsonObject stored index </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="117" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="160" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1a97ce51f073f6b4c8394f830edcfd3198" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int Loom_BatchSD::get_packet_counter</definition>
+        <argsstring>()</argsstring>
+        <name>get_packet_counter</name>
+        <briefdescription>
+<para>Get the current amount of packets that are being stored in the batch. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current number of packets </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="121" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1abf19bc992530ae56cd658661926fb2f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_BatchSD::add_drop_count</definition>
+        <argsstring>(uint8_t dropped)</argsstring>
+        <name>add_drop_count</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>dropped</declname>
+        </param>
+        <briefdescription>
+<para>Updates the count of packets that have failed to send. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dropped</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The amount of packets that have been dropped during transmit </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="125" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="125" bodyend="125"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MISCELLANEOUS</header>
+      <memberdef kind="function" id="class_loom___batch_s_d_1a7e1dc3a75a85b340c169a7b781c479db" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_BatchSD::create_file_name</definition>
+        <argsstring>(int index, char *name)</argsstring>
+        <name>create_file_name</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Creates the proper file name of the file from the batch. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the file in the batch </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The file name to be used for file in batch </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="138" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="206" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___batch_s_d_1a8393c4e667c66f50626520c65b46a5c8" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float Loom_BatchSD::get_drop_rate</definition>
+        <argsstring>() const </argsstring>
+        <name>get_drop_rate</name>
+        <briefdescription>
+<para>Get the packet drop rate from the current batch Keep in mind that this drop rate will not account for retransmissions Drops are considered to be failed trainsmission or publishes used in either the Communication or Publish platforms. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The drop rate from 0 (no drops) to 100 (100% drop) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="144" column="1" bodyfile="src/LogPlats/BatchSD.cpp" bodystart="216" bodyend="221"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___batch_s_d_1a26a8fecb120202e86c5c884d055ad8ae" prot="protected" static="no" mutable="no">
+        <type>SdFat</type>
+        <definition>SdFat Loom_BatchSD::sd</definition>
+        <argsstring></argsstring>
+        <name>sd</name>
+        <briefdescription>
+<para>File System Object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="35" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___batch_s_d_1abe9e47bc3e511e89056b2da32f580eed" prot="protected" static="no" mutable="no">
+        <type>const byte</type>
+        <definition>const byte Loom_BatchSD::chip_select</definition>
+        <argsstring></argsstring>
+        <name>chip_select</name>
+        <briefdescription>
+<para>Chip select pin. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="36" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___batch_s_d_1aac325ca5667cd8d81409072f890be678" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Loom_BatchSD::batch_counter</definition>
+        <argsstring></argsstring>
+        <name>batch_counter</name>
+        <briefdescription>
+<para>Current batch count value. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="37" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___batch_s_d_1af26d1091a8d6368edbf1456d016c0b78" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Loom_BatchSD::packet_counter</definition>
+        <argsstring></argsstring>
+        <name>packet_counter</name>
+        <briefdescription>
+<para>Current packet count value in a batch. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="38" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___batch_s_d_1a24ec8915a5e1789b64e1593e6215982a" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Loom_BatchSD::drop_count</definition>
+        <argsstring></argsstring>
+        <name>drop_count</name>
+        <briefdescription>
+<para>Current count of packets that failed to be sent. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="39" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___batch_s_d_1a06ca96fe43ddf77a2f20ca2877be7e85" prot="protected" static="no" mutable="no">
+        <type>DynamicJsonDocument</type>
+        <definition>DynamicJsonDocument Loom_BatchSD::doc</definition>
+        <argsstring></argsstring>
+        <name>doc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/LogPlats/BatchSD.h" line="40" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Batch SD logging platform module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___s_d.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/2922">Product Page: Adafruit Adalogger Featherwing</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/254">Product Page: Adafruit SD Breakout</ulink></para></listitem><listitem><para><ulink url="https://github.com/arduino-libraries/SD">Dependency: SD</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="421">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="420">
+        <label>LoomLogPlat</label>
+        <link refid="class_loom_log_plat"/>
+        <childnode refid="421" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="419">
+        <label>Loom_BatchSD</label>
+        <link refid="class_loom___batch_s_d"/>
+        <childnode refid="420" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="429">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="425">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="426" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="427" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="432" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="428" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="424">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="425" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="423">
+        <label>LoomLogPlat</label>
+        <link refid="class_loom_log_plat"/>
+        <childnode refid="424" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="433">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="428">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="424" relation="public-inheritance">
+        </childnode>
+        <childnode refid="429" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="430" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="427" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="431" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="432" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="433" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="427">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="424" relation="public-inheritance">
+        </childnode>
+        <childnode refid="428" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="422">
+        <label>Loom_BatchSD</label>
+        <link refid="class_loom___batch_s_d"/>
+        <childnode refid="423" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="426">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="424" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="432">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="424" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="430">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="431">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/LogPlats/BatchSD.h" line="33" column="1" bodyfile="src/LogPlats/BatchSD.h" bodystart="32" bodyend="145"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>add_config</name></member>
+      <member refid="class_loom___batch_s_d_1abf19bc992530ae56cd658661926fb2f3" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>add_drop_count</name></member>
+      <member refid="class_loom___batch_s_d_1aac325ca5667cd8d81409072f890be678" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>batch_counter</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>category</name></member>
+      <member refid="class_loom_log_plat_1a74520318a9427997df80f98f924a0e48" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>check_millis</name></member>
+      <member refid="class_loom___batch_s_d_1abe9e47bc3e511e89056b2da32f580eed" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>chip_select</name></member>
+      <member refid="class_loom___batch_s_d_1ae2e8856853e8a0ac0a3f92b03900eb40" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>clear_batch_log</name></member>
+      <member refid="class_loom___batch_s_d_1a7e1dc3a75a85b340c169a7b781c479db" prot="private" virt="non-virtual"><scope>Loom_BatchSD</scope><name>create_file_name</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>dispatch</name></member>
+      <member refid="class_loom___batch_s_d_1a06ca96fe43ddf77a2f20ca2877be7e85" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>doc</name></member>
+      <member refid="class_loom___batch_s_d_1a24ec8915a5e1789b64e1593e6215982a" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>drop_count</name></member>
+      <member refid="class_loom___batch_s_d_1acc8306e790e9068ad418add3186e0aa7" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>dump_batch</name></member>
+      <member refid="class_loom_log_plat_1a6d343b76b79a1e51572bcf2991966e61" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>enable_rate_filter</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_active</name></member>
+      <member refid="class_loom___batch_s_d_1af58cee5d0d99bc8e78ade04e0c89baf4" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_batch_json</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_device_manager</name></member>
+      <member refid="class_loom___batch_s_d_1a8393c4e667c66f50626520c65b46a5c8" prot="private" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_drop_rate</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom___batch_s_d_1a97ce51f073f6b4c8394f830edcfd3198" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_packet_counter</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_log_plat_1aa6ad61d7d6c126aa13dcc91debef67e3" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>last_log_millis</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___batch_s_d_1a3d80d1e31762c8b6328a05485cc8af88" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>log</name></member>
+      <member refid="class_loom_log_plat_1adabc1e04a045b91923cff425405c5039" prot="public" virt="non-virtual" ambiguityscope="LoomLogPlat::"><scope>Loom_BatchSD</scope><name>log</name></member>
+      <member refid="class_loom___batch_s_d_1a54f3ee7cdf05189de3f43c34c0b30465" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>Loom_BatchSD</name></member>
+      <member refid="class_loom___batch_s_d_1a4341896658e6e8ab97a5ff280d9dc254" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>Loom_BatchSD</name></member>
+      <member refid="class_loom_log_plat_1a95e7954d4d049c8481908ba248b1e57b" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>LoomLogPlat</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>LoomModule</name></member>
+      <member refid="class_loom_log_plat_1a3d4ffe4204560b9677b8007be7f522be" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>min_filter_delay</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>module_type</name></member>
+      <member refid="class_loom___batch_s_d_1a738bf5b08c3eba7ec2711b656e6f90bd" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___batch_s_d_1af26d1091a8d6368edbf1456d016c0b78" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>packet_counter</name></member>
+      <member refid="class_loom___batch_s_d_1adc78401b4bea4b41c76717e57417c1d5" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>power_down</name></member>
+      <member refid="class_loom___batch_s_d_1aa847506aab0cba43e0d98e0bb663a915" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>power_up</name></member>
+      <member refid="class_loom___batch_s_d_1ad1566bbb55d145e3206784df245be710" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>print_verbosity</name></member>
+      <member refid="class_loom___batch_s_d_1a26a8fecb120202e86c5c884d055ad8ae" prot="protected" virt="non-virtual"><scope>Loom_BatchSD</scope><name>sd</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___batch_s_d_1af87c1920bf19e06b7585e8bc1bf72059" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>store_batch</name></member>
+      <member refid="class_loom___batch_s_d_1ade1673f26d7b667571f76a4c7922571b" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>store_batch_json</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>Type</name></member>
+      <member refid="class_loom___batch_s_d_1a1b9cea47682085b0eebd8792ceb191fe" prot="public" virt="non-virtual"><scope>Loom_BatchSD</scope><name>~Loom_BatchSD</name></member>
+      <member refid="class_loom_log_plat_1ac05c81b2e83214d22bdc94dfbb8a835c" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>~LoomLogPlat</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_BatchSD</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

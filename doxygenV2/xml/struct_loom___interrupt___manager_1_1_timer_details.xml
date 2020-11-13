@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="struct_loom___interrupt___manager_1_1_timer_details" kind="struct" language="C++" prot="private">
+    <compoundname>Loom_Interrupt_Manager::TimerDetails</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_timer_details_1a07910352fab001df66ba7623cd350eb5" prot="public" static="no" mutable="no">
+        <type><ref refid="_interrupt___manager_8h_1a21adc8a9b6cc2505b5b1317ca9f74cf3" kindref="member">ISRFuncPtr</ref></type>
+        <definition>ISRFuncPtr Loom_Interrupt_Manager::TimerDetails::ISR</definition>
+        <argsstring></argsstring>
+        <name>ISR</name>
+        <briefdescription>
+<para>Not a real ISR, just a function called if timer has expired. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="75" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_timer_details_1acb8a9599ea17bdabf13f1978724b68e3" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint Loom_Interrupt_Manager::TimerDetails::duration</definition>
+        <argsstring></argsstring>
+        <name>duration</name>
+        <briefdescription>
+<para>The timer duration. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="76" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_timer_details_1a817a807aaad99d23cee2c62c50a618e6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::TimerDetails::repeat</definition>
+        <argsstring></argsstring>
+        <name>repeat</name>
+        <briefdescription>
+<para>Whether or not timer should repeat. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="77" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_timer_details_1aa807507581014aa764730709ad88de24" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::TimerDetails::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <briefdescription>
+<para>Whether or not this timer is enabled. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="78" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains information defining a timer&apos;s configuration. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Interrupt_Manager.h" line="74" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="74" bodyend="79"/>
+    <listofallmembers>
+      <member refid="struct_loom___interrupt___manager_1_1_timer_details_1acb8a9599ea17bdabf13f1978724b68e3" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::TimerDetails</scope><name>duration</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_timer_details_1aa807507581014aa764730709ad88de24" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::TimerDetails</scope><name>enabled</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_timer_details_1a07910352fab001df66ba7623cd350eb5" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::TimerDetails</scope><name>ISR</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_timer_details_1a817a807aaad99d23cee2c62c50a618e6" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::TimerDetails</scope><name>repeat</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

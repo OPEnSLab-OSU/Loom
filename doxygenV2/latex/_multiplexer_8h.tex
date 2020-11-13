@@ -1,0 +1,117 @@
+\hypertarget{_multiplexer_8h}{}\section{src/\+Multiplexer.h File Reference}
+\label{_multiplexer_8h}\index{src/\+Multiplexer.\+h@{src/\+Multiplexer.\+h}}
+{\ttfamily \#include \char`\"{}Module.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$array$>$}\\*
+Include dependency graph for Multiplexer.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_multiplexer_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_multiplexer_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_loom___multiplexer}{Loom\+\_\+\+Multiplexer}
+\begin{DoxyCompactList}\small\item\em Multiplexer manager for interfacing with multiple I2C sensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879}{I2\+C\+\_\+\+Selection} \{ \\*
+\hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879ab32cfc2332e3259d454e058c09ea147b}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+T\+S\+L2561}, 
+\hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a5a7ed0fa1524f2d16d50f6e18ff3f248}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+T\+S\+L2591}, 
+\hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879ac4b9427216b17673c98791f201d9aedd}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+A\+S7262}, 
+\hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879af3371aca8c2efe835e9fb362985bea19}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+A\+S7263}, 
+\\*
+\hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a736449f10b9a5838931a79d95e3415aa}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+A\+S7265X}, 
+\hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a80173fb909f49f4b765aeaff5db040a0}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+M\+M\+A8451}, 
+\hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a27cea56370fee967223e7202895365bb}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+F\+X\+O\+S8700}, 
+\hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a53137cea8089f4f87ddcbf71a877b4af}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+S\+T\+E\+M\+MA}
+ \}\begin{DoxyCompactList}\small\item\em I2C Address Conflict Selection. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879}{I2\+C\+\_\+\+Selection} \hyperlink{_multiplexer_8h_a950a92d7eb3b5a5ff5ad9d6afaef3a6e}{i2c\+\_\+0x1C} = \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a80173fb909f49f4b765aeaff5db040a0}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+M\+M\+A8451}
+\begin{DoxyCompactList}\small\item\em T\+S\+L2561 / T\+S\+L2591. \end{DoxyCompactList}\item 
+const \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879}{I2\+C\+\_\+\+Selection} \hyperlink{_multiplexer_8h_a34b483cd8926087d400e0da07a225287}{i2c\+\_\+0x1D} = \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a80173fb909f49f4b765aeaff5db040a0}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+M\+M\+A8451}
+\begin{DoxyCompactList}\small\item\em T\+S\+L2561 / T\+S\+L2591. \end{DoxyCompactList}\item 
+const \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879}{I2\+C\+\_\+\+Selection} \hyperlink{_multiplexer_8h_a2dde69bc13a8d6f8679e4735d03606d9}{i2c\+\_\+0x29} = \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a5a7ed0fa1524f2d16d50f6e18ff3f248}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+T\+S\+L2591}
+\begin{DoxyCompactList}\small\item\em T\+S\+L2561 / T\+S\+L2591. \end{DoxyCompactList}\item 
+const \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879}{I2\+C\+\_\+\+Selection} \hyperlink{_multiplexer_8h_a665017c4844723cda6c66d1bac5f9c2f}{i2c\+\_\+0x49} = \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a736449f10b9a5838931a79d95e3415aa}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+A\+S7265X}
+\begin{DoxyCompactList}\small\item\em T\+S\+L2561 / A\+S7262 / A\+S7263 / A\+S7265X. \end{DoxyCompactList}\item 
+const \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879}{I2\+C\+\_\+\+Selection} \hyperlink{_multiplexer_8h_a1c62b74c3182a916f6858860f4c622f9}{i2c\+\_\+0x36} = \hyperlink{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a53137cea8089f4f87ddcbf71a877b4af}{I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+S\+T\+E\+M\+MA}
+\end{DoxyCompactItemize}
+
+
+\subsection{Enumeration Type Documentation}
+\index{Multiplexer.\+h@{Multiplexer.\+h}!I2\+C\+\_\+\+Selection@{I2\+C\+\_\+\+Selection}}
+\index{I2\+C\+\_\+\+Selection@{I2\+C\+\_\+\+Selection}!Multiplexer.\+h@{Multiplexer.\+h}}
+\subsubsection[{\texorpdfstring{I2\+C\+\_\+\+Selection}{I2C_Selection}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf I2\+C\+\_\+\+Selection}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879}{}\label{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879}
+
+
+I2C Address Conflict Selection. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{L\+\_\+\+T\+S\+L2561@{L\+\_\+\+T\+S\+L2561}!Multiplexer.\+h@{Multiplexer.\+h}}\index{Multiplexer.\+h@{Multiplexer.\+h}!L\+\_\+\+T\+S\+L2561@{L\+\_\+\+T\+S\+L2561}}\item[{\em 
+L\+\_\+\+T\+S\+L2561\hypertarget{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879ab32cfc2332e3259d454e058c09ea147b}{}\label{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879ab32cfc2332e3259d454e058c09ea147b}
+}]T\+S\+L2561. \index{L\+\_\+\+T\+S\+L2591@{L\+\_\+\+T\+S\+L2591}!Multiplexer.\+h@{Multiplexer.\+h}}\index{Multiplexer.\+h@{Multiplexer.\+h}!L\+\_\+\+T\+S\+L2591@{L\+\_\+\+T\+S\+L2591}}\item[{\em 
+L\+\_\+\+T\+S\+L2591\hypertarget{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a5a7ed0fa1524f2d16d50f6e18ff3f248}{}\label{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a5a7ed0fa1524f2d16d50f6e18ff3f248}
+}]T\+S\+L2591. \index{L\+\_\+\+A\+S7262@{L\+\_\+\+A\+S7262}!Multiplexer.\+h@{Multiplexer.\+h}}\index{Multiplexer.\+h@{Multiplexer.\+h}!L\+\_\+\+A\+S7262@{L\+\_\+\+A\+S7262}}\item[{\em 
+L\+\_\+\+A\+S7262\hypertarget{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879ac4b9427216b17673c98791f201d9aedd}{}\label{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879ac4b9427216b17673c98791f201d9aedd}
+}]A\+S7262. \index{L\+\_\+\+A\+S7263@{L\+\_\+\+A\+S7263}!Multiplexer.\+h@{Multiplexer.\+h}}\index{Multiplexer.\+h@{Multiplexer.\+h}!L\+\_\+\+A\+S7263@{L\+\_\+\+A\+S7263}}\item[{\em 
+L\+\_\+\+A\+S7263\hypertarget{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879af3371aca8c2efe835e9fb362985bea19}{}\label{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879af3371aca8c2efe835e9fb362985bea19}
+}]A\+S7263. \index{L\+\_\+\+A\+S7265X@{L\+\_\+\+A\+S7265X}!Multiplexer.\+h@{Multiplexer.\+h}}\index{Multiplexer.\+h@{Multiplexer.\+h}!L\+\_\+\+A\+S7265X@{L\+\_\+\+A\+S7265X}}\item[{\em 
+L\+\_\+\+A\+S7265X\hypertarget{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a736449f10b9a5838931a79d95e3415aa}{}\label{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a736449f10b9a5838931a79d95e3415aa}
+}]A\+S7265X. \index{L\+\_\+\+M\+M\+A8451@{L\+\_\+\+M\+M\+A8451}!Multiplexer.\+h@{Multiplexer.\+h}}\index{Multiplexer.\+h@{Multiplexer.\+h}!L\+\_\+\+M\+M\+A8451@{L\+\_\+\+M\+M\+A8451}}\item[{\em 
+L\+\_\+\+M\+M\+A8451\hypertarget{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a80173fb909f49f4b765aeaff5db040a0}{}\label{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a80173fb909f49f4b765aeaff5db040a0}
+}]M\+M\+A8451. \index{L\+\_\+\+F\+X\+O\+S8700@{L\+\_\+\+F\+X\+O\+S8700}!Multiplexer.\+h@{Multiplexer.\+h}}\index{Multiplexer.\+h@{Multiplexer.\+h}!L\+\_\+\+F\+X\+O\+S8700@{L\+\_\+\+F\+X\+O\+S8700}}\item[{\em 
+L\+\_\+\+F\+X\+O\+S8700\hypertarget{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a27cea56370fee967223e7202895365bb}{}\label{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a27cea56370fee967223e7202895365bb}
+}]F\+X\+O\+S8700. \index{L\+\_\+\+S\+T\+E\+M\+MA@{L\+\_\+\+S\+T\+E\+M\+MA}!Multiplexer.\+h@{Multiplexer.\+h}}\index{Multiplexer.\+h@{Multiplexer.\+h}!L\+\_\+\+S\+T\+E\+M\+MA@{L\+\_\+\+S\+T\+E\+M\+MA}}\item[{\em 
+L\+\_\+\+S\+T\+E\+M\+MA\hypertarget{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a53137cea8089f4f87ddcbf71a877b4af}{}\label{_multiplexer_8h_a6e67d5400d8dcc8e8641765a5a84c879a53137cea8089f4f87ddcbf71a877b4af}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Variable Documentation}
+\index{Multiplexer.\+h@{Multiplexer.\+h}!i2c\+\_\+0x1C@{i2c\+\_\+0x1C}}
+\index{i2c\+\_\+0x1C@{i2c\+\_\+0x1C}!Multiplexer.\+h@{Multiplexer.\+h}}
+\subsubsection[{\texorpdfstring{i2c\+\_\+0x1C}{i2c_0x1C}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf I2\+C\+\_\+\+Selection} i2c\+\_\+0x1C = {\bf I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+M\+M\+A8451}}\hypertarget{_multiplexer_8h_a950a92d7eb3b5a5ff5ad9d6afaef3a6e}{}\label{_multiplexer_8h_a950a92d7eb3b5a5ff5ad9d6afaef3a6e}
+
+
+T\+S\+L2561 / T\+S\+L2591. 
+
+\index{Multiplexer.\+h@{Multiplexer.\+h}!i2c\+\_\+0x1D@{i2c\+\_\+0x1D}}
+\index{i2c\+\_\+0x1D@{i2c\+\_\+0x1D}!Multiplexer.\+h@{Multiplexer.\+h}}
+\subsubsection[{\texorpdfstring{i2c\+\_\+0x1D}{i2c_0x1D}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf I2\+C\+\_\+\+Selection} i2c\+\_\+0x1D = {\bf I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+M\+M\+A8451}}\hypertarget{_multiplexer_8h_a34b483cd8926087d400e0da07a225287}{}\label{_multiplexer_8h_a34b483cd8926087d400e0da07a225287}
+
+
+T\+S\+L2561 / T\+S\+L2591. 
+
+\index{Multiplexer.\+h@{Multiplexer.\+h}!i2c\+\_\+0x29@{i2c\+\_\+0x29}}
+\index{i2c\+\_\+0x29@{i2c\+\_\+0x29}!Multiplexer.\+h@{Multiplexer.\+h}}
+\subsubsection[{\texorpdfstring{i2c\+\_\+0x29}{i2c_0x29}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf I2\+C\+\_\+\+Selection} i2c\+\_\+0x29 = {\bf I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+T\+S\+L2591}}\hypertarget{_multiplexer_8h_a2dde69bc13a8d6f8679e4735d03606d9}{}\label{_multiplexer_8h_a2dde69bc13a8d6f8679e4735d03606d9}
+
+
+T\+S\+L2561 / T\+S\+L2591. 
+
+\index{Multiplexer.\+h@{Multiplexer.\+h}!i2c\+\_\+0x36@{i2c\+\_\+0x36}}
+\index{i2c\+\_\+0x36@{i2c\+\_\+0x36}!Multiplexer.\+h@{Multiplexer.\+h}}
+\subsubsection[{\texorpdfstring{i2c\+\_\+0x36}{i2c_0x36}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf I2\+C\+\_\+\+Selection} i2c\+\_\+0x36 = {\bf I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+S\+T\+E\+M\+MA}}\hypertarget{_multiplexer_8h_a1c62b74c3182a916f6858860f4c622f9}{}\label{_multiplexer_8h_a1c62b74c3182a916f6858860f4c622f9}
+\index{Multiplexer.\+h@{Multiplexer.\+h}!i2c\+\_\+0x49@{i2c\+\_\+0x49}}
+\index{i2c\+\_\+0x49@{i2c\+\_\+0x49}!Multiplexer.\+h@{Multiplexer.\+h}}
+\subsubsection[{\texorpdfstring{i2c\+\_\+0x49}{i2c_0x49}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf I2\+C\+\_\+\+Selection} i2c\+\_\+0x49 = {\bf I2\+C\+\_\+\+Selection\+::\+L\+\_\+\+A\+S7265X}}\hypertarget{_multiplexer_8h_a665017c4844723cda6c66d1bac5f9c2f}{}\label{_multiplexer_8h_a665017c4844723cda6c66d1bac5f9c2f}
+
+
+T\+S\+L2561 / A\+S7262 / A\+S7263 / A\+S7265X. 
+

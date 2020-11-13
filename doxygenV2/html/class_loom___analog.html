@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_Analog class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_Analog <span class="m-thin">class</span>
+        </h1>
+        <p>Analog pin manager module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+                <li><a href="#miscellaneous">MISCELLANEOUS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___analog.html">Module Documentation</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_sensor.html" class="m-doc">LoomSensor</a>
+            </dt>
+            <dd>Abstract root of Loom sensor modules hierarchy.</dd>
+          </dl>
+        </section>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> { </span><span class="m-doc-wrap"><a href="#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">NONE</a>,
+              <a href="#a83079adfd115a272351323429cefad46ad19d26898eee98e71fc8b0ad69bb898b" class="m-doc">VOLTAGE</a>,
+              <a href="#a83079adfd115a272351323429cefad46ada003223c47c56d9514ec438a602ae43" class="m-doc">THERMISTOR</a>,
+              <a href="#a83079adfd115a272351323429cefad46aa25496ebf095e4198da4088449c83ac6" class="m-doc">PH</a>,
+              <a href="#a83079adfd115a272351323429cefad46a3a6ff147d93a7b2d56cf875994d33775" class="m-doc">TURBIDITY</a>,
+              <a href="#a83079adfd115a272351323429cefad46a3fd6b696867d70225deda7868308679b" class="m-doc">EC</a>,
+              <a href="#a83079adfd115a272351323429cefad46a7a323371ef1444029ad6c74cd68809dd" class="m-doc">TDS</a>,
+              <a href="#a83079adfd115a272351323429cefad46a8ed43df473ba4db0ebe07e408199d5be" class="m-doc">SALINITY</a> }</span>
+            </dt>
+            <dd>Different types of conversions from analog to specified unit.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a8593018496b601b75eec9a1df44574fb">
+              uint8_t <a href="#a8593018496b601b75eec9a1df44574fb" class="m-doc-self">read_resolution</a>
+            </dt>
+            <dd>Which resolution to read at (generally use 12 or 10)</dd>
+            <dt id="a1111168ede4b93a1507e0cd67d849fd7">
+              bool <a href="#a1111168ede4b93a1507e0cd67d849fd7" class="m-doc-self">pin_enabled</a>
+            </dt>
+            <dd>Whether pins A0-A5 are enabled for analog reading.</dd>
+            <dt id="a9badecf02377889b100678c8c50ba387">
+              uint16_t <a href="#a9badecf02377889b100678c8c50ba387" class="m-doc-self">analog_vals</a>
+            </dt>
+            <dd>Last known analog readings for pin A0-A5.</dd>
+            <dt id="a1a1f859c11385e20ff2328f7df868436">
+              float <a href="#a1a1f859c11385e20ff2328f7df868436" class="m-doc-self">battery</a>
+            </dt>
+            <dd>Battery voltage.</dd>
+            <dt id="ab1be771ab1dfad8ddb955c42ba3a3de6">
+              bool <a href="#ab1be771ab1dfad8ddb955c42ba3a3de6" class="m-doc-self">enable_conversions</a>
+            </dt>
+            <dd><a href="namespace_enable.html" class="m-doc">Enable</a> or disable all conversions.</dd>
+            <dt id="a3bf07770f1244670cbfaa8d6e563f2ef">
+              <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> <a href="#a3bf07770f1244670cbfaa8d6e563f2ef" class="m-doc-self">conversions</a>
+            </dt>
+            <dd>Conversion (if any) to apply to analog value when printing / packaging.</dd>
+            <dt id="ad01ead292b5fecf5178cd1baf9354ac3">
+              float <a href="#ad01ead292b5fecf5178cd1baf9354ac3" class="m-doc-self">temperature</a>
+            </dt>
+            <dd>Temperature to use in conversions.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a3ce93ee8e03835045eb176828cc27add" class="m-doc">Loom_Analog</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const uint8_t num_samples = 8,
+              const uint8_t read_resolution = 12,
+              const bool enableA0 = true,
+              const bool enableA1 = true,
+              const bool enableA2 = true,
+              const bool enableA3 = true,
+              const bool enableA4 = true,
+              const bool enableA5 = true,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA0 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA1 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA2 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA3 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA4 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA5 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const float temperature = 25.0)</span>
+            </dt>
+            <dd>Analog manager module constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a617a6b9c093fb8bb54abd3e55d051c0a" class="m-doc">Loom_Analog</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="aa8d2a87c4c6ae72c1a943b95c96f2b53">
+              <span class="m-doc-wrap-bumper"><a href="#aa8d2a87c4c6ae72c1a943b95c96f2b53" class="m-doc-self">~Loom_Analog</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt id="afa90bbf4d632fe9b3168567cfc605f77">
+              <span class="m-doc-wrap-bumper">void <a href="#afa90bbf4d632fe9b3168567cfc605f77" class="m-doc-self">measure</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Take any relevant measurements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab22f3a9b0d5c78feb1e53cf565483385" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Package a modules measurements or state.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad74305d4a8d7f705072561b92e7b7c68" class="m-doc">add_config</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Add configuration information to JsonObject.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="ae41c9795ceb9079b88a87cb64d7869cf">
+              <span class="m-doc-wrap-bumper">void <a href="#ae41c9795ceb9079b88a87cb64d7869cf" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a981f42f7a1358ea77ec087df13859406" class="m-doc">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Print the last set of measurements taken.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab5f411c342780111457c64234b4d643a" class="m-doc">get_analog_resolution</a>(</span><span class="m-doc-wrap">) const -&gt; uint8_t</span>
+            </dt>
+            <dd>Get the current analog read resolution.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8e908b2ba222b3d4f62c7f7e329cbe8e" class="m-doc">get_analog_val</a>(</span><span class="m-doc-wrap">const uint8_t pin) const -&gt; int</span>
+            </dt>
+            <dd>Get the analog value of specified pin.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa92ebd0ecbf15bc6a4a48b60d7d86b7b" class="m-doc">get_battery</a>(</span><span class="m-doc-wrap">) const -&gt; float</span>
+            </dt>
+            <dd>Get the battery voltage of the device.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adfbd651535167726deffc2c033f0b725" class="m-doc">get_pin_enabled</a>(</span><span class="m-doc-wrap">const uint8_t pin) const -&gt; bool</span>
+            </dt>
+            <dd>Get if a pin is enabled in manager.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac8ac33bb528a34b34c389bb2debfe1e7" class="m-doc">get_conversion</a>(</span><span class="m-doc-wrap">const uint8_t pin) const -&gt; <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a></span>
+            </dt>
+            <dd>Get the current conversion associated with a pin.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5a513390535fd71e06df243a964bab84" class="m-doc">set_analog_resolution</a>(</span><span class="m-doc-wrap">const uint8_t res)</span>
+            </dt>
+            <dd>Set the analog read resolution.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0b6e9a100feed45e710aa05fac607147" class="m-doc">set_pin_enabled</a>(</span><span class="m-doc-wrap">const uint8_t pin,
+              const bool e)</span>
+            </dt>
+            <dd>Set the enable state of a pin.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad0cd72042cd7a978c7c1fc6761c38cf8" class="m-doc">set_conversion</a>(</span><span class="m-doc-wrap">const uint8_t pin,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> c)</span>
+            </dt>
+            <dd>Set the current conversion associated with a pin.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a80761be7bed4d3ae55eb4b9faa26a58c" class="m-doc">set_enable_conversions</a>(</span><span class="m-doc-wrap">const bool e)</span>
+            </dt>
+            <dd><a href="namespace_enable.html" class="m-doc">Enable</a> or disable all conversions.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#af7a82f3654bf08974ff95dd8ec90dba7" class="m-doc">set_temperature</a>(</span><span class="m-doc-wrap">const float temp)</span>
+            </dt>
+            <dd>Set temperature to use in conversions that require temperature compensation.</dd>
+          </dl>
+        </section>
+        <section id="miscellaneous">
+          <h2><a href="#miscellaneous">MISCELLANEOUS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a9bd686a057aaa43611665bd344fd7cac" class="m-doc">conversion_name</a>(</span><span class="m-doc-wrap">const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> conversion) -&gt; const char*</span>
+            </dt>
+            <dd>Get string of name associated with conversion enum.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="a83079adfd115a272351323429cefad46"><div>
+            <h3>
+              enum Loom_<wbr />Analog::<wbr /><a href="#a83079adfd115a272351323429cefad46" class="m-doc-self">Conversion</a>
+            </h3>
+            <p>Different types of conversions from analog to specified unit.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc-self" id="a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693">NONE</a></td>
+                  <td>
+                  <p>No conversion applied.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a83079adfd115a272351323429cefad46ad19d26898eee98e71fc8b0ad69bb898b" class="m-doc-self" id="a83079adfd115a272351323429cefad46ad19d26898eee98e71fc8b0ad69bb898b">VOLTAGE</a></td>
+                  <td>
+                  <p>Analog to voltage.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a83079adfd115a272351323429cefad46ada003223c47c56d9514ec438a602ae43" class="m-doc-self" id="a83079adfd115a272351323429cefad46ada003223c47c56d9514ec438a602ae43">THERMISTOR</a></td>
+                  <td>
+                  <p>Thermistor.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a83079adfd115a272351323429cefad46aa25496ebf095e4198da4088449c83ac6" class="m-doc-self" id="a83079adfd115a272351323429cefad46aa25496ebf095e4198da4088449c83ac6">PH</a></td>
+                  <td>
+                  <p>pH value</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a83079adfd115a272351323429cefad46a3a6ff147d93a7b2d56cf875994d33775" class="m-doc-self" id="a83079adfd115a272351323429cefad46a3a6ff147d93a7b2d56cf875994d33775">TURBIDITY</a></td>
+                  <td>
+                  <p>Turbidity.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a83079adfd115a272351323429cefad46a3fd6b696867d70225deda7868308679b" class="m-doc-self" id="a83079adfd115a272351323429cefad46a3fd6b696867d70225deda7868308679b">EC</a></td>
+                  <td>
+                  <p>Electrical Conductivity.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a83079adfd115a272351323429cefad46a7a323371ef1444029ad6c74cd68809dd" class="m-doc-self" id="a83079adfd115a272351323429cefad46a7a323371ef1444029ad6c74cd68809dd">TDS</a></td>
+                  <td>
+                  <p>Total Dissolved Solids.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a83079adfd115a272351323429cefad46a8ed43df473ba4db0ebe07e408199d5be" class="m-doc-self" id="a83079adfd115a272351323429cefad46a8ed43df473ba4db0ebe07e408199d5be">SALINITY</a></td>
+                  <td>
+                  <p>Salinity.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a3ce93ee8e03835045eb176828cc27add"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3ce93ee8e03835045eb176828cc27add" class="m-doc-self">Loom_Analog</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const uint8_t num_samples = 8,
+              const uint8_t read_resolution = 12,
+              const bool enableA0 = true,
+              const bool enableA1 = true,
+              const bool enableA2 = true,
+              const bool enableA3 = true,
+              const bool enableA4 = true,
+              const bool enableA5 = true,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA0 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA1 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA2 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA3 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA4 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> convertA5 = <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46ab50339a10e1de285ac99d4c3990b8693" class="m-doc">Conversion::<wbr />NONE</a>,
+              const float temperature = 25.0)</span></span>
+            </h3>
+            <p>Analog manager module constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>num_samples&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;8&gt; | {1, 2, 4, 8, 16} | How many samples to take and average</td>
+                </tr>
+                <tr>
+                  <td>read_resolution&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;12&gt; | [8-12] | How many bits to read analog values at</td>
+                </tr>
+                <tr>
+                  <td>enableA0&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | <a href="namespace_enable.html" class="m-doc">Enable</a> pin A0 for managing</td>
+                </tr>
+                <tr>
+                  <td>enableA1&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | <a href="namespace_enable.html" class="m-doc">Enable</a> pin A1 for managing</td>
+                </tr>
+                <tr>
+                  <td>enableA2&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | <a href="namespace_enable.html" class="m-doc">Enable</a> pin A2 for managing</td>
+                </tr>
+                <tr>
+                  <td>enableA3&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | <a href="namespace_enable.html" class="m-doc">Enable</a> pin A3 for managing</td>
+                </tr>
+                <tr>
+                  <td>enableA4&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | <a href="namespace_enable.html" class="m-doc">Enable</a> pin A4 for managing</td>
+                </tr>
+                <tr>
+                  <td>enableA5&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | <a href="namespace_enable.html" class="m-doc">Enable</a> pin A5 for managing</td>
+                </tr>
+                <tr>
+                  <td>convertA0&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A0</td>
+                </tr>
+                <tr>
+                  <td>convertA1&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A1</td>
+                </tr>
+                <tr>
+                  <td>convertA2&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A2</td>
+                </tr>
+                <tr>
+                  <td>convertA3&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A3</td>
+                </tr>
+                <tr>
+                  <td>convertA4&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A4</td>
+                </tr>
+                <tr>
+                  <td>convertA5&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Conversion) | &lt;0&gt; | {0(&quot;No conversion&quot;), 1(&quot;Analog to voltage&quot;), 2(&quot;Thermistor&quot; ), 3(&quot;pH&quot;), 4(&quot;Turbidity&quot;), 5(&quot;Electrical Conductivity&quot;), 6(&quot;Total Dissolved Solids&quot;), 7(&quot;Salinity&quot;)} | Conversion to apply to analog readings on pin A5</td>
+                </tr>
+                <tr>
+                  <td>temperature&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>float | &lt;25.0&gt; | [0.-100.] | Temperature to using in conversions</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a617a6b9c093fb8bb54abd3e55d051c0a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a617a6b9c093fb8bb54abd3e55d051c0a" class="m-doc-self">Loom_Analog</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab22f3a9b0d5c78feb1e53cf565483385"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab22f3a9b0d5c78feb1e53cf565483385" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Package a modules measurements or state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Object to put data into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad74305d4a8d7f705072561b92e7b7c68"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad74305d4a8d7f705072561b92e7b7c68" class="m-doc-self">add_config</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Add configuration information to JsonObject.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Json configuration object to add to</td>
+                </tr>
+              </tbody>
+            </table>
+<p><a href="class_loom_manager.html" class="m-doc">LoomManager</a> iterates over modules to build complete configuration</p>
+          </div></section>
+          <section class="m-doc-details" id="a981f42f7a1358ea77ec087df13859406"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a981f42f7a1358ea77ec087df13859406" class="m-doc-self">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Print the last set of measurements taken.</p>
+<p>Does not package the data.</p>
+          </div></section>
+          <section class="m-doc-details" id="ab5f411c342780111457c64234b4d643a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint8_t Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab5f411c342780111457c64234b4d643a" class="m-doc-self">get_analog_resolution</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the current analog read resolution.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Read resolution</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8e908b2ba222b3d4f62c7f7e329cbe8e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e908b2ba222b3d4f62c7f7e329cbe8e" class="m-doc-self">get_analog_val</a>(</span><span class="m-doc-wrap">const uint8_t pin) const</span></span>
+            </h3>
+            <p>Get the analog value of specified pin.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Pin to read</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The analog value</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa92ebd0ecbf15bc6a4a48b60d7d86b7b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">float Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa92ebd0ecbf15bc6a4a48b60d7d86b7b" class="m-doc-self">get_battery</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the battery voltage of the device.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The battery voltage</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="adfbd651535167726deffc2c033f0b725"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adfbd651535167726deffc2c033f0b725" class="m-doc-self">get_pin_enabled</a>(</span><span class="m-doc-wrap">const uint8_t pin) const</span></span>
+            </h3>
+            <p>Get if a pin is enabled in manager.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Pin to get enable state of</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The enabled state of pin</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac8ac33bb528a34b34c389bb2debfe1e7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac8ac33bb528a34b34c389bb2debfe1e7" class="m-doc-self">get_conversion</a>(</span><span class="m-doc-wrap">const uint8_t pin) const</span></span>
+            </h3>
+            <p>Get the current conversion associated with a pin.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The pin to get conversion for</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The current Conversion setting</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5a513390535fd71e06df243a964bab84"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5a513390535fd71e06df243a964bab84" class="m-doc-self">set_analog_resolution</a>(</span><span class="m-doc-wrap">const uint8_t res)</span></span>
+            </h3>
+            <p>Set the analog read resolution.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">res&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Resolution to read at (12 bit max)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0b6e9a100feed45e710aa05fac607147"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b6e9a100feed45e710aa05fac607147" class="m-doc-self">set_pin_enabled</a>(</span><span class="m-doc-wrap">const uint8_t pin,
+              const bool e)</span></span>
+            </h3>
+            <p>Set the enable state of a pin.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The pin to set enable state of</td>
+                </tr>
+                <tr>
+                  <td>e&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td><a href="namespace_enable.html" class="m-doc">Enable</a> state</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad0cd72042cd7a978c7c1fc6761c38cf8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0cd72042cd7a978c7c1fc6761c38cf8" class="m-doc-self">set_conversion</a>(</span><span class="m-doc-wrap">const uint8_t pin,
+              const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> c)</span></span>
+            </h3>
+            <p>Set the current conversion associated with a pin.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The pin to set conversion for</td>
+                </tr>
+                <tr>
+                  <td>c&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The Conversion to use</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a80761be7bed4d3ae55eb4b9faa26a58c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a80761be7bed4d3ae55eb4b9faa26a58c" class="m-doc-self">set_enable_conversions</a>(</span><span class="m-doc-wrap">const bool e)</span></span>
+            </h3>
+            <p><a href="namespace_enable.html" class="m-doc">Enable</a> or disable all conversions.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">e&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td><a href="namespace_enable.html" class="m-doc">Enable</a> state</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="af7a82f3654bf08974ff95dd8ec90dba7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af7a82f3654bf08974ff95dd8ec90dba7" class="m-doc-self">set_temperature</a>(</span><span class="m-doc-wrap">const float temp)</span></span>
+            </h3>
+            <p>Set temperature to use in conversions that require temperature compensation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">temp&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Temperature to use</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9bd686a057aaa43611665bd344fd7cac"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static const char* Loom_<wbr />Analog::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9bd686a057aaa43611665bd344fd7cac" class="m-doc-self">conversion_name</a>(</span><span class="m-doc-wrap">const <a href="class_loom___analog.html#a83079adfd115a272351323429cefad46" class="m-doc">Conversion</a> conversion)</span></span>
+            </h3>
+            <p>Get string of name associated with conversion enum.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>String of conversion</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

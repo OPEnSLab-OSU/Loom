@@ -1,0 +1,395 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_i2_c___sensor_8h" kind="file" language="C++">
+    <compoundname>I2C_Sensor.h</compoundname>
+    <includes refid="_sensor_8h" local="yes">../Sensor.h</includes>
+    <includes local="no">Wire.h</includes>
+    <includedby refid="_a_d_s1115_8h" local="yes">src/Sensors/I2C/ADS1115.h</includedby>
+    <includedby refid="_a_s7262_8h" local="yes">src/Sensors/I2C/AS7262.h</includedby>
+    <includedby refid="_a_s7263_8h" local="yes">src/Sensors/I2C/AS7263.h</includedby>
+    <includedby refid="_a_s7265_x_8h" local="yes">src/Sensors/I2C/AS7265X.h</includedby>
+    <includedby refid="_f_x_a_s21002_8h" local="yes">src/Sensors/I2C/FXAS21002.h</includedby>
+    <includedby refid="_f_x_o_s8700_8h" local="yes">src/Sensors/I2C/FXOS8700.h</includedby>
+    <includedby refid="_l_i_s3_d_h_8h" local="yes">src/Sensors/I2C/LIS3DH.h</includedby>
+    <includedby refid="_m_b1232_8h" local="yes">src/Sensors/I2C/MB1232.h</includedby>
+    <includedby refid="_m_m_a8451_8h" local="yes">src/Sensors/I2C/MMA8451.h</includedby>
+    <includedby refid="_m_p_u6050_8h" local="yes">src/Sensors/I2C/MPU6050.h</includedby>
+    <includedby refid="_m_s5803_8h" local="yes">src/Sensors/I2C/MS5803.h</includedby>
+    <includedby refid="_s_h_t31_d_8h" local="yes">src/Sensors/I2C/SHT31D.h</includedby>
+    <includedby refid="_t_m_p007_8h" local="yes">src/Sensors/I2C/TMP007.h</includedby>
+    <includedby refid="_t_s_l2561_8h" local="yes">src/Sensors/I2C/TSL2561.h</includedby>
+    <includedby refid="_t_s_l2591_8h" local="yes">src/Sensors/I2C/TSL2591.h</includedby>
+    <includedby refid="_z_x_gesture_8h" local="yes">src/Sensors/I2C/ZXGesture.h</includedby>
+    <includedby refid="_s_t_e_m_m_a_8h" local="yes">src/Sensors/I2C/STEMMA.h</includedby>
+    <includedby refid="_i2_c___sensor_8cpp" local="yes">src/Sensors/I2C/I2C_Sensor.cpp</includedby>
+    <incdepgraph>
+      <node id="5135">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5132">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5133" relation="include">
+        </childnode>
+        <childnode refid="5135" relation="include">
+        </childnode>
+        <childnode refid="5136" relation="include">
+        </childnode>
+        <childnode refid="5137" relation="include">
+        </childnode>
+      </node>
+      <node id="5136">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5134" relation="include">
+        </childnode>
+        <childnode refid="5137" relation="include">
+        </childnode>
+      </node>
+      <node id="5133">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5134" relation="include">
+        </childnode>
+      </node>
+      <node id="5138">
+        <label>Wire.h</label>
+      </node>
+      <node id="5137">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5131">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5132" relation="include">
+        </childnode>
+      </node>
+      <node id="5134">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5130">
+        <label>src/Sensors/I2C/I2C_Sensor.h</label>
+        <link refid="I2C_Sensor.h"/>
+        <childnode refid="5131" relation="include">
+        </childnode>
+        <childnode refid="5138" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5166">
+        <label>src/Temperature_Sync.cpp</label>
+        <link refid="_temperature___sync_8cpp"/>
+      </node>
+      <node id="5149">
+        <label>src/Sensors/I2C/AS7263.cpp</label>
+        <link refid="_a_s7263_8cpp"/>
+      </node>
+      <node id="5175">
+        <label>src/Sensors/I2C/ZXGesture.h</label>
+        <link refid="_z_x_gesture_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5176" relation="include">
+        </childnode>
+      </node>
+      <node id="5150">
+        <label>src/Sensors/I2C/AS7265X.h</label>
+        <link refid="_a_s7265_x_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5151" relation="include">
+        </childnode>
+      </node>
+      <node id="5141">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="5142" relation="include">
+        </childnode>
+        <childnode refid="5143" relation="include">
+        </childnode>
+      </node>
+      <node id="5146">
+        <label>src/Multiplexer.cpp</label>
+        <link refid="_multiplexer_8cpp"/>
+      </node>
+      <node id="5169">
+        <label>src/Sensors/I2C/TMP007.h</label>
+        <link refid="_t_m_p007_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5170" relation="include">
+        </childnode>
+      </node>
+      <node id="5145">
+        <label>src/Sensors/I2C/AS7262.h</label>
+        <link refid="_a_s7262_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5147" relation="include">
+        </childnode>
+      </node>
+      <node id="5165">
+        <label>src/Sensors/I2C/MS5803.cpp</label>
+        <link refid="_m_s5803_8cpp"/>
+      </node>
+      <node id="5172">
+        <label>src/Sensors/I2C/TSL2561.cpp</label>
+        <link refid="_t_s_l2561_8cpp"/>
+      </node>
+      <node id="5177">
+        <label>src/Sensors/I2C/STEMMA.h</label>
+        <link refid="_s_t_e_m_m_a_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5178" relation="include">
+        </childnode>
+      </node>
+      <node id="5179">
+        <label>src/Sensors/I2C/I2C_Sensor.cpp</label>
+        <link refid="_i2_c___sensor_8cpp"/>
+      </node>
+      <node id="5156">
+        <label>src/Sensors/I2C/LIS3DH.h</label>
+        <link refid="_l_i_s3_d_h_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5157" relation="include">
+        </childnode>
+      </node>
+      <node id="5161">
+        <label>src/Sensors/I2C/MMA8451.cpp</label>
+        <link refid="_m_m_a8451_8cpp"/>
+      </node>
+      <node id="5155">
+        <label>src/Sensors/I2C/FXOS8700.cpp</label>
+        <link refid="_f_x_o_s8700_8cpp"/>
+      </node>
+      <node id="5164">
+        <label>src/Sensors/I2C/MS5803.h</label>
+        <link refid="_m_s5803_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5165" relation="include">
+        </childnode>
+        <childnode refid="5166" relation="include">
+        </childnode>
+      </node>
+      <node id="5160">
+        <label>src/Sensors/I2C/MMA8451.h</label>
+        <link refid="_m_m_a8451_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5161" relation="include">
+        </childnode>
+      </node>
+      <node id="5159">
+        <label>src/Sensors/I2C/MB1232.cpp</label>
+        <link refid="_m_b1232_8cpp"/>
+      </node>
+      <node id="5162">
+        <label>src/Sensors/I2C/MPU6050.h</label>
+        <link refid="_m_p_u6050_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5163" relation="include">
+        </childnode>
+      </node>
+      <node id="5178">
+        <label>src/Sensors/I2C/STEMMA.cpp</label>
+        <link refid="_s_t_e_m_m_a_8cpp"/>
+      </node>
+      <node id="5151">
+        <label>src/Sensors/I2C/AS7265X.cpp</label>
+        <link refid="_a_s7265_x_8cpp"/>
+      </node>
+      <node id="5144">
+        <label>src/Sensors/I2C/ADS1115.cpp</label>
+        <link refid="_a_d_s1115_8cpp"/>
+      </node>
+      <node id="5171">
+        <label>src/Sensors/I2C/TSL2561.h</label>
+        <link refid="_t_s_l2561_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5172" relation="include">
+        </childnode>
+      </node>
+      <node id="5170">
+        <label>src/Sensors/I2C/TMP007.cpp</label>
+        <link refid="_t_m_p007_8cpp"/>
+      </node>
+      <node id="5152">
+        <label>src/Sensors/I2C/FXAS21002.h</label>
+        <link refid="_f_x_a_s21002_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5153" relation="include">
+        </childnode>
+      </node>
+      <node id="5168">
+        <label>src/Sensors/I2C/SHT31D.cpp</label>
+        <link refid="_s_h_t31_d_8cpp"/>
+      </node>
+      <node id="5176">
+        <label>src/Sensors/I2C/ZXGesture.cpp</label>
+        <link refid="_z_x_gesture_8cpp"/>
+      </node>
+      <node id="5142">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="5139">
+        <label>src/Sensors/I2C/I2C_Sensor.h</label>
+        <link refid="I2C_Sensor.h"/>
+        <childnode refid="5140" relation="include">
+        </childnode>
+        <childnode refid="5145" relation="include">
+        </childnode>
+        <childnode refid="5148" relation="include">
+        </childnode>
+        <childnode refid="5150" relation="include">
+        </childnode>
+        <childnode refid="5152" relation="include">
+        </childnode>
+        <childnode refid="5154" relation="include">
+        </childnode>
+        <childnode refid="5156" relation="include">
+        </childnode>
+        <childnode refid="5158" relation="include">
+        </childnode>
+        <childnode refid="5160" relation="include">
+        </childnode>
+        <childnode refid="5162" relation="include">
+        </childnode>
+        <childnode refid="5164" relation="include">
+        </childnode>
+        <childnode refid="5167" relation="include">
+        </childnode>
+        <childnode refid="5169" relation="include">
+        </childnode>
+        <childnode refid="5171" relation="include">
+        </childnode>
+        <childnode refid="5173" relation="include">
+        </childnode>
+        <childnode refid="5175" relation="include">
+        </childnode>
+        <childnode refid="5177" relation="include">
+        </childnode>
+        <childnode refid="5179" relation="include">
+        </childnode>
+      </node>
+      <node id="5174">
+        <label>src/Sensors/I2C/TSL2591.cpp</label>
+        <link refid="_t_s_l2591_8cpp"/>
+      </node>
+      <node id="5143">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="5154">
+        <label>src/Sensors/I2C/FXOS8700.h</label>
+        <link refid="_f_x_o_s8700_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5155" relation="include">
+        </childnode>
+      </node>
+      <node id="5173">
+        <label>src/Sensors/I2C/TSL2591.h</label>
+        <link refid="_t_s_l2591_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5174" relation="include">
+        </childnode>
+      </node>
+      <node id="5148">
+        <label>src/Sensors/I2C/AS7263.h</label>
+        <link refid="_a_s7263_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5149" relation="include">
+        </childnode>
+      </node>
+      <node id="5157">
+        <label>src/Sensors/I2C/LIS3DH.cpp</label>
+        <link refid="_l_i_s3_d_h_8cpp"/>
+      </node>
+      <node id="5163">
+        <label>src/Sensors/I2C/MPU6050.cpp</label>
+        <link refid="_m_p_u6050_8cpp"/>
+      </node>
+      <node id="5140">
+        <label>src/Sensors/I2C/ADS1115.h</label>
+        <link refid="_a_d_s1115_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5144" relation="include">
+        </childnode>
+      </node>
+      <node id="5158">
+        <label>src/Sensors/I2C/MB1232.h</label>
+        <link refid="_m_b1232_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5159" relation="include">
+        </childnode>
+      </node>
+      <node id="5147">
+        <label>src/Sensors/I2C/AS7262.cpp</label>
+        <link refid="_a_s7262_8cpp"/>
+      </node>
+      <node id="5153">
+        <label>src/Sensors/I2C/FXAS21002.cpp</label>
+        <link refid="_f_x_a_s21002_8cpp"/>
+      </node>
+      <node id="5167">
+        <label>src/Sensors/I2C/SHT31D.h</label>
+        <link refid="_s_h_t31_d_8h"/>
+        <childnode refid="5141" relation="include">
+        </childnode>
+        <childnode refid="5146" relation="include">
+        </childnode>
+        <childnode refid="5168" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom_i2_c_sensor" prot="public">LoomI2CSensor</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/I2C_Sensor.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_SD class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_SD <span class="m-thin">class</span>
+        </h1>
+        <p>SD logging platform module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___s_d.html">Module Documentation</a></li><li><a href="https://www.adafruit.com/product/2922">Product Page: Adafruit Adalogger Featherwing</a></li><li><a href="https://www.adafruit.com/product/254">Product Page: Adafruit SD Breakout</a></li><li><a href="https://github.com/arduino-libraries/SD">Dependency: SD</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_log_plat.html" class="m-doc">LoomLogPlat</a>
+            </dt>
+            <dd>Abstract base of logging platforms.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a0602d9ef1a9b7f8b31870702bcb692fd">
+              SdFat <a href="#a0602d9ef1a9b7f8b31870702bcb692fd" class="m-doc-self">sd</a>
+            </dt>
+            <dd>File system object.</dd>
+            <dt id="a404b47d978c23b9426dcfe1fe3a185e1">
+              const byte <a href="#a404b47d978c23b9426dcfe1fe3a185e1" class="m-doc-self">chip_select</a>
+            </dt>
+            <dd>Chip select pin.</dd>
+            <dt id="a970a01045c1d73b67f23982842249097">
+              char <a href="#a970a01045c1d73b67f23982842249097" class="m-doc-self">filename</a>
+            </dt>
+            <dd>String of file to write to if not filename explicitly provided (should not exceed 6 characters)</dd>
+            <dt id="a3dcce942e87eabc4e3912d1af283618c">
+              <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* <a href="#a3dcce942e87eabc4e3912d1af283618c" class="m-doc-self">RTC_Inst</a>
+            </dt>
+            <dd>Pointer to an RTC object for timestamps.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#ab093eb043634c52abdacf9397b4577d6" class="m-doc">Loom_SD</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const bool enable_rate_filter = true,
+              const uint16_t min_filter_delay = 1000,
+              const byte chip_select = 10,
+              const char* default_file = &quot;test&quot;,
+              const bool number_files = true)</span>
+            </dt>
+            <dd>SD Module Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a383cfc7b80778db3cec41992c7aaa9af" class="m-doc">Loom_SD</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="af939aa14399dd1f04dae897fbafb3159">
+              <span class="m-doc-wrap-bumper"><a href="#af939aa14399dd1f04dae897fbafb3159" class="m-doc-self">~Loom_SD</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0f106e4911985253e8ac09bcf953bb6e" class="m-doc">log</a>(</span><span class="m-doc-wrap">JsonObject json) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Log a Json object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9a281c97934fa0f54653408aa84ade6b" class="m-doc">log</a>(</span><span class="m-doc-wrap">const char* name) -&gt; bool</span>
+            </dt>
+            <dd>Version of logging for use with <a href="class_loom_manager.html" class="m-doc">LoomManager</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af5a463b90af2eb0debe01a24f23a6a4f" class="m-doc">save_json</a>(</span><span class="m-doc-wrap">JsonObject json,
+              const char* name) -&gt; bool</span>
+            </dt>
+            <dd>Save data to SD card in CSV format.</dd>
+            <dt id="adecc011e82fac7f1543b3f588bbf4816">
+              <span class="m-doc-wrap-bumper">void <a href="#adecc011e82fac7f1543b3f588bbf4816" class="m-doc-self">delete_file</a>(</span><span class="m-doc-wrap">const char* name)</span>
+            </dt>
+            <dd>Delete a file.</dd>
+            <dt id="aed577fc3915c42de474a992f81c827ac">
+              <span class="m-doc-wrap-bumper">void <a href="#aed577fc3915c42de474a992f81c827ac" class="m-doc-self">empty_file</a>(</span><span class="m-doc-wrap">const char* name)</span>
+            </dt>
+            <dd>Clear a file (remove contents but not file itself)</dd>
+            <dt id="a316af7fd9cd88c33aa9aa06755cc37fd">
+              <span class="m-doc-wrap-bumper">void <a href="#a316af7fd9cd88c33aa9aa06755cc37fd" class="m-doc-self">power_up</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Turn on any hardware.</dd>
+            <dt id="a01d99de8b39b25f562f2aeec3413170e">
+              <span class="m-doc-wrap-bumper">void <a href="#a01d99de8b39b25f562f2aeec3413170e" class="m-doc-self">power_down</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Turn off any hardware.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a4c0c3f46a3479ed8e4a96c0ca4acfa7e">
+              <span class="m-doc-wrap-bumper">void <a href="#a4c0c3f46a3479ed8e4a96c0ca4acfa7e" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aeeb9d41ad9b91658af6295483b42c55a" class="m-doc">dump_file</a>(</span><span class="m-doc-wrap">const char* name) -&gt; bool</span>
+            </dt>
+            <dd>List current files on the SD card.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4092a0759777c669914942c3559e6a76" class="m-doc">get_RTC_module</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>*</span>
+            </dt>
+            <dd>Return pointer to the currently linked RTC object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5abc30ca684dbd2cedb0e18c3c8a9685" class="m-doc">get_default_file</a>(</span><span class="m-doc-wrap">) const -&gt; const char*</span>
+            </dt>
+            <dd>Get the current default file to write to.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad910296dd33bec7d3ec8a91892aade48" class="m-doc">link_device_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LM) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Add pointer back to device manager.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8704546681d123363d8210ac0c95f293" class="m-doc">set_RTC_module</a>(</span><span class="m-doc-wrap"><a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* RTC_Inst)</span>
+            </dt>
+            <dd>Set the RTC module to use for timers.</dd>
+            <dt id="a58416c209f76a591bf85e824240a7659">
+              <span class="m-doc-wrap-bumper">void <a href="#a58416c209f76a591bf85e824240a7659" class="m-doc-self">set_filename</a>(</span><span class="m-doc-wrap">const char* name)</span>
+            </dt>
+            <dd>Set default file to write to.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ab093eb043634c52abdacf9397b4577d6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab093eb043634c52abdacf9397b4577d6" class="m-doc-self">Loom_SD</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const bool enable_rate_filter = true,
+              const uint16_t min_filter_delay = 1000,
+              const byte chip_select = 10,
+              const char* default_file = &quot;test&quot;,
+              const bool number_files = true)</span></span>
+            </h3>
+            <p>SD Module Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>enable_rate_filter&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | Whether or not to impose maximum update rate</td>
+                </tr>
+                <tr>
+                  <td>min_filter_delay&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;1000&gt; | [100-5000] | Minimum update delay, if enable_rate_filter enabled</td>
+                </tr>
+                <tr>
+                  <td>chip_select&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;10&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin to use for chip select</td>
+                </tr>
+                <tr>
+                  <td>default_file</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>number_files&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | True to number files with run number, false to not.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a383cfc7b80778db3cec41992c7aaa9af"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a383cfc7b80778db3cec41992c7aaa9af" class="m-doc-self">Loom_SD</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0f106e4911985253e8ac09bcf953bb6e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f106e4911985253e8ac09bcf953bb6e" class="m-doc-self">log</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Log a Json object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Json Object to log</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9a281c97934fa0f54653408aa84ade6b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a281c97934fa0f54653408aa84ade6b" class="m-doc-self">log</a>(</span><span class="m-doc-wrap">const char* name)</span></span>
+            </h3>
+            <p>Version of logging for use with <a href="class_loom_manager.html" class="m-doc">LoomManager</a>.</p>
+<p>Accesses Json from <a href="class_loom_manager.html" class="m-doc">LoomManager</a></p>
+          </div></section>
+          <section class="m-doc-details" id="af5a463b90af2eb0debe01a24f23a6a4f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af5a463b90af2eb0debe01a24f23a6a4f" class="m-doc-self">save_json</a>(</span><span class="m-doc-wrap">JsonObject json,
+              const char* name)</span></span>
+            </h3>
+            <p>Save data to SD card in CSV format.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The data to be saved</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+<p>Format: Identification Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ...</p>
+          </div></section>
+          <section class="m-doc-details" id="aeeb9d41ad9b91658af6295483b42c55a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeeb9d41ad9b91658af6295483b42c55a" class="m-doc-self">dump_file</a>(</span><span class="m-doc-wrap">const char* name)</span></span>
+            </h3>
+            <p>List current files on the SD card.</p>
+<p>Print the contents of a particular file</p>
+          </div></section>
+          <section class="m-doc-details" id="a4092a0759777c669914942c3559e6a76"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4092a0759777c669914942c3559e6a76" class="m-doc-self">get_RTC_module</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Return pointer to the currently linked RTC object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Current RTC object</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5abc30ca684dbd2cedb0e18c3c8a9685"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const char* Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5abc30ca684dbd2cedb0e18c3c8a9685" class="m-doc-self">get_default_file</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the current default file to write to.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Default file</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad910296dd33bec7d3ec8a91892aade48"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad910296dd33bec7d3ec8a91892aade48" class="m-doc-self">link_device_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LM) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Add pointer back to device manager.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">LM&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td><a href="class_loom_manager.html" class="m-doc">LoomManager</a> to point to</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Generally only called when device manager links module to provide pointer both directions</p>
+          </div></section>
+          <section class="m-doc-details" id="a8704546681d123363d8210ac0c95f293"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />SD::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8704546681d123363d8210ac0c95f293" class="m-doc-self">set_RTC_module</a>(</span><span class="m-doc-wrap"><a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* RTC_Inst)</span></span>
+            </h3>
+            <p>Set the RTC module to use for timers.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">RTC_Inst&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Pointer to the RTC object</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

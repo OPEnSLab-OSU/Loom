@@ -1,0 +1,197 @@
+\hypertarget{class_loom___f_x_a_s21002}{}\section{Loom\+\_\+\+F\+X\+A\+S21002 Class Reference}
+\label{class_loom___f_x_a_s21002}\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+
+
+F\+X\+A\+S21002 3-\/\+Axis Gyroscope sensor module.  
+
+
+
+
+{\ttfamily \#include $<$F\+X\+A\+S21002.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+F\+X\+A\+S21002\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{class_loom___f_x_a_s21002__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___f_x_a_s21002_acc1ccaa25c7ba070c07b5983e16fe331}{Loom\+\_\+\+F\+X\+A\+S21002} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}=0x20, const uint8\+\_\+t mux\+\_\+port=255)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___f_x_a_s21002_a1f8c10d72637197732e6607fa5c041b3}{Loom\+\_\+\+F\+X\+A\+S21002} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___f_x_a_s21002_a1b587ae11acdc2a1ab5d6f6e1fdb45c0}{$\sim$\+Loom\+\_\+\+F\+X\+A\+S21002} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___f_x_a_s21002_ac35903be3f438d0c1ba4eb229feb411e}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___f_x_a_s21002_aec2655c583a7bfe3b7603534c0e0edcf}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___f_x_a_s21002_a9216501d392e712d886b4164a62cd7b0}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+F\+X\+A\+S21002C \hyperlink{class_loom___f_x_a_s21002_a2f7e11c7ae7894a1990beedf7894e9aa}{inst\+\_\+\+F\+X\+A\+S21002}
+\begin{DoxyCompactList}\small\item\em Underlying F\+X\+A\+S21002 sensor manager instance. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___f_x_a_s21002_a092bb83d142cf80a10ca907cacb75d4e}{gyro} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Measured gyro values (x,y,z). Units\+: °/s. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+F\+X\+A\+S21002 3-\/\+Axis Gyroscope sensor module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___f_x_a_s21002.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/3463}{\tt Product Page\+: Adafruit Precision N\+XP 9-\/\+D\+OF Breakout Board -\/ F\+X\+O\+S8700 + F\+X\+A\+S21002}
+\item \href{https://github.com/adafruit/Adafruit_FXAS21002C}{\tt Dependency\+: Adafruit\+\_\+\+F\+X\+A\+S21002C}
+\item \href{https://github.com/adafruit/Adafruit_AHRS}{\tt Dependency\+: Adafruit\+\_\+\+A\+H\+RS}
+\item \href{https://github.com/adafruit/Adafruit_Sensor}{\tt Dependency\+: Adafruit\+\_\+\+Sensor}
+\item \href{https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056}{\tt Datasheet\+: 3-\/\+Axis Digital Angular Rate Gyroscope}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#fxas21002-3-axis-gyroscope}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+F\+X\+A\+S21002(\+Loom\+Manager $\ast$manager, const byte i2c\+\_\+address=0x20, const uint8\+\_\+t mux\+\_\+port=255)}{Loom_FXAS21002(LoomManager *manager, const byte i2c_address=0x20, const uint8_t mux_port=255)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+F\+X\+A\+S21002\+::\+Loom\+\_\+\+F\+X\+A\+S21002 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{i2c\+\_\+address = {\ttfamily 0x20}, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___f_x_a_s21002_acc1ccaa25c7ba070c07b5983e16fe331}{}\label{class_loom___f_x_a_s21002_acc1ccaa25c7ba070c07b5983e16fe331}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x20$>$ $\vert$ \{0x20, 0x21\} $\vert$ I2C address \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+port} & Int $\vert$ $<$255$>$ $\vert$ \mbox{[}0-\/16\mbox{]} $\vert$ Port on multiplexer \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+F\+X\+A\+S21002(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_FXAS21002(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+F\+X\+A\+S21002\+::\+Loom\+\_\+\+F\+X\+A\+S21002 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___f_x_a_s21002_a1f8c10d72637197732e6607fa5c041b3}{}\label{class_loom___f_x_a_s21002_a1f8c10d72637197732e6607fa5c041b3}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!````~Loom\+\_\+\+F\+X\+A\+S21002@{$\sim$\+Loom\+\_\+\+F\+X\+A\+S21002}}
+\index{````~Loom\+\_\+\+F\+X\+A\+S21002@{$\sim$\+Loom\+\_\+\+F\+X\+A\+S21002}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+F\+X\+A\+S21002()=default}{~Loom_FXAS21002()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+F\+X\+A\+S21002\+::$\sim$\+Loom\+\_\+\+F\+X\+A\+S21002 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___f_x_a_s21002_a1b587ae11acdc2a1ab5d6f6e1fdb45c0}{}\label{class_loom___f_x_a_s21002_a1b587ae11acdc2a1ab5d6f6e1fdb45c0}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+F\+X\+A\+S21002\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___f_x_a_s21002_ac35903be3f438d0c1ba4eb229feb411e}{}\label{class_loom___f_x_a_s21002_ac35903be3f438d0c1ba4eb229feb411e}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+F\+X\+A\+S21002\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___f_x_a_s21002_aec2655c583a7bfe3b7603534c0e0edcf}{}\label{class_loom___f_x_a_s21002_aec2655c583a7bfe3b7603534c0e0edcf}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+F\+X\+A\+S21002\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___f_x_a_s21002_a9216501d392e712d886b4164a62cd7b0}{}\label{class_loom___f_x_a_s21002_a9216501d392e712d886b4164a62cd7b0}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!gyro@{gyro}}
+\index{gyro@{gyro}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\subsubsection[{\texorpdfstring{gyro}{gyro}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+F\+X\+A\+S21002\+::gyro\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___f_x_a_s21002_a092bb83d142cf80a10ca907cacb75d4e}{}\label{class_loom___f_x_a_s21002_a092bb83d142cf80a10ca907cacb75d4e}
+
+
+Measured gyro values (x,y,z). Units\+: °/s. 
+
+\index{Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}!inst\+\_\+\+F\+X\+A\+S21002@{inst\+\_\+\+F\+X\+A\+S21002}}
+\index{inst\+\_\+\+F\+X\+A\+S21002@{inst\+\_\+\+F\+X\+A\+S21002}!Loom\+\_\+\+F\+X\+A\+S21002@{Loom\+\_\+\+F\+X\+A\+S21002}}
+\subsubsection[{\texorpdfstring{inst\+\_\+\+F\+X\+A\+S21002}{inst_FXAS21002}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+F\+X\+A\+S21002C Loom\+\_\+\+F\+X\+A\+S21002\+::inst\+\_\+\+F\+X\+A\+S21002\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___f_x_a_s21002_a2f7e11c7ae7894a1990beedf7894e9aa}{}\label{class_loom___f_x_a_s21002_a2f7e11c7ae7894a1990beedf7894e9aa}
+
+
+Underlying F\+X\+A\+S21002 sensor manager instance. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_f_x_a_s21002_8h}{F\+X\+A\+S21002.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_f_x_a_s21002_8cpp}{F\+X\+A\+S21002.\+cpp}\end{DoxyCompactItemize}

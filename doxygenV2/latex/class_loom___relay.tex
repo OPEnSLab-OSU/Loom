@@ -1,0 +1,226 @@
+\hypertarget{class_loom___relay}{}\section{Loom\+\_\+\+Relay Class Reference}
+\label{class_loom___relay}\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+
+
+Relay actuator module.  
+
+
+
+
+{\ttfamily \#include $<$Relay.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Relay\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{class_loom___relay__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___relay_a48ea7618746875d47a9d00ce797dc2f5}{Loom\+\_\+\+Relay} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom___relay_ad3cc1e820888c8bbf632dc03036d6a84}{pin}=10)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___relay_a65ee0e34faf507487c9e02dfba5fd043}{Loom\+\_\+\+Relay} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___relay_a59394cb27c87169a6de0dd726f7b49eb}{$\sim$\+Loom\+\_\+\+Relay} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___relay_ae3c0ac05a26917c832196205a7c2d7a9}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Not all actuators need a package method, implement with empty body. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___relay_a93ddf6a1c30244a81eaeb9332546e465}{dispatch} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Route command to driver. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___relay_a67c8d4bdf2f047917f5c5b05e4f64e58}{add\+\_\+config} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Add configuration information to Json\+Object. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___relay_aadab07b5c2d0c2bdc47c32d4eec4943a}{set} (const bool state)
+\begin{DoxyCompactList}\small\item\em Set relay state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___relay_a001fba3a442b2ef5792fe394eb1d78e4}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{class_loom___relay_ad3cc1e820888c8bbf632dc03036d6a84}{pin}
+\begin{DoxyCompactList}\small\item\em The digital pin the relay is connect to. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___relay_aaad7e04f955ebe499b45e5af5a4ed7d6}{on}
+\begin{DoxyCompactList}\small\item\em Whether the relay is on or off. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Relay actuator module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___relay.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/3191}{\tt Product Page\+: Adafruit Latching Relay Featherwing}
+\item \href{https://cdn-shop.adafruit.com/product-files/3191/G5LE-14-DC3-Omron-datasheet-10841140.pdf}{\tt Relay Datasheet}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#relay}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Relay(\+Loom\+Manager $\ast$manager, const byte pin=10)}{Loom_Relay(LoomManager *manager, const byte pin=10)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Relay\+::\+Loom\+\_\+\+Relay (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{pin = {\ttfamily 10}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___relay_a48ea7618746875d47a9d00ce797dc2f5}{}\label{class_loom___relay_a48ea7618746875d47a9d00ce797dc2f5}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Set(\+Int) $\vert$ $<$10$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin should be used to control the relay \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Relay(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Relay(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Relay\+::\+Loom\+\_\+\+Relay (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___relay_a65ee0e34faf507487c9e02dfba5fd043}{}\label{class_loom___relay_a65ee0e34faf507487c9e02dfba5fd043}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!````~Loom\+\_\+\+Relay@{$\sim$\+Loom\+\_\+\+Relay}}
+\index{````~Loom\+\_\+\+Relay@{$\sim$\+Loom\+\_\+\+Relay}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Relay()=default}{~Loom_Relay()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Relay\+::$\sim$\+Loom\+\_\+\+Relay (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___relay_a59394cb27c87169a6de0dd726f7b49eb}{}\label{class_loom___relay_a59394cb27c87169a6de0dd726f7b49eb}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!add\+\_\+config@{add\+\_\+config}}
+\index{add\+\_\+config@{add\+\_\+config}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{add\+\_\+config(\+Json\+Object json) override}{add_config(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Relay\+::add\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___relay_a67c8d4bdf2f047917f5c5b05e4f64e58}{}\label{class_loom___relay_a67c8d4bdf2f047917f5c5b05e4f64e58}
+
+
+Add configuration information to Json\+Object. 
+
+\hyperlink{class_loom_manager}{Loom\+Manager} iterates over modules to build complete configuration 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json configuration object to add to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_a06747f16d76bde35575557c7515adcc0}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{dispatch(\+Json\+Object json) override}{dispatch(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Relay\+::dispatch (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___relay_a93ddf6a1c30244a81eaeb9332546e465}{}\label{class_loom___relay_a93ddf6a1c30244a81eaeb9332546e465}
+
+
+Route command to driver. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Relay\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___relay_ae3c0ac05a26917c832196205a7c2d7a9}{}\label{class_loom___relay_ae3c0ac05a26917c832196205a7c2d7a9}
+
+
+Not all actuators need a package method, implement with empty body. 
+
+
+
+Reimplemented from \hyperlink{class_loom_actuator_abf895d8f41379ff53dff666d9d2791a2}{Loom\+Actuator}.
+
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Relay\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___relay_a001fba3a442b2ef5792fe394eb1d78e4}{}\label{class_loom___relay_a001fba3a442b2ef5792fe394eb1d78e4}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!set@{set}}
+\index{set@{set}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{set(const bool state)}{set(const bool state)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Relay\+::set (
+\begin{DoxyParamCaption}
+\item[{const bool}]{state}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___relay_aadab07b5c2d0c2bdc47c32d4eec4943a}{}\label{class_loom___relay_aadab07b5c2d0c2bdc47c32d4eec4943a}
+
+
+Set relay state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & The state to set relay to (True=H\+I\+GH, False=L\+OW) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!on@{on}}
+\index{on@{on}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{on}{on}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Relay\+::on\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___relay_aaad7e04f955ebe499b45e5af5a4ed7d6}{}\label{class_loom___relay_aaad7e04f955ebe499b45e5af5a4ed7d6}
+
+
+Whether the relay is on or off. 
+
+\index{Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}!pin@{pin}}
+\index{pin@{pin}!Loom\+\_\+\+Relay@{Loom\+\_\+\+Relay}}
+\subsubsection[{\texorpdfstring{pin}{pin}}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+Relay\+::pin\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___relay_ad3cc1e820888c8bbf632dc03036d6a84}{}\label{class_loom___relay_ad3cc1e820888c8bbf632dc03036d6a84}
+
+
+The digital pin the relay is connect to. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Actuators/\hyperlink{_relay_8h}{Relay.\+h}\item 
+src/\+Actuators/\hyperlink{_relay_8cpp}{Relay.\+cpp}\end{DoxyCompactItemize}

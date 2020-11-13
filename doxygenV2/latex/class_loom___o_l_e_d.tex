@@ -1,0 +1,524 @@
+\hypertarget{class_loom___o_l_e_d}{}\section{Loom\+\_\+\+O\+L\+ED Class Reference}
+\label{class_loom___o_l_e_d}\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+
+
+O\+L\+ED logging platform module.  
+
+
+
+
+{\ttfamily \#include $<$O\+L\+E\+D.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+O\+L\+ED\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{class_loom___o_l_e_d__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400}{Version} \{ \hyperlink{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97}{Version\+::\+F\+E\+A\+T\+H\+E\+R\+W\+I\+NG}, 
+\hyperlink{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400aef55538fb1b52e6052c75869be750acc}{Version\+::\+B\+R\+E\+A\+K\+O\+UT}
+ \}\begin{DoxyCompactList}\small\item\em Different forms of the O\+L\+ED display. \end{DoxyCompactList}
+\item 
+enum \hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffd}{Format} \{ \hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda341fee9692a2ed8f09906d40d23fb1f9}{Format\+::\+F\+O\+UR}, 
+\hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda960df6d77e65cd185ca4f3501db634eb}{Format\+::\+E\+I\+G\+HT}, 
+\hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25}{Format\+::\+S\+C\+R\+O\+LL}
+ \}\begin{DoxyCompactList}\small\item\em Different formats to display information in. \end{DoxyCompactList}
+\item 
+enum \hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9}{Freeze\+Type} \{ \hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9afc93ea58f6d27ffed2b6518ffecf3e4e}{Freeze\+Type\+::\+D\+I\+S\+A\+B\+LE}, 
+\hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9ae44f9e348e41cb272efa87387728571b}{Freeze\+Type\+::\+D\+A\+TA}, 
+\hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25}{Freeze\+Type\+::\+S\+C\+R\+O\+LL}
+ \}\begin{DoxyCompactList}\small\item\em Differnt freeze behaviors. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___o_l_e_d_accc63c1437c4d67fa6efbac79d647996}{Loom\+\_\+\+O\+L\+ED} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const bool \hyperlink{class_loom_log_plat_a6d343b76b79a1e51572bcf2991966e61}{enable\+\_\+rate\+\_\+filter}=true, const uint16\+\_\+t \hyperlink{class_loom_log_plat_a3d4ffe4204560b9677b8007be7f522be}{min\+\_\+filter\+\_\+delay}=300, const \hyperlink{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400}{Version} type=\hyperlink{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97}{Version\+::\+F\+E\+A\+T\+H\+E\+R\+W\+I\+NG}, const byte \hyperlink{class_loom___o_l_e_d_a8962f61e0211d70d1d1de489d1d6bbfa}{reset\+\_\+pin}=A2, const \hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffd}{Format} \hyperlink{class_loom___o_l_e_d_a1cfdc8965297ea1f697d8a4d3e44b5fd}{display\+\_\+format}=\hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25}{Format\+::\+S\+C\+R\+O\+LL}, const uint16\+\_\+t \hyperlink{class_loom___o_l_e_d_ad6893fc088b080440f2f1d5d6f84d461}{scroll\+\_\+duration}=6000, const byte \hyperlink{class_loom___o_l_e_d_a693dc20156729cb7d06e877247e914d0}{freeze\+\_\+pin}=10, const \hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9}{Freeze\+Type} \hyperlink{class_loom___o_l_e_d_aafea3f7f393170a4cc7c5e7ff8583344}{freeze\+\_\+behavior}=\hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25}{Freeze\+Type\+::\+S\+C\+R\+O\+LL})
+\begin{DoxyCompactList}\small\item\em O\+L\+ED module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___o_l_e_d_abbe56d7e45b4de6ae1ae1296c074d448}{Loom\+\_\+\+O\+L\+ED} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___o_l_e_d_a6970e6d9fa0dd9b40e87cb4f59a01a3f}{$\sim$\+Loom\+\_\+\+O\+L\+ED} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___o_l_e_d_a288f75a9eb423bda9b65b8cb4c7708b8}{log} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Log a Json object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___o_l_e_d_a20dab0bc2c5bdc139b1b04523a54a78c}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffd}{Format} \hyperlink{class_loom___o_l_e_d_ac76bb31bcfb46076a0e72f59025ba3cb}{get\+\_\+display\+\_\+format} () const 
+\begin{DoxyCompactList}\small\item\em Get the current O\+L\+ED display organization. \end{DoxyCompactList}\item 
+uint \hyperlink{class_loom___o_l_e_d_a1460b24e59ea1dff3dd8605a0a9a9564}{get\+\_\+scroll\+\_\+duration} () const 
+\begin{DoxyCompactList}\small\item\em Get the current scroll duration. \end{DoxyCompactList}\item 
+byte \hyperlink{class_loom___o_l_e_d_a6ca6b64ea5c2a5d78733f9675f409efb}{get\+\_\+freeze\+\_\+pin} () const 
+\begin{DoxyCompactList}\small\item\em Get the digital pin use to freeze the display. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9}{Freeze\+Type} \hyperlink{class_loom___o_l_e_d_a40d29eabfcdf35863dc2f1f5eca0b945}{get\+\_\+freeze\+\_\+behavior} () const 
+\begin{DoxyCompactList}\small\item\em Get the current freeze behavior. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___o_l_e_d_a4ce08addf521b1bba3a1f73730d8650b}{set\+\_\+display\+\_\+format} (const \hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffd}{Format} format)
+\begin{DoxyCompactList}\small\item\em Set the O\+L\+ED display organization. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___o_l_e_d_a5e58b03b11b03f79f1d9c98b0247cef0}{set\+\_\+scroll\+\_\+duration} (const uint duration)
+\begin{DoxyCompactList}\small\item\em Set the duration of a complete scroll. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___o_l_e_d_a13dc4c96f830f9c949c3e6731b2f9318}{set\+\_\+freeze\+\_\+pin} (const byte pin)
+\begin{DoxyCompactList}\small\item\em Set the digital pin to use to freeze the display. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___o_l_e_d_a42eea08f2832c5afd31522b62601196b}{set\+\_\+freeze\+\_\+behavior} (const \hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9}{Freeze\+Type} behavior)
+\begin{DoxyCompactList}\small\item\em Set the freezing behavior of the display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+S\+S\+D1306 \hyperlink{class_loom___o_l_e_d_a0cc78f1f1fd95a4c3d16fe32c9d33499}{display}
+\begin{DoxyCompactList}\small\item\em Underlying O\+L\+ED controller. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400}{Version} \hyperlink{class_loom___o_l_e_d_af0bc56c14688195fed9cafb74601bec3}{version}
+\begin{DoxyCompactList}\small\item\em What type the O\+L\+ED is (Feather\+Wing or breakout) \end{DoxyCompactList}\item 
+byte \hyperlink{class_loom___o_l_e_d_a8962f61e0211d70d1d1de489d1d6bbfa}{reset\+\_\+pin}
+\begin{DoxyCompactList}\small\item\em The reset pin (only applies to breakout version) \end{DoxyCompactList}\item 
+\hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffd}{Format} \hyperlink{class_loom___o_l_e_d_a1cfdc8965297ea1f697d8a4d3e44b5fd}{display\+\_\+format}
+\begin{DoxyCompactList}\small\item\em How to display the data on O\+L\+ED. \end{DoxyCompactList}\item 
+uint \hyperlink{class_loom___o_l_e_d_ad6893fc088b080440f2f1d5d6f84d461}{scroll\+\_\+duration}
+\begin{DoxyCompactList}\small\item\em The duration to complete a full cycle through a bundle of data (milliseconds)(non-\/blocking) \end{DoxyCompactList}\item 
+byte \hyperlink{class_loom___o_l_e_d_a693dc20156729cb7d06e877247e914d0}{freeze\+\_\+pin}
+\begin{DoxyCompactList}\small\item\em Which pin to check if display should freeze. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9}{Freeze\+Type} \hyperlink{class_loom___o_l_e_d_aafea3f7f393170a4cc7c5e7ff8583344}{freeze\+\_\+behavior}
+\begin{DoxyCompactList}\small\item\em What \textquotesingle{}freezing\textquotesingle{} behavior should be followed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{M\+I\+S\+C\+E\+L\+L\+A\+N\+E\+O\+US}
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$ \hyperlink{class_loom___o_l_e_d_a34e7751ffe7f5fdfa8d5c3adde2aedd7}{enum\+\_\+oled\+\_\+version\+\_\+string} (const \hyperlink{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400}{Version} v)
+\begin{DoxyCompactList}\small\item\em Get c-\/string of name associated with O\+L\+E\+D\+::\+Version enum. \end{DoxyCompactList}\item 
+static const char $\ast$ \hyperlink{class_loom___o_l_e_d_a7203f388d5c2eda2dee6aa27c3ab72ad}{enum\+\_\+oled\+\_\+format\+\_\+string} (const \hyperlink{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffd}{Format} f)
+\begin{DoxyCompactList}\small\item\em Get c-\/string of name associated with O\+L\+ED\+:Format enum. \end{DoxyCompactList}\item 
+static const char $\ast$ \hyperlink{class_loom___o_l_e_d_a4c44f95a1aeade637a671ae365c13871}{enum\+\_\+oled\+\_\+freeze\+\_\+string} (const \hyperlink{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9}{Freeze\+Type} f)
+\begin{DoxyCompactList}\small\item\em Get c-\/string of name associated with O\+L\+ED freeze behavior enum. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+O\+L\+ED logging platform module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___o_l_e_d.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/2900}{\tt Product Page\+: Adafruit Featherwing O\+L\+ED – 128x32}
+\item \href{https://www.adafruit.com/product/2927}{\tt Product Page\+: Adafruit Monochrome 128x32 I2C O\+L\+ED}
+\item \href{https://github.com/adafruit/Adafruit_SSD1306}{\tt Dependency\+: Adafruit\+\_\+\+S\+S\+D1306}
+\item \href{https://github.com/adafruit/Adafruit-GFX-Library}{\tt Dependency\+: Adafruit-\/\+G\+F\+X-\/\+Library}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#oled-display}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!Format@{Format}}
+\index{Format@{Format}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{Format}{Format}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+\_\+\+O\+L\+E\+D\+::\+Format}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffd}{}\label{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffd}
+
+
+Different formats to display information in. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\+O\+UR@{F\+O\+UR}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!F\+O\+UR@{F\+O\+UR}}\item[{\em 
+F\+O\+UR\hypertarget{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda341fee9692a2ed8f09906d40d23fb1f9}{}\label{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda341fee9692a2ed8f09906d40d23fb1f9}
+}]4 Key values \index{E\+I\+G\+HT@{E\+I\+G\+HT}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!E\+I\+G\+HT@{E\+I\+G\+HT}}\item[{\em 
+E\+I\+G\+HT\hypertarget{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda960df6d77e65cd185ca4f3501db634eb}{}\label{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda960df6d77e65cd185ca4f3501db634eb}
+}]8 Key values \index{S\+C\+R\+O\+LL@{S\+C\+R\+O\+LL}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!S\+C\+R\+O\+LL@{S\+C\+R\+O\+LL}}\item[{\em 
+S\+C\+R\+O\+LL\hypertarget{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25}{}\label{class_loom___o_l_e_d_aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25}
+}]Scrolling. \end{description}
+\end{Desc}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!Freeze\+Type@{Freeze\+Type}}
+\index{Freeze\+Type@{Freeze\+Type}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{Freeze\+Type}{FreezeType}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+\_\+\+O\+L\+E\+D\+::\+Freeze\+Type}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9}{}\label{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9}
+
+
+Differnt freeze behaviors. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{D\+I\+S\+A\+B\+LE@{D\+I\+S\+A\+B\+LE}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!D\+I\+S\+A\+B\+LE@{D\+I\+S\+A\+B\+LE}}\item[{\em 
+D\+I\+S\+A\+B\+LE\hypertarget{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9afc93ea58f6d27ffed2b6518ffecf3e4e}{}\label{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9afc93ea58f6d27ffed2b6518ffecf3e4e}
+}]Freeze disabled. \index{D\+A\+TA@{D\+A\+TA}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!D\+A\+TA@{D\+A\+TA}}\item[{\em 
+D\+A\+TA\hypertarget{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9ae44f9e348e41cb272efa87387728571b}{}\label{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9ae44f9e348e41cb272efa87387728571b}
+}]Screen freezes. \index{S\+C\+R\+O\+LL@{S\+C\+R\+O\+LL}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!S\+C\+R\+O\+LL@{S\+C\+R\+O\+LL}}\item[{\em 
+S\+C\+R\+O\+LL\hypertarget{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25}{}\label{class_loom___o_l_e_d_adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25}
+}]Scroll freezes, data updates. \end{description}
+\end{Desc}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!Version@{Version}}
+\index{Version@{Version}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{Version}{Version}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+\_\+\+O\+L\+E\+D\+::\+Version}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400}{}\label{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400}
+
+
+Different forms of the O\+L\+ED display. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\+E\+A\+T\+H\+E\+R\+W\+I\+NG@{F\+E\+A\+T\+H\+E\+R\+W\+I\+NG}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!F\+E\+A\+T\+H\+E\+R\+W\+I\+NG@{F\+E\+A\+T\+H\+E\+R\+W\+I\+NG}}\item[{\em 
+F\+E\+A\+T\+H\+E\+R\+W\+I\+NG\hypertarget{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97}{}\label{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400a012f86b3ded09f31189cefd9fe361d97}
+}]Feather\+Wing O\+L\+ED. \index{B\+R\+E\+A\+K\+O\+UT@{B\+R\+E\+A\+K\+O\+UT}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!B\+R\+E\+A\+K\+O\+UT@{B\+R\+E\+A\+K\+O\+UT}}\item[{\em 
+B\+R\+E\+A\+K\+O\+UT\hypertarget{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400aef55538fb1b52e6052c75869be750acc}{}\label{class_loom___o_l_e_d_aaf40c7e29901e7130f86046a26cb7400aef55538fb1b52e6052c75869be750acc}
+}]Breakout board. \end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+O\+L\+E\+D(\+Loom\+Manager $\ast$manager, const bool enable\+\_\+rate\+\_\+filter=true, const uint16\+\_\+t min\+\_\+filter\+\_\+delay=300, const Version type=\+Version\+::\+F\+E\+A\+T\+H\+E\+R\+W\+I\+N\+G, const byte reset\+\_\+pin=\+A2, const Format display\+\_\+format=\+Format\+::\+S\+C\+R\+O\+L\+L, const uint16\+\_\+t scroll\+\_\+duration=6000, const byte freeze\+\_\+pin=10, const Freeze\+Type freeze\+\_\+behavior=\+Freeze\+Type\+::\+S\+C\+R\+O\+L\+L)}{Loom_OLED(LoomManager *manager, const bool enable_rate_filter=true, const uint16_t min_filter_delay=300, const Version type=Version::FEATHERWING, const byte reset_pin=A2, const Format display_format=Format::SCROLL, const uint16_t scroll_duration=6000, const byte freeze_pin=10, const FreezeType freeze_behavior=FreezeType::SCROLL)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+O\+L\+E\+D\+::\+Loom\+\_\+\+O\+L\+ED (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const bool}]{enable\+\_\+rate\+\_\+filter = {\ttfamily true}, }
+\item[{const uint16\+\_\+t}]{min\+\_\+filter\+\_\+delay = {\ttfamily 300}, }
+\item[{const {\bf Version}}]{type = {\ttfamily {\bf Version\+::\+F\+E\+A\+T\+H\+E\+R\+W\+I\+NG}}, }
+\item[{const byte}]{reset\+\_\+pin = {\ttfamily A2}, }
+\item[{const {\bf Format}}]{display\+\_\+format = {\ttfamily {\bf Format\+::\+S\+C\+R\+O\+LL}}, }
+\item[{const uint16\+\_\+t}]{scroll\+\_\+duration = {\ttfamily 6000}, }
+\item[{const byte}]{freeze\+\_\+pin = {\ttfamily 10}, }
+\item[{const {\bf Freeze\+Type}}]{freeze\+\_\+behavior = {\ttfamily {\bf Freeze\+Type\+::\+S\+C\+R\+O\+LL}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___o_l_e_d_accc63c1437c4d67fa6efbac79d647996}{}\label{class_loom___o_l_e_d_accc63c1437c4d67fa6efbac79d647996}
+
+
+O\+L\+ED module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em enable\+\_\+rate\+\_\+filter} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ Whether or not to impose maximum update rate \\
+\hline
+\mbox{\tt in}  & {\em min\+\_\+filter\+\_\+delay} & Int $\vert$ $<$300$>$ $\vert$ \mbox{[}50-\/5000\mbox{]} $\vert$ Minimum update delay, if enable\+\_\+rate\+\_\+filter enabled \\
+\hline
+\mbox{\tt in}  & {\em type} & Set(\+Version) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+Featherwing\char`\"{}), 1(\char`\"{}\+Breakout\char`\"{})\} $\vert$ Which version of the O\+L\+ED is being used \\
+\hline
+\mbox{\tt in}  & {\em reset\+\_\+pin} & Set(\+Int) $\vert$ $<$14$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin should be used for reseting. Only applies to breakout version \\
+\hline
+\mbox{\tt in}  & {\em display\+\_\+format} & Set(\+Format) $\vert$ $<$\+A0$>$ $\vert$ \{0(\char`\"{}4 pairs\char`\"{}), 1(\char`\"{}8 pairs\char`\"{}), 2(\char`\"{}\+Scrolling\char`\"{})\} $\vert$ How to display the key value pairs of a bundle \\
+\hline
+\mbox{\tt in}  & {\em scroll\+\_\+duration} & Int $\vert$ $<$6000$>$ $\vert$ \mbox{[}500-\/30000\mbox{]} $\vert$ The time (ms) to complete full scroll cycle if display\+\_\+format is S\+C\+R\+O\+LL \\
+\hline
+\mbox{\tt in}  & {\em freeze\+\_\+pin} & Set(\+Int) $\vert$ $<$10$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin should be used to pause the display \\
+\hline
+\mbox{\tt in}  & {\em freeze\+\_\+behavior} & Set(\+Freeze\+Type) $\vert$ $<$2$>$ $\vert$ \{O(\char`\"{}\+Disable\char`\"{}), 1(\char`\"{}\+Pause Data\char`\"{}), 2(\char`\"{}\+Pause Data and Scroll\char`\"{})\} $\vert$ How freezing the display should behave \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+O\+L\+E\+D(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_OLED(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+O\+L\+E\+D\+::\+Loom\+\_\+\+O\+L\+ED (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___o_l_e_d_abbe56d7e45b4de6ae1ae1296c074d448}{}\label{class_loom___o_l_e_d_abbe56d7e45b4de6ae1ae1296c074d448}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!````~Loom\+\_\+\+O\+L\+ED@{$\sim$\+Loom\+\_\+\+O\+L\+ED}}
+\index{````~Loom\+\_\+\+O\+L\+ED@{$\sim$\+Loom\+\_\+\+O\+L\+ED}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+O\+L\+E\+D()=default}{~Loom_OLED()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+O\+L\+E\+D\+::$\sim$\+Loom\+\_\+\+O\+L\+ED (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___o_l_e_d_a6970e6d9fa0dd9b40e87cb4f59a01a3f}{}\label{class_loom___o_l_e_d_a6970e6d9fa0dd9b40e87cb4f59a01a3f}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!enum\+\_\+oled\+\_\+format\+\_\+string@{enum\+\_\+oled\+\_\+format\+\_\+string}}
+\index{enum\+\_\+oled\+\_\+format\+\_\+string@{enum\+\_\+oled\+\_\+format\+\_\+string}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{enum\+\_\+oled\+\_\+format\+\_\+string(const Format f)}{enum_oled_format_string(const Format f)}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+\_\+\+O\+L\+E\+D\+::enum\+\_\+oled\+\_\+format\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{const {\bf Format}}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom___o_l_e_d_a7203f388d5c2eda2dee6aa27c3ab72ad}{}\label{class_loom___o_l_e_d_a7203f388d5c2eda2dee6aa27c3ab72ad}
+
+
+Get c-\/string of name associated with O\+L\+ED\+:Format enum. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em f} & O\+L\+E\+D\+::\+Format value to get string of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C-\/string of O\+L\+ED format 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!enum\+\_\+oled\+\_\+freeze\+\_\+string@{enum\+\_\+oled\+\_\+freeze\+\_\+string}}
+\index{enum\+\_\+oled\+\_\+freeze\+\_\+string@{enum\+\_\+oled\+\_\+freeze\+\_\+string}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{enum\+\_\+oled\+\_\+freeze\+\_\+string(const Freeze\+Type f)}{enum_oled_freeze_string(const FreezeType f)}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+\_\+\+O\+L\+E\+D\+::enum\+\_\+oled\+\_\+freeze\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{const {\bf Freeze\+Type}}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom___o_l_e_d_a4c44f95a1aeade637a671ae365c13871}{}\label{class_loom___o_l_e_d_a4c44f95a1aeade637a671ae365c13871}
+
+
+Get c-\/string of name associated with O\+L\+ED freeze behavior enum. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em f} & Freeze\+Type to get string of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C-\/string of O\+L\+ED freeze behavior 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!enum\+\_\+oled\+\_\+version\+\_\+string@{enum\+\_\+oled\+\_\+version\+\_\+string}}
+\index{enum\+\_\+oled\+\_\+version\+\_\+string@{enum\+\_\+oled\+\_\+version\+\_\+string}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{enum\+\_\+oled\+\_\+version\+\_\+string(const Version v)}{enum_oled_version_string(const Version v)}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+\_\+\+O\+L\+E\+D\+::enum\+\_\+oled\+\_\+version\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{const {\bf Version}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom___o_l_e_d_a34e7751ffe7f5fdfa8d5c3adde2aedd7}{}\label{class_loom___o_l_e_d_a34e7751ffe7f5fdfa8d5c3adde2aedd7}
+
+
+Get c-\/string of name associated with O\+L\+E\+D\+::\+Version enum. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em v} & O\+L\+E\+D\+::\+Version value to get string of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C-\/string of O\+L\+ED version 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!get\+\_\+display\+\_\+format@{get\+\_\+display\+\_\+format}}
+\index{get\+\_\+display\+\_\+format@{get\+\_\+display\+\_\+format}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{get\+\_\+display\+\_\+format() const }{get_display_format() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Format} Loom\+\_\+\+O\+L\+E\+D\+::get\+\_\+display\+\_\+format (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___o_l_e_d_ac76bb31bcfb46076a0e72f59025ba3cb}{}\label{class_loom___o_l_e_d_ac76bb31bcfb46076a0e72f59025ba3cb}
+
+
+Get the current O\+L\+ED display organization. 
+
+\begin{DoxyReturn}{Returns}
+The current Format being used 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!get\+\_\+freeze\+\_\+behavior@{get\+\_\+freeze\+\_\+behavior}}
+\index{get\+\_\+freeze\+\_\+behavior@{get\+\_\+freeze\+\_\+behavior}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{get\+\_\+freeze\+\_\+behavior() const }{get_freeze_behavior() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Freeze\+Type} Loom\+\_\+\+O\+L\+E\+D\+::get\+\_\+freeze\+\_\+behavior (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___o_l_e_d_a40d29eabfcdf35863dc2f1f5eca0b945}{}\label{class_loom___o_l_e_d_a40d29eabfcdf35863dc2f1f5eca0b945}
+
+
+Get the current freeze behavior. 
+
+\begin{DoxyReturn}{Returns}
+The current freeze behavior 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!get\+\_\+freeze\+\_\+pin@{get\+\_\+freeze\+\_\+pin}}
+\index{get\+\_\+freeze\+\_\+pin@{get\+\_\+freeze\+\_\+pin}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{get\+\_\+freeze\+\_\+pin() const }{get_freeze_pin() const }}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+O\+L\+E\+D\+::get\+\_\+freeze\+\_\+pin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___o_l_e_d_a6ca6b64ea5c2a5d78733f9675f409efb}{}\label{class_loom___o_l_e_d_a6ca6b64ea5c2a5d78733f9675f409efb}
+
+
+Get the digital pin use to freeze the display. 
+
+\begin{DoxyReturn}{Returns}
+The freeze pin 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!get\+\_\+scroll\+\_\+duration@{get\+\_\+scroll\+\_\+duration}}
+\index{get\+\_\+scroll\+\_\+duration@{get\+\_\+scroll\+\_\+duration}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{get\+\_\+scroll\+\_\+duration() const }{get_scroll_duration() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint Loom\+\_\+\+O\+L\+E\+D\+::get\+\_\+scroll\+\_\+duration (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___o_l_e_d_a1460b24e59ea1dff3dd8605a0a9a9564}{}\label{class_loom___o_l_e_d_a1460b24e59ea1dff3dd8605a0a9a9564}
+
+
+Get the current scroll duration. 
+
+\begin{DoxyReturn}{Returns}
+The current scroll duration 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!log@{log}}
+\index{log@{log}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{log(\+Json\+Object json) override}{log(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+O\+L\+E\+D\+::log (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___o_l_e_d_a288f75a9eb423bda9b65b8cb4c7708b8}{}\label{class_loom___o_l_e_d_a288f75a9eb423bda9b65b8cb4c7708b8}
+
+
+Log a Json object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json Object to log \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_log_plat_accace14ed45817c98ef5ccc15fd79004}{Loom\+Log\+Plat}.
+
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+O\+L\+E\+D\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___o_l_e_d_a20dab0bc2c5bdc139b1b04523a54a78c}{}\label{class_loom___o_l_e_d_a20dab0bc2c5bdc139b1b04523a54a78c}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_log_plat_afd1780573d350f46ce26d237a4ade43b}{Loom\+Log\+Plat}.
+
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!set\+\_\+display\+\_\+format@{set\+\_\+display\+\_\+format}}
+\index{set\+\_\+display\+\_\+format@{set\+\_\+display\+\_\+format}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{set\+\_\+display\+\_\+format(const Format format)}{set_display_format(const Format format)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+O\+L\+E\+D\+::set\+\_\+display\+\_\+format (
+\begin{DoxyParamCaption}
+\item[{const {\bf Format}}]{format}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___o_l_e_d_a4ce08addf521b1bba3a1f73730d8650b}{}\label{class_loom___o_l_e_d_a4ce08addf521b1bba3a1f73730d8650b}
+
+
+Set the O\+L\+ED display organization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em format} & The Format to set to \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!set\+\_\+freeze\+\_\+behavior@{set\+\_\+freeze\+\_\+behavior}}
+\index{set\+\_\+freeze\+\_\+behavior@{set\+\_\+freeze\+\_\+behavior}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{set\+\_\+freeze\+\_\+behavior(const Freeze\+Type behavior)}{set_freeze_behavior(const FreezeType behavior)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+O\+L\+E\+D\+::set\+\_\+freeze\+\_\+behavior (
+\begin{DoxyParamCaption}
+\item[{const {\bf Freeze\+Type}}]{behavior}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___o_l_e_d_a42eea08f2832c5afd31522b62601196b}{}\label{class_loom___o_l_e_d_a42eea08f2832c5afd31522b62601196b}
+
+
+Set the freezing behavior of the display. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em behavior} & Which Freeze\+Type type to use \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!set\+\_\+freeze\+\_\+pin@{set\+\_\+freeze\+\_\+pin}}
+\index{set\+\_\+freeze\+\_\+pin@{set\+\_\+freeze\+\_\+pin}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{set\+\_\+freeze\+\_\+pin(const byte pin)}{set_freeze_pin(const byte pin)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+O\+L\+E\+D\+::set\+\_\+freeze\+\_\+pin (
+\begin{DoxyParamCaption}
+\item[{const byte}]{pin}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___o_l_e_d_a13dc4c96f830f9c949c3e6731b2f9318}{}\label{class_loom___o_l_e_d_a13dc4c96f830f9c949c3e6731b2f9318}
+
+
+Set the digital pin to use to freeze the display. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & The pin to use \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!set\+\_\+scroll\+\_\+duration@{set\+\_\+scroll\+\_\+duration}}
+\index{set\+\_\+scroll\+\_\+duration@{set\+\_\+scroll\+\_\+duration}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{set\+\_\+scroll\+\_\+duration(const uint duration)}{set_scroll_duration(const uint duration)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+O\+L\+E\+D\+::set\+\_\+scroll\+\_\+duration (
+\begin{DoxyParamCaption}
+\item[{const uint}]{duration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___o_l_e_d_a5e58b03b11b03f79f1d9c98b0247cef0}{}\label{class_loom___o_l_e_d_a5e58b03b11b03f79f1d9c98b0247cef0}
+
+
+Set the duration of a complete scroll. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em duration} & The duration to set to \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!display@{display}}
+\index{display@{display}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{display}{display}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+S\+S\+D1306 Loom\+\_\+\+O\+L\+E\+D\+::display\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___o_l_e_d_a0cc78f1f1fd95a4c3d16fe32c9d33499}{}\label{class_loom___o_l_e_d_a0cc78f1f1fd95a4c3d16fe32c9d33499}
+
+
+Underlying O\+L\+ED controller. 
+
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!display\+\_\+format@{display\+\_\+format}}
+\index{display\+\_\+format@{display\+\_\+format}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{display\+\_\+format}{display_format}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Format} Loom\+\_\+\+O\+L\+E\+D\+::display\+\_\+format\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___o_l_e_d_a1cfdc8965297ea1f697d8a4d3e44b5fd}{}\label{class_loom___o_l_e_d_a1cfdc8965297ea1f697d8a4d3e44b5fd}
+
+
+How to display the data on O\+L\+ED. 
+
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!freeze\+\_\+behavior@{freeze\+\_\+behavior}}
+\index{freeze\+\_\+behavior@{freeze\+\_\+behavior}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{freeze\+\_\+behavior}{freeze_behavior}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Freeze\+Type} Loom\+\_\+\+O\+L\+E\+D\+::freeze\+\_\+behavior\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___o_l_e_d_aafea3f7f393170a4cc7c5e7ff8583344}{}\label{class_loom___o_l_e_d_aafea3f7f393170a4cc7c5e7ff8583344}
+
+
+What \textquotesingle{}freezing\textquotesingle{} behavior should be followed. 
+
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!freeze\+\_\+pin@{freeze\+\_\+pin}}
+\index{freeze\+\_\+pin@{freeze\+\_\+pin}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{freeze\+\_\+pin}{freeze_pin}}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+O\+L\+E\+D\+::freeze\+\_\+pin\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___o_l_e_d_a693dc20156729cb7d06e877247e914d0}{}\label{class_loom___o_l_e_d_a693dc20156729cb7d06e877247e914d0}
+
+
+Which pin to check if display should freeze. 
+
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!reset\+\_\+pin@{reset\+\_\+pin}}
+\index{reset\+\_\+pin@{reset\+\_\+pin}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{reset\+\_\+pin}{reset_pin}}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+O\+L\+E\+D\+::reset\+\_\+pin\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___o_l_e_d_a8962f61e0211d70d1d1de489d1d6bbfa}{}\label{class_loom___o_l_e_d_a8962f61e0211d70d1d1de489d1d6bbfa}
+
+
+The reset pin (only applies to breakout version) 
+
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!scroll\+\_\+duration@{scroll\+\_\+duration}}
+\index{scroll\+\_\+duration@{scroll\+\_\+duration}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{scroll\+\_\+duration}{scroll_duration}}]{\setlength{\rightskip}{0pt plus 5cm}uint Loom\+\_\+\+O\+L\+E\+D\+::scroll\+\_\+duration\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___o_l_e_d_ad6893fc088b080440f2f1d5d6f84d461}{}\label{class_loom___o_l_e_d_ad6893fc088b080440f2f1d5d6f84d461}
+
+
+The duration to complete a full cycle through a bundle of data (milliseconds)(non-\/blocking) 
+
+\index{Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}!version@{version}}
+\index{version@{version}!Loom\+\_\+\+O\+L\+ED@{Loom\+\_\+\+O\+L\+ED}}
+\subsubsection[{\texorpdfstring{version}{version}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Version} Loom\+\_\+\+O\+L\+E\+D\+::version\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___o_l_e_d_af0bc56c14688195fed9cafb74601bec3}{}\label{class_loom___o_l_e_d_af0bc56c14688195fed9cafb74601bec3}
+
+
+What type the O\+L\+ED is (Feather\+Wing or breakout) 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Log\+Plats/\hyperlink{_o_l_e_d_8h}{O\+L\+E\+D.\+h}\item 
+src/\+Log\+Plats/\hyperlink{_o_l_e_d_8cpp}{O\+L\+E\+D.\+cpp}\end{DoxyCompactItemize}

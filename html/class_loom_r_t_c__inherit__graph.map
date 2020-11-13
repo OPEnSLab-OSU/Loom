@@ -1,0 +1,5 @@
+<map id="LoomRTC" name="LoomRTC">
+<area shape="rect" id="node3" href="$class_loom___d_s3231.html" title="DS3231 RTC module. " alt="" coords="5,155,121,181"/>
+<area shape="rect" id="node4" href="$class_loom___p_c_f8523.html" title="PCF8523 RTC module. " alt="" coords="145,155,267,181"/>
+<area shape="rect" id="node2" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="82,5,186,32"/>
+</map>

@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_package_8cpp" kind="file" language="C++">
+    <compoundname>Package.cpp</compoundname>
+    <includes refid="_package_8h" local="yes">Package.h</includes>
+    <incdepgraph>
+      <node id="4533">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4534" relation="include">
+        </childnode>
+        <childnode refid="4535" relation="include">
+        </childnode>
+      </node>
+      <node id="4535">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4534">
+        <label>Arduino.h</label>
+      </node>
+      <node id="4532">
+        <label>src/Package.cpp</label>
+        <link refid="Package.cpp"/>
+        <childnode refid="4533" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_package_8cpp_1afa4b771f3b536999226223c13d00e089" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>JsonObject</type>
+        <definition>JsonObject get_module_data_object</definition>
+        <argsstring>(JsonObject json, const char *module_name)</argsstring>
+        <name>get_module_data_object</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+        </param>
+        <briefdescription>
+<para>Add an list of alternating keys and values to a json data object under the specified module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to add data to </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of module calling package </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Package.cpp" line="17" column="1" bodyfile="src/Package.cpp" bodystart="17" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="_package_8cpp_1ae6dee320d551bb715e7e4099b742381b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void package_json_timestamp</definition>
+        <argsstring>(JsonObject json, const char *date, const char *time)</argsstring>
+        <name>package_json_timestamp</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>date</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>Add timestamp to a Json object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to add timestamp to </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">date</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time string of timestamp </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Date string of timestamp </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Package.cpp" line="50" column="1" bodyfile="src/Package.cpp" bodystart="50" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="_package_8cpp_1a47c6c724dc391e50f5350913b8201924" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void flatten_json_data_object</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>flatten_json_data_object</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Convert data in key values in arrays in ojects to keys and values in single object &apos;flatObj&apos;. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to flatten data of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Package.cpp" line="61" column="1" bodyfile="src/Package.cpp" bodystart="61" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="_package_8cpp_1a1cadd6f48122b56dc1bbed7df930707b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void flatten_json_data_array</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>flatten_json_data_array</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Convert data in key values in arrays in ojects to alternating keys and values in array &apos;flatArray&apos;. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object to flatten data of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Package.cpp" line="80" column="1" bodyfile="src/Package.cpp" bodystart="80" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="_package_8cpp_1a1d3f3a67119474ceffc5799bd40a68d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>JsonArray</type>
+        <definition>JsonArray add_config_temp</definition>
+        <argsstring>(JsonObject json, const char *module_name)</argsstring>
+        <name>add_config_temp</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Package.cpp" line="99" column="1" bodyfile="src/Package.cpp" bodystart="99" bodyend="109"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Package.cpp"/>
+  </compounddef>
+</doxygen>

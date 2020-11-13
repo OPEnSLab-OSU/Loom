@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_serial___sensor_8cpp" kind="file" language="C++">
+    <compoundname>Serial_Sensor.cpp</compoundname>
+    <includes refid="_serial___sensor_8h" local="yes">Serial_Sensor.h</includes>
+    <incdepgraph>
+      <node id="5700">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5697">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5698" relation="include">
+        </childnode>
+        <childnode refid="5700" relation="include">
+        </childnode>
+        <childnode refid="5701" relation="include">
+        </childnode>
+        <childnode refid="5702" relation="include">
+        </childnode>
+      </node>
+      <node id="5701">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5699" relation="include">
+        </childnode>
+        <childnode refid="5702" relation="include">
+        </childnode>
+      </node>
+      <node id="5695">
+        <label>Serial_Sensor.h</label>
+        <link refid="_serial___sensor_8h"/>
+        <childnode refid="5696" relation="include">
+        </childnode>
+      </node>
+      <node id="5698">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5699" relation="include">
+        </childnode>
+      </node>
+      <node id="5702">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5696">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5697" relation="include">
+        </childnode>
+      </node>
+      <node id="5699">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5694">
+        <label>src/Sensors/SERIAL/Serial_Sensor.cpp</label>
+        <link refid="Serial_Sensor.cpp"/>
+        <childnode refid="5695" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+<para>File for Serial Sensor implementation. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="author"><para>Eli Winkelman and Kenneth Kang </para></simplesect>
+<simplesect kind="date"><para>2020 </para></simplesect>
+<simplesect kind="copyright"><para>GNU General Public License v3.0 </para></simplesect>
+</para>    </detaileddescription>
+    <location file="src/Sensors/SERIAL/Serial_Sensor.cpp"/>
+  </compounddef>
+</doxygen>

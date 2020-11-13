@@ -1,0 +1,1150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_misc_8h" kind="file" language="C++">
+    <compoundname>Misc.h</compoundname>
+    <includes local="no">Arduino.h</includes>
+    <includedby refid="_module_8h" local="yes">src/Module.h</includedby>
+    <includedby refid="_manager_8h" local="yes">src/Manager.h</includedby>
+    <includedby refid="_misc_8cpp" local="yes">src/Misc.cpp</includedby>
+    <incdepgraph>
+      <node id="4037">
+        <label>src/Misc.h</label>
+        <link refid="Misc.h"/>
+        <childnode refid="4038" relation="include">
+        </childnode>
+      </node>
+      <node id="4038">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4098">
+        <label>src/Sleep_Manager.cpp</label>
+        <link refid="_sleep___manager_8cpp"/>
+      </node>
+      <node id="4107">
+        <label>src/Temperature_Sync.cpp</label>
+        <link refid="_temperature___sync_8cpp"/>
+      </node>
+      <node id="4056">
+        <label>src/CommPlats/Bluetooth.cpp</label>
+        <link refid="_bluetooth_8cpp"/>
+      </node>
+      <node id="4117">
+        <label>src/Sensors/I2C/AS7263.cpp</label>
+        <link refid="_a_s7263_8cpp"/>
+      </node>
+      <node id="4142">
+        <label>src/Sensors/I2C/ZXGesture.h</label>
+        <link refid="_z_x_gesture_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4143" relation="include">
+        </childnode>
+      </node>
+      <node id="4064">
+        <label>src/LogPlats/BatchSD.cpp</label>
+        <link refid="_batch_s_d_8cpp"/>
+      </node>
+      <node id="4118">
+        <label>src/Sensors/I2C/AS7265X.h</label>
+        <link refid="_a_s7265_x_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4119" relation="include">
+        </childnode>
+      </node>
+      <node id="4078">
+        <label>src/Components/WarmUp/WarmUp_Manager.cpp</label>
+        <link refid="_warm_up___manager_8cpp"/>
+      </node>
+      <node id="4077">
+        <label>src/Components/WarmUp/WarmUp.cpp</label>
+        <link refid="_warm_up_8cpp"/>
+      </node>
+      <node id="4052">
+        <label>src/Actuators/Stepper.h</label>
+        <link refid="_stepper_8h"/>
+        <childnode refid="4053" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4080">
+        <label>src/InternetPlats/InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="4081" relation="include">
+        </childnode>
+        <childnode refid="4083" relation="include">
+        </childnode>
+        <childnode refid="4085" relation="include">
+        </childnode>
+        <childnode refid="4086" relation="include">
+        </childnode>
+        <childnode refid="4065" relation="include">
+        </childnode>
+        <childnode refid="4088" relation="include">
+        </childnode>
+        <childnode refid="4092" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4094" relation="include">
+        </childnode>
+      </node>
+      <node id="4045">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="4046" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+      </node>
+      <node id="4114">
+        <label>src/Multiplexer.cpp</label>
+        <link refid="_multiplexer_8cpp"/>
+      </node>
+      <node id="4136">
+        <label>src/Sensors/I2C/TMP007.h</label>
+        <link refid="_t_m_p007_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4137" relation="include">
+        </childnode>
+      </node>
+      <node id="4073">
+        <label>src/LogPlats/OLED.cpp</label>
+        <link refid="_o_l_e_d_8cpp"/>
+      </node>
+      <node id="4093">
+        <label>src/NTP_Sync.cpp</label>
+        <link refid="_n_t_p___sync_8cpp"/>
+      </node>
+      <node id="4081">
+        <label>src/InternetPlats/InternetEthernet.h</label>
+        <link refid="_internet_ethernet_8h"/>
+        <childnode refid="4082" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4075">
+        <label>src/LogPlats/SD.cpp</label>
+        <link refid="_s_d_8cpp"/>
+      </node>
+      <node id="4065">
+        <label>src/PublishPlats/PublishPlat.h</label>
+        <link refid="_publish_plat_8h"/>
+        <childnode refid="4066" relation="include">
+        </childnode>
+        <childnode refid="4068" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4070" relation="include">
+        </childnode>
+      </node>
+      <node id="4154">
+        <label>src/Sensors/SPI/MAX31855.h</label>
+        <link refid="_m_a_x31855_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4155" relation="include">
+        </childnode>
+      </node>
+      <node id="4113">
+        <label>src/Sensors/I2C/AS7262.h</label>
+        <link refid="_a_s7262_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4115" relation="include">
+        </childnode>
+      </node>
+      <node id="4090">
+        <label>src/SubscribePlats/Max_Sub.cpp</label>
+        <link refid="_max___sub_8cpp"/>
+      </node>
+      <node id="4062">
+        <label>src/LogPlats/LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="4063" relation="include">
+        </childnode>
+        <childnode refid="4071" relation="include">
+        </childnode>
+        <childnode refid="4072" relation="include">
+        </childnode>
+        <childnode refid="4074" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+      </node>
+      <node id="4133">
+        <label>src/Sensors/I2C/MS5803.cpp</label>
+        <link refid="_m_s5803_8cpp"/>
+      </node>
+      <node id="4040">
+        <label>src/Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4041" relation="include">
+        </childnode>
+        <childnode refid="4054" relation="include">
+        </childnode>
+        <childnode refid="4062" relation="include">
+        </childnode>
+        <childnode refid="4076" relation="include">
+        </childnode>
+        <childnode refid="4080" relation="include">
+        </childnode>
+        <childnode refid="4095" relation="include">
+        </childnode>
+        <childnode refid="4097" relation="include">
+        </childnode>
+        <childnode refid="4099" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4065" relation="include">
+        </childnode>
+        <childnode refid="4088" relation="include">
+        </childnode>
+        <childnode refid="4104" relation="include">
+        </childnode>
+        <childnode refid="4092" relation="include">
+        </childnode>
+        <childnode refid="4164" relation="include">
+        </childnode>
+        <childnode refid="4165" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4079" relation="include">
+        </childnode>
+        <childnode refid="4166" relation="include">
+        </childnode>
+      </node>
+      <node id="4152">
+        <label>src/Sensors/SDI12/SDI12_Sensor.cpp</label>
+        <link refid="_s_d_i12___sensor_8cpp"/>
+      </node>
+      <node id="4044">
+        <label>src/Actuators/Neopixel.cpp</label>
+        <link refid="_neopixel_8cpp"/>
+      </node>
+      <node id="4082">
+        <label>src/InternetPlats/InternetEthernet.cpp</label>
+        <link refid="_internet_ethernet_8cpp"/>
+      </node>
+      <node id="4148">
+        <label>src/Sensors/SDI12/Decagon_5TM.h</label>
+        <link refid="_decagon__5_t_m_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4149" relation="include">
+        </childnode>
+      </node>
+      <node id="4139">
+        <label>src/Sensors/I2C/TSL2561.cpp</label>
+        <link refid="_t_s_l2561_8cpp"/>
+      </node>
+      <node id="4051">
+        <label>src/Actuators/Servo.cpp</label>
+        <link refid="_servo_8cpp"/>
+      </node>
+      <node id="4144">
+        <label>src/Sensors/I2C/STEMMA.h</label>
+        <link refid="_s_t_e_m_m_a_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4145" relation="include">
+        </childnode>
+      </node>
+      <node id="4068">
+        <label>src/PublishPlats/Max_Pub.h</label>
+        <link refid="_max___pub_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4069" relation="include">
+        </childnode>
+      </node>
+      <node id="4103">
+        <label>src/RTC/PCF8523.cpp</label>
+        <link refid="_p_c_f8523_8cpp"/>
+      </node>
+      <node id="4076">
+        <label>src/Components/WarmUp/WarmUp_Manager.h</label>
+        <link refid="_warm_up___manager_8h"/>
+        <childnode refid="4077" relation="include">
+        </childnode>
+        <childnode refid="4078" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4079" relation="include">
+        </childnode>
+      </node>
+      <node id="4088">
+        <label>src/SubscribePlats/SubscribePlat.h</label>
+        <link refid="_subscribe_plat_8h"/>
+        <childnode refid="4089" relation="include">
+        </childnode>
+        <childnode refid="4091" relation="include">
+        </childnode>
+      </node>
+      <node id="4089">
+        <label>src/SubscribePlats/Max_Sub.h</label>
+        <link refid="_max___sub_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4069" relation="include">
+        </childnode>
+        <childnode refid="4090" relation="include">
+        </childnode>
+      </node>
+      <node id="4105">
+        <label>src/Sensors/Analog.h</label>
+        <link refid="_analog_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4106" relation="include">
+        </childnode>
+        <childnode refid="4107" relation="include">
+        </childnode>
+      </node>
+      <node id="4168">
+        <label>src/Misc.cpp</label>
+        <link refid="_misc_8cpp"/>
+      </node>
+      <node id="4109">
+        <label>src/Sensors/Digital.cpp</label>
+        <link refid="_digital_8cpp"/>
+      </node>
+      <node id="4099">
+        <label>src/RTC/RTC.h</label>
+        <link refid="_r_t_c_8h"/>
+        <childnode refid="4096" relation="include">
+        </childnode>
+        <childnode refid="4074" relation="include">
+        </childnode>
+        <childnode refid="4100" relation="include">
+        </childnode>
+        <childnode refid="4102" relation="include">
+        </childnode>
+        <childnode refid="4092" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4079" relation="include">
+        </childnode>
+        <childnode refid="4094" relation="include">
+        </childnode>
+        <childnode refid="4098" relation="include">
+        </childnode>
+      </node>
+      <node id="4146">
+        <label>src/Sensors/I2C/I2C_Sensor.cpp</label>
+        <link refid="_i2_c___sensor_8cpp"/>
+      </node>
+      <node id="4048">
+        <label>src/Actuators/Relay.h</label>
+        <link refid="_relay_8h"/>
+        <childnode refid="4049" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4124">
+        <label>src/Sensors/I2C/LIS3DH.h</label>
+        <link refid="_l_i_s3_d_h_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4125" relation="include">
+        </childnode>
+      </node>
+      <node id="4159">
+        <label>src/Sensors/SERIAL/Serial_Sensor.h</label>
+        <link refid="_serial___sensor_8h"/>
+        <childnode refid="4160" relation="include">
+        </childnode>
+        <childnode refid="4162" relation="include">
+        </childnode>
+      </node>
+      <node id="4129">
+        <label>src/Sensors/I2C/MMA8451.cpp</label>
+        <link refid="_m_m_a8451_8cpp"/>
+      </node>
+      <node id="4055">
+        <label>src/CommPlats/Bluetooth.h</label>
+        <link refid="_bluetooth_8h"/>
+        <childnode refid="4056" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4123">
+        <label>src/Sensors/I2C/FXOS8700.cpp</label>
+        <link refid="_f_x_o_s8700_8cpp"/>
+      </node>
+      <node id="4157">
+        <label>src/Sensors/SPI/MAX31856.cpp</label>
+        <link refid="_m_a_x31856_8cpp"/>
+      </node>
+      <node id="4149">
+        <label>src/Sensors/SDI12/Decagon_5TM.cpp</label>
+        <link refid="_decagon__5_t_m_8cpp"/>
+      </node>
+      <node id="4132">
+        <label>src/Sensors/I2C/MS5803.h</label>
+        <link refid="_m_s5803_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4133" relation="include">
+        </childnode>
+        <childnode refid="4107" relation="include">
+        </childnode>
+      </node>
+      <node id="4084">
+        <label>src/InternetPlats/InternetLTE.cpp</label>
+        <link refid="_internet_l_t_e_8cpp"/>
+      </node>
+      <node id="4067">
+        <label>src/PublishPlats/GoogleSheets.cpp</label>
+        <link refid="_google_sheets_8cpp"/>
+      </node>
+      <node id="4128">
+        <label>src/Sensors/I2C/MMA8451.h</label>
+        <link refid="_m_m_a8451_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4129" relation="include">
+        </childnode>
+      </node>
+      <node id="4049">
+        <label>src/Actuators/Relay.cpp</label>
+        <link refid="_relay_8cpp"/>
+      </node>
+      <node id="4071">
+        <label>src/LogPlats/LogPlat.cpp</label>
+        <link refid="_log_plat_8cpp"/>
+      </node>
+      <node id="4147">
+        <label>src/Sensors/SDI12/SDI12_Sensor.h</label>
+        <link refid="_s_d_i12___sensor_8h"/>
+        <childnode refid="4148" relation="include">
+        </childnode>
+        <childnode refid="4150" relation="include">
+        </childnode>
+        <childnode refid="4152" relation="include">
+        </childnode>
+      </node>
+      <node id="4127">
+        <label>src/Sensors/I2C/MB1232.cpp</label>
+        <link refid="_m_b1232_8cpp"/>
+      </node>
+      <node id="4130">
+        <label>src/Sensors/I2C/MPU6050.h</label>
+        <link refid="_m_p_u6050_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4131" relation="include">
+        </childnode>
+      </node>
+      <node id="4039">
+        <label>src/Misc.h</label>
+        <link refid="Misc.h"/>
+        <childnode refid="4040" relation="include">
+        </childnode>
+        <childnode refid="4167" relation="include">
+        </childnode>
+        <childnode refid="4168" relation="include">
+        </childnode>
+      </node>
+      <node id="4058">
+        <label>src/CommPlats/LoRa.h</label>
+        <link refid="_lo_ra_8h"/>
+        <childnode refid="4059" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4108">
+        <label>src/Sensors/Digital.h</label>
+        <link refid="_digital_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4109" relation="include">
+        </childnode>
+      </node>
+      <node id="4050">
+        <label>src/Actuators/Servo.h</label>
+        <link refid="_servo_8h"/>
+        <childnode refid="4051" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4059">
+        <label>src/CommPlats/LoRa.cpp</label>
+        <link refid="_lo_ra_8cpp"/>
+      </node>
+      <node id="4161">
+        <label>src/Sensors/SERIAL/K30.cpp</label>
+        <link refid="_k30_8cpp"/>
+      </node>
+      <node id="4083">
+        <label>src/InternetPlats/InternetLTE.h</label>
+        <link refid="_internet_l_t_e_8h"/>
+        <childnode refid="4084" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4074">
+        <label>src/LogPlats/SD.h</label>
+        <link refid="_s_d_8h"/>
+        <childnode refid="4075" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4086">
+        <label>src/InternetPlats/InternetWiFi.h</label>
+        <link refid="_internet_wi_fi_8h"/>
+        <childnode refid="4087" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4145">
+        <label>src/Sensors/I2C/STEMMA.cpp</label>
+        <link refid="_s_t_e_m_m_a_8cpp"/>
+      </node>
+      <node id="4119">
+        <label>src/Sensors/I2C/AS7265X.cpp</label>
+        <link refid="_a_s7265_x_8cpp"/>
+      </node>
+      <node id="4079">
+        <label>src/Manager_Module_Access.cpp</label>
+        <link refid="_manager___module___access_8cpp"/>
+      </node>
+      <node id="4057">
+        <label>src/CommPlats/CommPlat.cpp</label>
+        <link refid="_comm_plat_8cpp"/>
+      </node>
+      <node id="4096">
+        <label>src/Interrupt_Manager.cpp</label>
+        <link refid="_interrupt___manager_8cpp"/>
+      </node>
+      <node id="4104">
+        <label>src/Sensors/Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="4105" relation="include">
+        </childnode>
+        <childnode refid="4108" relation="include">
+        </childnode>
+        <childnode refid="4110" relation="include">
+        </childnode>
+        <childnode refid="4147" relation="include">
+        </childnode>
+        <childnode refid="4153" relation="include">
+        </childnode>
+        <childnode refid="4159" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4163" relation="include">
+        </childnode>
+      </node>
+      <node id="4041">
+        <label>src/Actuators/Actuator.h</label>
+        <link refid="_actuator_8h"/>
+        <childnode refid="4042" relation="include">
+        </childnode>
+        <childnode refid="4043" relation="include">
+        </childnode>
+        <childnode refid="4048" relation="include">
+        </childnode>
+        <childnode refid="4050" relation="include">
+        </childnode>
+        <childnode refid="4052" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+      </node>
+      <node id="4087">
+        <label>src/InternetPlats/InternetWiFi.cpp</label>
+        <link refid="_internet_wi_fi_8cpp"/>
+      </node>
+      <node id="4042">
+        <label>src/Actuators/Actuator.cpp</label>
+        <link refid="_actuator_8cpp"/>
+      </node>
+      <node id="4166">
+        <label>src/Module.cpp</label>
+        <link refid="_module_8cpp"/>
+      </node>
+      <node id="4112">
+        <label>src/Sensors/I2C/ADS1115.cpp</label>
+        <link refid="_a_d_s1115_8cpp"/>
+      </node>
+      <node id="4153">
+        <label>src/Sensors/SPI/SPI_Sensor.h</label>
+        <link refid="_s_p_i___sensor_8h"/>
+        <childnode refid="4154" relation="include">
+        </childnode>
+        <childnode refid="4156" relation="include">
+        </childnode>
+        <childnode refid="4158" relation="include">
+        </childnode>
+      </node>
+      <node id="4138">
+        <label>src/Sensors/I2C/TSL2561.h</label>
+        <link refid="_t_s_l2561_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4139" relation="include">
+        </childnode>
+      </node>
+      <node id="4137">
+        <label>src/Sensors/I2C/TMP007.cpp</label>
+        <link refid="_t_m_p007_8cpp"/>
+      </node>
+      <node id="4101">
+        <label>src/RTC/DS3231.cpp</label>
+        <link refid="_d_s3231_8cpp"/>
+      </node>
+      <node id="4155">
+        <label>src/Sensors/SPI/MAX31855.cpp</label>
+        <link refid="_m_a_x31855_8cpp"/>
+      </node>
+      <node id="4102">
+        <label>src/RTC/PCF8523.h</label>
+        <link refid="_p_c_f8523_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4103" relation="include">
+        </childnode>
+      </node>
+      <node id="4120">
+        <label>src/Sensors/I2C/FXAS21002.h</label>
+        <link refid="_f_x_a_s21002_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4121" relation="include">
+        </childnode>
+      </node>
+      <node id="4135">
+        <label>src/Sensors/I2C/SHT31D.cpp</label>
+        <link refid="_s_h_t31_d_8cpp"/>
+      </node>
+      <node id="4070">
+        <label>src/PublishPlats/PublishPlat.cpp</label>
+        <link refid="_publish_plat_8cpp"/>
+      </node>
+      <node id="4158">
+        <label>src/Sensors/SPI/SPI_Sensor.cpp</label>
+        <link refid="_s_p_i___sensor_8cpp"/>
+      </node>
+      <node id="4085">
+        <label>src/InternetPlats/InternetPlat.cpp</label>
+        <link refid="_internet_plat_8cpp"/>
+      </node>
+      <node id="4092">
+        <label>src/NTP_Sync.h</label>
+        <link refid="_n_t_p___sync_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4093" relation="include">
+        </childnode>
+      </node>
+      <node id="4043">
+        <label>src/Actuators/Neopixel.h</label>
+        <link refid="_neopixel_8h"/>
+        <childnode refid="4044" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4069">
+        <label>src/PublishPlats/Max_Pub.cpp</label>
+        <link refid="_max___pub_8cpp"/>
+      </node>
+      <node id="4162">
+        <label>src/Sensors/SERIAL/Serial_Sensor.cpp</label>
+        <link refid="_serial___sensor_8cpp"/>
+      </node>
+      <node id="4063">
+        <label>src/LogPlats/BatchSD.h</label>
+        <link refid="_batch_s_d_8h"/>
+        <childnode refid="4054" relation="include">
+        </childnode>
+        <childnode refid="4064" relation="include">
+        </childnode>
+        <childnode refid="4065" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4072">
+        <label>src/LogPlats/OLED.h</label>
+        <link refid="_o_l_e_d_8h"/>
+        <childnode refid="4073" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4143">
+        <label>src/Sensors/I2C/ZXGesture.cpp</label>
+        <link refid="_z_x_gesture_8cpp"/>
+      </node>
+      <node id="4163">
+        <label>src/Sensors/Sensor.cpp</label>
+        <link refid="_sensor_8cpp"/>
+      </node>
+      <node id="4110">
+        <label>src/Sensors/I2C/I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="4111" relation="include">
+        </childnode>
+        <childnode refid="4113" relation="include">
+        </childnode>
+        <childnode refid="4116" relation="include">
+        </childnode>
+        <childnode refid="4118" relation="include">
+        </childnode>
+        <childnode refid="4120" relation="include">
+        </childnode>
+        <childnode refid="4122" relation="include">
+        </childnode>
+        <childnode refid="4124" relation="include">
+        </childnode>
+        <childnode refid="4126" relation="include">
+        </childnode>
+        <childnode refid="4128" relation="include">
+        </childnode>
+        <childnode refid="4130" relation="include">
+        </childnode>
+        <childnode refid="4132" relation="include">
+        </childnode>
+        <childnode refid="4134" relation="include">
+        </childnode>
+        <childnode refid="4136" relation="include">
+        </childnode>
+        <childnode refid="4138" relation="include">
+        </childnode>
+        <childnode refid="4140" relation="include">
+        </childnode>
+        <childnode refid="4142" relation="include">
+        </childnode>
+        <childnode refid="4144" relation="include">
+        </childnode>
+        <childnode refid="4146" relation="include">
+        </childnode>
+      </node>
+      <node id="4046">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="4165">
+        <label>src/Multiplexer.h</label>
+        <link refid="_multiplexer_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+      </node>
+      <node id="4091">
+        <label>src/SubscribePlats/SubscribePlat.cpp</label>
+        <link refid="_subscribe_plat_8cpp"/>
+      </node>
+      <node id="4094">
+        <label>src/RTC/RTC.cpp</label>
+        <link refid="_r_t_c_8cpp"/>
+      </node>
+      <node id="4141">
+        <label>src/Sensors/I2C/TSL2591.cpp</label>
+        <link refid="_t_s_l2591_8cpp"/>
+      </node>
+      <node id="4047">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="4151">
+        <label>src/Sensors/SDI12/Decagon_GS3.cpp</label>
+        <link refid="_decagon___g_s3_8cpp"/>
+      </node>
+      <node id="4095">
+        <label>src/Interrupt_Manager.h</label>
+        <link refid="_interrupt___manager_8h"/>
+        <childnode refid="4096" relation="include">
+        </childnode>
+        <childnode refid="4097" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4079" relation="include">
+        </childnode>
+        <childnode refid="4094" relation="include">
+        </childnode>
+      </node>
+      <node id="4122">
+        <label>src/Sensors/I2C/FXOS8700.h</label>
+        <link refid="_f_x_o_s8700_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4123" relation="include">
+        </childnode>
+      </node>
+      <node id="4140">
+        <label>src/Sensors/I2C/TSL2591.h</label>
+        <link refid="_t_s_l2591_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4141" relation="include">
+        </childnode>
+      </node>
+      <node id="4116">
+        <label>src/Sensors/I2C/AS7263.h</label>
+        <link refid="_a_s7263_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4117" relation="include">
+        </childnode>
+      </node>
+      <node id="4164">
+        <label>src/Temperature_Sync.h</label>
+        <link refid="_temperature___sync_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4107" relation="include">
+        </childnode>
+      </node>
+      <node id="4125">
+        <label>src/Sensors/I2C/LIS3DH.cpp</label>
+        <link refid="_l_i_s3_d_h_8cpp"/>
+      </node>
+      <node id="4053">
+        <label>src/Actuators/Stepper.cpp</label>
+        <link refid="_stepper_8cpp"/>
+      </node>
+      <node id="4131">
+        <label>src/Sensors/I2C/MPU6050.cpp</label>
+        <link refid="_m_p_u6050_8cpp"/>
+      </node>
+      <node id="4111">
+        <label>src/Sensors/I2C/ADS1115.h</label>
+        <link refid="_a_d_s1115_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4112" relation="include">
+        </childnode>
+      </node>
+      <node id="4156">
+        <label>src/Sensors/SPI/MAX31856.h</label>
+        <link refid="_m_a_x31856_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4157" relation="include">
+        </childnode>
+      </node>
+      <node id="4054">
+        <label>src/CommPlats/CommPlat.h</label>
+        <link refid="_comm_plat_8h"/>
+        <childnode refid="4055" relation="include">
+        </childnode>
+        <childnode refid="4057" relation="include">
+        </childnode>
+        <childnode refid="4058" relation="include">
+        </childnode>
+        <childnode refid="4060" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+      </node>
+      <node id="4100">
+        <label>src/RTC/DS3231.h</label>
+        <link refid="_d_s3231_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4101" relation="include">
+        </childnode>
+      </node>
+      <node id="4150">
+        <label>src/Sensors/SDI12/Decagon_GS3.h</label>
+        <link refid="_decagon___g_s3_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4151" relation="include">
+        </childnode>
+      </node>
+      <node id="4097">
+        <label>src/Sleep_Manager.h</label>
+        <link refid="_sleep___manager_8h"/>
+        <childnode refid="4096" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4079" relation="include">
+        </childnode>
+        <childnode refid="4098" relation="include">
+        </childnode>
+      </node>
+      <node id="4106">
+        <label>src/Sensors/Analog.cpp</label>
+        <link refid="_analog_8cpp"/>
+      </node>
+      <node id="4066">
+        <label>src/PublishPlats/GoogleSheets.h</label>
+        <link refid="_google_sheets_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4067" relation="include">
+        </childnode>
+      </node>
+      <node id="4126">
+        <label>src/Sensors/I2C/MB1232.h</label>
+        <link refid="_m_b1232_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4127" relation="include">
+        </childnode>
+      </node>
+      <node id="4061">
+        <label>src/CommPlats/nRF.cpp</label>
+        <link refid="n_r_f_8cpp"/>
+      </node>
+      <node id="4060">
+        <label>src/CommPlats/nRF.h</label>
+        <link refid="n_r_f_8h"/>
+        <childnode refid="4061" relation="include">
+        </childnode>
+        <childnode refid="4045" relation="include">
+        </childnode>
+      </node>
+      <node id="4115">
+        <label>src/Sensors/I2C/AS7262.cpp</label>
+        <link refid="_a_s7262_8cpp"/>
+      </node>
+      <node id="4167">
+        <label>src/Manager.h</label>
+        <link refid="_manager_8h"/>
+        <childnode refid="4057" relation="include">
+        </childnode>
+        <childnode refid="4077" relation="include">
+        </childnode>
+        <childnode refid="4097" relation="include">
+        </childnode>
+        <childnode refid="4096" relation="include">
+        </childnode>
+        <childnode refid="4064" relation="include">
+        </childnode>
+        <childnode refid="4071" relation="include">
+        </childnode>
+        <childnode refid="4075" relation="include">
+        </childnode>
+        <childnode refid="4046" relation="include">
+        </childnode>
+        <childnode refid="4047" relation="include">
+        </childnode>
+        <childnode refid="4079" relation="include">
+        </childnode>
+        <childnode refid="4093" relation="include">
+        </childnode>
+        <childnode refid="4067" relation="include">
+        </childnode>
+        <childnode refid="4069" relation="include">
+        </childnode>
+        <childnode refid="4070" relation="include">
+        </childnode>
+        <childnode refid="4094" relation="include">
+        </childnode>
+        <childnode refid="4090" relation="include">
+        </childnode>
+        <childnode refid="4091" relation="include">
+        </childnode>
+        <childnode refid="4107" relation="include">
+        </childnode>
+      </node>
+      <node id="4121">
+        <label>src/Sensors/I2C/FXAS21002.cpp</label>
+        <link refid="_f_x_a_s21002_8cpp"/>
+      </node>
+      <node id="4160">
+        <label>src/Sensors/SERIAL/K30.h</label>
+        <link refid="_k30_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4161" relation="include">
+        </childnode>
+      </node>
+      <node id="4134">
+        <label>src/Sensors/I2C/SHT31D.h</label>
+        <link refid="_s_h_t31_d_8h"/>
+        <childnode refid="4045" relation="include">
+        </childnode>
+        <childnode refid="4114" relation="include">
+        </childnode>
+        <childnode refid="4135" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" prot="public" static="no">
+        <name>Verbosity</name>
+        <enumvalue id="_misc_8h_1abf3be10d03894afb391f3a2935e3b313a7998a76d906b35a782e1ac4b499bde48" prot="public">
+          <name>V_OFF</name>
+          <briefdescription>
+<para>Disable. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_misc_8h_1abf3be10d03894afb391f3a2935e3b313afb734c04a9e5804353ceb79f5d37a169" prot="public">
+          <name>V_LOW</name>
+          <briefdescription>
+<para>Minimal/Stardard. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_misc_8h_1abf3be10d03894afb391f3a2935e3b313a4cec341dae86f2acc17c82c156c82d13" prot="public">
+          <name>V_HIGH</name>
+          <briefdescription>
+<para>Full details. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Different levels of verbosity (for printing or packaging) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Misc.h" line="16" column="1" bodyfile="src/Misc.h" bodystart="16" bodyend="20"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_misc_8h_1a60a6dfb772320c76158850d6ab74fca5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void print_array</definition>
+        <argsstring>(const T data[], const int len, const int format=1)</argsstring>
+        <name>print_array</name>
+        <param>
+          <type>const T</type>
+          <declname>data</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>format</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Print an array. </para>        </briefdescription>
+        <detaileddescription>
+<para>3 Options 1: every element on different line 2: every element on same line 3: 5 elements per line <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array to print </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of array </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">format</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Display formatting </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Misc.h" line="32" column="1" bodyfile="src/Misc.h" bodystart="32" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="_misc_8h_1a7e3da584ba8afa11b41ef436657a0e49" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_array</definition>
+        <argsstring>(const String data[], const int len, const int format=1)</argsstring>
+        <name>print_array</name>
+        <param>
+          <type>const String</type>
+          <declname>data</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>format</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>(hide from Doxygen) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Misc.h" line="46" column="1" bodyfile="src/Misc.cpp" bodystart="14" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Misc.h"/>
+  </compounddef>
+</doxygen>

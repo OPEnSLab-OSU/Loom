@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_MPU6050 class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_MPU6050 <span class="m-thin">class</span>
+        </h1>
+        <p>MPU6050 6 axis gyroscope and accelerometer sensor module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-warning"><h4>Attention</h4><p>Need to modify line 7 of MPU6050_tockn.h to have I2C address of 0x69</p></aside><aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___m_p_u6050.html">Module Documentation</a></li><li><a href="https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40/">Product Page: Amazon –Gy-521 MPU-6050 MPU6050 Module 3 Axis Analog Gyro Sensors+ 3 Axis Accelerometer Module</a></li><li><a href="https://github.com/tockn/MPU6050_tockn">Dependency: MPU6050_<wbr />tockn</a></li><li><a href="https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050">Previous Dependency: MPU6050</a></li><li><a href="https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf">Datasheet: MPU6050</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mpu6050-accelerometer--gyroscope">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_i2_c_sensor.html" class="m-doc">LoomI2CSensor</a>
+            </dt>
+            <dd>Abstract root for I2C sensor modules.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="af9c5eb7e6a657f92500dd39df03383b3">
+              float <a href="#af9c5eb7e6a657f92500dd39df03383b3" class="m-doc-self">temp</a>
+            </dt>
+            <dd>Temperature. Units: °C.</dd>
+            <dt id="abe1855f17309051bcecddf084a7f2a95">
+              float <a href="#abe1855f17309051bcecddf084a7f2a95" class="m-doc-self">accX</a>
+            </dt>
+            <dd>X-axis acceleration value. Units: g.</dd>
+            <dt id="a12e89f1a6d8e9564600e6e85375abca9">
+              float <a href="#a12e89f1a6d8e9564600e6e85375abca9" class="m-doc-self">accY</a>
+            </dt>
+            <dd>Y-axis acceleration value. Units: g.</dd>
+            <dt id="a7d9d3324a3b3bf58f6a11993e8d28b61">
+              float <a href="#a7d9d3324a3b3bf58f6a11993e8d28b61" class="m-doc-self">accZ</a>
+            </dt>
+            <dd>Z-axis acceleration value. Units: g.</dd>
+            <dt id="afd0b222a584ee71d922532ac12763f9a">
+              float <a href="#afd0b222a584ee71d922532ac12763f9a" class="m-doc-self">gyroX</a>
+            </dt>
+            <dd>X-axis gyro value. Units: °/s.</dd>
+            <dt id="a1edb0ae9dd59317f4c1aafad72f3d5ef">
+              float <a href="#a1edb0ae9dd59317f4c1aafad72f3d5ef" class="m-doc-self">gyroY</a>
+            </dt>
+            <dd>Y-axis gyro value. Units: °/s.</dd>
+            <dt id="a0e8122d20fc6e686e2952e93e1ff1a89">
+              float <a href="#a0e8122d20fc6e686e2952e93e1ff1a89" class="m-doc-self">gyroZ</a>
+            </dt>
+            <dd>Z-axis gyro value. Units: °/s.</dd>
+            <dt id="ab8ccba95253cd13a7505927d07a81abc">
+              float <a href="#ab8ccba95253cd13a7505927d07a81abc" class="m-doc-self">accAngleX</a>
+            </dt>
+            <dd>X-axis acceleration angle.</dd>
+            <dt id="a54de31e46d5c353b521483bcb88832c2">
+              float <a href="#a54de31e46d5c353b521483bcb88832c2" class="m-doc-self">accAngleY</a>
+            </dt>
+            <dd>Y-axis acceleration angle.</dd>
+            <dt id="a291abc624cd3687d6120fa406e362391">
+              float <a href="#a291abc624cd3687d6120fa406e362391" class="m-doc-self">gyroAngleX</a>
+            </dt>
+            <dd>X-axis acceleration angle.</dd>
+            <dt id="a1d1cde22eab898d09d653f4c001c0127">
+              float <a href="#a1d1cde22eab898d09d653f4c001c0127" class="m-doc-self">gyroAngleY</a>
+            </dt>
+            <dd>Y-axis acceleration angle.</dd>
+            <dt id="a78da02da066a030873cf72ee36026a64">
+              float <a href="#a78da02da066a030873cf72ee36026a64" class="m-doc-self">gyroAngleZ</a>
+            </dt>
+            <dd>Z-axis acceleration angle.</dd>
+            <dt id="a3f223a2721a44ff4d49a6194189a55c4">
+              float <a href="#a3f223a2721a44ff4d49a6194189a55c4" class="m-doc-self">angleX</a>
+            </dt>
+            <dd>X-axis angle.</dd>
+            <dt id="acccd878ef904048c3e770011f2f36a1c">
+              float <a href="#acccd878ef904048c3e770011f2f36a1c" class="m-doc-self">angleY</a>
+            </dt>
+            <dd>Y-axis angle.</dd>
+            <dt id="a8d8c30186abcda908795de978a5f6cd3">
+              float <a href="#a8d8c30186abcda908795de978a5f6cd3" class="m-doc-self">angleZ</a>
+            </dt>
+            <dd>Z-axis angle.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a433ac12fae38672cfd0bdb19d142d213" class="m-doc">Loom_MPU6050</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x69,
+              const uint8_t mux_port = 255,
+              const bool calibrate = true)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a680544122c36712c5b0fe908a284f6b1" class="m-doc">Loom_MPU6050</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="a7f416a3e5884ff71537608580259c1c0">
+              <span class="m-doc-wrap-bumper"><a href="#a7f416a3e5884ff71537608580259c1c0" class="m-doc-self">~Loom_MPU6050</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt id="ab2e0dc418e3ba9d0a4bb2098f204e46a">
+              <span class="m-doc-wrap-bumper">void <a href="#ab2e0dc418e3ba9d0a4bb2098f204e46a" class="m-doc-self">measure</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Take any relevant measurements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a053f5fd6c8e4d8bc3243f345d68d0f30" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Package a modules measurements or state.</dd>
+            <dt id="a56d731f0e63bbb4c00c12dab2b785d61">
+              <span class="m-doc-wrap-bumper">void <a href="#a56d731f0e63bbb4c00c12dab2b785d61" class="m-doc-self">calibrate</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Calibration routine.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a34dce6c99de2f323287598400499a4c4">
+              <span class="m-doc-wrap-bumper">void <a href="#a34dce6c99de2f323287598400499a4c4" class="m-doc-self">print_state</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display current state of the module.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9b6f6fbf9359caf4b4860c4d26fefde1" class="m-doc">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Print the last set of measurements taken.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a433ac12fae38672cfd0bdb19d142d213"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />MPU6050::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a433ac12fae38672cfd0bdb19d142d213" class="m-doc-self">Loom_MPU6050</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const byte i2c_address = 0x69,
+              const uint8_t mux_port = 255,
+              const bool calibrate = true)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>i2c_address&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;0x69&gt; | {0x68, 0x69} | I2C address</td>
+                </tr>
+                <tr>
+                  <td>mux_port&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;255&gt; | [0-16] | Port on multiplexer</td>
+                </tr>
+                <tr>
+                  <td>calibrate&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Bool | &lt;true&gt; | {true, false} | Whether or not to calibrate at start</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a680544122c36712c5b0fe908a284f6b1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />MPU6050::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a680544122c36712c5b0fe908a284f6b1" class="m-doc-self">Loom_MPU6050</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a053f5fd6c8e4d8bc3243f345d68d0f30"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />MPU6050::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a053f5fd6c8e4d8bc3243f345d68d0f30" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Package a modules measurements or state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Object to put data into</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9b6f6fbf9359caf4b4860c4d26fefde1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />MPU6050::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9b6f6fbf9359caf4b4860c4d26fefde1" class="m-doc-self">print_measurements</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Print the last set of measurements taken.</p>
+<p>Does not package the data.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

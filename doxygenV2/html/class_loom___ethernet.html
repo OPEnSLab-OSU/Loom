@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_Ethernet class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_Ethernet <span class="m-thin">class</span>
+        </h1>
+        <p>InternetPlat built off of SSLClient running over an Ethernet Featherwing.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-warning"><h4>Attention</h4><p>Requires 7KB of free SRAM at runtime to use.</p></aside><aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___ethernet.html">Module Documentation</a></li><li><a href="https://www.adafruit.com/product/3201">Product Page: Adafruit Ethernet Featherwing</a></li><li><a href="https://github.com/OPEnSLab-OSU/EthernetLarge">Dependency: EthernetLarge</a> OPEbS Lab fork of Arduino Ethernet library</li><li><a href="https://github.com/OPEnSLab-OSU/SSLClient">Dependency: SSLClient</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ethernet">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_internet_plat.html" class="m-doc">LoomInternetPlat</a>
+            </dt>
+            <dd>Abstract internet communication module.</dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a8152295e24d6bbd8f5b9cda6cccc0997">
+              <span class="m-doc-wrap-bumper">auto <a href="#a8152295e24d6bbd8f5b9cda6cccc0997" class="m-doc-self">get_client</a>(</span><span class="m-doc-wrap">) -&gt; SSLClient&amp; <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Get the underlying SSLClient implementation, which we will use for all of the other requests.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="ade9af6aab7a240375cc4f4786b8b0b04">
+              SSLClient <a href="#ade9af6aab7a240375cc4f4786b8b0b04" class="m-doc-self">m_client</a>
+            </dt>
+            <dd>Underlying Ethernet SSLclient instance.</dd>
+            <dt id="ad3ac39aaf45c0c53965d029e9c1db7a4">
+              byte <a href="#ad3ac39aaf45c0c53965d029e9c1db7a4" class="m-doc-self">m_mac</a>
+            </dt>
+            <dd>The Ethernet MAC address.</dd>
+            <dt id="ab7b3e7573fa75b43d99d99cec21b6a86">
+              IPAddress <a href="#ab7b3e7573fa75b43d99d99cec21b6a86" class="m-doc-self">m_ip</a>
+            </dt>
+            <dd>The devices IP address.</dd>
+            <dt id="a383b518b130bb1342bd8e4eae8c01e29">
+              bool <a href="#a383b518b130bb1342bd8e4eae8c01e29" class="m-doc-self">m_is_connected</a>
+            </dt>
+            <dd>Whether or not ethernet initialized successfully.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt id="a7f3a01c22467bb74b4ee421db507d4c8">
+              <span class="m-doc-wrap-bumper"><a href="#a7f3a01c22467bb74b4ee421db507d4c8" class="m-doc-self">Loom_Ethernet</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name = &quot;Ethernet&quot;,
+              const JsonArrayConst mac = JsonArray(),
+              const JsonArrayConst ip = JsonArray())</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aa03b81c5af2dc257f5a52f4dbe0f6714" class="m-doc">Loom_Ethernet</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="ab083d7e571e429c5741b7dfa1b3bd5a1">
+              <span class="m-doc-wrap-bumper"><a href="#ab083d7e571e429c5741b7dfa1b3bd5a1" class="m-doc-self">~Loom_Ethernet</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a743f6fa201609c3874bded88390a891e">
+              <span class="m-doc-wrap-bumper">void <a href="#a743f6fa201609c3874bded88390a891e" class="m-doc-self">connect</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Connect to internet.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2770d92b9459361acb44e78694f94964" class="m-doc">is_connected</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Whether or not connected to internet.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aadfcbd39770e463dbc0383f8d358d89f" class="m-doc">open_socket</a>(</span><span class="m-doc-wrap">const uint port) -&gt; <a href="class_loom_internet_plat.html#a0b2cc742a6ac5f4f7054b75ea99b345c" class="m-doc">UDPPtr</a> <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Open a UDP socket for sending and recieving incoming data.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a79ed8f208e2fe4faf0a71e468d7ba22e">
+              <span class="m-doc-wrap-bumper">void <a href="#a79ed8f208e2fe4faf0a71e468d7ba22e" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt id="a1305b086b7e99c98320ad1d280718259">
+              <span class="m-doc-wrap-bumper">void <a href="#a1305b086b7e99c98320ad1d280718259" class="m-doc-self">print_state</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display current state of the module.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="aa03b81c5af2dc257f5a52f4dbe0f6714"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />Ethernet::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa03b81c5af2dc257f5a52f4dbe0f6714" class="m-doc-self">Loom_Ethernet</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2770d92b9459361acb44e78694f94964"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Ethernet::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2770d92b9459361acb44e78694f94964" class="m-doc-self">is_connected</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Whether or not connected to internet.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if connect, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aadfcbd39770e463dbc0383f8d358d89f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_internet_plat.html#a0b2cc742a6ac5f4f7054b75ea99b345c" class="m-doc">UDPPtr</a> Loom_<wbr />Ethernet::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aadfcbd39770e463dbc0383f8d358d89f" class="m-doc-self">open_socket</a>(</span><span class="m-doc-wrap">const uint port) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Open a UDP socket for sending and recieving incoming data.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">port&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Port to open socket with</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>A UDP socket for transmitting and recieving, remember to close the socket when you are done!</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>Be careful about recieving data from an open socket!</p></aside>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

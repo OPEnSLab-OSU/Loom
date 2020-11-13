@@ -1,0 +1,413 @@
+\hypertarget{class_loom__n_r_f}{}\section{Loom\+\_\+n\+RF Class Reference}
+\label{class_loom__n_r_f}\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+
+
+Nordic Radio communication platform module.  
+
+
+
+
+{\ttfamily \#include $<$n\+R\+F.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+n\+RF\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{class_loom__n_r_f__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom__n_r_f_a54c70e58ccff14396a880199365da651}{Loom\+\_\+n\+RF} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const uint16\+\_\+t \hyperlink{class_loom_comm_plat_a2b4f69c2ec15028f5f281c3d1d399dba}{max\+\_\+message\+\_\+len}=120, const uint8\+\_\+t \hyperlink{class_loom__n_r_f_a9bd096cf262ff923c4ba8e8cbd85d63b}{address}=0, const uint8\+\_\+t \hyperlink{class_loom__n_r_f_aa07c72a33cf70c119ff333b3177aadd0}{data\+\_\+rate}=1, const uint8\+\_\+t \hyperlink{class_loom__n_r_f_a47eb5605398f1d83febef1c0ec3ef27b}{power\+\_\+level}=0, const uint8\+\_\+t \hyperlink{class_loom__n_r_f_a53c54395b6ac8e89b8c3a0b3d582a9fe}{retry\+\_\+count}=3, const uint16\+\_\+t \hyperlink{class_loom__n_r_f_a57f2765c35a200cf53ad055f5e1bef13}{retry\+\_\+timeout}=200, const uint8\+\_\+t \hyperlink{class_loom__n_r_f_a91e29e17ba984dc899ca11507adfd9f9}{multicast\+\_\+level}=1)
+\begin{DoxyCompactList}\small\item\em n\+RF module constructor \end{DoxyCompactList}\item 
+\hyperlink{class_loom__n_r_f_a0bb645a077a48e550bc3d7e669e60f42}{Loom\+\_\+n\+RF} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom__n_r_f_a8e09b1bbacd10cdaca78d952a8a80930}{$\sim$\+Loom\+\_\+n\+RF} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom__n_r_f_a17b192fceeb84d4da70c3213ea743228}{add\+\_\+config} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Add configuration information to Json\+Object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom__n_r_f_ad8a85a3ce2d9e2d7d12dec310a1c6615}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{class_loom__n_r_f_ae1140949b48b908ed1733fb8b3e7ae69}{get\+\_\+address} () const override
+\begin{DoxyCompactList}\small\item\em Get the address of this device. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom__n_r_f_a5ecdc813ddd9b32fa06a83147c922499}{get\+\_\+multicast\+\_\+level} () const 
+\begin{DoxyCompactList}\small\item\em Get multicast(broadcast) level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom__n_r_f_ab1020ef07ac5be037991ae48a5a6b682}{set\+\_\+address} (const uint8\+\_\+t addr) override
+\begin{DoxyCompactList}\small\item\em Set the address of this device. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom__n_r_f_a7220c2a2c7f9ba87dfef36474b7fb34a}{set\+\_\+multicast\+\_\+level} (const uint8\+\_\+t level)
+\begin{DoxyCompactList}\small\item\em Set multicast(broadcast) level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Member Functions}
+\begin{Indent}{\bf R\+A\+D\+IO I\+M\+P\+L\+E\+M\+E\+N\+T\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom__n_r_f_a8f4a184813d9aed777997f63e9835e42}{receive\+\_\+blocking\+\_\+impl} (Json\+Object json, uint max\+\_\+wait\+\_\+time) override
+\begin{DoxyCompactList}\small\item\em Receive, but block until packet received, or timeout reached. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom__n_r_f_ad63d064b8ae495e699627a3bc2c57fa4}{send\+\_\+impl} (Json\+Object json, const uint8\+\_\+t destination) override
+\begin{DoxyCompactList}\small\item\em Send json to a specific address. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom__n_r_f_a3e4d0db03fde19d29311338d5f3a979a}{broadcast\+\_\+impl} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Broadcast data to all that can receive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+R\+F24 \hyperlink{class_loom__n_r_f_a785fc4d36d622edea8a8a1e35de80e88}{radio}
+\begin{DoxyCompactList}\small\item\em Underlying n\+R\+F24\+L01(+) radio object. \end{DoxyCompactList}\item 
+R\+F24\+Network $\ast$ \hyperlink{class_loom__n_r_f_ac9f3accb15e32baa80557f03da7a4990}{network}
+\begin{DoxyCompactList}\small\item\em Network layer manager for radio. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom__n_r_f_a9bd096cf262ff923c4ba8e8cbd85d63b}{address}
+\begin{DoxyCompactList}\small\item\em Device Address (should this be part of \hyperlink{class_loom_comm_plat}{Loom\+Comm\+Plat}? – maybe not as each platform handles addresses differently) \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom__n_r_f_aa07c72a33cf70c119ff333b3177aadd0}{data\+\_\+rate}
+\begin{DoxyCompactList}\small\item\em Data rate. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom__n_r_f_a47eb5605398f1d83febef1c0ec3ef27b}{power\+\_\+level}
+\begin{DoxyCompactList}\small\item\em Power level to send at. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom__n_r_f_a53c54395b6ac8e89b8c3a0b3d582a9fe}{retry\+\_\+count}
+\begin{DoxyCompactList}\small\item\em Number of transmission retries allowed. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom__n_r_f_a57f2765c35a200cf53ad055f5e1bef13}{retry\+\_\+timeout}
+\begin{DoxyCompactList}\small\item\em Delay between transmission retries (in milliseconds) \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom__n_r_f_a91e29e17ba984dc899ca11507adfd9f9}{multicast\+\_\+level}
+\begin{DoxyCompactList}\small\item\em Which level(s) of the network to broadcast to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Nordic Radio communication platform module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom__n_r_f.html}{\tt Module Documentation}
+\item \href{https://github.com/nRF24/RF24}{\tt Dependency\+: R\+F24} optimized fork
+\item \href{https://github.com/nRF24/RF24Network}{\tt Dependency\+: R\+F24\+Network} optimized fork
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#nrf}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+n\+R\+F(\+Loom\+Manager $\ast$manager, const uint16\+\_\+t max\+\_\+message\+\_\+len=120, const uint8\+\_\+t address=0, const uint8\+\_\+t data\+\_\+rate=1, const uint8\+\_\+t power\+\_\+level=0, const uint8\+\_\+t retry\+\_\+count=3, const uint16\+\_\+t retry\+\_\+timeout=200, const uint8\+\_\+t multicast\+\_\+level=1)}{Loom_nRF(LoomManager *manager, const uint16_t max_message_len=120, const uint8_t address=0, const uint8_t data_rate=1, const uint8_t power_level=0, const uint8_t retry_count=3, const uint16_t retry_timeout=200, const uint8_t multicast_level=1)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+n\+R\+F\+::\+Loom\+\_\+n\+RF (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const uint16\+\_\+t}]{max\+\_\+message\+\_\+len = {\ttfamily 120}, }
+\item[{const uint8\+\_\+t}]{address = {\ttfamily 0}, }
+\item[{const uint8\+\_\+t}]{data\+\_\+rate = {\ttfamily 1}, }
+\item[{const uint8\+\_\+t}]{power\+\_\+level = {\ttfamily 0}, }
+\item[{const uint8\+\_\+t}]{retry\+\_\+count = {\ttfamily 3}, }
+\item[{const uint16\+\_\+t}]{retry\+\_\+timeout = {\ttfamily 200}, }
+\item[{const uint8\+\_\+t}]{multicast\+\_\+level = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom__n_r_f_a54c70e58ccff14396a880199365da651}{}\label{class_loom__n_r_f_a54c70e58ccff14396a880199365da651}
+
+
+n\+RF module constructor 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em max\+\_\+message\+\_\+len} & Set(\+Int) $\vert$ $<$120$>$ $\vert$ \{120(\char`\"{}\+Max length\char`\"{})\} $\vert$ The maximum possible message length \\
+\hline
+\mbox{\tt in}  & {\em address} & Int $\vert$ $<$01$>$ $\vert$ \mbox{[}0-\/99\mbox{]} $\vert$ This device\textquotesingle{}s n\+RF address \\
+\hline
+\mbox{\tt in}  & {\em data\+\_\+rate} & Set(\+Int) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+Default\char`\"{}), 1(\char`\"{}250\+K\+B\+P\+S\char`\"{}), 2(\char`\"{}1\+M\+B\+P\+S\char`\"{}), 3(\char`\"{}2\+M\+B\+P\+S\char`\"{})\} $\vert$ Transmission data rate \\
+\hline
+\mbox{\tt in}  & {\em power\+\_\+level} & Set(\+Int) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+Default\char`\"{}), 1(\char`\"{}\+Min\char`\"{}), 2(\char`\"{}\+Low\char`\"{}), 3(\char`\"{}\+High\char`\"{}), 4(\char`\"{}\+Max\char`\"{})\} $\vert$ Transmission ower level \\
+\hline
+\mbox{\tt in}  & {\em retry\+\_\+count} & Int $\vert$ $<$3$>$ $\vert$ \mbox{[}0-\/15\mbox{]} $\vert$ Max number of transmission retries \\
+\hline
+\mbox{\tt in}  & {\em retry\+\_\+timeout} & Int $\vert$ $<$200$>$ $\vert$ \mbox{[}20-\/500\mbox{]} $\vert$ Delay between retransmissions (ms) \\
+\hline
+\mbox{\tt in}  & {\em multicast\+\_\+level} & Int $\vert$ $<$1$>$ $\vert$ \mbox{[}1-\/3\mbox{]} $\vert$ How many levels to propogate message through heirarchy \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+n\+R\+F(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_nRF(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+n\+R\+F\+::\+Loom\+\_\+n\+RF (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom__n_r_f_a0bb645a077a48e550bc3d7e669e60f42}{}\label{class_loom__n_r_f_a0bb645a077a48e550bc3d7e669e60f42}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!````~Loom\+\_\+n\+RF@{$\sim$\+Loom\+\_\+n\+RF}}
+\index{````~Loom\+\_\+n\+RF@{$\sim$\+Loom\+\_\+n\+RF}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+n\+R\+F()}{~Loom_nRF()}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+n\+R\+F\+::$\sim$\+Loom\+\_\+n\+RF (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom__n_r_f_a8e09b1bbacd10cdaca78d952a8a80930}{}\label{class_loom__n_r_f_a8e09b1bbacd10cdaca78d952a8a80930}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!add\+\_\+config@{add\+\_\+config}}
+\index{add\+\_\+config@{add\+\_\+config}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{add\+\_\+config(\+Json\+Object json) override}{add_config(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+n\+R\+F\+::add\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom__n_r_f_a17b192fceeb84d4da70c3213ea743228}{}\label{class_loom__n_r_f_a17b192fceeb84d4da70c3213ea743228}
+
+
+Add configuration information to Json\+Object. 
+
+\hyperlink{class_loom_manager}{Loom\+Manager} iterates over modules to build complete configuration 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json configuration object to add to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_a06747f16d76bde35575557c7515adcc0}{Loom\+Module}.
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!broadcast\+\_\+impl@{broadcast\+\_\+impl}}
+\index{broadcast\+\_\+impl@{broadcast\+\_\+impl}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{broadcast\+\_\+impl(\+Json\+Object json) override}{broadcast_impl(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+n\+R\+F\+::broadcast\+\_\+impl (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom__n_r_f_a3e4d0db03fde19d29311338d5f3a979a}{}\label{class_loom__n_r_f_a3e4d0db03fde19d29311338d5f3a979a}
+
+
+Broadcast data to all that can receive. 
+
+Derived classes can optionally provide an implementation for this, As supported by the radio/platform\textquotesingle{}s library 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json object to send \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_comm_plat_ae88689d0db8ab91d1e672f0b5c358945}{Loom\+Comm\+Plat}.
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!get\+\_\+address@{get\+\_\+address}}
+\index{get\+\_\+address@{get\+\_\+address}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{get\+\_\+address() const override}{get_address() const override}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+n\+R\+F\+::get\+\_\+address (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom__n_r_f_ae1140949b48b908ed1733fb8b3e7ae69}{}\label{class_loom__n_r_f_ae1140949b48b908ed1733fb8b3e7ae69}
+
+
+Get the address of this device. 
+
+Each platform may have a different addressing scheme \begin{DoxyReturn}{Returns}
+The address of this device 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_comm_plat_afaf204bcf88cb88102cea8c6c1d745f3}{Loom\+Comm\+Plat}.
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!get\+\_\+multicast\+\_\+level@{get\+\_\+multicast\+\_\+level}}
+\index{get\+\_\+multicast\+\_\+level@{get\+\_\+multicast\+\_\+level}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{get\+\_\+multicast\+\_\+level() const }{get_multicast_level() const }}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+n\+R\+F\+::get\+\_\+multicast\+\_\+level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom__n_r_f_a5ecdc813ddd9b32fa06a83147c922499}{}\label{class_loom__n_r_f_a5ecdc813ddd9b32fa06a83147c922499}
+
+
+Get multicast(broadcast) level. 
+
+n\+RF has varying degrees of broadcast corresponding to depth to broadcast through network tree \begin{DoxyReturn}{Returns}
+Multicast level 
+\end{DoxyReturn}
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+n\+R\+F\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom__n_r_f_ad8a85a3ce2d9e2d7d12dec310a1c6615}{}\label{class_loom__n_r_f_ad8a85a3ce2d9e2d7d12dec310a1c6615}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_comm_plat_a97982022b7e279d4def0246e17a95d61}{Loom\+Comm\+Plat}.
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!receive\+\_\+blocking\+\_\+impl@{receive\+\_\+blocking\+\_\+impl}}
+\index{receive\+\_\+blocking\+\_\+impl@{receive\+\_\+blocking\+\_\+impl}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{receive\+\_\+blocking\+\_\+impl(\+Json\+Object json, uint max\+\_\+wait\+\_\+time) override}{receive_blocking_impl(JsonObject json, uint max_wait_time) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+n\+R\+F\+::receive\+\_\+blocking\+\_\+impl (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{uint}]{max\+\_\+wait\+\_\+time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom__n_r_f_a8f4a184813d9aed777997f63e9835e42}{}\label{class_loom__n_r_f_a8f4a184813d9aed777997f63e9835e42}
+
+
+Receive, but block until packet received, or timeout reached. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Json object to fill with incoming data \\
+\hline
+\mbox{\tt in}  & {\em max\+\_\+wait\+\_\+time} & Maximum number of milliseconds to block for (can be zero for non-\/blocking) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if packet received 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_loom_comm_plat_acc447dd60751ea7536f0c96b4390fdd8}{Loom\+Comm\+Plat}.
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!send\+\_\+impl@{send\+\_\+impl}}
+\index{send\+\_\+impl@{send\+\_\+impl}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{send\+\_\+impl(\+Json\+Object json, const uint8\+\_\+t destination) override}{send_impl(JsonObject json, const uint8_t destination) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+n\+R\+F\+::send\+\_\+impl (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json, }
+\item[{const uint8\+\_\+t}]{destination}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom__n_r_f_ad63d064b8ae495e699627a3bc2c57fa4}{}\label{class_loom__n_r_f_ad63d064b8ae495e699627a3bc2c57fa4}
+
+
+Send json to a specific address. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json package to send \\
+\hline
+\mbox{\tt in}  & {\em destination} & Device to send to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if packet sent successfully 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_loom_comm_plat_a28f40393c7d50d3bf30eff3add02d6fc}{Loom\+Comm\+Plat}.
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!set\+\_\+address@{set\+\_\+address}}
+\index{set\+\_\+address@{set\+\_\+address}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{set\+\_\+address(const uint8\+\_\+t addr) override}{set_address(const uint8_t addr) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+n\+R\+F\+::set\+\_\+address (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom__n_r_f_ab1020ef07ac5be037991ae48a5a6b682}{}\label{class_loom__n_r_f_ab1020ef07ac5be037991ae48a5a6b682}
+
+
+Set the address of this device. 
+
+Each platform may have a different addressing scheme. Changing the device\textquotesingle{}s address is not recommended. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em a} & The address to set this device to \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_comm_plat_afa0f66b4e657effefc34fa5a74363174}{Loom\+Comm\+Plat}.
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!set\+\_\+multicast\+\_\+level@{set\+\_\+multicast\+\_\+level}}
+\index{set\+\_\+multicast\+\_\+level@{set\+\_\+multicast\+\_\+level}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{set\+\_\+multicast\+\_\+level(const uint8\+\_\+t level)}{set_multicast_level(const uint8_t level)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+n\+R\+F\+::set\+\_\+multicast\+\_\+level (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom__n_r_f_a7220c2a2c7f9ba87dfef36474b7fb34a}{}\label{class_loom__n_r_f_a7220c2a2c7f9ba87dfef36474b7fb34a}
+
+
+Set multicast(broadcast) level. 
+
+n\+RF has varying degrees of broadcast corresponding to depth to broadcast through network tree 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em level} & Multicast level to set to \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!address@{address}}
+\index{address@{address}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{address}{address}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+n\+R\+F\+::address\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom__n_r_f_a9bd096cf262ff923c4ba8e8cbd85d63b}{}\label{class_loom__n_r_f_a9bd096cf262ff923c4ba8e8cbd85d63b}
+
+
+Device Address (should this be part of \hyperlink{class_loom_comm_plat}{Loom\+Comm\+Plat}? – maybe not as each platform handles addresses differently) 
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!data\+\_\+rate@{data\+\_\+rate}}
+\index{data\+\_\+rate@{data\+\_\+rate}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{data\+\_\+rate}{data_rate}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+n\+R\+F\+::data\+\_\+rate\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom__n_r_f_aa07c72a33cf70c119ff333b3177aadd0}{}\label{class_loom__n_r_f_aa07c72a33cf70c119ff333b3177aadd0}
+
+
+Data rate. 
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!multicast\+\_\+level@{multicast\+\_\+level}}
+\index{multicast\+\_\+level@{multicast\+\_\+level}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{multicast\+\_\+level}{multicast_level}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+n\+R\+F\+::multicast\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom__n_r_f_a91e29e17ba984dc899ca11507adfd9f9}{}\label{class_loom__n_r_f_a91e29e17ba984dc899ca11507adfd9f9}
+
+
+Which level(s) of the network to broadcast to. 
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!network@{network}}
+\index{network@{network}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{network}{network}}]{\setlength{\rightskip}{0pt plus 5cm}R\+F24\+Network$\ast$ Loom\+\_\+n\+R\+F\+::network\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom__n_r_f_ac9f3accb15e32baa80557f03da7a4990}{}\label{class_loom__n_r_f_ac9f3accb15e32baa80557f03da7a4990}
+
+
+Network layer manager for radio. 
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!power\+\_\+level@{power\+\_\+level}}
+\index{power\+\_\+level@{power\+\_\+level}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{power\+\_\+level}{power_level}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+n\+R\+F\+::power\+\_\+level\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom__n_r_f_a47eb5605398f1d83febef1c0ec3ef27b}{}\label{class_loom__n_r_f_a47eb5605398f1d83febef1c0ec3ef27b}
+
+
+Power level to send at. 
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!radio@{radio}}
+\index{radio@{radio}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{radio}{radio}}]{\setlength{\rightskip}{0pt plus 5cm}R\+F24 Loom\+\_\+n\+R\+F\+::radio\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom__n_r_f_a785fc4d36d622edea8a8a1e35de80e88}{}\label{class_loom__n_r_f_a785fc4d36d622edea8a8a1e35de80e88}
+
+
+Underlying n\+R\+F24\+L01(+) radio object. 
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!retry\+\_\+count@{retry\+\_\+count}}
+\index{retry\+\_\+count@{retry\+\_\+count}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{retry\+\_\+count}{retry_count}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+n\+R\+F\+::retry\+\_\+count\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom__n_r_f_a53c54395b6ac8e89b8c3a0b3d582a9fe}{}\label{class_loom__n_r_f_a53c54395b6ac8e89b8c3a0b3d582a9fe}
+
+
+Number of transmission retries allowed. 
+
+\index{Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}!retry\+\_\+timeout@{retry\+\_\+timeout}}
+\index{retry\+\_\+timeout@{retry\+\_\+timeout}!Loom\+\_\+n\+RF@{Loom\+\_\+n\+RF}}
+\subsubsection[{\texorpdfstring{retry\+\_\+timeout}{retry_timeout}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+n\+R\+F\+::retry\+\_\+timeout\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom__n_r_f_a57f2765c35a200cf53ad055f5e1bef13}{}\label{class_loom__n_r_f_a57f2765c35a200cf53ad055f5e1bef13}
+
+
+Delay between transmission retries (in milliseconds) 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Comm\+Plats/\hyperlink{n_r_f_8h}{n\+R\+F.\+h}\item 
+src/\+Comm\+Plats/\hyperlink{n_r_f_8cpp}{n\+R\+F.\+cpp}\end{DoxyCompactItemize}

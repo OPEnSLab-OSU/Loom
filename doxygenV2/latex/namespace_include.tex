@@ -1,0 +1,214 @@
+\hypertarget{namespace_include}{}\section{Include Namespace Reference}
+\label{namespace_include}\index{Include@{Include}}
+
+
+Possible sections of the module lookup table to include.  
+
+
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \hyperlink{namespace_include_a223a3f93bed9db5706b58e6fd15c8810}{None} = std\+::make\+\_\+tuple()
+\begin{DoxyCompactList}\small\item\em Empty block (used if a block of modules is disabled) \end{DoxyCompactList}\item 
+constexpr auto \hyperlink{namespace_include_afd5c6184c21e5cbb570f6ffb451fadb2}{Common}
+\begin{DoxyCompactList}\small\item\em Common modules. \end{DoxyCompactList}\item 
+constexpr auto \hyperlink{namespace_include_aaef3f142b15f5413c545a4b50a662fcc}{Radios}
+\begin{DoxyCompactList}\small\item\em Radios modules. \end{DoxyCompactList}\item 
+constexpr auto \hyperlink{namespace_include_aee5c809c679bf94fd69dc5deff6a90c4}{Max}
+\begin{DoxyCompactList}\small\item\em Max modules. \end{DoxyCompactList}\item 
+constexpr auto \hyperlink{namespace_include_a5f31f767a008f601b5d4f5c3aff90e89}{Ethernet\+And\+Wi\+Fi}
+\begin{DoxyCompactList}\small\item\em Ethernet and Wi\+Fi modules. \end{DoxyCompactList}\item 
+constexpr auto \hyperlink{namespace_include_a68386b4fe2e4f182c18b0f4b1e1ca554}{Ethernet}
+\begin{DoxyCompactList}\small\item\em Ethernet modules. \end{DoxyCompactList}\item 
+constexpr auto \hyperlink{namespace_include_a6cf33ac8efc6a5092ce9a6af9cf02d36}{Wi\+Fi}
+\begin{DoxyCompactList}\small\item\em Wi\+Fi modules. \end{DoxyCompactList}\item 
+constexpr auto \hyperlink{namespace_include_a8d54cbf6e38dd18378d1fbce77da979e}{L\+TE}
+\begin{DoxyCompactList}\small\item\em L\+TE modules. \end{DoxyCompactList}\item 
+constexpr auto \hyperlink{namespace_include_afdc5a0bd51655ca57718cdca40e5b277}{Sensors}
+\begin{DoxyCompactList}\small\item\em Sensor modules. \end{DoxyCompactList}\item 
+constexpr auto \hyperlink{namespace_include_a40e108fcc93c3c148487421aedb9a250}{Actuators}
+\begin{DoxyCompactList}\small\item\em Actuator modules. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Possible sections of the module lookup table to include. 
+
+Factory concatenates selected blocks to form its lookup table for module creation. Blocks are made up of tuples of Name\+Module\+Pair 
+
+\subsection{Variable Documentation}
+\index{Include@{Include}!Actuators@{Actuators}}
+\index{Actuators@{Actuators}!Include@{Include}}
+\subsubsection[{\texorpdfstring{Actuators}{Actuators}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+Actuators}\hypertarget{namespace_include_a40e108fcc93c3c148487421aedb9a250}{}\label{namespace_include_a40e108fcc93c3c148487421aedb9a250}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= std::make\_tuple(
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Neopixel"},      Construct<Loom\_Neopixel>,       
+      ConstructDefault<Loom\_Neopixel> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Relay"},     Construct<Loom\_Relay>,          
+      ConstructDefault<Loom\_Relay> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Servo"},     Construct<Loom\_Servo>,          
+      ConstructDefault<Loom\_Servo> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Stepper"},       Construct<Loom\_Stepper>,        
+      ConstructDefault<Loom\_Stepper> \}
+            )
+\end{DoxyCode}
+
+
+Actuator modules. 
+
+\index{Include@{Include}!Common@{Common}}
+\index{Common@{Common}!Include@{Include}}
+\subsubsection[{\texorpdfstring{Common}{Common}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+Common}\hypertarget{namespace_include_afd5c6184c21e5cbb570f6ffb451fadb2}{}\label{namespace_include_afd5c6184c21e5cbb570f6ffb451fadb2}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= std::make\_tuple(
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Interrupt\_Manager"}, 
+      Construct<Loom\_Interrupt\_Manager>,      ConstructDefault<Loom\_Interrupt\_Manager> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"WarmUp\_Manager"}, 
+      Construct<Loom\_WarmUp\_Manager>, ConstructDefault<Loom\_WarmUp\_Manager> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Sleep\_Manager"},     
+      Construct<Loom\_Sleep\_Manager>,          ConstructDefault<Loom\_Sleep\_Manager> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Analog"},        Construct<Loom\_Analog>,         
+      ConstructDefault<Loom\_Analog> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Digital"},       Construct<Loom\_Digital>,        
+      ConstructDefault<Loom\_Digital> \},
+                
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"OLED"},          Construct<Loom\_OLED>,           
+      ConstructDefault<Loom\_OLED> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"SD"},            Construct<Loom\_SD>,             
+      ConstructDefault<Loom\_SD> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"BatchSD"},           Construct<Loom\_BatchSD>
+      ,                ConstructDefault<Loom\_BatchSD> \},
+                
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"DS3231"},        Construct<Loom\_DS3231>,         
+      ConstructDefault<Loom\_DS3231> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"PCF8523"},       Construct<Loom\_PCF8523>,        
+      ConstructDefault<Loom\_PCF8523> \}
+            )
+\end{DoxyCode}
+
+
+Common modules. 
+
+\index{Include@{Include}!Ethernet@{Ethernet}}
+\index{Ethernet@{Ethernet}!Include@{Include}}
+\subsubsection[{\texorpdfstring{Ethernet}{Ethernet}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+Ethernet}\hypertarget{namespace_include_a68386b4fe2e4f182c18b0f4b1e1ca554}{}\label{namespace_include_a68386b4fe2e4f182c18b0f4b1e1ca554}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= std::make\_tuple(
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Ethernet"},      Construct<Loom\_Ethernet>,       
+      ConstructDefault<Loom\_Ethernet> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"GoogleSheets"},  
+      Construct<Loom\_GoogleSheets>,   \textcolor{keyword}{nullptr} \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"NTP\_Sync"},  Construct<LoomNTPSync>,         
+      ConstructDefault<LoomNTPSync> \}
+            )
+\end{DoxyCode}
+
+
+Ethernet modules. 
+
+\index{Include@{Include}!Ethernet\+And\+Wi\+Fi@{Ethernet\+And\+Wi\+Fi}}
+\index{Ethernet\+And\+Wi\+Fi@{Ethernet\+And\+Wi\+Fi}!Include@{Include}}
+\subsubsection[{\texorpdfstring{Ethernet\+And\+Wi\+Fi}{EthernetAndWiFi}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+Ethernet\+And\+Wi\+Fi}\hypertarget{namespace_include_a5f31f767a008f601b5d4f5c3aff90e89}{}\label{namespace_include_a5f31f767a008f601b5d4f5c3aff90e89}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= std::make\_tuple(
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Ethernet"},      Construct<Loom\_Ethernet>,       
+      ConstructDefault<Loom\_Ethernet> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"WiFi"},          Construct<Loom\_WiFi>,           
+      ConstructDefault<Loom\_WiFi> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"GoogleSheets"},  
+      Construct<Loom\_GoogleSheets>,   \textcolor{keyword}{nullptr} \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"NTP\_Sync"},  Construct<LoomNTPSync>,         
+      ConstructDefault<LoomNTPSync> \}
+            )
+\end{DoxyCode}
+
+
+Ethernet and Wi\+Fi modules. 
+
+\index{Include@{Include}!L\+TE@{L\+TE}}
+\index{L\+TE@{L\+TE}!Include@{Include}}
+\subsubsection[{\texorpdfstring{L\+TE}{LTE}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+L\+TE}\hypertarget{namespace_include_a8d54cbf6e38dd18378d1fbce77da979e}{}\label{namespace_include_a8d54cbf6e38dd18378d1fbce77da979e}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= std::make\_tuple(
+        \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"LTE"},           Construct<Loom\_LTE>,            
+      ConstructDefault<Loom\_LTE> \},
+        \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"GoogleSheets"},  Construct<Loom\_GoogleSheets>,   \textcolor{keyword}{
+      nullptr} \},
+        \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"NTP\_Sync"},  Construct<LoomNTPSync>,         
+      ConstructDefault<LoomNTPSync> \}
+    )
+\end{DoxyCode}
+
+
+L\+TE modules. 
+
+\index{Include@{Include}!Max@{Max}}
+\index{Max@{Max}!Include@{Include}}
+\subsubsection[{\texorpdfstring{Max}{Max}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+Max}\hypertarget{namespace_include_aee5c809c679bf94fd69dc5deff6a90c4}{}\label{namespace_include_aee5c809c679bf94fd69dc5deff6a90c4}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= std::make\_tuple(
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"MaxPub"},        Construct<Loom\_MaxPub>,         \textcolor{keyword}{
+      nullptr} \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"MaxSub"},        Construct<Loom\_MaxSub>,         \textcolor{keyword}{
+      nullptr} \}
+            )
+\end{DoxyCode}
+
+
+Max modules. 
+
+\index{Include@{Include}!None@{None}}
+\index{None@{None}!Include@{Include}}
+\subsubsection[{\texorpdfstring{None}{None}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+None = std\+::make\+\_\+tuple()}\hypertarget{namespace_include_a223a3f93bed9db5706b58e6fd15c8810}{}\label{namespace_include_a223a3f93bed9db5706b58e6fd15c8810}
+
+
+Empty block (used if a block of modules is disabled) 
+
+\index{Include@{Include}!Radios@{Radios}}
+\index{Radios@{Radios}!Include@{Include}}
+\subsubsection[{\texorpdfstring{Radios}{Radios}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+Radios}\hypertarget{namespace_include_aaef3f142b15f5413c545a4b50a662fcc}{}\label{namespace_include_aaef3f142b15f5413c545a4b50a662fcc}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= std::make\_tuple(
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"LoRa"},          Construct<Loom\_LoRa>,           
+      ConstructDefault<Loom\_LoRa> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"nRF"},           Construct<Loom\_nRF>,            
+      ConstructDefault<Loom\_nRF> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"Bluetooth"}, Construct<Loom\_Bluetooth>,      
+      ConstructDefault<Loom\_Bluetooth> \}
+            )
+\end{DoxyCode}
+
+
+Radios modules. 
+
+\index{Include@{Include}!Sensors@{Sensors}}
+\index{Sensors@{Sensors}!Include@{Include}}
+\subsubsection[{\texorpdfstring{Sensors}{Sensors}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+Sensors}\hypertarget{namespace_include_afdc5a0bd51655ca57718cdca40e5b277}{}\label{namespace_include_afdc5a0bd51655ca57718cdca40e5b277}
+
+
+Sensor modules. 
+
+\index{Include@{Include}!Wi\+Fi@{Wi\+Fi}}
+\index{Wi\+Fi@{Wi\+Fi}!Include@{Include}}
+\subsubsection[{\texorpdfstring{Wi\+Fi}{WiFi}}]{\setlength{\rightskip}{0pt plus 5cm}constexpr auto Include\+::\+Wi\+Fi}\hypertarget{namespace_include_a6cf33ac8efc6a5092ce9a6af9cf02d36}{}\label{namespace_include_a6cf33ac8efc6a5092ce9a6af9cf02d36}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= std::make\_tuple(
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"WiFi"},          Construct<Loom\_WiFi>,           
+      ConstructDefault<Loom\_WiFi> \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"GoogleSheets"},  
+      Construct<Loom\_GoogleSheets>,   \textcolor{keyword}{nullptr} \},
+                \hyperlink{structfactory_1_1_name_module_pair}{factory::NameModulePair}\{\textcolor{stringliteral}{"NTP\_Sync"},  Construct<LoomNTPSync>,         
+      ConstructDefault<LoomNTPSync> \}
+            )
+\end{DoxyCode}
+
+
+Wi\+Fi modules. 
+

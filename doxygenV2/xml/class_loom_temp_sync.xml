@@ -1,0 +1,384 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_temp_sync" kind="class" language="C++" prot="public">
+    <compoundname>LoomTempSync</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <includes refid="_temperature___sync_8h" local="no">Temperature_Sync.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom_temp_sync_1a170a1ecdcdc8589f306f7ea40d4878ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomTempSync::LoomTempSync</definition>
+        <argsstring>(LoomManager *manager, const LoomModule::Type source=LoomModule::Type::MS5803, const LoomModule::Type dependant=LoomModule::Type::Analog)</argsstring>
+        <name>LoomTempSync</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>source</declname>
+          <defval><ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865abf2c722c90ddbbd2403395e349a31844" kindref="member">LoomModule::Type::MS5803</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>dependant</declname>
+          <defval><ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865a3d953aa7cfa5ffe0fde34551d918c76c" kindref="member">LoomModule::Type::Analog</ref></defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">source</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module type to get temperature from </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dependant</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module type to forward temperature to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="47" column="1" bodyfile="src/Temperature_Sync.cpp" bodystart="18" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_temp_sync_1aae408072a7ead338db0f3d01b8579b42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomTempSync::LoomTempSync</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>LoomTempSync</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="56" column="1" bodyfile="src/Temperature_Sync.cpp" bodystart="29" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_temp_sync_1a8e00454996d6a757235a975dccee2272" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomTempSync::~LoomTempSync</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LoomTempSync</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="59" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_temp_sync_1a0bc1a857bc87c30482c8175d69876b0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomTempSync::second_stage_ctor</definition>
+        <argsstring>() override</argsstring>
+        <name>second_stage_ctor</name>
+        <reimplements refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12">second_stage_ctor</reimplements>
+        <briefdescription>
+<para>Verify that source and dependant modules exist, sync temperatures. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="62" column="1" bodyfile="src/Temperature_Sync.cpp" bodystart="33" bodyend="64"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom_temp_sync_1a11847e2106c869af9644e32c34cd68ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomTempSync::measure</definition>
+        <argsstring>()</argsstring>
+        <name>measure</name>
+        <briefdescription>
+<para>Sync the temperature. </para>        </briefdescription>
+        <detaileddescription>
+<para>Simply calls synchronization implementation LoomTempSync::sync_temp(). Allows the module to run regularly by emulating a sensor, which have thier measure methods called regularly. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="72" column="1" bodyfile="src/Temperature_Sync.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_temp_sync_1aa36abfbdda84295decbfdc962f7344c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void LoomTempSync::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>No package necessary. </para>        </briefdescription>
+        <detaileddescription>
+<para>Implement with empty body. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="76" column="1" bodyfile="src/Temperature_Sync.h" bodystart="76" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="variable" id="class_loom_temp_sync_1a243cb952438b1ddc56f8fde8384df3a0" prot="private" static="no" mutable="no">
+        <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *</type>
+        <definition>LoomModule* LoomTempSync::source</definition>
+        <argsstring></argsstring>
+        <name>source</name>
+        <briefdescription>
+<para>Pointer to module to get temperature from. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="88" column="1" bodyfile="src/Temperature_Sync.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_temp_sync_1a006905bff7fc9ce61d0bc70247669d43" prot="private" static="no" mutable="no">
+        <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *</type>
+        <definition>LoomModule* LoomTempSync::dependant</definition>
+        <argsstring></argsstring>
+        <name>dependant</name>
+        <briefdescription>
+<para>Pointer to module to forward temperature to. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="89" column="1" bodyfile="src/Temperature_Sync.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_temp_sync_1af10376405c3f9294f9c6456f95b8e7b3" prot="private" static="no" mutable="no">
+        <type><ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+        <definition>LoomModule::Type LoomTempSync::source_type</definition>
+        <argsstring></argsstring>
+        <name>source_type</name>
+        <briefdescription>
+<para>Type of source module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="91" column="1" bodyfile="src/Temperature_Sync.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_temp_sync_1a8ef4124723ad7a65185bb46b26ca9b0f" prot="private" static="no" mutable="no">
+        <type><ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+        <definition>LoomModule::Type LoomTempSync::dependant_type</definition>
+        <argsstring></argsstring>
+        <name>dependant_type</name>
+        <briefdescription>
+<para>Type of dependant module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="92" column="1" bodyfile="src/Temperature_Sync.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_temp_sync_1a7ebfed68ee73f407d698e70a023d5b5d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomTempSync::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="82" column="1" bodyfile="src/Temperature_Sync.cpp" bodystart="67" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_temp_sync_1ae9a2cab3c7642f855a4b91802b4839a0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomTempSync::sync_temp</definition>
+        <argsstring>()</argsstring>
+        <name>sync_temp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Temperature_Sync.h" line="86" column="1" bodyfile="src/Temperature_Sync.cpp" bodystart="75" bodyend="88"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Used to synchronize temperatures between sensors that read sensors and modules that need it. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="note"><para>Sources include:<itemizedlist>
+<listitem><para><ref refid="class_loom___m_s5803" kindref="compound">Loom_MS5803</ref> (code: 2110)</para></listitem><listitem><para><ref refid="class_loom___s_h_t31_d" kindref="compound">Loom_SHT31D</ref> (code: 2111) </para></listitem></itemizedlist>
+</para></simplesect>
+<simplesect kind="note"><para>Dependants include:<itemizedlist>
+<listitem><para><ref refid="class_loom___analog" kindref="compound">Loom_Analog</ref> (code 2001)</para></listitem></itemizedlist>
+</para></simplesect>
+<simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_temp_sync.html">Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1395">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="1394">
+        <label>LoomTempSync</label>
+        <link refid="class_loom_temp_sync"/>
+        <childnode refid="1395" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1402">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1398">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1399" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1400" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1405" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1401" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1397">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1398" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1406">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1401">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1397" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1402" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1403" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1400" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1404" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1405" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1406" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1396">
+        <label>LoomTempSync</label>
+        <link refid="class_loom_temp_sync"/>
+        <childnode refid="1397" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1400">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1397" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1401" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1399">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1397" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1405">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1397" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1403">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1404">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Temperature_Sync.h" line="33" column="1" bodyfile="src/Temperature_Sync.h" bodystart="32" bodyend="93"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>LoomTempSync</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>category</name></member>
+      <member refid="class_loom_temp_sync_1a006905bff7fc9ce61d0bc70247669d43" prot="private" virt="non-virtual"><scope>LoomTempSync</scope><name>dependant</name></member>
+      <member refid="class_loom_temp_sync_1a8ef4124723ad7a65185bb46b26ca9b0f" prot="private" virt="non-virtual"><scope>LoomTempSync</scope><name>dependant_type</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>LoomTempSync</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>link_device_manager</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>LoomModule</name></member>
+      <member refid="class_loom_temp_sync_1a170a1ecdcdc8589f306f7ea40d4878ea" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>LoomTempSync</name></member>
+      <member refid="class_loom_temp_sync_1aae408072a7ead338db0f3d01b8579b42" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>LoomTempSync</name></member>
+      <member refid="class_loom_temp_sync_1a11847e2106c869af9644e32c34cd68ea" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>measure</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>LoomTempSync</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>LoomTempSync</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>LoomTempSync</scope><name>module_type</name></member>
+      <member refid="class_loom_temp_sync_1aa36abfbdda84295decbfdc962f7344c8" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>LoomTempSync</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>power_up</name></member>
+      <member refid="class_loom_temp_sync_1a7ebfed68ee73f407d698e70a023d5b5d" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>LoomTempSync</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>LoomTempSync</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_temp_sync_1a0bc1a857bc87c30482c8175d69876b0a" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_temp_sync_1a243cb952438b1ddc56f8fde8384df3a0" prot="private" virt="non-virtual"><scope>LoomTempSync</scope><name>source</name></member>
+      <member refid="class_loom_temp_sync_1af10376405c3f9294f9c6456f95b8e7b3" prot="private" virt="non-virtual"><scope>LoomTempSync</scope><name>source_type</name></member>
+      <member refid="class_loom_temp_sync_1ae9a2cab3c7642f855a4b91802b4839a0" prot="private" virt="non-virtual"><scope>LoomTempSync</scope><name>sync_temp</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>Type</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>LoomTempSync</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_temp_sync_1a8e00454996d6a757235a975dccee2272" prot="public" virt="non-virtual"><scope>LoomTempSync</scope><name>~LoomTempSync</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

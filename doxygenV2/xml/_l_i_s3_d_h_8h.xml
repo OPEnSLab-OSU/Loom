@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_l_i_s3_d_h_8h" kind="file" language="C++">
+    <compoundname>LIS3DH.h</compoundname>
+    <includes refid="_i2_c___sensor_8h" local="yes">I2C_Sensor.h</includes>
+    <includes local="no">SparkFunLIS3DH.h</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_multiplexer_8cpp" local="yes">src/Multiplexer.cpp</includedby>
+    <includedby refid="_l_i_s3_d_h_8cpp" local="yes">src/Sensors/I2C/LIS3DH.cpp</includedby>
+    <incdepgraph>
+      <node id="5199">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5196">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5197" relation="include">
+        </childnode>
+        <childnode refid="5199" relation="include">
+        </childnode>
+        <childnode refid="5200" relation="include">
+        </childnode>
+        <childnode refid="5201" relation="include">
+        </childnode>
+      </node>
+      <node id="5200">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5198" relation="include">
+        </childnode>
+        <childnode refid="5201" relation="include">
+        </childnode>
+      </node>
+      <node id="5193">
+        <label>src/Sensors/I2C/LIS3DH.h</label>
+        <link refid="LIS3DH.h"/>
+        <childnode refid="5194" relation="include">
+        </childnode>
+        <childnode refid="5203" relation="include">
+        </childnode>
+      </node>
+      <node id="5197">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5198" relation="include">
+        </childnode>
+      </node>
+      <node id="5203">
+        <label>SparkFunLIS3DH.h</label>
+      </node>
+      <node id="5202">
+        <label>Wire.h</label>
+      </node>
+      <node id="5201">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5195">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5196" relation="include">
+        </childnode>
+      </node>
+      <node id="5198">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5194">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5195" relation="include">
+        </childnode>
+        <childnode refid="5202" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5205">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="5206" relation="include">
+        </childnode>
+        <childnode refid="5207" relation="include">
+        </childnode>
+      </node>
+      <node id="5208">
+        <label>src/Multiplexer.cpp</label>
+        <link refid="_multiplexer_8cpp"/>
+      </node>
+      <node id="5204">
+        <label>src/Sensors/I2C/LIS3DH.h</label>
+        <link refid="LIS3DH.h"/>
+        <childnode refid="5205" relation="include">
+        </childnode>
+        <childnode refid="5208" relation="include">
+        </childnode>
+        <childnode refid="5209" relation="include">
+        </childnode>
+      </node>
+      <node id="5206">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="5207">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="5209">
+        <label>src/Sensors/I2C/LIS3DH.cpp</label>
+        <link refid="_l_i_s3_d_h_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___l_i_s3_d_h" prot="public">Loom_LIS3DH</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/LIS3DH.h"/>
+  </compounddef>
+</doxygen>

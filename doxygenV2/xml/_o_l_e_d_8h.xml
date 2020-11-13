@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_o_l_e_d_8h" kind="file" language="C++">
+    <compoundname>OLED.h</compoundname>
+    <includes refid="_log_plat_8h" local="yes">LogPlat.h</includes>
+    <includes local="no">Adafruit_SSD1306.h</includes>
+    <includedby refid="_o_l_e_d_8cpp" local="yes">src/LogPlats/OLED.cpp</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="3582">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3578">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="3579" relation="include">
+        </childnode>
+      </node>
+      <node id="3579">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3580" relation="include">
+        </childnode>
+        <childnode refid="3582" relation="include">
+        </childnode>
+        <childnode refid="3583" relation="include">
+        </childnode>
+        <childnode refid="3584" relation="include">
+        </childnode>
+      </node>
+      <node id="3583">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3581" relation="include">
+        </childnode>
+        <childnode refid="3584" relation="include">
+        </childnode>
+      </node>
+      <node id="3585">
+        <label>Adafruit_SSD1306.h</label>
+      </node>
+      <node id="3580">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3581" relation="include">
+        </childnode>
+      </node>
+      <node id="3584">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3581">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3577">
+        <label>src/LogPlats/OLED.h</label>
+        <link refid="OLED.h"/>
+        <childnode refid="3578" relation="include">
+        </childnode>
+        <childnode refid="3585" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3588">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3589" relation="include">
+        </childnode>
+        <childnode refid="3590" relation="include">
+        </childnode>
+      </node>
+      <node id="3587">
+        <label>src/LogPlats/OLED.cpp</label>
+        <link refid="_o_l_e_d_8cpp"/>
+      </node>
+      <node id="3586">
+        <label>src/LogPlats/OLED.h</label>
+        <link refid="OLED.h"/>
+        <childnode refid="3587" relation="include">
+        </childnode>
+        <childnode refid="3588" relation="include">
+        </childnode>
+      </node>
+      <node id="3589">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3590">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___o_l_e_d" prot="public">Loom_OLED</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/LogPlats/OLED.h"/>
+  </compounddef>
+</doxygen>

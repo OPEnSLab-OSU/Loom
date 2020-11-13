@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_interrupt___manager_8h" kind="file" language="C++">
+    <compoundname>Interrupt_Manager.h</compoundname>
+    <includes refid="_module_8h" local="yes">Module.h</includes>
+    <includes local="no">OPEnS_RTC.h</includes>
+    <includes local="no">AsyncDelay.h</includes>
+    <includes local="no">RTCCounter.h</includes>
+    <includedby refid="_interrupt___manager_8cpp" local="yes">src/Interrupt_Manager.cpp</includedby>
+    <includedby refid="_sleep___manager_8h" local="yes">src/Sleep_Manager.h</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_manager_8cpp" local="yes">src/Manager.cpp</includedby>
+    <includedby refid="_manager___module___access_8cpp" local="yes">src/Manager_Module_Access.cpp</includedby>
+    <includedby refid="_r_t_c_8cpp" local="yes">src/RTC/RTC.cpp</includedby>
+    <incdepgraph>
+      <node id="3465">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3462">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3463" relation="include">
+        </childnode>
+        <childnode refid="3465" relation="include">
+        </childnode>
+        <childnode refid="3466" relation="include">
+        </childnode>
+        <childnode refid="3467" relation="include">
+        </childnode>
+      </node>
+      <node id="3466">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3464" relation="include">
+        </childnode>
+        <childnode refid="3467" relation="include">
+        </childnode>
+      </node>
+      <node id="3470">
+        <label>RTCCounter.h</label>
+      </node>
+      <node id="3463">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3464" relation="include">
+        </childnode>
+      </node>
+      <node id="3468">
+        <label>OPEnS_RTC.h</label>
+      </node>
+      <node id="3467">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3464">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3461">
+        <label>src/Interrupt_Manager.h</label>
+        <link refid="Interrupt_Manager.h"/>
+        <childnode refid="3462" relation="include">
+        </childnode>
+        <childnode refid="3468" relation="include">
+        </childnode>
+        <childnode refid="3469" relation="include">
+        </childnode>
+        <childnode refid="3470" relation="include">
+        </childnode>
+      </node>
+      <node id="3469">
+        <label>AsyncDelay.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3478">
+        <label>src/Sleep_Manager.cpp</label>
+        <link refid="_sleep___manager_8cpp"/>
+      </node>
+      <node id="3474">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3475" relation="include">
+        </childnode>
+        <childnode refid="3476" relation="include">
+        </childnode>
+      </node>
+      <node id="3477">
+        <label>src/Manager_Module_Access.cpp</label>
+        <link refid="_manager___module___access_8cpp"/>
+      </node>
+      <node id="3472">
+        <label>src/Interrupt_Manager.cpp</label>
+        <link refid="_interrupt___manager_8cpp"/>
+      </node>
+      <node id="3475">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3479">
+        <label>src/RTC/RTC.cpp</label>
+        <link refid="_r_t_c_8cpp"/>
+      </node>
+      <node id="3476">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="3471">
+        <label>src/Interrupt_Manager.h</label>
+        <link refid="Interrupt_Manager.h"/>
+        <childnode refid="3472" relation="include">
+        </childnode>
+        <childnode refid="3473" relation="include">
+        </childnode>
+        <childnode refid="3474" relation="include">
+        </childnode>
+        <childnode refid="3476" relation="include">
+        </childnode>
+        <childnode refid="3477" relation="include">
+        </childnode>
+        <childnode refid="3479" relation="include">
+        </childnode>
+      </node>
+      <node id="3473">
+        <label>src/Sleep_Manager.h</label>
+        <link refid="_sleep___manager_8h"/>
+        <childnode refid="3472" relation="include">
+        </childnode>
+        <childnode refid="3474" relation="include">
+        </childnode>
+        <childnode refid="3476" relation="include">
+        </childnode>
+        <childnode refid="3477" relation="include">
+        </childnode>
+        <childnode refid="3478" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___interrupt___manager" prot="public">Loom_Interrupt_Manager</innerclass>
+    <innerclass refid="struct_loom___interrupt___manager_1_1_int_details" prot="private">Loom_Interrupt_Manager::IntDetails</innerclass>
+    <innerclass refid="struct_loom___interrupt___manager_1_1_internal_timer_details" prot="private">Loom_Interrupt_Manager::InternalTimerDetails</innerclass>
+    <innerclass refid="struct_loom___interrupt___manager_1_1_timer_details" prot="private">Loom_Interrupt_Manager::TimerDetails</innerclass>
+    <innerclass refid="struct_loom___interrupt___manager_1_1_stop_watch_details" prot="private">Loom_Interrupt_Manager::StopWatchDetails</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_interrupt___manager_8h_1a3fbf8a43703481c17414cec74c056c5a" prot="public" static="no">
+        <name>InteruptRange</name>
+        <initializer>16</initializer>
+        <briefdescription>
+<para>Number of interrupts. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="21" column="9" bodyfile="src/Interrupt_Manager.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_interrupt___manager_8h_1a36969e07126fb846ed24bde87f6d8f73" prot="public" static="no">
+        <name>MaxTimerCount</name>
+        <initializer>2</initializer>
+        <briefdescription>
+<para>Maximum number of timers. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="22" column="9" bodyfile="src/Interrupt_Manager.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_interrupt___manager_8h_1a35dff5f1ee3055a319a9a773535b0ecf" prot="public" static="no">
+        <name>MaxStopWatchCount</name>
+        <initializer>2</initializer>
+        <briefdescription>
+<para>Maximum numbr of stopwatches. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="23" column="9" bodyfile="src/Interrupt_Manager.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="_interrupt___manager_8h_1a1cb40265e710cbdf07f99beb6c4020d1" prot="public" static="no">
+        <name>ISR_Type</name>
+        <enumvalue id="_interrupt___manager_8h_1a1cb40265e710cbdf07f99beb6c4020d1ae35884a2445bc4ae2df52f188763273c" prot="public">
+          <name>IMMEDIATE</name>
+          <briefdescription>
+<para>Run ISR immediately. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="_interrupt___manager_8h_1a1cb40265e710cbdf07f99beb6c4020d1aaf9e8c287542e149c8da0a6ee775d6fd" prot="public">
+          <name>CHECK_FLAG</name>
+          <briefdescription>
+<para>Run ISR when run_pending_ISRs() is called. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum of different ISR run behavior. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="36" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="36" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="_interrupt___manager_8h_1a21adc8a9b6cc2505b5b1317ca9f74cf3" prot="public" static="no">
+        <type>void(*)(</type>
+        <definition>using ISRFuncPtr =  void (*)(</definition>
+        <argsstring>)</argsstring>
+        <name>ISRFuncPtr</name>
+        <briefdescription>
+<para>Used to make function signatures easier to read when returning function pointers. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="33" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Interrupt_Manager.h"/>
+  </compounddef>
+</doxygen>

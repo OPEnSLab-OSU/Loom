@@ -1,0 +1,6 @@
+<map id="LoomSPISensor" name="LoomSPISensor">
+<area shape="rect" id="node4" href="$class_loom___m_a_x31855.html" title="MAX31855 thermocouple temperature module. " alt="" coords="5,229,139,256"/>
+<area shape="rect" id="node5" href="$class_loom___m_a_x31856.html" title="MAX31856 thermocouple module. " alt="" coords="163,229,296,256"/>
+<area shape="rect" id="node2" href="$class_loom_sensor.html" title="Abstract root of Loom sensor modules hierarchy. " alt="" coords="99,80,202,107"/>
+<area shape="rect" id="node3" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="99,5,203,32"/>
+</map>

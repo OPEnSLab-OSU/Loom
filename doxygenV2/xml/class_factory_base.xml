@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_factory_base" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>FactoryBase</compoundname>
+    <derivedcompoundref refid="class_loom_factory" prot="public" virt="non-virtual">LoomFactory&lt; INTERNET, SENSORS, RADIOS, ACTUATORS, MAX &gt;</derivedcompoundref>
+    <includes refid="_module___factory_8h" local="no">Module_Factory.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_factory_base_1a96c50a015c8e2b0e6cc4a8ee48ae2a12" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void FactoryBase::print_table</definition>
+        <argsstring>() const =0</argsstring>
+        <name>print_table</name>
+        <reimplementedby refid="class_loom_factory_1a9a81e69b81e801e055a7d2b86e24d59b">print_table</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="289" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_factory_base_1a1a3356d8729b56634c3bca85c7530223" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *</type>
+        <definition>virtual LoomModule* FactoryBase::Create</definition>
+        <argsstring>(LoomManager *manager, JsonVariant module) const =0</argsstring>
+        <name>Create</name>
+        <reimplementedby refid="class_loom_factory_1a16952c39558fd8fcb317e251e9f02266">Create</reimplementedby>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonVariant</type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="298" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_factory_base_1a4d5751e4e588002b1f5390124bfc1351" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>static T* FactoryBase::CreateDefault</definition>
+        <argsstring>()</argsstring>
+        <name>CreateDefault</name>
+        <briefdescription>
+<para>Creates a <ref refid="class_loom_module" kindref="compound">LoomModule</ref> with its default parameters. </para>        </briefdescription>
+        <detaileddescription>
+<para>Usage example: <ref refid="class_loom___relay" kindref="compound">Loom_Relay</ref> r = FactoryInst.CreateDefault&lt;Loom_Relay&gt;(); <simplesect kind="return"><para>The created <ref refid="class_loom_module" kindref="compound">LoomModule</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="296" column="1" bodyfile="src/Module_Factory.h" bodystart="296" bodyend="296"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class that factory is derived from. </para>    </briefdescription>
+    <detaileddescription>
+<para>Purpose is to allow LoomManger to have a pointer to a <ref refid="class_loom_factory" kindref="compound">LoomFactory</ref>, which it cannot do directly because different parameter selections result in different factory classes</para><para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_factory_base.html">FactoryBase Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="329">
+        <label>FactoryBase</label>
+        <link refid="class_factory_base"/>
+      </node>
+      <node id="330">
+        <label>LoomFactory&lt; INTERNET, SENSORS, RADIOS, ACTUATORS, MAX &gt;</label>
+        <link refid="class_loom_factory"/>
+        <childnode refid="329" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="src/Module_Factory.h" line="286" column="1" bodyfile="src/Module_Factory.h" bodystart="285" bodyend="299"/>
+    <listofallmembers>
+      <member refid="class_factory_base_1a1a3356d8729b56634c3bca85c7530223" prot="public" virt="pure-virtual"><scope>FactoryBase</scope><name>Create</name></member>
+      <member refid="class_factory_base_1a4d5751e4e588002b1f5390124bfc1351" prot="public" virt="non-virtual"><scope>FactoryBase</scope><name>CreateDefault</name></member>
+      <member refid="class_factory_base_1a96c50a015c8e2b0e6cc4a8ee48ae2a12" prot="public" virt="pure-virtual"><scope>FactoryBase</scope><name>print_table</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

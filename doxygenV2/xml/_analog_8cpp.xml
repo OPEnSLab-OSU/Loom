@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_analog_8cpp" kind="file" language="C++">
+    <compoundname>Analog.cpp</compoundname>
+    <includes refid="_analog_8h" local="yes">Analog.h</includes>
+    <incdepgraph>
+      <node id="4897">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4894">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4895" relation="include">
+        </childnode>
+        <childnode refid="4897" relation="include">
+        </childnode>
+        <childnode refid="4898" relation="include">
+        </childnode>
+        <childnode refid="4899" relation="include">
+        </childnode>
+      </node>
+      <node id="4898">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4896" relation="include">
+        </childnode>
+        <childnode refid="4899" relation="include">
+        </childnode>
+      </node>
+      <node id="4892">
+        <label>Analog.h</label>
+        <link refid="_analog_8h"/>
+        <childnode refid="4893" relation="include">
+        </childnode>
+      </node>
+      <node id="4895">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4896" relation="include">
+        </childnode>
+      </node>
+      <node id="4899">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4893">
+        <label>Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="4894" relation="include">
+        </childnode>
+      </node>
+      <node id="4896">
+        <label>Arduino.h</label>
+      </node>
+      <node id="4891">
+        <label>src/Sensors/Analog.cpp</label>
+        <link refid="Analog.cpp"/>
+        <childnode refid="4892" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_analog_8cpp_1a8d6df810c08028f55aba0e86b146093c" prot="public" static="no">
+        <name>reverse_connect</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.cpp" line="237" column="9" bodyfile="src/Sensors/Analog.cpp" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_analog_8cpp_1a38f2d877dee7ea0fbb35efd14ee2ca42" prot="public" static="no">
+        <name>THERMISTORNOMINAL</name>
+        <initializer>10000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.cpp" line="238" column="9" bodyfile="src/Sensors/Analog.cpp" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_analog_8cpp_1ad131decb98217dffe7e5c6d0f7fcb453" prot="public" static="no">
+        <name>TEMPERATURENOMINAL</name>
+        <initializer>25</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.cpp" line="239" column="9" bodyfile="src/Sensors/Analog.cpp" bodystart="239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_analog_8cpp_1a4ea9e58bc3ede78b23d4ed2f84f8ef97" prot="public" static="no">
+        <name>BCOEFFICIENT</name>
+        <initializer>3950</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.cpp" line="240" column="9" bodyfile="src/Sensors/Analog.cpp" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_analog_8cpp_1aeda514ffe2696b78d945bc12a07b63cf" prot="public" static="no">
+        <name>SERIESRESISTOR</name>
+        <initializer>29330</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.cpp" line="242" column="9" bodyfile="src/Sensors/Analog.cpp" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_analog_8cpp_1a853d04495fe8feea2a42928791a0b0e2" prot="public" static="no">
+        <name>range_resol</name>
+        <initializer>4095</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.cpp" line="243" column="9" bodyfile="src/Sensors/Analog.cpp" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_analog_8cpp_1a8c3a424528b51eb4fcd755876c0cec30" prot="public" static="no">
+        <name>PH_Offset</name>
+        <initializer>0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/Analog.cpp" line="271" column="9" bodyfile="src/Sensors/Analog.cpp" bodystart="271" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/Analog.cpp"/>
+  </compounddef>
+</doxygen>

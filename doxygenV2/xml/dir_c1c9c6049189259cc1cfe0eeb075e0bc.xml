@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_c1c9c6049189259cc1cfe0eeb075e0bc" kind="dir">
+    <compoundname>src/Sensors/SDI12</compoundname>
+    <innerfile refid="_decagon__5_t_m_8cpp">Decagon_5TM.cpp</innerfile>
+    <innerfile refid="_decagon__5_t_m_8h">Decagon_5TM.h</innerfile>
+    <innerfile refid="_decagon___g_s3_8cpp">Decagon_GS3.cpp</innerfile>
+    <innerfile refid="_decagon___g_s3_8h">Decagon_GS3.h</innerfile>
+    <innerfile refid="_s_d_i12___sensor_8cpp">SDI12_Sensor.cpp</innerfile>
+    <innerfile refid="_s_d_i12___sensor_8h">SDI12_Sensor.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/SDI12/"/>
+  </compounddef>
+</doxygen>

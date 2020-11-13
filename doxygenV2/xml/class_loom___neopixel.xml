@@ -1,0 +1,500 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___neopixel" kind="class" language="C++" prot="public">
+    <compoundname>Loom_Neopixel</compoundname>
+    <basecompoundref refid="class_loom_actuator" prot="public" virt="non-virtual">LoomActuator</basecompoundref>
+    <includes refid="_neopixel_8h" local="no">Neopixel.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___neopixel_1a2a0d74646338fb10a103a7ea73247e21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Neopixel::Loom_Neopixel</definition>
+        <argsstring>(LoomManager *manager, const bool enableA0=false, const bool enableA1=false, const bool enableA2=true)</argsstring>
+        <name>Loom_Neopixel</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enableA0</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enableA1</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>enableA2</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">enableA0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;false&gt; | {true, false} | Whether or not to use pin A0 for Neopixel </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enableA1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;false&gt; | {true, false} | Whether or not to use pin A1 for Neopixel </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enableA2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | Whether or not to use pin A2 for Neopixel </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="51" column="1" bodyfile="src/Actuators/Neopixel.cpp" bodystart="16" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___neopixel_1a3f640252abdf3a7bf3767f8ebd2d78eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Neopixel::Loom_Neopixel</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_Neopixel</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="61" column="1" bodyfile="src/Actuators/Neopixel.cpp" bodystart="48" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___neopixel_1a478d9ab0f93182948e9969af40c65819" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Neopixel::~Loom_Neopixel</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_Neopixel</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="64" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___neopixel_1a89ecb4894b7be0e00657d32aa2374a42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_Neopixel::dispatch</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>dispatch</name>
+        <reimplements refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8">dispatch</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Route command to driver. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="70" column="1" bodyfile="src/Actuators/Neopixel.cpp" bodystart="85" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___neopixel_1a005ac12c181ff40647657c6c9b2fde2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Neopixel::add_config</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>add_config</name>
+        <reimplements refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0">add_config</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Add configuration information to JsonObject. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> iterates over modules to build complete configuration <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json configuration object to add to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="71" column="1" bodyfile="src/Actuators/Neopixel.cpp" bodystart="52" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___neopixel_1a5e5009a63413482de5b5baa54603da65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Neopixel::set_color</definition>
+        <argsstring>(const uint8_t port, const uint8_t chain_num, const uint8_t red, const uint8_t green, const uint8_t blue)</argsstring>
+        <name>set_color</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>chain_num</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>red</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>green</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>blue</declname>
+        </param>
+        <briefdescription>
+<para>Set Neopixel color. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The port the Neopixel to control is on (0-2 corresponding to A0-A2) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">chain_num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Neopixel number if daisy-chained </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">red</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The red value (0-255) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">green</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The green value (0-255) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">blue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The blue value (0-255) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="79" column="1" bodyfile="src/Actuators/Neopixel.cpp" bodystart="108" bodyend="134"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___neopixel_1aa1930cfa494ef432bbbf1d1786c6b57d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Neopixel::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="85" column="1" bodyfile="src/Actuators/Neopixel.cpp" bodystart="61" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___neopixel_1a0a5e8fd23e4f32b006a52c422551b48e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Neopixel::print_state</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_state</name>
+        <reimplements refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7">print_state</reimplements>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="86" column="1" bodyfile="src/Actuators/Neopixel.cpp" bodystart="71" bodyend="82"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom___neopixel_1ac967b6eff14a0e028ff70524f70acd0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Neopixel::enable_pin</definition>
+        <argsstring>(const uint8_t port, const bool state)</argsstring>
+        <name>enable_pin</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>enable or disable pin for use with Neopixel </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Port to configure (0-2) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="namespace_enable" kindref="compound">Enable</ref> or disable </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="95" column="1" bodyfile="src/Actuators/Neopixel.cpp" bodystart="95" bodyend="105"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___neopixel_1a3f177f651d50d29a0ca12d2a9ba5eb79" prot="protected" static="no" mutable="no">
+        <type>Adafruit_NeoPixel</type>
+        <definition>Adafruit_NeoPixel Loom_Neopixel::pixels[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>pixels</name>
+        <briefdescription>
+<para>Array of Neopixel instances to manage up to 3 Neopixels. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="35" column="1" bodyfile="src/Actuators/Neopixel.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___neopixel_1aec3c3270cf9a4c9f942296a7ebd5147d" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Neopixel::pin_enabled[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>pin_enabled</name>
+        <briefdescription>
+<para>Whether pins A0-A2 are enabled. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="37" column="1" bodyfile="src/Actuators/Neopixel.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___neopixel_1ac084d5a5236d29d024c166a79e9423f1" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_Neopixel::color_vals[3][3]</definition>
+        <argsstring>[3][3]</argsstring>
+        <name>color_vals</name>
+        <briefdescription>
+<para>The associated color values (RGB) for each of the 3 Neopixels. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Neopixel.h" line="38" column="1" bodyfile="src/Actuators/Neopixel.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Neopixel tri-color LED actuator module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___neopixel.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/category/168">Product Page: Adafruit Neopixel</ulink></para></listitem><listitem><para><ulink url="https://github.com/adafruit/Adafruit_NeoPixel">Dependency</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#neopixel">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="804">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="803">
+        <label>LoomActuator</label>
+        <link refid="class_loom_actuator"/>
+        <childnode refid="804" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="802">
+        <label>Loom_Neopixel</label>
+        <link refid="class_loom___neopixel"/>
+        <childnode refid="803" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="812">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="808">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="809" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="810" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="815" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="811" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="807">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="808" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="816">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="811">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="807" relation="public-inheritance">
+        </childnode>
+        <childnode refid="812" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="813" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="810" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="814" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="815" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="816" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="810">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="807" relation="public-inheritance">
+        </childnode>
+        <childnode refid="811" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="806">
+        <label>LoomActuator</label>
+        <link refid="class_loom_actuator"/>
+        <childnode refid="807" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="809">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="807" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="815">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="807" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="813">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="805">
+        <label>Loom_Neopixel</label>
+        <link refid="class_loom___neopixel"/>
+        <childnode refid="806" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="814">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Actuators/Neopixel.h" line="31" column="1" bodyfile="src/Actuators/Neopixel.h" bodystart="30" bodyend="100"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>active</name></member>
+      <member refid="class_loom___neopixel_1a005ac12c181ff40647657c6c9b2fde2d" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>Category</name></member>
+      <member refid="class_loom___neopixel_1ac084d5a5236d29d024c166a79e9423f1" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>color_vals</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>device_manager</name></member>
+      <member refid="class_loom___neopixel_1a89ecb4894b7be0e00657d32aa2374a42" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>dispatch</name></member>
+      <member refid="class_loom___neopixel_1ac967b6eff14a0e028ff70524f70acd0c" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>enable_pin</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___neopixel_1a2a0d74646338fb10a103a7ea73247e21" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>Loom_Neopixel</name></member>
+      <member refid="class_loom___neopixel_1a3f640252abdf3a7bf3767f8ebd2d78eb" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>Loom_Neopixel</name></member>
+      <member refid="class_loom_actuator_1a3a789588b9092dae071cd236bc72e698" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>LoomActuator</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>LoomModule</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>module_type</name></member>
+      <member refid="class_loom_actuator_1abf895d8f41379ff53dff666d9d2791a2" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___neopixel_1aec3c3270cf9a4c9f942296a7ebd5147d" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>pin_enabled</name></member>
+      <member refid="class_loom___neopixel_1a3f177f651d50d29a0ca12d2a9ba5eb79" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>pixels</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>power_up</name></member>
+      <member refid="class_loom___neopixel_1aa1930cfa494ef432bbbf1d1786c6b57d" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>print_module_label</name></member>
+      <member refid="class_loom___neopixel_1a0a5e8fd23e4f32b006a52c422551b48e" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_Neopixel</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>set_active</name></member>
+      <member refid="class_loom___neopixel_1a5e5009a63413482de5b5baa54603da65" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>set_color</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>Type</name></member>
+      <member refid="class_loom___neopixel_1a478d9ab0f93182948e9969af40c65819" prot="public" virt="non-virtual"><scope>Loom_Neopixel</scope><name>~Loom_Neopixel</name></member>
+      <member refid="class_loom_actuator_1a397f57e44b59f1705829bd9f44ae6187" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>~LoomActuator</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_Neopixel</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

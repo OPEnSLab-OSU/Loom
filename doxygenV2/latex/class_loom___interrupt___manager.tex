@@ -1,0 +1,844 @@
+\hypertarget{class_loom___interrupt___manager}{}\section{Loom\+\_\+\+Interrupt\+\_\+\+Manager Class Reference}
+\label{class_loom___interrupt___manager}\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+
+
+Submanager for managing interrupts, timers, and stopwatches.  
+
+
+
+
+{\ttfamily \#include $<$Interrupt\+\_\+\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Interrupt\+\_\+\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{class_loom___interrupt___manager__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___interrupt___manager_a5b12fcb72f0f5da323d63ab9a6ca95a5}{Loom\+\_\+\+Interrupt\+\_\+\+Manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, \hyperlink{class_loom_r_t_c}{Loom\+R\+TC} $\ast$\hyperlink{class_loom___interrupt___manager_af209a82a1929466fa1d00a14733120c6}{R\+T\+C\+\_\+\+Inst}=nullptr)
+\begin{DoxyCompactList}\small\item\em Interrupt Manager module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___interrupt___manager_a5b23954e2888942d6370f82e2f790d6d}{Loom\+\_\+\+Interrupt\+\_\+\+Manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___interrupt___manager_a0a389cd37e3266ab844ff0eed146082a}{$\sim$\+Loom\+\_\+\+Interrupt\+\_\+\+Manager} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___interrupt___manager_a5acb7bf173619dbd1a459800182767e6}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em No package necessary. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_ada590ee9e56b82b39a6cf443c6038efd}{run\+\_\+pending\+\_\+\+I\+S\+Rs} ()
+\begin{DoxyCompactList}\small\item\em Run any waiting I\+S\+Rs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf E\+X\+T\+E\+R\+N\+AL I\+N\+T\+E\+R\+R\+U\+PT M\+E\+T\+H\+O\+DS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___interrupt___manager_a2d10238301b261b7cc98f5392c2d8cff}{register\+\_\+\+I\+SR} (const uint32\+\_\+t pin, \hyperlink{_interrupt___manager_8h_a21adc8a9b6cc2505b5b1317ca9f74cf3}{I\+S\+R\+Func\+Ptr} I\+SR, const uint32\+\_\+t signal\+\_\+type, \hyperlink{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1}{I\+S\+R\+\_\+\+Type} run\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Register an I\+SR to an interrupt pin and its configuration. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___interrupt___manager_abbf112a7a515088c543e76f5ad2a8bea}{reconnect\+\_\+interrupt} (const uint32\+\_\+t pin)
+\begin{DoxyCompactList}\small\item\em If an I\+SR dettaches interrupt, use this to reattach according to previous settings. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_a314bdba78fd288871bea3421ba6ec022}{unregister\+\_\+\+I\+SR} (const uint32\+\_\+t pin, const uint32\+\_\+t signal\+\_\+type=L\+OW)
+\begin{DoxyCompactList}\small\item\em Restores pin to default I\+SR, disables interrupt. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_a05ba1bf76145681fecb787374358711f}{interrupt\+\_\+reset} (const uint32\+\_\+t pin)
+\begin{DoxyCompactList}\small\item\em Detaches then reattacheds interrupt according to settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf R\+TC A\+L\+A\+RM M\+E\+T\+H\+O\+DS}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___interrupt___manager_ac188b3f03d32bcfdfe5caf4eae31f33d}{R\+T\+C\+\_\+alarm\+\_\+duration} (const Time\+Span duration)
+\begin{DoxyCompactList}\small\item\em Set R\+TC alarm an amount of time from now. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___interrupt___manager_abde5c47ed6021fe7280c14891b1a1c31}{R\+T\+C\+\_\+alarm\+\_\+duration} (const uint8\+\_\+t days, const uint8\+\_\+t hours, const uint8\+\_\+t minutes, const uint8\+\_\+t seconds)
+\begin{DoxyCompactList}\small\item\em Set R\+TC alarm an amount of time from now. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___interrupt___manager_afca2eade7f1520c97add8dbffe1247df}{R\+T\+C\+\_\+alarm\+\_\+at} (Date\+Time future\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Set R\+TC alarm for a specific time. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___interrupt___manager_abbfb010ec889658a10d596ac4d096069}{R\+T\+C\+\_\+alarm\+\_\+at} (const uint8\+\_\+t hour, const uint8\+\_\+t minute, const uint8\+\_\+t second)
+\begin{DoxyCompactList}\small\item\em Set R\+TC alarm for a specific time. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___interrupt___manager_aef46cb9e0c3aee294ef5eacd5685be72}{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last} (const Time\+Span duration)
+\begin{DoxyCompactList}\small\item\em Set R\+TC alarm an amount of time from last alarm time. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___interrupt___manager_a254c240e87b74e465acb4ed36e9fc2b8}{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last} (const uint8\+\_\+t days, const uint8\+\_\+t hours, const uint8\+\_\+t minutes, const uint8\+\_\+t seconds)
+\begin{DoxyCompactList}\small\item\em Set R\+TC alarm an amount of time from last alarm time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf A\+S\+Y\+N\+C\+D\+E\+L\+AY T\+I\+M\+ER M\+E\+T\+H\+O\+DS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___interrupt___manager_af5b0647e08c81406eefd25c3d4cc54f3}{check\+\_\+timers} ()
+\begin{DoxyCompactList}\small\item\em Check if timers have elapsed, if so run associated \textquotesingle{}I\+SR\textquotesingle{}. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_a1b921c29326cfc93dd4e2e405d50bbdd}{register\+\_\+timer} (const uint8\+\_\+t timer\+\_\+num, const unsigned long duration, const \hyperlink{_interrupt___manager_8h_a21adc8a9b6cc2505b5b1317ca9f74cf3}{I\+S\+R\+Func\+Ptr} I\+SR, const bool repeat)
+\begin{DoxyCompactList}\small\item\em Configure specified timer. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_a1f52e9304f3b8b1fc93225f6d2e55785}{clear\+\_\+timer} (const uint8\+\_\+t timer\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Clear specified timer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf I\+N\+T\+E\+R\+N\+AL T\+I\+M\+ER M\+E\+T\+H\+O\+DS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___interrupt___manager_a61330d0a7d555fd77f0ecfa9e8d2d68e}{register\+\_\+internal\+\_\+timer} (const uint duration, const \hyperlink{_interrupt___manager_8h_a21adc8a9b6cc2505b5b1317ca9f74cf3}{I\+S\+R\+Func\+Ptr} I\+SR, const bool repeat, const \hyperlink{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1}{I\+S\+R\+\_\+\+Type} run\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Configure internal timer. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___interrupt___manager_a62c7686cecf790cfa0b05b704dd331b7}{run\+\_\+pending\+\_\+internal\+\_\+timer\+\_\+\+I\+SR} ()
+\begin{DoxyCompactList}\small\item\em Run a delayed (flag based) I\+SR if the interal timer elapsed. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___interrupt___manager_a0dce3fcaa0a20ebb67e6ff723cf6ac3d}{get\+\_\+internal\+\_\+timer\+\_\+flag} () const 
+\begin{DoxyCompactList}\small\item\em Get whether the internal timer has elapsed. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_acd8fc9dcdf5711155cde0b1ac6a3da15}{clear\+\_\+internal\+\_\+timer\+\_\+flag} () const 
+\begin{DoxyCompactList}\small\item\em Clear internal timer flag. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_a1264d1fc1bbb0d8c82e791d174e37007}{internal\+\_\+timer\+\_\+enable} (const bool enable)
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespace_enable}{Enable} or disable internal timer. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_ac70690464b0311ad8758bf9cde3887d9}{unregister\+\_\+internal\+\_\+timer} ()
+\begin{DoxyCompactList}\small\item\em Clear and disable internal timer, remove I\+SR. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___interrupt___manager_a6b7a28e4b7a150016e2975165581f7e9}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_ae9dde4f4da0e50a0bc19e2ae3453c3cb}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___interrupt___manager_a647e6a07bcfcf479a5510d29f11fd1e6}{get\+\_\+interrupts\+\_\+enabled} () const 
+\begin{DoxyCompactList}\small\item\em Get global interrupt enable state. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___interrupt___manager_a947b7bc935f50e33f2483ab315188709}{get\+\_\+enable\+\_\+interrupt} (const uint32\+\_\+t pin) const 
+\begin{DoxyCompactList}\small\item\em Get pin interrupt enable state. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_r_t_c}{Loom\+R\+TC} $\ast$ \hyperlink{class_loom___interrupt___manager_a7d27c7a5b0c7f7d8c26f043656cb28a7}{get\+\_\+\+R\+T\+C\+\_\+module} () const 
+\begin{DoxyCompactList}\small\item\em Return pointer to the currently linked R\+TC object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___interrupt___manager_a7415a4ffbeda1358639936cc62969605}{link\+\_\+device\+\_\+manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$LM) override
+\begin{DoxyCompactList}\small\item\em Link a device manager. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_a794ec2babdedb928f17862c93b772215}{link\+\_\+sleep\+\_\+manager} (\hyperlink{class_loom___sleep___manager}{Loom\+\_\+\+Sleep\+\_\+\+Manager} $\ast$SM)
+\begin{DoxyCompactList}\small\item\em Set pointer to sleep Manager. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_a179034c16493d648ad3108ae1152e86b}{set\+\_\+interrupts\+\_\+enabled} (const bool state)
+\begin{DoxyCompactList}\small\item\em All interrupts enable/disable. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_ac3551b3ce17a6eb7db6885689510be60}{set\+\_\+enable\+\_\+interrupt} (const uint32\+\_\+t pin, const bool state)
+\begin{DoxyCompactList}\small\item\em Per interrupt enable. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___interrupt___manager_a971175f7e1109e0317041bde9824591d}{set\+\_\+\+R\+T\+C\+\_\+module} (\hyperlink{class_loom_r_t_c}{Loom\+R\+TC} $\ast$\hyperlink{class_loom___interrupt___manager_af209a82a1929466fa1d00a14733120c6}{R\+T\+C\+\_\+\+Inst})
+\begin{DoxyCompactList}\small\item\em Set the R\+TC module to use for timers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_r_t_c}{Loom\+R\+TC} $\ast$ \hyperlink{class_loom___interrupt___manager_af209a82a1929466fa1d00a14733120c6}{R\+T\+C\+\_\+\+Inst}
+\begin{DoxyCompactList}\small\item\em Pointer to an R\+TC object for managing timers / timed interrupts. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___sleep___manager}{Loom\+\_\+\+Sleep\+\_\+\+Manager} $\ast$ \hyperlink{class_loom___interrupt___manager_a1afa84cd52b350fcc4a48ec2e45431a9}{Sleep\+\_\+\+Manager}
+\begin{DoxyCompactList}\small\item\em Pointer to a Sleep Manager object. \end{DoxyCompactList}\item 
+Int\+Details \hyperlink{class_loom___interrupt___manager_a8b625720d3238492bc51a301e4e9b09a}{int\+\_\+settings} \mbox{[}\hyperlink{_interrupt___manager_8h_a3fbf8a43703481c17414cec74c056c5a}{Interupt\+Range}\mbox{]}
+\begin{DoxyCompactList}\small\item\em List of interrupts configurations. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___interrupt___manager_a0c79ea059f94d9ec26c4b58d3c945754}{int\+\_\+count} = 0
+\item 
+bool \hyperlink{class_loom___interrupt___manager_a042032ad0c2ed2748e1d2849dcae1a2f}{interrupts\+\_\+enabled}
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespace_enable}{Enable} or disable all interrupts -- currently only disables bottom halves. \end{DoxyCompactList}\item 
+Internal\+Timer\+Details \hyperlink{class_loom___interrupt___manager_a9a00f26aff65a7294699d3518a3b7e74}{internal\+\_\+timer}
+\item 
+Date\+Time \hyperlink{class_loom___interrupt___manager_a099eebe8ec30cee46432701945b0e758}{last\+\_\+alarm\+\_\+time}
+\begin{DoxyCompactList}\small\item\em Last time an alarm went off. \end{DoxyCompactList}\item 
+Async\+Delay \hyperlink{class_loom___interrupt___manager_aee0fc09dd7023b4d740932bb44a705c4}{timers} \mbox{[}\hyperlink{_interrupt___manager_8h_a36969e07126fb846ed24bde87f6d8f73}{Max\+Timer\+Count}\mbox{]}
+\item 
+Timer\+Details \hyperlink{class_loom___interrupt___manager_a77b5bb21e151ca476b9e9cf8e45eaad6}{timer\+\_\+settings} \mbox{[}\hyperlink{_interrupt___manager_8h_a36969e07126fb846ed24bde87f6d8f73}{Max\+Timer\+Count}\mbox{]}
+\item 
+Stop\+Watch\+Details \hyperlink{class_loom___interrupt___manager_a70c3fa86880738c1090071003b76cdc5}{stopwatch\+\_\+settings} \mbox{[}\hyperlink{_interrupt___manager_8h_a35dff5f1ee3055a319a9a773535b0ecf}{Max\+Stop\+Watch\+Count}\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{class_loom___interrupt___manager_a12c988c69d8e14c845a736e032ac3575}{interrupt\+\_\+triggered} \mbox{[}\hyperlink{_interrupt___manager_8h_a3fbf8a43703481c17414cec74c056c5a}{Interupt\+Range}\mbox{]} = \{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}
+\begin{DoxyCompactList}\small\item\em Flags set by interrupts, indicating I\+SR bottom half should be called if not Null. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{M\+I\+S\+C\+E\+L\+L\+A\+N\+E\+O\+US}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{class_loom___interrupt___manager_a212f9cf070fb64c56d9ff675139278a4}{pin\+\_\+to\+\_\+interrupt} (uint32\+\_\+t pin)
+\item 
+static const char $\ast$ \hyperlink{class_loom___interrupt___manager_a9627a5c793fa172b25c4ff0078fe7193}{interrupt\+\_\+type\+\_\+to\+\_\+string} (const uint8\+\_\+t type)
+\begin{DoxyCompactList}\small\item\em Get c-\/string of name associated with interrupt type enum. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Submanager for managing interrupts, timers, and stopwatches. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html}{\tt Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Interrupt\+\_\+\+Manager(\+Loom\+Manager $\ast$manager, Loom\+R\+T\+C $\ast$\+R\+T\+C\+\_\+\+Inst=nullptr)}{Loom_Interrupt_Manager(LoomManager *manager, LoomRTC *RTC_Inst=nullptr)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+Loom\+\_\+\+Interrupt\+\_\+\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{{\bf Loom\+R\+TC} $\ast$}]{R\+T\+C\+\_\+\+Inst = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a5b12fcb72f0f5da323d63ab9a6ca95a5}{}\label{class_loom___interrupt___manager_a5b12fcb72f0f5da323d63ab9a6ca95a5}
+
+
+Interrupt Manager module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em R\+T\+C\+\_\+\+Inst} & Set(\+Int) $\vert$ $<$0$>$ $\vert$ \{0(\char`\"{}\+Null\char`\"{})\} $\vert$ O\+L\+ED module name \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Interrupt\+\_\+\+Manager(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Interrupt_Manager(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+Loom\+\_\+\+Interrupt\+\_\+\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a5b23954e2888942d6370f82e2f790d6d}{}\label{class_loom___interrupt___manager_a5b23954e2888942d6370f82e2f790d6d}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!````~Loom\+\_\+\+Interrupt\+\_\+\+Manager@{$\sim$\+Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\index{````~Loom\+\_\+\+Interrupt\+\_\+\+Manager@{$\sim$\+Loom\+\_\+\+Interrupt\+\_\+\+Manager}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Interrupt\+\_\+\+Manager()=default}{~Loom_Interrupt_Manager()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::$\sim$\+Loom\+\_\+\+Interrupt\+\_\+\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___interrupt___manager_a0a389cd37e3266ab844ff0eed146082a}{}\label{class_loom___interrupt___manager_a0a389cd37e3266ab844ff0eed146082a}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!check\+\_\+timers@{check\+\_\+timers}}
+\index{check\+\_\+timers@{check\+\_\+timers}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{check\+\_\+timers()}{check_timers()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::check\+\_\+timers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_af5b0647e08c81406eefd25c3d4cc54f3}{}\label{class_loom___interrupt___manager_af5b0647e08c81406eefd25c3d4cc54f3}
+
+
+Check if timers have elapsed, if so run associated \textquotesingle{}I\+SR\textquotesingle{}. 
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!clear\+\_\+internal\+\_\+timer\+\_\+flag@{clear\+\_\+internal\+\_\+timer\+\_\+flag}}
+\index{clear\+\_\+internal\+\_\+timer\+\_\+flag@{clear\+\_\+internal\+\_\+timer\+\_\+flag}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{clear\+\_\+internal\+\_\+timer\+\_\+flag() const }{clear_internal_timer_flag() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::clear\+\_\+internal\+\_\+timer\+\_\+flag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___interrupt___manager_acd8fc9dcdf5711155cde0b1ac6a3da15}{}\label{class_loom___interrupt___manager_acd8fc9dcdf5711155cde0b1ac6a3da15}
+
+
+Clear internal timer flag. 
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!clear\+\_\+timer@{clear\+\_\+timer}}
+\index{clear\+\_\+timer@{clear\+\_\+timer}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{clear\+\_\+timer(const uint8\+\_\+t timer\+\_\+num)}{clear_timer(const uint8_t timer_num)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::clear\+\_\+timer (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{timer\+\_\+num}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a1f52e9304f3b8b1fc93225f6d2e55785}{}\label{class_loom___interrupt___manager_a1f52e9304f3b8b1fc93225f6d2e55785}
+
+
+Clear specified timer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer\+\_\+num} & Timer to clear \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!get\+\_\+enable\+\_\+interrupt@{get\+\_\+enable\+\_\+interrupt}}
+\index{get\+\_\+enable\+\_\+interrupt@{get\+\_\+enable\+\_\+interrupt}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+enable\+\_\+interrupt(const uint32\+\_\+t pin) const }{get_enable_interrupt(const uint32_t pin) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::get\+\_\+enable\+\_\+interrupt (
+\begin{DoxyParamCaption}
+\item[{const uint32\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___interrupt___manager_a947b7bc935f50e33f2483ab315188709}{}\label{class_loom___interrupt___manager_a947b7bc935f50e33f2483ab315188709}
+
+
+Get pin interrupt enable state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Pin to the the enable state of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The enable state 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!get\+\_\+internal\+\_\+timer\+\_\+flag@{get\+\_\+internal\+\_\+timer\+\_\+flag}}
+\index{get\+\_\+internal\+\_\+timer\+\_\+flag@{get\+\_\+internal\+\_\+timer\+\_\+flag}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+internal\+\_\+timer\+\_\+flag() const }{get_internal_timer_flag() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::get\+\_\+internal\+\_\+timer\+\_\+flag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___interrupt___manager_a0dce3fcaa0a20ebb67e6ff723cf6ac3d}{}\label{class_loom___interrupt___manager_a0dce3fcaa0a20ebb67e6ff723cf6ac3d}
+
+
+Get whether the internal timer has elapsed. 
+
+\begin{DoxyReturn}{Returns}
+True if timer elapsed, false otherwise 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!get\+\_\+interrupts\+\_\+enabled@{get\+\_\+interrupts\+\_\+enabled}}
+\index{get\+\_\+interrupts\+\_\+enabled@{get\+\_\+interrupts\+\_\+enabled}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+interrupts\+\_\+enabled() const }{get_interrupts_enabled() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::get\+\_\+interrupts\+\_\+enabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___interrupt___manager_a647e6a07bcfcf479a5510d29f11fd1e6}{}\label{class_loom___interrupt___manager_a647e6a07bcfcf479a5510d29f11fd1e6}
+
+
+Get global interrupt enable state. 
+
+\begin{DoxyReturn}{Returns}
+Global interrupt enable state 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!get\+\_\+\+R\+T\+C\+\_\+module@{get\+\_\+\+R\+T\+C\+\_\+module}}
+\index{get\+\_\+\+R\+T\+C\+\_\+module@{get\+\_\+\+R\+T\+C\+\_\+module}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+\+R\+T\+C\+\_\+module() const }{get_RTC_module() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+R\+TC}$\ast$ Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::get\+\_\+\+R\+T\+C\+\_\+module (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___interrupt___manager_a7d27c7a5b0c7f7d8c26f043656cb28a7}{}\label{class_loom___interrupt___manager_a7d27c7a5b0c7f7d8c26f043656cb28a7}
+
+
+Return pointer to the currently linked R\+TC object. 
+
+\begin{DoxyReturn}{Returns}
+Current R\+TC object 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!internal\+\_\+timer\+\_\+enable@{internal\+\_\+timer\+\_\+enable}}
+\index{internal\+\_\+timer\+\_\+enable@{internal\+\_\+timer\+\_\+enable}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{internal\+\_\+timer\+\_\+enable(const bool enable)}{internal_timer_enable(const bool enable)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::internal\+\_\+timer\+\_\+enable (
+\begin{DoxyParamCaption}
+\item[{const bool}]{enable}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a1264d1fc1bbb0d8c82e791d174e37007}{}\label{class_loom___interrupt___manager_a1264d1fc1bbb0d8c82e791d174e37007}
+
+
+\hyperlink{namespace_enable}{Enable} or disable internal timer. 
+
+Disabling does not remove settings, use unregister\+\_\+interal\+\_\+timer for that behavior 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em enable} & True to enable timer, false to disable \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!interrupt\+\_\+reset@{interrupt\+\_\+reset}}
+\index{interrupt\+\_\+reset@{interrupt\+\_\+reset}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{interrupt\+\_\+reset(const uint32\+\_\+t pin)}{interrupt_reset(const uint32_t pin)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::interrupt\+\_\+reset (
+\begin{DoxyParamCaption}
+\item[{const uint32\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a05ba1bf76145681fecb787374358711f}{}\label{class_loom___interrupt___manager_a05ba1bf76145681fecb787374358711f}
+
+
+Detaches then reattacheds interrupt according to settings. 
+
+used to clear pending interrupts 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Pin to reset interrupts for ... \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!interrupt\+\_\+type\+\_\+to\+\_\+string@{interrupt\+\_\+type\+\_\+to\+\_\+string}}
+\index{interrupt\+\_\+type\+\_\+to\+\_\+string@{interrupt\+\_\+type\+\_\+to\+\_\+string}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{interrupt\+\_\+type\+\_\+to\+\_\+string(const uint8\+\_\+t type)}{interrupt_type_to_string(const uint8_t type)}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::interrupt\+\_\+type\+\_\+to\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{type}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom___interrupt___manager_a9627a5c793fa172b25c4ff0078fe7193}{}\label{class_loom___interrupt___manager_a9627a5c793fa172b25c4ff0078fe7193}
+
+
+Get c-\/string of name associated with interrupt type enum. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em type} & Interrupt type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C-\/string of interrupt type 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}}
+\index{link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{link\+\_\+device\+\_\+manager(\+Loom\+Manager $\ast$\+L\+M) override}{link_device_manager(LoomManager *LM) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::link\+\_\+device\+\_\+manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{LM}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___interrupt___manager_a7415a4ffbeda1358639936cc62969605}{}\label{class_loom___interrupt___manager_a7415a4ffbeda1358639936cc62969605}
+
+
+Link a device manager. 
+
+Overrides default by getting R\+TC pointer from device manager if possible 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em LM} & Manager to link \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_adc08f87bf7c0c0988decee196a714396}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!link\+\_\+sleep\+\_\+manager@{link\+\_\+sleep\+\_\+manager}}
+\index{link\+\_\+sleep\+\_\+manager@{link\+\_\+sleep\+\_\+manager}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{link\+\_\+sleep\+\_\+manager(\+Loom\+\_\+\+Sleep\+\_\+\+Manager $\ast$\+S\+M)}{link_sleep_manager(Loom_Sleep_Manager *SM)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::link\+\_\+sleep\+\_\+manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+\_\+\+Sleep\+\_\+\+Manager} $\ast$}]{SM}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a794ec2babdedb928f17862c93b772215}{}\label{class_loom___interrupt___manager_a794ec2babdedb928f17862c93b772215}
+
+
+Set pointer to sleep Manager. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em SM} & Pointer to sleep manager \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___interrupt___manager_a5acb7bf173619dbd1a459800182767e6}{}\label{class_loom___interrupt___manager_a5acb7bf173619dbd1a459800182767e6}
+
+
+No package necessary. 
+
+Implement with empty body. 
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!pin\+\_\+to\+\_\+interrupt@{pin\+\_\+to\+\_\+interrupt}}
+\index{pin\+\_\+to\+\_\+interrupt@{pin\+\_\+to\+\_\+interrupt}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{pin\+\_\+to\+\_\+interrupt(uint32\+\_\+t pin)}{pin_to_interrupt(uint32_t pin)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::pin\+\_\+to\+\_\+interrupt (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a212f9cf070fb64c56d9ff675139278a4}{}\label{class_loom___interrupt___manager_a212f9cf070fb64c56d9ff675139278a4}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___interrupt___manager_a6b7a28e4b7a150016e2975165581f7e9}{}\label{class_loom___interrupt___manager_a6b7a28e4b7a150016e2975165581f7e9}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___interrupt___manager_ae9dde4f4da0e50a0bc19e2ae3453c3cb}{}\label{class_loom___interrupt___manager_ae9dde4f4da0e50a0bc19e2ae3453c3cb}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!reconnect\+\_\+interrupt@{reconnect\+\_\+interrupt}}
+\index{reconnect\+\_\+interrupt@{reconnect\+\_\+interrupt}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{reconnect\+\_\+interrupt(const uint32\+\_\+t pin)}{reconnect_interrupt(const uint32_t pin)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::reconnect\+\_\+interrupt (
+\begin{DoxyParamCaption}
+\item[{const uint32\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_abbf112a7a515088c543e76f5ad2a8bea}{}\label{class_loom___interrupt___manager_abbf112a7a515088c543e76f5ad2a8bea}
+
+
+If an I\+SR dettaches interrupt, use this to reattach according to previous settings. 
+
+Effectively to running register\+\_\+\+I\+SR with previous settings 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Which pin to reconnect the interrupt on \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!register\+\_\+internal\+\_\+timer@{register\+\_\+internal\+\_\+timer}}
+\index{register\+\_\+internal\+\_\+timer@{register\+\_\+internal\+\_\+timer}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{register\+\_\+internal\+\_\+timer(const uint duration, const I\+S\+R\+Func\+Ptr I\+S\+R, const bool repeat, const I\+S\+R\+\_\+\+Type run\+\_\+type)}{register_internal_timer(const uint duration, const ISRFuncPtr ISR, const bool repeat, const ISR_Type run_type)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::register\+\_\+internal\+\_\+timer (
+\begin{DoxyParamCaption}
+\item[{const uint}]{duration, }
+\item[{const {\bf I\+S\+R\+Func\+Ptr}}]{I\+SR, }
+\item[{const bool}]{repeat, }
+\item[{const {\bf I\+S\+R\+\_\+\+Type}}]{run\+\_\+type}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a61330d0a7d555fd77f0ecfa9e8d2d68e}{}\label{class_loom___interrupt___manager_a61330d0a7d555fd77f0ecfa9e8d2d68e}
+
+
+Configure internal timer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em duration} & How long timer should take (seconds) \\
+\hline
+\mbox{\tt in}  & {\em I\+SR} & I\+SR to run after timer goes off \\
+\hline
+\mbox{\tt in}  & {\em repeat} & Whether or not to be a repeating alarm \\
+\hline
+\mbox{\tt in}  & {\em run\+\_\+type} & Whether the interrupt runs immediately, else sets flag to check and runs I\+SR when flag checked \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!register\+\_\+\+I\+SR@{register\+\_\+\+I\+SR}}
+\index{register\+\_\+\+I\+SR@{register\+\_\+\+I\+SR}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{register\+\_\+\+I\+S\+R(const uint32\+\_\+t pin, I\+S\+R\+Func\+Ptr I\+S\+R, const uint32\+\_\+t signal\+\_\+type, I\+S\+R\+\_\+\+Type run\+\_\+type)}{register_ISR(const uint32_t pin, ISRFuncPtr ISR, const uint32_t signal_type, ISR_Type run_type)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::register\+\_\+\+I\+SR (
+\begin{DoxyParamCaption}
+\item[{const uint32\+\_\+t}]{pin, }
+\item[{{\bf I\+S\+R\+Func\+Ptr}}]{I\+SR, }
+\item[{const uint32\+\_\+t}]{signal\+\_\+type, }
+\item[{{\bf I\+S\+R\+\_\+\+Type}}]{run\+\_\+type}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a2d10238301b261b7cc98f5392c2d8cff}{}\label{class_loom___interrupt___manager_a2d10238301b261b7cc98f5392c2d8cff}
+
+
+Register an I\+SR to an interrupt pin and its configuration. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Which pin to connect the interrupt on \\
+\hline
+\mbox{\tt in}  & {\em I\+SR} & I\+SR function (Null if no interrupt linked) \\
+\hline
+\mbox{\tt in}  & {\em signal\+\_\+type} & Low, High, Change, Falling, Rising \\
+\hline
+\mbox{\tt in}  & {\em run\+\_\+type} & Whether the interrupt runs immediately, else sets flag to check and runs I\+SR when flag checked \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!register\+\_\+timer@{register\+\_\+timer}}
+\index{register\+\_\+timer@{register\+\_\+timer}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{register\+\_\+timer(const uint8\+\_\+t timer\+\_\+num, const unsigned long duration, const I\+S\+R\+Func\+Ptr I\+S\+R, const bool repeat)}{register_timer(const uint8_t timer_num, const unsigned long duration, const ISRFuncPtr ISR, const bool repeat)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::register\+\_\+timer (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{timer\+\_\+num, }
+\item[{const unsigned long}]{duration, }
+\item[{const {\bf I\+S\+R\+Func\+Ptr}}]{I\+SR, }
+\item[{const bool}]{repeat}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a1b921c29326cfc93dd4e2e405d50bbdd}{}\label{class_loom___interrupt___manager_a1b921c29326cfc93dd4e2e405d50bbdd}
+
+
+Configure specified timer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer\+\_\+num} & Timer to set \\
+\hline
+\mbox{\tt in}  & {\em duration} & How long timer should take (seconds) \\
+\hline
+\mbox{\tt in}  & {\em I\+SR} & I\+SR to run after timer goes off \\
+\hline
+\mbox{\tt in}  & {\em repeat} & Whether or not to be a repeating alarm \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!R\+T\+C\+\_\+alarm\+\_\+at@{R\+T\+C\+\_\+alarm\+\_\+at}}
+\index{R\+T\+C\+\_\+alarm\+\_\+at@{R\+T\+C\+\_\+alarm\+\_\+at}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{R\+T\+C\+\_\+alarm\+\_\+at(\+Date\+Time future\+\_\+time)}{RTC_alarm_at(DateTime future_time)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+R\+T\+C\+\_\+alarm\+\_\+at (
+\begin{DoxyParamCaption}
+\item[{Date\+Time}]{future\+\_\+time}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_afca2eade7f1520c97add8dbffe1247df}{}\label{class_loom___interrupt___manager_afca2eade7f1520c97add8dbffe1247df}
+
+
+Set R\+TC alarm for a specific time. 
+
+Increments to next day at given hour, min, sec if specified time is in past 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em future\+\_\+time} & Time to set alarm for \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!R\+T\+C\+\_\+alarm\+\_\+at@{R\+T\+C\+\_\+alarm\+\_\+at}}
+\index{R\+T\+C\+\_\+alarm\+\_\+at@{R\+T\+C\+\_\+alarm\+\_\+at}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{R\+T\+C\+\_\+alarm\+\_\+at(const uint8\+\_\+t hour, const uint8\+\_\+t minute, const uint8\+\_\+t second)}{RTC_alarm_at(const uint8_t hour, const uint8_t minute, const uint8_t second)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+R\+T\+C\+\_\+alarm\+\_\+at (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{hour, }
+\item[{const uint8\+\_\+t}]{minute, }
+\item[{const uint8\+\_\+t}]{second}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_abbfb010ec889658a10d596ac4d096069}{}\label{class_loom___interrupt___manager_abbfb010ec889658a10d596ac4d096069}
+
+
+Set R\+TC alarm for a specific time. 
+
+Forwards to R\+T\+C\+\_\+alarm\+\_\+at that takes Date\+Time object 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em hour} & Hour to set alarm for \\
+\hline
+\mbox{\tt in}  & {\em minute} & Minute to set alarm for \\
+\hline
+\mbox{\tt in}  & {\em second} & Second to set alarm for \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!R\+T\+C\+\_\+alarm\+\_\+duration@{R\+T\+C\+\_\+alarm\+\_\+duration}}
+\index{R\+T\+C\+\_\+alarm\+\_\+duration@{R\+T\+C\+\_\+alarm\+\_\+duration}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{R\+T\+C\+\_\+alarm\+\_\+duration(const Time\+Span duration)}{RTC_alarm_duration(const TimeSpan duration)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+R\+T\+C\+\_\+alarm\+\_\+duration (
+\begin{DoxyParamCaption}
+\item[{const Time\+Span}]{duration}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_ac188b3f03d32bcfdfe5caf4eae31f33d}{}\label{class_loom___interrupt___manager_ac188b3f03d32bcfdfe5caf4eae31f33d}
+
+
+Set R\+TC alarm an amount of time from now. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em duration} & How long before the alarm should go off \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!R\+T\+C\+\_\+alarm\+\_\+duration@{R\+T\+C\+\_\+alarm\+\_\+duration}}
+\index{R\+T\+C\+\_\+alarm\+\_\+duration@{R\+T\+C\+\_\+alarm\+\_\+duration}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{R\+T\+C\+\_\+alarm\+\_\+duration(const uint8\+\_\+t days, const uint8\+\_\+t hours, const uint8\+\_\+t minutes, const uint8\+\_\+t seconds)}{RTC_alarm_duration(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+R\+T\+C\+\_\+alarm\+\_\+duration (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{days, }
+\item[{const uint8\+\_\+t}]{hours, }
+\item[{const uint8\+\_\+t}]{minutes, }
+\item[{const uint8\+\_\+t}]{seconds}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_abde5c47ed6021fe7280c14891b1a1c31}{}\label{class_loom___interrupt___manager_abde5c47ed6021fe7280c14891b1a1c31}
+
+
+Set R\+TC alarm an amount of time from now. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em days} & Days into the future the alarm should be set \\
+\hline
+\mbox{\tt in}  & {\em hours} & Hours into the future the alarm should be set \\
+\hline
+\mbox{\tt in}  & {\em minutes} & Minutes into the future the alarm should be set \\
+\hline
+\mbox{\tt in}  & {\em seconds} & Seconds into the future the alarm should be set \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last@{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last}}
+\index{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last@{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last(const Time\+Span duration)}{RTC_alarm_duration_from_last(const TimeSpan duration)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last (
+\begin{DoxyParamCaption}
+\item[{const Time\+Span}]{duration}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_aef46cb9e0c3aee294ef5eacd5685be72}{}\label{class_loom___interrupt___manager_aef46cb9e0c3aee294ef5eacd5685be72}
+
+
+Set R\+TC alarm an amount of time from last alarm time. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em duration} & How long before the alarm should go off \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last@{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last}}
+\index{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last@{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last(const uint8\+\_\+t days, const uint8\+\_\+t hours, const uint8\+\_\+t minutes, const uint8\+\_\+t seconds)}{RTC_alarm_duration_from_last(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+R\+T\+C\+\_\+alarm\+\_\+duration\+\_\+from\+\_\+last (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{days, }
+\item[{const uint8\+\_\+t}]{hours, }
+\item[{const uint8\+\_\+t}]{minutes, }
+\item[{const uint8\+\_\+t}]{seconds}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a254c240e87b74e465acb4ed36e9fc2b8}{}\label{class_loom___interrupt___manager_a254c240e87b74e465acb4ed36e9fc2b8}
+
+
+Set R\+TC alarm an amount of time from last alarm time. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em days} & Days into the future the alarm should be set \\
+\hline
+\mbox{\tt in}  & {\em hours} & Hours into the future the alarm should be set \\
+\hline
+\mbox{\tt in}  & {\em minutes} & Minutes into the future the alarm should be set \\
+\hline
+\mbox{\tt in}  & {\em seconds} & Seconds into the future the alarm should be set \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!run\+\_\+pending\+\_\+internal\+\_\+timer\+\_\+\+I\+SR@{run\+\_\+pending\+\_\+internal\+\_\+timer\+\_\+\+I\+SR}}
+\index{run\+\_\+pending\+\_\+internal\+\_\+timer\+\_\+\+I\+SR@{run\+\_\+pending\+\_\+internal\+\_\+timer\+\_\+\+I\+SR}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{run\+\_\+pending\+\_\+internal\+\_\+timer\+\_\+\+I\+S\+R()}{run_pending_internal_timer_ISR()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::run\+\_\+pending\+\_\+internal\+\_\+timer\+\_\+\+I\+SR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a62c7686cecf790cfa0b05b704dd331b7}{}\label{class_loom___interrupt___manager_a62c7686cecf790cfa0b05b704dd331b7}
+
+
+Run a delayed (flag based) I\+SR if the interal timer elapsed. 
+
+Is not needed if using \hyperlink{_interrupt___manager_8h_a1cb40265e710cbdf07f99beb6c4020d1ae35884a2445bc4ae2df52f188763273c}{I\+S\+R\+\_\+\+Type\+::\+I\+M\+M\+E\+D\+I\+A\+TE} I\+SR \begin{DoxyReturn}{Returns}
+True if flag was set and I\+SR run 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!run\+\_\+pending\+\_\+\+I\+S\+Rs@{run\+\_\+pending\+\_\+\+I\+S\+Rs}}
+\index{run\+\_\+pending\+\_\+\+I\+S\+Rs@{run\+\_\+pending\+\_\+\+I\+S\+Rs}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{run\+\_\+pending\+\_\+\+I\+S\+Rs()}{run_pending_ISRs()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::run\+\_\+pending\+\_\+\+I\+S\+Rs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_ada590ee9e56b82b39a6cf443c6038efd}{}\label{class_loom___interrupt___manager_ada590ee9e56b82b39a6cf443c6038efd}
+
+
+Run any waiting I\+S\+Rs. 
+
+Flag was set by a top half I\+SR \index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!set\+\_\+enable\+\_\+interrupt@{set\+\_\+enable\+\_\+interrupt}}
+\index{set\+\_\+enable\+\_\+interrupt@{set\+\_\+enable\+\_\+interrupt}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+enable\+\_\+interrupt(const uint32\+\_\+t pin, const bool state)}{set_enable_interrupt(const uint32_t pin, const bool state)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::set\+\_\+enable\+\_\+interrupt (
+\begin{DoxyParamCaption}
+\item[{const uint32\+\_\+t}]{pin, }
+\item[{const bool}]{state}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_ac3551b3ce17a6eb7db6885689510be60}{}\label{class_loom___interrupt___manager_ac3551b3ce17a6eb7db6885689510be60}
+
+
+Per interrupt enable. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & Interrupt pin to change enable state of \\
+\hline
+\mbox{\tt in}  & {\em state} & The enable state to set pin to \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!set\+\_\+interrupts\+\_\+enabled@{set\+\_\+interrupts\+\_\+enabled}}
+\index{set\+\_\+interrupts\+\_\+enabled@{set\+\_\+interrupts\+\_\+enabled}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+interrupts\+\_\+enabled(const bool state)}{set_interrupts_enabled(const bool state)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::set\+\_\+interrupts\+\_\+enabled (
+\begin{DoxyParamCaption}
+\item[{const bool}]{state}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___interrupt___manager_a179034c16493d648ad3108ae1152e86b}{}\label{class_loom___interrupt___manager_a179034c16493d648ad3108ae1152e86b}
+
+
+All interrupts enable/disable. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & \hyperlink{namespace_enable}{Enable} state to apply to all interrupts \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!set\+\_\+\+R\+T\+C\+\_\+module@{set\+\_\+\+R\+T\+C\+\_\+module}}
+\index{set\+\_\+\+R\+T\+C\+\_\+module@{set\+\_\+\+R\+T\+C\+\_\+module}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+\+R\+T\+C\+\_\+module(\+Loom\+R\+T\+C $\ast$\+R\+T\+C\+\_\+\+Inst)}{set_RTC_module(LoomRTC *RTC_Inst)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::set\+\_\+\+R\+T\+C\+\_\+module (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+R\+TC} $\ast$}]{R\+T\+C\+\_\+\+Inst}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___interrupt___manager_a971175f7e1109e0317041bde9824591d}{}\label{class_loom___interrupt___manager_a971175f7e1109e0317041bde9824591d}
+
+
+Set the R\+TC module to use for timers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em R\+T\+C\+\_\+\+Inst} & Pointer to the R\+TC object \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!unregister\+\_\+internal\+\_\+timer@{unregister\+\_\+internal\+\_\+timer}}
+\index{unregister\+\_\+internal\+\_\+timer@{unregister\+\_\+internal\+\_\+timer}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{unregister\+\_\+internal\+\_\+timer()}{unregister_internal_timer()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::unregister\+\_\+internal\+\_\+timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_ac70690464b0311ad8758bf9cde3887d9}{}\label{class_loom___interrupt___manager_ac70690464b0311ad8758bf9cde3887d9}
+
+
+Clear and disable internal timer, remove I\+SR. 
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!unregister\+\_\+\+I\+SR@{unregister\+\_\+\+I\+SR}}
+\index{unregister\+\_\+\+I\+SR@{unregister\+\_\+\+I\+SR}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{unregister\+\_\+\+I\+S\+R(const uint32\+\_\+t pin, const uint32\+\_\+t signal\+\_\+type=\+L\+O\+W)}{unregister_ISR(const uint32_t pin, const uint32_t signal_type=LOW)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::unregister\+\_\+\+I\+SR (
+\begin{DoxyParamCaption}
+\item[{const uint32\+\_\+t}]{pin, }
+\item[{const uint32\+\_\+t}]{signal\+\_\+type = {\ttfamily LOW}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___interrupt___manager_a314bdba78fd288871bea3421ba6ec022}{}\label{class_loom___interrupt___manager_a314bdba78fd288871bea3421ba6ec022}
+
+
+Restores pin to default I\+SR, disables interrupt. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em pin} & The pin to unregister I\+S\+Rs for \\
+\hline
+\mbox{\tt in}  & {\em signal\+\_\+type} & What signal to configure default I\+SR to (default L\+OW) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!int\+\_\+count@{int\+\_\+count}}
+\index{int\+\_\+count@{int\+\_\+count}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{int\+\_\+count}{int_count}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::int\+\_\+count = 0\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_a0c79ea059f94d9ec26c4b58d3c945754}{}\label{class_loom___interrupt___manager_a0c79ea059f94d9ec26c4b58d3c945754}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!int\+\_\+settings@{int\+\_\+settings}}
+\index{int\+\_\+settings@{int\+\_\+settings}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{int\+\_\+settings}{int_settings}}]{\setlength{\rightskip}{0pt plus 5cm}Int\+Details Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::int\+\_\+settings\mbox{[}{\bf Interupt\+Range}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_a8b625720d3238492bc51a301e4e9b09a}{}\label{class_loom___interrupt___manager_a8b625720d3238492bc51a301e4e9b09a}
+
+
+List of interrupts configurations. 
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!internal\+\_\+timer@{internal\+\_\+timer}}
+\index{internal\+\_\+timer@{internal\+\_\+timer}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{internal\+\_\+timer}{internal_timer}}]{\setlength{\rightskip}{0pt plus 5cm}Internal\+Timer\+Details Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::internal\+\_\+timer\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_a9a00f26aff65a7294699d3518a3b7e74}{}\label{class_loom___interrupt___manager_a9a00f26aff65a7294699d3518a3b7e74}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!interrupt\+\_\+triggered@{interrupt\+\_\+triggered}}
+\index{interrupt\+\_\+triggered@{interrupt\+\_\+triggered}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{interrupt\+\_\+triggered}{interrupt_triggered}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::interrupt\+\_\+triggered = \{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_a12c988c69d8e14c845a736e032ac3575}{}\label{class_loom___interrupt___manager_a12c988c69d8e14c845a736e032ac3575}
+
+
+Flags set by interrupts, indicating I\+SR bottom half should be called if not Null. 
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!interrupts\+\_\+enabled@{interrupts\+\_\+enabled}}
+\index{interrupts\+\_\+enabled@{interrupts\+\_\+enabled}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{interrupts\+\_\+enabled}{interrupts_enabled}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::interrupts\+\_\+enabled\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_a042032ad0c2ed2748e1d2849dcae1a2f}{}\label{class_loom___interrupt___manager_a042032ad0c2ed2748e1d2849dcae1a2f}
+
+
+\hyperlink{namespace_enable}{Enable} or disable all interrupts -- currently only disables bottom halves. 
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!last\+\_\+alarm\+\_\+time@{last\+\_\+alarm\+\_\+time}}
+\index{last\+\_\+alarm\+\_\+time@{last\+\_\+alarm\+\_\+time}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{last\+\_\+alarm\+\_\+time}{last_alarm_time}}]{\setlength{\rightskip}{0pt plus 5cm}Date\+Time Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::last\+\_\+alarm\+\_\+time\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_a099eebe8ec30cee46432701945b0e758}{}\label{class_loom___interrupt___manager_a099eebe8ec30cee46432701945b0e758}
+
+
+Last time an alarm went off. 
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!R\+T\+C\+\_\+\+Inst@{R\+T\+C\+\_\+\+Inst}}
+\index{R\+T\+C\+\_\+\+Inst@{R\+T\+C\+\_\+\+Inst}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{R\+T\+C\+\_\+\+Inst}{RTC_Inst}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+R\+TC}$\ast$ Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+R\+T\+C\+\_\+\+Inst\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_af209a82a1929466fa1d00a14733120c6}{}\label{class_loom___interrupt___manager_af209a82a1929466fa1d00a14733120c6}
+
+
+Pointer to an R\+TC object for managing timers / timed interrupts. 
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!Sleep\+\_\+\+Manager@{Sleep\+\_\+\+Manager}}
+\index{Sleep\+\_\+\+Manager@{Sleep\+\_\+\+Manager}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{Sleep\+\_\+\+Manager}{Sleep_Manager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Sleep\+\_\+\+Manager}$\ast$ Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::\+Sleep\+\_\+\+Manager\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_a1afa84cd52b350fcc4a48ec2e45431a9}{}\label{class_loom___interrupt___manager_a1afa84cd52b350fcc4a48ec2e45431a9}
+
+
+Pointer to a Sleep Manager object. 
+
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!stopwatch\+\_\+settings@{stopwatch\+\_\+settings}}
+\index{stopwatch\+\_\+settings@{stopwatch\+\_\+settings}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{stopwatch\+\_\+settings}{stopwatch_settings}}]{\setlength{\rightskip}{0pt plus 5cm}Stop\+Watch\+Details Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::stopwatch\+\_\+settings\mbox{[}{\bf Max\+Stop\+Watch\+Count}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_a70c3fa86880738c1090071003b76cdc5}{}\label{class_loom___interrupt___manager_a70c3fa86880738c1090071003b76cdc5}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!timer\+\_\+settings@{timer\+\_\+settings}}
+\index{timer\+\_\+settings@{timer\+\_\+settings}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{timer\+\_\+settings}{timer_settings}}]{\setlength{\rightskip}{0pt plus 5cm}Timer\+Details Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::timer\+\_\+settings\mbox{[}{\bf Max\+Timer\+Count}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_a77b5bb21e151ca476b9e9cf8e45eaad6}{}\label{class_loom___interrupt___manager_a77b5bb21e151ca476b9e9cf8e45eaad6}
+\index{Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}!timers@{timers}}
+\index{timers@{timers}!Loom\+\_\+\+Interrupt\+\_\+\+Manager@{Loom\+\_\+\+Interrupt\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{timers}{timers}}]{\setlength{\rightskip}{0pt plus 5cm}Async\+Delay Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::timers\mbox{[}{\bf Max\+Timer\+Count}\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___interrupt___manager_aee0fc09dd7023b4d740932bb44a705c4}{}\label{class_loom___interrupt___manager_aee0fc09dd7023b4d740932bb44a705c4}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{_interrupt___manager_8h}{Interrupt\+\_\+\+Manager.\+h}\item 
+src/\hyperlink{_interrupt___manager_8cpp}{Interrupt\+\_\+\+Manager.\+cpp}\end{DoxyCompactItemize}

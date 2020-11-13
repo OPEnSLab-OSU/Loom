@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_warm_up___manager_8cpp" kind="file" language="C++">
+    <compoundname>WarmUp_Manager.cpp</compoundname>
+    <includes refid="_warm_up___manager_8h" local="yes">WarmUp_Manager.h</includes>
+    <includes refid="_warm_up_8h" local="yes">WarmUp.h</includes>
+    <incdepgraph>
+      <node id="3250">
+        <label>src/Components/WarmUp/WarmUp_Manager.cpp</label>
+        <link refid="WarmUp_Manager.cpp"/>
+        <childnode refid="3251" relation="include">
+        </childnode>
+        <childnode refid="3259" relation="include">
+        </childnode>
+      </node>
+      <node id="3255">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3252">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3253" relation="include">
+        </childnode>
+        <childnode refid="3255" relation="include">
+        </childnode>
+        <childnode refid="3256" relation="include">
+        </childnode>
+        <childnode refid="3257" relation="include">
+        </childnode>
+      </node>
+      <node id="3251">
+        <label>WarmUp_Manager.h</label>
+        <link refid="_warm_up___manager_8h"/>
+        <childnode refid="3252" relation="include">
+        </childnode>
+        <childnode refid="3257" relation="include">
+        </childnode>
+        <childnode refid="3258" relation="include">
+        </childnode>
+      </node>
+      <node id="3256">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3254" relation="include">
+        </childnode>
+        <childnode refid="3257" relation="include">
+        </childnode>
+      </node>
+      <node id="3253">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3254" relation="include">
+        </childnode>
+      </node>
+      <node id="3258">
+        <label>vector</label>
+      </node>
+      <node id="3257">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3254">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3259">
+        <label>WarmUp.h</label>
+        <link refid="_warm_up_8h"/>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Components/WarmUp/WarmUp_Manager.cpp"/>
+  </compounddef>
+</doxygen>

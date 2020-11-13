@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['salinity',['SALINITY',['../class_loom___analog.html#a83079adfd115a272351323429cefad46a8ed43df473ba4db0ebe07e408199d5be',1,'Loom_Analog']]],
+  ['scroll',['SCROLL',['../class_loom___o_l_e_d.html#aade282dab7eb118271f73b3b3bfc0ffda71574275cadb387a5082e87e9dd60c25',1,'Loom_OLED::SCROLL()'],['../class_loom___o_l_e_d.html#adedc20c1c901fe472d976c722abf0bb9a71574275cadb387a5082e87e9dd60c25',1,'Loom_OLED::SCROLL()']]],
+  ['sdcard',['SDCARD',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865ac66fbf5395181adce9b08d44876c88f9',1,'LoomModule']]],
+  ['sdi12',['SDI12',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a637b3bc6a90037a3db249c4d65cd1f1b',1,'LoomModule']]],
+  ['sensor',['Sensor',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a06b185256c71c1aec263c6e22bf8ef6b',1,'LoomModule::Sensor()'],['../class_loom_module.html#a0c6ecc60315f95af551138dc83567068a06b185256c71c1aec263c6e22bf8ef6b',1,'LoomModule::Sensor()']]],
+  ['servo',['Servo',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a365687df33f7052679dca2d38edcfaf7',1,'LoomModule']]],
+  ['sht31d',['SHT31D',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a705f45d84f6cd36287095af9ecac5efa',1,'LoomModule']]],
+  ['sleep_5fmanager',['Sleep_Manager',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a99431851f2f2612986f845d9b40cacf6',1,'LoomModule']]],
+  ['spi',['SPI',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a33dc5312b091968f5a120c2484d40df8',1,'LoomModule']]],
+  ['spoolpub',['SpoolPub',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a321256c36911eaeef98e3742f4baead2',1,'LoomModule']]],
+  ['sst',['SST',['../class_loom_r_t_c.html#a103a9db94b031555185bbce688d2527aa23f7aea788f73df61e33a6d3653d66fa',1,'LoomRTC']]],
+  ['standby',['STANDBY',['../class_loom___sleep___manager.html#ab1cb2baaf00c386048490c3787a2de13aeea559d5c56d48e94e586f7fe000c0b1',1,'Loom_Sleep_Manager']]],
+  ['stemma',['STEMMA',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865ab266849811ab468397b9980f7a5f6457',1,'LoomModule']]],
+  ['stepper',['Stepper',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a370509b5dfe60deb7be545e0a7aff04c',1,'LoomModule']]],
+  ['subscribeplat',['SubscribePlat',['../class_loom_module.html#a0c6ecc60315f95af551138dc83567068a6882013ad745e1f86f8ae9ff82746579',1,'LoomModule']]],
+  ['subscribeplats',['SubscribePlats',['../class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865a8e3ec8e74532cd668a3f565b737d148f',1,'LoomModule']]]
+];

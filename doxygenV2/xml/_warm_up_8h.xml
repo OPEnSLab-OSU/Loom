@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_warm_up_8h" kind="file" language="C++">
+    <compoundname>WarmUp.h</compoundname>
+    <includedby refid="_warm_up_8cpp" local="yes">src/Components/WarmUp/WarmUp.cpp</includedby>
+    <includedby refid="_warm_up___manager_8cpp" local="yes">src/Components/WarmUp/WarmUp_Manager.cpp</includedby>
+    <invincdepgraph>
+      <node id="3249">
+        <label>src/Components/WarmUp/WarmUp_Manager.cpp</label>
+        <link refid="_warm_up___manager_8cpp"/>
+      </node>
+      <node id="3248">
+        <label>src/Components/WarmUp/WarmUp.cpp</label>
+        <link refid="_warm_up_8cpp"/>
+      </node>
+      <node id="3247">
+        <label>src/Components/WarmUp/WarmUp.h</label>
+        <link refid="WarmUp.h"/>
+        <childnode refid="3248" relation="include">
+        </childnode>
+        <childnode refid="3249" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_warm_up" prot="public">WarmUp</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Components/WarmUp/WarmUp.h"/>
+  </compounddef>
+</doxygen>

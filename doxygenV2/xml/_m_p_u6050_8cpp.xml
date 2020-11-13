@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_m_p_u6050_8cpp" kind="file" language="C++">
+    <compoundname>MPU6050.cpp</compoundname>
+    <includes refid="_m_p_u6050_8h" local="yes">MPU6050.h</includes>
+    <incdepgraph>
+      <node id="5281">
+        <label>MPU6050_tockn.h</label>
+      </node>
+      <node id="5277">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5274">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5275" relation="include">
+        </childnode>
+        <childnode refid="5277" relation="include">
+        </childnode>
+        <childnode refid="5278" relation="include">
+        </childnode>
+        <childnode refid="5279" relation="include">
+        </childnode>
+      </node>
+      <node id="5278">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5276" relation="include">
+        </childnode>
+        <childnode refid="5279" relation="include">
+        </childnode>
+      </node>
+      <node id="5271">
+        <label>MPU6050.h</label>
+        <link refid="_m_p_u6050_8h"/>
+        <childnode refid="5272" relation="include">
+        </childnode>
+        <childnode refid="5281" relation="include">
+        </childnode>
+      </node>
+      <node id="5275">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5276" relation="include">
+        </childnode>
+      </node>
+      <node id="5280">
+        <label>Wire.h</label>
+      </node>
+      <node id="5279">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5273">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5274" relation="include">
+        </childnode>
+      </node>
+      <node id="5276">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5272">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5273" relation="include">
+        </childnode>
+        <childnode refid="5280" relation="include">
+        </childnode>
+      </node>
+      <node id="5270">
+        <label>src/Sensors/I2C/MPU6050.cpp</label>
+        <link refid="MPU6050.cpp"/>
+        <childnode refid="5271" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_m_p_u6050_8cpp_1af39b7b38f37c221162fb77e91305b7a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>MPU6050</type>
+        <definition>MPU6050 mpu6050</definition>
+        <argsstring>(Wire)</argsstring>
+        <name>mpu6050</name>
+        <param>
+          <type>Wire</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/MPU6050.cpp" line="16" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/MPU6050.cpp"/>
+  </compounddef>
+</doxygen>

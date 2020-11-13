@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_afe58f6d0ef7eec69c2706509daaefe7" kind="dir">
+    <compoundname>src/Sensors</compoundname>
+    <innerdir refid="dir_abc44327bd9a62eb36f446d48ca760f8">src/Sensors/I2C</innerdir>
+    <innerdir refid="dir_c1c9c6049189259cc1cfe0eeb075e0bc">src/Sensors/SDI12</innerdir>
+    <innerdir refid="dir_1027babe27d5a0ccf435eb4f8ce720a2">src/Sensors/SERIAL</innerdir>
+    <innerdir refid="dir_510aef1acf63521dcdd1684edb86e21c">src/Sensors/SPI</innerdir>
+    <innerfile refid="_analog_8cpp">Analog.cpp</innerfile>
+    <innerfile refid="_analog_8h">Analog.h</innerfile>
+    <innerfile refid="_digital_8cpp">Digital.cpp</innerfile>
+    <innerfile refid="_digital_8h">Digital.h</innerfile>
+    <innerfile refid="_sensor_8cpp">Sensor.cpp</innerfile>
+    <innerfile refid="_sensor_8h">Sensor.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/"/>
+  </compounddef>
+</doxygen>

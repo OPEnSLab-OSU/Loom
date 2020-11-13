@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_a_s7263_8cpp" kind="file" language="C++">
+    <compoundname>AS7263.cpp</compoundname>
+    <includes refid="_a_s7263_8h" local="yes">AS7263.h</includes>
+    <incdepgraph>
+      <node id="4997">
+        <label>src/Sensors/I2C/AS7263.cpp</label>
+        <link refid="AS7263.cpp"/>
+        <childnode refid="4998" relation="include">
+        </childnode>
+      </node>
+      <node id="5004">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5001">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5002" relation="include">
+        </childnode>
+        <childnode refid="5004" relation="include">
+        </childnode>
+        <childnode refid="5005" relation="include">
+        </childnode>
+        <childnode refid="5006" relation="include">
+        </childnode>
+      </node>
+      <node id="5005">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5003" relation="include">
+        </childnode>
+        <childnode refid="5006" relation="include">
+        </childnode>
+      </node>
+      <node id="5002">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5003" relation="include">
+        </childnode>
+      </node>
+      <node id="5007">
+        <label>Wire.h</label>
+      </node>
+      <node id="5006">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5000">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5001" relation="include">
+        </childnode>
+      </node>
+      <node id="5003">
+        <label>Arduino.h</label>
+      </node>
+      <node id="4999">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5000" relation="include">
+        </childnode>
+        <childnode refid="5007" relation="include">
+        </childnode>
+      </node>
+      <node id="4998">
+        <label>AS7263.h</label>
+        <link refid="_a_s7263_8h"/>
+        <childnode refid="4999" relation="include">
+        </childnode>
+        <childnode refid="5008" relation="include">
+        </childnode>
+      </node>
+      <node id="5008">
+        <label>AS726X.h</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/AS7263.cpp"/>
+  </compounddef>
+</doxygen>

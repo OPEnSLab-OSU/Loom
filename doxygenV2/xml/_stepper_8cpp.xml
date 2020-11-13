@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_stepper_8cpp" kind="file" language="C++">
+    <compoundname>Stepper.cpp</compoundname>
+    <includes refid="_stepper_8h" local="yes">Stepper.h</includes>
+    <includes local="no">Wire.h</includes>
+    <incdepgraph>
+      <node id="3081">
+        <label>Adafruit_MotorShield.h</label>
+      </node>
+      <node id="3073">
+        <label>Stepper.h</label>
+        <link refid="_stepper_8h"/>
+        <childnode refid="3074" relation="include">
+        </childnode>
+        <childnode refid="3081" relation="include">
+        </childnode>
+        <childnode refid="3082" relation="include">
+        </childnode>
+      </node>
+      <node id="3078">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3075">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3076" relation="include">
+        </childnode>
+        <childnode refid="3078" relation="include">
+        </childnode>
+        <childnode refid="3079" relation="include">
+        </childnode>
+        <childnode refid="3080" relation="include">
+        </childnode>
+      </node>
+      <node id="3079">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3077" relation="include">
+        </childnode>
+        <childnode refid="3080" relation="include">
+        </childnode>
+      </node>
+      <node id="3076">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3077" relation="include">
+        </childnode>
+      </node>
+      <node id="3083">
+        <label>Wire.h</label>
+      </node>
+      <node id="3080">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3074">
+        <label>Actuator.h</label>
+        <link refid="_actuator_8h"/>
+        <childnode refid="3075" relation="include">
+        </childnode>
+      </node>
+      <node id="3077">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3082">
+        <label>Adafruit_PWMServoDriver.h</label>
+      </node>
+      <node id="3072">
+        <label>src/Actuators/Stepper.cpp</label>
+        <link refid="Stepper.cpp"/>
+        <childnode refid="3073" relation="include">
+        </childnode>
+        <childnode refid="3083" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Actuators/Stepper.cpp"/>
+  </compounddef>
+</doxygen>

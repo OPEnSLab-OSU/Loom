@@ -1,0 +1,30 @@
+\hypertarget{_internet_plat_8h}{}\section{src/\+Internet\+Plats/\+Internet\+Plat.h File Reference}
+\label{_internet_plat_8h}\index{src/\+Internet\+Plats/\+Internet\+Plat.\+h@{src/\+Internet\+Plats/\+Internet\+Plat.\+h}}
+{\ttfamily \#include \char`\"{}Module.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Client.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Udp.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\+S\+L\+Client.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$memory$>$}\\*
+Include dependency graph for Internet\+Plat.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_internet_plat_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_internet_plat_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_loom_internet_plat}{Loom\+Internet\+Plat}
+\begin{DoxyCompactList}\small\item\em Abstract internet communication module. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_loom_internet_plat_1_1_u_d_p_deletor}{Loom\+Internet\+Plat\+::\+U\+D\+P\+Deletor}
+\begin{DoxyCompactList}\small\item\em Close the socket and delete the U\+DP object when the unique ptr dissapears. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_loom_internet_plat_1_1_client_cleanup}{Loom\+Internet\+Plat\+::\+Client\+Cleanup}
+\begin{DoxyCompactList}\small\item\em Simply close the socket when the client dissapears, we don\textquotesingle{}t want to delete the object because the client needs to cache sessions. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,226 @@
+\hypertarget{class_loom_subscribe_plat}{}\section{Loom\+Subscribe\+Plat Class Reference}
+\label{class_loom_subscribe_plat}\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+
+
+Abstract subscribe platform module.  
+
+
+
+
+{\ttfamily \#include $<$Subscribe\+Plat.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Subscribe\+Plat\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=189pt]{class_loom_subscribe_plat__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+{\em Document to read incoming data into }\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_subscribe_plat_a940e8602c9a6d8b8b7af17f3e68dd704}{Loom\+Subscribe\+Plat} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_subscribe_plat_ac1f89a414dd68151b156c3d76a5cbffe}{internet\+\_\+type})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_subscribe_plat_a364ceafa947e0b761021ce50730964a3}{$\sim$\+Loom\+Subscribe\+Plat} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_subscribe_plat_a5394d492cec0f9403d0442ea46bce2db}{second\+\_\+stage\+\_\+ctor} () override
+\begin{DoxyCompactList}\small\item\em Grab the internet platform specified by the ctor parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{class_loom_subscribe_plat_ad80fe04ecc6d8d1c2c5f093b9c4e9b72}{subscribe} (Json\+Object json)=0
+\begin{DoxyCompactList}\small\item\em Request / try to receive data from platform subscribed to. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_subscribe_plat_a005ab2acc545abbdcbc6a44dadb11abb}{subscribe} ()
+\begin{DoxyCompactList}\small\item\em Version of log for use with \hyperlink{class_loom_manager}{Loom\+Manager}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_subscribe_plat_a574b062d74e998a12cdb54d265c36972}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_subscribe_plat_ace7e2ccbd9a8b5155bfabb2fd2e38d33}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_internet_plat}{Loom\+Internet\+Plat} $\ast$ \hyperlink{class_loom_subscribe_plat_ab3992d3d1cc20c9e46794142f5e778e2}{m\+\_\+internet}
+\begin{DoxyCompactList}\small\item\em Pointer to internet platform to use to publish. \end{DoxyCompactList}\item 
+const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_subscribe_plat_ac1f89a414dd68151b156c3d76a5cbffe}{internet\+\_\+type}
+\begin{DoxyCompactList}\small\item\em Type of internet platform used to publish. \end{DoxyCompactList}\item 
+Static\+Json\+Document$<$ 1000 $>$ \hyperlink{class_loom_subscribe_plat_ae06b201b8f5928c0434beeb29f0c6ac2}{message\+Json}
+\begin{DoxyCompactList}\small\item\em Subscribe Platforms need their own Json\+Document because an incoming message can only be deserialized into Json\+Documents, not Json\+Objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract subscribe platform module. 
+
+All Subscribe\+Plat modules inherit from this class.
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_subscribe_plat.html}{\tt Module Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{Loom\+Subscribe\+Plat(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type, const Loom\+Module\+::\+Type internet\+\_\+type)}{LoomSubscribePlat(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const LoomModule::Type internet_type)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Subscribe\+Plat\+::\+Loom\+Subscribe\+Plat (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{internet\+\_\+type}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_subscribe_plat_a940e8602c9a6d8b8b7af17f3e68dd704}{}\label{class_loom_subscribe_plat_a940e8602c9a6d8b8b7af17f3e68dd704}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & String $\vert$ $<$\char`\"{}\+Internet-\/\+Plat\char`\"{}$>$ $\vert$ null $\vert$ Publish platform module name \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em internet\+\_\+type} & Set(\+Loom\+Module\+::\+Type) $\vert$ $<$7001$>$ $\vert$ \{7001(\char`\"{}\+Ethernet\char`\"{}), 7002(\char`\"{}\+Wi\+Fi\char`\"{})\} $\vert$ Code of the desired internet platform. \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!````~Loom\+Subscribe\+Plat@{$\sim$\+Loom\+Subscribe\+Plat}}
+\index{````~Loom\+Subscribe\+Plat@{$\sim$\+Loom\+Subscribe\+Plat}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Subscribe\+Plat()=default}{~LoomSubscribePlat()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+Subscribe\+Plat\+::$\sim$\+Loom\+Subscribe\+Plat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_subscribe_plat_a364ceafa947e0b761021ce50730964a3}{}\label{class_loom_subscribe_plat_a364ceafa947e0b761021ce50730964a3}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Subscribe\+Plat\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_subscribe_plat_a574b062d74e998a12cdb54d265c36972}{}\label{class_loom_subscribe_plat_a574b062d74e998a12cdb54d265c36972}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+
+
+Reimplemented in \hyperlink{class_loom___max_sub_a86ebb385b46bd7d1052d98b525216657}{Loom\+\_\+\+Max\+Sub}.
+
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Subscribe\+Plat\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_subscribe_plat_ace7e2ccbd9a8b5155bfabb2fd2e38d33}{}\label{class_loom_subscribe_plat_ace7e2ccbd9a8b5155bfabb2fd2e38d33}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}}
+\index{second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{second\+\_\+stage\+\_\+ctor() override}{second_stage_ctor() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Subscribe\+Plat\+::second\+\_\+stage\+\_\+ctor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_subscribe_plat_a5394d492cec0f9403d0442ea46bce2db}{}\label{class_loom_subscribe_plat_a5394d492cec0f9403d0442ea46bce2db}
+
+
+Grab the internet platform specified by the ctor parameters. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a8dd3704d1bd38868d5774e48c1073d12}{Loom\+Module}.
+
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!subscribe@{subscribe}}
+\index{subscribe@{subscribe}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{subscribe(\+Json\+Object json)=0}{subscribe(JsonObject json)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Loom\+Subscribe\+Plat\+::subscribe (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_subscribe_plat_ad80fe04ecc6d8d1c2c5f093b9c4e9b72}{}\label{class_loom_subscribe_plat_ad80fe04ecc6d8d1c2c5f093b9c4e9b72}
+
+
+Request / try to receive data from platform subscribed to. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Received data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if received anything 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_loom___max_sub_ac108a85356fe7d05d7754cb56f5957b7}{Loom\+\_\+\+Max\+Sub}.
+
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!subscribe@{subscribe}}
+\index{subscribe@{subscribe}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{subscribe()}{subscribe()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Subscribe\+Plat\+::subscribe (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_subscribe_plat_a005ab2acc545abbdcbc6a44dadb11abb}{}\label{class_loom_subscribe_plat_a005ab2acc545abbdcbc6a44dadb11abb}
+
+
+Version of log for use with \hyperlink{class_loom_manager}{Loom\+Manager}. 
+
+Accesses Json from \hyperlink{class_loom_manager}{Loom\+Manager} \begin{DoxyReturn}{Returns}
+True if received anything 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!internet\+\_\+type@{internet\+\_\+type}}
+\index{internet\+\_\+type@{internet\+\_\+type}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{internet\+\_\+type}{internet_type}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Loom\+Module\+::\+Type} Loom\+Subscribe\+Plat\+::internet\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_subscribe_plat_ac1f89a414dd68151b156c3d76a5cbffe}{}\label{class_loom_subscribe_plat_ac1f89a414dd68151b156c3d76a5cbffe}
+
+
+Type of internet platform used to publish. 
+
+Needed because finding the module for m\+\_\+internet happens in \hyperlink{class_loom_subscribe_plat_a5394d492cec0f9403d0442ea46bce2db}{second\+\_\+stage\+\_\+ctor()}, rather than the regular constructor. \index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!m\+\_\+internet@{m\+\_\+internet}}
+\index{m\+\_\+internet@{m\+\_\+internet}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{m\+\_\+internet}{m_internet}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat}$\ast$ Loom\+Subscribe\+Plat\+::m\+\_\+internet\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_subscribe_plat_ab3992d3d1cc20c9e46794142f5e778e2}{}\label{class_loom_subscribe_plat_ab3992d3d1cc20c9e46794142f5e778e2}
+
+
+Pointer to internet platform to use to publish. 
+
+\index{Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}!message\+Json@{message\+Json}}
+\index{message\+Json@{message\+Json}!Loom\+Subscribe\+Plat@{Loom\+Subscribe\+Plat}}
+\subsubsection[{\texorpdfstring{message\+Json}{messageJson}}]{\setlength{\rightskip}{0pt plus 5cm}Static\+Json\+Document$<$1000$>$ Loom\+Subscribe\+Plat\+::message\+Json\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_subscribe_plat_ae06b201b8f5928c0434beeb29f0c6ac2}{}\label{class_loom_subscribe_plat_ae06b201b8f5928c0434beeb29f0c6ac2}
+
+
+Subscribe Platforms need their own Json\+Document because an incoming message can only be deserialized into Json\+Documents, not Json\+Objects. 
+
+And it seemed bad design to pass around references to the \hyperlink{class_loom_manager}{Loom\+Manager}\textquotesingle{}s internal Json\+Document. Also as the \hyperlink{class_loom_manager}{Loom\+Manager} is intended to be non-\/mandatory for usage of Loom 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Subscribe\+Plats/\hyperlink{_subscribe_plat_8h}{Subscribe\+Plat.\+h}\item 
+src/\+Subscribe\+Plats/\hyperlink{_subscribe_plat_8cpp}{Subscribe\+Plat.\+cpp}\end{DoxyCompactItemize}

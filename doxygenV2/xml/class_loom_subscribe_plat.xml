@@ -1,0 +1,374 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_subscribe_plat" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>LoomSubscribePlat</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <derivedcompoundref refid="class_loom___max_sub" prot="public" virt="non-virtual">Loom_MaxSub</derivedcompoundref>
+    <includes refid="_subscribe_plat_8h" local="no">SubscribePlat.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <description><para>Document to read incoming data into </para></description>
+      <memberdef kind="function" id="class_loom_subscribe_plat_1a940e8602c9a6d8b8b7af17f3e68dd704" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomSubscribePlat::LoomSubscribePlat</definition>
+        <argsstring>(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const LoomModule::Type internet_type)</argsstring>
+        <name>LoomSubscribePlat</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>module_type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>internet_type</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;Internet-Plat&quot;&gt; | null | Publish platform module name </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">module_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">internet_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(LoomModule::Type) | &lt;7001&gt; | {7001(&quot;Ethernet&quot;), 7002(&quot;WiFi&quot;)} | Code of the desired internet platform. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="59" column="1" bodyfile="src/SubscribePlats/SubscribePlat.cpp" bodystart="15" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_subscribe_plat_1a364ceafa947e0b761021ce50730964a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual LoomSubscribePlat::~LoomSubscribePlat</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LoomSubscribePlat</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="67" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_subscribe_plat_1a5394d492cec0f9403d0442ea46bce2db" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomSubscribePlat::second_stage_ctor</definition>
+        <argsstring>() override</argsstring>
+        <name>second_stage_ctor</name>
+        <reimplements refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12">second_stage_ctor</reimplements>
+        <briefdescription>
+<para>Grab the internet platform specified by the ctor parameters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="70" column="1" bodyfile="src/SubscribePlats/SubscribePlat.cpp" bodystart="27" bodyend="52"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom_subscribe_plat_1ad80fe04ecc6d8d1c2c5f093b9c4e9b72" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool LoomSubscribePlat::subscribe</definition>
+        <argsstring>(JsonObject json)=0</argsstring>
+        <name>subscribe</name>
+        <reimplementedby refid="class_loom___max_sub_1ac108a85356fe7d05d7754cb56f5957b7">subscribe</reimplementedby>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Request / try to receive data from platform subscribed to. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Received data </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if received anything </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="79" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_subscribe_plat_1a005ab2acc545abbdcbc6a44dadb11abb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomSubscribePlat::subscribe</definition>
+        <argsstring>()</argsstring>
+        <name>subscribe</name>
+        <briefdescription>
+<para>Version of log for use with <ref refid="class_loom_manager" kindref="compound">LoomManager</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Accesses Json from <ref refid="class_loom_manager" kindref="compound">LoomManager</ref> <simplesect kind="return"><para>True if received anything </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="84" column="1" bodyfile="src/SubscribePlats/SubscribePlat.cpp" bodystart="69" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom_subscribe_plat_1a574b062d74e998a12cdb54d265c36972" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomSubscribePlat::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <reimplementedby refid="class_loom___max_sub_1a86ebb385b46bd7d1052d98b525216657">print_config</reimplementedby>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="90" column="1" bodyfile="src/SubscribePlats/SubscribePlat.cpp" bodystart="55" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_subscribe_plat_1ace7e2ccbd9a8b5155bfabb2fd2e38d33" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomSubscribePlat::print_state</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_state</name>
+        <reimplements refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7">print_state</reimplements>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="91" column="1" bodyfile="src/SubscribePlats/SubscribePlat.cpp" bodystart="62" bodyend="66"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom_subscribe_plat_1ab3992d3d1cc20c9e46794142f5e778e2" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_internet_plat" kindref="compound">LoomInternetPlat</ref> *</type>
+        <definition>LoomInternetPlat* LoomSubscribePlat::m_internet</definition>
+        <argsstring></argsstring>
+        <name>m_internet</name>
+        <briefdescription>
+<para>Pointer to internet platform to use to publish. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="34" column="1" bodyfile="src/SubscribePlats/SubscribePlat.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_subscribe_plat_1ac1f89a414dd68151b156c3d76a5cbffe" prot="protected" static="no" mutable="no">
+        <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+        <definition>const LoomModule::Type LoomSubscribePlat::internet_type</definition>
+        <argsstring></argsstring>
+        <name>internet_type</name>
+        <briefdescription>
+<para>Type of internet platform used to publish. </para>        </briefdescription>
+        <detaileddescription>
+<para>Needed because finding the module for m_internet happens in <ref refid="class_loom_subscribe_plat_1a5394d492cec0f9403d0442ea46bce2db" kindref="member">second_stage_ctor()</ref>, rather than the regular constructor. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="39" column="1" bodyfile="src/SubscribePlats/SubscribePlat.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_subscribe_plat_1ae06b201b8f5928c0434beeb29f0c6ac2" prot="protected" static="no" mutable="no">
+        <type>StaticJsonDocument&lt; 1000 &gt;</type>
+        <definition>StaticJsonDocument&lt;1000&gt; LoomSubscribePlat::messageJson</definition>
+        <argsstring></argsstring>
+        <name>messageJson</name>
+        <briefdescription>
+<para>Subscribe Platforms need their own JsonDocument because an incoming message can only be deserialized into JsonDocuments, not JsonObjects. </para>        </briefdescription>
+        <detaileddescription>
+<para>And it seemed bad design to pass around references to the <ref refid="class_loom_manager" kindref="compound">LoomManager</ref>&apos;s internal JsonDocument. Also as the <ref refid="class_loom_manager" kindref="compound">LoomManager</ref> is intended to be non-mandatory for usage of Loom </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/SubscribePlats/SubscribePlat.h" line="46" column="1" bodyfile="src/SubscribePlats/SubscribePlat.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract subscribe platform module. </para>    </briefdescription>
+    <detaileddescription>
+<para>All SubscribePlat modules inherit from this class.</para><para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_subscribe_plat.html">Module Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1380">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="1379">
+        <label>LoomSubscribePlat</label>
+        <link refid="class_loom_subscribe_plat"/>
+        <childnode refid="1380" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1381">
+        <label>Loom_MaxSub</label>
+        <link refid="class_loom___max_sub"/>
+        <childnode refid="1379" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1388">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1384">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1385" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1386" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1391" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1387" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1383">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1384" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1392">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1387">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1383" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1388" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1389" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1386" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1390" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1391" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1392" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1382">
+        <label>LoomSubscribePlat</label>
+        <link refid="class_loom_subscribe_plat"/>
+        <childnode refid="1383" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1393" relation="usage">
+          <edgelabel>m_internet</edgelabel>
+        </childnode>
+      </node>
+      <node id="1386">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1383" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1387" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1393">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="1383" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1385">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1383" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1391">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1383" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1389">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1390">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/SubscribePlats/SubscribePlat.h" line="29" column="1" bodyfile="src/SubscribePlats/SubscribePlat.h" bodystart="28" bodyend="96"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_subscribe_plat_1ac1f89a414dd68151b156c3d76a5cbffe" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>internet_type</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>link_device_manager</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>LoomModule</name></member>
+      <member refid="class_loom_subscribe_plat_1a940e8602c9a6d8b8b7af17f3e68dd704" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>LoomSubscribePlat</name></member>
+      <member refid="class_loom_subscribe_plat_1ab3992d3d1cc20c9e46794142f5e778e2" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>m_internet</name></member>
+      <member refid="class_loom_subscribe_plat_1ae06b201b8f5928c0434beeb29f0c6ac2" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>messageJson</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>module_type</name></member>
+      <member refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53" prot="public" virt="pure-virtual"><scope>LoomSubscribePlat</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>power_up</name></member>
+      <member refid="class_loom_subscribe_plat_1a574b062d74e998a12cdb54d265c36972" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>print_module_label</name></member>
+      <member refid="class_loom_subscribe_plat_1ace7e2ccbd9a8b5155bfabb2fd2e38d33" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_subscribe_plat_1a5394d492cec0f9403d0442ea46bce2db" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_subscribe_plat_1ad80fe04ecc6d8d1c2c5f093b9c4e9b72" prot="public" virt="pure-virtual"><scope>LoomSubscribePlat</scope><name>subscribe</name></member>
+      <member refid="class_loom_subscribe_plat_1a005ab2acc545abbdcbc6a44dadb11abb" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>subscribe</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>LoomSubscribePlat</scope><name>Type</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_subscribe_plat_1a364ceafa947e0b761021ce50730964a3" prot="public" virt="virtual"><scope>LoomSubscribePlat</scope><name>~LoomSubscribePlat</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,353 @@
+\hypertarget{class_loom___sleep___manager}{}\section{Loom\+\_\+\+Sleep\+\_\+\+Manager Class Reference}
+\label{class_loom___sleep___manager}\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+
+
+Submanager to manage sleep functionality.  
+
+
+
+
+{\ttfamily \#include $<$Sleep\+\_\+\+Manager.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Sleep\+\_\+\+Manager\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{class_loom___sleep___manager__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13}{Mode} \{ \hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13aa5daf7f2ebbba4975d61dab1c40188c7}{Mode\+::\+I\+D\+LE}, 
+\hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13aeea559d5c56d48e94e586f7fe000c0b1}{Mode\+::\+S\+T\+A\+N\+D\+BY}, 
+\hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13ac7cf9ecb707e9328789a3c3a4752f874}{Mode\+::\+O\+P\+E\+N\+S\+\_\+\+L\+O\+W\+P\+O\+W\+ER}
+ \}\begin{DoxyCompactList}\small\item\em Different options available to sleep in. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___sleep___manager_ae7bb3c7151e64825fc6ff0473f157175}{Loom\+\_\+\+Sleep\+\_\+\+Manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const bool \hyperlink{class_loom___sleep___manager_ae9ffd9f5310fdac6d1df1f23741598a6}{use\+\_\+\+L\+ED}=true, const bool \hyperlink{class_loom___sleep___manager_a8404672e11d82bea2ba0934f1c197764}{delay\+\_\+on\+\_\+wake}=false, const \hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13}{Mode} \hyperlink{class_loom___sleep___manager_a3fdbc0a285480a155459ddc675a2482c}{sleep\+\_\+mode}=\hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13aeea559d5c56d48e94e586f7fe000c0b1}{Mode\+::\+S\+T\+A\+N\+D\+BY}, const byte \hyperlink{class_loom___sleep___manager_a46e360dc9b81c2a76e5f7f8d485dbae2}{power\+\_\+off\+\_\+pin}=A5)
+\begin{DoxyCompactList}\small\item\em Sleep Manager module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___sleep___manager_a879ccf13274f65ac33a2f09758f1a9ca}{Loom\+\_\+\+Sleep\+\_\+\+Manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___sleep___manager_a163e980ca26fa9b90b712fc80d754963}{$\sim$\+Loom\+\_\+\+Sleep\+\_\+\+Manager} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___sleep___manager_acbb98e60458aec76b9bf9ed446f17029}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em No package necessary. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___sleep___manager_a640ace07af614eee3e7dda74a4d617c2}{sleep} ()
+\begin{DoxyCompactList}\small\item\em Put into low power state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___sleep___manager_a862cdfcf8c4cdba3aae5993a8ce0cff1}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13}{Mode} \hyperlink{class_loom___sleep___manager_aa15266a651a882b39e4323e5a1248825}{get\+\_\+sleep\+\_\+mode} () const 
+\begin{DoxyCompactList}\small\item\em Get the current sleep mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___sleep___manager_a8a6bdde2cff93469c558890273de231d}{link\+\_\+interrupt\+\_\+manager} (\hyperlink{class_loom___interrupt___manager}{Loom\+\_\+\+Interrupt\+\_\+\+Manager} $\ast$IM)
+\begin{DoxyCompactList}\small\item\em Set pointer to interrupt manager. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___sleep___manager_a684b78e0a86c3902fe66374d67c1024d}{set\+\_\+sleep\+\_\+mode} (const \hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13}{Mode} mode)
+\begin{DoxyCompactList}\small\item\em Set the sleep mode to use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___interrupt___manager}{Loom\+\_\+\+Interrupt\+\_\+\+Manager} $\ast$ \hyperlink{class_loom___sleep___manager_a41c366974539c348f16c6b6e7f6ddae1}{interrupt\+\_\+manager}
+\begin{DoxyCompactList}\small\item\em Pointer to interrupt\+\_\+manager instance. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___sleep___manager_ae9ffd9f5310fdac6d1df1f23741598a6}{use\+\_\+\+L\+ED}
+\begin{DoxyCompactList}\small\item\em Whether or not to use L\+ED to indicate wake status. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___sleep___manager_a8404672e11d82bea2ba0934f1c197764}{delay\+\_\+on\+\_\+wake}
+\begin{DoxyCompactList}\small\item\em Whether to provide delay on wake. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13}{Mode} \hyperlink{class_loom___sleep___manager_a3fdbc0a285480a155459ddc675a2482c}{sleep\+\_\+mode}
+\begin{DoxyCompactList}\small\item\em Which sleep mode to use. \end{DoxyCompactList}\item 
+byte \hyperlink{class_loom___sleep___manager_a46e360dc9b81c2a76e5f7f8d485dbae2}{power\+\_\+off\+\_\+pin}
+\begin{DoxyCompactList}\small\item\em Which pin to use to power board off (requires power board) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{M\+I\+S\+C\+E\+L\+L\+A\+N\+E\+O\+US}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___sleep___manager_a8b9622388b96fcb7a63b011a5b4e885e}{link\+\_\+device\+\_\+manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$LM) override
+\begin{DoxyCompactList}\small\item\em Add pointer back to device manager. \end{DoxyCompactList}\item 
+static const char $\ast$ \hyperlink{class_loom___sleep___manager_aab509d2270fb079db04654e9e7aa2b7f}{enum\+\_\+sleep\+\_\+mode\+\_\+string} (const \hyperlink{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13}{Mode} m)
+\begin{DoxyCompactList}\small\item\em Convert enum of sleep mode to a c-\/string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Submanager to manage sleep functionality. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___sleep___manager.html}{\tt Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!Mode@{Mode}}
+\index{Mode@{Mode}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{Mode}{Mode}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+\_\+\+Sleep\+\_\+\+Manager\+::\+Mode}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13}{}\label{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13}
+
+
+Different options available to sleep in. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I\+D\+LE@{I\+D\+LE}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!I\+D\+LE@{I\+D\+LE}}\item[{\em 
+I\+D\+LE\hypertarget{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13aa5daf7f2ebbba4975d61dab1c40188c7}{}\label{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13aa5daf7f2ebbba4975d61dab1c40188c7}
+}]Idle. \index{S\+T\+A\+N\+D\+BY@{S\+T\+A\+N\+D\+BY}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!S\+T\+A\+N\+D\+BY@{S\+T\+A\+N\+D\+BY}}\item[{\em 
+S\+T\+A\+N\+D\+BY\hypertarget{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13aeea559d5c56d48e94e586f7fe000c0b1}{}\label{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13aeea559d5c56d48e94e586f7fe000c0b1}
+}]Standby. \index{O\+P\+E\+N\+S\+\_\+\+L\+O\+W\+P\+O\+W\+ER@{O\+P\+E\+N\+S\+\_\+\+L\+O\+W\+P\+O\+W\+ER}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!O\+P\+E\+N\+S\+\_\+\+L\+O\+W\+P\+O\+W\+ER@{O\+P\+E\+N\+S\+\_\+\+L\+O\+W\+P\+O\+W\+ER}}\item[{\em 
+O\+P\+E\+N\+S\+\_\+\+L\+O\+W\+P\+O\+W\+ER\hypertarget{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13ac7cf9ecb707e9328789a3c3a4752f874}{}\label{class_loom___sleep___manager_ab1cb2baaf00c386048490c3787a2de13ac7cf9ecb707e9328789a3c3a4752f874}
+}]O\+P\+EnS board to shut board off completely. \end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Sleep\+\_\+\+Manager(\+Loom\+Manager $\ast$manager, const bool use\+\_\+\+L\+E\+D=true, const bool delay\+\_\+on\+\_\+wake=false, const Mode sleep\+\_\+mode=\+Mode\+::\+S\+T\+A\+N\+D\+B\+Y, const byte power\+\_\+off\+\_\+pin=\+A5)}{Loom_Sleep_Manager(LoomManager *manager, const bool use_LED=true, const bool delay_on_wake=false, const Mode sleep_mode=Mode::STANDBY, const byte power_off_pin=A5)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Sleep\+\_\+\+Manager\+::\+Loom\+\_\+\+Sleep\+\_\+\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const bool}]{use\+\_\+\+L\+ED = {\ttfamily true}, }
+\item[{const bool}]{delay\+\_\+on\+\_\+wake = {\ttfamily false}, }
+\item[{const {\bf Mode}}]{sleep\+\_\+mode = {\ttfamily {\bf Mode\+::\+S\+T\+A\+N\+D\+BY}}, }
+\item[{const byte}]{power\+\_\+off\+\_\+pin = {\ttfamily A5}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___sleep___manager_ae7bb3c7151e64825fc6ff0473f157175}{}\label{class_loom___sleep___manager_ae7bb3c7151e64825fc6ff0473f157175}
+
+
+Sleep Manager module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em use\+\_\+\+L\+ED} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ Whether or not to use L\+ED to indicate wake state \\
+\hline
+\mbox{\tt in}  & {\em delay\+\_\+on\+\_\+wake} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ Whether or not to delay upon waking to allow time to open Serial Monitor \\
+\hline
+\mbox{\tt in}  & {\em sleep\+\_\+mode} & Set(\+Mode) $\vert$ $<$1$>$ $\vert$ \{ 0(\char`\"{}\+Idle\char`\"{}), 1(\char`\"{}\+Standby\char`\"{}), 2(\char`\"{}\+Opens Low Power\char`\"{})\} $\vert$ Which Mode to use \\
+\hline
+\mbox{\tt in}  & {\em power\+\_\+off\+\_\+pin} & Set(\+Int) $\vert$ $<$10$>$ $\vert$ \{5, 6, 9, 10, 11, 12, 13, 14(\char`\"{}\+A0\char`\"{}), 15(\char`\"{}\+A1\char`\"{}), 16(\char`\"{}\+A2\char`\"{}), 17(\char`\"{}\+A3\char`\"{}), 18(\char`\"{}\+A4\char`\"{}), 19(\char`\"{}\+A5\char`\"{})\} $\vert$ Which pin should be used to power off board \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Sleep\+\_\+\+Manager(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Sleep_Manager(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Sleep\+\_\+\+Manager\+::\+Loom\+\_\+\+Sleep\+\_\+\+Manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___sleep___manager_a879ccf13274f65ac33a2f09758f1a9ca}{}\label{class_loom___sleep___manager_a879ccf13274f65ac33a2f09758f1a9ca}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!````~Loom\+\_\+\+Sleep\+\_\+\+Manager@{$\sim$\+Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\index{````~Loom\+\_\+\+Sleep\+\_\+\+Manager@{$\sim$\+Loom\+\_\+\+Sleep\+\_\+\+Manager}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Sleep\+\_\+\+Manager()=default}{~Loom_Sleep_Manager()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Sleep\+\_\+\+Manager\+::$\sim$\+Loom\+\_\+\+Sleep\+\_\+\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___sleep___manager_a163e980ca26fa9b90b712fc80d754963}{}\label{class_loom___sleep___manager_a163e980ca26fa9b90b712fc80d754963}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!enum\+\_\+sleep\+\_\+mode\+\_\+string@{enum\+\_\+sleep\+\_\+mode\+\_\+string}}
+\index{enum\+\_\+sleep\+\_\+mode\+\_\+string@{enum\+\_\+sleep\+\_\+mode\+\_\+string}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{enum\+\_\+sleep\+\_\+mode\+\_\+string(const Mode m)}{enum_sleep_mode_string(const Mode m)}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+\_\+\+Sleep\+\_\+\+Manager\+::enum\+\_\+sleep\+\_\+mode\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{const {\bf Mode}}]{m}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom___sleep___manager_aab509d2270fb079db04654e9e7aa2b7f}{}\label{class_loom___sleep___manager_aab509d2270fb079db04654e9e7aa2b7f}
+
+
+Convert enum of sleep mode to a c-\/string. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em m} & Sleep to get string of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+C-\/string of sleep mode 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!get\+\_\+sleep\+\_\+mode@{get\+\_\+sleep\+\_\+mode}}
+\index{get\+\_\+sleep\+\_\+mode@{get\+\_\+sleep\+\_\+mode}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{get\+\_\+sleep\+\_\+mode() const }{get_sleep_mode() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mode} Loom\+\_\+\+Sleep\+\_\+\+Manager\+::get\+\_\+sleep\+\_\+mode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___sleep___manager_aa15266a651a882b39e4323e5a1248825}{}\label{class_loom___sleep___manager_aa15266a651a882b39e4323e5a1248825}
+
+
+Get the current sleep mode. 
+
+\begin{DoxyReturn}{Returns}
+The current sleep mode 
+\end{DoxyReturn}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}}
+\index{link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{link\+\_\+device\+\_\+manager(\+Loom\+Manager $\ast$\+L\+M) override}{link_device_manager(LoomManager *LM) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Sleep\+\_\+\+Manager\+::link\+\_\+device\+\_\+manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{LM}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___sleep___manager_a8b9622388b96fcb7a63b011a5b4e885e}{}\label{class_loom___sleep___manager_a8b9622388b96fcb7a63b011a5b4e885e}
+
+
+Add pointer back to device manager. 
+
+Generally only called when device manager links module to provide pointer both directions. Derived modules may override this for increased function, such as linking a submanager or R\+TC module. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em LM} & \hyperlink{class_loom_manager}{Loom\+Manager} to point to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_adc08f87bf7c0c0988decee196a714396}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!link\+\_\+interrupt\+\_\+manager@{link\+\_\+interrupt\+\_\+manager}}
+\index{link\+\_\+interrupt\+\_\+manager@{link\+\_\+interrupt\+\_\+manager}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{link\+\_\+interrupt\+\_\+manager(\+Loom\+\_\+\+Interrupt\+\_\+\+Manager $\ast$\+I\+M)}{link_interrupt_manager(Loom_Interrupt_Manager *IM)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Sleep\+\_\+\+Manager\+::link\+\_\+interrupt\+\_\+manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+\_\+\+Interrupt\+\_\+\+Manager} $\ast$}]{IM}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___sleep___manager_a8a6bdde2cff93469c558890273de231d}{}\label{class_loom___sleep___manager_a8a6bdde2cff93469c558890273de231d}
+
+
+Set pointer to interrupt manager. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em IM} & Pointer to an interrupt manager \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Sleep\+\_\+\+Manager\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___sleep___manager_acbb98e60458aec76b9bf9ed446f17029}{}\label{class_loom___sleep___manager_acbb98e60458aec76b9bf9ed446f17029}
+
+
+No package necessary. 
+
+Implement with empty body. 
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Sleep\+\_\+\+Manager\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___sleep___manager_a862cdfcf8c4cdba3aae5993a8ce0cff1}{}\label{class_loom___sleep___manager_a862cdfcf8c4cdba3aae5993a8ce0cff1}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!set\+\_\+sleep\+\_\+mode@{set\+\_\+sleep\+\_\+mode}}
+\index{set\+\_\+sleep\+\_\+mode@{set\+\_\+sleep\+\_\+mode}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+sleep\+\_\+mode(const Mode mode)}{set_sleep_mode(const Mode mode)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Sleep\+\_\+\+Manager\+::set\+\_\+sleep\+\_\+mode (
+\begin{DoxyParamCaption}
+\item[{const {\bf Mode}}]{mode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom___sleep___manager_a684b78e0a86c3902fe66374d67c1024d}{}\label{class_loom___sleep___manager_a684b78e0a86c3902fe66374d67c1024d}
+
+
+Set the sleep mode to use. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mode} & The Mode to set to \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!sleep@{sleep}}
+\index{sleep@{sleep}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{sleep()}{sleep()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Sleep\+\_\+\+Manager\+::sleep (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___sleep___manager_a640ace07af614eee3e7dda74a4d617c2}{}\label{class_loom___sleep___manager_a640ace07af614eee3e7dda74a4d617c2}
+
+
+Put into low power state. 
+
+On wake, program will continue from where it went to sleep \begin{DoxyReturn}{Returns}
+Whether or not sleep was successful 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!delay\+\_\+on\+\_\+wake@{delay\+\_\+on\+\_\+wake}}
+\index{delay\+\_\+on\+\_\+wake@{delay\+\_\+on\+\_\+wake}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{delay\+\_\+on\+\_\+wake}{delay_on_wake}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Sleep\+\_\+\+Manager\+::delay\+\_\+on\+\_\+wake\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___sleep___manager_a8404672e11d82bea2ba0934f1c197764}{}\label{class_loom___sleep___manager_a8404672e11d82bea2ba0934f1c197764}
+
+
+Whether to provide delay on wake. 
+
+Used to allow user to restart Serial Monitor \index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!interrupt\+\_\+manager@{interrupt\+\_\+manager}}
+\index{interrupt\+\_\+manager@{interrupt\+\_\+manager}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{interrupt\+\_\+manager}{interrupt_manager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+\_\+\+Interrupt\+\_\+\+Manager}$\ast$ Loom\+\_\+\+Sleep\+\_\+\+Manager\+::interrupt\+\_\+manager\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___sleep___manager_a41c366974539c348f16c6b6e7f6ddae1}{}\label{class_loom___sleep___manager_a41c366974539c348f16c6b6e7f6ddae1}
+
+
+Pointer to interrupt\+\_\+manager instance. 
+
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!power\+\_\+off\+\_\+pin@{power\+\_\+off\+\_\+pin}}
+\index{power\+\_\+off\+\_\+pin@{power\+\_\+off\+\_\+pin}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{power\+\_\+off\+\_\+pin}{power_off_pin}}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+Sleep\+\_\+\+Manager\+::power\+\_\+off\+\_\+pin\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___sleep___manager_a46e360dc9b81c2a76e5f7f8d485dbae2}{}\label{class_loom___sleep___manager_a46e360dc9b81c2a76e5f7f8d485dbae2}
+
+
+Which pin to use to power board off (requires power board) 
+
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!sleep\+\_\+mode@{sleep\+\_\+mode}}
+\index{sleep\+\_\+mode@{sleep\+\_\+mode}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{sleep\+\_\+mode}{sleep_mode}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mode} Loom\+\_\+\+Sleep\+\_\+\+Manager\+::sleep\+\_\+mode\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___sleep___manager_a3fdbc0a285480a155459ddc675a2482c}{}\label{class_loom___sleep___manager_a3fdbc0a285480a155459ddc675a2482c}
+
+
+Which sleep mode to use. 
+
+\index{Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}!use\+\_\+\+L\+ED@{use\+\_\+\+L\+ED}}
+\index{use\+\_\+\+L\+ED@{use\+\_\+\+L\+ED}!Loom\+\_\+\+Sleep\+\_\+\+Manager@{Loom\+\_\+\+Sleep\+\_\+\+Manager}}
+\subsubsection[{\texorpdfstring{use\+\_\+\+L\+ED}{use_LED}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Sleep\+\_\+\+Manager\+::use\+\_\+\+L\+ED\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___sleep___manager_ae9ffd9f5310fdac6d1df1f23741598a6}{}\label{class_loom___sleep___manager_ae9ffd9f5310fdac6d1df1f23741598a6}
+
+
+Whether or not to use L\+ED to indicate wake status. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{_sleep___manager_8h}{Sleep\+\_\+\+Manager.\+h}\item 
+src/\hyperlink{_sleep___manager_8cpp}{Sleep\+\_\+\+Manager.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,281 @@
+\hypertarget{class_loom___a_d_s1115}{}\section{Loom\+\_\+\+A\+D\+S1115 Class Reference}
+\label{class_loom___a_d_s1115}\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+
+
+A\+D\+S1115 External A\+DC sensor module.  
+
+
+
+
+{\ttfamily \#include $<$A\+D\+S1115.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+A\+D\+S1115\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{class_loom___a_d_s1115__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952a}{Gain} \+: uint32\+\_\+t \{ \\*
+\hyperlink{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa4f368390110c2278aa3c72e6b085354c}{Gain\+::\+G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+DS} = A\+D\+S1015\+\_\+\+R\+E\+G\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+G\+A\+\_\+6\+\_\+144V, 
+\hyperlink{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aab8284f310841b1a41957a911283bda89}{Gain\+::\+G\+A\+I\+N\+\_\+\+O\+NE} = A\+D\+S1015\+\_\+\+R\+E\+G\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+G\+A\+\_\+4\+\_\+096V, 
+\hyperlink{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa8d6f24e65fcc2887089a99a84b99dc77}{Gain\+::\+G\+A\+I\+N\+\_\+\+T\+WO} = A\+D\+S1015\+\_\+\+R\+E\+G\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+G\+A\+\_\+2\+\_\+048V, 
+\hyperlink{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa6076fa4cd6ea21a2b7594e4a55f49a10}{Gain\+::\+G\+A\+I\+N\+\_\+\+F\+O\+UR} = A\+D\+S1015\+\_\+\+R\+E\+G\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+G\+A\+\_\+1\+\_\+024V, 
+\\*
+\hyperlink{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa807d8cf62c79d677ad96e017fc9c8a89}{Gain\+::\+G\+A\+I\+N\+\_\+\+E\+I\+G\+HT} = A\+D\+S1015\+\_\+\+R\+E\+G\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+G\+A\+\_\+0\+\_\+512V, 
+\hyperlink{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aab130f619fbd0feb9cd3b045068446e2f}{Gain\+::\+G\+A\+I\+N\+\_\+\+S\+I\+X\+T\+E\+EN} = A\+D\+S1015\+\_\+\+R\+E\+G\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+G\+A\+\_\+0\+\_\+256V
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___a_d_s1115_a19e893a647843f6c69f3050a07317b9d}{Loom\+\_\+\+A\+D\+S1115} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}=A\+D\+S1015\+\_\+\+A\+D\+D\+R\+E\+SS, const uint8\+\_\+t mux\+\_\+port=255, const bool analog\+\_\+0\+\_\+enabled=true, const bool analog\+\_\+1\+\_\+enabled=true, const bool analog\+\_\+2\+\_\+enabled=true, const bool analog\+\_\+3\+\_\+enabled=true, const bool diff\+\_\+0\+\_\+enabled=false, const bool diff\+\_\+1\+\_\+enabled=false, const \hyperlink{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952a}{Gain} gain=\hyperlink{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa4f368390110c2278aa3c72e6b085354c}{Gain\+::\+G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+DS})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___a_d_s1115_ab4692a84c54678e8c748256fdfd70e97}{Loom\+\_\+\+A\+D\+S1115} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom___a_d_s1115_a6faa4607b12d0ea7f45adaeb98eb7b88}{$\sim$\+Loom\+\_\+\+A\+D\+S1115} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___a_d_s1115_acb67c9e3b562c8a1f03ed5a031dfa3ef}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___a_d_s1115_a4c2a1f5b61f51cf5485598d8d36c6e3d}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___a_d_s1115_a8c5419d33482990e84be15dfe82b0ea6}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___a_d_s1115_a91ac5a218d357d6fa362f028ac922965}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+A\+D\+S1115 \hyperlink{class_loom___a_d_s1115_a3e415ba1bcb735a7c68f3d8186af16ff}{ads1115}
+\begin{DoxyCompactList}\small\item\em $<$ Underlying A\+D\+S1115 sensor manager instance \end{DoxyCompactList}\item 
+const bool \hyperlink{class_loom___a_d_s1115_adae846869b16a628b143b58a4cbafe66}{analog\+\_\+enabled} \mbox{[}4\mbox{]}
+\item 
+const bool \hyperlink{class_loom___a_d_s1115_a61952169aa13145525c1ad60ff13de9c}{diff\+\_\+enabled} \mbox{[}2\mbox{]}
+\item 
+int16\+\_\+t \hyperlink{class_loom___a_d_s1115_a069b993572153286feab41c0467342a4}{analog\+\_\+reads} \mbox{[}4\mbox{]}
+\item 
+int16\+\_\+t \hyperlink{class_loom___a_d_s1115_a8f56df6850f8837b029f0f52515a3f38}{diff\+\_\+reads} \mbox{[}2\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A\+D\+S1115 External A\+DC sensor module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \mbox{[}Module Documentation\mbox{]}(T\+O\+DO)
+\item \href{https://www.adafruit.com/product/1085}{\tt Product Page\+: A\+D\+S1115 16-\/\+Bit A\+DC}
+\item \href{https://github.com/adafruit/Adafruit_ADS1X15}{\tt Dependency\+: Adafruit A\+D\+S1\+X15 Arduino Library}
+\item \href{https://learn.adafruit.com/adafruit-4-channel-adc-breakouts/assembly-and-wiring}{\tt Hookup Guide\+: A\+D\+S1115 Assembly and Wiring}
+\item \href{https://cdn-shop.adafruit.com/datasheets/ads1115.pdf}{\tt Datasheet\+: A\+D\+S1115}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ads1115-16-bit-adc}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!Gain@{Gain}}
+\index{Gain@{Gain}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{Gain}{Gain}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+\_\+\+A\+D\+S1115\+::\+Gain} \+: uint32\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952a}{}\label{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952a}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+DS@{G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+DS}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+DS@{G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+DS}}\item[{\em 
+G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+DS\hypertarget{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa4f368390110c2278aa3c72e6b085354c}{}\label{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa4f368390110c2278aa3c72e6b085354c}
+}]\index{G\+A\+I\+N\+\_\+\+O\+NE@{G\+A\+I\+N\+\_\+\+O\+NE}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!G\+A\+I\+N\+\_\+\+O\+NE@{G\+A\+I\+N\+\_\+\+O\+NE}}\item[{\em 
+G\+A\+I\+N\+\_\+\+O\+NE\hypertarget{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aab8284f310841b1a41957a911283bda89}{}\label{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aab8284f310841b1a41957a911283bda89}
+}]\index{G\+A\+I\+N\+\_\+\+T\+WO@{G\+A\+I\+N\+\_\+\+T\+WO}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!G\+A\+I\+N\+\_\+\+T\+WO@{G\+A\+I\+N\+\_\+\+T\+WO}}\item[{\em 
+G\+A\+I\+N\+\_\+\+T\+WO\hypertarget{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa8d6f24e65fcc2887089a99a84b99dc77}{}\label{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa8d6f24e65fcc2887089a99a84b99dc77}
+}]\index{G\+A\+I\+N\+\_\+\+F\+O\+UR@{G\+A\+I\+N\+\_\+\+F\+O\+UR}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!G\+A\+I\+N\+\_\+\+F\+O\+UR@{G\+A\+I\+N\+\_\+\+F\+O\+UR}}\item[{\em 
+G\+A\+I\+N\+\_\+\+F\+O\+UR\hypertarget{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa6076fa4cd6ea21a2b7594e4a55f49a10}{}\label{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa6076fa4cd6ea21a2b7594e4a55f49a10}
+}]\index{G\+A\+I\+N\+\_\+\+E\+I\+G\+HT@{G\+A\+I\+N\+\_\+\+E\+I\+G\+HT}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!G\+A\+I\+N\+\_\+\+E\+I\+G\+HT@{G\+A\+I\+N\+\_\+\+E\+I\+G\+HT}}\item[{\em 
+G\+A\+I\+N\+\_\+\+E\+I\+G\+HT\hypertarget{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa807d8cf62c79d677ad96e017fc9c8a89}{}\label{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aa807d8cf62c79d677ad96e017fc9c8a89}
+}]\index{G\+A\+I\+N\+\_\+\+S\+I\+X\+T\+E\+EN@{G\+A\+I\+N\+\_\+\+S\+I\+X\+T\+E\+EN}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!G\+A\+I\+N\+\_\+\+S\+I\+X\+T\+E\+EN@{G\+A\+I\+N\+\_\+\+S\+I\+X\+T\+E\+EN}}\item[{\em 
+G\+A\+I\+N\+\_\+\+S\+I\+X\+T\+E\+EN\hypertarget{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aab130f619fbd0feb9cd3b045068446e2f}{}\label{class_loom___a_d_s1115_a3a8b67f3b5757a84d8066cd9c8ea952aab130f619fbd0feb9cd3b045068446e2f}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+A\+D\+S1115(\+Loom\+Manager $\ast$manager, const byte i2c\+\_\+address=\+A\+D\+S1015\+\_\+\+A\+D\+D\+R\+E\+S\+S, const uint8\+\_\+t mux\+\_\+port=255, const bool analog\+\_\+0\+\_\+enabled=true, const bool analog\+\_\+1\+\_\+enabled=true, const bool analog\+\_\+2\+\_\+enabled=true, const bool analog\+\_\+3\+\_\+enabled=true, const bool diff\+\_\+0\+\_\+enabled=false, const bool diff\+\_\+1\+\_\+enabled=false, const Gain gain=\+Gain\+::\+G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+D\+S)}{Loom_ADS1115(LoomManager *manager, const byte i2c_address=ADS1015_ADDRESS, const uint8_t mux_port=255, const bool analog_0_enabled=true, const bool analog_1_enabled=true, const bool analog_2_enabled=true, const bool analog_3_enabled=true, const bool diff_0_enabled=false, const bool diff_1_enabled=false, const Gain gain=Gain::GAIN_TWOTHIRDS)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+A\+D\+S1115\+::\+Loom\+\_\+\+A\+D\+S1115 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{i2c\+\_\+address = {\ttfamily ADS1015\+\_\+ADDRESS}, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}, }
+\item[{const bool}]{analog\+\_\+0\+\_\+enabled = {\ttfamily true}, }
+\item[{const bool}]{analog\+\_\+1\+\_\+enabled = {\ttfamily true}, }
+\item[{const bool}]{analog\+\_\+2\+\_\+enabled = {\ttfamily true}, }
+\item[{const bool}]{analog\+\_\+3\+\_\+enabled = {\ttfamily true}, }
+\item[{const bool}]{diff\+\_\+0\+\_\+enabled = {\ttfamily false}, }
+\item[{const bool}]{diff\+\_\+1\+\_\+enabled = {\ttfamily false}, }
+\item[{const {\bf Gain}}]{gain = {\ttfamily {\bf Gain\+::\+G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+DS}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___a_d_s1115_a19e893a647843f6c69f3050a07317b9d}{}\label{class_loom___a_d_s1115_a19e893a647843f6c69f3050a07317b9d}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x10$>$ $\vert$ \{0x10, 0x11\} $\vert$ I2C address \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+port} & Int $\vert$ $<$255$>$ $\vert$ \mbox{[}0-\/16\mbox{]} $\vert$ Port on multiplexer \\
+\hline
+\mbox{\tt in}  & {\em analog\+\_\+0\+\_\+enabled} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} A0 for reading \\
+\hline
+\mbox{\tt in}  & {\em analog\+\_\+1\+\_\+enabled} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} A1 for reading \\
+\hline
+\mbox{\tt in}  & {\em analog\+\_\+2\+\_\+enabled} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} A2 for reading \\
+\hline
+\mbox{\tt in}  & {\em analog\+\_\+3\+\_\+enabled} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} A3 for reading \\
+\hline
+\mbox{\tt in}  & {\em diff\+\_\+0\+\_\+enabled} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} a differential measurement between A0 and A1 \\
+\hline
+\mbox{\tt in}  & {\em diff\+\_\+1\+\_\+enabled} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ \hyperlink{namespace_enable}{Enable} a differential measurement between A2 and A3 \\
+\hline
+\mbox{\tt in}  & {\em Fain} & Set(\+Gain) $\vert$ $<$0$>$ $\vert$ \{0x0000(\char`\"{}\+G\+A\+I\+N\+\_\+\+T\+W\+O\+T\+H\+I\+R\+D\+S\char`\"{}), 0x0200(\char`\"{}\+G\+A\+I\+N\+\_\+\+O\+N\+E\char`\"{}), 0x0400(\char`\"{}\+G\+A\+I\+N\+\_\+\+T\+W\+O\char`\"{} ), 0x0600(\char`\"{}\+G\+A\+I\+N\+\_\+\+F\+O\+U\+R\char`\"{}), 0x0800(\char`\"{}\+G\+A\+I\+N\+\_\+\+E\+I\+G\+H\+T\char`\"{}), 0x0\+A00(\char`\"{}\+G\+A\+I\+N\+\_\+\+S\+I\+X\+T\+E\+E\+N\char`\"{})\} $\vert$ The gain setting for the A\+D\+S1115. Please do not change this number unless you are familiar with the A\+D\+S1115, as an incorrect setting will destroy the A\+D\+C!. \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+A\+D\+S1115(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_ADS1115(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+A\+D\+S1115\+::\+Loom\+\_\+\+A\+D\+S1115 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___a_d_s1115_ab4692a84c54678e8c748256fdfd70e97}{}\label{class_loom___a_d_s1115_ab4692a84c54678e8c748256fdfd70e97}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!````~Loom\+\_\+\+A\+D\+S1115@{$\sim$\+Loom\+\_\+\+A\+D\+S1115}}
+\index{````~Loom\+\_\+\+A\+D\+S1115@{$\sim$\+Loom\+\_\+\+A\+D\+S1115}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+A\+D\+S1115()=default}{~Loom_ADS1115()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+\_\+\+A\+D\+S1115\+::$\sim$\+Loom\+\_\+\+A\+D\+S1115 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom___a_d_s1115_a6faa4607b12d0ea7f45adaeb98eb7b88}{}\label{class_loom___a_d_s1115_a6faa4607b12d0ea7f45adaeb98eb7b88}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+D\+S1115\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___a_d_s1115_acb67c9e3b562c8a1f03ed5a031dfa3ef}{}\label{class_loom___a_d_s1115_acb67c9e3b562c8a1f03ed5a031dfa3ef}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+D\+S1115\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___a_d_s1115_a4c2a1f5b61f51cf5485598d8d36c6e3d}{}\label{class_loom___a_d_s1115_a4c2a1f5b61f51cf5485598d8d36c6e3d}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+D\+S1115\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___a_d_s1115_a8c5419d33482990e84be15dfe82b0ea6}{}\label{class_loom___a_d_s1115_a8c5419d33482990e84be15dfe82b0ea6}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_i2_c_sensor_ab90004ce30a281b7f51ecf3093ca4cea}{Loom\+I2\+C\+Sensor}.
+
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+A\+D\+S1115\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___a_d_s1115_a91ac5a218d357d6fa362f028ac922965}{}\label{class_loom___a_d_s1115_a91ac5a218d357d6fa362f028ac922965}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!ads1115@{ads1115}}
+\index{ads1115@{ads1115}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{ads1115}{ads1115}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+A\+D\+S1115 Loom\+\_\+\+A\+D\+S1115\+::ads1115\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_d_s1115_a3e415ba1bcb735a7c68f3d8186af16ff}{}\label{class_loom___a_d_s1115_a3e415ba1bcb735a7c68f3d8186af16ff}
+
+
+$<$ Underlying A\+D\+S1115 sensor manager instance 
+
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!analog\+\_\+enabled@{analog\+\_\+enabled}}
+\index{analog\+\_\+enabled@{analog\+\_\+enabled}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{analog\+\_\+enabled}{analog_enabled}}]{\setlength{\rightskip}{0pt plus 5cm}const bool Loom\+\_\+\+A\+D\+S1115\+::analog\+\_\+enabled\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_d_s1115_adae846869b16a628b143b58a4cbafe66}{}\label{class_loom___a_d_s1115_adae846869b16a628b143b58a4cbafe66}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!analog\+\_\+reads@{analog\+\_\+reads}}
+\index{analog\+\_\+reads@{analog\+\_\+reads}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{analog\+\_\+reads}{analog_reads}}]{\setlength{\rightskip}{0pt plus 5cm}int16\+\_\+t Loom\+\_\+\+A\+D\+S1115\+::analog\+\_\+reads\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_d_s1115_a069b993572153286feab41c0467342a4}{}\label{class_loom___a_d_s1115_a069b993572153286feab41c0467342a4}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!diff\+\_\+enabled@{diff\+\_\+enabled}}
+\index{diff\+\_\+enabled@{diff\+\_\+enabled}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{diff\+\_\+enabled}{diff_enabled}}]{\setlength{\rightskip}{0pt plus 5cm}const bool Loom\+\_\+\+A\+D\+S1115\+::diff\+\_\+enabled\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_d_s1115_a61952169aa13145525c1ad60ff13de9c}{}\label{class_loom___a_d_s1115_a61952169aa13145525c1ad60ff13de9c}
+\index{Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}!diff\+\_\+reads@{diff\+\_\+reads}}
+\index{diff\+\_\+reads@{diff\+\_\+reads}!Loom\+\_\+\+A\+D\+S1115@{Loom\+\_\+\+A\+D\+S1115}}
+\subsubsection[{\texorpdfstring{diff\+\_\+reads}{diff_reads}}]{\setlength{\rightskip}{0pt plus 5cm}int16\+\_\+t Loom\+\_\+\+A\+D\+S1115\+::diff\+\_\+reads\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___a_d_s1115_a8f56df6850f8837b029f0f52515a3f38}{}\label{class_loom___a_d_s1115_a8f56df6850f8837b029f0f52515a3f38}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_a_d_s1115_8h}{A\+D\+S1115.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_a_d_s1115_8cpp}{A\+D\+S1115.\+cpp}\end{DoxyCompactItemize}

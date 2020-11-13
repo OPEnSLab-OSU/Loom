@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_misc_8cpp" kind="file" language="C++">
+    <compoundname>Misc.cpp</compoundname>
+    <includes refid="_misc_8h" local="yes">Misc.h</includes>
+    <incdepgraph>
+      <node id="4033">
+        <label>src/Misc.cpp</label>
+        <link refid="Misc.cpp"/>
+        <childnode refid="4034" relation="include">
+        </childnode>
+      </node>
+      <node id="4034">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4035" relation="include">
+        </childnode>
+      </node>
+      <node id="4035">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_misc_8cpp_1a3fe4f3d974159c62cde9f7fff67eb689" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_array</definition>
+        <argsstring>(const String data[], const int len, const int format)</argsstring>
+        <name>print_array</name>
+        <param>
+          <type>const String</type>
+          <declname>data</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+<para>(hide from Doxygen) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Misc.cpp" line="14" column="1" bodyfile="src/Misc.cpp" bodystart="14" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Misc.cpp"/>
+  </compounddef>
+</doxygen>

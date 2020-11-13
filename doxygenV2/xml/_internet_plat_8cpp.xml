@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_internet_plat_8cpp" kind="file" language="C++">
+    <compoundname>InternetPlat.cpp</compoundname>
+    <includes refid="_internet_plat_8h" local="yes">InternetPlat.h</includes>
+    <incdepgraph>
+      <node id="3349">
+        <label>InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="3350" relation="include">
+        </childnode>
+        <childnode refid="3356" relation="include">
+        </childnode>
+        <childnode refid="3357" relation="include">
+        </childnode>
+        <childnode refid="3358" relation="include">
+        </childnode>
+        <childnode refid="3359" relation="include">
+        </childnode>
+      </node>
+      <node id="3357">
+        <label>Udp.h</label>
+      </node>
+      <node id="3353">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3350">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3351" relation="include">
+        </childnode>
+        <childnode refid="3353" relation="include">
+        </childnode>
+        <childnode refid="3354" relation="include">
+        </childnode>
+        <childnode refid="3355" relation="include">
+        </childnode>
+      </node>
+      <node id="3356">
+        <label>Client.h</label>
+      </node>
+      <node id="3354">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3352" relation="include">
+        </childnode>
+        <childnode refid="3355" relation="include">
+        </childnode>
+      </node>
+      <node id="3351">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3352" relation="include">
+        </childnode>
+      </node>
+      <node id="3355">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3352">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3348">
+        <label>src/InternetPlats/InternetPlat.cpp</label>
+        <link refid="InternetPlat.cpp"/>
+        <childnode refid="3349" relation="include">
+        </childnode>
+      </node>
+      <node id="3358">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="3359">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_internet_plat_8cpp_1abcaddbad7add48e4a8a0cbc0b34115da" prot="public" static="yes" mutable="no">
+        <type>constexpr unsigned int</type>
+        <definition>constexpr unsigned int localPort</definition>
+        <argsstring></argsstring>
+        <name>localPort</name>
+        <initializer>= 8888</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.cpp" line="132" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_internet_plat_8cpp_1ac265fa80877a452dcd67ca27f794e7c0" prot="public" static="yes" mutable="no">
+        <type>constexpr int</type>
+        <definition>constexpr int NTP_PACKET_SIZE</definition>
+        <argsstring></argsstring>
+        <name>NTP_PACKET_SIZE</name>
+        <initializer>= 48</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.cpp" line="133" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_internet_plat_8cpp_1a4bde4311ff68387b4a52dfa0a1941cb0" prot="public" static="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char time_server[]</definition>
+        <argsstring>[]</argsstring>
+        <name>time_server</name>
+        <initializer>= &quot;pool.ntp.org&quot;</initializer>
+        <briefdescription>
+<para>Static NTP time server. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.cpp" line="135" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_internet_plat_8cpp_1a62877ddffe2a08833184744b5a3b98ce" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void print_unix_time</definition>
+        <argsstring>(unsigned long epoch)</argsstring>
+        <name>print_unix_time</name>
+        <param>
+          <type>unsigned long</type>
+          <declname>epoch</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetPlat.cpp" line="137" column="1" bodyfile="src/InternetPlats/InternetPlat.cpp" bodystart="137" bodyend="157"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/InternetPlats/InternetPlat.cpp"/>
+  </compounddef>
+</doxygen>

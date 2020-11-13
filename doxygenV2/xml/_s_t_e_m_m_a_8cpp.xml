@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_s_t_e_m_m_a_8cpp" kind="file" language="C++">
+    <compoundname>STEMMA.cpp</compoundname>
+    <includes refid="_s_t_e_m_m_a_8h" local="yes">STEMMA.h</includes>
+    <incdepgraph>
+      <node id="5368">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5365">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5366" relation="include">
+        </childnode>
+        <childnode refid="5368" relation="include">
+        </childnode>
+        <childnode refid="5369" relation="include">
+        </childnode>
+        <childnode refid="5370" relation="include">
+        </childnode>
+      </node>
+      <node id="5362">
+        <label>STEMMA.h</label>
+        <link refid="_s_t_e_m_m_a_8h"/>
+        <childnode refid="5363" relation="include">
+        </childnode>
+        <childnode refid="5372" relation="include">
+        </childnode>
+      </node>
+      <node id="5369">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5367" relation="include">
+        </childnode>
+        <childnode refid="5370" relation="include">
+        </childnode>
+      </node>
+      <node id="5366">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5367" relation="include">
+        </childnode>
+      </node>
+      <node id="5371">
+        <label>Wire.h</label>
+      </node>
+      <node id="5372">
+        <label>Adafruit_seesaw.h</label>
+      </node>
+      <node id="5361">
+        <label>src/Sensors/I2C/STEMMA.cpp</label>
+        <link refid="STEMMA.cpp"/>
+        <childnode refid="5362" relation="include">
+        </childnode>
+      </node>
+      <node id="5370">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5364">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5365" relation="include">
+        </childnode>
+      </node>
+      <node id="5367">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5363">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5364" relation="include">
+        </childnode>
+        <childnode refid="5371" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/STEMMA.cpp"/>
+  </compounddef>
+</doxygen>

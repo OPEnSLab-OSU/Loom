@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_Interrupt_Manager class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_Interrupt_Manager <span class="m-thin">class</span>
+        </h1>
+        <p>Submanager for managing interrupts, timers, and stopwatches.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-static-attribs">Protected static variables</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#external-interrupt-methods">EXTERNAL INTERRUPT METHODS</a></li>
+                <li><a href="#rtc-alarm-methods">RTC ALARM METHODS</a></li>
+                <li><a href="#asyncdelay-timer-methods">ASYNCDELAY TIMER METHODS</a></li>
+                <li><a href="#internal-timer-methods">INTERNAL TIMER METHODS</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+                <li><a href="#miscellaneous">MISCELLANEOUS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html">Documentation</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_module.html" class="m-doc">LoomModule</a>
+            </dt>
+            <dd>Abstract root of Loom component modules inheritance hierarchy.</dd>
+          </dl>
+        </section>
+        <section id="pro-static-attribs">
+          <h2><a href="#pro-static-attribs">Protected static variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a12c988c69d8e14c845a736e032ac3575">
+              static bool <a href="#a12c988c69d8e14c845a736e032ac3575" class="m-doc-self">interrupt_triggered</a>
+            </dt>
+            <dd>Flags set by interrupts, indicating ISR bottom half should be called if not Null.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="af209a82a1929466fa1d00a14733120c6">
+              <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* <a href="#af209a82a1929466fa1d00a14733120c6" class="m-doc-self">RTC_Inst</a>
+            </dt>
+            <dd>Pointer to an RTC object for managing timers / timed interrupts.</dd>
+            <dt id="a1afa84cd52b350fcc4a48ec2e45431a9">
+              <a href="class_loom___sleep___manager.html" class="m-doc">Loom_<wbr />Sleep_<wbr />Manager</a>* <a href="#a1afa84cd52b350fcc4a48ec2e45431a9" class="m-doc-self">Sleep_Manager</a>
+            </dt>
+            <dd>Pointer to a Sleep Manager object.</dd>
+            <dt id="a8b625720d3238492bc51a301e4e9b09a">
+              IntDetails <a href="#a8b625720d3238492bc51a301e4e9b09a" class="m-doc-self">int_settings</a>
+            </dt>
+            <dd>List of interrupts configurations.</dd>
+            <dt id="a042032ad0c2ed2748e1d2849dcae1a2f">
+              bool <a href="#a042032ad0c2ed2748e1d2849dcae1a2f" class="m-doc-self">interrupts_enabled</a>
+            </dt>
+            <dd><a href="namespace_enable.html" class="m-doc">Enable</a> or disable all interrupts &ndash; currently only disables bottom halves.</dd>
+            <dt id="a099eebe8ec30cee46432701945b0e758">
+              DateTime <a href="#a099eebe8ec30cee46432701945b0e758" class="m-doc-self">last_alarm_time</a>
+            </dt>
+            <dd>Last time an alarm went off.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a5b12fcb72f0f5da323d63ab9a6ca95a5" class="m-doc">Loom_Interrupt_Manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* RTC_Inst = nullptr)</span>
+            </dt>
+            <dd>Interrupt Manager module constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a5b23954e2888942d6370f82e2f790d6d" class="m-doc">Loom_Interrupt_Manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="a0a389cd37e3266ab844ff0eed146082a">
+              <span class="m-doc-wrap-bumper"><a href="#a0a389cd37e3266ab844ff0eed146082a" class="m-doc-self">~Loom_Interrupt_Manager</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5acb7bf173619dbd1a459800182767e6" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>No package necessary.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ada590ee9e56b82b39a6cf443c6038efd" class="m-doc">run_pending_ISRs</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Run any waiting ISRs.</dd>
+          </dl>
+        </section>
+        <section id="external-interrupt-methods">
+          <h2><a href="#external-interrupt-methods">EXTERNAL INTERRUPT METHODS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2d10238301b261b7cc98f5392c2d8cff" class="m-doc">register_ISR</a>(</span><span class="m-doc-wrap">const uint32_t pin,
+              <a href="_interrupt___manager_8h.html#a21adc8a9b6cc2505b5b1317ca9f74cf3" class="m-doc">ISRFuncPtr</a> ISR,
+              const uint32_t signal_type,
+              <a href="_interrupt___manager_8h.html#a1cb40265e710cbdf07f99beb6c4020d1" class="m-doc">ISR_<wbr />Type</a> run_type)</span>
+            </dt>
+            <dd>Register an ISR to an interrupt pin and its configuration.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abbf112a7a515088c543e76f5ad2a8bea" class="m-doc">reconnect_interrupt</a>(</span><span class="m-doc-wrap">const uint32_t pin) -&gt; bool</span>
+            </dt>
+            <dd>If an ISR dettaches interrupt, use this to reattach according to previous settings.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a314bdba78fd288871bea3421ba6ec022" class="m-doc">unregister_ISR</a>(</span><span class="m-doc-wrap">const uint32_t pin,
+              const uint32_t signal_type = LOW)</span>
+            </dt>
+            <dd>Restores pin to default ISR, disables interrupt.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a05ba1bf76145681fecb787374358711f" class="m-doc">interrupt_reset</a>(</span><span class="m-doc-wrap">const uint32_t pin)</span>
+            </dt>
+            <dd>Detaches then reattacheds interrupt according to settings.</dd>
+          </dl>
+        </section>
+        <section id="rtc-alarm-methods">
+          <h2><a href="#rtc-alarm-methods">RTC ALARM METHODS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac188b3f03d32bcfdfe5caf4eae31f33d" class="m-doc">RTC_alarm_duration</a>(</span><span class="m-doc-wrap">const TimeSpan duration) -&gt; bool</span>
+            </dt>
+            <dd>Set RTC alarm an amount of time from now.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abde5c47ed6021fe7280c14891b1a1c31" class="m-doc">RTC_alarm_duration</a>(</span><span class="m-doc-wrap">const uint8_t days,
+              const uint8_t hours,
+              const uint8_t minutes,
+              const uint8_t seconds) -&gt; bool</span>
+            </dt>
+            <dd>Set RTC alarm an amount of time from now.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#afca2eade7f1520c97add8dbffe1247df" class="m-doc">RTC_alarm_at</a>(</span><span class="m-doc-wrap">DateTime future_time) -&gt; bool</span>
+            </dt>
+            <dd>Set RTC alarm for a specific time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abbfb010ec889658a10d596ac4d096069" class="m-doc">RTC_alarm_at</a>(</span><span class="m-doc-wrap">const uint8_t hour,
+              const uint8_t minute,
+              const uint8_t second) -&gt; bool</span>
+            </dt>
+            <dd>Set RTC alarm for a specific time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aef46cb9e0c3aee294ef5eacd5685be72" class="m-doc">RTC_alarm_duration_from_last</a>(</span><span class="m-doc-wrap">const TimeSpan duration) -&gt; bool</span>
+            </dt>
+            <dd>Set RTC alarm an amount of time from last alarm time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a254c240e87b74e465acb4ed36e9fc2b8" class="m-doc">RTC_alarm_duration_from_last</a>(</span><span class="m-doc-wrap">const uint8_t days,
+              const uint8_t hours,
+              const uint8_t minutes,
+              const uint8_t seconds) -&gt; bool</span>
+            </dt>
+            <dd>Set RTC alarm an amount of time from last alarm time.</dd>
+          </dl>
+        </section>
+        <section id="asyncdelay-timer-methods">
+          <h2><a href="#asyncdelay-timer-methods">ASYNCDELAY TIMER METHODS</a></h2>
+          <dl class="m-doc">
+            <dt id="af5b0647e08c81406eefd25c3d4cc54f3">
+              <span class="m-doc-wrap-bumper">void <a href="#af5b0647e08c81406eefd25c3d4cc54f3" class="m-doc-self">check_timers</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Check if timers have elapsed, if so run associated &#x27;ISR&#x27;.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a1b921c29326cfc93dd4e2e405d50bbdd" class="m-doc">register_timer</a>(</span><span class="m-doc-wrap">const uint8_t timer_num,
+              const unsigned long duration,
+              const <a href="_interrupt___manager_8h.html#a21adc8a9b6cc2505b5b1317ca9f74cf3" class="m-doc">ISRFuncPtr</a> ISR,
+              const bool repeat)</span>
+            </dt>
+            <dd>Configure specified timer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a1f52e9304f3b8b1fc93225f6d2e55785" class="m-doc">clear_timer</a>(</span><span class="m-doc-wrap">const uint8_t timer_num)</span>
+            </dt>
+            <dd>Clear specified timer.</dd>
+          </dl>
+        </section>
+        <section id="internal-timer-methods">
+          <h2><a href="#internal-timer-methods">INTERNAL TIMER METHODS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a61330d0a7d555fd77f0ecfa9e8d2d68e" class="m-doc">register_internal_timer</a>(</span><span class="m-doc-wrap">const uint duration,
+              const <a href="_interrupt___manager_8h.html#a21adc8a9b6cc2505b5b1317ca9f74cf3" class="m-doc">ISRFuncPtr</a> ISR,
+              const bool repeat,
+              const <a href="_interrupt___manager_8h.html#a1cb40265e710cbdf07f99beb6c4020d1" class="m-doc">ISR_<wbr />Type</a> run_type)</span>
+            </dt>
+            <dd>Configure internal timer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a62c7686cecf790cfa0b05b704dd331b7" class="m-doc">run_pending_internal_timer_ISR</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Run a delayed (flag based) ISR if the interal timer elapsed.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0dce3fcaa0a20ebb67e6ff723cf6ac3d" class="m-doc">get_internal_timer_flag</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Get whether the internal timer has elapsed.</dd>
+            <dt id="acd8fc9dcdf5711155cde0b1ac6a3da15">
+              <span class="m-doc-wrap-bumper">void <a href="#acd8fc9dcdf5711155cde0b1ac6a3da15" class="m-doc-self">clear_internal_timer_flag</a>(</span><span class="m-doc-wrap">) const</span>
+            </dt>
+            <dd>Clear internal timer flag.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a1264d1fc1bbb0d8c82e791d174e37007" class="m-doc">internal_timer_enable</a>(</span><span class="m-doc-wrap">const bool enable)</span>
+            </dt>
+            <dd><a href="namespace_enable.html" class="m-doc">Enable</a> or disable internal timer.</dd>
+            <dt id="ac70690464b0311ad8758bf9cde3887d9">
+              <span class="m-doc-wrap-bumper">void <a href="#ac70690464b0311ad8758bf9cde3887d9" class="m-doc-self">unregister_internal_timer</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Clear and disable internal timer, remove ISR.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a6b7a28e4b7a150016e2975165581f7e9">
+              <span class="m-doc-wrap-bumper">void <a href="#a6b7a28e4b7a150016e2975165581f7e9" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+            <dt id="ae9dde4f4da0e50a0bc19e2ae3453c3cb">
+              <span class="m-doc-wrap-bumper">void <a href="#ae9dde4f4da0e50a0bc19e2ae3453c3cb" class="m-doc-self">print_state</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display current state of the module.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a647e6a07bcfcf479a5510d29f11fd1e6" class="m-doc">get_interrupts_enabled</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Get global interrupt enable state.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a947b7bc935f50e33f2483ab315188709" class="m-doc">get_enable_interrupt</a>(</span><span class="m-doc-wrap">const uint32_t pin) const -&gt; bool</span>
+            </dt>
+            <dd>Get pin interrupt enable state.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7d27c7a5b0c7f7d8c26f043656cb28a7" class="m-doc">get_RTC_module</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>*</span>
+            </dt>
+            <dd>Return pointer to the currently linked RTC object.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7415a4ffbeda1358639936cc62969605" class="m-doc">link_device_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LM) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Link a device manager.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a794ec2babdedb928f17862c93b772215" class="m-doc">link_sleep_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom___sleep___manager.html" class="m-doc">Loom_<wbr />Sleep_<wbr />Manager</a>* SM)</span>
+            </dt>
+            <dd>Set pointer to sleep Manager.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a179034c16493d648ad3108ae1152e86b" class="m-doc">set_interrupts_enabled</a>(</span><span class="m-doc-wrap">const bool state)</span>
+            </dt>
+            <dd>All interrupts enable/disable.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac3551b3ce17a6eb7db6885689510be60" class="m-doc">set_enable_interrupt</a>(</span><span class="m-doc-wrap">const uint32_t pin,
+              const bool state)</span>
+            </dt>
+            <dd>Per interrupt enable.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a971175f7e1109e0317041bde9824591d" class="m-doc">set_RTC_module</a>(</span><span class="m-doc-wrap"><a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* RTC_Inst)</span>
+            </dt>
+            <dd>Set the RTC module to use for timers.</dd>
+          </dl>
+        </section>
+        <section id="miscellaneous">
+          <h2><a href="#miscellaneous">MISCELLANEOUS</a></h2>
+          <dl class="m-doc">
+            <dt id="aff3d5e9c3754228fd2986c4c90b2134b">
+              static const <a href="_interrupt___manager_8h.html#a21adc8a9b6cc2505b5b1317ca9f74cf3" class="m-doc">ISRFuncPtr</a> <a href="#aff3d5e9c3754228fd2986c4c90b2134b" class="m-doc-self">default_ISRs</a>
+            </dt>
+            <dd>Array of the default ISRs that set flags.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a9627a5c793fa172b25c4ff0078fe7193" class="m-doc">interrupt_type_to_string</a>(</span><span class="m-doc-wrap">const uint8_t type) -&gt; const char*</span>
+            </dt>
+            <dd>Get c-string of name associated with interrupt type enum.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a5b12fcb72f0f5da323d63ab9a6ca95a5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5b12fcb72f0f5da323d63ab9a6ca95a5" class="m-doc-self">Loom_Interrupt_Manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              <a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* RTC_Inst = nullptr)</span></span>
+            </h3>
+            <p>Interrupt Manager module constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>RTC_Inst&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;0&gt; | {0(&quot;Null&quot;)} | OLED module name</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5b23954e2888942d6370f82e2f790d6d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5b23954e2888942d6370f82e2f790d6d" class="m-doc-self">Loom_Interrupt_Manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5acb7bf173619dbd1a459800182767e6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5acb7bf173619dbd1a459800182767e6" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>No package necessary.</p>
+<p>Implement with empty body.</p>
+          </div></section>
+          <section class="m-doc-details" id="ada590ee9e56b82b39a6cf443c6038efd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ada590ee9e56b82b39a6cf443c6038efd" class="m-doc-self">run_pending_ISRs</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Run any waiting ISRs.</p>
+<p>Flag was set by a top half ISR</p>
+          </div></section>
+          <section class="m-doc-details" id="a2d10238301b261b7cc98f5392c2d8cff"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d10238301b261b7cc98f5392c2d8cff" class="m-doc-self">register_ISR</a>(</span><span class="m-doc-wrap">const uint32_t pin,
+              <a href="_interrupt___manager_8h.html#a21adc8a9b6cc2505b5b1317ca9f74cf3" class="m-doc">ISRFuncPtr</a> ISR,
+              const uint32_t signal_type,
+              <a href="_interrupt___manager_8h.html#a1cb40265e710cbdf07f99beb6c4020d1" class="m-doc">ISR_<wbr />Type</a> run_type)</span></span>
+            </h3>
+            <p>Register an ISR to an interrupt pin and its configuration.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Which pin to connect the interrupt on</td>
+                </tr>
+                <tr>
+                  <td>ISR&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>ISR function (Null if no interrupt linked)</td>
+                </tr>
+                <tr>
+                  <td>signal_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Low, High, Change, Falling, Rising</td>
+                </tr>
+                <tr>
+                  <td>run_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abbf112a7a515088c543e76f5ad2a8bea"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbf112a7a515088c543e76f5ad2a8bea" class="m-doc-self">reconnect_interrupt</a>(</span><span class="m-doc-wrap">const uint32_t pin)</span></span>
+            </h3>
+            <p>If an ISR dettaches interrupt, use this to reattach according to previous settings.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Which pin to reconnect the interrupt on</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Effectively to running register_ISR with previous settings</p>
+          </div></section>
+          <section class="m-doc-details" id="a314bdba78fd288871bea3421ba6ec022"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a314bdba78fd288871bea3421ba6ec022" class="m-doc-self">unregister_ISR</a>(</span><span class="m-doc-wrap">const uint32_t pin,
+              const uint32_t signal_type = LOW)</span></span>
+            </h3>
+            <p>Restores pin to default ISR, disables interrupt.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The pin to unregister ISRs for</td>
+                </tr>
+                <tr>
+                  <td>signal_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>What signal to configure default ISR to (default LOW)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a05ba1bf76145681fecb787374358711f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a05ba1bf76145681fecb787374358711f" class="m-doc-self">interrupt_reset</a>(</span><span class="m-doc-wrap">const uint32_t pin)</span></span>
+            </h3>
+            <p>Detaches then reattacheds interrupt according to settings.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Pin to reset interrupts for ...</td>
+                </tr>
+              </tbody>
+            </table>
+<p>used to clear pending interrupts</p>
+          </div></section>
+          <section class="m-doc-details" id="ac188b3f03d32bcfdfe5caf4eae31f33d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac188b3f03d32bcfdfe5caf4eae31f33d" class="m-doc-self">RTC_alarm_duration</a>(</span><span class="m-doc-wrap">const TimeSpan duration)</span></span>
+            </h3>
+            <p>Set RTC alarm an amount of time from now.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">duration&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>How long before the alarm should go off</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abde5c47ed6021fe7280c14891b1a1c31"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abde5c47ed6021fe7280c14891b1a1c31" class="m-doc-self">RTC_alarm_duration</a>(</span><span class="m-doc-wrap">const uint8_t days,
+              const uint8_t hours,
+              const uint8_t minutes,
+              const uint8_t seconds)</span></span>
+            </h3>
+            <p>Set RTC alarm an amount of time from now.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">days&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Days into the future the alarm should be set</td>
+                </tr>
+                <tr>
+                  <td>hours&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Hours into the future the alarm should be set</td>
+                </tr>
+                <tr>
+                  <td>minutes&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Minutes into the future the alarm should be set</td>
+                </tr>
+                <tr>
+                  <td>seconds&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Seconds into the future the alarm should be set</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="afca2eade7f1520c97add8dbffe1247df"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afca2eade7f1520c97add8dbffe1247df" class="m-doc-self">RTC_alarm_at</a>(</span><span class="m-doc-wrap">DateTime future_time)</span></span>
+            </h3>
+            <p>Set RTC alarm for a specific time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">future_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Time to set alarm for</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Increments to next day at given hour, min, sec if specified time is in past</p>
+          </div></section>
+          <section class="m-doc-details" id="abbfb010ec889658a10d596ac4d096069"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbfb010ec889658a10d596ac4d096069" class="m-doc-self">RTC_alarm_at</a>(</span><span class="m-doc-wrap">const uint8_t hour,
+              const uint8_t minute,
+              const uint8_t second)</span></span>
+            </h3>
+            <p>Set RTC alarm for a specific time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">hour&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Hour to set alarm for</td>
+                </tr>
+                <tr>
+                  <td>minute&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Minute to set alarm for</td>
+                </tr>
+                <tr>
+                  <td>second&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Second to set alarm for</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Forwards to RTC_alarm_at that takes DateTime object</p>
+          </div></section>
+          <section class="m-doc-details" id="aef46cb9e0c3aee294ef5eacd5685be72"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aef46cb9e0c3aee294ef5eacd5685be72" class="m-doc-self">RTC_alarm_duration_from_last</a>(</span><span class="m-doc-wrap">const TimeSpan duration)</span></span>
+            </h3>
+            <p>Set RTC alarm an amount of time from last alarm time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">duration&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>How long before the alarm should go off</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a254c240e87b74e465acb4ed36e9fc2b8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a254c240e87b74e465acb4ed36e9fc2b8" class="m-doc-self">RTC_alarm_duration_from_last</a>(</span><span class="m-doc-wrap">const uint8_t days,
+              const uint8_t hours,
+              const uint8_t minutes,
+              const uint8_t seconds)</span></span>
+            </h3>
+            <p>Set RTC alarm an amount of time from last alarm time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">days&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Days into the future the alarm should be set</td>
+                </tr>
+                <tr>
+                  <td>hours&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Hours into the future the alarm should be set</td>
+                </tr>
+                <tr>
+                  <td>minutes&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Minutes into the future the alarm should be set</td>
+                </tr>
+                <tr>
+                  <td>seconds&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Seconds into the future the alarm should be set</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1b921c29326cfc93dd4e2e405d50bbdd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1b921c29326cfc93dd4e2e405d50bbdd" class="m-doc-self">register_timer</a>(</span><span class="m-doc-wrap">const uint8_t timer_num,
+              const unsigned long duration,
+              const <a href="_interrupt___manager_8h.html#a21adc8a9b6cc2505b5b1317ca9f74cf3" class="m-doc">ISRFuncPtr</a> ISR,
+              const bool repeat)</span></span>
+            </h3>
+            <p>Configure specified timer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">timer_num&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Timer to set</td>
+                </tr>
+                <tr>
+                  <td>duration&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>How long timer should take (seconds)</td>
+                </tr>
+                <tr>
+                  <td>ISR&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>ISR to run after timer goes off</td>
+                </tr>
+                <tr>
+                  <td>repeat&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Whether or not to be a repeating alarm</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1f52e9304f3b8b1fc93225f6d2e55785"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1f52e9304f3b8b1fc93225f6d2e55785" class="m-doc-self">clear_timer</a>(</span><span class="m-doc-wrap">const uint8_t timer_num)</span></span>
+            </h3>
+            <p>Clear specified timer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">timer_num&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Timer to clear</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a61330d0a7d555fd77f0ecfa9e8d2d68e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a61330d0a7d555fd77f0ecfa9e8d2d68e" class="m-doc-self">register_internal_timer</a>(</span><span class="m-doc-wrap">const uint duration,
+              const <a href="_interrupt___manager_8h.html#a21adc8a9b6cc2505b5b1317ca9f74cf3" class="m-doc">ISRFuncPtr</a> ISR,
+              const bool repeat,
+              const <a href="_interrupt___manager_8h.html#a1cb40265e710cbdf07f99beb6c4020d1" class="m-doc">ISR_<wbr />Type</a> run_type)</span></span>
+            </h3>
+            <p>Configure internal timer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">duration&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>How long timer should take (seconds)</td>
+                </tr>
+                <tr>
+                  <td>ISR&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>ISR to run after timer goes off</td>
+                </tr>
+                <tr>
+                  <td>repeat&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Whether or not to be a repeating alarm</td>
+                </tr>
+                <tr>
+                  <td>run_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Whether the interrupt runs immediately, else sets flag to check and runs ISR when flag checked</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a62c7686cecf790cfa0b05b704dd331b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a62c7686cecf790cfa0b05b704dd331b7" class="m-doc-self">run_pending_internal_timer_ISR</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Run a delayed (flag based) ISR if the interal timer elapsed.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if flag was set and ISR run</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Is not needed if using <a href="_interrupt___manager_8h.html#a1cb40265e710cbdf07f99beb6c4020d1ae35884a2445bc4ae2df52f188763273c" class="m-doc">ISR_Type::<wbr />IMMEDIATE</a> ISR</p>
+          </div></section>
+          <section class="m-doc-details" id="a0dce3fcaa0a20ebb67e6ff723cf6ac3d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0dce3fcaa0a20ebb67e6ff723cf6ac3d" class="m-doc-self">get_internal_timer_flag</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get whether the internal timer has elapsed.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if timer elapsed, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1264d1fc1bbb0d8c82e791d174e37007"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1264d1fc1bbb0d8c82e791d174e37007" class="m-doc-self">internal_timer_enable</a>(</span><span class="m-doc-wrap">const bool enable)</span></span>
+            </h3>
+            <p><a href="namespace_enable.html" class="m-doc">Enable</a> or disable internal timer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">enable&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>True to enable timer, false to disable</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Disabling does not remove settings, use unregister_interal_timer for that behavior</p>
+          </div></section>
+          <section class="m-doc-details" id="a647e6a07bcfcf479a5510d29f11fd1e6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a647e6a07bcfcf479a5510d29f11fd1e6" class="m-doc-self">get_interrupts_enabled</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get global interrupt enable state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Global interrupt enable state</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a947b7bc935f50e33f2483ab315188709"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a947b7bc935f50e33f2483ab315188709" class="m-doc-self">get_enable_interrupt</a>(</span><span class="m-doc-wrap">const uint32_t pin) const</span></span>
+            </h3>
+            <p>Get pin interrupt enable state.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Pin to the the enable state of</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>The enable state</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7d27c7a5b0c7f7d8c26f043656cb28a7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7d27c7a5b0c7f7d8c26f043656cb28a7" class="m-doc-self">get_RTC_module</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Return pointer to the currently linked RTC object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Current RTC object</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a7415a4ffbeda1358639936cc62969605"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7415a4ffbeda1358639936cc62969605" class="m-doc-self">link_device_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* LM) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Link a device manager.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">LM&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Manager to link</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Overrides default by getting RTC pointer from device manager if possible</p>
+          </div></section>
+          <section class="m-doc-details" id="a794ec2babdedb928f17862c93b772215"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a794ec2babdedb928f17862c93b772215" class="m-doc-self">link_sleep_manager</a>(</span><span class="m-doc-wrap"><a href="class_loom___sleep___manager.html" class="m-doc">Loom_<wbr />Sleep_<wbr />Manager</a>* SM)</span></span>
+            </h3>
+            <p>Set pointer to sleep Manager.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">SM&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Pointer to sleep manager</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a179034c16493d648ad3108ae1152e86b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a179034c16493d648ad3108ae1152e86b" class="m-doc-self">set_interrupts_enabled</a>(</span><span class="m-doc-wrap">const bool state)</span></span>
+            </h3>
+            <p>All interrupts enable/disable.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">state&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td><a href="namespace_enable.html" class="m-doc">Enable</a> state to apply to all interrupts</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac3551b3ce17a6eb7db6885689510be60"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac3551b3ce17a6eb7db6885689510be60" class="m-doc-self">set_enable_interrupt</a>(</span><span class="m-doc-wrap">const uint32_t pin,
+              const bool state)</span></span>
+            </h3>
+            <p>Per interrupt enable.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">pin&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Interrupt pin to change enable state of</td>
+                </tr>
+                <tr>
+                  <td>state&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The enable state to set pin to</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a971175f7e1109e0317041bde9824591d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a971175f7e1109e0317041bde9824591d" class="m-doc-self">set_RTC_module</a>(</span><span class="m-doc-wrap"><a href="class_loom_r_t_c.html" class="m-doc">LoomRTC</a>* RTC_Inst)</span></span>
+            </h3>
+            <p>Set the RTC module to use for timers.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">RTC_Inst&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Pointer to the RTC object</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9627a5c793fa172b25c4ff0078fe7193"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static const char* Loom_<wbr />Interrupt_<wbr />Manager::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9627a5c793fa172b25c4ff0078fe7193" class="m-doc-self">interrupt_type_to_string</a>(</span><span class="m-doc-wrap">const uint8_t type)</span></span>
+            </h3>
+            <p>Get c-string of name associated with interrupt type enum.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Interrupt type</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>C-string of interrupt type</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

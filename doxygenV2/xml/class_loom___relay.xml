@@ -1,0 +1,382 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___relay" kind="class" language="C++" prot="public">
+    <compoundname>Loom_Relay</compoundname>
+    <basecompoundref refid="class_loom_actuator" prot="public" virt="non-virtual">LoomActuator</basecompoundref>
+    <includes refid="_relay_8h" local="no">Relay.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___relay_1a48ea7618746875d47a9d00ce797dc2f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Relay::Loom_Relay</definition>
+        <argsstring>(LoomManager *manager, const byte pin=10)</argsstring>
+        <name>Loom_Relay</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const byte</type>
+          <declname>pin</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;10&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin should be used to control the relay </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="45" column="1" bodyfile="src/Actuators/Relay.cpp" bodystart="16" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___relay_1a65ee0e34faf507487c9e02dfba5fd043" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Relay::Loom_Relay</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_Relay</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="53" column="1" bodyfile="src/Actuators/Relay.cpp" bodystart="29" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___relay_1a59394cb27c87169a6de0dd726f7b49eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Relay::~Loom_Relay</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_Relay</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="56" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___relay_1ae3c0ac05a26917c832196205a7c2d7a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Relay::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_actuator_1abf895d8f41379ff53dff666d9d2791a2">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Not all actuators need a package method, implement with empty body. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="62" column="1" bodyfile="src/Actuators/Relay.cpp" bodystart="51" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___relay_1a93ddf6a1c30244a81eaeb9332546e465" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_Relay::dispatch</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>dispatch</name>
+        <reimplements refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8">dispatch</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Route command to driver. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="63" column="1" bodyfile="src/Actuators/Relay.cpp" bodystart="58" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___relay_1a67c8d4bdf2f047917f5c5b05e4f64e58" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Relay::add_config</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>add_config</name>
+        <reimplements refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0">add_config</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Add configuration information to JsonObject. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> iterates over modules to build complete configuration <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json configuration object to add to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="64" column="1" bodyfile="src/Actuators/Relay.cpp" bodystart="36" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___relay_1aadab07b5c2d0c2bdc47c32d4eec4943a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Relay::set</definition>
+        <argsstring>(const bool state)</argsstring>
+        <name>set</name>
+        <param>
+          <type>const bool</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Set relay state. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state to set relay to (True=HIGH, False=LOW) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="68" column="1" bodyfile="src/Actuators/Relay.cpp" bodystart="80" bodyend="91"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___relay_1a001fba3a442b2ef5792fe394eb1d78e4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Relay::print_state</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_state</name>
+        <reimplements refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7">print_state</reimplements>
+        <briefdescription>
+<para>Display current state of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="74" column="1" bodyfile="src/Actuators/Relay.cpp" bodystart="44" bodyend="48"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___relay_1ad3cc1e820888c8bbf632dc03036d6a84" prot="protected" static="no" mutable="no">
+        <type>byte</type>
+        <definition>byte Loom_Relay::pin</definition>
+        <argsstring></argsstring>
+        <name>pin</name>
+        <briefdescription>
+<para>The digital pin the relay is connect to. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="33" column="1" bodyfile="src/Actuators/Relay.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___relay_1aaad7e04f955ebe499b45e5af5a4ed7d6" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Relay::on</definition>
+        <argsstring></argsstring>
+        <name>on</name>
+        <briefdescription>
+<para>Whether the relay is on or off. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Actuators/Relay.h" line="34" column="1" bodyfile="src/Actuators/Relay.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Relay actuator module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___relay.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/3191">Product Page: Adafruit Latching Relay Featherwing</ulink></para></listitem><listitem><para><ulink url="https://cdn-shop.adafruit.com/product-files/3191/G5LE-14-DC3-Omron-datasheet-10841140.pdf">Relay Datasheet</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#relay">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="863">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="862">
+        <label>LoomActuator</label>
+        <link refid="class_loom_actuator"/>
+        <childnode refid="863" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="861">
+        <label>Loom_Relay</label>
+        <link refid="class_loom___relay"/>
+        <childnode refid="862" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="871">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="867">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="868" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="869" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="874" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="870" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="866">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="867" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="875">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="870">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="866" relation="public-inheritance">
+        </childnode>
+        <childnode refid="871" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="872" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="869" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="873" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="874" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="875" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="869">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="866" relation="public-inheritance">
+        </childnode>
+        <childnode refid="870" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="865">
+        <label>LoomActuator</label>
+        <link refid="class_loom_actuator"/>
+        <childnode refid="866" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="864">
+        <label>Loom_Relay</label>
+        <link refid="class_loom___relay"/>
+        <childnode refid="865" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="868">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="866" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="874">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="866" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="872">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="873">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Actuators/Relay.h" line="29" column="1" bodyfile="src/Actuators/Relay.h" bodystart="28" bodyend="78"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>active</name></member>
+      <member refid="class_loom___relay_1a67c8d4bdf2f047917f5c5b05e4f64e58" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>Category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>device_manager</name></member>
+      <member refid="class_loom___relay_1a93ddf6a1c30244a81eaeb9332546e465" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___relay_1a48ea7618746875d47a9d00ce797dc2f5" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>Loom_Relay</name></member>
+      <member refid="class_loom___relay_1a65ee0e34faf507487c9e02dfba5fd043" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>Loom_Relay</name></member>
+      <member refid="class_loom_actuator_1a3a789588b9092dae071cd236bc72e698" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>LoomActuator</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>LoomModule</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>module_type</name></member>
+      <member refid="class_loom___relay_1aaad7e04f955ebe499b45e5af5a4ed7d6" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>on</name></member>
+      <member refid="class_loom___relay_1ae3c0ac05a26917c832196205a7c2d7a9" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___relay_1ad3cc1e820888c8bbf632dc03036d6a84" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>pin</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>power_up</name></member>
+      <member refid="class_loom_module_1a4385842da9226014283136b3e37dde88" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>print_module_label</name></member>
+      <member refid="class_loom___relay_1a001fba3a442b2ef5792fe394eb1d78e4" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_Relay</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom___relay_1aadab07b5c2d0c2bdc47c32d4eec4943a" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>set</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>Type</name></member>
+      <member refid="class_loom___relay_1a59394cb27c87169a6de0dd726f7b49eb" prot="public" virt="non-virtual"><scope>Loom_Relay</scope><name>~Loom_Relay</name></member>
+      <member refid="class_loom_actuator_1a397f57e44b59f1705829bd9f44ae6187" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>~LoomActuator</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_Relay</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

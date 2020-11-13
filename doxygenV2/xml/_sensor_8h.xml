@@ -1,0 +1,523 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_sensor_8h" kind="file" language="C++">
+    <compoundname>Sensor.h</compoundname>
+    <includes refid="_module_8h" local="yes">Module.h</includes>
+    <includedby refid="_analog_8h" local="yes">src/Sensors/Analog.h</includedby>
+    <includedby refid="_digital_8h" local="yes">src/Sensors/Digital.h</includedby>
+    <includedby refid="_i2_c___sensor_8h" local="yes">src/Sensors/I2C/I2C_Sensor.h</includedby>
+    <includedby refid="_s_d_i12___sensor_8h" local="yes">src/Sensors/SDI12/SDI12_Sensor.h</includedby>
+    <includedby refid="_s_p_i___sensor_8h" local="yes">src/Sensors/SPI/SPI_Sensor.h</includedby>
+    <includedby refid="_serial___sensor_8h" local="yes">src/Sensors/SERIAL/Serial_Sensor.h</includedby>
+    <includedby refid="_manager_8cpp" local="yes">src/Manager.cpp</includedby>
+    <includedby refid="_sensor_8cpp" local="yes">src/Sensors/Sensor.cpp</includedby>
+    <incdepgraph>
+      <node id="5603">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5600">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5601" relation="include">
+        </childnode>
+        <childnode refid="5603" relation="include">
+        </childnode>
+        <childnode refid="5604" relation="include">
+        </childnode>
+        <childnode refid="5605" relation="include">
+        </childnode>
+      </node>
+      <node id="5604">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5602" relation="include">
+        </childnode>
+        <childnode refid="5605" relation="include">
+        </childnode>
+      </node>
+      <node id="5601">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5602" relation="include">
+        </childnode>
+      </node>
+      <node id="5605">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5599">
+        <label>src/Sensors/Sensor.h</label>
+        <link refid="Sensor.h"/>
+        <childnode refid="5600" relation="include">
+        </childnode>
+      </node>
+      <node id="5602">
+        <label>Arduino.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5612">
+        <label>src/Temperature_Sync.cpp</label>
+        <link refid="_temperature___sync_8cpp"/>
+      </node>
+      <node id="5622">
+        <label>src/Sensors/I2C/AS7263.cpp</label>
+        <link refid="_a_s7263_8cpp"/>
+      </node>
+      <node id="5647">
+        <label>src/Sensors/I2C/ZXGesture.h</label>
+        <link refid="_z_x_gesture_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5648" relation="include">
+        </childnode>
+      </node>
+      <node id="5623">
+        <label>src/Sensors/I2C/AS7265X.h</label>
+        <link refid="_a_s7265_x_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5624" relation="include">
+        </childnode>
+      </node>
+      <node id="5608">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="5609" relation="include">
+        </childnode>
+        <childnode refid="5610" relation="include">
+        </childnode>
+      </node>
+      <node id="5619">
+        <label>src/Multiplexer.cpp</label>
+        <link refid="_multiplexer_8cpp"/>
+      </node>
+      <node id="5641">
+        <label>src/Sensors/I2C/TMP007.h</label>
+        <link refid="_t_m_p007_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5642" relation="include">
+        </childnode>
+      </node>
+      <node id="5659">
+        <label>src/Sensors/SPI/MAX31855.h</label>
+        <link refid="_m_a_x31855_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5660" relation="include">
+        </childnode>
+      </node>
+      <node id="5618">
+        <label>src/Sensors/I2C/AS7262.h</label>
+        <link refid="_a_s7262_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5620" relation="include">
+        </childnode>
+      </node>
+      <node id="5638">
+        <label>src/Sensors/I2C/MS5803.cpp</label>
+        <link refid="_m_s5803_8cpp"/>
+      </node>
+      <node id="5657">
+        <label>src/Sensors/SDI12/SDI12_Sensor.cpp</label>
+        <link refid="_s_d_i12___sensor_8cpp"/>
+      </node>
+      <node id="5653">
+        <label>src/Sensors/SDI12/Decagon_5TM.h</label>
+        <link refid="_decagon__5_t_m_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5654" relation="include">
+        </childnode>
+      </node>
+      <node id="5644">
+        <label>src/Sensors/I2C/TSL2561.cpp</label>
+        <link refid="_t_s_l2561_8cpp"/>
+      </node>
+      <node id="5649">
+        <label>src/Sensors/I2C/STEMMA.h</label>
+        <link refid="_s_t_e_m_m_a_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5650" relation="include">
+        </childnode>
+      </node>
+      <node id="5607">
+        <label>src/Sensors/Analog.h</label>
+        <link refid="_analog_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5611" relation="include">
+        </childnode>
+        <childnode refid="5612" relation="include">
+        </childnode>
+      </node>
+      <node id="5614">
+        <label>src/Sensors/Digital.cpp</label>
+        <link refid="_digital_8cpp"/>
+      </node>
+      <node id="5651">
+        <label>src/Sensors/I2C/I2C_Sensor.cpp</label>
+        <link refid="_i2_c___sensor_8cpp"/>
+      </node>
+      <node id="5629">
+        <label>src/Sensors/I2C/LIS3DH.h</label>
+        <link refid="_l_i_s3_d_h_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5630" relation="include">
+        </childnode>
+      </node>
+      <node id="5664">
+        <label>src/Sensors/SERIAL/Serial_Sensor.h</label>
+        <link refid="_serial___sensor_8h"/>
+        <childnode refid="5665" relation="include">
+        </childnode>
+        <childnode refid="5667" relation="include">
+        </childnode>
+      </node>
+      <node id="5634">
+        <label>src/Sensors/I2C/MMA8451.cpp</label>
+        <link refid="_m_m_a8451_8cpp"/>
+      </node>
+      <node id="5628">
+        <label>src/Sensors/I2C/FXOS8700.cpp</label>
+        <link refid="_f_x_o_s8700_8cpp"/>
+      </node>
+      <node id="5662">
+        <label>src/Sensors/SPI/MAX31856.cpp</label>
+        <link refid="_m_a_x31856_8cpp"/>
+      </node>
+      <node id="5654">
+        <label>src/Sensors/SDI12/Decagon_5TM.cpp</label>
+        <link refid="_decagon__5_t_m_8cpp"/>
+      </node>
+      <node id="5637">
+        <label>src/Sensors/I2C/MS5803.h</label>
+        <link refid="_m_s5803_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5638" relation="include">
+        </childnode>
+        <childnode refid="5612" relation="include">
+        </childnode>
+      </node>
+      <node id="5633">
+        <label>src/Sensors/I2C/MMA8451.h</label>
+        <link refid="_m_m_a8451_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5634" relation="include">
+        </childnode>
+      </node>
+      <node id="5652">
+        <label>src/Sensors/SDI12/SDI12_Sensor.h</label>
+        <link refid="_s_d_i12___sensor_8h"/>
+        <childnode refid="5653" relation="include">
+        </childnode>
+        <childnode refid="5655" relation="include">
+        </childnode>
+        <childnode refid="5657" relation="include">
+        </childnode>
+      </node>
+      <node id="5632">
+        <label>src/Sensors/I2C/MB1232.cpp</label>
+        <link refid="_m_b1232_8cpp"/>
+      </node>
+      <node id="5635">
+        <label>src/Sensors/I2C/MPU6050.h</label>
+        <link refid="_m_p_u6050_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5636" relation="include">
+        </childnode>
+      </node>
+      <node id="5613">
+        <label>src/Sensors/Digital.h</label>
+        <link refid="_digital_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5614" relation="include">
+        </childnode>
+      </node>
+      <node id="5666">
+        <label>src/Sensors/SERIAL/K30.cpp</label>
+        <link refid="_k30_8cpp"/>
+      </node>
+      <node id="5650">
+        <label>src/Sensors/I2C/STEMMA.cpp</label>
+        <link refid="_s_t_e_m_m_a_8cpp"/>
+      </node>
+      <node id="5624">
+        <label>src/Sensors/I2C/AS7265X.cpp</label>
+        <link refid="_a_s7265_x_8cpp"/>
+      </node>
+      <node id="5606">
+        <label>src/Sensors/Sensor.h</label>
+        <link refid="Sensor.h"/>
+        <childnode refid="5607" relation="include">
+        </childnode>
+        <childnode refid="5613" relation="include">
+        </childnode>
+        <childnode refid="5615" relation="include">
+        </childnode>
+        <childnode refid="5652" relation="include">
+        </childnode>
+        <childnode refid="5658" relation="include">
+        </childnode>
+        <childnode refid="5664" relation="include">
+        </childnode>
+        <childnode refid="5610" relation="include">
+        </childnode>
+        <childnode refid="5668" relation="include">
+        </childnode>
+      </node>
+      <node id="5617">
+        <label>src/Sensors/I2C/ADS1115.cpp</label>
+        <link refid="_a_d_s1115_8cpp"/>
+      </node>
+      <node id="5658">
+        <label>src/Sensors/SPI/SPI_Sensor.h</label>
+        <link refid="_s_p_i___sensor_8h"/>
+        <childnode refid="5659" relation="include">
+        </childnode>
+        <childnode refid="5661" relation="include">
+        </childnode>
+        <childnode refid="5663" relation="include">
+        </childnode>
+      </node>
+      <node id="5643">
+        <label>src/Sensors/I2C/TSL2561.h</label>
+        <link refid="_t_s_l2561_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5644" relation="include">
+        </childnode>
+      </node>
+      <node id="5642">
+        <label>src/Sensors/I2C/TMP007.cpp</label>
+        <link refid="_t_m_p007_8cpp"/>
+      </node>
+      <node id="5660">
+        <label>src/Sensors/SPI/MAX31855.cpp</label>
+        <link refid="_m_a_x31855_8cpp"/>
+      </node>
+      <node id="5625">
+        <label>src/Sensors/I2C/FXAS21002.h</label>
+        <link refid="_f_x_a_s21002_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5626" relation="include">
+        </childnode>
+      </node>
+      <node id="5640">
+        <label>src/Sensors/I2C/SHT31D.cpp</label>
+        <link refid="_s_h_t31_d_8cpp"/>
+      </node>
+      <node id="5663">
+        <label>src/Sensors/SPI/SPI_Sensor.cpp</label>
+        <link refid="_s_p_i___sensor_8cpp"/>
+      </node>
+      <node id="5667">
+        <label>src/Sensors/SERIAL/Serial_Sensor.cpp</label>
+        <link refid="_serial___sensor_8cpp"/>
+      </node>
+      <node id="5648">
+        <label>src/Sensors/I2C/ZXGesture.cpp</label>
+        <link refid="_z_x_gesture_8cpp"/>
+      </node>
+      <node id="5668">
+        <label>src/Sensors/Sensor.cpp</label>
+        <link refid="_sensor_8cpp"/>
+      </node>
+      <node id="5615">
+        <label>src/Sensors/I2C/I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5616" relation="include">
+        </childnode>
+        <childnode refid="5618" relation="include">
+        </childnode>
+        <childnode refid="5621" relation="include">
+        </childnode>
+        <childnode refid="5623" relation="include">
+        </childnode>
+        <childnode refid="5625" relation="include">
+        </childnode>
+        <childnode refid="5627" relation="include">
+        </childnode>
+        <childnode refid="5629" relation="include">
+        </childnode>
+        <childnode refid="5631" relation="include">
+        </childnode>
+        <childnode refid="5633" relation="include">
+        </childnode>
+        <childnode refid="5635" relation="include">
+        </childnode>
+        <childnode refid="5637" relation="include">
+        </childnode>
+        <childnode refid="5639" relation="include">
+        </childnode>
+        <childnode refid="5641" relation="include">
+        </childnode>
+        <childnode refid="5643" relation="include">
+        </childnode>
+        <childnode refid="5645" relation="include">
+        </childnode>
+        <childnode refid="5647" relation="include">
+        </childnode>
+        <childnode refid="5649" relation="include">
+        </childnode>
+        <childnode refid="5651" relation="include">
+        </childnode>
+      </node>
+      <node id="5609">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="5646">
+        <label>src/Sensors/I2C/TSL2591.cpp</label>
+        <link refid="_t_s_l2591_8cpp"/>
+      </node>
+      <node id="5610">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="5656">
+        <label>src/Sensors/SDI12/Decagon_GS3.cpp</label>
+        <link refid="_decagon___g_s3_8cpp"/>
+      </node>
+      <node id="5627">
+        <label>src/Sensors/I2C/FXOS8700.h</label>
+        <link refid="_f_x_o_s8700_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5628" relation="include">
+        </childnode>
+      </node>
+      <node id="5645">
+        <label>src/Sensors/I2C/TSL2591.h</label>
+        <link refid="_t_s_l2591_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5646" relation="include">
+        </childnode>
+      </node>
+      <node id="5621">
+        <label>src/Sensors/I2C/AS7263.h</label>
+        <link refid="_a_s7263_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5622" relation="include">
+        </childnode>
+      </node>
+      <node id="5630">
+        <label>src/Sensors/I2C/LIS3DH.cpp</label>
+        <link refid="_l_i_s3_d_h_8cpp"/>
+      </node>
+      <node id="5636">
+        <label>src/Sensors/I2C/MPU6050.cpp</label>
+        <link refid="_m_p_u6050_8cpp"/>
+      </node>
+      <node id="5616">
+        <label>src/Sensors/I2C/ADS1115.h</label>
+        <link refid="_a_d_s1115_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5617" relation="include">
+        </childnode>
+      </node>
+      <node id="5661">
+        <label>src/Sensors/SPI/MAX31856.h</label>
+        <link refid="_m_a_x31856_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5662" relation="include">
+        </childnode>
+      </node>
+      <node id="5655">
+        <label>src/Sensors/SDI12/Decagon_GS3.h</label>
+        <link refid="_decagon___g_s3_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5656" relation="include">
+        </childnode>
+      </node>
+      <node id="5611">
+        <label>src/Sensors/Analog.cpp</label>
+        <link refid="_analog_8cpp"/>
+      </node>
+      <node id="5631">
+        <label>src/Sensors/I2C/MB1232.h</label>
+        <link refid="_m_b1232_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5632" relation="include">
+        </childnode>
+      </node>
+      <node id="5620">
+        <label>src/Sensors/I2C/AS7262.cpp</label>
+        <link refid="_a_s7262_8cpp"/>
+      </node>
+      <node id="5626">
+        <label>src/Sensors/I2C/FXAS21002.cpp</label>
+        <link refid="_f_x_a_s21002_8cpp"/>
+      </node>
+      <node id="5665">
+        <label>src/Sensors/SERIAL/K30.h</label>
+        <link refid="_k30_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5666" relation="include">
+        </childnode>
+      </node>
+      <node id="5639">
+        <label>src/Sensors/I2C/SHT31D.h</label>
+        <link refid="_s_h_t31_d_8h"/>
+        <childnode refid="5608" relation="include">
+        </childnode>
+        <childnode refid="5619" relation="include">
+        </childnode>
+        <childnode refid="5640" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom_sensor" prot="public">LoomSensor</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/Sensor.h"/>
+  </compounddef>
+</doxygen>

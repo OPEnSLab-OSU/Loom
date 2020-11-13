@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LoomInternetPlat class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          LoomInternetPlat <span class="m-thin">class</span>
+        </h1>
+        <p>Abstract internet communication module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
+                <li><a href="#types">TYPES</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>All internet modules inherit from this class.</p><aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom_internet_plat.html">Module Documentation</a></li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#internet-capabilities">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_module.html" class="m-doc">LoomModule</a>
+            </dt>
+            <dd>Abstract root of Loom component modules inheritance hierarchy.</dd>
+          </dl>
+        </section>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom___ethernet.html" class="m-doc">Loom_Ethernet</a>
+            </dt>
+            <dd>InternetPlat built off of SSLClient running over an Ethernet Featherwing.</dd>
+            <dt>
+              class <a href="class_loom___l_t_e.html" class="m-doc">Loom_LTE</a>
+            </dt>
+            <dd>LTE InternetPlat.</dd>
+            <dt>
+              class <a href="class_loom___wi_fi.html" class="m-doc">Loom_WiFi</a>
+            </dt>
+            <dd>WiFi InternetPlat.</dd>
+          </dl>
+        </section>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              struct <a href="struct_loom_internet_plat_1_1_client_cleanup.html" class="m-doc">ClientCleanup</a>
+            </dt>
+            <dd>Simply close the socket when the client dissapears, we don&#x27;t want to delete the object because the client needs to cache sessions.</dd>
+            <dt>
+              struct <a href="struct_loom_internet_plat_1_1_u_d_p_deletor.html" class="m-doc">UDPDeletor</a>
+            </dt>
+            <dd>Close the socket and delete the UDP object when the unique ptr dissapears.</dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2a6ca5f5f807f420c445dd5ff53aed41" class="m-doc">write_http_request</a>(</span><span class="m-doc-wrap">Stream&amp; client,
+              const char* domain,
+              const char* url,
+              const char* body,
+              const char* verb)</span>
+            </dt>
+            <dd>Utility function to write an http reqest based on parameters specified by <a href="class_loom_internet_plat.html#a01a61bd1d5ec547b2619c620abbfd983" class="m-doc">LoomInternetPlat::<wbr />http_request</a> to a Client class.</dd>
+            <dt id="a71bfc232cac5294b1c3e6dbb00029fa7">
+              <span class="m-doc-wrap-bumper">auto <a href="#a71bfc232cac5294b1c3e6dbb00029fa7" class="m-doc-self">get_client</a>(</span><span class="m-doc-wrap">) -&gt; SSLClient&amp; <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Get the underlying SSLClient implementation, which we will use for all of the other requests.</dd>
+          </dl>
+        </section>
+        <section id="types">
+          <h2><a href="#types">TYPES</a></h2>
+          <dl class="m-doc">
+            <dt id="a0b2cc742a6ac5f4f7054b75ea99b345c">
+              using <a href="#a0b2cc742a6ac5f4f7054b75ea99b345c" class="m-doc-self">UDPPtr</a> = std::unique_ptr&lt;UDP, <a href="struct_loom_internet_plat_1_1_u_d_p_deletor.html" class="m-doc">UDPDeletor</a>&gt;
+            </dt>
+            <dd>Cleaner name for UDP smart pointer.</dd>
+            <dt id="a7044d4ef42ec9181d519e6d37365789d">
+              using <a href="#a7044d4ef42ec9181d519e6d37365789d" class="m-doc-self">ClientSession</a> = std::unique_ptr&lt;Client, <a href="struct_loom_internet_plat_1_1_client_cleanup.html" class="m-doc">ClientCleanup</a>&gt;
+            </dt>
+            <dd>Cleaner name for Client smart pointer.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a357f426519f563931cf6793bca0ae397" class="m-doc">LoomInternetPlat</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> module_type)</span>
+            </dt>
+            <dd>Loom Internet Platform module constructor.</dd>
+            <dt id="a36f9cc600e5ee1a916c330da914a3b11">
+              <span class="m-doc-wrap-bumper"><a href="#a36f9cc600e5ee1a916c330da914a3b11" class="m-doc-self">~LoomInternetPlat</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ae9cbe7ba64e4d597fe7084110f646dec" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>No package necessary for internet platforms.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a01a61bd1d5ec547b2619c620abbfd983" class="m-doc">http_request</a>(</span><span class="m-doc-wrap">const char* domain,
+              const char* url,
+              const char* body,
+              const char* verb) -&gt; <a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Make HTTP request.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad1a855e6ed61aa2c40ff0b8f477df57f" class="m-doc">http_get_request</a>(</span><span class="m-doc-wrap">const char* domain,
+              const char* url,
+              const char* body = nullptr) -&gt; <a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a></span>
+            </dt>
+            <dd>Make HTTP GET request.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aeac1140fb30e60c0f845f36d2ff02cd8" class="m-doc">http_post_request</a>(</span><span class="m-doc-wrap">const char* domain,
+              const char* url,
+              const char* body = nullptr) -&gt; <a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a></span>
+            </dt>
+            <dd>Make HTTP POST request.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa89a42b49465a6924a674be2e9dac709" class="m-doc">connect_to_domain</a>(</span><span class="m-doc-wrap">const char* domain) -&gt; <a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Connect to a domain, but don&#x27;t write any HTTP stuff, Let the module figure that out.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aebfc1c711a7fa0eb781e545d7fc757cf" class="m-doc">connect_to_ip</a>(</span><span class="m-doc-wrap">const IPAddress&amp; ip,
+              const uint16_t port) -&gt; <a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a> <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Connect to a domain, but don&#x27;t write any HTTP stuff, Let the module figure that out.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a91204905ec272ff1edc608a3aa250745" class="m-doc">open_socket</a>(</span><span class="m-doc-wrap">const uint port) -&gt; <a href="class_loom_internet_plat.html#a0b2cc742a6ac5f4f7054b75ea99b345c" class="m-doc">UDPPtr</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Open a UDP socket for sending and recieving incoming data.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a17807cb51c969dbdba980a4d704aef33" class="m-doc">get_time</a>(</span><span class="m-doc-wrap">) -&gt; uint32_t</span>
+            </dt>
+            <dd>make NTP request to get UTC time, using the UDP function above</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a2a6ca5f5f807f420c445dd5ff53aed41"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2a6ca5f5f807f420c445dd5ff53aed41" class="m-doc-self">write_http_request</a>(</span><span class="m-doc-wrap">Stream&amp; client,
+              const char* domain,
+              const char* url,
+              const char* body,
+              const char* verb) <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Utility function to write an http reqest based on parameters specified by <a href="class_loom_internet_plat.html#a01a61bd1d5ec547b2619c620abbfd983" class="m-doc">LoomInternetPlat::<wbr />http_request</a> to a Client class.</p>
+<p>See <a href="class_loom_internet_plat.html#a01a61bd1d5ec547b2619c620abbfd983" class="m-doc">http_<wbr />request()</a> for parameter details.</p>
+          </div></section>
+          <section class="m-doc-details" id="a357f426519f563931cf6793bca0ae397"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a357f426519f563931cf6793bca0ae397" class="m-doc-self">LoomInternetPlat</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const char* module_name,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> module_type)</span></span>
+            </h3>
+            <p>Loom Internet Platform module constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>module_name&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>String | &lt;&quot;Internet-Plat&quot;&gt; | null | Internet Platform module name</td>
+                </tr>
+                <tr>
+                  <td>module_type</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae9cbe7ba64e4d597fe7084110f646dec"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae9cbe7ba64e4d597fe7084110f646dec" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>No package necessary for internet platforms.</p>
+<p>implement with empty body.</p>
+          </div></section>
+          <section class="m-doc-details" id="a01a61bd1d5ec547b2619c620abbfd983"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a> LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a01a61bd1d5ec547b2619c620abbfd983" class="m-doc-self">http_request</a>(</span><span class="m-doc-wrap">const char* domain,
+              const char* url,
+              const char* body,
+              const char* verb) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Make HTTP request.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">domain&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The domain to connect to (e.g &quot;www.google.com&quot;)</td>
+                </tr>
+                <tr>
+                  <td>url&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The URL string to send with the http request, not including the domain (ex. &quot;/arduino?thing=otherthing&quot;).</td>
+                </tr>
+                <tr>
+                  <td>body&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The body string to use for the rest of the request, including additional headers. Will be appended directly to the request (right after the last header appended by the library) and will need newlines at the top or between additional headers and body. Example: &quot;some-header: thing\r\nsome-other-header:29\r\n\r\n{\&quot;my-json-body&quot;:&quot;nice&quot;}&quot; adds two headers (some-header and some-other-header) and has a simple JSON body. Can be nullptr for none.</td>
+                </tr>
+                <tr>
+                  <td>verb&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>HTTP verb (&quot;PUT&quot;, &quot;GET&quot;, etc.) to use with this request.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>A client session pointer, or a nullptr if the connection failed. When this pointer is destroyed the client will automatically close the connection.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad1a855e6ed61aa2c40ff0b8f477df57f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a> LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad1a855e6ed61aa2c40ff0b8f477df57f" class="m-doc-self">http_get_request</a>(</span><span class="m-doc-wrap">const char* domain,
+              const char* url,
+              const char* body = nullptr)</span></span>
+            </h3>
+            <p>Make HTTP GET request.</p>
+<p>See <a href="class_loom_internet_plat.html#a01a61bd1d5ec547b2619c620abbfd983" class="m-doc">http_<wbr />request()</a> for parameter and return details.</p>
+          </div></section>
+          <section class="m-doc-details" id="aeac1140fb30e60c0f845f36d2ff02cd8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a> LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeac1140fb30e60c0f845f36d2ff02cd8" class="m-doc-self">http_post_request</a>(</span><span class="m-doc-wrap">const char* domain,
+              const char* url,
+              const char* body = nullptr)</span></span>
+            </h3>
+            <p>Make HTTP POST request.</p>
+<p>See <a href="class_loom_internet_plat.html#a01a61bd1d5ec547b2619c620abbfd983" class="m-doc">http_<wbr />request()</a> for parameter and return details.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa89a42b49465a6924a674be2e9dac709"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a> LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa89a42b49465a6924a674be2e9dac709" class="m-doc-self">connect_to_domain</a>(</span><span class="m-doc-wrap">const char* domain) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Connect to a domain, but don&#x27;t write any HTTP stuff, Let the module figure that out.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">domain&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The domain to connect to &quot;www.google.com&quot;</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-warning"><h4>Attention</h4><p>Remember to close the socket!</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aebfc1c711a7fa0eb781e545d7fc757cf"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_internet_plat.html#a7044d4ef42ec9181d519e6d37365789d" class="m-doc">ClientSession</a> LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aebfc1c711a7fa0eb781e545d7fc757cf" class="m-doc-self">connect_to_ip</a>(</span><span class="m-doc-wrap">const IPAddress&amp; ip,
+              const uint16_t port) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Connect to a domain, but don&#x27;t write any HTTP stuff, Let the module figure that out.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">ip&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The IPAddress to connect to</td>
+                </tr>
+                <tr>
+                  <td>port&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The port to connect to</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-warning"><h4>Attention</h4><p>Remember to close the socket!</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a91204905ec272ff1edc608a3aa250745"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="class_loom_internet_plat.html#a0b2cc742a6ac5f4f7054b75ea99b345c" class="m-doc">UDPPtr</a> LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a91204905ec272ff1edc608a3aa250745" class="m-doc-self">open_socket</a>(</span><span class="m-doc-wrap">const uint port) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Open a UDP socket for sending and recieving incoming data.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>A UDP socket for transmitting and recieving, or a nullptr if opening the socket failed. The socket will automatically close when the pointer is destructed.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>Be careful about recieving data from an open socket!</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a17807cb51c969dbdba980a4d704aef33"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint32_t LoomInternetPlat::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a17807cb51c969dbdba980a4d704aef33" class="m-doc-self">get_time</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>make NTP request to get UTC time, using the UDP function above</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>a unix timestamp if success, or 0 if failure.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

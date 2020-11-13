@@ -1,0 +1,704 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom__n_r_f" kind="class" language="C++" prot="public">
+    <compoundname>Loom_nRF</compoundname>
+    <basecompoundref refid="class_loom_comm_plat" prot="public" virt="non-virtual">LoomCommPlat</basecompoundref>
+    <includes refid="n_r_f_8h" local="no">nRF.h</includes>
+      <sectiondef kind="user-defined">
+      <header>RADIO IMPLEMENTATION</header>
+      <memberdef kind="function" id="class_loom__n_r_f_1a8f4a184813d9aed777997f63e9835e42" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_nRF::receive_blocking_impl</definition>
+        <argsstring>(JsonObject json, uint max_wait_time) override</argsstring>
+        <name>receive_blocking_impl</name>
+        <reimplements refid="class_loom_comm_plat_1acc447dd60751ea7536f0c96b4390fdd8">receive_blocking_impl</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>max_wait_time</declname>
+        </param>
+        <briefdescription>
+<para>Receive, but block until packet received, or timeout reached. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json object to fill with incoming data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">max_wait_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of milliseconds to block for (can be zero for non-blocking) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if packet received </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="59" column="1" bodyfile="src/CommPlats/nRF.cpp" bodystart="136" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom__n_r_f_1ad63d064b8ae495e699627a3bc2c57fa4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_nRF::send_impl</definition>
+        <argsstring>(JsonObject json, const uint8_t destination) override</argsstring>
+        <name>send_impl</name>
+        <reimplements refid="class_loom_comm_plat_1a28f40393c7d50d3bf30eff3add02d6fc">send_impl</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>destination</declname>
+        </param>
+        <briefdescription>
+<para>Send json to a specific address. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json package to send </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">destination</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Device to send to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if packet sent successfully </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="65" column="1" bodyfile="src/CommPlats/nRF.cpp" bodystart="158" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom__n_r_f_1a3e4d0db03fde19d29311338d5f3a979a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_nRF::broadcast_impl</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>broadcast_impl</name>
+        <reimplements refid="class_loom_comm_plat_1ae88689d0db8ab91d1e672f0b5c358945">broadcast_impl</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Broadcast data to all that can receive. </para>        </briefdescription>
+        <detaileddescription>
+<para>Derived classes can optionally provide an implementation for this, As supported by the radio/platform&apos;s library <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json object to send </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="71" column="1" bodyfile="src/CommPlats/nRF.cpp" bodystart="173" bodyend="188"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom__n_r_f_1a54c70e58ccff14396a880199365da651" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_nRF::Loom_nRF</definition>
+        <argsstring>(LoomManager *manager, const uint16_t max_message_len=120, const uint8_t address=0, const uint8_t data_rate=1, const uint8_t power_level=0, const uint8_t retry_count=3, const uint16_t retry_timeout=200, const uint8_t multicast_level=1)</argsstring>
+        <name>Loom_nRF</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>max_message_len</declname>
+          <defval>120</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>address</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>data_rate</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>power_level</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>retry_count</declname>
+          <defval>3</defval>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>retry_timeout</declname>
+          <defval>200</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>multicast_level</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>nRF module constructor </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">max_message_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;120&gt; | {120(&quot;Max length&quot;)} | The maximum possible message length </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">address</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;01&gt; | [0-99] | This device&apos;s nRF address </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">data_rate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;0&gt; | {0(&quot;Default&quot;), 1(&quot;250KBPS&quot;), 2(&quot;1MBPS&quot;), 3(&quot;2MBPS&quot;)} | Transmission data rate </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">power_level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;0&gt; | {0(&quot;Default&quot;), 1(&quot;Min&quot;), 2(&quot;Low&quot;), 3(&quot;High&quot;), 4(&quot;Max&quot;)} | Transmission ower level </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">retry_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;3&gt; | [0-15] | Max number of transmission retries </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">retry_timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;200&gt; | [20-500] | Delay between retransmissions (ms) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">multicast_level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;1&gt; | [1-3] | How many levels to propogate message through heirarchy </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="88" column="1" bodyfile="src/CommPlats/nRF.cpp" bodystart="14" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom__n_r_f_1a0bb645a077a48e550bc3d7e669e60f42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_nRF::Loom_nRF</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_nRF</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="102" column="1" bodyfile="src/CommPlats/nRF.cpp" bodystart="103" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom__n_r_f_1a8e09b1bbacd10cdaca78d952a8a80930" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_nRF::~Loom_nRF</definition>
+        <argsstring>()</argsstring>
+        <name>~Loom_nRF</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="105" column="1" bodyfile="src/CommPlats/nRF.cpp" bodystart="107" bodyend="111"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom__n_r_f_1a17b192fceeb84d4da70c3213ea743228" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_nRF::add_config</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>add_config</name>
+        <reimplements refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0">add_config</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Add configuration information to JsonObject. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> iterates over modules to build complete configuration <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json configuration object to add to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="111" column="1" bodyfile="src/CommPlats/nRF.cpp" bodystart="114" bodyend="121"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom__n_r_f_1ad8a85a3ce2d9e2d7d12dec310a1c6615" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_nRF::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_comm_plat_1a97982022b7e279d4def0246e17a95d61">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="117" column="1" bodyfile="src/CommPlats/nRF.cpp" bodystart="124" bodyend="133"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom__n_r_f_1ae1140949b48b908ed1733fb8b3e7ae69" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_nRF::get_address</definition>
+        <argsstring>() const override</argsstring>
+        <name>get_address</name>
+        <reimplements refid="class_loom_comm_plat_1afaf204bcf88cb88102cea8c6c1d745f3">get_address</reimplements>
+        <briefdescription>
+<para>Get the address of this device. </para>        </briefdescription>
+        <detaileddescription>
+<para>Each platform may have a different addressing scheme <simplesect kind="return"><para>The address of this device </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="123" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="123" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom__n_r_f_1a5ecdc813ddd9b32fa06a83147c922499" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_nRF::get_multicast_level</definition>
+        <argsstring>() const </argsstring>
+        <name>get_multicast_level</name>
+        <briefdescription>
+<para>Get multicast(broadcast) level. </para>        </briefdescription>
+        <detaileddescription>
+<para>nRF has varying degrees of broadcast corresponding to depth to broadcast through network tree <simplesect kind="return"><para>Multicast level </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="129" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="129" bodyend="129"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom__n_r_f_1ab1020ef07ac5be037991ae48a5a6b682" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_nRF::set_address</definition>
+        <argsstring>(const uint8_t addr) override</argsstring>
+        <name>set_address</name>
+        <reimplements refid="class_loom_comm_plat_1afa0f66b4e657effefc34fa5a74363174">set_address</reimplements>
+        <param>
+          <type>const uint8_t</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+<para>Set the address of this device. </para>        </briefdescription>
+        <detaileddescription>
+<para>Each platform may have a different addressing scheme. Changing the device&apos;s address is not recommended. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The address to set this device to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="135" column="1" bodyfile="src/CommPlats/nRF.cpp" bodystart="191" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom__n_r_f_1a7220c2a2c7f9ba87dfef36474b7fb34a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_nRF::set_multicast_level</definition>
+        <argsstring>(const uint8_t level)</argsstring>
+        <name>set_multicast_level</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>Set multicast(broadcast) level. </para>        </briefdescription>
+        <detaileddescription>
+<para>nRF has varying degrees of broadcast corresponding to depth to broadcast through network tree <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Multicast level to set to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="141" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="141" bodyend="141"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom__n_r_f_1a785fc4d36d622edea8a8a1e35de80e88" prot="protected" static="no" mutable="no">
+        <type>RF24</type>
+        <definition>RF24 Loom_nRF::radio</definition>
+        <argsstring></argsstring>
+        <name>radio</name>
+        <briefdescription>
+<para>Underlying nRF24L01(+) radio object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="39" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom__n_r_f_1ac9f3accb15e32baa80557f03da7a4990" prot="protected" static="no" mutable="no">
+        <type>RF24Network *</type>
+        <definition>RF24Network* Loom_nRF::network</definition>
+        <argsstring></argsstring>
+        <name>network</name>
+        <briefdescription>
+<para>Network layer manager for radio. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="40" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom__n_r_f_1a9bd096cf262ff923c4ba8e8cbd85d63b" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_nRF::address</definition>
+        <argsstring></argsstring>
+        <name>address</name>
+        <briefdescription>
+<para>Device Address (should this be part of <ref refid="class_loom_comm_plat" kindref="compound">LoomCommPlat</ref>? – maybe not as each platform handles addresses differently) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="42" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom__n_r_f_1aa07c72a33cf70c119ff333b3177aadd0" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_nRF::data_rate</definition>
+        <argsstring></argsstring>
+        <name>data_rate</name>
+        <briefdescription>
+<para>Data rate. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="44" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom__n_r_f_1a47eb5605398f1d83febef1c0ec3ef27b" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_nRF::power_level</definition>
+        <argsstring></argsstring>
+        <name>power_level</name>
+        <briefdescription>
+<para>Power level to send at. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="45" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom__n_r_f_1a53c54395b6ac8e89b8c3a0b3d582a9fe" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_nRF::retry_count</definition>
+        <argsstring></argsstring>
+        <name>retry_count</name>
+        <briefdescription>
+<para>Number of transmission retries allowed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="46" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom__n_r_f_1a57f2765c35a200cf53ad055f5e1bef13" prot="protected" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t Loom_nRF::retry_timeout</definition>
+        <argsstring></argsstring>
+        <name>retry_timeout</name>
+        <briefdescription>
+<para>Delay between transmission retries (in milliseconds) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="47" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom__n_r_f_1a91e29e17ba984dc899ca11507adfd9f9" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t Loom_nRF::multicast_level</definition>
+        <argsstring></argsstring>
+        <name>multicast_level</name>
+        <briefdescription>
+<para>Which level(s) of the network to broadcast to. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="49" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Nordic Radio communication platform module. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom__n_r_f.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://github.com/nRF24/RF24">Dependency: RF24</ulink> optimized fork</para></listitem><listitem><para><ulink url="https://github.com/nRF24/RF24Network">Dependency: RF24Network</ulink> optimized fork</para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#nrf">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="819">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="818">
+        <label>LoomCommPlat</label>
+        <link refid="class_loom_comm_plat"/>
+        <childnode refid="819" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="817">
+        <label>Loom_nRF</label>
+        <link refid="class_loom__n_r_f"/>
+        <childnode refid="818" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="827">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="823">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="824" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="825" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="830" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="826" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="822">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="823" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="831">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="826">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="822" relation="public-inheritance">
+        </childnode>
+        <childnode refid="827" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="828" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="825" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="829" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="830" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="831" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="825">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="822" relation="public-inheritance">
+        </childnode>
+        <childnode refid="826" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="821">
+        <label>LoomCommPlat</label>
+        <link refid="class_loom_comm_plat"/>
+        <childnode refid="822" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="820">
+        <label>Loom_nRF</label>
+        <link refid="class_loom__n_r_f"/>
+        <childnode refid="821" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="824">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="822" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="830">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="822" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="828">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="829">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/CommPlats/nRF.h" line="35" column="1" bodyfile="src/CommPlats/nRF.h" bodystart="34" bodyend="145"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>active</name></member>
+      <member refid="class_loom__n_r_f_1a17b192fceeb84d4da70c3213ea743228" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>add_config</name></member>
+      <member refid="class_loom_comm_plat_1a7053c8475d0f2c00507fe0806f1d37bc" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>add_packet_result</name></member>
+      <member refid="class_loom__n_r_f_1a9bd096cf262ff923c4ba8e8cbd85d63b" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>address</name></member>
+      <member refid="class_loom_comm_plat_1a5098505add4d65102472aeeb7dc442bb" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>broadcast</name></member>
+      <member refid="class_loom_comm_plat_1a30796b7e6bbeb5f0c9cbf112b578c27f" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>broadcast</name></member>
+      <member refid="class_loom_comm_plat_1a9fdc18392e011fe3bd41b37a5d3d8999" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>broadcast_batch</name></member>
+      <member refid="class_loom__n_r_f_1a3e4d0db03fde19d29311338d5f3a979a" prot="protected" virt="virtual"><scope>Loom_nRF</scope><name>broadcast_impl</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>Category</name></member>
+      <member refid="class_loom__n_r_f_1aa07c72a33cf70c119ff333b3177aadd0" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>data_rate</name></member>
+      <member refid="class_loom_comm_plat_1ab8fd85c99d07244665b818610edde993" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>determine_json_size</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_active</name></member>
+      <member refid="class_loom__n_r_f_1ae1140949b48b908ed1733fb8b3e7ae69" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>get_address</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_comm_plat_1ad55b5a20b503ea93789159f075677d9f" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_drop_rate</name></member>
+      <member refid="class_loom_comm_plat_1a5c21c70637e43f0731d97173b59200cf" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_last_ten_drop_rate</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_module_type</name></member>
+      <member refid="class_loom__n_r_f_1a5ecdc813ddd9b32fa06a83147c922499" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_multicast_level</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_comm_plat_1af5030b99e3398396af535558efa82279" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>json_to_msgpack_buffer</name></member>
+      <member refid="class_loom_comm_plat_1a447e99f2f727936f4aff95257ca98b62" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>last_ten_dropped</name></member>
+      <member refid="class_loom_comm_plat_1a790dbad03d48713072716c23d515c6c0" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>last_ten_dropped_idx</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>link_device_manager</name></member>
+      <member refid="class_loom__n_r_f_1a54c70e58ccff14396a880199365da651" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>Loom_nRF</name></member>
+      <member refid="class_loom__n_r_f_1a0bb645a077a48e550bc3d7e669e60f42" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>Loom_nRF</name></member>
+      <member refid="class_loom_comm_plat_1ae977f58b40bd6f292fc7e5a20b319ca4" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>LoomCommPlat</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>LoomModule</name></member>
+      <member refid="class_loom_comm_plat_1a2b4f69c2ec15028f5f281c3d1d399dba" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>max_message_len</name></member>
+      <member refid="class_loom_comm_plat_1a3505da17f54272de95f4d92a3c0caf49" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>merge_json</name></member>
+      <member refid="class_loom_comm_plat_1a9dbf2f13eafb03ae9078e10af47ca8cf" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>mergeJson</name></member>
+      <member refid="class_loom_comm_plat_1a065bda8c5f83a087359bda645b51c87e" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>messageJson</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>module_type</name></member>
+      <member refid="class_loom_comm_plat_1ae6b8468f5345cf30d857e3229d3f5aa3" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>msgpack_buffer_to_json</name></member>
+      <member refid="class_loom__n_r_f_1a91e29e17ba984dc899ca11507adfd9f9" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>multicast_level</name></member>
+      <member refid="class_loom__n_r_f_1ac9f3accb15e32baa80557f03da7a4990" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>network</name></member>
+      <member refid="class_loom_comm_plat_1a4cc05ef1f12c5b15fc6516dc75f070d4" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>power_down</name></member>
+      <member refid="class_loom__n_r_f_1a47eb5605398f1d83febef1c0ec3ef27b" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>power_level</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>power_up</name></member>
+      <member refid="class_loom_comm_plat_1a727f88000d237c0f413a17600fc261a6" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>pre_merge_receive_blocking</name></member>
+      <member refid="class_loom__n_r_f_1ad8a85a3ce2d9e2d7d12dec310a1c6615" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>print_module_label</name></member>
+      <member refid="class_loom_comm_plat_1a2a3336599f8b56c2cbb223a386d797ec" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>print_verbosity</name></member>
+      <member refid="class_loom__n_r_f_1a785fc4d36d622edea8a8a1e35de80e88" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>radio</name></member>
+      <member refid="class_loom_comm_plat_1a7d5af29f4053627979c15928f284446f" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>receive</name></member>
+      <member refid="class_loom_comm_plat_1abe9a506341e7e5dd3dde40210d7c3904" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>receive</name></member>
+      <member refid="class_loom_comm_plat_1ab59a3e7ed1aa0c3997506bf77b1176e6" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>receive_batch</name></member>
+      <member refid="class_loom_comm_plat_1a84aa23d66457ffe78053d3d0cbd1e7b1" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>receive_batch_blocking</name></member>
+      <member refid="class_loom_comm_plat_1a15fb6d65a9454154ac899f3560c67a6f" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>receive_blocking</name></member>
+      <member refid="class_loom_comm_plat_1a5a16f4a2a37ddf593f7a3c0dd9e5f692" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>receive_blocking</name></member>
+      <member refid="class_loom__n_r_f_1a8f4a184813d9aed777997f63e9835e42" prot="protected" virt="virtual"><scope>Loom_nRF</scope><name>receive_blocking_impl</name></member>
+      <member refid="class_loom__n_r_f_1a53c54395b6ac8e89b8c3a0b3d582a9fe" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>retry_count</name></member>
+      <member refid="class_loom__n_r_f_1a57f2765c35a200cf53ad055f5e1bef13" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>retry_timeout</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_comm_plat_1a503a10dbf3add366f1cd3bf4c274f907" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>send</name></member>
+      <member refid="class_loom_comm_plat_1ae1a86dffbfd638cd56b8be47af9964ab" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>send</name></member>
+      <member refid="class_loom_comm_plat_1a4cd103d035644901828bf4959cd7a9c9" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>send_batch</name></member>
+      <member refid="class_loom__n_r_f_1ad63d064b8ae495e699627a3bc2c57fa4" prot="protected" virt="virtual"><scope>Loom_nRF</scope><name>send_impl</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>set_active</name></member>
+      <member refid="class_loom__n_r_f_1ab1020ef07ac5be037991ae48a5a6b682" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>set_address</name></member>
+      <member refid="class_loom__n_r_f_1a7220c2a2c7f9ba87dfef36474b7fb34a" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>set_multicast_level</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_comm_plat_1a20b6f639d308b8b2f05cea41597bd6d3" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>signal_strength</name></member>
+      <member refid="class_loom_comm_plat_1a7a0d2c230d977bfb8f286aab7bd8469e" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>split_send</name></member>
+      <member refid="class_loom_comm_plat_1abc9ba333b93167dda5dd721eb4a04d02" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>split_send_notification</name></member>
+      <member refid="class_loom_comm_plat_1a731d3f9f16e8a2647f0ef81e477ef2a7" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>total_drop_count</name></member>
+      <member refid="class_loom_comm_plat_1afacaa3247078d09dd953371cfb929094" prot="protected" virt="non-virtual"><scope>Loom_nRF</scope><name>total_packet_count</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>Type</name></member>
+      <member refid="class_loom__n_r_f_1a8e09b1bbacd10cdaca78d952a8a80930" prot="public" virt="non-virtual"><scope>Loom_nRF</scope><name>~Loom_nRF</name></member>
+      <member refid="class_loom_comm_plat_1a88da37ecf287280aa166e25f4f947b37" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>~LoomCommPlat</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_nRF</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

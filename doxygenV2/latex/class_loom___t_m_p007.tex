@@ -1,0 +1,204 @@
+\hypertarget{class_loom___t_m_p007}{}\section{Loom\+\_\+\+T\+M\+P007 Class Reference}
+\label{class_loom___t_m_p007}\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+
+
+T\+M\+P007 thermopile temperature sensor module.  
+
+
+
+
+{\ttfamily \#include $<$T\+M\+P007.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+T\+M\+P007\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_loom___t_m_p007__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___t_m_p007_ac50be7567182233540cf3c4eec65fc59}{Loom\+\_\+\+T\+M\+P007} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}=0x40, const uint8\+\_\+t mux\+\_\+port=255)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___t_m_p007_acef41b3a17130350bdb320e91314d47c}{Loom\+\_\+\+T\+M\+P007} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom___t_m_p007_afb953afd9f04840e46431ce77fbad6a3}{$\sim$\+Loom\+\_\+\+T\+M\+P007} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___t_m_p007_a07ac672973fca3d8e812a26c8233af18}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___t_m_p007_a15de2056a158e8ec1662b6760ecb66e6}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___t_m_p007_a51880b75b8e1fc2b069acb1899b43e5a}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+T\+M\+P007 \hyperlink{class_loom___t_m_p007_ab32371c9649b51b8592d2a783617cf97}{inst\+\_\+tmp007}
+\begin{DoxyCompactList}\small\item\em Underlying T\+M\+P007 sensor manager instance. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___t_m_p007_ae75459c624c69fd36cf699200ead2c8a}{object\+\_\+temp}
+\begin{DoxyCompactList}\small\item\em Object temperature. Units\+: °C. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___t_m_p007_a93d28d31fe70ff78782942b7f2a7e840}{die\+\_\+temp}
+\begin{DoxyCompactList}\small\item\em Die temperature. Units\+: °C. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+T\+M\+P007 thermopile temperature sensor module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___t_m_p007.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/2023}{\tt Product Page\+: Contact-\/less Infrared Thermopile Sensor Breakout -\/ T\+M\+P007}
+\item \href{https://github.com/adafruit/Adafruit_TMP007_Library}{\tt Dependency\+: Adafruit\+\_\+\+T\+M\+P007\+\_\+\+Library}
+\item \href{https://cdn-shop.adafruit.com/datasheets/tmp007.pdf}{\tt Data\+Sheet}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#tmp007-contact-less-infrared-thermopile-sensor}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+T\+M\+P007(\+Loom\+Manager $\ast$manager, const byte i2c\+\_\+address=0x40, const uint8\+\_\+t mux\+\_\+port=255)}{Loom_TMP007(LoomManager *manager, const byte i2c_address=0x40, const uint8_t mux_port=255)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+T\+M\+P007\+::\+Loom\+\_\+\+T\+M\+P007 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{i2c\+\_\+address = {\ttfamily 0x40}, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___t_m_p007_ac50be7567182233540cf3c4eec65fc59}{}\label{class_loom___t_m_p007_ac50be7567182233540cf3c4eec65fc59}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x40$>$ $\vert$ \{0x40, 0x41, 0x42, 0x43, 0x46, 0x47, 0x48\} $\vert$ I2C address \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+port} & Int $\vert$ $<$255$>$ $\vert$ \mbox{[}0-\/16\mbox{]} $\vert$ Port on multiplexer \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+T\+M\+P007(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_TMP007(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+T\+M\+P007\+::\+Loom\+\_\+\+T\+M\+P007 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___t_m_p007_acef41b3a17130350bdb320e91314d47c}{}\label{class_loom___t_m_p007_acef41b3a17130350bdb320e91314d47c}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!````~Loom\+\_\+\+T\+M\+P007@{$\sim$\+Loom\+\_\+\+T\+M\+P007}}
+\index{````~Loom\+\_\+\+T\+M\+P007@{$\sim$\+Loom\+\_\+\+T\+M\+P007}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+T\+M\+P007()=default}{~Loom_TMP007()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+\_\+\+T\+M\+P007\+::$\sim$\+Loom\+\_\+\+T\+M\+P007 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom___t_m_p007_afb953afd9f04840e46431ce77fbad6a3}{}\label{class_loom___t_m_p007_afb953afd9f04840e46431ce77fbad6a3}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+T\+M\+P007\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___t_m_p007_a07ac672973fca3d8e812a26c8233af18}{}\label{class_loom___t_m_p007_a07ac672973fca3d8e812a26c8233af18}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+T\+M\+P007\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___t_m_p007_a15de2056a158e8ec1662b6760ecb66e6}{}\label{class_loom___t_m_p007_a15de2056a158e8ec1662b6760ecb66e6}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+T\+M\+P007\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___t_m_p007_a51880b75b8e1fc2b069acb1899b43e5a}{}\label{class_loom___t_m_p007_a51880b75b8e1fc2b069acb1899b43e5a}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!die\+\_\+temp@{die\+\_\+temp}}
+\index{die\+\_\+temp@{die\+\_\+temp}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\subsubsection[{\texorpdfstring{die\+\_\+temp}{die_temp}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+T\+M\+P007\+::die\+\_\+temp\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___t_m_p007_a93d28d31fe70ff78782942b7f2a7e840}{}\label{class_loom___t_m_p007_a93d28d31fe70ff78782942b7f2a7e840}
+
+
+Die temperature. Units\+: °C. 
+
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!inst\+\_\+tmp007@{inst\+\_\+tmp007}}
+\index{inst\+\_\+tmp007@{inst\+\_\+tmp007}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\subsubsection[{\texorpdfstring{inst\+\_\+tmp007}{inst_tmp007}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+T\+M\+P007 Loom\+\_\+\+T\+M\+P007\+::inst\+\_\+tmp007\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___t_m_p007_ab32371c9649b51b8592d2a783617cf97}{}\label{class_loom___t_m_p007_ab32371c9649b51b8592d2a783617cf97}
+
+
+Underlying T\+M\+P007 sensor manager instance. 
+
+\index{Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}!object\+\_\+temp@{object\+\_\+temp}}
+\index{object\+\_\+temp@{object\+\_\+temp}!Loom\+\_\+\+T\+M\+P007@{Loom\+\_\+\+T\+M\+P007}}
+\subsubsection[{\texorpdfstring{object\+\_\+temp}{object_temp}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+T\+M\+P007\+::object\+\_\+temp\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___t_m_p007_ae75459c624c69fd36cf699200ead2c8a}{}\label{class_loom___t_m_p007_ae75459c624c69fd36cf699200ead2c8a}
+
+
+Object temperature. Units\+: °C. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_t_m_p007_8h}{T\+M\+P007.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_t_m_p007_8cpp}{T\+M\+P007.\+cpp}\end{DoxyCompactItemize}

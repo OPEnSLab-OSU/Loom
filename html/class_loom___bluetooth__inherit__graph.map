@@ -1,0 +1,4 @@
+<map id="Loom_Bluetooth" name="Loom_Bluetooth">
+<area shape="rect" id="node2" href="$class_loom_comm_plat.html" title="Abstract base of communication platform modules. " alt="" coords="6,80,131,107"/>
+<area shape="rect" id="node3" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="17,5,121,32"/>
+</map>

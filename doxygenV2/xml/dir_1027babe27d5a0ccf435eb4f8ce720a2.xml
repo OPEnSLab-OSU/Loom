@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_1027babe27d5a0ccf435eb4f8ce720a2" kind="dir">
+    <compoundname>src/Sensors/SERIAL</compoundname>
+    <innerfile refid="_k30_8cpp">K30.cpp</innerfile>
+    <innerfile refid="_k30_8h">K30.h</innerfile>
+    <innerfile refid="_serial___sensor_8cpp">Serial_Sensor.cpp</innerfile>
+    <innerfile refid="_serial___sensor_8h">Serial_Sensor.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/SERIAL/"/>
+  </compounddef>
+</doxygen>

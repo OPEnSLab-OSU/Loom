@@ -1,0 +1,385 @@
+\hypertarget{class_loom_internet_plat}{}\section{Loom\+Internet\+Plat Class Reference}
+\label{class_loom_internet_plat}\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+
+
+Abstract internet communication module.  
+
+
+
+
+{\ttfamily \#include $<$Internet\+Plat.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Internet\+Plat\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{class_loom_internet_plat__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_loom_internet_plat_1_1_client_cleanup}{Client\+Cleanup}
+\begin{DoxyCompactList}\small\item\em Simply close the socket when the client dissapears, we don\textquotesingle{}t want to delete the object because the client needs to cache sessions. \end{DoxyCompactList}\item 
+struct \hyperlink{struct_loom_internet_plat_1_1_u_d_p_deletor}{U\+D\+P\+Deletor}
+\begin{DoxyCompactList}\small\item\em Close the socket and delete the U\+DP object when the unique ptr dissapears. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{Indent}{\bf T\+Y\+P\+ES}\par
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{class_loom_internet_plat_a0b2cc742a6ac5f4f7054b75ea99b345c}{U\+D\+P\+Ptr} = std\+::unique\+\_\+ptr$<$ U\+DP, \hyperlink{struct_loom_internet_plat_1_1_u_d_p_deletor}{U\+D\+P\+Deletor} $>$
+\begin{DoxyCompactList}\small\item\em Cleaner name for U\+DP smart pointer. \end{DoxyCompactList}\item 
+using \hyperlink{class_loom_internet_plat_a7044d4ef42ec9181d519e6d37365789d}{Client\+Session} = std\+::unique\+\_\+ptr$<$ Client, \hyperlink{struct_loom_internet_plat_1_1_client_cleanup}{Client\+Cleanup} $>$
+\begin{DoxyCompactList}\small\item\em Cleaner name for Client smart pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_internet_plat_a357f426519f563931cf6793bca0ae397}{Loom\+Internet\+Plat} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type})
+\begin{DoxyCompactList}\small\item\em Loom Internet Platform module constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_internet_plat_a36f9cc600e5ee1a916c330da914a3b11}{$\sim$\+Loom\+Internet\+Plat} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_internet_plat_a2a6ca5f5f807f420c445dd5ff53aed41}{write\+\_\+http\+\_\+request} (Stream \&client, const char $\ast$domain, const char $\ast$url, const char $\ast$body, const char $\ast$verb)
+\begin{DoxyCompactList}\small\item\em Utility function to write an http reqest based on parameters specified by \hyperlink{class_loom_internet_plat_a01a61bd1d5ec547b2619c620abbfd983}{Loom\+Internet\+Plat\+::http\+\_\+request} to a Client class. \end{DoxyCompactList}\item 
+virtual S\+S\+L\+Client \& \hyperlink{class_loom_internet_plat_a71bfc232cac5294b1c3e6dbb00029fa7}{get\+\_\+client} ()=0
+\begin{DoxyCompactList}\small\item\em Get the underlying S\+S\+L\+Client implementation, which we will use for all of the other requests. \end{DoxyCompactList}\item 
+virtual const S\+S\+L\+Client \& \hyperlink{class_loom_internet_plat_a3b79a1467f5f239cd740d6ced88cdadf}{get\+\_\+client} () const =0
+\end{DoxyCompactItemize}
+\subsection*{O\+P\+E\+R\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_internet_plat_ae9cbe7ba64e4d597fe7084110f646dec}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em No package necessary for internet platforms. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_internet_plat_a7044d4ef42ec9181d519e6d37365789d}{Client\+Session} \hyperlink{class_loom_internet_plat_a01a61bd1d5ec547b2619c620abbfd983}{http\+\_\+request} (const char $\ast$domain, const char $\ast$url, const char $\ast$body, const char $\ast$verb)
+\begin{DoxyCompactList}\small\item\em Make H\+T\+TP request. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_internet_plat_a7044d4ef42ec9181d519e6d37365789d}{Client\+Session} \hyperlink{class_loom_internet_plat_ad1a855e6ed61aa2c40ff0b8f477df57f}{http\+\_\+get\+\_\+request} (const char $\ast$domain, const char $\ast$url, const char $\ast$body=nullptr)
+\begin{DoxyCompactList}\small\item\em Make H\+T\+TP G\+ET request. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_internet_plat_a7044d4ef42ec9181d519e6d37365789d}{Client\+Session} \hyperlink{class_loom_internet_plat_aeac1140fb30e60c0f845f36d2ff02cd8}{http\+\_\+post\+\_\+request} (const char $\ast$domain, const char $\ast$url, const char $\ast$body=nullptr)
+\begin{DoxyCompactList}\small\item\em Make H\+T\+TP P\+O\+ST request. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_internet_plat_a7044d4ef42ec9181d519e6d37365789d}{Client\+Session} \hyperlink{class_loom_internet_plat_aa89a42b49465a6924a674be2e9dac709}{connect\+\_\+to\+\_\+domain} (const char $\ast$domain)
+\begin{DoxyCompactList}\small\item\em Connect to a domain, but don\textquotesingle{}t write any H\+T\+TP stuff, Let the module figure that out. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_internet_plat_a7044d4ef42ec9181d519e6d37365789d}{Client\+Session} \hyperlink{class_loom_internet_plat_aebfc1c711a7fa0eb781e545d7fc757cf}{connect\+\_\+to\+\_\+ip} (const I\+P\+Address \&ip, const uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Connect to a domain, but don\textquotesingle{}t write any H\+T\+TP stuff, Let the module figure that out. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_internet_plat_a0b2cc742a6ac5f4f7054b75ea99b345c}{U\+D\+P\+Ptr} \hyperlink{class_loom_internet_plat_a91204905ec272ff1edc608a3aa250745}{open\+\_\+socket} (const uint port)=0
+\begin{DoxyCompactList}\small\item\em Open a U\+DP socket for sending and recieving incoming data. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_internet_plat_a24d7c701a3db8e16355b6a33a4e323a6}{connect} ()=0
+\item 
+virtual void \hyperlink{class_loom_internet_plat_a32af1196a982d84a18e53f8d97e358a1}{disconnect} ()
+\item 
+virtual bool \hyperlink{class_loom_internet_plat_af9c5c867598c9951db4d404a6a495ce7}{is\+\_\+connected} () const =0
+\item 
+uint32\+\_\+t \hyperlink{class_loom_internet_plat_a17807cb51c969dbdba980a4d704aef33}{get\+\_\+time} ()
+\begin{DoxyCompactList}\small\item\em make N\+TP request to get U\+TC time, using the U\+DP function above \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract internet communication module. 
+
+All internet modules inherit from this class.
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_internet_plat.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#internet-capabilities}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Typedef Documentation}
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!Client\+Session@{Client\+Session}}
+\index{Client\+Session@{Client\+Session}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{Client\+Session}{ClientSession}}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Loom\+Internet\+Plat\+::\+Client\+Session} =  std\+::unique\+\_\+ptr$<$Client, {\bf Client\+Cleanup}$>$}\hypertarget{class_loom_internet_plat_a7044d4ef42ec9181d519e6d37365789d}{}\label{class_loom_internet_plat_a7044d4ef42ec9181d519e6d37365789d}
+
+
+Cleaner name for Client smart pointer. 
+
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!U\+D\+P\+Ptr@{U\+D\+P\+Ptr}}
+\index{U\+D\+P\+Ptr@{U\+D\+P\+Ptr}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{U\+D\+P\+Ptr}{UDPPtr}}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Loom\+Internet\+Plat\+::\+U\+D\+P\+Ptr} =  std\+::unique\+\_\+ptr$<$U\+DP, {\bf U\+D\+P\+Deletor}$>$}\hypertarget{class_loom_internet_plat_a0b2cc742a6ac5f4f7054b75ea99b345c}{}\label{class_loom_internet_plat_a0b2cc742a6ac5f4f7054b75ea99b345c}
+
+
+Cleaner name for U\+DP smart pointer. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{Loom\+Internet\+Plat(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type)}{LoomInternetPlat(LoomManager *manager, const char *module_name, const LoomModule::Type module_type)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Internet\+Plat\+::\+Loom\+Internet\+Plat (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_internet_plat_a357f426519f563931cf6793bca0ae397}{}\label{class_loom_internet_plat_a357f426519f563931cf6793bca0ae397}
+
+
+Loom Internet Platform module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & String $\vert$ $<$\char`\"{}\+Internet-\/\+Plat\char`\"{}$>$ $\vert$ null $\vert$ Internet Platform module name \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!````~Loom\+Internet\+Plat@{$\sim$\+Loom\+Internet\+Plat}}
+\index{````~Loom\+Internet\+Plat@{$\sim$\+Loom\+Internet\+Plat}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Internet\+Plat()=default}{~LoomInternetPlat()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+Internet\+Plat\+::$\sim$\+Loom\+Internet\+Plat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_internet_plat_a36f9cc600e5ee1a916c330da914a3b11}{}\label{class_loom_internet_plat_a36f9cc600e5ee1a916c330da914a3b11}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!connect@{connect}}
+\index{connect@{connect}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{connect()=0}{connect()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Internet\+Plat\+::connect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_internet_plat_a24d7c701a3db8e16355b6a33a4e323a6}{}\label{class_loom_internet_plat_a24d7c701a3db8e16355b6a33a4e323a6}
+
+
+Implemented in \hyperlink{class_loom___l_t_e_ac1a5109706d827b394f350181a8f3698}{Loom\+\_\+\+L\+TE}, \hyperlink{class_loom___ethernet_a743f6fa201609c3874bded88390a891e}{Loom\+\_\+\+Ethernet}, and \hyperlink{class_loom___wi_fi_a741402e5003f248d2c3ed4e7b222a926}{Loom\+\_\+\+Wi\+Fi}.
+
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!connect\+\_\+to\+\_\+domain@{connect\+\_\+to\+\_\+domain}}
+\index{connect\+\_\+to\+\_\+domain@{connect\+\_\+to\+\_\+domain}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{connect\+\_\+to\+\_\+domain(const char $\ast$domain)}{connect_to_domain(const char *domain)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat\+::\+Client\+Session} Loom\+Internet\+Plat\+::connect\+\_\+to\+\_\+domain (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{domain}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_loom_internet_plat_aa89a42b49465a6924a674be2e9dac709}{}\label{class_loom_internet_plat_aa89a42b49465a6924a674be2e9dac709}
+
+
+Connect to a domain, but don\textquotesingle{}t write any H\+T\+TP stuff, Let the module figure that out. 
+
+\begin{DoxyAttention}{Attention}
+Remember to close the socket! 
+\end{DoxyAttention}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em domain} & The domain to connect to \char`\"{}www.\+google.\+com\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A client reference. The client\+::connected method will return true if the connection succeeded, and false otherwise. 
+\end{DoxyReturn}
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!connect\+\_\+to\+\_\+ip@{connect\+\_\+to\+\_\+ip}}
+\index{connect\+\_\+to\+\_\+ip@{connect\+\_\+to\+\_\+ip}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{connect\+\_\+to\+\_\+ip(const I\+P\+Address \&ip, const uint16\+\_\+t port)}{connect_to_ip(const IPAddress &ip, const uint16_t port)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat\+::\+Client\+Session} Loom\+Internet\+Plat\+::connect\+\_\+to\+\_\+ip (
+\begin{DoxyParamCaption}
+\item[{const I\+P\+Address \&}]{ip, }
+\item[{const uint16\+\_\+t}]{port}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_loom_internet_plat_aebfc1c711a7fa0eb781e545d7fc757cf}{}\label{class_loom_internet_plat_aebfc1c711a7fa0eb781e545d7fc757cf}
+
+
+Connect to a domain, but don\textquotesingle{}t write any H\+T\+TP stuff, Let the module figure that out. 
+
+\begin{DoxyAttention}{Attention}
+Remember to close the socket! 
+\end{DoxyAttention}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ip} & The I\+P\+Address to connect to \\
+\hline
+\mbox{\tt in}  & {\em port} & The port to connect to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A client reference. The client\+::connected method will return true if the connection succeeded, and false otherwise. 
+\end{DoxyReturn}
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!disconnect@{disconnect}}
+\index{disconnect@{disconnect}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{disconnect()}{disconnect()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Internet\+Plat\+::disconnect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_loom_internet_plat_a32af1196a982d84a18e53f8d97e358a1}{}\label{class_loom_internet_plat_a32af1196a982d84a18e53f8d97e358a1}
+
+
+Reimplemented in \hyperlink{class_loom___l_t_e_a14b4c6a3cefe05144d3d8a3bee587188}{Loom\+\_\+\+L\+TE}, and \hyperlink{class_loom___wi_fi_a04ff3733be0b54c8bc48aa5cb652a31f}{Loom\+\_\+\+Wi\+Fi}.
+
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!get\+\_\+client@{get\+\_\+client}}
+\index{get\+\_\+client@{get\+\_\+client}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{get\+\_\+client()=0}{get_client()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual S\+S\+L\+Client\& Loom\+Internet\+Plat\+::get\+\_\+client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_loom_internet_plat_a71bfc232cac5294b1c3e6dbb00029fa7}{}\label{class_loom_internet_plat_a71bfc232cac5294b1c3e6dbb00029fa7}
+
+
+Get the underlying S\+S\+L\+Client implementation, which we will use for all of the other requests. 
+
+
+
+Implemented in \hyperlink{class_loom___l_t_e_a7f4179803a9db2ccfd306bf37bfdf64e}{Loom\+\_\+\+L\+TE}, \hyperlink{class_loom___ethernet_a8152295e24d6bbd8f5b9cda6cccc0997}{Loom\+\_\+\+Ethernet}, and \hyperlink{class_loom___wi_fi_afa854fccc5b59f6cfce8751d3223133c}{Loom\+\_\+\+Wi\+Fi}.
+
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!get\+\_\+client@{get\+\_\+client}}
+\index{get\+\_\+client@{get\+\_\+client}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{get\+\_\+client() const =0}{get_client() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual const S\+S\+L\+Client\& Loom\+Internet\+Plat\+::get\+\_\+client (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{class_loom_internet_plat_a3b79a1467f5f239cd740d6ced88cdadf}{}\label{class_loom_internet_plat_a3b79a1467f5f239cd740d6ced88cdadf}
+
+
+Implemented in \hyperlink{class_loom___l_t_e_a844e09e0ae9b0c6f181d974171dfc10c}{Loom\+\_\+\+L\+TE}, \hyperlink{class_loom___ethernet_a9223a4328f34b0a6640e1183e1f8ed2c}{Loom\+\_\+\+Ethernet}, and \hyperlink{class_loom___wi_fi_a115964eb261df0585ab71e796d02f9d4}{Loom\+\_\+\+Wi\+Fi}.
+
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!get\+\_\+time@{get\+\_\+time}}
+\index{get\+\_\+time@{get\+\_\+time}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{get\+\_\+time()}{get_time()}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t Loom\+Internet\+Plat\+::get\+\_\+time (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_internet_plat_a17807cb51c969dbdba980a4d704aef33}{}\label{class_loom_internet_plat_a17807cb51c969dbdba980a4d704aef33}
+
+
+make N\+TP request to get U\+TC time, using the U\+DP function above 
+
+\begin{DoxyReturn}{Returns}
+a unix timestamp if success, or 0 if failure. 
+\end{DoxyReturn}
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!http\+\_\+get\+\_\+request@{http\+\_\+get\+\_\+request}}
+\index{http\+\_\+get\+\_\+request@{http\+\_\+get\+\_\+request}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{http\+\_\+get\+\_\+request(const char $\ast$domain, const char $\ast$url, const char $\ast$body=nullptr)}{http_get_request(const char *domain, const char *url, const char *body=nullptr)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Client\+Session} Loom\+Internet\+Plat\+::http\+\_\+get\+\_\+request (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{domain, }
+\item[{const char $\ast$}]{url, }
+\item[{const char $\ast$}]{body = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_internet_plat_ad1a855e6ed61aa2c40ff0b8f477df57f}{}\label{class_loom_internet_plat_ad1a855e6ed61aa2c40ff0b8f477df57f}
+
+
+Make H\+T\+TP G\+ET request. 
+
+See \hyperlink{class_loom_internet_plat_a01a61bd1d5ec547b2619c620abbfd983}{http\+\_\+request()} for parameter and return details. \index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!http\+\_\+post\+\_\+request@{http\+\_\+post\+\_\+request}}
+\index{http\+\_\+post\+\_\+request@{http\+\_\+post\+\_\+request}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{http\+\_\+post\+\_\+request(const char $\ast$domain, const char $\ast$url, const char $\ast$body=nullptr)}{http_post_request(const char *domain, const char *url, const char *body=nullptr)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Client\+Session} Loom\+Internet\+Plat\+::http\+\_\+post\+\_\+request (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{domain, }
+\item[{const char $\ast$}]{url, }
+\item[{const char $\ast$}]{body = {\ttfamily nullptr}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_internet_plat_aeac1140fb30e60c0f845f36d2ff02cd8}{}\label{class_loom_internet_plat_aeac1140fb30e60c0f845f36d2ff02cd8}
+
+
+Make H\+T\+TP P\+O\+ST request. 
+
+See \hyperlink{class_loom_internet_plat_a01a61bd1d5ec547b2619c620abbfd983}{http\+\_\+request()} for parameter and return details. \index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!http\+\_\+request@{http\+\_\+request}}
+\index{http\+\_\+request@{http\+\_\+request}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{http\+\_\+request(const char $\ast$domain, const char $\ast$url, const char $\ast$body, const char $\ast$verb)}{http_request(const char *domain, const char *url, const char *body, const char *verb)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Internet\+Plat\+::\+Client\+Session} Loom\+Internet\+Plat\+::http\+\_\+request (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{domain, }
+\item[{const char $\ast$}]{url, }
+\item[{const char $\ast$}]{body, }
+\item[{const char $\ast$}]{verb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_loom_internet_plat_a01a61bd1d5ec547b2619c620abbfd983}{}\label{class_loom_internet_plat_a01a61bd1d5ec547b2619c620abbfd983}
+
+
+Make H\+T\+TP request. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em domain} & The domain to connect to (e.\+g \char`\"{}www.\+google.\+com\char`\"{}) \\
+\hline
+\mbox{\tt in}  & {\em url} & The U\+RL string to send with the http request, not including the domain (ex. \char`\"{}/arduino?thing=otherthing\char`\"{}). \\
+\hline
+\mbox{\tt in}  & {\em body} & The body string to use for the rest of the request, including additional headers. Will be appended directly to the request (right after the last header appended by the library) and will need newlines at the top or between additional headers and body. Example\+: \char`\"{}some-\/header\+: thing\textbackslash{}r\textbackslash{}nsome-\/other-\/header\+:29\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n\{\textbackslash{}\char`\"{}my-\/json-\/body"\+:"nice"\}" adds two headers (some-\/header and some-\/other-\/header) and has a simple J\+S\+ON body. Can be nullptr for none. \\
+\hline
+\mbox{\tt in}  & {\em result\+\_\+size} & Size of the buffer pointed to by result, in bytes. If the size of the buffer is exceeded, this function will return false. \\
+\hline
+\mbox{\tt out}  & {\em result} & Pointer to the buffer to put data returned from the request in. Can be nullptr if result data is to be discarded. \\
+\hline
+\mbox{\tt in}  & {\em verb} & H\+T\+TP verb (\char`\"{}\+P\+U\+T\char`\"{}, \char`\"{}\+G\+E\+T\char`\"{}, etc.) to use with this request. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A client session pointer, or a nullptr if the connection failed. When this pointer is destroyed the client will automatically close the connection. 
+\end{DoxyReturn}
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!is\+\_\+connected@{is\+\_\+connected}}
+\index{is\+\_\+connected@{is\+\_\+connected}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{is\+\_\+connected() const =0}{is_connected() const =0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Loom\+Internet\+Plat\+::is\+\_\+connected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_internet_plat_af9c5c867598c9951db4d404a6a495ce7}{}\label{class_loom_internet_plat_af9c5c867598c9951db4d404a6a495ce7}
+
+
+Implemented in \hyperlink{class_loom___l_t_e_a38253137a5dbe6a069e75ca7aa9b872f}{Loom\+\_\+\+L\+TE}, \hyperlink{class_loom___wi_fi_a948eb2892e06294750c121d986abf179}{Loom\+\_\+\+Wi\+Fi}, and \hyperlink{class_loom___ethernet_a2770d92b9459361acb44e78694f94964}{Loom\+\_\+\+Ethernet}.
+
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!open\+\_\+socket@{open\+\_\+socket}}
+\index{open\+\_\+socket@{open\+\_\+socket}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{open\+\_\+socket(const uint port)=0}{open_socket(const uint port)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf U\+D\+P\+Ptr} Loom\+Internet\+Plat\+::open\+\_\+socket (
+\begin{DoxyParamCaption}
+\item[{const uint}]{port}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_internet_plat_a91204905ec272ff1edc608a3aa250745}{}\label{class_loom_internet_plat_a91204905ec272ff1edc608a3aa250745}
+
+
+Open a U\+DP socket for sending and recieving incoming data. 
+
+\begin{DoxyWarning}{Warning}
+Be careful about recieving data from an open socket! 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A U\+DP socket for transmitting and recieving, or a nullptr if opening the socket failed. The socket will automatically close when the pointer is destructed. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{class_loom___l_t_e_a414b0ca17f97103620c7058fb0cb98d2}{Loom\+\_\+\+L\+TE}, \hyperlink{class_loom___wi_fi_aca028d9a3a39206d85b1eaac63cf0048}{Loom\+\_\+\+Wi\+Fi}, and \hyperlink{class_loom___ethernet_aadfcbd39770e463dbc0383f8d358d89f}{Loom\+\_\+\+Ethernet}.
+
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!package@{package}}
+\index{package@{package}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Internet\+Plat\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_internet_plat_ae9cbe7ba64e4d597fe7084110f646dec}{}\label{class_loom_internet_plat_ae9cbe7ba64e4d597fe7084110f646dec}
+
+
+No package necessary for internet platforms. 
+
+implement with empty body. 
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+
+
+Reimplemented in \hyperlink{class_loom___wi_fi_a536247ffb9228c55d5a2473d8df9a58b}{Loom\+\_\+\+Wi\+Fi}.
+
+\index{Loom\+Internet\+Plat@{Loom\+Internet\+Plat}!write\+\_\+http\+\_\+request@{write\+\_\+http\+\_\+request}}
+\index{write\+\_\+http\+\_\+request@{write\+\_\+http\+\_\+request}!Loom\+Internet\+Plat@{Loom\+Internet\+Plat}}
+\subsubsection[{\texorpdfstring{write\+\_\+http\+\_\+request(\+Stream \&client, const char $\ast$domain, const char $\ast$url, const char $\ast$body, const char $\ast$verb)}{write_http_request(Stream &client, const char *domain, const char *url, const char *body, const char *verb)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Internet\+Plat\+::write\+\_\+http\+\_\+request (
+\begin{DoxyParamCaption}
+\item[{Stream \&}]{client, }
+\item[{const char $\ast$}]{domain, }
+\item[{const char $\ast$}]{url, }
+\item[{const char $\ast$}]{body, }
+\item[{const char $\ast$}]{verb}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_internet_plat_a2a6ca5f5f807f420c445dd5ff53aed41}{}\label{class_loom_internet_plat_a2a6ca5f5f807f420c445dd5ff53aed41}
+
+
+Utility function to write an http reqest based on parameters specified by \hyperlink{class_loom_internet_plat_a01a61bd1d5ec547b2619c620abbfd983}{Loom\+Internet\+Plat\+::http\+\_\+request} to a Client class. 
+
+See \hyperlink{class_loom_internet_plat_a01a61bd1d5ec547b2619c620abbfd983}{http\+\_\+request()} for parameter details. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Internet\+Plats/\hyperlink{_internet_plat_8h}{Internet\+Plat.\+h}\item 
+src/\+Internet\+Plats/\hyperlink{_internet_plat_8cpp}{Internet\+Plat.\+cpp}\end{DoxyCompactItemize}

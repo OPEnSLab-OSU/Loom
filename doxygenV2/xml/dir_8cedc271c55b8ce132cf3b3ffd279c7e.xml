@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_8cedc271c55b8ce132cf3b3ffd279c7e" kind="dir">
+    <compoundname>src/InternetPlats</compoundname>
+    <innerfile refid="_internet_ethernet_8cpp">InternetEthernet.cpp</innerfile>
+    <innerfile refid="_internet_ethernet_8h">InternetEthernet.h</innerfile>
+    <innerfile refid="_internet_l_t_e_8cpp">InternetLTE.cpp</innerfile>
+    <innerfile refid="_internet_l_t_e_8h">InternetLTE.h</innerfile>
+    <innerfile refid="_internet_plat_8cpp">InternetPlat.cpp</innerfile>
+    <innerfile refid="_internet_plat_8h">InternetPlat.h</innerfile>
+    <innerfile refid="_internet_wi_fi_8cpp">InternetWiFi.cpp</innerfile>
+    <innerfile refid="_internet_wi_fi_8h">InternetWiFi.h</innerfile>
+    <innerfile refid="_trust___anchors_8h">Trust_Anchors.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/InternetPlats/"/>
+  </compounddef>
+</doxygen>

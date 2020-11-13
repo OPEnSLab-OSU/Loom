@@ -1,0 +1,6 @@
+<map id="LoomSDI12Sensor" name="LoomSDI12Sensor">
+<area shape="rect" id="node4" href="$class_loom___decagon5_t_m.html" title="Decagon 5TM soil moisture sensor module. " alt="" coords="5,229,153,256"/>
+<area shape="rect" id="node5" href="$class_loom___decagon_g_s3.html" title="Decagon GS3 soil moisture sensor module. " alt="" coords="178,229,327,256"/>
+<area shape="rect" id="node2" href="$class_loom_sensor.html" title="Abstract root of Loom sensor modules hierarchy. " alt="" coords="115,80,217,107"/>
+<area shape="rect" id="node3" href="$class_loom_module.html" title="Abstract root of Loom component modules inheritance hierarchy. " alt="" coords="114,5,218,32"/>
+</map>

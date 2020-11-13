@@ -1,0 +1,263 @@
+\hypertarget{class_loom___d_s3231}{}\section{Loom\+\_\+\+D\+S3231 Class Reference}
+\label{class_loom___d_s3231}\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+
+
+D\+S3231 R\+TC module.  
+
+
+
+
+{\ttfamily \#include $<$D\+S3231.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+D\+S3231\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{class_loom___d_s3231__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___d_s3231_a92679342b390b9d1339f2e196f064dce}{Loom\+\_\+\+D\+S3231} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, \hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527a}{Time\+Zone} \hyperlink{class_loom_r_t_c_a6c1336bf000fd9a385f315d43bbbc5b0}{timezone}=\hyperlink{class_loom_r_t_c_a103a9db94b031555185bbce688d2527aa67d47df7eb52f9e54f467763167398f3}{Time\+Zone\+::\+P\+ST}, const bool \hyperlink{class_loom_r_t_c_a5783620e9af8eb5fa0818aa189483d8e}{use\+\_\+local\+\_\+time}=false, const bool \hyperlink{class_loom_r_t_c_a91c96be6cc3f0f0f4dedbb038f164e73}{custom\+\_\+time}=false)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___d_s3231_a903c3cbd251dc82473eec5163f958ba7}{Loom\+\_\+\+D\+S3231} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___d_s3231_aec3af7092dc29fd95f77e068cf4517d7}{$\sim$\+Loom\+\_\+\+D\+S3231} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+Date\+Time \hyperlink{class_loom___d_s3231_aae43c488ccea88b751d781a3dc920e0b}{now} () const override
+\begin{DoxyCompactList}\small\item\em Get Date\+Time of current time. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___d_s3231_a597444a8d1e4230ab931731986d9af7c}{set\+\_\+alarm} (Date\+Time time) override
+\begin{DoxyCompactList}\small\item\em Set an alarm to go off at the specified time. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___d_s3231_a013fba4d81a09ad61dabef8e2ffe9669}{clear\+\_\+alarms} () override
+\begin{DoxyCompactList}\small\item\em Clear alarms. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+R\+T\+C\+\_\+\+D\+S3231 \hyperlink{class_loom___d_s3231_a3407d04f9e8cd13b2cfee640818f5e4b}{rtc\+\_\+inst}
+\begin{DoxyCompactList}\small\item\em Underlying D\+S3231 manager instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___d_s3231_a82be3e8bae268cb80bca455e5fef1289}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___d_s3231_a204356e5f64a038f14a53c5106d17e9d}{\+\_\+begin} () override
+\begin{DoxyCompactList}\small\item\em Begin auxiliary function that subclasses need to implement. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___d_s3231_a8dd6327294c41f8aaea424660770184e}{\+\_\+initialized} () override
+\begin{DoxyCompactList}\small\item\em Initialization auxiliary function that subclasses need to implement. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___d_s3231_a1f1825fe54a8308bdcea79814d5d7d5c}{\+\_\+adjust} (const Date\+Time time) override
+\begin{DoxyCompactList}\small\item\em Begin auxiliary function that subclasses need to implement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+D\+S3231 R\+TC module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___d_s3231.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/product/3028}{\tt Product Page\+: Adafruit D\+S3231 Precision R\+TC Feather\+Wing}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ds3231-rtc}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+D\+S3231(\+Loom\+Manager $\ast$manager, Time\+Zone timezone=\+Time\+Zone\+::\+P\+S\+T, const bool use\+\_\+local\+\_\+time=false, const bool custom\+\_\+time=false)}{Loom_DS3231(LoomManager *manager, TimeZone timezone=TimeZone::PST, const bool use_local_time=false, const bool custom_time=false)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+D\+S3231\+::\+Loom\+\_\+\+D\+S3231 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{{\bf Time\+Zone}}]{timezone = {\ttfamily {\bf Time\+Zone\+::\+P\+ST}}, }
+\item[{const bool}]{use\+\_\+local\+\_\+time = {\ttfamily false}, }
+\item[{const bool}]{custom\+\_\+time = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___d_s3231_a92679342b390b9d1339f2e196f064dce}{}\label{class_loom___d_s3231_a92679342b390b9d1339f2e196f064dce}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timezone} & Set(\+Time\+Zone) $\vert$ $<$11$>$ $\vert$ \{ 0(\char`\"{}\+W\+A\+T\char`\"{}), 1(\char`\"{}\+A\+T\char`\"{}), 2(\char`\"{}\+A\+D\+T\char`\"{}), 3(\char`\"{}\+A\+S\+T\char`\"{}), 4(\char`\"{}\+E\+D\+T\char`\"{}), 5(\char`\"{}\+E\+S\+T\char`\"{}), 6(\char`\"{}\+C\+D\+T\char`\"{}), 7(\char`\"{}\+C\+S\+T\char`\"{}), 8(\char`\"{}\+M\+D\+T\char`\"{}), 9(\char`\"{}\+M\+S\+T\char`\"{}), 10(\char`\"{}\+P\+D\+T\char`\"{}), 11(\char`\"{}\+P\+S\+T\char`\"{}), 12(\char`\"{}\+A\+K\+D\+T\char`\"{}), 13(\char`\"{}\+A\+K\+S\+T\char`\"{}), 14(\char`\"{}\+H\+S\+T\char`\"{}), 15(\char`\"{}\+S\+S\+T\char`\"{}), 16(\char`\"{}\+G\+M\+T\char`\"{}), 17(\char`\"{}\+B\+S\+T\char`\"{}), 18(\char`\"{}\+C\+E\+T\char`\"{}), 19(\char`\"{}\+E\+E\+T\char`\"{}), 20(\char`\"{}\+E\+E\+S\+T\char`\"{}), 21(\char`\"{}\+B\+R\+T\char`\"{}), 22(\char`\"{}\+Z\+P4\char`\"{}), 23(\char`\"{}\+Z\+P5\char`\"{}), 24(\char`\"{}\+Z\+P6\char`\"{}), 25(\char`\"{}\+Z\+P7\char`\"{}), 26(\char`\"{}\+A\+W\+S\+T\char`\"{}), 27(\char`\"{}\+A\+C\+S\+T\char`\"{}), 28(\char`\"{}\+A\+E\+S\+T\char`\"{})\} $\vert$ Which timezone device is in \\
+\hline
+\mbox{\tt in}  & {\em use\+\_\+local\+\_\+time} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ True for local time, false for U\+TC time \\
+\hline
+\mbox{\tt in}  & {\em custom\+\_\+time} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ True for user input local time, false otherwise \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+D\+S3231(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_DS3231(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+D\+S3231\+::\+Loom\+\_\+\+D\+S3231 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___d_s3231_a903c3cbd251dc82473eec5163f958ba7}{}\label{class_loom___d_s3231_a903c3cbd251dc82473eec5163f958ba7}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!````~Loom\+\_\+\+D\+S3231@{$\sim$\+Loom\+\_\+\+D\+S3231}}
+\index{````~Loom\+\_\+\+D\+S3231@{$\sim$\+Loom\+\_\+\+D\+S3231}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+D\+S3231()=default}{~Loom_DS3231()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+D\+S3231\+::$\sim$\+Loom\+\_\+\+D\+S3231 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___d_s3231_aec3af7092dc29fd95f77e068cf4517d7}{}\label{class_loom___d_s3231_aec3af7092dc29fd95f77e068cf4517d7}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!\+\_\+adjust@{\+\_\+adjust}}
+\index{\+\_\+adjust@{\+\_\+adjust}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{\+\_\+adjust(const Date\+Time time) override}{_adjust(const DateTime time) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+D\+S3231\+::\+\_\+adjust (
+\begin{DoxyParamCaption}
+\item[{const Date\+Time}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___d_s3231_a1f1825fe54a8308bdcea79814d5d7d5c}{}\label{class_loom___d_s3231_a1f1825fe54a8308bdcea79814d5d7d5c}
+
+
+Begin auxiliary function that subclasses need to implement. 
+
+
+
+Implements \hyperlink{class_loom_r_t_c_a748cbec6163eee36ec96346526b8094d}{Loom\+R\+TC}.
+
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!\+\_\+begin@{\+\_\+begin}}
+\index{\+\_\+begin@{\+\_\+begin}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{\+\_\+begin() override}{_begin() override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+D\+S3231\+::\+\_\+begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___d_s3231_a204356e5f64a038f14a53c5106d17e9d}{}\label{class_loom___d_s3231_a204356e5f64a038f14a53c5106d17e9d}
+
+
+Begin auxiliary function that subclasses need to implement. 
+
+\begin{DoxyReturn}{Returns}
+True if begin worked without issue, false otherwise 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_r_t_c_a92103dd50b8ed11cd84fc8f08557ab09}{Loom\+R\+TC}.
+
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!\+\_\+initialized@{\+\_\+initialized}}
+\index{\+\_\+initialized@{\+\_\+initialized}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{\+\_\+initialized() override}{_initialized() override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+D\+S3231\+::\+\_\+initialized (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{class_loom___d_s3231_a8dd6327294c41f8aaea424660770184e}{}\label{class_loom___d_s3231_a8dd6327294c41f8aaea424660770184e}
+
+
+Initialization auxiliary function that subclasses need to implement. 
+
+\begin{DoxyReturn}{Returns}
+True if R\+TC is initialized / did not lose power 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_r_t_c_a601c266811b25f0d16cbe2ae18ec5b41}{Loom\+R\+TC}.
+
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!clear\+\_\+alarms@{clear\+\_\+alarms}}
+\index{clear\+\_\+alarms@{clear\+\_\+alarms}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{clear\+\_\+alarms() override}{clear_alarms() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+D\+S3231\+::clear\+\_\+alarms (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___d_s3231_a013fba4d81a09ad61dabef8e2ffe9669}{}\label{class_loom___d_s3231_a013fba4d81a09ad61dabef8e2ffe9669}
+
+
+Clear alarms. 
+
+
+
+Implements \hyperlink{class_loom_r_t_c_aac5fd7b736ca4732348ca9c99935bfc6}{Loom\+R\+TC}.
+
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!now@{now}}
+\index{now@{now}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{now() const override}{now() const override}}]{\setlength{\rightskip}{0pt plus 5cm}Date\+Time Loom\+\_\+\+D\+S3231\+::now (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___d_s3231_aae43c488ccea88b751d781a3dc920e0b}{}\label{class_loom___d_s3231_aae43c488ccea88b751d781a3dc920e0b}
+
+
+Get Date\+Time of current time. 
+
+\begin{DoxyReturn}{Returns}
+Date\+Time 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_loom_r_t_c_abef017ad813f2f5fd6559af2b64e409b}{Loom\+R\+TC}.
+
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+D\+S3231\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___d_s3231_a82be3e8bae268cb80bca455e5fef1289}{}\label{class_loom___d_s3231_a82be3e8bae268cb80bca455e5fef1289}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_r_t_c_a41c84de7ef49bf7f42069f948a98c30b}{Loom\+R\+TC}.
+
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!set\+\_\+alarm@{set\+\_\+alarm}}
+\index{set\+\_\+alarm@{set\+\_\+alarm}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{set\+\_\+alarm(\+Date\+Time time) override}{set_alarm(DateTime time) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+D\+S3231\+::set\+\_\+alarm (
+\begin{DoxyParamCaption}
+\item[{Date\+Time}]{time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___d_s3231_a597444a8d1e4230ab931731986d9af7c}{}\label{class_loom___d_s3231_a597444a8d1e4230ab931731986d9af7c}
+
+
+Set an alarm to go off at the specified time. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em time} & Date\+Time of time alarm should go off \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_r_t_c_a34b7dd8dacbfdb61876cc4aabb79e67e}{Loom\+R\+TC}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}!rtc\+\_\+inst@{rtc\+\_\+inst}}
+\index{rtc\+\_\+inst@{rtc\+\_\+inst}!Loom\+\_\+\+D\+S3231@{Loom\+\_\+\+D\+S3231}}
+\subsubsection[{\texorpdfstring{rtc\+\_\+inst}{rtc_inst}}]{\setlength{\rightskip}{0pt plus 5cm}R\+T\+C\+\_\+\+D\+S3231 Loom\+\_\+\+D\+S3231\+::rtc\+\_\+inst\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___d_s3231_a3407d04f9e8cd13b2cfee640818f5e4b}{}\label{class_loom___d_s3231_a3407d04f9e8cd13b2cfee640818f5e4b}
+
+
+Underlying D\+S3231 manager instance. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+R\+T\+C/\hyperlink{_d_s3231_8h}{D\+S3231.\+h}\item 
+src/\+R\+T\+C/\hyperlink{_d_s3231_8cpp}{D\+S3231.\+cpp}\end{DoxyCompactItemize}

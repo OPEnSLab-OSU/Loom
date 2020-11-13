@@ -1,0 +1,479 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___max_pub" kind="class" language="C++" prot="public">
+    <compoundname>Loom_MaxPub</compoundname>
+    <basecompoundref refid="class_loom_publish_plat" prot="public" virt="non-virtual">LoomPublishPlat</basecompoundref>
+    <includes refid="_max___pub_8h" local="no">Max_Pub.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___max_pub_1aa000de565cb6a5e06d03a6ff65f6f9e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_MaxPub::Loom_MaxPub</definition>
+        <argsstring>(LoomManager *manager, const LoomModule::Type internet_type)</argsstring>
+        <name>Loom_MaxPub</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>internet_type</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">internet_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(LoomModule::Type) | &lt;7001&gt; | {7001(&quot;Ethernet&quot;), 7002(&quot;WiFi&quot;), 7003(&quot;LTE&quot;)} | Code of the desired internet platform. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="49" column="1" bodyfile="src/PublishPlats/Max_Pub.cpp" bodystart="18" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___max_pub_1a14324e11a518e6c64d92c0623d572765" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_MaxPub::Loom_MaxPub</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_MaxPub</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="57" column="1" bodyfile="src/PublishPlats/Max_Pub.cpp" bodystart="43" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___max_pub_1a86cecc2a45d660c5f1cc1d6b720b1739" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_MaxPub::second_stage_ctor</definition>
+        <argsstring>() override</argsstring>
+        <name>second_stage_ctor</name>
+        <reimplements refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12">second_stage_ctor</reimplements>
+        <briefdescription>
+<para>Second stage construction. </para>        </briefdescription>
+        <detaileddescription>
+<para>Perform any actions that need all of the devices to be initized beforehand - such as looking up an internet platform This function is guranteed to be called AFTER all modules have been constructed. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="59" column="1" bodyfile="src/PublishPlats/Max_Pub.cpp" bodystart="27" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___max_pub_1a1cb4e999495f70425a920003dc78d99d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Loom_MaxPub::~Loom_MaxPub</definition>
+        <argsstring>()</argsstring>
+        <name>~Loom_MaxPub</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="62" column="1" bodyfile="src/PublishPlats/Max_Pub.h" bodystart="62" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___max_pub_1a5d824f56b133288fc9dcb0d62379ca35" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_MaxPub::dispatch</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>dispatch</name>
+        <reimplements refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8">dispatch</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Route command to driver. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="68" column="1" bodyfile="src/PublishPlats/Max_Pub.cpp" bodystart="112" bodyend="119"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___max_pub_1a9286db7e281484d00233dc4d86012197" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_MaxPub::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_publish_plat_1a38cc9fe71203a153392fbca807e39434">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="74" column="1" bodyfile="src/PublishPlats/Max_Pub.cpp" bodystart="47" bodyend="52"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom___max_pub_1aadc82ca62997907eda950c8f9d3dd4a8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t Loom_MaxPub::get_port</definition>
+        <argsstring>() const </argsstring>
+        <name>get_port</name>
+        <briefdescription>
+<para>Get UDP port device is listening on. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>UDP port </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="82" column="1" bodyfile="src/PublishPlats/Max_Pub.h" bodystart="82" bodyend="82"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom___max_pub_1ab0d598913fba6f06773495806533da81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_MaxPub::set_port</definition>
+        <argsstring>(const uint16_t port)</argsstring>
+        <name>set_port</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Set the UDP port to send on. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The UDP port to send on </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="90" column="1" bodyfile="src/PublishPlats/Max_Pub.cpp" bodystart="55" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___max_pub_1a34d82217de5608ee475e73c5d1a13868" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_MaxPub::set_ip</definition>
+        <argsstring>(const IPAddress ip)</argsstring>
+        <name>set_ip</name>
+        <param>
+          <type>const IPAddress</type>
+          <declname>ip</declname>
+        </param>
+        <briefdescription>
+<para>Set the IP address to send to. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ip</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IP address to set to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="94" column="1" bodyfile="src/PublishPlats/Max_Pub.cpp" bodystart="87" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___max_pub_1a873dd6ccd99520c4e63207cb371799f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_MaxPub::set_ip</definition>
+        <argsstring>()</argsstring>
+        <name>set_ip</name>
+        <briefdescription>
+<para>Set the IP addres to send to by getting remote IP from MaxSub if available. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="97" column="1" bodyfile="src/PublishPlats/Max_Pub.cpp" bodystart="95" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___max_pub_1aa0a82d79ac37d01ba3bb2add3061a235" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_MaxPub::send_to_internet</definition>
+        <argsstring>(const JsonObject json, LoomInternetPlat *plat) override</argsstring>
+        <name>send_to_internet</name>
+        <reimplements refid="class_loom_publish_plat_1a5d54196f11ef28daf8fdf853f215a033">send_to_internet</reimplements>
+        <param>
+          <type>const JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <param>
+          <type><ref refid="class_loom_internet_plat" kindref="compound">LoomInternetPlat</ref> *</type>
+          <declname>plat</declname>
+        </param>
+        <briefdescription>
+<para>Send JSON to the internet, assumes that a valid internet plat was found and can be used. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Json object to send </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">plat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Internet platform to send on </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="101" column="1" bodyfile="src/PublishPlats/Max_Pub.cpp" bodystart="62" bodyend="84"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___max_pub_1aabdb739b93a98972610d836d2f4ace19" prot="protected" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t Loom_MaxPub::UDP_port</definition>
+        <argsstring></argsstring>
+        <name>UDP_port</name>
+        <briefdescription>
+<para>Which UDP port to transmit on. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="35" column="1" bodyfile="src/PublishPlats/Max_Pub.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___max_pub_1a61f53dddbf95967c3e34f19a159e9e15" prot="protected" static="no" mutable="no">
+        <type>IPAddress</type>
+        <definition>IPAddress Loom_MaxPub::remoteIP</definition>
+        <argsstring></argsstring>
+        <name>remoteIP</name>
+        <briefdescription>
+<para>Which IP address to send to. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="36" column="1" bodyfile="src/PublishPlats/Max_Pub.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___max_pub_1a39f9cb9d6c5bc08bc4f2c164ab834620" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_internet_plat_1a0b2cc742a6ac5f4f7054b75ea99b345c" kindref="member">LoomInternetPlat::UDPPtr</ref></type>
+        <definition>LoomInternetPlat::UDPPtr Loom_MaxPub::UDP_Inst</definition>
+        <argsstring></argsstring>
+        <name>UDP_Inst</name>
+        <briefdescription>
+<para>Pointer to UDP object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/PublishPlats/Max_Pub.h" line="38" column="1" bodyfile="src/PublishPlats/Max_Pub.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Module taking in and translating JSON into data understood by the Google Sheets script API. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___max_pub.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://cycling74.com">Max 8</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Max-Loom2">Loom Max Patches</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="687">
+        <label>Loom_MaxPub</label>
+        <link refid="class_loom___max_pub"/>
+        <childnode refid="688" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="689">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="688">
+        <label>LoomPublishPlat</label>
+        <link refid="class_loom_publish_plat"/>
+        <childnode refid="689" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="697">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="693">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="694" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="695" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="700" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="696" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="690">
+        <label>Loom_MaxPub</label>
+        <link refid="class_loom___max_pub"/>
+        <childnode refid="691" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="692">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="693" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="701">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="696">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="692" relation="public-inheritance">
+        </childnode>
+        <childnode refid="697" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="698" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="695" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="699" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="700" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="701" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="695">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="692" relation="public-inheritance">
+        </childnode>
+        <childnode refid="696" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="691">
+        <label>LoomPublishPlat</label>
+        <link refid="class_loom_publish_plat"/>
+        <childnode refid="692" relation="public-inheritance">
+        </childnode>
+        <childnode refid="702" relation="usage">
+          <edgelabel>m_internet</edgelabel>
+        </childnode>
+      </node>
+      <node id="702">
+        <label>LoomInternetPlat</label>
+        <link refid="class_loom_internet_plat"/>
+        <childnode refid="692" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="694">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="692" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="700">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="692" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="698">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="699">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/PublishPlats/Max_Pub.h" line="31" column="1" bodyfile="src/PublishPlats/Max_Pub.h" bodystart="30" bodyend="105"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>Category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>device_manager</name></member>
+      <member refid="class_loom___max_pub_1a5d824f56b133288fc9dcb0d62379ca35" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom___max_pub_1aadc82ca62997907eda950c8f9d3dd4a8" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>get_port</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_publish_plat_1aab697868e61843787893f5509d22b9ed" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>internet_type</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___max_pub_1aa000de565cb6a5e06d03a6ff65f6f9e5" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>Loom_MaxPub</name></member>
+      <member refid="class_loom___max_pub_1a14324e11a518e6c64d92c0623d572765" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>Loom_MaxPub</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>LoomModule</name></member>
+      <member refid="class_loom_publish_plat_1a59b0b76a0a0507c211284f341c0c5b34" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>LoomPublishPlat</name></member>
+      <member refid="class_loom_publish_plat_1a9e07931b084ea022c48485a2df28cc83" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>m_internet</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>module_type</name></member>
+      <member refid="class_loom_publish_plat_1ac8548fef404b55465773513aefce5608" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>power_up</name></member>
+      <member refid="class_loom___max_pub_1a9286db7e281484d00233dc4d86012197" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>print_module_label</name></member>
+      <member refid="class_loom_publish_plat_1a0055306a6b0efc49d83f083c1398eea1" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_publish_plat_1a9be2ccbcaba4d1a5735bcd5bf828eafb" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>publish</name></member>
+      <member refid="class_loom_publish_plat_1a5a172ded7502cd31fe15596e21dd6cc9" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>publish</name></member>
+      <member refid="class_loom_publish_plat_1ae0c0825a58465f124bfe07e3de8b3b25" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>publish_batch</name></member>
+      <member refid="class_loom___max_pub_1a61f53dddbf95967c3e34f19a159e9e15" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>remoteIP</name></member>
+      <member refid="class_loom___max_pub_1a86cecc2a45d660c5f1cc1d6b720b1739" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom___max_pub_1aa0a82d79ac37d01ba3bb2add3061a235" prot="protected" virt="virtual"><scope>Loom_MaxPub</scope><name>send_to_internet</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>set_active</name></member>
+      <member refid="class_loom___max_pub_1a34d82217de5608ee475e73c5d1a13868" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>set_ip</name></member>
+      <member refid="class_loom___max_pub_1a873dd6ccd99520c4e63207cb371799f4" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>set_ip</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom___max_pub_1ab0d598913fba6f06773495806533da81" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>set_port</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>Type</name></member>
+      <member refid="class_loom___max_pub_1a39f9cb9d6c5bc08bc4f2c164ab834620" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>UDP_Inst</name></member>
+      <member refid="class_loom___max_pub_1aabdb739b93a98972610d836d2f4ace19" prot="protected" virt="non-virtual"><scope>Loom_MaxPub</scope><name>UDP_port</name></member>
+      <member refid="class_loom___max_pub_1a1cb4e999495f70425a920003dc78d99d" prot="public" virt="non-virtual"><scope>Loom_MaxPub</scope><name>~Loom_MaxPub</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_publish_plat_1a68870cd02f9de172d4bcf448060ef1ec" prot="public" virt="virtual"><scope>Loom_MaxPub</scope><name>~LoomPublishPlat</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

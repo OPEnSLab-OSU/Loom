@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_nRF class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_nRF <span class="m-thin">class</span>
+        </h1>
+        <p>Nordic Radio communication platform module.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#radio-implementation">RADIO IMPLEMENTATION</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom__n_r_f.html">Module Documentation</a></li><li><a href="https://github.com/nRF24/RF24">Dependency: RF24</a> optimized fork</li><li><a href="https://github.com/nRF24/RF24Network">Dependency: RF24Network</a> optimized fork</li><li><a href="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#nrf">Hardware Support</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_comm_plat.html" class="m-doc">LoomCommPlat</a>
+            </dt>
+            <dd>Abstract base of communication platform modules.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a785fc4d36d622edea8a8a1e35de80e88">
+              RF24 <a href="#a785fc4d36d622edea8a8a1e35de80e88" class="m-doc-self">radio</a>
+            </dt>
+            <dd>Underlying nRF24L01(+) radio object.</dd>
+            <dt id="ac9f3accb15e32baa80557f03da7a4990">
+              RF24Network* <a href="#ac9f3accb15e32baa80557f03da7a4990" class="m-doc-self">network</a>
+            </dt>
+            <dd>Network layer manager for radio.</dd>
+            <dt id="a9bd096cf262ff923c4ba8e8cbd85d63b">
+              uint8_t <a href="#a9bd096cf262ff923c4ba8e8cbd85d63b" class="m-doc-self">address</a>
+            </dt>
+            <dd>Device Address (should this be part of <a href="class_loom_comm_plat.html" class="m-doc">LoomCommPlat</a>? – maybe not as each platform handles addresses differently)</dd>
+            <dt id="aa07c72a33cf70c119ff333b3177aadd0">
+              uint8_t <a href="#aa07c72a33cf70c119ff333b3177aadd0" class="m-doc-self">data_rate</a>
+            </dt>
+            <dd>Data rate.</dd>
+            <dt id="a47eb5605398f1d83febef1c0ec3ef27b">
+              uint8_t <a href="#a47eb5605398f1d83febef1c0ec3ef27b" class="m-doc-self">power_level</a>
+            </dt>
+            <dd>Power level to send at.</dd>
+            <dt id="a53c54395b6ac8e89b8c3a0b3d582a9fe">
+              uint8_t <a href="#a53c54395b6ac8e89b8c3a0b3d582a9fe" class="m-doc-self">retry_count</a>
+            </dt>
+            <dd>Number of transmission retries allowed.</dd>
+            <dt id="a57f2765c35a200cf53ad055f5e1bef13">
+              uint16_t <a href="#a57f2765c35a200cf53ad055f5e1bef13" class="m-doc-self">retry_timeout</a>
+            </dt>
+            <dd>Delay between transmission retries (in milliseconds)</dd>
+            <dt id="a91e29e17ba984dc899ca11507adfd9f9">
+              uint8_t <a href="#a91e29e17ba984dc899ca11507adfd9f9" class="m-doc-self">multicast_level</a>
+            </dt>
+            <dd>Which level(s) of the network to broadcast to.</dd>
+          </dl>
+        </section>
+        <section id="radio-implementation">
+          <h2><a href="#radio-implementation">RADIO IMPLEMENTATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8f4a184813d9aed777997f63e9835e42" class="m-doc">receive_blocking_impl</a>(</span><span class="m-doc-wrap">JsonObject json,
+              uint max_wait_time) -&gt; bool <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Receive, but block until packet received, or timeout reached.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad63d064b8ae495e699627a3bc2c57fa4" class="m-doc">send_impl</a>(</span><span class="m-doc-wrap">JsonObject json,
+              const uint8_t destination) -&gt; bool <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Send json to a specific address.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a3e4d0db03fde19d29311338d5f3a979a" class="m-doc">broadcast_impl</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">protected</span> <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Broadcast data to all that can receive.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a54c70e58ccff14396a880199365da651" class="m-doc">Loom_nRF</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const uint16_t max_message_len = 120,
+              const uint8_t address = 0,
+              const uint8_t data_rate = 1,
+              const uint8_t power_level = 0,
+              const uint8_t retry_count = 3,
+              const uint16_t retry_timeout = 200,
+              const uint8_t multicast_level = 1)</span>
+            </dt>
+            <dd>nRF module constructor</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a0bb645a077a48e550bc3d7e669e60f42" class="m-doc">Loom_nRF</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt id="a8e09b1bbacd10cdaca78d952a8a80930">
+              <span class="m-doc-wrap-bumper"><a href="#a8e09b1bbacd10cdaca78d952a8a80930" class="m-doc-self">~Loom_nRF</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a17b192fceeb84d4da70c3213ea743228" class="m-doc">add_config</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Add configuration information to JsonObject.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="ad8a85a3ce2d9e2d7d12dec310a1c6615">
+              <span class="m-doc-wrap-bumper">void <a href="#ad8a85a3ce2d9e2d7d12dec310a1c6615" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae1140949b48b908ed1733fb8b3e7ae69" class="m-doc">get_address</a>(</span><span class="m-doc-wrap">) const -&gt; uint8_t <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Get the address of this device.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5ecdc813ddd9b32fa06a83147c922499" class="m-doc">get_multicast_level</a>(</span><span class="m-doc-wrap">) const -&gt; uint8_t</span>
+            </dt>
+            <dd>Get multicast(broadcast) level.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab1020ef07ac5be037991ae48a5a6b682" class="m-doc">set_address</a>(</span><span class="m-doc-wrap">const uint8_t a) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Set the address of this device.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7220c2a2c7f9ba87dfef36474b7fb34a" class="m-doc">set_multicast_level</a>(</span><span class="m-doc-wrap">const uint8_t level)</span>
+            </dt>
+            <dd>Set multicast(broadcast) level.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a8f4a184813d9aed777997f63e9835e42"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f4a184813d9aed777997f63e9835e42" class="m-doc-self">receive_blocking_impl</a>(</span><span class="m-doc-wrap">JsonObject json,
+              uint max_wait_time) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Receive, but block until packet received, or timeout reached.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Json object to fill with incoming data</td>
+                </tr>
+                <tr>
+                  <td>max_wait_time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Maximum number of milliseconds to block for (can be zero for non-blocking)</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if packet received</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ad63d064b8ae495e699627a3bc2c57fa4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad63d064b8ae495e699627a3bc2c57fa4" class="m-doc-self">send_impl</a>(</span><span class="m-doc-wrap">JsonObject json,
+              const uint8_t destination) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Send json to a specific address.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Json package to send</td>
+                </tr>
+                <tr>
+                  <td>destination&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Device to send to</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if packet sent successfully</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3e4d0db03fde19d29311338d5f3a979a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3e4d0db03fde19d29311338d5f3a979a" class="m-doc-self">broadcast_impl</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span> <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Broadcast data to all that can receive.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Json object to send</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Derived classes can optionally provide an implementation for this, As supported by the radio/platform&#x27;s library</p>
+          </div></section>
+          <section class="m-doc-details" id="a54c70e58ccff14396a880199365da651"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a54c70e58ccff14396a880199365da651" class="m-doc-self">Loom_nRF</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const uint16_t max_message_len = 120,
+              const uint8_t address = 0,
+              const uint8_t data_rate = 1,
+              const uint8_t power_level = 0,
+              const uint8_t retry_count = 3,
+              const uint16_t retry_timeout = 200,
+              const uint8_t multicast_level = 1)</span></span>
+            </h3>
+            <p>nRF module constructor</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>max_message_len&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;120&gt; | {120(&quot;Max length&quot;)} | The maximum possible message length</td>
+                </tr>
+                <tr>
+                  <td>address&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;01&gt; | [0-99] | This device&#x27;s nRF address</td>
+                </tr>
+                <tr>
+                  <td>data_rate&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;0&gt; | {0(&quot;Default&quot;), 1(&quot;250KBPS&quot;), 2(&quot;1MBPS&quot;), 3(&quot;2MBPS&quot;)} | Transmission data rate</td>
+                </tr>
+                <tr>
+                  <td>power_level&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(Int) | &lt;0&gt; | {0(&quot;Default&quot;), 1(&quot;Min&quot;), 2(&quot;Low&quot;), 3(&quot;High&quot;), 4(&quot;Max&quot;)} | Transmission ower level</td>
+                </tr>
+                <tr>
+                  <td>retry_count&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;3&gt; | [0-15] | Max number of transmission retries</td>
+                </tr>
+                <tr>
+                  <td>retry_timeout&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;200&gt; | [20-500] | Delay between retransmissions (ms)</td>
+                </tr>
+                <tr>
+                  <td>multicast_level&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Int | &lt;1&gt; | [1-3] | How many levels to propogate message through heirarchy</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0bb645a077a48e550bc3d7e669e60f42"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0bb645a077a48e550bc3d7e669e60f42" class="m-doc-self">Loom_nRF</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a17b192fceeb84d4da70c3213ea743228"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a17b192fceeb84d4da70c3213ea743228" class="m-doc-self">add_config</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Add configuration information to JsonObject.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Json configuration object to add to</td>
+                </tr>
+              </tbody>
+            </table>
+<p><a href="class_loom_manager.html" class="m-doc">LoomManager</a> iterates over modules to build complete configuration</p>
+          </div></section>
+          <section class="m-doc-details" id="ae1140949b48b908ed1733fb8b3e7ae69"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint8_t Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae1140949b48b908ed1733fb8b3e7ae69" class="m-doc-self">get_address</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Get the address of this device.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The address of this device</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Each platform may have a different addressing scheme</p>
+          </div></section>
+          <section class="m-doc-details" id="a5ecdc813ddd9b32fa06a83147c922499"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint8_t Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ecdc813ddd9b32fa06a83147c922499" class="m-doc-self">get_multicast_level</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get multicast(broadcast) level.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Multicast level</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>nRF has varying degrees of broadcast corresponding to depth to broadcast through network tree</p>
+          </div></section>
+          <section class="m-doc-details" id="ab1020ef07ac5be037991ae48a5a6b682"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab1020ef07ac5be037991ae48a5a6b682" class="m-doc-self">set_address</a>(</span><span class="m-doc-wrap">const uint8_t a) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Set the address of this device.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">a&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The address to set this device to</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Each platform may have a different addressing scheme. Changing the device&#x27;s address is not recommended.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7220c2a2c7f9ba87dfef36474b7fb34a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />nRF::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7220c2a2c7f9ba87dfef36474b7fb34a" class="m-doc-self">set_multicast_level</a>(</span><span class="m-doc-wrap">const uint8_t level)</span></span>
+            </h3>
+            <p>Set multicast(broadcast) level.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">level&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Multicast level to set to</td>
+                </tr>
+              </tbody>
+            </table>
+<p>nRF has varying degrees of broadcast corresponding to depth to broadcast through network tree</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

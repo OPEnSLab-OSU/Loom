@@ -1,0 +1,8 @@
+<map id="src/Sensors" name="src/Sensors">
+<area shape="rect" id="node2" href="dir_abc44327bd9a62eb36f446d48ca760f8.html" title="I2C" alt="" coords="325,63,397,111"/>
+<area shape="rect" id="node3" href="dir_c1c9c6049189259cc1cfe0eeb075e0bc.html" title="SDI12" alt="" coords="229,63,301,111"/>
+<area shape="rect" id="node4" href="dir_1027babe27d5a0ccf435eb4f8ce720a2.html" title="SERIAL" alt="" coords="133,63,205,111"/>
+<area shape="rect" id="node5" href="dir_510aef1acf63521dcdd1684edb86e21c.html" title="SPI" alt="" coords="37,63,109,111"/>
+<area shape="rect" id="clust2" href="dir_afe58f6d0ef7eec69c2706509daaefe7.html" alt="" coords="27,52,507,121"/>
+<area shape="rect" id="clust1" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html" title="src" alt="" coords="16,16,517,132"/>
+</map>

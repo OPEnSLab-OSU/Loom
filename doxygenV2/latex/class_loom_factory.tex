@@ -1,0 +1,120 @@
+\hypertarget{class_loom_factory}{}\section{Loom\+Factory$<$ I\+N\+T\+E\+R\+N\+ET, S\+E\+N\+S\+O\+RS, R\+A\+D\+I\+OS, A\+C\+T\+U\+A\+T\+O\+RS, M\+AX $>$ Class Template Reference}
+\label{class_loom_factory}\index{Loom\+Factory$<$ I\+N\+T\+E\+R\+N\+E\+T, S\+E\+N\+S\+O\+R\+S, R\+A\+D\+I\+O\+S, A\+C\+T\+U\+A\+T\+O\+R\+S, M\+A\+X $>$@{Loom\+Factory$<$ I\+N\+T\+E\+R\+N\+E\+T, S\+E\+N\+S\+O\+R\+S, R\+A\+D\+I\+O\+S, A\+C\+T\+U\+A\+T\+O\+R\+S, M\+A\+X $>$}}
+
+
+Factory is used by \hyperlink{class_loom_manager}{Loom\+Manager} when parsing Json to match module names to their associated constructors, and calling with parameters from the Json.  
+
+
+
+
+{\ttfamily \#include $<$Module\+\_\+\+Factory.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Factory$<$ I\+N\+T\+E\+R\+N\+ET, S\+E\+N\+S\+O\+RS, R\+A\+D\+I\+OS, A\+C\+T\+U\+A\+T\+O\+RS, M\+AX $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{class_loom_factory__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_factory_a58a9d3e047ee49d9111506390f122abd}{Loom\+Factory} ()=default
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_factory_a15b465cec2e3d8b88493ba773d81aadc}{$\sim$\+Loom\+Factory} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_factory_a9a81e69b81e801e055a7d2b86e24d59b}{print\+\_\+table} () const 
+\begin{DoxyCompactList}\small\item\em Print the contents of the lookup table. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_module}{Loom\+Module} $\ast$ \hyperlink{class_loom_factory_a16952c39558fd8fcb317e251e9f02266}{Create} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Variant module) const 
+\begin{DoxyCompactList}\small\item\em Create Loom\+Manager$\ast$ manager, a module based on a subset of a Json configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$Enable\+::\+Internet I\+N\+T\+E\+R\+N\+ET = Enable\+::\+Internet\+::\+All, Enable\+::\+Sensors S\+E\+N\+S\+O\+RS = Enable\+::\+Sensors\+::\+Enabled, Enable\+::\+Radios R\+A\+D\+I\+OS = Enable\+::\+Radios\+::\+Enabled, Enable\+::\+Actuators A\+C\+T\+U\+A\+T\+O\+RS = Enable\+::\+Actuators\+::\+Enabled, Enable\+::\+Max M\+AX = Enable\+::\+Max\+::\+Disabled$>$\\*
+class Loom\+Factory$<$ I\+N\+T\+E\+R\+N\+E\+T, S\+E\+N\+S\+O\+R\+S, R\+A\+D\+I\+O\+S, A\+C\+T\+U\+A\+T\+O\+R\+S, M\+A\+X $>$}
+
+Factory is used by \hyperlink{class_loom_manager}{Loom\+Manager} when parsing Json to match module names to their associated constructors, and calling with parameters from the Json. 
+
+The template parameters are used to select whether certain blocks of modules are included in the lookup table. This is determined at compile time to not include unnecessary module classes and supporting code, thus reducing code size
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_factory.html}{\tt Loom\+Factory Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Factory@{Loom\+Factory}!Loom\+Factory@{Loom\+Factory}}
+\index{Loom\+Factory@{Loom\+Factory}!Loom\+Factory@{Loom\+Factory}}
+\subsubsection[{\texorpdfstring{Loom\+Factory()=default}{LoomFactory()=default}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Enable\+::\+Internet I\+N\+T\+E\+R\+N\+ET = Enable\+::\+Internet\+::\+All, Enable\+::\+Sensors S\+E\+N\+S\+O\+RS = Enable\+::\+Sensors\+::\+Enabled, Enable\+::\+Radios R\+A\+D\+I\+OS = Enable\+::\+Radios\+::\+Enabled, Enable\+::\+Actuators A\+C\+T\+U\+A\+T\+O\+RS = Enable\+::\+Actuators\+::\+Enabled, Enable\+::\+Max M\+AX = Enable\+::\+Max\+::\+Disabled$>$ {\bf Loom\+Factory}$<$ I\+N\+T\+E\+R\+N\+ET, S\+E\+N\+S\+O\+RS, R\+A\+D\+I\+OS, A\+C\+T\+U\+A\+T\+O\+RS, M\+AX $>$\+::{\bf Loom\+Factory} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom_factory_a58a9d3e047ee49d9111506390f122abd}{}\label{class_loom_factory_a58a9d3e047ee49d9111506390f122abd}
+
+
+Constructor. 
+
+\index{Loom\+Factory@{Loom\+Factory}!````~Loom\+Factory@{$\sim$\+Loom\+Factory}}
+\index{````~Loom\+Factory@{$\sim$\+Loom\+Factory}!Loom\+Factory@{Loom\+Factory}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Factory()=default}{~LoomFactory()=default}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Enable\+::\+Internet I\+N\+T\+E\+R\+N\+ET = Enable\+::\+Internet\+::\+All, Enable\+::\+Sensors S\+E\+N\+S\+O\+RS = Enable\+::\+Sensors\+::\+Enabled, Enable\+::\+Radios R\+A\+D\+I\+OS = Enable\+::\+Radios\+::\+Enabled, Enable\+::\+Actuators A\+C\+T\+U\+A\+T\+O\+RS = Enable\+::\+Actuators\+::\+Enabled, Enable\+::\+Max M\+AX = Enable\+::\+Max\+::\+Disabled$>$ {\bf Loom\+Factory}$<$ I\+N\+T\+E\+R\+N\+ET, S\+E\+N\+S\+O\+RS, R\+A\+D\+I\+OS, A\+C\+T\+U\+A\+T\+O\+RS, M\+AX $>$\+::$\sim${\bf Loom\+Factory} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom_factory_a15b465cec2e3d8b88493ba773d81aadc}{}\label{class_loom_factory_a15b465cec2e3d8b88493ba773d81aadc}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Factory@{Loom\+Factory}!Create@{Create}}
+\index{Create@{Create}!Loom\+Factory@{Loom\+Factory}}
+\subsubsection[{\texorpdfstring{Create(\+Loom\+Manager $\ast$manager, Json\+Variant module) const }{Create(LoomManager *manager, JsonVariant module) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Enable\+::\+Internet I\+N\+T\+E\+R\+N\+ET = Enable\+::\+Internet\+::\+All, Enable\+::\+Sensors S\+E\+N\+S\+O\+RS = Enable\+::\+Sensors\+::\+Enabled, Enable\+::\+Radios R\+A\+D\+I\+OS = Enable\+::\+Radios\+::\+Enabled, Enable\+::\+Actuators A\+C\+T\+U\+A\+T\+O\+RS = Enable\+::\+Actuators\+::\+Enabled, Enable\+::\+Max M\+AX = Enable\+::\+Max\+::\+Disabled$>$ {\bf Loom\+Module}$\ast$ {\bf Loom\+Factory}$<$ I\+N\+T\+E\+R\+N\+ET, S\+E\+N\+S\+O\+RS, R\+A\+D\+I\+OS, A\+C\+T\+U\+A\+T\+O\+RS, M\+AX $>$\+::Create (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Variant}]{module}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_loom_factory_a16952c39558fd8fcb317e251e9f02266}{}\label{class_loom_factory_a16952c39558fd8fcb317e251e9f02266}
+
+
+Create Loom\+Manager$\ast$ manager, a module based on a subset of a Json configuration. 
+
+Needs name and parameters to the constructor as an array (or the word \textquotesingle{}default\textquotesingle{}) if that module has default values for all parameters 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module} & Subset of a Json configuration, used to identify module to create and with what parameters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_loom_module}{Loom\+Module} if created, nullptr if it could not be created 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_factory_base_a1a3356d8729b56634c3bca85c7530223}{Factory\+Base}.
+
+\index{Loom\+Factory@{Loom\+Factory}!print\+\_\+table@{print\+\_\+table}}
+\index{print\+\_\+table@{print\+\_\+table}!Loom\+Factory@{Loom\+Factory}}
+\subsubsection[{\texorpdfstring{print\+\_\+table() const }{print_table() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$Enable\+::\+Internet I\+N\+T\+E\+R\+N\+ET = Enable\+::\+Internet\+::\+All, Enable\+::\+Sensors S\+E\+N\+S\+O\+RS = Enable\+::\+Sensors\+::\+Enabled, Enable\+::\+Radios R\+A\+D\+I\+OS = Enable\+::\+Radios\+::\+Enabled, Enable\+::\+Actuators A\+C\+T\+U\+A\+T\+O\+RS = Enable\+::\+Actuators\+::\+Enabled, Enable\+::\+Max M\+AX = Enable\+::\+Max\+::\+Disabled$>$ void {\bf Loom\+Factory}$<$ I\+N\+T\+E\+R\+N\+ET, S\+E\+N\+S\+O\+RS, R\+A\+D\+I\+OS, A\+C\+T\+U\+A\+T\+O\+RS, M\+AX $>$\+::print\+\_\+table (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_loom_factory_a9a81e69b81e801e055a7d2b86e24d59b}{}\label{class_loom_factory_a9a81e69b81e801e055a7d2b86e24d59b}
+
+
+Print the contents of the lookup table. 
+
+
+
+Implements \hyperlink{class_factory_base_a96c50a015c8e2b0e6cc4a8ee48ae2a12}{Factory\+Base}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{_module___factory_8h}{Module\+\_\+\+Factory.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,198 @@
+\hypertarget{class_loom___s_t_e_m_m_a}{}\section{Loom\+\_\+\+S\+T\+E\+M\+MA Class Reference}
+\label{class_loom___s_t_e_m_m_a}\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+
+
+Adafruit Stemma soil moisture sensor.  
+
+
+
+
+{\ttfamily \#include $<$S\+T\+E\+M\+M\+A.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+S\+T\+E\+M\+MA\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_loom___s_t_e_m_m_a__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___s_t_e_m_m_a_a45c0901b1a9e848aa25452eb86335736}{Loom\+\_\+\+S\+T\+E\+M\+MA} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}=0x36, const uint8\+\_\+t mux\+\_\+port=255)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___s_t_e_m_m_a_a07576a4d5b9595e686a6f9a0809aa32c}{Loom\+\_\+\+S\+T\+E\+M\+MA} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom___s_t_e_m_m_a_a1d08b21fb63b8cf734a5a7461e1fd636}{$\sim$\+Loom\+\_\+\+S\+T\+E\+M\+MA} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___s_t_e_m_m_a_abdee7585790a9d6d7dcae5abf41448de}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___s_t_e_m_m_a_aaee00fa7deb976da153cd6a90c62eceb}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___s_t_e_m_m_a_aa7f730c402dfecd8e0401e569ecfe5c3}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+seesaw \hyperlink{class_loom___s_t_e_m_m_a_afaef66b72da7983be590ca9fd8e8a43b}{ss}
+\begin{DoxyCompactList}\small\item\em Adafruit Seesaw object. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___s_t_e_m_m_a_a71c6cb89007396bb88f265ad70b998b0}{temperature}
+\begin{DoxyCompactList}\small\item\em Sensor data objects. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_loom___s_t_e_m_m_a_a9bc07affd7f811ccd9ec562d78e24ee6}{capacitive}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Adafruit Stemma soil moisture sensor. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://learn.adafruit.com/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor/arduino-test}{\tt Product Page}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#stemma-soil-sensor}{\tt Hardware Support}
+\item \href{https://cdn-learn.adafruit.com/downloads/pdf/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor.pdf?timestamp=1594765200}{\tt Data\+Sheet} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+S\+T\+E\+M\+M\+A(\+Loom\+Manager $\ast$manager, byte i2c\+\_\+address=0x36, const uint8\+\_\+t mux\+\_\+port=255)}{Loom_STEMMA(LoomManager *manager, byte i2c_address=0x36, const uint8_t mux_port=255)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+S\+T\+E\+M\+M\+A\+::\+Loom\+\_\+\+S\+T\+E\+M\+MA (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{byte}]{i2c\+\_\+address = {\ttfamily 0x36}, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___s_t_e_m_m_a_a45c0901b1a9e848aa25452eb86335736}{}\label{class_loom___s_t_e_m_m_a_a45c0901b1a9e848aa25452eb86335736}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x36$>$ $\vert$ \{0x36\} $\vert$ I2C address \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+port} & Int $\vert$ $<$255$>$ $\vert$ \mbox{[}0-\/16\mbox{]} $\vert$ Port on multiplexer \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+S\+T\+E\+M\+M\+A(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_STEMMA(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+S\+T\+E\+M\+M\+A\+::\+Loom\+\_\+\+S\+T\+E\+M\+MA (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___s_t_e_m_m_a_a07576a4d5b9595e686a6f9a0809aa32c}{}\label{class_loom___s_t_e_m_m_a_a07576a4d5b9595e686a6f9a0809aa32c}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!````~Loom\+\_\+\+S\+T\+E\+M\+MA@{$\sim$\+Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\index{````~Loom\+\_\+\+S\+T\+E\+M\+MA@{$\sim$\+Loom\+\_\+\+S\+T\+E\+M\+MA}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+S\+T\+E\+M\+M\+A()=default}{~Loom_STEMMA()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+\_\+\+S\+T\+E\+M\+M\+A\+::$\sim$\+Loom\+\_\+\+S\+T\+E\+M\+MA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom___s_t_e_m_m_a_a1d08b21fb63b8cf734a5a7461e1fd636}{}\label{class_loom___s_t_e_m_m_a_a1d08b21fb63b8cf734a5a7461e1fd636}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+T\+E\+M\+M\+A\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___s_t_e_m_m_a_abdee7585790a9d6d7dcae5abf41448de}{}\label{class_loom___s_t_e_m_m_a_abdee7585790a9d6d7dcae5abf41448de}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+T\+E\+M\+M\+A\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___s_t_e_m_m_a_aaee00fa7deb976da153cd6a90c62eceb}{}\label{class_loom___s_t_e_m_m_a_aaee00fa7deb976da153cd6a90c62eceb}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+S\+T\+E\+M\+M\+A\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___s_t_e_m_m_a_aa7f730c402dfecd8e0401e569ecfe5c3}{}\label{class_loom___s_t_e_m_m_a_aa7f730c402dfecd8e0401e569ecfe5c3}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!capacitive@{capacitive}}
+\index{capacitive@{capacitive}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\subsubsection[{\texorpdfstring{capacitive}{capacitive}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+S\+T\+E\+M\+M\+A\+::capacitive\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___s_t_e_m_m_a_a9bc07affd7f811ccd9ec562d78e24ee6}{}\label{class_loom___s_t_e_m_m_a_a9bc07affd7f811ccd9ec562d78e24ee6}
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!ss@{ss}}
+\index{ss@{ss}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\subsubsection[{\texorpdfstring{ss}{ss}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+seesaw Loom\+\_\+\+S\+T\+E\+M\+M\+A\+::ss\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___s_t_e_m_m_a_afaef66b72da7983be590ca9fd8e8a43b}{}\label{class_loom___s_t_e_m_m_a_afaef66b72da7983be590ca9fd8e8a43b}
+
+
+Adafruit Seesaw object. 
+
+\index{Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}!temperature@{temperature}}
+\index{temperature@{temperature}!Loom\+\_\+\+S\+T\+E\+M\+MA@{Loom\+\_\+\+S\+T\+E\+M\+MA}}
+\subsubsection[{\texorpdfstring{temperature}{temperature}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+S\+T\+E\+M\+M\+A\+::temperature\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___s_t_e_m_m_a_a71c6cb89007396bb88f265ad70b998b0}{}\label{class_loom___s_t_e_m_m_a_a71c6cb89007396bb88f265ad70b998b0}
+
+
+Sensor data objects. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_s_t_e_m_m_a_8h}{S\+T\+E\+M\+M\+A.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_s_t_e_m_m_a_8cpp}{S\+T\+E\+M\+M\+A.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_lo_ra_8cpp" kind="file" language="C++">
+    <compoundname>LoRa.cpp</compoundname>
+    <includes refid="_lo_ra_8h" local="yes">LoRa.h</includes>
+    <incdepgraph>
+      <node id="3174">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3178">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="3171" relation="include">
+        </childnode>
+      </node>
+      <node id="3171">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3172" relation="include">
+        </childnode>
+        <childnode refid="3174" relation="include">
+        </childnode>
+        <childnode refid="3175" relation="include">
+        </childnode>
+        <childnode refid="3176" relation="include">
+        </childnode>
+      </node>
+      <node id="3175">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3173" relation="include">
+        </childnode>
+        <childnode refid="3176" relation="include">
+        </childnode>
+      </node>
+      <node id="3180">
+        <label>RH_RF95.h</label>
+      </node>
+      <node id="3172">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3173" relation="include">
+        </childnode>
+      </node>
+      <node id="3181">
+        <label>RHReliableDatagram.h</label>
+      </node>
+      <node id="3169">
+        <label>LoRa.h</label>
+        <link refid="_lo_ra_8h"/>
+        <childnode refid="3170" relation="include">
+        </childnode>
+        <childnode refid="3180" relation="include">
+        </childnode>
+        <childnode refid="3181" relation="include">
+        </childnode>
+      </node>
+      <node id="3168">
+        <label>src/CommPlats/LoRa.cpp</label>
+        <link refid="LoRa.cpp"/>
+        <childnode refid="3169" relation="include">
+        </childnode>
+      </node>
+      <node id="3179">
+        <label>SdFat.h</label>
+      </node>
+      <node id="3176">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3173">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3177">
+        <label>../LogPlats/BatchSD.h</label>
+        <link refid="_batch_s_d_8h"/>
+        <childnode refid="3178" relation="include">
+        </childnode>
+        <childnode refid="3179" relation="include">
+        </childnode>
+      </node>
+      <node id="3170">
+        <label>CommPlat.h</label>
+        <link refid="_comm_plat_8h"/>
+        <childnode refid="3171" relation="include">
+        </childnode>
+        <childnode refid="3177" relation="include">
+        </childnode>
+        <childnode refid="3173" relation="include">
+        </childnode>
+        <childnode refid="3176" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/CommPlats/LoRa.cpp"/>
+  </compounddef>
+</doxygen>

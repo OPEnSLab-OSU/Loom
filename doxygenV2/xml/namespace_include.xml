@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="namespace_include" kind="namespace" language="C++">
+    <compoundname>Include</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespace_include_1a223a3f93bed9db5706b58e6fd15c8810" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::None</definition>
+        <argsstring></argsstring>
+        <name>None</name>
+        <initializer>= std::make_tuple()</initializer>
+        <briefdescription>
+<para>Empty block (used if a block of modules is disabled) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="168" column="1" bodyfile="src/Module_Factory.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_include_1afd5c6184c21e5cbb570f6ffb451fadb2" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::Common</definition>
+        <argsstring></argsstring>
+        <name>Common</name>
+        <initializer>= std::make_tuple(
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Interrupt_Manager&quot;,	Construct&lt;<ref refid="class_loom___interrupt___manager" kindref="compound">Loom_Interrupt_Manager</ref>&gt;,		<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___interrupt___manager" kindref="compound">Loom_Interrupt_Manager</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;WarmUp_Manager&quot;, Construct&lt;<ref refid="class_loom___warm_up___manager" kindref="compound">Loom_WarmUp_Manager</ref>&gt;, <ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___warm_up___manager" kindref="compound">Loom_WarmUp_Manager</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Sleep_Manager&quot;,		Construct&lt;<ref refid="class_loom___sleep___manager" kindref="compound">Loom_Sleep_Manager</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___sleep___manager" kindref="compound">Loom_Sleep_Manager</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Analog&quot;,		Construct&lt;<ref refid="class_loom___analog" kindref="compound">Loom_Analog</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___analog" kindref="compound">Loom_Analog</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Digital&quot;,		Construct&lt;<ref refid="class_loom___digital" kindref="compound">Loom_Digital</ref>&gt;,		<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___digital" kindref="compound">Loom_Digital</ref>&gt; },
+				
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;OLED&quot;,			Construct&lt;<ref refid="class_loom___o_l_e_d" kindref="compound">Loom_OLED</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___o_l_e_d" kindref="compound">Loom_OLED</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;SD&quot;,			Construct&lt;<ref refid="class_loom___s_d" kindref="compound">Loom_SD</ref>&gt;,				<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___s_d" kindref="compound">Loom_SD</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;BatchSD&quot;,			Construct&lt;<ref refid="class_loom___batch_s_d" kindref="compound">Loom_BatchSD</ref>&gt;,				<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___batch_s_d" kindref="compound">Loom_BatchSD</ref>&gt; },
+				
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;DS3231&quot;,		Construct&lt;<ref refid="class_loom___d_s3231" kindref="compound">Loom_DS3231</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___d_s3231" kindref="compound">Loom_DS3231</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;PCF8523&quot;,		Construct&lt;<ref refid="class_loom___p_c_f8523" kindref="compound">Loom_PCF8523</ref>&gt;,		<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___p_c_f8523" kindref="compound">Loom_PCF8523</ref>&gt; }
+			)</initializer>
+        <briefdescription>
+<para>Common modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="171" column="1" bodyfile="src/Module_Factory.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_include_1aaef3f142b15f5413c545a4b50a662fcc" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::Radios</definition>
+        <argsstring></argsstring>
+        <name>Radios</name>
+        <initializer>= std::make_tuple(
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;LoRa&quot;,			Construct&lt;<ref refid="class_loom___lo_ra" kindref="compound">Loom_LoRa</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___lo_ra" kindref="compound">Loom_LoRa</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;nRF&quot;,			Construct&lt;<ref refid="class_loom__n_r_f" kindref="compound">Loom_nRF</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom__n_r_f" kindref="compound">Loom_nRF</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Bluetooth&quot;,	Construct&lt;<ref refid="class_loom___bluetooth" kindref="compound">Loom_Bluetooth</ref>&gt;,		<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___bluetooth" kindref="compound">Loom_Bluetooth</ref>&gt; }
+			)</initializer>
+        <briefdescription>
+<para>Radios modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="187" column="1" bodyfile="src/Module_Factory.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_include_1aee5c809c679bf94fd69dc5deff6a90c4" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::Max</definition>
+        <argsstring></argsstring>
+        <name>Max</name>
+        <initializer>= std::make_tuple(
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;MaxPub&quot;,		Construct&lt;<ref refid="class_loom___max_pub" kindref="compound">Loom_MaxPub</ref>&gt;,			nullptr },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;MaxSub&quot;,		Construct&lt;<ref refid="class_loom___max_sub" kindref="compound">Loom_MaxSub</ref>&gt;,			nullptr }
+			)</initializer>
+        <briefdescription>
+<para>Max modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="194" column="1" bodyfile="src/Module_Factory.h" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_include_1a5f31f767a008f601b5d4f5c3aff90e89" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::EthernetAndWiFi</definition>
+        <argsstring></argsstring>
+        <name>EthernetAndWiFi</name>
+        <initializer>= std::make_tuple(
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Ethernet&quot;,		Construct&lt;<ref refid="class_loom___ethernet" kindref="compound">Loom_Ethernet</ref>&gt;,		<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___ethernet" kindref="compound">Loom_Ethernet</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;WiFi&quot;,			Construct&lt;<ref refid="class_loom___wi_fi" kindref="compound">Loom_WiFi</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___wi_fi" kindref="compound">Loom_WiFi</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;GoogleSheets&quot;,	Construct&lt;<ref refid="class_loom___google_sheets" kindref="compound">Loom_GoogleSheets</ref>&gt;,	nullptr },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;NTP_Sync&quot;, 	Construct&lt;<ref refid="class_loom_n_t_p_sync" kindref="compound">LoomNTPSync</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom_n_t_p_sync" kindref="compound">LoomNTPSync</ref>&gt; }
+			)</initializer>
+        <briefdescription>
+<para>Ethernet and WiFi modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="200" column="1" bodyfile="src/Module_Factory.h" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_include_1a68386b4fe2e4f182c18b0f4b1e1ca554" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::Ethernet</definition>
+        <argsstring></argsstring>
+        <name>Ethernet</name>
+        <initializer>= std::make_tuple(
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Ethernet&quot;,		Construct&lt;<ref refid="class_loom___ethernet" kindref="compound">Loom_Ethernet</ref>&gt;,		<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___ethernet" kindref="compound">Loom_Ethernet</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;GoogleSheets&quot;,	Construct&lt;<ref refid="class_loom___google_sheets" kindref="compound">Loom_GoogleSheets</ref>&gt;,	nullptr },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;NTP_Sync&quot;, 	Construct&lt;<ref refid="class_loom_n_t_p_sync" kindref="compound">LoomNTPSync</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom_n_t_p_sync" kindref="compound">LoomNTPSync</ref>&gt; }
+			)</initializer>
+        <briefdescription>
+<para>Ethernet modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="208" column="1" bodyfile="src/Module_Factory.h" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_include_1a6cf33ac8efc6a5092ce9a6af9cf02d36" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::WiFi</definition>
+        <argsstring></argsstring>
+        <name>WiFi</name>
+        <initializer>= std::make_tuple(
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;WiFi&quot;,			Construct&lt;<ref refid="class_loom___wi_fi" kindref="compound">Loom_WiFi</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___wi_fi" kindref="compound">Loom_WiFi</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;GoogleSheets&quot;,	Construct&lt;<ref refid="class_loom___google_sheets" kindref="compound">Loom_GoogleSheets</ref>&gt;,	nullptr },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;NTP_Sync&quot;, 	Construct&lt;<ref refid="class_loom_n_t_p_sync" kindref="compound">LoomNTPSync</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom_n_t_p_sync" kindref="compound">LoomNTPSync</ref>&gt; }
+			)</initializer>
+        <briefdescription>
+<para>WiFi modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="215" column="1" bodyfile="src/Module_Factory.h" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_include_1a8d54cbf6e38dd18378d1fbce77da979e" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::LTE</definition>
+        <argsstring></argsstring>
+        <name>LTE</name>
+        <initializer>= std::make_tuple(
+		<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;LTE&quot;,			Construct&lt;<ref refid="class_loom___l_t_e" kindref="compound">Loom_LTE</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___l_t_e" kindref="compound">Loom_LTE</ref>&gt; },
+		<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;GoogleSheets&quot;,	Construct&lt;<ref refid="class_loom___google_sheets" kindref="compound">Loom_GoogleSheets</ref>&gt;,	nullptr },
+		<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;NTP_Sync&quot;, 	Construct&lt;<ref refid="class_loom_n_t_p_sync" kindref="compound">LoomNTPSync</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom_n_t_p_sync" kindref="compound">LoomNTPSync</ref>&gt; }
+	)</initializer>
+        <briefdescription>
+<para>LTE modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="222" column="1" bodyfile="src/Module_Factory.h" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_include_1afdc5a0bd51655ca57718cdca40e5b277" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::Sensors</definition>
+        <argsstring></argsstring>
+        <name>Sensors</name>
+        <briefdescription>
+<para>Sensor modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="229" column="1" bodyfile="src/Module_Factory.h" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_include_1a40e108fcc93c3c148487421aedb9a250" prot="public" static="no" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto Include::Actuators</definition>
+        <argsstring></argsstring>
+        <name>Actuators</name>
+        <initializer>= std::make_tuple(
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Neopixel&quot;,		Construct&lt;<ref refid="class_loom___neopixel" kindref="compound">Loom_Neopixel</ref>&gt;,		<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___neopixel" kindref="compound">Loom_Neopixel</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Relay&quot;,		Construct&lt;<ref refid="class_loom___relay" kindref="compound">Loom_Relay</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___relay" kindref="compound">Loom_Relay</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Servo&quot;,		Construct&lt;<ref refid="class_loom___servo" kindref="compound">Loom_Servo</ref>&gt;,			<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___servo" kindref="compound">Loom_Servo</ref>&gt; },
+				<ref refid="structfactory_1_1_name_module_pair" kindref="compound">factory::NameModulePair</ref>{&quot;Stepper&quot;,		Construct&lt;<ref refid="class_loom___stepper" kindref="compound">Loom_Stepper</ref>&gt;,		<ref refid="_module___factory_8h_1ad520abf333963919b93c320af42f4337" kindref="member">ConstructDefault</ref>&lt;<ref refid="class_loom___stepper" kindref="compound">Loom_Stepper</ref>&gt; }
+			)</initializer>
+        <briefdescription>
+<para>Actuator modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="263" column="1" bodyfile="src/Module_Factory.h" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Possible sections of the module lookup table to include. </para>    </briefdescription>
+    <detaileddescription>
+<para>Factory concatenates selected blocks to form its lookup table for module creation. Blocks are made up of tuples of NameModulePair </para>    </detaileddescription>
+    <location file="src/Module_Factory.h" line="166" column="1"/>
+  </compounddef>
+</doxygen>

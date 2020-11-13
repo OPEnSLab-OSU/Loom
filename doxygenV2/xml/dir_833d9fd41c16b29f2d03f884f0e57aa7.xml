@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_833d9fd41c16b29f2d03f884f0e57aa7" kind="dir">
+    <compoundname>src/PublishPlats</compoundname>
+    <innerfile refid="_google_sheets_8cpp">GoogleSheets.cpp</innerfile>
+    <innerfile refid="_google_sheets_8h">GoogleSheets.h</innerfile>
+    <innerfile refid="_max___pub_8cpp">Max_Pub.cpp</innerfile>
+    <innerfile refid="_max___pub_8h">Max_Pub.h</innerfile>
+    <innerfile refid="_publish_plat_8cpp">PublishPlat.cpp</innerfile>
+    <innerfile refid="_publish_plat_8h">PublishPlat.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/PublishPlats/"/>
+  </compounddef>
+</doxygen>

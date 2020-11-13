@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_internet_l_t_e_8cpp" kind="file" language="C++">
+    <compoundname>InternetLTE.cpp</compoundname>
+    <includes refid="_internet_l_t_e_8h" local="yes">InternetLTE.h</includes>
+    <incdepgraph>
+      <node id="3316">
+        <label>InternetPlat.h</label>
+        <link refid="_internet_plat_8h"/>
+        <childnode refid="3317" relation="include">
+        </childnode>
+        <childnode refid="3323" relation="include">
+        </childnode>
+        <childnode refid="3324" relation="include">
+        </childnode>
+        <childnode refid="3315" relation="include">
+        </childnode>
+        <childnode refid="3325" relation="include">
+        </childnode>
+      </node>
+      <node id="3324">
+        <label>Udp.h</label>
+      </node>
+      <node id="3320">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3313">
+        <label>TinyGsmClient.h</label>
+      </node>
+      <node id="3317">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3318" relation="include">
+        </childnode>
+        <childnode refid="3320" relation="include">
+        </childnode>
+        <childnode refid="3321" relation="include">
+        </childnode>
+        <childnode refid="3322" relation="include">
+        </childnode>
+      </node>
+      <node id="3323">
+        <label>Client.h</label>
+      </node>
+      <node id="3321">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3319" relation="include">
+        </childnode>
+        <childnode refid="3322" relation="include">
+        </childnode>
+      </node>
+      <node id="3311">
+        <label>src/InternetPlats/InternetLTE.cpp</label>
+        <link refid="InternetLTE.cpp"/>
+        <childnode refid="3312" relation="include">
+        </childnode>
+      </node>
+      <node id="3314">
+        <label>ArduinoHttpClient.h</label>
+      </node>
+      <node id="3318">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3319" relation="include">
+        </childnode>
+      </node>
+      <node id="3312">
+        <label>InternetLTE.h</label>
+        <link refid="_internet_l_t_e_8h"/>
+        <childnode refid="3313" relation="include">
+        </childnode>
+        <childnode refid="3314" relation="include">
+        </childnode>
+        <childnode refid="3315" relation="include">
+        </childnode>
+        <childnode refid="3316" relation="include">
+        </childnode>
+        <childnode refid="3326" relation="include">
+        </childnode>
+      </node>
+      <node id="3322">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3319">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3326">
+        <label>Trust_Anchors.h</label>
+        <link refid="_trust___anchors_8h"/>
+      </node>
+      <node id="3315">
+        <label>SSLClient.h</label>
+      </node>
+      <node id="3325">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_internet_l_t_e_8cpp_1a98a66f1ef802c118d5fcc9b5a5b0fc10" prot="public" static="no">
+        <name>SerialAT</name>
+        <initializer>Serial1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.cpp" line="12" column="9" bodyfile="src/InternetPlats/InternetLTE.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_internet_l_t_e_8cpp_1a27efdcb8c676e099b1bf4473e4beb331" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>TinyGsm</type>
+        <definition>TinyGsm modem</definition>
+        <argsstring>(SerialAT)</argsstring>
+        <name>modem</name>
+        <param>
+          <type><ref refid="_internet_l_t_e_8cpp_1a98a66f1ef802c118d5fcc9b5a5b0fc10" kindref="member">SerialAT</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/InternetPlats/InternetLTE.cpp" line="13" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/InternetPlats/InternetLTE.cpp"/>
+  </compounddef>
+</doxygen>

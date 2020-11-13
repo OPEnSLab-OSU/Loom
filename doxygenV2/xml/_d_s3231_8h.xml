@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_d_s3231_8h" kind="file" language="C++">
+    <compoundname>DS3231.h</compoundname>
+    <includes refid="_r_t_c_8h" local="yes">RTC.h</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_d_s3231_8cpp" local="yes">src/RTC/DS3231.cpp</includedby>
+    <incdepgraph>
+      <node id="4812">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="4809">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="4810" relation="include">
+        </childnode>
+        <childnode refid="4812" relation="include">
+        </childnode>
+        <childnode refid="4813" relation="include">
+        </childnode>
+        <childnode refid="4814" relation="include">
+        </childnode>
+      </node>
+      <node id="4813">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="4811" relation="include">
+        </childnode>
+        <childnode refid="4814" relation="include">
+        </childnode>
+      </node>
+      <node id="4808">
+        <label>RTC.h</label>
+        <link refid="_r_t_c_8h"/>
+        <childnode refid="4809" relation="include">
+        </childnode>
+        <childnode refid="4815" relation="include">
+        </childnode>
+      </node>
+      <node id="4810">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="4811" relation="include">
+        </childnode>
+      </node>
+      <node id="4815">
+        <label>OPEnS_RTC.h</label>
+      </node>
+      <node id="4814">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="4811">
+        <label>Arduino.h</label>
+      </node>
+      <node id="4807">
+        <label>src/RTC/DS3231.h</label>
+        <link refid="DS3231.h"/>
+        <childnode refid="4808" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4817">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="4818" relation="include">
+        </childnode>
+        <childnode refid="4819" relation="include">
+        </childnode>
+      </node>
+      <node id="4820">
+        <label>src/RTC/DS3231.cpp</label>
+        <link refid="_d_s3231_8cpp"/>
+      </node>
+      <node id="4818">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="4819">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="4816">
+        <label>src/RTC/DS3231.h</label>
+        <link refid="DS3231.h"/>
+        <childnode refid="4817" relation="include">
+        </childnode>
+        <childnode refid="4820" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___d_s3231" prot="public">Loom_DS3231</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/RTC/DS3231.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_sensor_8cpp" kind="file" language="C++">
+    <compoundname>Sensor.cpp</compoundname>
+    <includes refid="_sensor_8h" local="yes">Sensor.h</includes>
+    <incdepgraph>
+      <node id="5595">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5592">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5593" relation="include">
+        </childnode>
+        <childnode refid="5595" relation="include">
+        </childnode>
+        <childnode refid="5596" relation="include">
+        </childnode>
+        <childnode refid="5597" relation="include">
+        </childnode>
+      </node>
+      <node id="5596">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5594" relation="include">
+        </childnode>
+        <childnode refid="5597" relation="include">
+        </childnode>
+      </node>
+      <node id="5593">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5594" relation="include">
+        </childnode>
+      </node>
+      <node id="5597">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5591">
+        <label>Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5592" relation="include">
+        </childnode>
+      </node>
+      <node id="5594">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5590">
+        <label>src/Sensors/Sensor.cpp</label>
+        <link refid="Sensor.cpp"/>
+        <childnode refid="5591" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/Sensor.cpp"/>
+  </compounddef>
+</doxygen>

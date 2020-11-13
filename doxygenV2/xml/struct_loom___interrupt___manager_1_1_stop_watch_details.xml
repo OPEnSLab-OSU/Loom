@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="struct_loom___interrupt___manager_1_1_stop_watch_details" kind="struct" language="C++" prot="private">
+    <compoundname>Loom_Interrupt_Manager::StopWatchDetails</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_stop_watch_details_1a378a0aa93e7905dd86f32f0101f4587b" prot="public" static="no" mutable="no">
+        <type>unsigned long</type>
+        <definition>unsigned long Loom_Interrupt_Manager::StopWatchDetails::start_time</definition>
+        <argsstring></argsstring>
+        <name>start_time</name>
+        <briefdescription>
+<para>The millis time when stopwatch started. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="83" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_loom___interrupt___manager_1_1_stop_watch_details_1a0b6c6cb2be37ef484cfc580644fc4e91" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Interrupt_Manager::StopWatchDetails::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <briefdescription>
+<para>Whether or not this stopwatch is enabled. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Interrupt_Manager.h" line="84" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains information defining a stopwatch&apos;s configuration. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Interrupt_Manager.h" line="82" column="1" bodyfile="src/Interrupt_Manager.h" bodystart="82" bodyend="85"/>
+    <listofallmembers>
+      <member refid="struct_loom___interrupt___manager_1_1_stop_watch_details_1a0b6c6cb2be37ef484cfc580644fc4e91" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::StopWatchDetails</scope><name>enabled</name></member>
+      <member refid="struct_loom___interrupt___manager_1_1_stop_watch_details_1a378a0aa93e7905dd86f32f0101f4587b" prot="public" virt="non-virtual"><scope>Loom_Interrupt_Manager::StopWatchDetails</scope><name>start_time</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

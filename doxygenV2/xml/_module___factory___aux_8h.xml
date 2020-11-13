@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_module___factory___aux_8h" kind="file" language="C++">
+    <compoundname>Module_Factory_Aux.h</compoundname>
+    <includes local="no">array</includes>
+    <includes local="no">tuple</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="4431">
+        <label>tuple</label>
+      </node>
+      <node id="4429">
+        <label>src/Module_Factory_Aux.h</label>
+        <link refid="Module_Factory_Aux.h"/>
+        <childnode refid="4430" relation="include">
+        </childnode>
+        <childnode refid="4431" relation="include">
+        </childnode>
+      </node>
+      <node id="4430">
+        <label>array</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4433">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="4434" relation="include">
+        </childnode>
+        <childnode refid="4435" relation="include">
+        </childnode>
+      </node>
+      <node id="4432">
+        <label>src/Module_Factory_Aux.h</label>
+        <link refid="Module_Factory_Aux.h"/>
+        <childnode refid="4433" relation="include">
+        </childnode>
+      </node>
+      <node id="4434">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="4435">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Module_Factory_Aux.h"/>
+  </compounddef>
+</doxygen>

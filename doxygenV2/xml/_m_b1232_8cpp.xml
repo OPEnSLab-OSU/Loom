@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_m_b1232_8cpp" kind="file" language="C++">
+    <compoundname>MB1232.cpp</compoundname>
+    <includes refid="_m_b1232_8h" local="yes">MB1232.h</includes>
+    <incdepgraph>
+      <node id="5217">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5214">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5215" relation="include">
+        </childnode>
+        <childnode refid="5217" relation="include">
+        </childnode>
+        <childnode refid="5218" relation="include">
+        </childnode>
+        <childnode refid="5219" relation="include">
+        </childnode>
+      </node>
+      <node id="5218">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5216" relation="include">
+        </childnode>
+        <childnode refid="5219" relation="include">
+        </childnode>
+      </node>
+      <node id="5210">
+        <label>src/Sensors/I2C/MB1232.cpp</label>
+        <link refid="MB1232.cpp"/>
+        <childnode refid="5211" relation="include">
+        </childnode>
+      </node>
+      <node id="5215">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5216" relation="include">
+        </childnode>
+      </node>
+      <node id="5220">
+        <label>Wire.h</label>
+      </node>
+      <node id="5219">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5213">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5214" relation="include">
+        </childnode>
+      </node>
+      <node id="5216">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5212">
+        <label>I2C_Sensor.h</label>
+        <link refid="_i2_c___sensor_8h"/>
+        <childnode refid="5213" relation="include">
+        </childnode>
+        <childnode refid="5220" relation="include">
+        </childnode>
+      </node>
+      <node id="5211">
+        <label>MB1232.h</label>
+        <link refid="_m_b1232_8h"/>
+        <childnode refid="5212" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_m_b1232_8cpp_1ab73c624a44b8000233f379d46fad79d8" prot="public" static="no">
+        <name>RangeCommand</name>
+        <initializer>0x51</initializer>
+        <briefdescription>
+<para>The Sensor ranging command has a value of 0x51. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/MB1232.cpp" line="14" column="9" bodyfile="src/Sensors/I2C/MB1232.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_m_b1232_8cpp_1acbbbb9e7c25f53a7be97de013c35b843" prot="public" static="no">
+        <name>ChangeAddressCommand1</name>
+        <initializer>0xAA</initializer>
+        <briefdescription>
+<para>These are the two commands that need to be sent in sequence to change the sensor address. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/MB1232.cpp" line="15" column="9" bodyfile="src/Sensors/I2C/MB1232.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_m_b1232_8cpp_1a811ee838a384afbb4a52d99f9a9d80ea" prot="public" static="no">
+        <name>ChangeAddressCommand2</name>
+        <initializer>0xA5</initializer>
+        <briefdescription>
+<para>These are the two commands that need to be sent in sequence to change the sensor address. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/MB1232.cpp" line="16" column="9" bodyfile="src/Sensors/I2C/MB1232.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/I2C/MB1232.cpp"/>
+  </compounddef>
+</doxygen>

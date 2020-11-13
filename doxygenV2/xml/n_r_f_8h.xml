@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="n_r_f_8h" kind="file" language="C++">
+    <compoundname>nRF.h</compoundname>
+    <includes refid="_comm_plat_8h" local="yes">CommPlat.h</includes>
+    <includes local="no">RF24Network.h</includes>
+    <includes local="no">RF24.h</includes>
+    <includedby refid="n_r_f_8cpp" local="yes">src/CommPlats/nRF.cpp</includedby>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <incdepgraph>
+      <node id="3221">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="3225">
+        <label>LogPlat.h</label>
+        <link refid="_log_plat_8h"/>
+        <childnode refid="3218" relation="include">
+        </childnode>
+      </node>
+      <node id="3218">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="3219" relation="include">
+        </childnode>
+        <childnode refid="3221" relation="include">
+        </childnode>
+        <childnode refid="3222" relation="include">
+        </childnode>
+        <childnode refid="3223" relation="include">
+        </childnode>
+      </node>
+      <node id="3227">
+        <label>RF24Network.h</label>
+      </node>
+      <node id="3222">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="3220" relation="include">
+        </childnode>
+        <childnode refid="3223" relation="include">
+        </childnode>
+      </node>
+      <node id="3219">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3220" relation="include">
+        </childnode>
+      </node>
+      <node id="3226">
+        <label>SdFat.h</label>
+      </node>
+      <node id="3223">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3220">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3224">
+        <label>../LogPlats/BatchSD.h</label>
+        <link refid="_batch_s_d_8h"/>
+        <childnode refid="3225" relation="include">
+        </childnode>
+        <childnode refid="3226" relation="include">
+        </childnode>
+      </node>
+      <node id="3228">
+        <label>RF24.h</label>
+      </node>
+      <node id="3217">
+        <label>CommPlat.h</label>
+        <link refid="_comm_plat_8h"/>
+        <childnode refid="3218" relation="include">
+        </childnode>
+        <childnode refid="3224" relation="include">
+        </childnode>
+        <childnode refid="3220" relation="include">
+        </childnode>
+        <childnode refid="3223" relation="include">
+        </childnode>
+      </node>
+      <node id="3216">
+        <label>src/CommPlats/nRF.h</label>
+        <link refid="nRF.h"/>
+        <childnode refid="3217" relation="include">
+        </childnode>
+        <childnode refid="3227" relation="include">
+        </childnode>
+        <childnode refid="3228" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3231">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="3232" relation="include">
+        </childnode>
+        <childnode refid="3233" relation="include">
+        </childnode>
+      </node>
+      <node id="3232">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="3233">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="3230">
+        <label>src/CommPlats/nRF.cpp</label>
+        <link refid="n_r_f_8cpp"/>
+      </node>
+      <node id="3229">
+        <label>src/CommPlats/nRF.h</label>
+        <link refid="nRF.h"/>
+        <childnode refid="3230" relation="include">
+        </childnode>
+        <childnode refid="3231" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom__n_r_f" prot="public">Loom_nRF</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="n_r_f_8h_1af0704aae19af765f162551e066c7bff4" prot="public" static="no">
+        <name>NRF_MESSAGE_SIZE</name>
+        <initializer>120</initializer>
+        <briefdescription>
+<para>Max nRF message size. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/CommPlats/nRF.h" line="20" column="9" bodyfile="src/CommPlats/nRF.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/CommPlats/nRF.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,217 @@
+\hypertarget{class_loom___decagon_g_s3}{}\section{Loom\+\_\+\+Decagon\+G\+S3 Class Reference}
+\label{class_loom___decagon_g_s3}\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+
+
+Decagon G\+S3 soil moisture sensor module.  
+
+
+
+
+{\ttfamily \#include $<$Decagon\+\_\+\+G\+S3.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Decagon\+G\+S3\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{class_loom___decagon_g_s3__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___decagon_g_s3_a1e9aa9e2f05d497830bc263152107f4a}{Loom\+\_\+\+Decagon\+G\+S3} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const uint8\+\_\+t \hyperlink{class_loom_sensor_a0e74ebbaecde15ed1c71e1bb6bc6aebe}{num\+\_\+samples}=1)
+\begin{DoxyCompactList}\small\item\em Decagon G\+S3 module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___decagon_g_s3_a4a21f57dc28223d45e0a3bf128fa15a8}{Loom\+\_\+\+Decagon\+G\+S3} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___decagon_g_s3_aa660a154dca3ecb397a67ddd989e8382}{$\sim$\+Loom\+\_\+\+Decagon\+G\+S3} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___decagon_g_s3_a355b3ff5a69506a015e77acbaae30c9b}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___decagon_g_s3_a48b54dffb09f83a82e9ebed32e1c7152}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___decagon_g_s3_a398d5f2c572ae06bc31870fea1ca3e68}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___decagon_g_s3_a070ed45daa73857fd8fafbb0f7bd27a3}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_loom___decagon_g_s3_a4d980a6c88cf7eeed2594c1651a439dd}{dielec\+\_\+perm}
+\begin{DoxyCompactList}\small\item\em Measured dielectric permativity. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___decagon_g_s3_a24b5b1b72e6754add3768d4596832026}{temp}
+\begin{DoxyCompactList}\small\item\em Measured temperature. \end{DoxyCompactList}\item 
+float \hyperlink{class_loom___decagon_g_s3_a707a1d557e8b5eaa55202b45d369a350}{elec\+\_\+cond}
+\begin{DoxyCompactList}\small\item\em Measure electrical conductivity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Decagon G\+S3 soil moisture sensor module. 
+
+Incomplete.
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___decagon_g_s3.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sdi-12-sensors}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Decagon\+G\+S3(\+Loom\+Manager $\ast$manager, const uint8\+\_\+t num\+\_\+samples=1)}{Loom_DecagonGS3(LoomManager *manager, const uint8_t num_samples=1)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Decagon\+G\+S3\+::\+Loom\+\_\+\+Decagon\+G\+S3 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const uint8\+\_\+t}]{num\+\_\+samples = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___decagon_g_s3_a1e9aa9e2f05d497830bc263152107f4a}{}\label{class_loom___decagon_g_s3_a1e9aa9e2f05d497830bc263152107f4a}
+
+
+Decagon G\+S3 module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em num\+\_\+samples} & Set(\+Int) $\vert$ $<$8$>$ $\vert$ \{1, 2, 4, 8, 16\} $\vert$ How many samples to take and average \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Decagon\+G\+S3(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_DecagonGS3(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Decagon\+G\+S3\+::\+Loom\+\_\+\+Decagon\+G\+S3 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___decagon_g_s3_a4a21f57dc28223d45e0a3bf128fa15a8}{}\label{class_loom___decagon_g_s3_a4a21f57dc28223d45e0a3bf128fa15a8}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!````~Loom\+\_\+\+Decagon\+G\+S3@{$\sim$\+Loom\+\_\+\+Decagon\+G\+S3}}
+\index{````~Loom\+\_\+\+Decagon\+G\+S3@{$\sim$\+Loom\+\_\+\+Decagon\+G\+S3}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Decagon\+G\+S3()=default}{~Loom_DecagonGS3()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Decagon\+G\+S3\+::$\sim$\+Loom\+\_\+\+Decagon\+G\+S3 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___decagon_g_s3_aa660a154dca3ecb397a67ddd989e8382}{}\label{class_loom___decagon_g_s3_aa660a154dca3ecb397a67ddd989e8382}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Decagon\+G\+S3\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___decagon_g_s3_a355b3ff5a69506a015e77acbaae30c9b}{}\label{class_loom___decagon_g_s3_a355b3ff5a69506a015e77acbaae30c9b}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Decagon\+G\+S3\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___decagon_g_s3_a48b54dffb09f83a82e9ebed32e1c7152}{}\label{class_loom___decagon_g_s3_a48b54dffb09f83a82e9ebed32e1c7152}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Decagon\+G\+S3\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___decagon_g_s3_a398d5f2c572ae06bc31870fea1ca3e68}{}\label{class_loom___decagon_g_s3_a398d5f2c572ae06bc31870fea1ca3e68}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_sensor_aaa3bb2a2165029906c4ee815e790c89e}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Decagon\+G\+S3\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___decagon_g_s3_a070ed45daa73857fd8fafbb0f7bd27a3}{}\label{class_loom___decagon_g_s3_a070ed45daa73857fd8fafbb0f7bd27a3}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!dielec\+\_\+perm@{dielec\+\_\+perm}}
+\index{dielec\+\_\+perm@{dielec\+\_\+perm}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{dielec\+\_\+perm}{dielec_perm}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+Decagon\+G\+S3\+::dielec\+\_\+perm\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___decagon_g_s3_a4d980a6c88cf7eeed2594c1651a439dd}{}\label{class_loom___decagon_g_s3_a4d980a6c88cf7eeed2594c1651a439dd}
+
+
+Measured dielectric permativity. 
+
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!elec\+\_\+cond@{elec\+\_\+cond}}
+\index{elec\+\_\+cond@{elec\+\_\+cond}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{elec\+\_\+cond}{elec_cond}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+Decagon\+G\+S3\+::elec\+\_\+cond\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___decagon_g_s3_a707a1d557e8b5eaa55202b45d369a350}{}\label{class_loom___decagon_g_s3_a707a1d557e8b5eaa55202b45d369a350}
+
+
+Measure electrical conductivity. 
+
+\index{Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}!temp@{temp}}
+\index{temp@{temp}!Loom\+\_\+\+Decagon\+G\+S3@{Loom\+\_\+\+Decagon\+G\+S3}}
+\subsubsection[{\texorpdfstring{temp}{temp}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+Decagon\+G\+S3\+::temp\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___decagon_g_s3_a24b5b1b72e6754add3768d4596832026}{}\label{class_loom___decagon_g_s3_a24b5b1b72e6754add3768d4596832026}
+
+
+Measured temperature. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+S\+D\+I12/\hyperlink{_decagon___g_s3_8h}{Decagon\+\_\+\+G\+S3.\+h}\item 
+src/\+Sensors/\+S\+D\+I12/\hyperlink{_decagon___g_s3_8cpp}{Decagon\+\_\+\+G\+S3.\+cpp}\end{DoxyCompactItemize}

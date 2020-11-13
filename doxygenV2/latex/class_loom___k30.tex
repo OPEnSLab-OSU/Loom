@@ -1,0 +1,209 @@
+\hypertarget{class_loom___k30}{}\section{Loom\+\_\+\+K30 Class Reference}
+\label{class_loom___k30}\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+
+
+K30 C\+O2 sensor module.  
+
+
+
+
+{\ttfamily \#include $<$K30.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+K30\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{class_loom___k30__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___k30_adcbe5982ebd5edc1cacb06eca55e4f7b}{Loom\+\_\+\+K30} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}=\char`\"{}K30\char`\"{}, int \hyperlink{class_loom_sensor_a0e74ebbaecde15ed1c71e1bb6bc6aebe}{num\+\_\+samples}=1)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___k30_a5177bbcfd75e763efd286d0bbb799475}{Loom\+\_\+\+K30} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\item 
+virtual \hyperlink{class_loom___k30_a0863089be8f2e4a378e85406838c0b50}{$\sim$\+Loom\+\_\+\+K30} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___k30_a341fce3e5008b4a7b5bbb0c6d5a5cb71}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___k30_ad13974aee5a993538a0ba43b1e68beac}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___k30_a20b989aee8822e204e951edbc6a5969a}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___k30_a0b67390fda29e2e5761d479ef03914a8}{send\+Sensor\+Request} (byte request\mbox{[}7\mbox{]})
+\item 
+int \hyperlink{class_loom___k30_a73652d3a27632e202f65eb442f3a6a99}{read\+Sensor\+Response} (byte packet\mbox{[}7\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_loom___k30_a99216bf4efea0cea4033abbd4f8c4cf8}{C\+O2\+\_\+levels}
+\item 
+byte \hyperlink{class_loom___k30_a0b8f6461001363a009dc206347084264}{read\+\_\+\+C\+O2} \mbox{[}7\mbox{]} = \{0x\+F\+E, 0\+X44, 0\+X00, 0\+X08, 0\+X02, 0\+X9\+F, 0\+X25\}
+\item 
+byte \hyperlink{class_loom___k30_a82e7ef99aa9ee1709271bfe491e35632}{sensor\+\_\+response} \mbox{[}7\mbox{]} = \{0, 0, 0, 0, 0, 0, 0\}
+\item 
+Uart $\ast$ \hyperlink{class_loom___k30_a6066aba52897fee08390c9e6a5baf688}{K30\+\_\+\+Serial} = nullptr
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+K30 C\+O2 sensor module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/OPEnSLab-OSU/OPEnS-Lab-Home/wiki/K30-CO2-Sensor-(SE-0018)}{\tt Module Documentation}
+\item \href{https://www.co2meter.com/products/k-30-co2-sensor-module?variant=8463942}{\tt Product Page\+: C\+O2\+Meter K30 10,000ppm C\+O2 Sensor}
+\item \href{http://co2meters.com/Documentation/Datasheets/DS_SE_0118_CM_0024_Revised9%20(1).pdf}{\tt Datasheet\+: K30}
+\item \href{http://co2meters.com/Documentation/Other/AN_SE_0018_AN_126_Revised8.pdf}{\tt Arduino U\+A\+RT Interface to K30 Sensor}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#k30-co2-sensor}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+K30(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name=""K30"", int num\+\_\+samples=1)}{Loom_K30(LoomManager *manager, const char *module_name="K30", int num_samples=1)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+K30\+::\+Loom\+\_\+\+K30 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name = {\ttfamily \char`\"{}K30\char`\"{}}, }
+\item[{int}]{num\+\_\+samples = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___k30_adcbe5982ebd5edc1cacb06eca55e4f7b}{}\label{class_loom___k30_adcbe5982ebd5edc1cacb06eca55e4f7b}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & The name of the module \\
+\hline
+\mbox{\tt in}  & {\em num\+\_\+samples} & The number of samples to take and average \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+K30(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_K30(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+K30\+::\+Loom\+\_\+\+K30 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___k30_a5177bbcfd75e763efd286d0bbb799475}{}\label{class_loom___k30_a5177bbcfd75e763efd286d0bbb799475}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!````~Loom\+\_\+\+K30@{$\sim$\+Loom\+\_\+\+K30}}
+\index{````~Loom\+\_\+\+K30@{$\sim$\+Loom\+\_\+\+K30}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+K30()=default}{~Loom_K30()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+\_\+\+K30\+::$\sim$\+Loom\+\_\+\+K30 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom___k30_a0863089be8f2e4a378e85406838c0b50}{}\label{class_loom___k30_a0863089be8f2e4a378e85406838c0b50}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+K30\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___k30_ad13974aee5a993538a0ba43b1e68beac}{}\label{class_loom___k30_ad13974aee5a993538a0ba43b1e68beac}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+K30\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___k30_a20b989aee8822e204e951edbc6a5969a}{}\label{class_loom___k30_a20b989aee8822e204e951edbc6a5969a}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+K30\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___k30_a341fce3e5008b4a7b5bbb0c6d5a5cb71}{}\label{class_loom___k30_a341fce3e5008b4a7b5bbb0c6d5a5cb71}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!read\+Sensor\+Response@{read\+Sensor\+Response}}
+\index{read\+Sensor\+Response@{read\+Sensor\+Response}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{read\+Sensor\+Response(byte packet[7])}{readSensorResponse(byte packet[7])}}]{\setlength{\rightskip}{0pt plus 5cm}int Loom\+\_\+\+K30\+::read\+Sensor\+Response (
+\begin{DoxyParamCaption}
+\item[{byte}]{packet\mbox{[}7\mbox{]}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___k30_a73652d3a27632e202f65eb442f3a6a99}{}\label{class_loom___k30_a73652d3a27632e202f65eb442f3a6a99}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!send\+Sensor\+Request@{send\+Sensor\+Request}}
+\index{send\+Sensor\+Request@{send\+Sensor\+Request}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{send\+Sensor\+Request(byte request[7])}{sendSensorRequest(byte request[7])}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+K30\+::send\+Sensor\+Request (
+\begin{DoxyParamCaption}
+\item[{byte}]{request\mbox{[}7\mbox{]}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___k30_a0b67390fda29e2e5761d479ef03914a8}{}\label{class_loom___k30_a0b67390fda29e2e5761d479ef03914a8}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!C\+O2\+\_\+levels@{C\+O2\+\_\+levels}}
+\index{C\+O2\+\_\+levels@{C\+O2\+\_\+levels}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{C\+O2\+\_\+levels}{CO2_levels}}]{\setlength{\rightskip}{0pt plus 5cm}float Loom\+\_\+\+K30\+::\+C\+O2\+\_\+levels\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___k30_a99216bf4efea0cea4033abbd4f8c4cf8}{}\label{class_loom___k30_a99216bf4efea0cea4033abbd4f8c4cf8}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!K30\+\_\+\+Serial@{K30\+\_\+\+Serial}}
+\index{K30\+\_\+\+Serial@{K30\+\_\+\+Serial}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{K30\+\_\+\+Serial}{K30_Serial}}]{\setlength{\rightskip}{0pt plus 5cm}Uart$\ast$ Loom\+\_\+\+K30\+::\+K30\+\_\+\+Serial = nullptr\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___k30_a6066aba52897fee08390c9e6a5baf688}{}\label{class_loom___k30_a6066aba52897fee08390c9e6a5baf688}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!read\+\_\+\+C\+O2@{read\+\_\+\+C\+O2}}
+\index{read\+\_\+\+C\+O2@{read\+\_\+\+C\+O2}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{read\+\_\+\+C\+O2}{read_CO2}}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+K30\+::read\+\_\+\+C\+O2\mbox{[}7\mbox{]} = \{0x\+F\+E, 0\+X44, 0\+X00, 0\+X08, 0\+X02, 0\+X9\+F, 0\+X25\}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___k30_a0b8f6461001363a009dc206347084264}{}\label{class_loom___k30_a0b8f6461001363a009dc206347084264}
+\index{Loom\+\_\+\+K30@{Loom\+\_\+\+K30}!sensor\+\_\+response@{sensor\+\_\+response}}
+\index{sensor\+\_\+response@{sensor\+\_\+response}!Loom\+\_\+\+K30@{Loom\+\_\+\+K30}}
+\subsubsection[{\texorpdfstring{sensor\+\_\+response}{sensor_response}}]{\setlength{\rightskip}{0pt plus 5cm}byte Loom\+\_\+\+K30\+::sensor\+\_\+response\mbox{[}7\mbox{]} = \{0, 0, 0, 0, 0, 0, 0\}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___k30_a82e7ef99aa9ee1709271bfe491e35632}{}\label{class_loom___k30_a82e7ef99aa9ee1709271bfe491e35632}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+S\+E\+R\+I\+A\+L/\hyperlink{_k30_8h}{K30.\+h}\item 
+src/\+Sensors/\+S\+E\+R\+I\+A\+L/\hyperlink{_k30_8cpp}{K30.\+cpp}\end{DoxyCompactItemize}

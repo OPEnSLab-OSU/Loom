@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="structfactory_1_1_name_module_pair" kind="struct" language="C++" prot="public">
+    <compoundname>factory::NameModulePair</compoundname>
+    <includes refid="_module___factory_8h" local="no">Module_Factory.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfactory_1_1_name_module_pair_1abd0feebc88465d1acbd71eb3ed632fe2" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* factory::NameModulePair::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>Module type to compare against. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="123" column="1" bodyfile="src/Module_Factory.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfactory_1_1_name_module_pair_1ada6abb90038e59d80f8b0bbfa2b0f39b" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefactory_1a3032a25e556f11cb0899c2b3abc95283" kindref="member">FactoryPtr</ref></type>
+        <definition>FactoryPtr factory::NameModulePair::Construct</definition>
+        <argsstring></argsstring>
+        <name>Construct</name>
+        <briefdescription>
+<para>Pointer to &apos;template&lt;class T&gt; LoomModule* Create(LoomManager* manager, JsonArrayConst p)&apos; with the type T set. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="125" column="1" bodyfile="src/Module_Factory.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfactory_1_1_name_module_pair_1ad0df41ece733325bc0b1ba75f7e38e07" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefactory_1aa63dbcb7fe5c455558ae48b029500d77" kindref="member">FactoryPtrDefault</ref></type>
+        <definition>FactoryPtrDefault factory::NameModulePair::ConstructDefault</definition>
+        <argsstring></argsstring>
+        <name>ConstructDefault</name>
+        <briefdescription>
+<para>Pointer to &apos;template&lt;class T&gt; LoomModule* CreateDefault()&apos; with the type T set. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="127" column="1" bodyfile="src/Module_Factory.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct to contain the elements of factory lookup table. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1416">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1412">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1413" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1414" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1419" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1415" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1411">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1412" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1420">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1415">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1411" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1416" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1417" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1414" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1418" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1419" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1420" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1414">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1411" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1415" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1410">
+        <label>factory::NameModulePair</label>
+        <link refid="structfactory_1_1_name_module_pair"/>
+        <childnode refid="1411" relation="usage">
+          <edgelabel>Construct</edgelabel>
+          <edgelabel>ConstructDefault</edgelabel>
+        </childnode>
+      </node>
+      <node id="1413">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1411" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1419">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1411" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1417">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1418">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Module_Factory.h" line="121" column="1" bodyfile="src/Module_Factory.h" bodystart="121" bodyend="128"/>
+    <listofallmembers>
+      <member refid="structfactory_1_1_name_module_pair_1ada6abb90038e59d80f8b0bbfa2b0f39b" prot="public" virt="non-virtual"><scope>factory::NameModulePair</scope><name>Construct</name></member>
+      <member refid="structfactory_1_1_name_module_pair_1ad0df41ece733325bc0b1ba75f7e38e07" prot="public" virt="non-virtual"><scope>factory::NameModulePair</scope><name>ConstructDefault</name></member>
+      <member refid="structfactory_1_1_name_module_pair_1abd0feebc88465d1acbd71eb3ed632fe2" prot="public" virt="non-virtual"><scope>factory::NameModulePair</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_m_a_x31856_8h" kind="file" language="C++">
+    <compoundname>MAX31856.h</compoundname>
+    <includes refid="_s_p_i___sensor_8h" local="yes">SPI_Sensor.h</includes>
+    <includes local="no">Adafruit_MAX31856.h</includes>
+    <includedby refid="_module___factory_8h" local="yes">src/Module_Factory.h</includedby>
+    <includedby refid="_m_a_x31856_8cpp" local="yes">src/Sensors/SPI/MAX31856.cpp</includedby>
+    <incdepgraph>
+      <node id="5764">
+        <label>Macros.h</label>
+        <link refid="_macros_8h"/>
+      </node>
+      <node id="5761">
+        <label>Module.h</label>
+        <link refid="_module_8h"/>
+        <childnode refid="5762" relation="include">
+        </childnode>
+        <childnode refid="5764" relation="include">
+        </childnode>
+        <childnode refid="5765" relation="include">
+        </childnode>
+        <childnode refid="5766" relation="include">
+        </childnode>
+      </node>
+      <node id="5765">
+        <label>Package.h</label>
+        <link refid="_package_8h"/>
+        <childnode refid="5763" relation="include">
+        </childnode>
+        <childnode refid="5766" relation="include">
+        </childnode>
+      </node>
+      <node id="5762">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="5763" relation="include">
+        </childnode>
+      </node>
+      <node id="5766">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="5767">
+        <label>Adafruit_MAX31856.h</label>
+      </node>
+      <node id="5760">
+        <label>../Sensor.h</label>
+        <link refid="_sensor_8h"/>
+        <childnode refid="5761" relation="include">
+        </childnode>
+      </node>
+      <node id="5759">
+        <label>SPI_Sensor.h</label>
+        <link refid="_s_p_i___sensor_8h"/>
+        <childnode refid="5760" relation="include">
+        </childnode>
+      </node>
+      <node id="5763">
+        <label>Arduino.h</label>
+      </node>
+      <node id="5758">
+        <label>src/Sensors/SPI/MAX31856.h</label>
+        <link refid="MAX31856.h"/>
+        <childnode refid="5759" relation="include">
+        </childnode>
+        <childnode refid="5767" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5769">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="5770" relation="include">
+        </childnode>
+        <childnode refid="5771" relation="include">
+        </childnode>
+      </node>
+      <node id="5772">
+        <label>src/Sensors/SPI/MAX31856.cpp</label>
+        <link refid="_m_a_x31856_8cpp"/>
+      </node>
+      <node id="5770">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="5771">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="5768">
+        <label>src/Sensors/SPI/MAX31856.h</label>
+        <link refid="MAX31856.h"/>
+        <childnode refid="5769" relation="include">
+        </childnode>
+        <childnode refid="5772" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom___m_a_x31856" prot="public">Loom_MAX31856</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/SPI/MAX31856.h"/>
+  </compounddef>
+</doxygen>

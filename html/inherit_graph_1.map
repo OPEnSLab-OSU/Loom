@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_factory_base.html" title="Base class that factory is derived from. " alt="" coords="5,20,105,47"/>
+<area shape="rect" id="node2" href="$class_loom_factory.html" title="Factory is used by LoomManager when parsing Json to match module names to their associated constructo..." alt="" coords="153,5,388,61"/>
+</map>

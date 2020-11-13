@@ -1,0 +1,468 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_i2_c_sensor" kind="class" language="C++" prot="public">
+    <compoundname>LoomI2CSensor</compoundname>
+    <basecompoundref refid="class_loom_sensor" prot="public" virt="non-virtual">LoomSensor</basecompoundref>
+    <derivedcompoundref refid="class_loom___a_d_s1115" prot="public" virt="non-virtual">Loom_ADS1115</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___a_s7262" prot="public" virt="non-virtual">Loom_AS7262</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___a_s7263" prot="public" virt="non-virtual">Loom_AS7263</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___a_s7265_x" prot="public" virt="non-virtual">Loom_AS7265X</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___f_x_a_s21002" prot="public" virt="non-virtual">Loom_FXAS21002</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___f_x_o_s8700" prot="public" virt="non-virtual">Loom_FXOS8700</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___l_i_s3_d_h" prot="public" virt="non-virtual">Loom_LIS3DH</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___m_b1232" prot="public" virt="non-virtual">Loom_MB1232</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___m_m_a8451" prot="public" virt="non-virtual">Loom_MMA8451</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___m_p_u6050" prot="public" virt="non-virtual">Loom_MPU6050</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___m_s5803" prot="public" virt="non-virtual">Loom_MS5803</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___s_h_t31_d" prot="public" virt="non-virtual">Loom_SHT31D</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___s_t_e_m_m_a" prot="public" virt="non-virtual">Loom_STEMMA</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___t_m_p007" prot="public" virt="non-virtual">Loom_TMP007</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___t_s_l2561" prot="public" virt="non-virtual">Loom_TSL2561</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___t_s_l2591" prot="public" virt="non-virtual">Loom_TSL2591</derivedcompoundref>
+    <derivedcompoundref refid="class_loom___z_x_gesture" prot="public" virt="non-virtual">Loom_ZXGesture</derivedcompoundref>
+    <includes refid="_i2_c___sensor_8h" local="no">I2C_Sensor.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom_i2_c_sensor_1a974180c199ef01753afc67bc59c1e2c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomI2CSensor::LoomI2CSensor</definition>
+        <argsstring>(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const byte i2c_address, const uint8_t mux_port=255, const uint8_t num_samples=1)</argsstring>
+        <name>LoomI2CSensor</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>module_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>module_type</declname>
+        </param>
+        <param>
+          <type>const byte</type>
+          <declname>i2c_address</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>mux_port</declname>
+          <defval>255</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>num_samples</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">module_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the module (provided by derived classes) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">i2c_address</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The i2c address of the sensor </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mux_portx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The port of the sensor if used with a multiplexer, 255 if not </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">num_samples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of samples to take and average </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/I2C_Sensor.h" line="52" column="1" bodyfile="src/Sensors/I2C/I2C_Sensor.cpp" bodystart="16" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_i2_c_sensor_1ac27cd8c9d81b92b2c0dcb8f8808a530e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual LoomI2CSensor::~LoomI2CSensor</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LoomI2CSensor</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/I2C_Sensor.h" line="62" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom_i2_c_sensor_1ab90004ce30a281b7f51ecf3093ca4cea" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LoomI2CSensor::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_sensor_1aaa3bb2a2165029906c4ee815e790c89e">print_config</reimplements>
+        <reimplementedby refid="class_loom___m_m_a8451_1aad7bfbb26c8dd4eadd61e9a4817e6930">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___z_x_gesture_1a7af9796af4c3dfa33a3eedb63de89285">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7262_1a29aef77c6d06feb46bc840f4407abba7">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___a_s7263_1a19c0c1b6a4ae3ad0454011764cf54c70">print_config</reimplementedby>
+        <reimplementedby refid="class_loom___a_d_s1115_1a8c5419d33482990e84be15dfe82b0ea6">print_config</reimplementedby>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/I2C_Sensor.h" line="73" column="1" bodyfile="src/Sensors/I2C/I2C_Sensor.cpp" bodystart="30" bodyend="35"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="friend" id="class_loom_i2_c_sensor_1af2e72949edeee6c1a837d695ca3f3302" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class Loom_Multiplexer</definition>
+        <argsstring></argsstring>
+        <name>Loom_Multiplexer</name>
+        <briefdescription>
+<para>Allow Multiplexer to access private methods of I2C sensor modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/I2C_Sensor.h" line="86" column="1" bodyfile="src/Sensors/I2C/I2C_Sensor.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_i2_c_sensor_1a22a0afe0a2d1f13cdac37e9208fdce2b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>byte</type>
+        <definition>byte LoomI2CSensor::get_i2c_address</definition>
+        <argsstring>() const </argsstring>
+        <name>get_i2c_address</name>
+        <briefdescription>
+<para>Get the sensor&apos;s I2C address. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The sensor&apos;s I2C address </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/I2C_Sensor.h" line="81" column="1" bodyfile="src/Sensors/I2C/I2C_Sensor.h" bodystart="81" bodyend="81"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom_i2_c_sensor_1a6ff389c1f015152a9ebfccb037d3d90e" prot="protected" static="no" mutable="no">
+        <type>const byte</type>
+        <definition>const byte LoomI2CSensor::i2c_address</definition>
+        <argsstring></argsstring>
+        <name>i2c_address</name>
+        <briefdescription>
+<para>The sensor&apos;s I2C address. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the sensor supports mutliple, make sure this matches the current configuration of the i2c address </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/I2C_Sensor.h" line="35" column="1" bodyfile="src/Sensors/I2C/I2C_Sensor.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_i2_c_sensor_1ab5c61951a994a76a2aa2e5400089dad1" prot="protected" static="no" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t LoomI2CSensor::port_num</definition>
+        <argsstring></argsstring>
+        <name>port_num</name>
+        <briefdescription>
+<para>Used with multiplexer, keep track of port it is on. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sensors/I2C/I2C_Sensor.h" line="38" column="1" bodyfile="src/Sensors/I2C/I2C_Sensor.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract root for I2C sensor modules. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_i2_c_sensor.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#i2c-sensors">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1105">
+        <label>Loom_AS7265X</label>
+        <link refid="class_loom___a_s7265_x"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1101">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="1110">
+        <label>Loom_MMA8451</label>
+        <link refid="class_loom___m_m_a8451"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1108">
+        <label>Loom_LIS3DH</label>
+        <link refid="class_loom___l_i_s3_d_h"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1113">
+        <label>Loom_SHT31D</label>
+        <link refid="class_loom___s_h_t31_d"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1102">
+        <label>Loom_ADS1115</label>
+        <link refid="class_loom___a_d_s1115"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1117">
+        <label>Loom_TSL2591</label>
+        <link refid="class_loom___t_s_l2591"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1107">
+        <label>Loom_FXOS8700</label>
+        <link refid="class_loom___f_x_o_s8700"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1116">
+        <label>Loom_TSL2561</label>
+        <link refid="class_loom___t_s_l2561"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1118">
+        <label>Loom_ZXGesture</label>
+        <link refid="class_loom___z_x_gesture"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1106">
+        <label>Loom_FXAS21002</label>
+        <link refid="class_loom___f_x_a_s21002"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1114">
+        <label>Loom_STEMMA</label>
+        <link refid="class_loom___s_t_e_m_m_a"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1111">
+        <label>Loom_MPU6050</label>
+        <link refid="class_loom___m_p_u6050"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1112">
+        <label>Loom_MS5803</label>
+        <link refid="class_loom___m_s5803"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1099">
+        <label>LoomI2CSensor</label>
+        <link refid="class_loom_i2_c_sensor"/>
+        <childnode refid="1100" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1103">
+        <label>Loom_AS7262</label>
+        <link refid="class_loom___a_s7262"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1104">
+        <label>Loom_AS7263</label>
+        <link refid="class_loom___a_s7263"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1100">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="1101" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1109">
+        <label>Loom_MB1232</label>
+        <link refid="class_loom___m_b1232"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1115">
+        <label>Loom_TMP007</label>
+        <link refid="class_loom___t_m_p007"/>
+        <childnode refid="1099" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1126">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1122">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1123" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1124" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1129" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1125" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1121">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1122" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1130">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1125">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1121" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1126" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1127" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1124" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1128" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1129" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1130" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1124">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1121" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1125" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1119">
+        <label>LoomI2CSensor</label>
+        <link refid="class_loom_i2_c_sensor"/>
+        <childnode refid="1120" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1120">
+        <label>LoomSensor</label>
+        <link refid="class_loom_sensor"/>
+        <childnode refid="1121" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1123">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1121" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1129">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1121" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1127">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1128">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Sensors/I2C/I2C_Sensor.h" line="28" column="1" bodyfile="src/Sensors/I2C/I2C_Sensor.h" bodystart="27" bodyend="88"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>add_config</name></member>
+      <member refid="class_loom_sensor_1ab75183469715506e8a694b9559b76c35" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>calibrate</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>Category</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>category</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_i2_c_sensor_1a22a0afe0a2d1f13cdac37e9208fdce2b" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>get_i2c_address</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>get_module_type</name></member>
+      <member refid="class_loom_sensor_1ae9a177765bd3ab79e002e98df6053ce0" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>get_num_samples</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_i2_c_sensor_1a6ff389c1f015152a9ebfccb037d3d90e" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>i2c_address</name></member>
+      <member refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>link_device_manager</name></member>
+      <member refid="class_loom_i2_c_sensor_1af2e72949edeee6c1a837d695ca3f3302" prot="private" virt="non-virtual"><scope>LoomI2CSensor</scope><name>Loom_Multiplexer</name></member>
+      <member refid="class_loom_i2_c_sensor_1a974180c199ef01753afc67bc59c1e2c2" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>LoomI2CSensor</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>LoomModule</name></member>
+      <member refid="class_loom_sensor_1acce7ce989a74b5e4b3c8ee51ae55e8a9" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>LoomSensor</name></member>
+      <member refid="class_loom_sensor_1a390ef79a4d5d6b6386e099c7fe56ed1a" prot="public" virt="pure-virtual"><scope>LoomI2CSensor</scope><name>measure</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>module_type</name></member>
+      <member refid="class_loom_sensor_1a0e74ebbaecde15ed1c71e1bb6bc6aebe" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>num_samples</name></member>
+      <member refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53" prot="public" virt="pure-virtual"><scope>LoomI2CSensor</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_i2_c_sensor_1ab5c61951a994a76a2aa2e5400089dad1" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>port_num</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>power_up</name></member>
+      <member refid="class_loom_i2_c_sensor_1ab90004ce30a281b7f51ecf3093ca4cea" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>print_config</name></member>
+      <member refid="class_loom_sensor_1aba2aa35441c2eb1cf27b95a1fc08b288" prot="public" virt="pure-virtual"><scope>LoomI2CSensor</scope><name>print_measurements</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>LoomI2CSensor</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>set_active</name></member>
+      <member refid="class_loom_sensor_1ad02e186edda41d4458246f329641d6f4" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>set_num_samples</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>LoomI2CSensor</scope><name>Type</name></member>
+      <member refid="class_loom_i2_c_sensor_1ac27cd8c9d81b92b2c0dcb8f8808a530e" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>~LoomI2CSensor</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_sensor_1aac0541421949a20b91a13583271f6757" prot="public" virt="virtual"><scope>LoomI2CSensor</scope><name>~LoomSensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,215 @@
+\hypertarget{class_loom_n_t_p_sync}{}\section{Loom\+N\+T\+P\+Sync Class Reference}
+\label{class_loom_n_t_p_sync}\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+
+
+Glue code to synchronize an R\+TC using an Internet\+Plat.  
+
+
+
+
+{\ttfamily \#include $<$N\+T\+P\+\_\+\+Sync.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+N\+T\+P\+Sync\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{class_loom_n_t_p_sync__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_n_t_p_sync_a022444628c2923c9285cdf496c4485e6}{Loom\+N\+T\+P\+Sync} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const uint sync\+\_\+interval\+\_\+hours=0)
+\begin{DoxyCompactList}\small\item\em N\+TP Sync module constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_n_t_p_sync_a0475c092a7fadd3d0615258560da3225}{Loom\+N\+T\+P\+Sync} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_n_t_p_sync_a78ac0f9bcfdf4bb2e283bfcfc19c1983}{$\sim$\+Loom\+N\+T\+P\+Sync} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_n_t_p_sync_ad4a9843c49172a83f4c7bcb310f4b177}{second\+\_\+stage\+\_\+ctor} () override
+\begin{DoxyCompactList}\small\item\em Sync the R\+TC using N\+TP from the internet platform specified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_n_t_p_sync_a59671fae8c01482a2643cadaef3fd73d}{measure} ()
+\begin{DoxyCompactList}\small\item\em Sync the time if necessary or enabled. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_n_t_p_sync_a99820eea8c86bbeb299a12fa2164fdad}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_n_t_p_sync_aab638db55b31b1233fe697117d3e3330}{dispatch} (Json\+Object) override
+\begin{DoxyCompactList}\small\item\em Route command to driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom_n_t_p_sync_af683546f2b20799e3afbcf61eaabfc2b}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_n_t_p_sync_ad33806de76e81d80f9868951e83a8191}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Glue code to synchronize an R\+TC using an Internet\+Plat. 
+
+Always synchronizes the R\+TC from \hyperlink{class_loom___interrupt___manager_a7d27c7a5b0c7f7d8c26f043656cb28a7}{Loom\+\_\+\+Interrupt\+\_\+\+Manager\+::get\+\_\+\+R\+T\+C\+\_\+module()}.
+
+\begin{DoxyNote}{Note}
+Requires a \hyperlink{class_loom_r_t_c}{Loom\+R\+TC} and \hyperlink{class_loom_internet_plat}{Loom\+Internet\+Plat} module to work.
+\end{DoxyNote}
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_n_t_p_sync.html}{\tt Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\subsubsection[{\texorpdfstring{Loom\+N\+T\+P\+Sync(\+Loom\+Manager $\ast$manager, const uint sync\+\_\+interval\+\_\+hours=0)}{LoomNTPSync(LoomManager *manager, const uint sync_interval_hours=0)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+N\+T\+P\+Sync\+::\+Loom\+N\+T\+P\+Sync (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const uint}]{sync\+\_\+interval\+\_\+hours = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_n_t_p_sync_a022444628c2923c9285cdf496c4485e6}{}\label{class_loom_n_t_p_sync_a022444628c2923c9285cdf496c4485e6}
+
+
+N\+TP Sync module constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sync\+\_\+interval\+\_\+hours} & Int $\vert$ $<$0$>$ $\vert$ \mbox{[}0-\/999\mbox{]} $\vert$ What hourly period to sync the R\+TC, zero for once on startup. \\
+\hline
+\end{DoxyParams}
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\subsubsection[{\texorpdfstring{Loom\+N\+T\+P\+Sync(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{LoomNTPSync(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+N\+T\+P\+Sync\+::\+Loom\+N\+T\+P\+Sync (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_n_t_p_sync_a0475c092a7fadd3d0615258560da3225}{}\label{class_loom_n_t_p_sync_a0475c092a7fadd3d0615258560da3225}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!````~Loom\+N\+T\+P\+Sync@{$\sim$\+Loom\+N\+T\+P\+Sync}}
+\index{````~Loom\+N\+T\+P\+Sync@{$\sim$\+Loom\+N\+T\+P\+Sync}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+N\+T\+P\+Sync()=default}{~LoomNTPSync()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+N\+T\+P\+Sync\+::$\sim$\+Loom\+N\+T\+P\+Sync (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom_n_t_p_sync_a78ac0f9bcfdf4bb2e283bfcfc19c1983}{}\label{class_loom_n_t_p_sync_a78ac0f9bcfdf4bb2e283bfcfc19c1983}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\subsubsection[{\texorpdfstring{dispatch(\+Json\+Object) override}{dispatch(JsonObject) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+N\+T\+P\+Sync\+::dispatch (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_n_t_p_sync_aab638db55b31b1233fe697117d3e3330}{}\label{class_loom_n_t_p_sync_aab638db55b31b1233fe697117d3e3330}
+
+
+Route command to driver. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}{Loom\+Module}.
+
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!measure@{measure}}
+\index{measure@{measure}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\subsubsection[{\texorpdfstring{measure()}{measure()}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+N\+T\+P\+Sync\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_n_t_p_sync_a59671fae8c01482a2643cadaef3fd73d}{}\label{class_loom_n_t_p_sync_a59671fae8c01482a2643cadaef3fd73d}
+
+
+Sync the time if necessary or enabled. 
+
+Allows the module to run regularly by emulating a sensor, which have thier measure methods called regularly. \index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!package@{package}}
+\index{package@{package}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+N\+T\+P\+Sync\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_n_t_p_sync_a99820eea8c86bbeb299a12fa2164fdad}{}\label{class_loom_n_t_p_sync_a99820eea8c86bbeb299a12fa2164fdad}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+N\+T\+P\+Sync\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_n_t_p_sync_af683546f2b20799e3afbcf61eaabfc2b}{}\label{class_loom_n_t_p_sync_af683546f2b20799e3afbcf61eaabfc2b}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+N\+T\+P\+Sync\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_n_t_p_sync_ad33806de76e81d80f9868951e83a8191}{}\label{class_loom_n_t_p_sync_ad33806de76e81d80f9868951e83a8191}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}!second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}}
+\index{second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}!Loom\+N\+T\+P\+Sync@{Loom\+N\+T\+P\+Sync}}
+\subsubsection[{\texorpdfstring{second\+\_\+stage\+\_\+ctor() override}{second_stage_ctor() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+N\+T\+P\+Sync\+::second\+\_\+stage\+\_\+ctor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom_n_t_p_sync_ad4a9843c49172a83f4c7bcb310f4b177}{}\label{class_loom_n_t_p_sync_ad4a9843c49172a83f4c7bcb310f4b177}
+
+
+Sync the R\+TC using N\+TP from the internet platform specified. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a8dd3704d1bd38868d5774e48c1073d12}{Loom\+Module}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{_n_t_p___sync_8h}{N\+T\+P\+\_\+\+Sync.\+h}\item 
+src/\hyperlink{_n_t_p___sync_8cpp}{N\+T\+P\+\_\+\+Sync.\+cpp}\end{DoxyCompactItemize}

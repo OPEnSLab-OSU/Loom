@@ -1,0 +1,85 @@
+\hypertarget{class_loom_s_d_i12_sensor}{}\section{Loom\+S\+D\+I12\+Sensor Class Reference}
+\label{class_loom_s_d_i12_sensor}\index{Loom\+S\+D\+I12\+Sensor@{Loom\+S\+D\+I12\+Sensor}}
+
+
+Abstract base class for S\+D\+I12 sensor modules.  
+
+
+
+
+{\ttfamily \#include $<$S\+D\+I12\+\_\+\+Sensor.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+S\+D\+I12\+Sensor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{class_loom_s_d_i12_sensor__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_s_d_i12_sensor_a63046778156b466c978abd5a4553d856}{Loom\+S\+D\+I12\+Sensor} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}, const uint8\+\_\+t \hyperlink{class_loom_sensor_a0e74ebbaecde15ed1c71e1bb6bc6aebe}{num\+\_\+samples}=1)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_s_d_i12_sensor_a58c4dff03ae7cc178bcf322ba4fdd393}{$\sim$\+Loom\+S\+D\+I12\+Sensor} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Abstract base class for S\+D\+I12 sensor modules. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_s_d_i12_sensor.html}{\tt Module Documentation}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sdi-12-sensors}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+S\+D\+I12\+Sensor@{Loom\+S\+D\+I12\+Sensor}!Loom\+S\+D\+I12\+Sensor@{Loom\+S\+D\+I12\+Sensor}}
+\index{Loom\+S\+D\+I12\+Sensor@{Loom\+S\+D\+I12\+Sensor}!Loom\+S\+D\+I12\+Sensor@{Loom\+S\+D\+I12\+Sensor}}
+\subsubsection[{\texorpdfstring{Loom\+S\+D\+I12\+Sensor(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name, const Loom\+Module\+::\+Type module\+\_\+type, const uint8\+\_\+t num\+\_\+samples=1)}{LoomSDI12Sensor(LoomManager *manager, const char *module_name, const LoomModule::Type module_type, const uint8_t num_samples=1)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+S\+D\+I12\+Sensor\+::\+Loom\+S\+D\+I12\+Sensor (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name, }
+\item[{const {\bf Loom\+Module\+::\+Type}}]{module\+\_\+type, }
+\item[{const uint8\+\_\+t}]{num\+\_\+samples = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_s_d_i12_sensor_a63046778156b466c978abd5a4553d856}{}\label{class_loom_s_d_i12_sensor_a63046778156b466c978abd5a4553d856}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em num\+\_\+samples} & The number of samples to take and average \\
+\hline
+\end{DoxyParams}
+\index{Loom\+S\+D\+I12\+Sensor@{Loom\+S\+D\+I12\+Sensor}!````~Loom\+S\+D\+I12\+Sensor@{$\sim$\+Loom\+S\+D\+I12\+Sensor}}
+\index{````~Loom\+S\+D\+I12\+Sensor@{$\sim$\+Loom\+S\+D\+I12\+Sensor}!Loom\+S\+D\+I12\+Sensor@{Loom\+S\+D\+I12\+Sensor}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+S\+D\+I12\+Sensor()=default}{~LoomSDI12Sensor()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+S\+D\+I12\+Sensor\+::$\sim$\+Loom\+S\+D\+I12\+Sensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_s_d_i12_sensor_a58c4dff03ae7cc178bcf322ba4fdd393}{}\label{class_loom_s_d_i12_sensor_a58c4dff03ae7cc178bcf322ba4fdd393}
+
+
+Destructor. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+S\+D\+I12/\hyperlink{_s_d_i12___sensor_8h}{S\+D\+I12\+\_\+\+Sensor.\+h}\item 
+src/\+Sensors/\+S\+D\+I12/\hyperlink{_s_d_i12___sensor_8cpp}{S\+D\+I12\+\_\+\+Sensor.\+cpp}\end{DoxyCompactItemize}

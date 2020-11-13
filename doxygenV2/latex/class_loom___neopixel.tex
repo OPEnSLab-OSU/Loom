@@ -1,0 +1,278 @@
+\hypertarget{class_loom___neopixel}{}\section{Loom\+\_\+\+Neopixel Class Reference}
+\label{class_loom___neopixel}\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+
+
+Neopixel tri-\/color L\+ED actuator module.  
+
+
+
+
+{\ttfamily \#include $<$Neopixel.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+Neopixel\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{class_loom___neopixel__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___neopixel_a2a0d74646338fb10a103a7ea73247e21}{Loom\+\_\+\+Neopixel} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const bool enable\+A0=false, const bool enable\+A1=false, const bool enable\+A2=true)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___neopixel_a3f640252abdf3a7bf3767f8ebd2d78eb}{Loom\+\_\+\+Neopixel} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___neopixel_a478d9ab0f93182948e9969af40c65819}{$\sim$\+Loom\+\_\+\+Neopixel} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_loom___neopixel_a89ecb4894b7be0e00657d32aa2374a42}{dispatch} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Route command to driver. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___neopixel_a005ac12c181ff40647657c6c9b2fde2d}{add\+\_\+config} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Add configuration information to Json\+Object. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___neopixel_a5e5009a63413482de5b5baa54603da65}{set\+\_\+color} (const uint8\+\_\+t port, const uint8\+\_\+t chain\+\_\+num, const uint8\+\_\+t red, const uint8\+\_\+t green, const uint8\+\_\+t blue)
+\begin{DoxyCompactList}\small\item\em Set Neopixel color. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___neopixel_aa1930cfa494ef432bbbf1d1786c6b57d}{print\+\_\+config} () const override
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___neopixel_a0a5e8fd23e4f32b006a52c422551b48e}{print\+\_\+state} () const override
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___neopixel_ac967b6eff14a0e028ff70524f70acd0c}{enable\+\_\+pin} (const uint8\+\_\+t port, const bool state)
+\begin{DoxyCompactList}\small\item\em enable or disable pin for use with Neopixel \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+Neo\+Pixel \hyperlink{class_loom___neopixel_a3f177f651d50d29a0ca12d2a9ba5eb79}{pixels} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Array of Neopixel instances to manage up to 3 Neopixels. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom___neopixel_aec3c3270cf9a4c9f942296a7ebd5147d}{pin\+\_\+enabled} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Whether pins A0-\/\+A2 are enabled. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_loom___neopixel_ac084d5a5236d29d024c166a79e9423f1}{color\+\_\+vals} \mbox{[}3\mbox{]}\mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em The associated color values (R\+GB) for each of the 3 Neopixels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Neopixel tri-\/color L\+ED actuator module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___neopixel.html}{\tt Module Documentation}
+\item \href{https://www.adafruit.com/category/168}{\tt Product Page\+: Adafruit Neopixel}
+\item \href{https://github.com/adafruit/Adafruit_NeoPixel}{\tt Dependency}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#neopixel}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Neopixel(\+Loom\+Manager $\ast$manager, const bool enable\+A0=false, const bool enable\+A1=false, const bool enable\+A2=true)}{Loom_Neopixel(LoomManager *manager, const bool enableA0=false, const bool enableA1=false, const bool enableA2=true)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Neopixel\+::\+Loom\+\_\+\+Neopixel (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const bool}]{enable\+A0 = {\ttfamily false}, }
+\item[{const bool}]{enable\+A1 = {\ttfamily false}, }
+\item[{const bool}]{enable\+A2 = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___neopixel_a2a0d74646338fb10a103a7ea73247e21}{}\label{class_loom___neopixel_a2a0d74646338fb10a103a7ea73247e21}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em enable\+A0} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ Whether or not to use pin A0 for Neopixel \\
+\hline
+\mbox{\tt in}  & {\em enable\+A1} & Bool $\vert$ $<$false$>$ $\vert$ \{true, false\} $\vert$ Whether or not to use pin A1 for Neopixel \\
+\hline
+\mbox{\tt in}  & {\em enable\+A2} & Bool $\vert$ $<$true$>$ $\vert$ \{true, false\} $\vert$ Whether or not to use pin A2 for Neopixel \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+Neopixel(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_Neopixel(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Neopixel\+::\+Loom\+\_\+\+Neopixel (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___neopixel_a3f640252abdf3a7bf3767f8ebd2d78eb}{}\label{class_loom___neopixel_a3f640252abdf3a7bf3767f8ebd2d78eb}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!````~Loom\+\_\+\+Neopixel@{$\sim$\+Loom\+\_\+\+Neopixel}}
+\index{````~Loom\+\_\+\+Neopixel@{$\sim$\+Loom\+\_\+\+Neopixel}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+Neopixel()=default}{~Loom_Neopixel()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+Neopixel\+::$\sim$\+Loom\+\_\+\+Neopixel (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___neopixel_a478d9ab0f93182948e9969af40c65819}{}\label{class_loom___neopixel_a478d9ab0f93182948e9969af40c65819}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!add\+\_\+config@{add\+\_\+config}}
+\index{add\+\_\+config@{add\+\_\+config}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{add\+\_\+config(\+Json\+Object json) override}{add_config(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Neopixel\+::add\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___neopixel_a005ac12c181ff40647657c6c9b2fde2d}{}\label{class_loom___neopixel_a005ac12c181ff40647657c6c9b2fde2d}
+
+
+Add configuration information to Json\+Object. 
+
+\hyperlink{class_loom_manager}{Loom\+Manager} iterates over modules to build complete configuration 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json configuration object to add to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{class_loom_module_a06747f16d76bde35575557c7515adcc0}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{dispatch(\+Json\+Object json) override}{dispatch(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Neopixel\+::dispatch (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___neopixel_a89ecb4894b7be0e00657d32aa2374a42}{}\label{class_loom___neopixel_a89ecb4894b7be0e00657d32aa2374a42}
+
+
+Route command to driver. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!enable\+\_\+pin@{enable\+\_\+pin}}
+\index{enable\+\_\+pin@{enable\+\_\+pin}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{enable\+\_\+pin(const uint8\+\_\+t port, const bool state)}{enable_pin(const uint8_t port, const bool state)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Neopixel\+::enable\+\_\+pin (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{port, }
+\item[{const bool}]{state}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___neopixel_ac967b6eff14a0e028ff70524f70acd0c}{}\label{class_loom___neopixel_ac967b6eff14a0e028ff70524f70acd0c}
+
+
+enable or disable pin for use with Neopixel 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em port} & Port to configure (0-\/2) \\
+\hline
+\mbox{\tt in}  & {\em state} & \hyperlink{namespace_enable}{Enable} or disable \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const override}{print_config() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Neopixel\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___neopixel_aa1930cfa494ef432bbbf1d1786c6b57d}{}\label{class_loom___neopixel_aa1930cfa494ef432bbbf1d1786c6b57d}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const override}{print_state() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Neopixel\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___neopixel_a0a5e8fd23e4f32b006a52c422551b48e}{}\label{class_loom___neopixel_a0a5e8fd23e4f32b006a52c422551b48e}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented from \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{Loom\+Module}.
+
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!set\+\_\+color@{set\+\_\+color}}
+\index{set\+\_\+color@{set\+\_\+color}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{set\+\_\+color(const uint8\+\_\+t port, const uint8\+\_\+t chain\+\_\+num, const uint8\+\_\+t red, const uint8\+\_\+t green, const uint8\+\_\+t blue)}{set_color(const uint8_t port, const uint8_t chain_num, const uint8_t red, const uint8_t green, const uint8_t blue)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+Neopixel\+::set\+\_\+color (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t}]{port, }
+\item[{const uint8\+\_\+t}]{chain\+\_\+num, }
+\item[{const uint8\+\_\+t}]{red, }
+\item[{const uint8\+\_\+t}]{green, }
+\item[{const uint8\+\_\+t}]{blue}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___neopixel_a5e5009a63413482de5b5baa54603da65}{}\label{class_loom___neopixel_a5e5009a63413482de5b5baa54603da65}
+
+
+Set Neopixel color. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em port} & The port the Neopixel to control is on (0-\/2 corresponding to A0-\/\+A2) \\
+\hline
+\mbox{\tt in}  & {\em chain\+\_\+num} & The Neopixel number if daisy-\/chained \\
+\hline
+\mbox{\tt in}  & {\em red} & The red value (0-\/255) \\
+\hline
+\mbox{\tt in}  & {\em green} & The green value (0-\/255) \\
+\hline
+\mbox{\tt in}  & {\em blue} & The blue value (0-\/255) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!color\+\_\+vals@{color\+\_\+vals}}
+\index{color\+\_\+vals@{color\+\_\+vals}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{color\+\_\+vals}{color_vals}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t Loom\+\_\+\+Neopixel\+::color\+\_\+vals\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___neopixel_ac084d5a5236d29d024c166a79e9423f1}{}\label{class_loom___neopixel_ac084d5a5236d29d024c166a79e9423f1}
+
+
+The associated color values (R\+GB) for each of the 3 Neopixels. 
+
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!pin\+\_\+enabled@{pin\+\_\+enabled}}
+\index{pin\+\_\+enabled@{pin\+\_\+enabled}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{pin\+\_\+enabled}{pin_enabled}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+\_\+\+Neopixel\+::pin\+\_\+enabled\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___neopixel_aec3c3270cf9a4c9f942296a7ebd5147d}{}\label{class_loom___neopixel_aec3c3270cf9a4c9f942296a7ebd5147d}
+
+
+Whether pins A0-\/\+A2 are enabled. 
+
+\index{Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}!pixels@{pixels}}
+\index{pixels@{pixels}!Loom\+\_\+\+Neopixel@{Loom\+\_\+\+Neopixel}}
+\subsubsection[{\texorpdfstring{pixels}{pixels}}]{\setlength{\rightskip}{0pt plus 5cm}Adafruit\+\_\+\+Neo\+Pixel Loom\+\_\+\+Neopixel\+::pixels\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___neopixel_a3f177f651d50d29a0ca12d2a9ba5eb79}{}\label{class_loom___neopixel_a3f177f651d50d29a0ca12d2a9ba5eb79}
+
+
+Array of Neopixel instances to manage up to 3 Neopixels. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Actuators/\hyperlink{_neopixel_8h}{Neopixel.\+h}\item 
+src/\+Actuators/\hyperlink{_neopixel_8cpp}{Neopixel.\+cpp}\end{DoxyCompactItemize}

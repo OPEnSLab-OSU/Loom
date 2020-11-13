@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="_manager_8h" kind="file" language="C++">
+    <compoundname>Manager.h</compoundname>
+    <includes refid="_misc_8h" local="yes">Misc.h</includes>
+    <includes local="no">ArduinoJson.h</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="_comm_plat_8cpp" local="yes">src/CommPlats/CommPlat.cpp</includedby>
+    <includedby refid="_warm_up_8cpp" local="yes">src/Components/WarmUp/WarmUp.cpp</includedby>
+    <includedby refid="_sleep___manager_8h" local="yes">src/Sleep_Manager.h</includedby>
+    <includedby refid="_interrupt___manager_8cpp" local="yes">src/Interrupt_Manager.cpp</includedby>
+    <includedby refid="_batch_s_d_8cpp" local="yes">src/LogPlats/BatchSD.cpp</includedby>
+    <includedby refid="_log_plat_8cpp" local="yes">src/LogPlats/LogPlat.cpp</includedby>
+    <includedby refid="_s_d_8cpp" local="yes">src/LogPlats/SD.cpp</includedby>
+    <includedby refid="_loom_8h" local="yes">src/Loom.h</includedby>
+    <includedby refid="_manager_8cpp" local="yes">src/Manager.cpp</includedby>
+    <includedby refid="_manager___module___access_8cpp" local="yes">src/Manager_Module_Access.cpp</includedby>
+    <includedby refid="_n_t_p___sync_8cpp" local="yes">src/NTP_Sync.cpp</includedby>
+    <includedby refid="_google_sheets_8cpp" local="yes">src/PublishPlats/GoogleSheets.cpp</includedby>
+    <includedby refid="_max___pub_8cpp" local="yes">src/PublishPlats/Max_Pub.cpp</includedby>
+    <includedby refid="_publish_plat_8cpp" local="yes">src/PublishPlats/PublishPlat.cpp</includedby>
+    <includedby refid="_r_t_c_8cpp" local="yes">src/RTC/RTC.cpp</includedby>
+    <includedby refid="_max___sub_8cpp" local="yes">src/SubscribePlats/Max_Sub.cpp</includedby>
+    <includedby refid="_subscribe_plat_8cpp" local="yes">src/SubscribePlats/SubscribePlat.cpp</includedby>
+    <includedby refid="_temperature___sync_8cpp" local="yes">src/Temperature_Sync.cpp</includedby>
+    <incdepgraph>
+      <node id="3990">
+        <label>Misc.h</label>
+        <link refid="_misc_8h"/>
+        <childnode refid="3991" relation="include">
+        </childnode>
+      </node>
+      <node id="3993">
+        <label>vector</label>
+      </node>
+      <node id="3992">
+        <label>ArduinoJson.h</label>
+      </node>
+      <node id="3991">
+        <label>Arduino.h</label>
+      </node>
+      <node id="3989">
+        <label>src/Manager.h</label>
+        <link refid="Manager.h"/>
+        <childnode refid="3990" relation="include">
+        </childnode>
+        <childnode refid="3992" relation="include">
+        </childnode>
+        <childnode refid="3993" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4003">
+        <label>src/Sleep_Manager.cpp</label>
+        <link refid="_sleep___manager_8cpp"/>
+      </node>
+      <node id="4014">
+        <label>src/Temperature_Sync.cpp</label>
+        <link refid="_temperature___sync_8cpp"/>
+      </node>
+      <node id="4004">
+        <label>src/LogPlats/BatchSD.cpp</label>
+        <link refid="_batch_s_d_8cpp"/>
+      </node>
+      <node id="3996">
+        <label>src/Components/WarmUp/WarmUp.cpp</label>
+        <link refid="_warm_up_8cpp"/>
+      </node>
+      <node id="3999">
+        <label>src/Module_Factory.h</label>
+        <link refid="_module___factory_8h"/>
+        <childnode refid="4000" relation="include">
+        </childnode>
+        <childnode refid="4001" relation="include">
+        </childnode>
+      </node>
+      <node id="4007">
+        <label>src/NTP_Sync.cpp</label>
+        <link refid="_n_t_p___sync_8cpp"/>
+      </node>
+      <node id="4006">
+        <label>src/LogPlats/SD.cpp</label>
+        <link refid="_s_d_8cpp"/>
+      </node>
+      <node id="4012">
+        <label>src/SubscribePlats/Max_Sub.cpp</label>
+        <link refid="_max___sub_8cpp"/>
+      </node>
+      <node id="4008">
+        <label>src/PublishPlats/GoogleSheets.cpp</label>
+        <link refid="_google_sheets_8cpp"/>
+      </node>
+      <node id="4005">
+        <label>src/LogPlats/LogPlat.cpp</label>
+        <link refid="_log_plat_8cpp"/>
+      </node>
+      <node id="4002">
+        <label>src/Manager_Module_Access.cpp</label>
+        <link refid="_manager___module___access_8cpp"/>
+      </node>
+      <node id="3995">
+        <label>src/CommPlats/CommPlat.cpp</label>
+        <link refid="_comm_plat_8cpp"/>
+      </node>
+      <node id="3998">
+        <label>src/Interrupt_Manager.cpp</label>
+        <link refid="_interrupt___manager_8cpp"/>
+      </node>
+      <node id="4010">
+        <label>src/PublishPlats/PublishPlat.cpp</label>
+        <link refid="_publish_plat_8cpp"/>
+      </node>
+      <node id="4009">
+        <label>src/PublishPlats/Max_Pub.cpp</label>
+        <link refid="_max___pub_8cpp"/>
+      </node>
+      <node id="4000">
+        <label>src/Loom.h</label>
+        <link refid="_loom_8h"/>
+      </node>
+      <node id="4013">
+        <label>src/SubscribePlats/SubscribePlat.cpp</label>
+        <link refid="_subscribe_plat_8cpp"/>
+      </node>
+      <node id="4011">
+        <label>src/RTC/RTC.cpp</label>
+        <link refid="_r_t_c_8cpp"/>
+      </node>
+      <node id="4001">
+        <label>src/Manager.cpp</label>
+        <link refid="_manager_8cpp"/>
+      </node>
+      <node id="3997">
+        <label>src/Sleep_Manager.h</label>
+        <link refid="_sleep___manager_8h"/>
+        <childnode refid="3998" relation="include">
+        </childnode>
+        <childnode refid="3999" relation="include">
+        </childnode>
+        <childnode refid="4001" relation="include">
+        </childnode>
+        <childnode refid="4002" relation="include">
+        </childnode>
+        <childnode refid="4003" relation="include">
+        </childnode>
+      </node>
+      <node id="3994">
+        <label>src/Manager.h</label>
+        <link refid="Manager.h"/>
+        <childnode refid="3995" relation="include">
+        </childnode>
+        <childnode refid="3996" relation="include">
+        </childnode>
+        <childnode refid="3997" relation="include">
+        </childnode>
+        <childnode refid="3998" relation="include">
+        </childnode>
+        <childnode refid="4004" relation="include">
+        </childnode>
+        <childnode refid="4005" relation="include">
+        </childnode>
+        <childnode refid="4006" relation="include">
+        </childnode>
+        <childnode refid="4000" relation="include">
+        </childnode>
+        <childnode refid="4001" relation="include">
+        </childnode>
+        <childnode refid="4002" relation="include">
+        </childnode>
+        <childnode refid="4007" relation="include">
+        </childnode>
+        <childnode refid="4008" relation="include">
+        </childnode>
+        <childnode refid="4009" relation="include">
+        </childnode>
+        <childnode refid="4010" relation="include">
+        </childnode>
+        <childnode refid="4011" relation="include">
+        </childnode>
+        <childnode refid="4012" relation="include">
+        </childnode>
+        <childnode refid="4013" relation="include">
+        </childnode>
+        <childnode refid="4014" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_loom_manager" prot="public">LoomManager</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_manager_8h_1a94df10e7efe7613d074c105099c7fd0e" prot="public" static="no">
+        <name>SERIAL_BAUD</name>
+        <initializer>115200</initializer>
+        <briefdescription>
+<para>Serial Baud Rate. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="116" column="9" bodyfile="src/Manager.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_manager_8h_1a043830be9011f9891371fdbc4174b115" prot="public" static="no">
+        <name>MAX_SERIAL_WAIT</name>
+        <initializer>20000</initializer>
+        <briefdescription>
+<para>Maximum number of milliseconds to wait for user given &apos;begin_serial(true)&apos;. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="117" column="9" bodyfile="src/Manager.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_manager_8h_1a7e2d8ef8f0724f23ce84b1e7d0c171d9" prot="public" static="no">
+        <name>SD_CS</name>
+        <initializer>10</initializer>
+        <briefdescription>
+<para>SD chip select used in parse_config_SD(). </para>        </briefdescription>
+        <detaileddescription>
+<para>You can still instantiate a <ref refid="class_loom___s_d" kindref="compound">Loom_SD</ref> module with a different chip select </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="118" column="9" bodyfile="src/Manager.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Manager.h"/>
+  </compounddef>
+</doxygen>

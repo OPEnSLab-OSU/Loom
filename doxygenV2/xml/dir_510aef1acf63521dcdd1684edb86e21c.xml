@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="dir_510aef1acf63521dcdd1684edb86e21c" kind="dir">
+    <compoundname>src/Sensors/SPI</compoundname>
+    <innerfile refid="_m_a_x31855_8cpp">MAX31855.cpp</innerfile>
+    <innerfile refid="_m_a_x31855_8h">MAX31855.h</innerfile>
+    <innerfile refid="_m_a_x31856_8cpp">MAX31856.cpp</innerfile>
+    <innerfile refid="_m_a_x31856_8h">MAX31856.h</innerfile>
+    <innerfile refid="_s_p_i___sensor_8cpp">SPI_Sensor.cpp</innerfile>
+    <innerfile refid="_s_p_i___sensor_8h">SPI_Sensor.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Sensors/SPI/"/>
+  </compounddef>
+</doxygen>

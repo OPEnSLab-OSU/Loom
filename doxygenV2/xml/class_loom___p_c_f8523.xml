@@ -1,0 +1,439 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___p_c_f8523" kind="class" language="C++" prot="public">
+    <compoundname>Loom_PCF8523</compoundname>
+    <basecompoundref refid="class_loom_r_t_c" prot="public" virt="non-virtual">LoomRTC</basecompoundref>
+    <includes refid="_p_c_f8523_8h" local="no">PCF8523.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1ae2bae04c42dcf3fdacd611a3cd710049" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_PCF8523::Loom_PCF8523</definition>
+        <argsstring>(LoomManager *manager, TimeZone timezone=TimeZone::PST, const bool use_local_time=false, const bool custom_time=false)</argsstring>
+        <name>Loom_PCF8523</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type><ref refid="class_loom_r_t_c_1a103a9db94b031555185bbce688d2527a" kindref="member">TimeZone</ref></type>
+          <declname>timezone</declname>
+          <defval><ref refid="class_loom_r_t_c_1a103a9db94b031555185bbce688d2527aa67d47df7eb52f9e54f467763167398f3" kindref="member">TimeZone::PST</ref></defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>use_local_time</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>custom_time</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">timezone</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(TimeZone) | &lt;11&gt; | { 0(&quot;WAT&quot;), 1(&quot;AT&quot;), 2(&quot;ADT&quot;), 3(&quot;AST&quot;), 4(&quot;EDT&quot;), 5(&quot;EST&quot;), 6(&quot;CDT&quot;), 7(&quot;CST&quot;), 8(&quot;MDT&quot;), 9(&quot;MST&quot;), 10(&quot;PDT&quot;), 11(&quot;PST&quot;), 12(&quot;AKDT&quot;), 13(&quot;AKST&quot;), 14(&quot;HST&quot;), 15(&quot;SST&quot;), 16(&quot;GMT&quot;), 17(&quot;BST&quot;), 18(&quot;CET&quot;), 19(&quot;EET&quot;), 20(&quot;EEST&quot;), 21(&quot;BRT&quot;), 22(&quot;ZP4&quot;), 23(&quot;ZP5&quot;), 24(&quot;ZP6&quot;), 25(&quot;ZP7&quot;), 26(&quot;AWST&quot;), 27(&quot;ACST&quot;), 28(&quot;AEST&quot;)} | Which timezone device is in </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">use_local_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;false&gt; | {true, false} | True for local time, false for UTC time </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">custom_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;false&gt; | {true, false} | True for user input local time, false otherwise </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="48" column="1" bodyfile="src/RTC/PCF8523.cpp" bodystart="16" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1aecc9bb1632c201d1c7ed2ef7c1c6cb1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_PCF8523::Loom_PCF8523</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_PCF8523</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="58" column="1" bodyfile="src/RTC/PCF8523.cpp" bodystart="29" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1a3604a6574b45d50a00f6443cbd7a8018" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_PCF8523::~Loom_PCF8523</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_PCF8523</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="61" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1a8d39f82dea66cdb0ae2d15a1297d5490" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>DateTime</type>
+        <definition>DateTime Loom_PCF8523::now</definition>
+        <argsstring>() const override</argsstring>
+        <name>now</name>
+        <reimplements refid="class_loom_r_t_c_1abef017ad813f2f5fd6559af2b64e409b">now</reimplements>
+        <briefdescription>
+<para>Get DateTime of current time. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>DateTime </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="67" column="1" bodyfile="src/RTC/PCF8523.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1aaac2d5972d2c7745847ea6c4adc15927" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_PCF8523::set_alarm</definition>
+        <argsstring>(DateTime time) override</argsstring>
+        <name>set_alarm</name>
+        <reimplements refid="class_loom_r_t_c_1a34b7dd8dacbfdb61876cc4aabb79e67e">set_alarm</reimplements>
+        <param>
+          <type>DateTime</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>Set an alarm to go off at the specified time. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>DateTime of time alarm should go off </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="68" column="1" bodyfile="src/RTC/PCF8523.cpp" bodystart="47" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1a6b261ca485708b7fb03a01c7933940ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_PCF8523::clear_alarms</definition>
+        <argsstring>() override</argsstring>
+        <name>clear_alarms</name>
+        <reimplements refid="class_loom_r_t_c_1aac5fd7b736ca4732348ca9c99935bfc6">clear_alarms</reimplements>
+        <briefdescription>
+<para>Clear alarms. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="69" column="1" bodyfile="src/RTC/PCF8523.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1a428ddebfaec1b10cbe079f8aa5f64972" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_PCF8523::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_r_t_c_1a41c84de7ef49bf7f42069f948a98c30b">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="75" column="1" bodyfile="src/RTC/PCF8523.cpp" bodystart="40" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1a227ca0224556b60f619fa9c3d662c02f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_PCF8523::_begin</definition>
+        <argsstring>() override</argsstring>
+        <name>_begin</name>
+        <reimplements refid="class_loom_r_t_c_1a92103dd50b8ed11cd84fc8f08557ab09">_begin</reimplements>
+        <briefdescription>
+<para>Begin auxiliary function that subclasses need to implement. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if begin worked without issue, false otherwise </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="79" column="1" bodyfile="src/RTC/PCF8523.cpp" bodystart="33" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1a3b675c9d7a74ac2ddfa0f83a61073859" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool Loom_PCF8523::_initialized</definition>
+        <argsstring>() override</argsstring>
+        <name>_initialized</name>
+        <reimplements refid="class_loom_r_t_c_1a601c266811b25f0d16cbe2ae18ec5b41">_initialized</reimplements>
+        <briefdescription>
+<para>Initialization auxiliary function that subclasses need to implement. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if RTC is initialized / did not lose power </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="80" column="1" bodyfile="src/RTC/PCF8523.h" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___p_c_f8523_1a86528ef00f1971a8eee8f93644d638cb" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_PCF8523::_adjust</definition>
+        <argsstring>(const DateTime time) override</argsstring>
+        <name>_adjust</name>
+        <reimplements refid="class_loom_r_t_c_1a748cbec6163eee36ec96346526b8094d">_adjust</reimplements>
+        <param>
+          <type>const DateTime</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>Begin auxiliary function that subclasses need to implement. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="81" column="1" bodyfile="src/RTC/PCF8523.h" bodystart="81" bodyend="81"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___p_c_f8523_1a1eb8eaffae7033c6c2e376775e44e383" prot="protected" static="no" mutable="no">
+        <type>PCF8523</type>
+        <definition>PCF8523 Loom_PCF8523::rtc_inst</definition>
+        <argsstring></argsstring>
+        <name>rtc_inst</name>
+        <briefdescription>
+<para>Underlying PCF8523 manager instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/RTC/PCF8523.h" line="34" column="1" bodyfile="src/RTC/PCF8523.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>PCF8523 RTC module. </para>    </briefdescription>
+    <detaileddescription>
+<para>OPEnS Lab usually uses the PCF8523 on the Adafruit Adalogger Featherwing</para><para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___p_c_f8523.html">Module Documentation</ulink></para></listitem><listitem><para><ulink url="https://www.adafruit.com/product/2922">Product Page: Adafruit Adalogger Featherwing - RTC + SD</ulink></para></listitem><listitem><para><ulink url="https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#adalogger--pcf8523-rtc">Hardware Support</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="849">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="847">
+        <label>Loom_PCF8523</label>
+        <link refid="class_loom___p_c_f8523"/>
+        <childnode refid="848" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="848">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="849" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="857">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="853">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="854" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="855" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="851" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="856" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="852">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="853" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="860">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="850">
+        <label>Loom_PCF8523</label>
+        <link refid="class_loom___p_c_f8523"/>
+        <childnode refid="851" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="856">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="852" relation="public-inheritance">
+        </childnode>
+        <childnode refid="857" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="858" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="855" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="859" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="851" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="860" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="855">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="852" relation="public-inheritance">
+        </childnode>
+        <childnode refid="856" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="854">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="852" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="851">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="852" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="858">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="859">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/RTC/PCF8523.h" line="30" column="1" bodyfile="src/RTC/PCF8523.h" bodystart="29" bodyend="83"/>
+    <listofallmembers>
+      <member refid="class_loom___p_c_f8523_1a86528ef00f1971a8eee8f93644d638cb" prot="protected" virt="virtual"><scope>Loom_PCF8523</scope><name>_adjust</name></member>
+      <member refid="class_loom___p_c_f8523_1a227ca0224556b60f619fa9c3d662c02f" prot="protected" virt="virtual"><scope>Loom_PCF8523</scope><name>_begin</name></member>
+      <member refid="class_loom___p_c_f8523_1a3b675c9d7a74ac2ddfa0f83a61073859" prot="protected" virt="virtual"><scope>Loom_PCF8523</scope><name>_initialized</name></member>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>Category</name></member>
+      <member refid="class_loom___p_c_f8523_1a6b261ca485708b7fb03a01c7933940ed" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>clear_alarms</name></member>
+      <member refid="class_loom_r_t_c_1ac2e7b1655fee21edb30e98fb415a92ee" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>convert_daylight_to_standard</name></member>
+      <member refid="class_loom_r_t_c_1a41aa35e0b493300ab85c4028c117b51f" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>convert_local_to_utc</name></member>
+      <member refid="class_loom_r_t_c_1a79db2b47bfecccd825519e677bc43a43" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>converted</name></member>
+      <member refid="class_loom_r_t_c_1a91c96be6cc3f0f0f4dedbb038f164e73" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>custom_time</name></member>
+      <member refid="class_loom_r_t_c_1a86d3babf565f32bcbdffcf6e2a5efcdd" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>datestring</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>enum_category_string</name></member>
+      <member refid="class_loom_r_t_c_1ae388e3498ce6b942ccff838c2a4359fb" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>enum_timezone_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_r_t_c_1a6bde5d91ff867799abc3f635614d0a4e" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>eu_daylight_to_standard</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_active</name></member>
+      <member refid="class_loom_r_t_c_1a39b290c0f070c99c83e4794d73f145c1" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_datestring</name></member>
+      <member refid="class_loom_r_t_c_1a358a34b80334df22441db675715d5b14" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_datestring</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_r_t_c_1a711641fee9d04f0a9be5537950908f6b" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_timestamp</name></member>
+      <member refid="class_loom_r_t_c_1ad899bf3e07f5fe270addb88fafa22016" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_timestring</name></member>
+      <member refid="class_loom_r_t_c_1a9a14c5f4a347b64c661e4af6eab969dd" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_timestring</name></member>
+      <member refid="class_loom_r_t_c_1a9eaffa2c1d312cf13f5f6b66a7bd6067" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_weekday</name></member>
+      <member refid="class_loom_r_t_c_1aeae9084ff1fc9fe0faa81df9c39277fa" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>get_weekday</name></member>
+      <member refid="class_loom_r_t_c_1a008e89e23f3650d1e8a9c96fe1d8c857" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>init</name></member>
+      <member refid="class_loom_r_t_c_1a24c72617d7e275e89740af4f5296e42b" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>link_device_manager</name></member>
+      <member refid="class_loom_r_t_c_1a9692826e2c5093e528645a619fc16bc9" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>local_datestring</name></member>
+      <member refid="class_loom_r_t_c_1afd2c4c89a426678d754b7b59643b9d90" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>local_rtc</name></member>
+      <member refid="class_loom_r_t_c_1ab3d490dd52a5e2d2413d1f0c00944a7b" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>local_time</name></member>
+      <member refid="class_loom_r_t_c_1ae8fe182cd1fc3f7c66ef6b3ee353c51f" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>local_timestring</name></member>
+      <member refid="class_loom___p_c_f8523_1ae2bae04c42dcf3fdacd611a3cd710049" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>Loom_PCF8523</name></member>
+      <member refid="class_loom___p_c_f8523_1aecc9bb1632c201d1c7ed2ef7c1c6cb1b" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>Loom_PCF8523</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>LoomModule</name></member>
+      <member refid="class_loom_r_t_c_1a90ad338511d471757658aa0bff019575" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>LoomRTC</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>module_type</name></member>
+      <member refid="class_loom___p_c_f8523_1a8d39f82dea66cdb0ae2d15a1297d5490" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>now</name></member>
+      <member refid="class_loom_r_t_c_1a13101cb450db89fe15ab77b29dba975e" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>power_down</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>power_up</name></member>
+      <member refid="class_loom___p_c_f8523_1a428ddebfaec1b10cbe079f8aa5f64972" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>print_config</name></member>
+      <member refid="class_loom_r_t_c_1a4114a95d1dbc89e3ea8e3f27b3250108" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>print_DateTime</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>print_module_label</name></member>
+      <member refid="class_loom_r_t_c_1aaa45a542cfd7b64f79a2c321a29c08f5" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>print_state</name></member>
+      <member refid="class_loom_r_t_c_1afa1dcbf39c103215fbc41313c09294d2" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>print_time</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_r_t_c_1a7ecd2d763167955581da55aab3602c11" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>read_rtc</name></member>
+      <member refid="class_loom___p_c_f8523_1a1eb8eaffae7033c6c2e376775e44e383" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>rtc_inst</name></member>
+      <member refid="class_loom_r_t_c_1a6a1bedc03dd44c013cf6b75000533e9f" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>rtc_validity_check</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>set_active</name></member>
+      <member refid="class_loom___p_c_f8523_1aaac2d5972d2c7745847ea6c4adc15927" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>set_alarm</name></member>
+      <member refid="class_loom_r_t_c_1ac0576fedce58ab95c864b146494343af" prot="public" virt="non-virtual" ambiguityscope="LoomRTC::"><scope>Loom_PCF8523</scope><name>set_alarm</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_r_t_c_1a97c2b8e6e8c31f1865feb1ed8e1948df" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>set_rtc_to_compile_time</name></member>
+      <member refid="class_loom_r_t_c_1ab556620d00236ff10f4438f3b80c2636" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>set_rtc_to_computer_time</name></member>
+      <member refid="class_loom_r_t_c_1ac25717e8d486c123629973684778348f" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>time_adjust</name></member>
+      <member refid="class_loom_r_t_c_1a30e77eaeb4b0e25c8fde9239e64fe13a" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>timestring</name></member>
+      <member refid="class_loom_r_t_c_1a103a9db94b031555185bbce688d2527a" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>TimeZone</name></member>
+      <member refid="class_loom_r_t_c_1a6c1336bf000fd9a385f315d43bbbc5b0" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>timezone</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>Type</name></member>
+      <member refid="class_loom_r_t_c_1ab78edb38537fd80c4fbd1ac1625606b5" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>us_daylight_to_standard</name></member>
+      <member refid="class_loom_r_t_c_1a5783620e9af8eb5fa0818aa189483d8e" prot="protected" virt="non-virtual"><scope>Loom_PCF8523</scope><name>use_local_time</name></member>
+      <member refid="class_loom___p_c_f8523_1a3604a6574b45d50a00f6443cbd7a8018" prot="public" virt="non-virtual"><scope>Loom_PCF8523</scope><name>~Loom_PCF8523</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>~LoomModule</name></member>
+      <member refid="class_loom_r_t_c_1a3077c3988808e9a57605e7c9842114c7" prot="public" virt="virtual"><scope>Loom_PCF8523</scope><name>~LoomRTC</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

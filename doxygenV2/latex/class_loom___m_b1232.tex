@@ -1,0 +1,185 @@
+\hypertarget{class_loom___m_b1232}{}\section{Loom\+\_\+\+M\+B1232 Class Reference}
+\label{class_loom___m_b1232}\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+
+
+M\+B1232 Sonar sensor module.  
+
+
+
+
+{\ttfamily \#include $<$M\+B1232.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+\_\+\+M\+B1232\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{class_loom___m_b1232__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom___m_b1232_ad84bb3599a2bee2505f1d9427cd72724}{Loom\+\_\+\+M\+B1232} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const byte \hyperlink{class_loom_i2_c_sensor_a6ff389c1f015152a9ebfccb037d3d90e}{i2c\+\_\+address}=0x70, const uint8\+\_\+t mux\+\_\+port=255)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___m_b1232_a255627986420d4676d80508ca6aa156f}{Loom\+\_\+\+M\+B1232} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, Json\+Array\+Const p)
+\begin{DoxyCompactList}\small\item\em Constructor that takes Json Array, extracts args and delegates to regular constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_loom___m_b1232_abdfbbe04d1fe04dce5b047a01eb33b00}{$\sim$\+Loom\+\_\+\+M\+B1232} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___m_b1232_a2117216e8004b6fe4e386d6fea6a06fe}{measure} () override
+\begin{DoxyCompactList}\small\item\em Take any relevant measurements. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom___m_b1232_ac08f29a40c91d9008dd355324b125bd9}{package} (Json\+Object json) override
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_loom___m_b1232_afce7df3f692a27fa6b452e3cc3b9cf63}{print\+\_\+measurements} () const override
+\begin{DoxyCompactList}\small\item\em Print the last set of measurements taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \hyperlink{class_loom___m_b1232_acfb38d20f72e16e517ed5cc670a4d1a8}{range}
+\begin{DoxyCompactList}\small\item\em Measure distance. Units\+: cm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+M\+B1232 Sonar sensor module. 
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom___m_b1232.html}{\tt Module Documentation}
+\item \href{https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm}{\tt Product Page\+: M\+B1232 I2\+C\+X\+L-\/\+Max\+Sonar-\/\+E\+Z3}
+\item \href{https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf}{\tt Datasheet\+: I2\+C\+X\+L-\/\+Max\+Sonar-\/ E\+Z\+TM Series}
+\item \href{https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mb1232-sonar}{\tt Hardware Support} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}!Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}!Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+M\+B1232(\+Loom\+Manager $\ast$manager, const byte i2c\+\_\+address=0x70, const uint8\+\_\+t mux\+\_\+port=255)}{Loom_MB1232(LoomManager *manager, const byte i2c_address=0x70, const uint8_t mux_port=255)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+B1232\+::\+Loom\+\_\+\+M\+B1232 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const byte}]{i2c\+\_\+address = {\ttfamily 0x70}, }
+\item[{const uint8\+\_\+t}]{mux\+\_\+port = {\ttfamily 255}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___m_b1232_ad84bb3599a2bee2505f1d9427cd72724}{}\label{class_loom___m_b1232_ad84bb3599a2bee2505f1d9427cd72724}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i2c\+\_\+address} & Set(\+Int) $\vert$ $<$0x70$>$ $\vert$ \{0x70\} $\vert$ I2C address \\
+\hline
+\mbox{\tt in}  & {\em mux\+\_\+port} & Int $\vert$ $<$255$>$ $\vert$ \mbox{[}0-\/16\mbox{]} $\vert$ Port on multiplexer \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}!Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}!Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+\subsubsection[{\texorpdfstring{Loom\+\_\+\+M\+B1232(\+Loom\+Manager $\ast$manager, Json\+Array\+Const p)}{Loom_MB1232(LoomManager *manager, JsonArrayConst p)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+B1232\+::\+Loom\+\_\+\+M\+B1232 (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{Json\+Array\+Const}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom___m_b1232_a255627986420d4676d80508ca6aa156f}{}\label{class_loom___m_b1232_a255627986420d4676d80508ca6aa156f}
+
+
+Constructor that takes Json Array, extracts args and delegates to regular constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em p} & The array of constuctor args to expand \\
+\hline
+\end{DoxyParams}
+\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}!````~Loom\+\_\+\+M\+B1232@{$\sim$\+Loom\+\_\+\+M\+B1232}}
+\index{````~Loom\+\_\+\+M\+B1232@{$\sim$\+Loom\+\_\+\+M\+B1232}!Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+\_\+\+M\+B1232()=default}{~Loom_MB1232()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+\_\+\+M\+B1232\+::$\sim$\+Loom\+\_\+\+M\+B1232 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{class_loom___m_b1232_abdfbbe04d1fe04dce5b047a01eb33b00}{}\label{class_loom___m_b1232_abdfbbe04d1fe04dce5b047a01eb33b00}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}!measure@{measure}}
+\index{measure@{measure}!Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+\subsubsection[{\texorpdfstring{measure() override}{measure() override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+B1232\+::measure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_b1232_a2117216e8004b6fe4e386d6fea6a06fe}{}\label{class_loom___m_b1232_a2117216e8004b6fe4e386d6fea6a06fe}
+
+
+Take any relevant measurements. 
+
+
+
+Implements \hyperlink{class_loom_sensor_a390ef79a4d5d6b6386e099c7fe56ed1a}{Loom\+Sensor}.
+
+\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}!package@{package}}
+\index{package@{package}!Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json) override}{package(JsonObject json) override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+B1232\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_b1232_ac08f29a40c91d9008dd355324b125bd9}{}\label{class_loom___m_b1232_ac08f29a40c91d9008dd355324b125bd9}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{Loom\+Module}.
+
+\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}!print\+\_\+measurements@{print\+\_\+measurements}}
+\index{print\+\_\+measurements@{print\+\_\+measurements}!Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+\subsubsection[{\texorpdfstring{print\+\_\+measurements() const override}{print_measurements() const override}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+\_\+\+M\+B1232\+::print\+\_\+measurements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{class_loom___m_b1232_afce7df3f692a27fa6b452e3cc3b9cf63}{}\label{class_loom___m_b1232_afce7df3f692a27fa6b452e3cc3b9cf63}
+
+
+Print the last set of measurements taken. 
+
+Does not package the data. 
+
+Implements \hyperlink{class_loom_sensor_aba2aa35441c2eb1cf27b95a1fc08b288}{Loom\+Sensor}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}!range@{range}}
+\index{range@{range}!Loom\+\_\+\+M\+B1232@{Loom\+\_\+\+M\+B1232}}
+\subsubsection[{\texorpdfstring{range}{range}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t Loom\+\_\+\+M\+B1232\+::range\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom___m_b1232_acfb38d20f72e16e517ed5cc670a4d1a8}{}\label{class_loom___m_b1232_acfb38d20f72e16e517ed5cc670a4d1a8}
+
+
+Measure distance. Units\+: cm. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_m_b1232_8h}{M\+B1232.\+h}\item 
+src/\+Sensors/\+I2\+C/\hyperlink{_m_b1232_8cpp}{M\+B1232.\+cpp}\end{DoxyCompactItemize}

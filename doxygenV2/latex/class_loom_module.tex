@@ -1,0 +1,841 @@
+\hypertarget{class_loom_module}{}\section{Loom\+Module Class Reference}
+\label{class_loom_module}\index{Loom\+Module@{Loom\+Module}}
+
+
+Abstract root of Loom component modules inheritance hierarchy.  
+
+
+
+
+{\ttfamily \#include $<$Module.\+h$>$}
+
+
+
+Inheritance diagram for Loom\+Module\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_loom_module__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Type} \{ \\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a88183b946cc5f0e8c96b2e66e1c74a7e}{Type\+::\+Unknown} = 0, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6311ae17c1ee52b36e68aaf4ad066387}{Type\+::\+Other} =1000, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a4862a5de39e268e2f48baaf4acaa7cdf}{Type\+::\+Interrupt\+\_\+\+Manager}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a99431851f2f2612986f845d9b40cacf6}{Type\+::\+Sleep\+\_\+\+Manager}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6667632eb808086429b4ca435a919bf5}{Type\+::\+Multiplexer}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a5c54cb8f927a6c5a90622e1c7bd0bda5}{Type\+::\+N\+TP}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865adce3fb50a4bc330e546fd186739e24ed}{Type\+::\+Temp\+Sync}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865acd235875816a9408700833b8c74ab451}{Type\+::\+Warm\+Up\+\_\+\+Manager}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a06b185256c71c1aec263c6e22bf8ef6b}{Type\+::\+Sensor} =2000, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a3d953aa7cfa5ffe0fde34551d918c76c}{Type\+::\+Analog}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a0bb8309239953b782fec18706fe60b4a}{Type\+::\+Digital}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865afb87bf1fc88386ca21395991f90fff95}{Type\+::\+I2C} =2100, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6d21d762b94797d22ffe78d6542e61ab}{Type\+::\+A\+D\+S1115}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a527de70670a90843118260d9493bcbf4}{Type\+::\+A\+S7262}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad6baeaa4fb2dc6d299c096803c785dbc}{Type\+::\+A\+S7263}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ac8a79265342226bcdd6949de5295b273}{Type\+::\+A\+S7265X}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865afaee4d8a6b8dbeddca64e96e25929b81}{Type\+::\+F\+X\+A\+S21002}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a5178d465d9869c304ec488d1d1d6059a}{Type\+::\+F\+X\+O\+S8700}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a2a81ef230c5c7ad7d81988dd5e4b834c}{Type\+::\+L\+I\+S3\+DH}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a428c702f773fc2aa1cefa288bebdb27b}{Type\+::\+M\+B1232}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a779354713151cb49d14a173bf608926d}{Type\+::\+M\+M\+A8451}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865af1c3e607be363407b5eb8e870477a9d7}{Type\+::\+M\+P\+U6050}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abf2c722c90ddbbd2403395e349a31844}{Type\+::\+M\+S5803}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a705f45d84f6cd36287095af9ecac5efa}{Type\+::\+S\+H\+T31D}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad00882122977dad77c50e74f60dac3f3}{Type\+::\+T\+M\+P007}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aa9d22d3b656f50802d180ec6d21a7437}{Type\+::\+T\+S\+L2561}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a24572bad020934b52809215a48ab057d}{Type\+::\+T\+S\+L2591}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a1b6b1307f071478b18dcd7d8714328ff}{Type\+::\+Z\+X\+Gesture}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ab266849811ab468397b9980f7a5f6457}{Type\+::\+S\+T\+E\+M\+MA}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a637b3bc6a90037a3db249c4d65cd1f1b}{Type\+::\+S\+D\+I12} =2200, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ada4a393183666f7a62eb7387702bde07}{Type\+::\+Decagon5\+TM}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a03424cb92cab03f739aa963e794c4b92}{Type\+::\+Decagon\+G\+S3}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a33dc5312b091968f5a120c2484d40df8}{Type\+::\+S\+PI} =2300, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ab03c58e511fd87c010c7e4b894354990}{Type\+::\+M\+A\+X31855}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad114b3bc0f0daeb7cd181dda88554c1b}{Type\+::\+M\+A\+X31856}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aff46f35af219adc3daffbb10e205df83}{Type\+::\+L\+\_\+\+S\+E\+R\+I\+AL} =2400, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a92f11b2c64f9b85861d5dcb84b14742e}{Type\+::\+K30}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865afc65b1fe417628d7c6c7bd9ebfbc50c5}{Type\+::\+L\+\_\+\+R\+TC} =3000, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a95e16e1a4c4ff4bfd6e3798969663b0c}{Type\+::\+D\+S3231}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abfc5e432a6b2493218ff884dab001482}{Type\+::\+P\+C\+F8523}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aa2ec2ef7ebb614cf7dd5d78b9bbf59b3}{Type\+::\+Actuator} =4000, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aff8561f7c2a8b57c9eb4eb11ebac161e}{Type\+::\+Neopixel}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a34c4c50fc7bdd0394f3954f73f2be34d}{Type\+::\+Relay}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a365687df33f7052679dca2d38edcfaf7}{Type\+::\+Servo}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a370509b5dfe60deb7be545e0a7aff04c}{Type\+::\+Stepper}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a4e472f8ae62a269048664d59be7081b5}{Type\+::\+Log\+Plat} =5000, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a0c9b2f3f3530345ea5cd8c586478d2b7}{Type\+::\+O\+L\+ED}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ac66fbf5395181adce9b08d44876c88f9}{Type\+::\+S\+D\+C\+A\+RD}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865acb3aae462c24d74a186926822f40f418}{Type\+::\+B\+A\+T\+C\+H\+SD}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a621ea64935d8300364bc5a479c622a37}{Type\+::\+Comm\+Plat} =6000, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a987f947a83fbf1022695e132547e0e19}{Type\+::\+Lo\+Ra}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad62c72d62c9a14731ce877d226d7e534}{Type\+::n\+RF}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a7deff39593c9cecd401b795d6e1ae04b}{Type\+::\+Bluetooth}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a095cd7ef32631598b47bef1e6070c437}{Type\+::\+Internet\+Plat} =7000, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abe2ae05fb04ddcf6efa31e63e0f0e111}{Type\+::\+Ethernet}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a3bf5d41ed0ac852c9a2e2d3a1161e26d}{Type\+::\+Wi\+Fi}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865acc981ecc65ecf63ad1673cbec9c64198}{Type\+::\+L\+TE}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a81d5311fa1f8170585d6f4baaa189bc9}{Type\+::\+Publish\+Plat} =8000, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a1992455436de79b1a1f7f708bee6f037}{Type\+::\+Google\+Sheets}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6b2ed7e0ac3a1ef150971bdc599278f5}{Type\+::\+Max\+Pub}, 
+\\*
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a321256c36911eaeef98e3742f4baead2}{Type\+::\+Spool\+Pub}, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a8e3ec8e74532cd668a3f565b737d148f}{Type\+::\+Subscribe\+Plats} =9000, 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abdeb20b27627b3c9604d0f2a568fb906}{Type\+::\+Max\+Sub}
+ \}\begin{DoxyCompactList}\small\item\em Enum to check against to when finding individual component managed by a \hyperlink{class_loom_manager}{Loom\+Manager}. \end{DoxyCompactList}
+\item 
+enum \hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068}{Category} \{ \\*
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068a88183b946cc5f0e8c96b2e66e1c74a7e}{Category\+::\+Unknown} =0, 
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068a6311ae17c1ee52b36e68aaf4ad066387}{Category\+::\+Other} =1, 
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068a06b185256c71c1aec263c6e22bf8ef6b}{Category\+::\+Sensor} =2, 
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068afc65b1fe417628d7c6c7bd9ebfbc50c5}{Category\+::\+L\+\_\+\+R\+TC} =3, 
+\\*
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068aa2ec2ef7ebb614cf7dd5d78b9bbf59b3}{Category\+::\+Actuator} =4, 
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068a4e472f8ae62a269048664d59be7081b5}{Category\+::\+Log\+Plat} =5, 
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068a621ea64935d8300364bc5a479c622a37}{Category\+::\+Comm\+Plat} =6, 
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068a095cd7ef32631598b47bef1e6070c437}{Category\+::\+Internet\+Plat} =7, 
+\\*
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068a81d5311fa1f8170585d6f4baaa189bc9}{Category\+::\+Publish\+Plat} =8, 
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068a6882013ad745e1f86f8ae9ff82746579}{Category\+::\+Subscribe\+Plat} =9
+ \}\begin{DoxyCompactList}\small\item\em Enum to classify modules. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{Indent}{\bf C\+O\+N\+S\+T\+R\+U\+C\+T\+O\+RS / D\+E\+S\+T\+R\+U\+C\+T\+OR}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_module_a5e0d9e185ade9e2ae5be68fdefb25887}{Loom\+Module} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$manager, const char $\ast$\hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}=\char`\"{}Unknown\char`\"{}, const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}=\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a88183b946cc5f0e8c96b2e66e1c74a7e}{Type\+::\+Unknown})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_loom_module_aec256a84e0498d723540743849e0166c}{$\sim$\+Loom\+Module} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_module_a8dd3704d1bd38868d5774e48c1073d12}{second\+\_\+stage\+\_\+ctor} ()
+\begin{DoxyCompactList}\small\item\em Second stage construction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf O\+P\+E\+R\+A\+T\+I\+ON}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{package} (Json\+Object json)=0
+\begin{DoxyCompactList}\small\item\em Package a modules measurements or state. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}{dispatch} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Route command to driver. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_module_a31ea02275e356c6ce0d01fdb6d4190df}{power\+\_\+down} ()
+\begin{DoxyCompactList}\small\item\em Turn off any hardware. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_module_aa0683cb24ce1cc49273440e79f035e23}{power\+\_\+up} ()
+\begin{DoxyCompactList}\small\item\em Turn on any hardware. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_module_a06747f16d76bde35575557c7515adcc0}{add\+\_\+config} (Json\+Object json)
+\begin{DoxyCompactList}\small\item\em Add configuration information to Json\+Object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf G\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Type} \hyperlink{class_loom_module_a4e040c36df109bfa39d9499828d3df1d}{get\+\_\+module\+\_\+type} () const 
+\begin{DoxyCompactList}\small\item\em Get module type. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$ \hyperlink{class_loom_module_a4752224a62f535fbaf3777aa486fc3c5}{get\+\_\+device\+\_\+manager} () const 
+\begin{DoxyCompactList}\small\item\em Get the device manager class if linked. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_module_a7ff57ffb2d8fabc484f6678f7fae8082}{get\+\_\+module\+\_\+name} (char $\ast$buf) const 
+\begin{DoxyCompactList}\small\item\em Copy module name into buffer. \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{class_loom_module_a95fbb30f0ab618f3305659f9e7a4bdaf}{get\+\_\+module\+\_\+name} () const 
+\begin{DoxyCompactList}\small\item\em Get module name. \end{DoxyCompactList}\item 
+\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_module_ab17b0faa49c40c08692714ca6064a8f7}{get\+\_\+print\+\_\+verbosity} () const 
+\begin{DoxyCompactList}\small\item\em Get print verbosity. \end{DoxyCompactList}\item 
+\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_module_ac259e773fa409b96fa6b43d8edeaa96b}{get\+\_\+package\+\_\+verbosity} () const 
+\begin{DoxyCompactList}\small\item\em Get package verbosity. \end{DoxyCompactList}\item 
+bool \hyperlink{class_loom_module_a1bb79ab68994c51851998a31b982da72}{get\+\_\+active} () const 
+\begin{DoxyCompactList}\small\item\em Get whether or not the module should be treated as active. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068}{Category} \hyperlink{class_loom_module_abe41c7748d6f6566b6e96918dca12106}{category} () const 
+\begin{DoxyCompactList}\small\item\em Get the category of the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf S\+E\+T\+T\+E\+RS}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_module_adc08f87bf7c0c0988decee196a714396}{link\+\_\+device\+\_\+manager} (\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$LM)
+\begin{DoxyCompactList}\small\item\em Add pointer back to device manager. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_module_a5008d47cff50ffa2e6fe4f813c3ffa1e}{set\+\_\+print\+\_\+verbosity} (const \hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} v)
+\begin{DoxyCompactList}\small\item\em Set print verbosity Controlls level of detail included in debug prints. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_module_a096b13557553a7fb283a32ab3645815b}{set\+\_\+package\+\_\+verbosity} (const \hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} v)
+\begin{DoxyCompactList}\small\item\em Set package verbosity. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_module_aaac9a713ba6389818cefdc740718ad9e}{set\+\_\+active} (const bool enable)
+\begin{DoxyCompactList}\small\item\em Set whether or not the module should be treated as active. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Static Public Member Functions}
+\begin{Indent}{\bf M\+I\+S\+C\+E\+L\+L\+A\+N\+E\+O\+US}\par
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$ \hyperlink{class_loom_module_aaf32cb6107f0402822c615e9cd38eaef}{enum\+\_\+verbosity\+\_\+string} (const \hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} v)
+\begin{DoxyCompactList}\small\item\em Get string of name associated with verbosity enum. \end{DoxyCompactList}\item 
+static const char $\ast$ \hyperlink{class_loom_module_a7fc17923cdef15e3a60a871a2458eaad}{enum\+\_\+category\+\_\+string} (const \hyperlink{class_loom_module_a0c6ecc60315f95af551138dc83567068}{Category} c)
+\begin{DoxyCompactList}\small\item\em Get string of the category associated with a Category. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Type} \hyperlink{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{module\+\_\+type}
+\begin{DoxyCompactList}\small\item\em Module type. \end{DoxyCompactList}\item 
+\hyperlink{class_loom_manager}{Loom\+Manager} $\ast$ \hyperlink{class_loom_module_a28fe8b2fb5a9a0d14bebe13ac1c92bdf}{device\+\_\+manager}
+\begin{DoxyCompactList}\small\item\em Pointer to manager. \end{DoxyCompactList}\item 
+const String \hyperlink{class_loom_module_a7cb2d5ef593dfc99e938c632f8843c84}{module\+\_\+name\+\_\+base}
+\begin{DoxyCompactList}\small\item\em The name of the module (Should have a D\+E\+F\+A\+U\+LT but can be overriden if provided to constructor) \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{module\+\_\+name}
+\item 
+bool \hyperlink{class_loom_module_af61a7b93ef2b9acfc22c7ad7968a45c7}{active}
+\begin{DoxyCompactList}\small\item\em Whether or not the module should be treated as active. \end{DoxyCompactList}\item 
+\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_module_a6e73663a6a5ebdcbe3f92153ca88ce8c}{print\+\_\+verbosity}
+\begin{DoxyCompactList}\small\item\em Print verbosity. \end{DoxyCompactList}\item 
+\hyperlink{_misc_8h_abf3be10d03894afb391f3a2935e3b313}{Verbosity} \hyperlink{class_loom_module_aec8db10ee69e265779822792f177f982}{package\+\_\+verbosity}
+\begin{DoxyCompactList}\small\item\em Package verbosity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{P\+R\+I\+NT I\+N\+F\+O\+R\+M\+A\+T\+I\+ON}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_loom_module_a4385842da9226014283136b3e37dde88}{print\+\_\+config} () const 
+\begin{DoxyCompactList}\small\item\em Display the configuration settings of the module. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{print\+\_\+state} () const 
+\begin{DoxyCompactList}\small\item\em Display current state of the module. \end{DoxyCompactList}\item 
+void \hyperlink{class_loom_module_a636735282f2208ab71403ae5720622ba}{print\+\_\+module\+\_\+label} () const 
+\begin{DoxyCompactList}\small\item\em Print the module name as a label. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract root of Loom component modules inheritance hierarchy. 
+
+All modules in Loom inherit from \hyperlink{class_loom_module}{Loom\+Module}
+
+\begin{DoxyParagraph}{Resources}
+
+\begin{DoxyItemize}
+\item \href{https://openslab-osu.github.io/Loom/html/class_loom_module.html}{\tt Loom\+Module Documentation} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Loom\+Module@{Loom\+Module}!Category@{Category}}
+\index{Category@{Category}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{Category}{Category}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+Module\+::\+Category}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068}
+
+
+Enum to classify modules. 
+
+Similar \hyperlink{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{Loom\+Module\+::\+Type} but represents the astract classes rather than the leaf node modules in the inheritance tree. For a given module, its category often shares a name with the abstract class it is derived from \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Unknown@{Unknown}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Unknown@{Unknown}}\item[{\em 
+Unknown\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068a88183b946cc5f0e8c96b2e66e1c74a7e}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068a88183b946cc5f0e8c96b2e66e1c74a7e}
+}]Unknown. \index{Other@{Other}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Other@{Other}}\item[{\em 
+Other\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068a6311ae17c1ee52b36e68aaf4ad066387}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068a6311ae17c1ee52b36e68aaf4ad066387}
+}]Other. \index{Sensor@{Sensor}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Sensor@{Sensor}}\item[{\em 
+Sensor\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068a06b185256c71c1aec263c6e22bf8ef6b}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068a06b185256c71c1aec263c6e22bf8ef6b}
+}]Sensors. \index{L\+\_\+\+R\+TC@{L\+\_\+\+R\+TC}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!L\+\_\+\+R\+TC@{L\+\_\+\+R\+TC}}\item[{\em 
+L\+\_\+\+R\+TC\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068afc65b1fe417628d7c6c7bd9ebfbc50c5}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068afc65b1fe417628d7c6c7bd9ebfbc50c5}
+}]R\+TC. \index{Actuator@{Actuator}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Actuator@{Actuator}}\item[{\em 
+Actuator\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068aa2ec2ef7ebb614cf7dd5d78b9bbf59b3}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068aa2ec2ef7ebb614cf7dd5d78b9bbf59b3}
+}]Actuators. \index{Log\+Plat@{Log\+Plat}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Log\+Plat@{Log\+Plat}}\item[{\em 
+Log\+Plat\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068a4e472f8ae62a269048664d59be7081b5}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068a4e472f8ae62a269048664d59be7081b5}
+}]Log\+Plats. \index{Comm\+Plat@{Comm\+Plat}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Comm\+Plat@{Comm\+Plat}}\item[{\em 
+Comm\+Plat\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068a621ea64935d8300364bc5a479c622a37}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068a621ea64935d8300364bc5a479c622a37}
+}]Comm\+Plats. \index{Internet\+Plat@{Internet\+Plat}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Internet\+Plat@{Internet\+Plat}}\item[{\em 
+Internet\+Plat\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068a095cd7ef32631598b47bef1e6070c437}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068a095cd7ef32631598b47bef1e6070c437}
+}]Internet\+Plats. \index{Publish\+Plat@{Publish\+Plat}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Publish\+Plat@{Publish\+Plat}}\item[{\em 
+Publish\+Plat\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068a81d5311fa1f8170585d6f4baaa189bc9}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068a81d5311fa1f8170585d6f4baaa189bc9}
+}]Publish\+Plats. \index{Subscribe\+Plat@{Subscribe\+Plat}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Subscribe\+Plat@{Subscribe\+Plat}}\item[{\em 
+Subscribe\+Plat\hypertarget{class_loom_module_a0c6ecc60315f95af551138dc83567068a6882013ad745e1f86f8ae9ff82746579}{}\label{class_loom_module_a0c6ecc60315f95af551138dc83567068a6882013ad745e1f86f8ae9ff82746579}
+}]Subscribe\+Plats. \end{description}
+\end{Desc}
+\index{Loom\+Module@{Loom\+Module}!Type@{Type}}
+\index{Type@{Type}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{Type}{Type}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Loom\+Module\+::\+Type}\hspace{0.3cm}{\ttfamily [strong]}}\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865}
+
+
+Enum to check against to when finding individual component managed by a \hyperlink{class_loom_manager}{Loom\+Manager}. 
+
+Used because we cannot use dynamic\+\_\+cast to check type of modules (rtti disabled by Arduino I\+DE) \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Unknown@{Unknown}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Unknown@{Unknown}}\item[{\em 
+Unknown\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a88183b946cc5f0e8c96b2e66e1c74a7e}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a88183b946cc5f0e8c96b2e66e1c74a7e}
+}]\index{Other@{Other}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Other@{Other}}\item[{\em 
+Other\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6311ae17c1ee52b36e68aaf4ad066387}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6311ae17c1ee52b36e68aaf4ad066387}
+}]\index{Interrupt\+\_\+\+Manager@{Interrupt\+\_\+\+Manager}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Interrupt\+\_\+\+Manager@{Interrupt\+\_\+\+Manager}}\item[{\em 
+Interrupt\+\_\+\+Manager\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a4862a5de39e268e2f48baaf4acaa7cdf}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a4862a5de39e268e2f48baaf4acaa7cdf}
+}]\index{Sleep\+\_\+\+Manager@{Sleep\+\_\+\+Manager}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Sleep\+\_\+\+Manager@{Sleep\+\_\+\+Manager}}\item[{\em 
+Sleep\+\_\+\+Manager\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a99431851f2f2612986f845d9b40cacf6}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a99431851f2f2612986f845d9b40cacf6}
+}]\index{Multiplexer@{Multiplexer}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Multiplexer@{Multiplexer}}\item[{\em 
+Multiplexer\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6667632eb808086429b4ca435a919bf5}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6667632eb808086429b4ca435a919bf5}
+}]\index{N\+TP@{N\+TP}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!N\+TP@{N\+TP}}\item[{\em 
+N\+TP\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a5c54cb8f927a6c5a90622e1c7bd0bda5}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a5c54cb8f927a6c5a90622e1c7bd0bda5}
+}]\index{Temp\+Sync@{Temp\+Sync}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Temp\+Sync@{Temp\+Sync}}\item[{\em 
+Temp\+Sync\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865adce3fb50a4bc330e546fd186739e24ed}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865adce3fb50a4bc330e546fd186739e24ed}
+}]\index{Warm\+Up\+\_\+\+Manager@{Warm\+Up\+\_\+\+Manager}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Warm\+Up\+\_\+\+Manager@{Warm\+Up\+\_\+\+Manager}}\item[{\em 
+Warm\+Up\+\_\+\+Manager\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865acd235875816a9408700833b8c74ab451}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865acd235875816a9408700833b8c74ab451}
+}]\index{Sensor@{Sensor}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Sensor@{Sensor}}\item[{\em 
+Sensor\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a06b185256c71c1aec263c6e22bf8ef6b}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a06b185256c71c1aec263c6e22bf8ef6b}
+}]\index{Analog@{Analog}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Analog@{Analog}}\item[{\em 
+Analog\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a3d953aa7cfa5ffe0fde34551d918c76c}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a3d953aa7cfa5ffe0fde34551d918c76c}
+}]\index{Digital@{Digital}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Digital@{Digital}}\item[{\em 
+Digital\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a0bb8309239953b782fec18706fe60b4a}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a0bb8309239953b782fec18706fe60b4a}
+}]\index{I2C@{I2C}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!I2C@{I2C}}\item[{\em 
+I2C\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865afb87bf1fc88386ca21395991f90fff95}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865afb87bf1fc88386ca21395991f90fff95}
+}]\index{A\+D\+S1115@{A\+D\+S1115}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!A\+D\+S1115@{A\+D\+S1115}}\item[{\em 
+A\+D\+S1115\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6d21d762b94797d22ffe78d6542e61ab}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6d21d762b94797d22ffe78d6542e61ab}
+}]\index{A\+S7262@{A\+S7262}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!A\+S7262@{A\+S7262}}\item[{\em 
+A\+S7262\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a527de70670a90843118260d9493bcbf4}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a527de70670a90843118260d9493bcbf4}
+}]\index{A\+S7263@{A\+S7263}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!A\+S7263@{A\+S7263}}\item[{\em 
+A\+S7263\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad6baeaa4fb2dc6d299c096803c785dbc}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad6baeaa4fb2dc6d299c096803c785dbc}
+}]\index{A\+S7265X@{A\+S7265X}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!A\+S7265X@{A\+S7265X}}\item[{\em 
+A\+S7265X\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ac8a79265342226bcdd6949de5295b273}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ac8a79265342226bcdd6949de5295b273}
+}]\index{F\+X\+A\+S21002@{F\+X\+A\+S21002}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!F\+X\+A\+S21002@{F\+X\+A\+S21002}}\item[{\em 
+F\+X\+A\+S21002\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865afaee4d8a6b8dbeddca64e96e25929b81}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865afaee4d8a6b8dbeddca64e96e25929b81}
+}]\index{F\+X\+O\+S8700@{F\+X\+O\+S8700}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!F\+X\+O\+S8700@{F\+X\+O\+S8700}}\item[{\em 
+F\+X\+O\+S8700\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a5178d465d9869c304ec488d1d1d6059a}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a5178d465d9869c304ec488d1d1d6059a}
+}]\index{L\+I\+S3\+DH@{L\+I\+S3\+DH}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!L\+I\+S3\+DH@{L\+I\+S3\+DH}}\item[{\em 
+L\+I\+S3\+DH\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a2a81ef230c5c7ad7d81988dd5e4b834c}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a2a81ef230c5c7ad7d81988dd5e4b834c}
+}]\index{M\+B1232@{M\+B1232}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!M\+B1232@{M\+B1232}}\item[{\em 
+M\+B1232\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a428c702f773fc2aa1cefa288bebdb27b}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a428c702f773fc2aa1cefa288bebdb27b}
+}]\index{M\+M\+A8451@{M\+M\+A8451}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!M\+M\+A8451@{M\+M\+A8451}}\item[{\em 
+M\+M\+A8451\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a779354713151cb49d14a173bf608926d}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a779354713151cb49d14a173bf608926d}
+}]\index{M\+P\+U6050@{M\+P\+U6050}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!M\+P\+U6050@{M\+P\+U6050}}\item[{\em 
+M\+P\+U6050\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865af1c3e607be363407b5eb8e870477a9d7}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865af1c3e607be363407b5eb8e870477a9d7}
+}]\index{M\+S5803@{M\+S5803}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!M\+S5803@{M\+S5803}}\item[{\em 
+M\+S5803\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abf2c722c90ddbbd2403395e349a31844}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abf2c722c90ddbbd2403395e349a31844}
+}]\index{S\+H\+T31D@{S\+H\+T31D}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!S\+H\+T31D@{S\+H\+T31D}}\item[{\em 
+S\+H\+T31D\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a705f45d84f6cd36287095af9ecac5efa}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a705f45d84f6cd36287095af9ecac5efa}
+}]\index{T\+M\+P007@{T\+M\+P007}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!T\+M\+P007@{T\+M\+P007}}\item[{\em 
+T\+M\+P007\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad00882122977dad77c50e74f60dac3f3}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad00882122977dad77c50e74f60dac3f3}
+}]\index{T\+S\+L2561@{T\+S\+L2561}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!T\+S\+L2561@{T\+S\+L2561}}\item[{\em 
+T\+S\+L2561\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aa9d22d3b656f50802d180ec6d21a7437}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aa9d22d3b656f50802d180ec6d21a7437}
+}]\index{T\+S\+L2591@{T\+S\+L2591}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!T\+S\+L2591@{T\+S\+L2591}}\item[{\em 
+T\+S\+L2591\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a24572bad020934b52809215a48ab057d}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a24572bad020934b52809215a48ab057d}
+}]\index{Z\+X\+Gesture@{Z\+X\+Gesture}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Z\+X\+Gesture@{Z\+X\+Gesture}}\item[{\em 
+Z\+X\+Gesture\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a1b6b1307f071478b18dcd7d8714328ff}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a1b6b1307f071478b18dcd7d8714328ff}
+}]\index{S\+T\+E\+M\+MA@{S\+T\+E\+M\+MA}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!S\+T\+E\+M\+MA@{S\+T\+E\+M\+MA}}\item[{\em 
+S\+T\+E\+M\+MA\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ab266849811ab468397b9980f7a5f6457}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ab266849811ab468397b9980f7a5f6457}
+}]\index{S\+D\+I12@{S\+D\+I12}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!S\+D\+I12@{S\+D\+I12}}\item[{\em 
+S\+D\+I12\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a637b3bc6a90037a3db249c4d65cd1f1b}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a637b3bc6a90037a3db249c4d65cd1f1b}
+}]\index{Decagon5\+TM@{Decagon5\+TM}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Decagon5\+TM@{Decagon5\+TM}}\item[{\em 
+Decagon5\+TM\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ada4a393183666f7a62eb7387702bde07}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ada4a393183666f7a62eb7387702bde07}
+}]\index{Decagon\+G\+S3@{Decagon\+G\+S3}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Decagon\+G\+S3@{Decagon\+G\+S3}}\item[{\em 
+Decagon\+G\+S3\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a03424cb92cab03f739aa963e794c4b92}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a03424cb92cab03f739aa963e794c4b92}
+}]\index{S\+PI@{S\+PI}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!S\+PI@{S\+PI}}\item[{\em 
+S\+PI\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a33dc5312b091968f5a120c2484d40df8}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a33dc5312b091968f5a120c2484d40df8}
+}]\index{M\+A\+X31855@{M\+A\+X31855}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!M\+A\+X31855@{M\+A\+X31855}}\item[{\em 
+M\+A\+X31855\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ab03c58e511fd87c010c7e4b894354990}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ab03c58e511fd87c010c7e4b894354990}
+}]\index{M\+A\+X31856@{M\+A\+X31856}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!M\+A\+X31856@{M\+A\+X31856}}\item[{\em 
+M\+A\+X31856\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad114b3bc0f0daeb7cd181dda88554c1b}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad114b3bc0f0daeb7cd181dda88554c1b}
+}]\index{L\+\_\+\+S\+E\+R\+I\+AL@{L\+\_\+\+S\+E\+R\+I\+AL}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!L\+\_\+\+S\+E\+R\+I\+AL@{L\+\_\+\+S\+E\+R\+I\+AL}}\item[{\em 
+L\+\_\+\+S\+E\+R\+I\+AL\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aff46f35af219adc3daffbb10e205df83}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aff46f35af219adc3daffbb10e205df83}
+}]\index{K30@{K30}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!K30@{K30}}\item[{\em 
+K30\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a92f11b2c64f9b85861d5dcb84b14742e}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a92f11b2c64f9b85861d5dcb84b14742e}
+}]\index{L\+\_\+\+R\+TC@{L\+\_\+\+R\+TC}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!L\+\_\+\+R\+TC@{L\+\_\+\+R\+TC}}\item[{\em 
+L\+\_\+\+R\+TC\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865afc65b1fe417628d7c6c7bd9ebfbc50c5}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865afc65b1fe417628d7c6c7bd9ebfbc50c5}
+}]\index{D\+S3231@{D\+S3231}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!D\+S3231@{D\+S3231}}\item[{\em 
+D\+S3231\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a95e16e1a4c4ff4bfd6e3798969663b0c}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a95e16e1a4c4ff4bfd6e3798969663b0c}
+}]\index{P\+C\+F8523@{P\+C\+F8523}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!P\+C\+F8523@{P\+C\+F8523}}\item[{\em 
+P\+C\+F8523\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abfc5e432a6b2493218ff884dab001482}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abfc5e432a6b2493218ff884dab001482}
+}]\index{Actuator@{Actuator}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Actuator@{Actuator}}\item[{\em 
+Actuator\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aa2ec2ef7ebb614cf7dd5d78b9bbf59b3}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aa2ec2ef7ebb614cf7dd5d78b9bbf59b3}
+}]\index{Neopixel@{Neopixel}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Neopixel@{Neopixel}}\item[{\em 
+Neopixel\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aff8561f7c2a8b57c9eb4eb11ebac161e}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865aff8561f7c2a8b57c9eb4eb11ebac161e}
+}]\index{Relay@{Relay}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Relay@{Relay}}\item[{\em 
+Relay\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a34c4c50fc7bdd0394f3954f73f2be34d}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a34c4c50fc7bdd0394f3954f73f2be34d}
+}]\index{Servo@{Servo}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Servo@{Servo}}\item[{\em 
+Servo\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a365687df33f7052679dca2d38edcfaf7}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a365687df33f7052679dca2d38edcfaf7}
+}]\index{Stepper@{Stepper}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Stepper@{Stepper}}\item[{\em 
+Stepper\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a370509b5dfe60deb7be545e0a7aff04c}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a370509b5dfe60deb7be545e0a7aff04c}
+}]\index{Log\+Plat@{Log\+Plat}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Log\+Plat@{Log\+Plat}}\item[{\em 
+Log\+Plat\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a4e472f8ae62a269048664d59be7081b5}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a4e472f8ae62a269048664d59be7081b5}
+}]\index{O\+L\+ED@{O\+L\+ED}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!O\+L\+ED@{O\+L\+ED}}\item[{\em 
+O\+L\+ED\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a0c9b2f3f3530345ea5cd8c586478d2b7}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a0c9b2f3f3530345ea5cd8c586478d2b7}
+}]\index{S\+D\+C\+A\+RD@{S\+D\+C\+A\+RD}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!S\+D\+C\+A\+RD@{S\+D\+C\+A\+RD}}\item[{\em 
+S\+D\+C\+A\+RD\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ac66fbf5395181adce9b08d44876c88f9}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ac66fbf5395181adce9b08d44876c88f9}
+}]\index{B\+A\+T\+C\+H\+SD@{B\+A\+T\+C\+H\+SD}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!B\+A\+T\+C\+H\+SD@{B\+A\+T\+C\+H\+SD}}\item[{\em 
+B\+A\+T\+C\+H\+SD\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865acb3aae462c24d74a186926822f40f418}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865acb3aae462c24d74a186926822f40f418}
+}]\index{Comm\+Plat@{Comm\+Plat}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Comm\+Plat@{Comm\+Plat}}\item[{\em 
+Comm\+Plat\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a621ea64935d8300364bc5a479c622a37}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a621ea64935d8300364bc5a479c622a37}
+}]\index{Lo\+Ra@{Lo\+Ra}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Lo\+Ra@{Lo\+Ra}}\item[{\em 
+Lo\+Ra\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a987f947a83fbf1022695e132547e0e19}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a987f947a83fbf1022695e132547e0e19}
+}]\index{n\+RF@{n\+RF}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!n\+RF@{n\+RF}}\item[{\em 
+n\+RF\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad62c72d62c9a14731ce877d226d7e534}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865ad62c72d62c9a14731ce877d226d7e534}
+}]\index{Bluetooth@{Bluetooth}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Bluetooth@{Bluetooth}}\item[{\em 
+Bluetooth\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a7deff39593c9cecd401b795d6e1ae04b}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a7deff39593c9cecd401b795d6e1ae04b}
+}]\index{Internet\+Plat@{Internet\+Plat}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Internet\+Plat@{Internet\+Plat}}\item[{\em 
+Internet\+Plat\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a095cd7ef32631598b47bef1e6070c437}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a095cd7ef32631598b47bef1e6070c437}
+}]\index{Ethernet@{Ethernet}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Ethernet@{Ethernet}}\item[{\em 
+Ethernet\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abe2ae05fb04ddcf6efa31e63e0f0e111}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abe2ae05fb04ddcf6efa31e63e0f0e111}
+}]\index{Wi\+Fi@{Wi\+Fi}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Wi\+Fi@{Wi\+Fi}}\item[{\em 
+Wi\+Fi\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a3bf5d41ed0ac852c9a2e2d3a1161e26d}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a3bf5d41ed0ac852c9a2e2d3a1161e26d}
+}]\index{L\+TE@{L\+TE}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!L\+TE@{L\+TE}}\item[{\em 
+L\+TE\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865acc981ecc65ecf63ad1673cbec9c64198}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865acc981ecc65ecf63ad1673cbec9c64198}
+}]\index{Publish\+Plat@{Publish\+Plat}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Publish\+Plat@{Publish\+Plat}}\item[{\em 
+Publish\+Plat\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a81d5311fa1f8170585d6f4baaa189bc9}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a81d5311fa1f8170585d6f4baaa189bc9}
+}]\index{Google\+Sheets@{Google\+Sheets}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Google\+Sheets@{Google\+Sheets}}\item[{\em 
+Google\+Sheets\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a1992455436de79b1a1f7f708bee6f037}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a1992455436de79b1a1f7f708bee6f037}
+}]\index{Max\+Pub@{Max\+Pub}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Max\+Pub@{Max\+Pub}}\item[{\em 
+Max\+Pub\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6b2ed7e0ac3a1ef150971bdc599278f5}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a6b2ed7e0ac3a1ef150971bdc599278f5}
+}]\index{Spool\+Pub@{Spool\+Pub}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Spool\+Pub@{Spool\+Pub}}\item[{\em 
+Spool\+Pub\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a321256c36911eaeef98e3742f4baead2}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a321256c36911eaeef98e3742f4baead2}
+}]\index{Subscribe\+Plats@{Subscribe\+Plats}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Subscribe\+Plats@{Subscribe\+Plats}}\item[{\em 
+Subscribe\+Plats\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a8e3ec8e74532cd668a3f565b737d148f}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865a8e3ec8e74532cd668a3f565b737d148f}
+}]\index{Max\+Sub@{Max\+Sub}!Loom\+Module@{Loom\+Module}}\index{Loom\+Module@{Loom\+Module}!Max\+Sub@{Max\+Sub}}\item[{\em 
+Max\+Sub\hypertarget{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abdeb20b27627b3c9604d0f2a568fb906}{}\label{class_loom_module_aee91d0a75140d51ee428fc2d4417d865abdeb20b27627b3c9604d0f2a568fb906}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Loom\+Module@{Loom\+Module}!Loom\+Module@{Loom\+Module}}
+\index{Loom\+Module@{Loom\+Module}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{Loom\+Module(\+Loom\+Manager $\ast$manager, const char $\ast$module\+\_\+name=""Unknown"", const Type module\+\_\+type=\+Type\+::\+Unknown)}{LoomModule(LoomManager *manager, const char *module_name="Unknown", const Type module_type=Type::Unknown)}}]{\setlength{\rightskip}{0pt plus 5cm}Loom\+Module\+::\+Loom\+Module (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{manager, }
+\item[{const char $\ast$}]{module\+\_\+name = {\ttfamily \char`\"{}Unknown\char`\"{}}, }
+\item[{const {\bf Type}}]{module\+\_\+type = {\ttfamily {\bf Type\+::\+Unknown}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_module_a5e0d9e185ade9e2ae5be68fdefb25887}{}\label{class_loom_module_a5e0d9e185ade9e2ae5be68fdefb25887}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em module\+\_\+name} & Name of the module (provided by derived classes) \\
+\hline
+\mbox{\tt in}  & {\em module\+\_\+type} & Type of the module (provided by derived classes) \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Module@{Loom\+Module}!````~Loom\+Module@{$\sim$\+Loom\+Module}}
+\index{````~Loom\+Module@{$\sim$\+Loom\+Module}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{$\sim$\+Loom\+Module()=default}{~LoomModule()=default}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Loom\+Module\+::$\sim$\+Loom\+Module (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}\hypertarget{class_loom_module_aec256a84e0498d723540743849e0166c}{}\label{class_loom_module_aec256a84e0498d723540743849e0166c}
+
+
+Destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{Loom\+Module@{Loom\+Module}!add\+\_\+config@{add\+\_\+config}}
+\index{add\+\_\+config@{add\+\_\+config}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{add\+\_\+config(\+Json\+Object json)}{add_config(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Module\+::add\+\_\+config (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_loom_module_a06747f16d76bde35575557c7515adcc0}{}\label{class_loom_module_a06747f16d76bde35575557c7515adcc0}
+
+
+Add configuration information to Json\+Object. 
+
+\hyperlink{class_loom_manager}{Loom\+Manager} iterates over modules to build complete configuration 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em json} & Json configuration object to add to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{class_loom___analog_ad74305d4a8d7f705072561b92e7b7c68}{Loom\+\_\+\+Analog}, \hyperlink{class_loom___lo_ra_a0f70fbbfe83db6ab5bc70d5b73e1df5a}{Loom\+\_\+\+Lo\+Ra}, \hyperlink{class_loom__n_r_f_a17b192fceeb84d4da70c3213ea743228}{Loom\+\_\+n\+RF}, \hyperlink{class_loom___digital_aac57da701cadb9466ff060dc3a26a95f}{Loom\+\_\+\+Digital}, \hyperlink{class_loom___bluetooth_a6cd69b2bdd618cab4093eed50e0149d4}{Loom\+\_\+\+Bluetooth}, \hyperlink{class_loom___stepper_a5413b50ce475e1f14773c3dfa8af0b59}{Loom\+\_\+\+Stepper}, \hyperlink{class_loom___neopixel_a005ac12c181ff40647657c6c9b2fde2d}{Loom\+\_\+\+Neopixel}, \hyperlink{class_loom___servo_a442e82c30372c4579b3d2bfeeacaccb6}{Loom\+\_\+\+Servo}, and \hyperlink{class_loom___relay_a67c8d4bdf2f047917f5c5b05e4f64e58}{Loom\+\_\+\+Relay}.
+
+\index{Loom\+Module@{Loom\+Module}!category@{category}}
+\index{category@{category}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{category() const }{category() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Module\+::\+Category} Loom\+Module\+::category (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_module_abe41c7748d6f6566b6e96918dca12106}{}\label{class_loom_module_abe41c7748d6f6566b6e96918dca12106}
+
+
+Get the category of the module. 
+
+\index{Loom\+Module@{Loom\+Module}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{dispatch(\+Json\+Object json)}{dispatch(JsonObject json)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Loom\+Module\+::dispatch (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}{}\label{class_loom_module_aa4e7db1687a95e41ee418c201677fff8}
+
+
+Route command to driver. 
+
+
+
+Reimplemented in \hyperlink{class_loom___multiplexer_abadc1f55ae04c66e761d366325a0804f}{Loom\+\_\+\+Multiplexer}, \hyperlink{class_loom___stepper_ae2500cbc8029c5b3878d5465dfc01c22}{Loom\+\_\+\+Stepper}, \hyperlink{class_loom___neopixel_a89ecb4894b7be0e00657d32aa2374a42}{Loom\+\_\+\+Neopixel}, \hyperlink{class_loom___servo_ad24074bb212a1c47ec389379726c7c01}{Loom\+\_\+\+Servo}, \hyperlink{class_loom_n_t_p_sync_aab638db55b31b1233fe697117d3e3330}{Loom\+N\+T\+P\+Sync}, \hyperlink{class_loom___max_pub_a5d824f56b133288fc9dcb0d62379ca35}{Loom\+\_\+\+Max\+Pub}, and \hyperlink{class_loom___relay_a93ddf6a1c30244a81eaeb9332546e465}{Loom\+\_\+\+Relay}.
+
+\index{Loom\+Module@{Loom\+Module}!enum\+\_\+category\+\_\+string@{enum\+\_\+category\+\_\+string}}
+\index{enum\+\_\+category\+\_\+string@{enum\+\_\+category\+\_\+string}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{enum\+\_\+category\+\_\+string(const Category c)}{enum_category_string(const Category c)}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+Module\+::enum\+\_\+category\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{const {\bf Category}}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom_module_a7fc17923cdef15e3a60a871a2458eaad}{}\label{class_loom_module_a7fc17923cdef15e3a60a871a2458eaad}
+
+
+Get string of the category associated with a Category. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em c} & Category value to get string representation of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String of category 
+\end{DoxyReturn}
+\index{Loom\+Module@{Loom\+Module}!enum\+\_\+verbosity\+\_\+string@{enum\+\_\+verbosity\+\_\+string}}
+\index{enum\+\_\+verbosity\+\_\+string@{enum\+\_\+verbosity\+\_\+string}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{enum\+\_\+verbosity\+\_\+string(const Verbosity v)}{enum_verbosity_string(const Verbosity v)}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Loom\+Module\+::enum\+\_\+verbosity\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{const {\bf Verbosity}}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_loom_module_aaf32cb6107f0402822c615e9cd38eaef}{}\label{class_loom_module_aaf32cb6107f0402822c615e9cd38eaef}
+
+
+Get string of name associated with verbosity enum. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em v} & Verbosity value to get string representation of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String of verbosity 
+\end{DoxyReturn}
+\index{Loom\+Module@{Loom\+Module}!get\+\_\+active@{get\+\_\+active}}
+\index{get\+\_\+active@{get\+\_\+active}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{get\+\_\+active() const }{get_active() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Module\+::get\+\_\+active (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_module_a1bb79ab68994c51851998a31b982da72}{}\label{class_loom_module_a1bb79ab68994c51851998a31b982da72}
+
+
+Get whether or not the module should be treated as active. 
+
+\begin{DoxyReturn}{Returns}
+Whether or not the module is active 
+\end{DoxyReturn}
+\index{Loom\+Module@{Loom\+Module}!get\+\_\+device\+\_\+manager@{get\+\_\+device\+\_\+manager}}
+\index{get\+\_\+device\+\_\+manager@{get\+\_\+device\+\_\+manager}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{get\+\_\+device\+\_\+manager() const }{get_device_manager() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Manager}$\ast$ Loom\+Module\+::get\+\_\+device\+\_\+manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_module_a4752224a62f535fbaf3777aa486fc3c5}{}\label{class_loom_module_a4752224a62f535fbaf3777aa486fc3c5}
+
+
+Get the device manager class if linked. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the \hyperlink{class_loom_manager}{Loom\+Manager}, Null if not linked 
+\end{DoxyReturn}
+\index{Loom\+Module@{Loom\+Module}!get\+\_\+module\+\_\+name@{get\+\_\+module\+\_\+name}}
+\index{get\+\_\+module\+\_\+name@{get\+\_\+module\+\_\+name}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{get\+\_\+module\+\_\+name(char $\ast$buf) const }{get_module_name(char *buf) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Module\+::get\+\_\+module\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buf}
+\end{DoxyParamCaption}
+) const}\hypertarget{class_loom_module_a7ff57ffb2d8fabc484f6678f7fae8082}{}\label{class_loom_module_a7ff57ffb2d8fabc484f6678f7fae8082}
+
+
+Copy module name into buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em buf} & The buffer to copy module name into \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Module@{Loom\+Module}!get\+\_\+module\+\_\+name@{get\+\_\+module\+\_\+name}}
+\index{get\+\_\+module\+\_\+name@{get\+\_\+module\+\_\+name}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{get\+\_\+module\+\_\+name() const }{get_module_name() const }}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Loom\+Module\+::get\+\_\+module\+\_\+name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_module_a95fbb30f0ab618f3305659f9e7a4bdaf}{}\label{class_loom_module_a95fbb30f0ab618f3305659f9e7a4bdaf}
+
+
+Get module name. 
+
+\begin{DoxyReturn}{Returns}
+Module name 
+\end{DoxyReturn}
+\index{Loom\+Module@{Loom\+Module}!get\+\_\+module\+\_\+type@{get\+\_\+module\+\_\+type}}
+\index{get\+\_\+module\+\_\+type@{get\+\_\+module\+\_\+type}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{get\+\_\+module\+\_\+type() const }{get_module_type() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Type} Loom\+Module\+::get\+\_\+module\+\_\+type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_module_a4e040c36df109bfa39d9499828d3df1d}{}\label{class_loom_module_a4e040c36df109bfa39d9499828d3df1d}
+
+
+Get module type. 
+
+\begin{DoxyReturn}{Returns}
+Module type 
+\end{DoxyReturn}
+\index{Loom\+Module@{Loom\+Module}!get\+\_\+package\+\_\+verbosity@{get\+\_\+package\+\_\+verbosity}}
+\index{get\+\_\+package\+\_\+verbosity@{get\+\_\+package\+\_\+verbosity}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{get\+\_\+package\+\_\+verbosity() const }{get_package_verbosity() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Verbosity} Loom\+Module\+::get\+\_\+package\+\_\+verbosity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_module_ac259e773fa409b96fa6b43d8edeaa96b}{}\label{class_loom_module_ac259e773fa409b96fa6b43d8edeaa96b}
+
+
+Get package verbosity. 
+
+\begin{DoxyReturn}{Returns}
+The current verbosity setting 
+\end{DoxyReturn}
+\index{Loom\+Module@{Loom\+Module}!get\+\_\+print\+\_\+verbosity@{get\+\_\+print\+\_\+verbosity}}
+\index{get\+\_\+print\+\_\+verbosity@{get\+\_\+print\+\_\+verbosity}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{get\+\_\+print\+\_\+verbosity() const }{get_print_verbosity() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Verbosity} Loom\+Module\+::get\+\_\+print\+\_\+verbosity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_module_ab17b0faa49c40c08692714ca6064a8f7}{}\label{class_loom_module_ab17b0faa49c40c08692714ca6064a8f7}
+
+
+Get print verbosity. 
+
+\begin{DoxyReturn}{Returns}
+The current verbosity setting 
+\end{DoxyReturn}
+\index{Loom\+Module@{Loom\+Module}!link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}}
+\index{link\+\_\+device\+\_\+manager@{link\+\_\+device\+\_\+manager}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{link\+\_\+device\+\_\+manager(\+Loom\+Manager $\ast$\+L\+M)}{link_device_manager(LoomManager *LM)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Module\+::link\+\_\+device\+\_\+manager (
+\begin{DoxyParamCaption}
+\item[{{\bf Loom\+Manager} $\ast$}]{LM}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_loom_module_adc08f87bf7c0c0988decee196a714396}{}\label{class_loom_module_adc08f87bf7c0c0988decee196a714396}
+
+
+Add pointer back to device manager. 
+
+Generally only called when device manager links module to provide pointer both directions. Derived modules may override this for increased function, such as linking a submanager or R\+TC module. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em LM} & \hyperlink{class_loom_manager}{Loom\+Manager} to point to \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{class_loom___interrupt___manager_a7415a4ffbeda1358639936cc62969605}{Loom\+\_\+\+Interrupt\+\_\+\+Manager}, \hyperlink{class_loom_r_t_c_a24c72617d7e275e89740af4f5296e42b}{Loom\+R\+TC}, \hyperlink{class_loom___s_d_ad910296dd33bec7d3ec8a91892aade48}{Loom\+\_\+\+SD}, and \hyperlink{class_loom___sleep___manager_a8b9622388b96fcb7a63b011a5b4e885e}{Loom\+\_\+\+Sleep\+\_\+\+Manager}.
+
+\index{Loom\+Module@{Loom\+Module}!package@{package}}
+\index{package@{package}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{package(\+Json\+Object json)=0}{package(JsonObject json)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Module\+::package (
+\begin{DoxyParamCaption}
+\item[{Json\+Object}]{json}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}{}\label{class_loom_module_a84f1c1f3340203a3457b5ffe0bd53a53}
+
+
+Package a modules measurements or state. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em json} & Object to put data into \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{class_loom___interrupt___manager_a5acb7bf173619dbd1a459800182767e6}{Loom\+\_\+\+Interrupt\+\_\+\+Manager}, \hyperlink{class_loom___analog_ab22f3a9b0d5c78feb1e53cf565483385}{Loom\+\_\+\+Analog}, \hyperlink{class_loom___multiplexer_aa09d42f26ce3c4185ae8e9b55e3d851f}{Loom\+\_\+\+Multiplexer}, \hyperlink{class_loom_comm_plat_a4cc05ef1f12c5b15fc6516dc75f070d4}{Loom\+Comm\+Plat}, \hyperlink{class_loom_internet_plat_ae9cbe7ba64e4d597fe7084110f646dec}{Loom\+Internet\+Plat}, \hyperlink{class_loom___a_d_s1115_a4c2a1f5b61f51cf5485598d8d36c6e3d}{Loom\+\_\+\+A\+D\+S1115}, \hyperlink{class_loom_r_t_c_a13101cb450db89fe15ab77b29dba975e}{Loom\+R\+TC}, \hyperlink{class_loom___batch_s_d_a738bf5b08c3eba7ec2711b656e6f90bd}{Loom\+\_\+\+Batch\+SD}, \hyperlink{class_loom___wi_fi_a536247ffb9228c55d5a2473d8df9a58b}{Loom\+\_\+\+Wi\+Fi}, \hyperlink{class_loom___m_p_u6050_a053f5fd6c8e4d8bc3243f345d68d0f30}{Loom\+\_\+\+M\+P\+U6050}, \hyperlink{class_loom___sleep___manager_acbb98e60458aec76b9bf9ed446f17029}{Loom\+\_\+\+Sleep\+\_\+\+Manager}, \hyperlink{class_loom___digital_a8cbad6dd375dca45843b459dec8da717}{Loom\+\_\+\+Digital}, \hyperlink{class_loom___a_s7265_x_aa6b4502c7486d9aef3277af7287218f0}{Loom\+\_\+\+A\+S7265X}, \hyperlink{class_loom___a_s7263_ad2003ca203febd1dc34dc19184187631}{Loom\+\_\+\+A\+S7263}, \hyperlink{class_loom___a_s7262_a943cf5569f3f583da3049d8d64e7da76}{Loom\+\_\+\+A\+S7262}, \hyperlink{class_loom___z_x_gesture_a48153345d472b3e5008c42ddb6f49223}{Loom\+\_\+\+Z\+X\+Gesture}, \hyperlink{class_loom___t_s_l2591_a02b3656a1bccbed969306141c1f06011}{Loom\+\_\+\+T\+S\+L2591}, \hyperlink{class_loom___k30_a20b989aee8822e204e951edbc6a5969a}{Loom\+\_\+\+K30}, \hyperlink{class_loom___t_s_l2561_a1efaaba6462bd3c2658d169cfc5132b7}{Loom\+\_\+\+T\+S\+L2561}, \hyperlink{class_loom___m_a_x31856_a7b2d2b233930c75207c1a6521927ee74}{Loom\+\_\+\+M\+A\+X31856}, \hyperlink{class_loom___m_s5803_a994abd7bfb62ece7b47bd595d70603b9}{Loom\+\_\+\+M\+S5803}, \hyperlink{class_loom___m_m_a8451_a94a382c80a638f3cba9fb0c7fd4bd232}{Loom\+\_\+\+M\+M\+A8451}, \hyperlink{class_loom_temp_sync_aa36abfbdda84295decbfdc962f7344c8}{Loom\+Temp\+Sync}, \hyperlink{class_loom_publish_plat_ac8548fef404b55465773513aefce5608}{Loom\+Publish\+Plat}, \hyperlink{class_loom___l_i_s3_d_h_a1e96a7df95de03409692c4194d8300b0}{Loom\+\_\+\+L\+I\+S3\+DH}, \hyperlink{class_loom___f_x_o_s8700_a0418ea42d1c8764de9a152a4fae96c40}{Loom\+\_\+\+F\+X\+O\+S8700}, \hyperlink{class_loom___max_sub_a7680cb0286f2320c68ab26242643fe64}{Loom\+\_\+\+Max\+Sub}, \hyperlink{class_loom___f_x_a_s21002_aec2655c583a7bfe3b7603534c0e0edcf}{Loom\+\_\+\+F\+X\+A\+S21002}, \hyperlink{class_loom___s_h_t31_d_a0fd16cdcaf91721d68a7a882656c9551}{Loom\+\_\+\+S\+H\+T31D}, \hyperlink{class_loom___t_m_p007_a15de2056a158e8ec1662b6760ecb66e6}{Loom\+\_\+\+T\+M\+P007}, \hyperlink{class_loom___m_a_x31855_ab810ae8d4b02cb1a7326669f359bb56b}{Loom\+\_\+\+M\+A\+X31855}, \hyperlink{class_loom___servo_a0162afa4dade96bb86340fb567b43820}{Loom\+\_\+\+Servo}, \hyperlink{class_loom_n_t_p_sync_a99820eea8c86bbeb299a12fa2164fdad}{Loom\+N\+T\+P\+Sync}, \hyperlink{class_loom_log_plat_abddec0fce6ef786577ae008702c9393e}{Loom\+Log\+Plat}, \hyperlink{class_loom___m_b1232_ac08f29a40c91d9008dd355324b125bd9}{Loom\+\_\+\+M\+B1232}, \hyperlink{class_loom___relay_ae3c0ac05a26917c832196205a7c2d7a9}{Loom\+\_\+\+Relay}, \hyperlink{class_loom___decagon_g_s3_a48b54dffb09f83a82e9ebed32e1c7152}{Loom\+\_\+\+Decagon\+G\+S3}, \hyperlink{class_loom___decagon5_t_m_ac3bd11e1e2fb49b330d355778118886e}{Loom\+\_\+\+Decagon5\+TM}, \hyperlink{class_loom___s_t_e_m_m_a_aaee00fa7deb976da153cd6a90c62eceb}{Loom\+\_\+\+S\+T\+E\+M\+MA}, \hyperlink{class_loom_actuator_abf895d8f41379ff53dff666d9d2791a2}{Loom\+Actuator}, and \hyperlink{class_loom___warm_up___manager_a82c8cd30f969a681a76b332d3b1c2ce4}{Loom\+\_\+\+Warm\+Up\+\_\+\+Manager}.
+
+\index{Loom\+Module@{Loom\+Module}!power\+\_\+down@{power\+\_\+down}}
+\index{power\+\_\+down@{power\+\_\+down}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{power\+\_\+down()}{power_down()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Module\+::power\+\_\+down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_loom_module_a31ea02275e356c6ce0d01fdb6d4190df}{}\label{class_loom_module_a31ea02275e356c6ce0d01fdb6d4190df}
+
+
+Turn off any hardware. 
+
+
+
+Reimplemented in \hyperlink{class_loom___multiplexer_a8196a461d4b93f39f7b469ae89fa17c7}{Loom\+\_\+\+Multiplexer}, \hyperlink{class_loom___lo_ra_a28c3103ea9024475f152e7585cc462df}{Loom\+\_\+\+Lo\+Ra}, \hyperlink{class_loom___s_d_a01d99de8b39b25f562f2aeec3413170e}{Loom\+\_\+\+SD}, \hyperlink{class_loom___l_t_e_a553ab68611ebae383e590ffa3e15a243}{Loom\+\_\+\+L\+TE}, and \hyperlink{class_loom___batch_s_d_adc78401b4bea4b41c76717e57417c1d5}{Loom\+\_\+\+Batch\+SD}.
+
+\index{Loom\+Module@{Loom\+Module}!power\+\_\+up@{power\+\_\+up}}
+\index{power\+\_\+up@{power\+\_\+up}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{power\+\_\+up()}{power_up()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Module\+::power\+\_\+up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_loom_module_aa0683cb24ce1cc49273440e79f035e23}{}\label{class_loom_module_aa0683cb24ce1cc49273440e79f035e23}
+
+
+Turn on any hardware. 
+
+
+
+Reimplemented in \hyperlink{class_loom___multiplexer_ad09225b1a4c8b70735992cd5eac9a71b}{Loom\+\_\+\+Multiplexer}, \hyperlink{class_loom___lo_ra_ad94dccb488e41df1492129c81d480ae4}{Loom\+\_\+\+Lo\+Ra}, \hyperlink{class_loom___s_d_a316af7fd9cd88c33aa9aa06755cc37fd}{Loom\+\_\+\+SD}, \hyperlink{class_loom___l_t_e_a4c2a46142110aa917b0f30bc75c7fec1}{Loom\+\_\+\+L\+TE}, and \hyperlink{class_loom___batch_s_d_aa847506aab0cba43e0d98e0bb663a915}{Loom\+\_\+\+Batch\+SD}.
+
+\index{Loom\+Module@{Loom\+Module}!print\+\_\+config@{print\+\_\+config}}
+\index{print\+\_\+config@{print\+\_\+config}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{print\+\_\+config() const }{print_config() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Module\+::print\+\_\+config (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_loom_module_a4385842da9226014283136b3e37dde88}{}\label{class_loom_module_a4385842da9226014283136b3e37dde88}
+
+
+Display the configuration settings of the module. 
+
+
+
+Reimplemented in \hyperlink{class_loom___interrupt___manager_a6b7a28e4b7a150016e2975165581f7e9}{Loom\+\_\+\+Interrupt\+\_\+\+Manager}, \hyperlink{class_loom_comm_plat_a97982022b7e279d4def0246e17a95d61}{Loom\+Comm\+Plat}, \hyperlink{class_loom___multiplexer_a21759070f77ec1560e9b2a272a0c0640}{Loom\+\_\+\+Multiplexer}, \hyperlink{class_loom_r_t_c_a41c84de7ef49bf7f42069f948a98c30b}{Loom\+R\+TC}, \hyperlink{class_loom___analog_ae41c9795ceb9079b88a87cb64d7869cf}{Loom\+\_\+\+Analog}, \hyperlink{class_loom___lo_ra_a2d73e0aa394de9db046621c86ea644c0}{Loom\+\_\+\+Lo\+Ra}, \hyperlink{class_loom___s_d_a4c0c3f46a3479ed8e4a96c0ca4acfa7e}{Loom\+\_\+\+SD}, \hyperlink{class_loom___o_l_e_d_a20dab0bc2c5bdc139b1b04523a54a78c}{Loom\+\_\+\+O\+L\+ED}, \hyperlink{class_loom__n_r_f_ad8a85a3ce2d9e2d7d12dec310a1c6615}{Loom\+\_\+n\+RF}, \hyperlink{class_loom___bluetooth_acf5fbe9ae0476fbc647c742baab183e8}{Loom\+\_\+\+Bluetooth}, \hyperlink{class_loom___l_t_e_ae55b43c23da41b673720f5f160804e10}{Loom\+\_\+\+L\+TE}, \hyperlink{class_loom___a_d_s1115_a8c5419d33482990e84be15dfe82b0ea6}{Loom\+\_\+\+A\+D\+S1115}, \hyperlink{class_loom___batch_s_d_ad1566bbb55d145e3206784df245be710}{Loom\+\_\+\+Batch\+SD}, \hyperlink{class_loom___sleep___manager_a862cdfcf8c4cdba3aae5993a8ce0cff1}{Loom\+\_\+\+Sleep\+\_\+\+Manager}, \hyperlink{class_loom___wi_fi_acf10d90ceedbe039f216b7d1544eb935}{Loom\+\_\+\+Wi\+Fi}, \hyperlink{class_loom_publish_plat_a38cc9fe71203a153392fbca807e39434}{Loom\+Publish\+Plat}, \hyperlink{class_loom___digital_a8667d980ae3546a96584bbdd9a244a7c}{Loom\+\_\+\+Digital}, \hyperlink{class_loom___ethernet_a79ed8f208e2fe4faf0a71e468d7ba22e}{Loom\+\_\+\+Ethernet}, \hyperlink{class_loom___a_s7263_a19c0c1b6a4ae3ad0454011764cf54c70}{Loom\+\_\+\+A\+S7263}, \hyperlink{class_loom___a_s7262_a29aef77c6d06feb46bc840f4407abba7}{Loom\+\_\+\+A\+S7262}, \hyperlink{class_loom___z_x_gesture_a7af9796af4c3dfa33a3eedb63de89285}{Loom\+\_\+\+Z\+X\+Gesture}, \hyperlink{class_loom_subscribe_plat_a574b062d74e998a12cdb54d265c36972}{Loom\+Subscribe\+Plat}, \hyperlink{class_loom___neopixel_aa1930cfa494ef432bbbf1d1786c6b57d}{Loom\+\_\+\+Neopixel}, \hyperlink{class_loom___m_m_a8451_aad7bfbb26c8dd4eadd61e9a4817e6930}{Loom\+\_\+\+M\+M\+A8451}, \hyperlink{class_loom___max_sub_a86ebb385b46bd7d1052d98b525216657}{Loom\+\_\+\+Max\+Sub}, \hyperlink{class_loom_temp_sync_a7ebfed68ee73f407d698e70a023d5b5d}{Loom\+Temp\+Sync}, \hyperlink{class_loom_log_plat_afd1780573d350f46ce26d237a4ade43b}{Loom\+Log\+Plat}, \hyperlink{class_loom___p_c_f8523_a428ddebfaec1b10cbe079f8aa5f64972}{Loom\+\_\+\+P\+C\+F8523}, \hyperlink{class_loom_n_t_p_sync_af683546f2b20799e3afbcf61eaabfc2b}{Loom\+N\+T\+P\+Sync}, \hyperlink{class_loom___max_pub_a9286db7e281484d00233dc4d86012197}{Loom\+\_\+\+Max\+Pub}, \hyperlink{class_loom_i2_c_sensor_ab90004ce30a281b7f51ecf3093ca4cea}{Loom\+I2\+C\+Sensor}, \hyperlink{class_loom___d_s3231_a82be3e8bae268cb80bca455e5fef1289}{Loom\+\_\+\+D\+S3231}, \hyperlink{class_loom___google_sheets_a83066e82b742c1f273bf7b009a1490d4}{Loom\+\_\+\+Google\+Sheets}, \hyperlink{class_loom_sensor_aaa3bb2a2165029906c4ee815e790c89e}{Loom\+Sensor}, \hyperlink{class_loom___decagon_g_s3_a398d5f2c572ae06bc31870fea1ca3e68}{Loom\+\_\+\+Decagon\+G\+S3}, \hyperlink{class_loom___decagon5_t_m_ac402bf4f4ea1e26d9ac38b0572ceade6}{Loom\+\_\+\+Decagon5\+TM}, and \hyperlink{class_loom_serial_sensor_ac21a512699c90db3b4287798e1526f0c}{Loom\+Serial\+Sensor}.
+
+\index{Loom\+Module@{Loom\+Module}!print\+\_\+module\+\_\+label@{print\+\_\+module\+\_\+label}}
+\index{print\+\_\+module\+\_\+label@{print\+\_\+module\+\_\+label}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{print\+\_\+module\+\_\+label() const }{print_module_label() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Module\+::print\+\_\+module\+\_\+label (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_module_a636735282f2208ab71403ae5720622ba}{}\label{class_loom_module_a636735282f2208ab71403ae5720622ba}
+
+
+Print the module name as a label. 
+
+Used for matching debug prints to corresponding module \index{Loom\+Module@{Loom\+Module}!print\+\_\+state@{print\+\_\+state}}
+\index{print\+\_\+state@{print\+\_\+state}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{print\+\_\+state() const }{print_state() const }}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Module\+::print\+\_\+state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}{}\label{class_loom_module_a96505b45f2e712eab5de873b4d49dfc7}
+
+
+Display current state of the module. 
+
+
+
+Reimplemented in \hyperlink{class_loom___interrupt___manager_ae9dde4f4da0e50a0bc19e2ae3453c3cb}{Loom\+\_\+\+Interrupt\+\_\+\+Manager}, \hyperlink{class_loom_comm_plat_a2a3336599f8b56c2cbb223a386d797ec}{Loom\+Comm\+Plat}, \hyperlink{class_loom___multiplexer_a2a60ebefe68aa75a3141015d2aa81955}{Loom\+\_\+\+Multiplexer}, \hyperlink{class_loom_r_t_c_aaa45a542cfd7b64f79a2c321a29c08f5}{Loom\+R\+TC}, \hyperlink{class_loom___l_t_e_a2ca3566bf14efebc81a94d650ebc5236}{Loom\+\_\+\+L\+TE}, \hyperlink{class_loom___wi_fi_ab3663639761f7748602fbddd8c713087}{Loom\+\_\+\+Wi\+Fi}, \hyperlink{class_loom___m_p_u6050_a34dce6c99de2f323287598400499a4c4}{Loom\+\_\+\+M\+P\+U6050}, \hyperlink{class_loom___ethernet_a1305b086b7e99c98320ad1d280718259}{Loom\+\_\+\+Ethernet}, \hyperlink{class_loom_publish_plat_a0055306a6b0efc49d83f083c1398eea1}{Loom\+Publish\+Plat}, \hyperlink{class_loom_subscribe_plat_ace7e2ccbd9a8b5155bfabb2fd2e38d33}{Loom\+Subscribe\+Plat}, \hyperlink{class_loom___neopixel_a0a5e8fd23e4f32b006a52c422551b48e}{Loom\+\_\+\+Neopixel}, \hyperlink{class_loom___stepper_a8aaf4b82032fc4b4cdd1ea1b9f289de1}{Loom\+\_\+\+Stepper}, \hyperlink{class_loom___servo_a8b8f085c570773d5008beccf3467cac6}{Loom\+\_\+\+Servo}, \hyperlink{class_loom_n_t_p_sync_ad33806de76e81d80f9868951e83a8191}{Loom\+N\+T\+P\+Sync}, and \hyperlink{class_loom___relay_a001fba3a442b2ef5792fe394eb1d78e4}{Loom\+\_\+\+Relay}.
+
+\index{Loom\+Module@{Loom\+Module}!second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}}
+\index{second\+\_\+stage\+\_\+ctor@{second\+\_\+stage\+\_\+ctor}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{second\+\_\+stage\+\_\+ctor()}{second_stage_ctor()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Loom\+Module\+::second\+\_\+stage\+\_\+ctor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{class_loom_module_a8dd3704d1bd38868d5774e48c1073d12}{}\label{class_loom_module_a8dd3704d1bd38868d5774e48c1073d12}
+
+
+Second stage construction. 
+
+Perform any actions that need all of the devices to be initized beforehand -\/ such as looking up an internet platform This function is guranteed to be called A\+F\+T\+ER all modules have been constructed. 
+
+Reimplemented in \hyperlink{class_loom_subscribe_plat_a5394d492cec0f9403d0442ea46bce2db}{Loom\+Subscribe\+Plat}, \hyperlink{class_loom_publish_plat_a9be9c86b766a6308fb2851875b50ba56}{Loom\+Publish\+Plat}, \hyperlink{class_loom_temp_sync_a0bc1a857bc87c30482c8175d69876b0a}{Loom\+Temp\+Sync}, \hyperlink{class_loom___max_sub_a8cc7cbe1313118bd7773e5f023eb7bb2}{Loom\+\_\+\+Max\+Sub}, \hyperlink{class_loom___max_pub_a86cecc2a45d660c5f1cc1d6b720b1739}{Loom\+\_\+\+Max\+Pub}, and \hyperlink{class_loom_n_t_p_sync_ad4a9843c49172a83f4c7bcb310f4b177}{Loom\+N\+T\+P\+Sync}.
+
+\index{Loom\+Module@{Loom\+Module}!set\+\_\+active@{set\+\_\+active}}
+\index{set\+\_\+active@{set\+\_\+active}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{set\+\_\+active(const bool enable)}{set_active(const bool enable)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Module\+::set\+\_\+active (
+\begin{DoxyParamCaption}
+\item[{const bool}]{enable}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_loom_module_aaac9a713ba6389818cefdc740718ad9e}{}\label{class_loom_module_aaac9a713ba6389818cefdc740718ad9e}
+
+
+Set whether or not the module should be treated as active. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em enable} & Whether or not to enable module \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Module@{Loom\+Module}!set\+\_\+package\+\_\+verbosity@{set\+\_\+package\+\_\+verbosity}}
+\index{set\+\_\+package\+\_\+verbosity@{set\+\_\+package\+\_\+verbosity}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{set\+\_\+package\+\_\+verbosity(const Verbosity v)}{set_package_verbosity(const Verbosity v)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Module\+::set\+\_\+package\+\_\+verbosity (
+\begin{DoxyParamCaption}
+\item[{const {\bf Verbosity}}]{v}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_module_a096b13557553a7fb283a32ab3645815b}{}\label{class_loom_module_a096b13557553a7fb283a32ab3645815b}
+
+
+Set package verbosity. 
+
+Controlls level of detail included in bundles 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em v} & The verbosity setting \\
+\hline
+\end{DoxyParams}
+\index{Loom\+Module@{Loom\+Module}!set\+\_\+print\+\_\+verbosity@{set\+\_\+print\+\_\+verbosity}}
+\index{set\+\_\+print\+\_\+verbosity@{set\+\_\+print\+\_\+verbosity}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{set\+\_\+print\+\_\+verbosity(const Verbosity v)}{set_print_verbosity(const Verbosity v)}}]{\setlength{\rightskip}{0pt plus 5cm}void Loom\+Module\+::set\+\_\+print\+\_\+verbosity (
+\begin{DoxyParamCaption}
+\item[{const {\bf Verbosity}}]{v}
+\end{DoxyParamCaption}
+)}\hypertarget{class_loom_module_a5008d47cff50ffa2e6fe4f813c3ffa1e}{}\label{class_loom_module_a5008d47cff50ffa2e6fe4f813c3ffa1e}
+
+
+Set print verbosity Controlls level of detail included in debug prints. 
+
+
+
+\subsection{Member Data Documentation}
+\index{Loom\+Module@{Loom\+Module}!active@{active}}
+\index{active@{active}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{active}{active}}]{\setlength{\rightskip}{0pt plus 5cm}bool Loom\+Module\+::active\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_module_af61a7b93ef2b9acfc22c7ad7968a45c7}{}\label{class_loom_module_af61a7b93ef2b9acfc22c7ad7968a45c7}
+
+
+Whether or not the module should be treated as active. 
+
+If inactive at setup (due to failed initialization, module will be deleted) \index{Loom\+Module@{Loom\+Module}!device\+\_\+manager@{device\+\_\+manager}}
+\index{device\+\_\+manager@{device\+\_\+manager}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{device\+\_\+manager}{device_manager}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Loom\+Manager}$\ast$ Loom\+Module\+::device\+\_\+manager\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_module_a28fe8b2fb5a9a0d14bebe13ac1c92bdf}{}\label{class_loom_module_a28fe8b2fb5a9a0d14bebe13ac1c92bdf}
+
+
+Pointer to manager. 
+
+\hyperlink{class_loom_manager}{Loom\+Manager} provides to any modules passed to add\+\_\+module \index{Loom\+Module@{Loom\+Module}!module\+\_\+name@{module\+\_\+name}}
+\index{module\+\_\+name@{module\+\_\+name}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{module\+\_\+name}{module_name}}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Loom\+Module\+::module\+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}{}\label{class_loom_module_adf6e68ad7e9fa2acfca7a8a280680764}
+\index{Loom\+Module@{Loom\+Module}!module\+\_\+name\+\_\+base@{module\+\_\+name\+\_\+base}}
+\index{module\+\_\+name\+\_\+base@{module\+\_\+name\+\_\+base}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{module\+\_\+name\+\_\+base}{module_name_base}}]{\setlength{\rightskip}{0pt plus 5cm}const String Loom\+Module\+::module\+\_\+name\+\_\+base\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_module_a7cb2d5ef593dfc99e938c632f8843c84}{}\label{class_loom_module_a7cb2d5ef593dfc99e938c632f8843c84}
+
+
+The name of the module (Should have a D\+E\+F\+A\+U\+LT but can be overriden if provided to constructor) 
+
+\index{Loom\+Module@{Loom\+Module}!module\+\_\+type@{module\+\_\+type}}
+\index{module\+\_\+type@{module\+\_\+type}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{module\+\_\+type}{module_type}}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Type} Loom\+Module\+::module\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_module_a152d394f37236a2b159dae19da67eeb0}{}\label{class_loom_module_a152d394f37236a2b159dae19da67eeb0}
+
+
+Module type. 
+
+\index{Loom\+Module@{Loom\+Module}!package\+\_\+verbosity@{package\+\_\+verbosity}}
+\index{package\+\_\+verbosity@{package\+\_\+verbosity}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{package\+\_\+verbosity}{package_verbosity}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Verbosity} Loom\+Module\+::package\+\_\+verbosity\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_module_aec8db10ee69e265779822792f177f982}{}\label{class_loom_module_aec8db10ee69e265779822792f177f982}
+
+
+Package verbosity. 
+
+\index{Loom\+Module@{Loom\+Module}!print\+\_\+verbosity@{print\+\_\+verbosity}}
+\index{print\+\_\+verbosity@{print\+\_\+verbosity}!Loom\+Module@{Loom\+Module}}
+\subsubsection[{\texorpdfstring{print\+\_\+verbosity}{print_verbosity}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Verbosity} Loom\+Module\+::print\+\_\+verbosity\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_loom_module_a6e73663a6a5ebdcbe3f92153ca88ce8c}{}\label{class_loom_module_a6e73663a6a5ebdcbe3f92153ca88ce8c}
+
+
+Print verbosity. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{_module_8h}{Module.\+h}\item 
+src/\hyperlink{_module_8cpp}{Module.\+cpp}\end{DoxyCompactItemize}

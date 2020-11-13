@@ -1,0 +1,576 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom___sleep___manager" kind="class" language="C++" prot="public">
+    <compoundname>Loom_Sleep_Manager</compoundname>
+    <basecompoundref refid="class_loom_module" prot="public" virt="non-virtual">LoomModule</basecompoundref>
+    <includes refid="_sleep___manager_8h" local="no">Sleep_Manager.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom___sleep___manager_1ae7bb3c7151e64825fc6ff0473f157175" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Sleep_Manager::Loom_Sleep_Manager</definition>
+        <argsstring>(LoomManager *manager, const bool use_LED=true, const bool delay_on_wake=false, const Mode sleep_mode=Mode::STANDBY, const byte power_off_pin=A5)</argsstring>
+        <name>Loom_Sleep_Manager</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>use_LED</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>delay_on_wake</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13" kindref="member">Mode</ref></type>
+          <declname>sleep_mode</declname>
+          <defval><ref refid="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13aeea559d5c56d48e94e586f7fe000c0b1" kindref="member">Mode::STANDBY</ref></defval>
+        </param>
+        <param>
+          <type>const byte</type>
+          <declname>power_off_pin</declname>
+          <defval>A5</defval>
+        </param>
+        <briefdescription>
+<para>Sleep Manager module constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">use_LED</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;true&gt; | {true, false} | Whether or not to use LED to indicate wake state </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delay_on_wake</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bool | &lt;false&gt; | {true, false} | Whether or not to delay upon waking to allow time to open Serial Monitor </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sleep_mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Mode) | &lt;1&gt; | { 0(&quot;Idle&quot;), 1(&quot;Standby&quot;), 2(&quot;Opens Low Power&quot;)} | Which Mode to use </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">power_off_pin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Int) | &lt;10&gt; | {5, 6, 9, 10, 11, 12, 13, 14(&quot;A0&quot;), 15(&quot;A1&quot;), 16(&quot;A2&quot;), 17(&quot;A3&quot;), 18(&quot;A4&quot;), 19(&quot;A5&quot;)} | Which pin should be used to power off board </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="69" column="1" bodyfile="src/Sleep_Manager.cpp" bodystart="18" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___sleep___manager_1a879ccf13274f65ac33a2f09758f1a9ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Sleep_Manager::Loom_Sleep_Manager</definition>
+        <argsstring>(LoomManager *manager, JsonArrayConst p)</argsstring>
+        <name>Loom_Sleep_Manager</name>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonArrayConst</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes Json Array, extracts args and delegates to regular constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of constuctor args to expand </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="80" column="1" bodyfile="src/Sleep_Manager.cpp" bodystart="35" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___sleep___manager_1a163e980ca26fa9b90b712fc80d754963" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Loom_Sleep_Manager::~Loom_Sleep_Manager</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Loom_Sleep_Manager</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="83" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom___sleep___manager_1acbb98e60458aec76b9bf9ed446f17029" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Sleep_Manager::package</definition>
+        <argsstring>(JsonObject json) override</argsstring>
+        <name>package</name>
+        <reimplements refid="class_loom_module_1a84f1c1f3340203a3457b5ffe0bd53a53">package</reimplements>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>No package necessary. </para>        </briefdescription>
+        <detaileddescription>
+<para>Implement with empty body. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="91" column="1" bodyfile="src/Sleep_Manager.h" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___sleep___manager_1a640ace07af614eee3e7dda74a4d617c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Loom_Sleep_Manager::sleep</definition>
+        <argsstring>()</argsstring>
+        <name>sleep</name>
+        <briefdescription>
+<para>Put into low power state. </para>        </briefdescription>
+        <detaileddescription>
+<para>On wake, program will continue from where it went to sleep <simplesect kind="return"><para>Whether or not sleep was successful </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="96" column="1" bodyfile="src/Sleep_Manager.cpp" bodystart="68" bodyend="76"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom___sleep___manager_1a862cdfcf8c4cdba3aae5993a8ce0cff1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Sleep_Manager::print_config</definition>
+        <argsstring>() const override</argsstring>
+        <name>print_config</name>
+        <reimplements refid="class_loom_module_1a4385842da9226014283136b3e37dde88">print_config</reimplements>
+        <briefdescription>
+<para>Display the configuration settings of the module. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="102" column="1" bodyfile="src/Sleep_Manager.cpp" bodystart="39" bodyend="46"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom___sleep___manager_1aa15266a651a882b39e4323e5a1248825" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13" kindref="member">Mode</ref></type>
+        <definition>Mode Loom_Sleep_Manager::get_sleep_mode</definition>
+        <argsstring>() const </argsstring>
+        <name>get_sleep_mode</name>
+        <briefdescription>
+<para>Get the current sleep mode. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The current sleep mode </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="110" column="1" bodyfile="src/Sleep_Manager.h" bodystart="110" bodyend="110"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom___sleep___manager_1a8a6bdde2cff93469c558890273de231d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Sleep_Manager::link_interrupt_manager</definition>
+        <argsstring>(Loom_Interrupt_Manager *IM)</argsstring>
+        <name>link_interrupt_manager</name>
+        <param>
+          <type><ref refid="class_loom___interrupt___manager" kindref="compound">Loom_Interrupt_Manager</ref> *</type>
+          <declname>IM</declname>
+        </param>
+        <briefdescription>
+<para>Set pointer to interrupt manager. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">IM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an interrupt manager </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="118" column="1" bodyfile="src/Sleep_Manager.h" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___sleep___manager_1a684b78e0a86c3902fe66374d67c1024d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Sleep_Manager::set_sleep_mode</definition>
+        <argsstring>(const Mode mode)</argsstring>
+        <name>set_sleep_mode</name>
+        <param>
+          <type>const <ref refid="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13" kindref="member">Mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>Set the sleep mode to use. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Mode to set to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="122" column="1" bodyfile="src/Sleep_Manager.h" bodystart="122" bodyend="122"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MISCELLANEOUS</header>
+      <memberdef kind="function" id="class_loom___sleep___manager_1a8b9622388b96fcb7a63b011a5b4e885e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Loom_Sleep_Manager::link_device_manager</definition>
+        <argsstring>(LoomManager *LM) override</argsstring>
+        <name>link_device_manager</name>
+        <reimplements refid="class_loom_module_1adc08f87bf7c0c0988decee196a714396">link_device_manager</reimplements>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>LM</declname>
+        </param>
+        <briefdescription>
+<para>Add pointer back to device manager. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generally only called when device manager links module to provide pointer both directions. Derived modules may override this for increased function, such as linking a submanager or RTC module. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">LM</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> to point to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="128" column="1" bodyfile="src/Sleep_Manager.cpp" bodystart="49" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___sleep___manager_1aab509d2270fb079db04654e9e7aa2b7f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * Loom_Sleep_Manager::enum_sleep_mode_string</definition>
+        <argsstring>(const Mode m)</argsstring>
+        <name>enum_sleep_mode_string</name>
+        <param>
+          <type>const <ref refid="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13" kindref="member">Mode</ref></type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+<para>Convert enum of sleep mode to a c-string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sleep to get string of </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>C-string of sleep mode </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="133" column="1" bodyfile="src/Sleep_Manager.cpp" bodystart="111" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___sleep___manager_1aabce9094454d817c5912d97f45ea32d6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Sleep_Manager::pre_sleep</definition>
+        <argsstring>()</argsstring>
+        <name>pre_sleep</name>
+        <briefdescription>
+<para>Handles pre-sleep operations. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="138" column="1" bodyfile="src/Sleep_Manager.cpp" bodystart="79" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom___sleep___manager_1a925aa846e7c5a78da56977a2d8e516f0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Loom_Sleep_Manager::post_sleep</definition>
+        <argsstring>()</argsstring>
+        <name>post_sleep</name>
+        <briefdescription>
+<para>Handles post-sleep operations. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="141" column="1" bodyfile="src/Sleep_Manager.cpp" bodystart="95" bodyend="108"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13" prot="public" static="no">
+        <name>Mode</name>
+        <enumvalue id="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13aa5daf7f2ebbba4975d61dab1c40188c7" prot="public">
+          <name>IDLE</name>
+          <briefdescription>
+<para>Idle. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13aeea559d5c56d48e94e586f7fe000c0b1" prot="public">
+          <name>STANDBY</name>
+          <briefdescription>
+<para>Standby. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13ac7cf9ecb707e9328789a3c3a4752f874" prot="public">
+          <name>OPENS_LOWPOWER</name>
+          <briefdescription>
+<para>OPEnS board to shut board off completely. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Different options available to sleep in. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="41" column="1" bodyfile="src/Sleep_Manager.h" bodystart="41" bodyend="45"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom___sleep___manager_1a41c366974539c348f16c6b6e7f6ddae1" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___interrupt___manager" kindref="compound">Loom_Interrupt_Manager</ref> *</type>
+        <definition>Loom_Interrupt_Manager* Loom_Sleep_Manager::interrupt_manager</definition>
+        <argsstring></argsstring>
+        <name>interrupt_manager</name>
+        <briefdescription>
+<para>Pointer to interrupt_manager instance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="49" column="1" bodyfile="src/Sleep_Manager.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___sleep___manager_1ae9ffd9f5310fdac6d1df1f23741598a6" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Sleep_Manager::use_LED</definition>
+        <argsstring></argsstring>
+        <name>use_LED</name>
+        <briefdescription>
+<para>Whether or not to use LED to indicate wake status. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="51" column="1" bodyfile="src/Sleep_Manager.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___sleep___manager_1a8404672e11d82bea2ba0934f1c197764" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Loom_Sleep_Manager::delay_on_wake</definition>
+        <argsstring></argsstring>
+        <name>delay_on_wake</name>
+        <briefdescription>
+<para>Whether to provide delay on wake. </para>        </briefdescription>
+        <detaileddescription>
+<para>Used to allow user to restart Serial Monitor </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="52" column="1" bodyfile="src/Sleep_Manager.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___sleep___manager_1a3fdbc0a285480a155459ddc675a2482c" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13" kindref="member">Mode</ref></type>
+        <definition>Mode Loom_Sleep_Manager::sleep_mode</definition>
+        <argsstring></argsstring>
+        <name>sleep_mode</name>
+        <briefdescription>
+<para>Which sleep mode to use. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="54" column="1" bodyfile="src/Sleep_Manager.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom___sleep___manager_1a46e360dc9b81c2a76e5f7f8d485dbae2" prot="protected" static="no" mutable="no">
+        <type>byte</type>
+        <definition>byte Loom_Sleep_Manager::power_off_pin</definition>
+        <argsstring></argsstring>
+        <name>power_off_pin</name>
+        <briefdescription>
+<para>Which pin to use to power board off (requires power board) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Sleep_Manager.h" line="55" column="1" bodyfile="src/Sleep_Manager.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Submanager to manage sleep functionality. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom___sleep___manager.html">Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="924">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+      </node>
+      <node id="923">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="924" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="931">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="927">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="928" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="925" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="929" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="930" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="926">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="927" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="934">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="930">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="926" relation="public-inheritance">
+        </childnode>
+        <childnode refid="931" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="932" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="925" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="933" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="929" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="934" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="925">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="926" relation="public-inheritance">
+        </childnode>
+        <childnode refid="930" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="928">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="926" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="929">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="926" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="932">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="933">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Sleep_Manager.h" line="36" column="1" bodyfile="src/Sleep_Manager.h" bodystart="35" bodyend="142"/>
+    <listofallmembers>
+      <member refid="class_loom_module_1af61a7b93ef2b9acfc22c7ad7968a45c7" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>active</name></member>
+      <member refid="class_loom_module_1a06747f16d76bde35575557c7515adcc0" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>add_config</name></member>
+      <member refid="class_loom_module_1abe41c7748d6f6566b6e96918dca12106" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>category</name></member>
+      <member refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>Category</name></member>
+      <member refid="class_loom___sleep___manager_1a8404672e11d82bea2ba0934f1c197764" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>delay_on_wake</name></member>
+      <member refid="class_loom_module_1a28fe8b2fb5a9a0d14bebe13ac1c92bdf" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>device_manager</name></member>
+      <member refid="class_loom_module_1aa4e7db1687a95e41ee418c201677fff8" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>dispatch</name></member>
+      <member refid="class_loom_module_1a7fc17923cdef15e3a60a871a2458eaad" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>enum_category_string</name></member>
+      <member refid="class_loom___sleep___manager_1aab509d2270fb079db04654e9e7aa2b7f" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>enum_sleep_mode_string</name></member>
+      <member refid="class_loom_module_1aaf32cb6107f0402822c615e9cd38eaef" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>enum_verbosity_string</name></member>
+      <member refid="class_loom_module_1a1bb79ab68994c51851998a31b982da72" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>get_active</name></member>
+      <member refid="class_loom_module_1a4752224a62f535fbaf3777aa486fc3c5" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>get_device_manager</name></member>
+      <member refid="class_loom_module_1a7ff57ffb2d8fabc484f6678f7fae8082" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a95fbb30f0ab618f3305659f9e7a4bdaf" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>get_module_name</name></member>
+      <member refid="class_loom_module_1a4e040c36df109bfa39d9499828d3df1d" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>get_module_type</name></member>
+      <member refid="class_loom_module_1ac259e773fa409b96fa6b43d8edeaa96b" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_module_1ab17b0faa49c40c08692714ca6064a8f7" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom___sleep___manager_1aa15266a651a882b39e4323e5a1248825" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>get_sleep_mode</name></member>
+      <member refid="class_loom___sleep___manager_1a41c366974539c348f16c6b6e7f6ddae1" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>interrupt_manager</name></member>
+      <member refid="class_loom___sleep___manager_1a8b9622388b96fcb7a63b011a5b4e885e" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>link_device_manager</name></member>
+      <member refid="class_loom___sleep___manager_1a8a6bdde2cff93469c558890273de231d" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>link_interrupt_manager</name></member>
+      <member refid="class_loom___sleep___manager_1ae7bb3c7151e64825fc6ff0473f157175" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>Loom_Sleep_Manager</name></member>
+      <member refid="class_loom___sleep___manager_1a879ccf13274f65ac33a2f09758f1a9ca" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>Loom_Sleep_Manager</name></member>
+      <member refid="class_loom_module_1a5e0d9e185ade9e2ae5be68fdefb25887" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>LoomModule</name></member>
+      <member refid="class_loom___sleep___manager_1ab1cb2baaf00c386048490c3787a2de13" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>Mode</name></member>
+      <member refid="class_loom_module_1adf6e68ad7e9fa2acfca7a8a280680764" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>module_name</name></member>
+      <member refid="class_loom_module_1a7cb2d5ef593dfc99e938c632f8843c84" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>module_name_base</name></member>
+      <member refid="class_loom_module_1a152d394f37236a2b159dae19da67eeb0" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>module_type</name></member>
+      <member refid="class_loom___sleep___manager_1acbb98e60458aec76b9bf9ed446f17029" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>package</name></member>
+      <member refid="class_loom_module_1aec8db10ee69e265779822792f177f982" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>package_verbosity</name></member>
+      <member refid="class_loom___sleep___manager_1a925aa846e7c5a78da56977a2d8e516f0" prot="private" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>post_sleep</name></member>
+      <member refid="class_loom_module_1a31ea02275e356c6ce0d01fdb6d4190df" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>power_down</name></member>
+      <member refid="class_loom___sleep___manager_1a46e360dc9b81c2a76e5f7f8d485dbae2" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>power_off_pin</name></member>
+      <member refid="class_loom_module_1aa0683cb24ce1cc49273440e79f035e23" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>power_up</name></member>
+      <member refid="class_loom___sleep___manager_1aabce9094454d817c5912d97f45ea32d6" prot="private" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>pre_sleep</name></member>
+      <member refid="class_loom___sleep___manager_1a862cdfcf8c4cdba3aae5993a8ce0cff1" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>print_config</name></member>
+      <member refid="class_loom_module_1a636735282f2208ab71403ae5720622ba" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>print_module_label</name></member>
+      <member refid="class_loom_module_1a96505b45f2e712eab5de873b4d49dfc7" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>print_state</name></member>
+      <member refid="class_loom_module_1a6e73663a6a5ebdcbe3f92153ca88ce8c" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_module_1a8dd3704d1bd38868d5774e48c1073d12" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>second_stage_ctor</name></member>
+      <member refid="class_loom_module_1aaac9a713ba6389818cefdc740718ad9e" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>set_active</name></member>
+      <member refid="class_loom_module_1a096b13557553a7fb283a32ab3645815b" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_module_1a5008d47cff50ffa2e6fe4f813c3ffa1e" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom___sleep___manager_1a684b78e0a86c3902fe66374d67c1024d" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>set_sleep_mode</name></member>
+      <member refid="class_loom___sleep___manager_1a640ace07af614eee3e7dda74a4d617c2" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>sleep</name></member>
+      <member refid="class_loom___sleep___manager_1a3fdbc0a285480a155459ddc675a2482c" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>sleep_mode</name></member>
+      <member refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>Type</name></member>
+      <member refid="class_loom___sleep___manager_1ae9ffd9f5310fdac6d1df1f23741598a6" prot="protected" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>use_LED</name></member>
+      <member refid="class_loom___sleep___manager_1a163e980ca26fa9b90b712fc80d754963" prot="public" virt="non-virtual"><scope>Loom_Sleep_Manager</scope><name>~Loom_Sleep_Manager</name></member>
+      <member refid="class_loom_module_1aec256a84e0498d723540743849e0166c" prot="public" virt="virtual"><scope>Loom_Sleep_Manager</scope><name>~LoomModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

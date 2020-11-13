@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loom_MaxSub class | Loom</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="index.html" id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">Loom</a>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="namespaces.html">Namespaces</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="3">
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          Loom_MaxSub <span class="m-thin">class</span>
+        </h1>
+        <p>Module for receiving data from Max.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></li>
+                <li><a href="#operation">OPERATION</a></li>
+                <li><a href="#print-information">PRINT INFORMATION</a></li>
+                <li><a href="#getters">GETTERS</a></li>
+                <li><a href="#setters">SETTERS</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-default"><h4>Resources</h4><ul><li><a href="https://openslab-osu.github.io/Loom/html/class_loom___max_sub.html">Module Documentation</a></li><li><a href="https://cycling74.com">Max 8</a></li><li><a href="https://github.com/OPEnSLab-OSU/Max-Loom2">Loom Max Patches</a></li></ul></aside>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="class_loom_subscribe_plat.html" class="m-doc">LoomSubscribePlat</a>
+            </dt>
+            <dd>Abstract subscribe platform module.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a0b60c2de2c1a5e2259cc5723edd9d51c">
+              uint16_t <a href="#a0b60c2de2c1a5e2259cc5723edd9d51c" class="m-doc-self">UDP_port</a>
+            </dt>
+            <dd>Which UDP port to receive on.</dd>
+            <dt id="adb1bf0c7394ff4ebaa1e893fb55356ff">
+              bool <a href="#adb1bf0c7394ff4ebaa1e893fb55356ff" class="m-doc-self">auto_dispatch</a>
+            </dt>
+            <dd>True to immediately call <a href="class_loom_manager.html#a80fb13974b3bde9b0cedcd43732d7226" class="m-doc">LoomManager::<wbr />dispatch()</a> when packet received.</dd>
+            <dt id="aa41703fadde1c5aca2c265eba0e2d13e">
+              <a href="class_loom_internet_plat.html#a0b2cc742a6ac5f4f7054b75ea99b345c" class="m-doc">LoomInternetPlat::<wbr />UDPPtr</a> <a href="#aa41703fadde1c5aca2c265eba0e2d13e" class="m-doc-self">UDP_Inst</a>
+            </dt>
+            <dd>Pointer to UDP object.</dd>
+          </dl>
+        </section>
+        <section id="constructors-destructor">
+          <h2><a href="#constructors-destructor">CONSTRUCTORS / DESTRUCTOR</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a9d30bf2d064970e8513009c8556aabc2" class="m-doc">Loom_MaxSub</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> internet_type,
+              const bool auto_dispatch)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#abbdefe05ce2bf306fe224d56f2b67aa9" class="m-doc">Loom_MaxSub</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span>
+            </dt>
+            <dd>Constructor that takes Json Array, extracts args and delegates to regular constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8cc7cbe1313118bd7773e5f023eb7bb2" class="m-doc">second_stage_ctor</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Second stage construction.</dd>
+            <dt id="a9f34cd71b9fbace2702d25c49ef64c00">
+              <span class="m-doc-wrap-bumper"><a href="#a9f34cd71b9fbace2702d25c49ef64c00" class="m-doc-self">~Loom_MaxSub</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="operation">
+          <h2><a href="#operation">OPERATION</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7680cb0286f2320c68ab26242643fe64" class="m-doc">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>No package necessary for subscribe platforms.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac108a85356fe7d05d7754cb56f5957b7" class="m-doc">subscribe</a>(</span><span class="m-doc-wrap">JsonObject json) -&gt; bool <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Request / try to receive data from platform subscribed to.</dd>
+          </dl>
+        </section>
+        <section id="print-information">
+          <h2><a href="#print-information">PRINT INFORMATION</a></h2>
+          <dl class="m-doc">
+            <dt id="a86ebb385b46bd7d1052d98b525216657">
+              <span class="m-doc-wrap-bumper">void <a href="#a86ebb385b46bd7d1052d98b525216657" class="m-doc-self">print_config</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-flat m-warning">override</span></span>
+            </dt>
+            <dd>Display the configuration settings of the module.</dd>
+          </dl>
+        </section>
+        <section id="getters">
+          <h2><a href="#getters">GETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3ecdeac19cc208c2dc0efdcf1006c2d3" class="m-doc">get_port</a>(</span><span class="m-doc-wrap">) const -&gt; uint16_t</span>
+            </dt>
+            <dd>Get the UDP port currently receiving on.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8f7485cb80d7784362f265ee54a2c39e" class="m-doc">get_remote_IP</a>(</span><span class="m-doc-wrap">) const -&gt; IPAddress</span>
+            </dt>
+            <dd>Get the last IP address received from.</dd>
+          </dl>
+        </section>
+        <section id="setters">
+          <h2><a href="#setters">SETTERS</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a68aeec383e7bc3d7fd5886d32eb21409" class="m-doc">set_port</a>(</span><span class="m-doc-wrap">const uint16_t port)</span>
+            </dt>
+            <dd>Set the UDP port to receive on.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9d30bf2d064970e8513009c8556aabc2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />MaxSub::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d30bf2d064970e8513009c8556aabc2" class="m-doc-self">Loom_MaxSub</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              const <a href="class_loom_module.html#aee91d0a75140d51ee428fc2d4417d865" class="m-doc">LoomModule::<wbr />Type</a> internet_type,
+              const bool auto_dispatch)</span></span>
+            </h3>
+            <p>Constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>internet_type&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Set(LoomModule::Type) | &lt;7001&gt; | {7001(&quot;Ethernet&quot;), 7002(&quot;WiFi&quot;)} | Code of the desired internet platform.</td>
+                </tr>
+                <tr>
+                  <td>auto_dispatch&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>True to immediately call <a href="class_loom_manager.html#a80fb13974b3bde9b0cedcd43732d7226" class="m-doc">LoomManager::<wbr />dispatch()</a> when packet received</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="abbdefe05ce2bf306fe224d56f2b67aa9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> Loom_<wbr />MaxSub::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbdefe05ce2bf306fe224d56f2b67aa9" class="m-doc-self">Loom_MaxSub</a>(</span><span class="m-doc-wrap"><a href="class_loom_manager.html" class="m-doc">LoomManager</a>* manager,
+              JsonArrayConst p)</span></span>
+            </h3>
+            <p>Constructor that takes Json Array, extracts args and delegates to regular constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">manager</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>p&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The array of constuctor args to expand</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8cc7cbe1313118bd7773e5f023eb7bb2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />MaxSub::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8cc7cbe1313118bd7773e5f023eb7bb2" class="m-doc-self">second_stage_ctor</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Second stage construction.</p>
+<p>Perform any actions that need all of the devices to be initized beforehand - such as looking up an internet platform This function is guranteed to be called AFTER all modules have been constructed.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7680cb0286f2320c68ab26242643fe64"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />MaxSub::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7680cb0286f2320c68ab26242643fe64" class="m-doc-self">package</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>No package necessary for subscribe platforms.</p>
+<p>Implement with empty body.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac108a85356fe7d05d7754cb56f5957b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool Loom_<wbr />MaxSub::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac108a85356fe7d05d7754cb56f5957b7" class="m-doc-self">subscribe</a>(</span><span class="m-doc-wrap">JsonObject json) <span class="m-label m-warning">override</span></span></span>
+            </h3>
+            <p>Request / try to receive data from platform subscribed to.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">json&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>Received data</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if received anything</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3ecdeac19cc208c2dc0efdcf1006c2d3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">uint16_t Loom_<wbr />MaxSub::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3ecdeac19cc208c2dc0efdcf1006c2d3" class="m-doc-self">get_port</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the UDP port currently receiving on.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>UDP port being used</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8f7485cb80d7784362f265ee54a2c39e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">IPAddress Loom_<wbr />MaxSub::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8f7485cb80d7784362f265ee54a2c39e" class="m-doc-self">get_remote_IP</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the last IP address received from.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>Last IP address</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a68aeec383e7bc3d7fd5886d32eb21409"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void Loom_<wbr />MaxSub::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a68aeec383e7bc3d7fd5886d32eb21409" class="m-doc-self">set_port</a>(</span><span class="m-doc-wrap">const uint16_t port)</span></span>
+            </h3>
+            <p>Set the UDP port to receive on.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">port&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Port to set to</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Changing the port from automatic port setting (based on instance number) may make the device stop receiving from Max MSP</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Loom. Created with <a href="https://doxygen.org/">Doxygen</a> 1.8.11 and <a href="https://mcss.mosra.cz/">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,2682 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_manager" kind="class" language="C++" prot="public">
+    <compoundname>LoomManager</compoundname>
+    <includes refid="_manager_8h" local="no">Manager.h</includes>
+      <sectiondef kind="user-defined">
+      <header>CONSTRUCTORS / DESTRUCTOR</header>
+      <memberdef kind="function" id="class_loom_manager_1a084222072528d9fe59480b0c9e2f5757" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomManager::LoomManager</definition>
+        <argsstring>(const FactoryBase *factory_ptr, const char *device_name=&quot;Device&quot;, const uint8_t instance=1, const DeviceType device_type=DeviceType::NODE, const Verbosity print_verbosity=Verbosity::V_HIGH, const Verbosity package_verbosity=Verbosity::V_LOW, const uint16_t interval=1000)</argsstring>
+        <name>LoomManager</name>
+        <param>
+          <type>const <ref refid="class_factory_base" kindref="compound">FactoryBase</ref> *</type>
+          <declname>factory_ptr</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>device_name</declname>
+          <defval>&quot;Device&quot;</defval>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>instance</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>const <ref refid="class_loom_manager_1a23170d165993ad196a7604fd08b29400" kindref="member">DeviceType</ref></type>
+          <declname>device_type</declname>
+          <defval><ref refid="class_loom_manager_1a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495" kindref="member">DeviceType::NODE</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+          <declname>print_verbosity</declname>
+          <defval><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313a4cec341dae86f2acc17c82c156c82d13" kindref="member">Verbosity::V_HIGH</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+          <declname>package_verbosity</declname>
+          <defval><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313afb734c04a9e5804353ceb79f5d37a169" kindref="member">Verbosity::V_LOW</ref></defval>
+        </param>
+        <param>
+          <type>const uint16_t</type>
+          <declname>interval</declname>
+          <defval>1000</defval>
+        </param>
+        <briefdescription>
+<para>Loom Manager constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">device_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String | &lt;&quot;Default&quot;&gt; | null | Manager name </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">instance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;1&gt; | [0-99] | Device instance number on its subnet </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">device_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(DeviceType) | &lt;1&gt; | {0(&quot;Hub&quot;), 1(&quot;Node&quot;), 2(&quot;Repeater&quot;)} | Device&apos;s topological type </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">print_verbosity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Verbosity) | &lt;1&gt; | {0(&quot;Off&quot;), 1(&quot;Low&quot;), 2(&quot;High&quot;)} | How detailed prints to the Serial Monitor should be </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">package_verbosity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set(Verbosity) | &lt;2&gt; | {0(&quot;Off&quot;), 1(&quot;Low&quot;), 2(&quot;High&quot;)} | How detailed to package data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Int | &lt;1&gt; | [0-60000] | Default milliseconds to pause </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="187" column="1" bodyfile="src/Manager.cpp" bodystart="48" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a4dabf340ea6475e6f0ad395e25a56a47" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>LoomManager::~LoomManager</definition>
+        <argsstring>()</argsstring>
+        <name>~LoomManager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="198" column="1" bodyfile="src/Manager.cpp" bodystart="68" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>OPERATION</header>
+      <memberdef kind="function" id="class_loom_manager_1a315be7f7fe42feb0710b85cc8c023291" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::begin_LED</definition>
+        <argsstring>() const </argsstring>
+        <name>begin_LED</name>
+        <briefdescription>
+<para>Begin LED. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="205" column="1" bodyfile="src/Manager.h" bodystart="205" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a15a76615e56881a51a78005ad903db24" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::begin_serial</definition>
+        <argsstring>(const bool wait_for_monitor=false) const </argsstring>
+        <name>begin_serial</name>
+        <param>
+          <type>const bool</type>
+          <declname>wait_for_monitor</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Begin Serial, optionally wait for user. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">wait_for_monitor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>True to wait for serial monitor to open </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="209" column="1" bodyfile="src/Manager.cpp" bodystart="94" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ab06b9f5b623b01cc0966eb84da173238" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::parse_config</definition>
+        <argsstring>(const char *json_config)</argsstring>
+        <name>parse_config</name>
+        <param>
+          <type>const char *</type>
+          <declname>json_config</declname>
+        </param>
+        <briefdescription>
+<para>Parse a JSON configuration string specifying enabled modules. </para>        </briefdescription>
+        <detaileddescription>
+<para>Enabled modules are instantiated with specified settings and added to manager lists for managing <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json_config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="216" column="1" bodyfile="src/Manager.cpp" bodystart="486" bodyend="502"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1adbcbf45453af8fd47dc6c536447540be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::parse_config_SD</definition>
+        <argsstring>(const char *config_file)</argsstring>
+        <name>parse_config_SD</name>
+        <param>
+          <type>const char *</type>
+          <declname>config_file</declname>
+        </param>
+        <briefdescription>
+<para>Parse a JSON configuration on SD card specifying enabled modules. </para>        </briefdescription>
+        <detaileddescription>
+<para>Enabled modules are instantiated with specified settings and added to manager lists for managing. Json should be on a single line in a .txt file. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json_config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="224" column="1" bodyfile="src/Manager.cpp" bodystart="505" bodyend="541"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a22d5a375034b484461a9488889cc348a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::parse_config_serial</definition>
+        <argsstring>()</argsstring>
+        <name>parse_config_serial</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="228" column="1" bodyfile="src/Manager.cpp" bodystart="621" bodyend="652"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a03b417d8a2d39954723dd33ce4856b07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::check_serial_for_config</definition>
+        <argsstring>()</argsstring>
+        <name>check_serial_for_config</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="229" column="1" bodyfile="src/Manager.cpp" bodystart="655" bodyend="677"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a445ca7e4c6f7db0d7dc7c5f4fa8ffea0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::parse_config_json</definition>
+        <argsstring>(JsonObject config)</argsstring>
+        <name>parse_config_json</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>Parse a JSON configuration object specifying enabled modules. </para>        </briefdescription>
+        <detaileddescription>
+<para>Enabled modules are instantiated with specified settings and added to manager lists for managing. Called by parse_config and parse_config_SD <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json_config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Configuration </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="239" column="1" bodyfile="src/Manager.cpp" bodystart="544" bodyend="611"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1af9666106e7f25c4735b22c70dfaab33f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::get_config</definition>
+        <argsstring>()</argsstring>
+        <name>get_config</name>
+        <briefdescription>
+<para>Get complete configuration of the device. </para>        </briefdescription>
+        <detaileddescription>
+<para>Generally used to save configuration to SD </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="243" column="1" bodyfile="src/Manager.cpp" bodystart="413" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a3202f184c7d76abff38a353347c3f457" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::measure</definition>
+        <argsstring>()</argsstring>
+        <name>measure</name>
+        <briefdescription>
+<para>Measure data of all managed sensors. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="246" column="1" bodyfile="src/Manager.cpp" bodystart="197" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ad09d72a0950ee5df48371e4d49a56e68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::package</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>package</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Package data of all modules into provide JsonObject. </para>        </briefdescription>
+        <detaileddescription>
+<para>How detailed data is can be modified with package_verbosity <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>JsonObject of packaged data of enabled modules </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="251" column="1" bodyfile="src/Manager.cpp" bodystart="219" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1af62aaa2aea11411f65b3fe1ed2c4c3d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::record</definition>
+        <argsstring>()</argsstring>
+        <name>record</name>
+        <briefdescription>
+<para>Measure and package data. </para>        </briefdescription>
+        <detaileddescription>
+<para>Convenience function, current just calls measure then package </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="255" column="1" bodyfile="src/Manager.h" bodystart="255" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a34666ea29808834e120ef169f389387b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>JsonObject</type>
+        <definition>JsonObject LoomManager::package</definition>
+        <argsstring>()</argsstring>
+        <name>package</name>
+        <briefdescription>
+<para>Package data of all modules into JsonObject and return. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>JsonObject of packaged data of enabled modules </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="259" column="1" bodyfile="src/Manager.cpp" bodystart="235" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a85bcc5929215f48af9dffed13bd78862" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::publish_all</definition>
+        <argsstring>(const JsonObject json)</argsstring>
+        <name>publish_all</name>
+        <param>
+          <type>const JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Publish. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data object to publish </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="264" column="1" bodyfile="src/Manager.cpp" bodystart="275" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a5cea46f54dd9f891108bc0adf2c2d437" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::publish_all</definition>
+        <argsstring>()</argsstring>
+        <name>publish_all</name>
+        <briefdescription>
+<para>Publish. </para>        </briefdescription>
+        <detaileddescription>
+<para>Calls <ref refid="class_loom_manager_1a85bcc5929215f48af9dffed13bd78862" kindref="member">publish_all(const JsonObject json)</ref> with interal json <simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="269" column="1" bodyfile="src/Manager.h" bodystart="269" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a349a86e686c0b71d8613f1e5a58ea2e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::log_all</definition>
+        <argsstring>(const JsonObject json)</argsstring>
+        <name>log_all</name>
+        <param>
+          <type>const JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Log. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data object to log </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="274" column="1" bodyfile="src/Manager.cpp" bodystart="292" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1af59e23602c123c36d4a855e6af6b4d75" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::log_all</definition>
+        <argsstring>()</argsstring>
+        <name>log_all</name>
+        <briefdescription>
+<para>Log. </para>        </briefdescription>
+        <detaileddescription>
+<para>Calls <ref refid="class_loom_manager_1a349a86e686c0b71d8613f1e5a58ea2e3" kindref="member">log_all(const JsonObject json)</ref> with interal json <simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="279" column="1" bodyfile="src/Manager.h" bodystart="279" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1affe6f936dd6c9f7f8b489b03786ac83d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::dispatch</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>dispatch</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Iterate over list of commands, forwarding to handling module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">json</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object containing commands </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="283" column="1" bodyfile="src/Manager.cpp" bodystart="309" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a80fb13974b3bde9b0cedcd43732d7226" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::dispatch</definition>
+        <argsstring>()</argsstring>
+        <name>dispatch</name>
+        <briefdescription>
+<para>Iterate over list of commands, forwarding to handling module. </para>        </briefdescription>
+        <detaileddescription>
+<para>Uses internal json </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="287" column="1" bodyfile="src/Manager.h" bodystart="287" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a3e57c97dd28717002cf11a1cff794239" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::pause</definition>
+        <argsstring>(const uint16_t ms) const </argsstring>
+        <name>pause</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>ms</declname>
+        </param>
+        <briefdescription>
+<para>Delay milliseconds. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="290" column="1" bodyfile="src/Manager.h" bodystart="290" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a8d3dba74d36bf91a7356f08f0012268e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::pause</definition>
+        <argsstring>() const </argsstring>
+        <name>pause</name>
+        <briefdescription>
+<para>Delay milliseconds based on interval member. </para>        </briefdescription>
+        <detaileddescription>
+<para>Uses interval member as value </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="294" column="1" bodyfile="src/Manager.h" bodystart="294" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1abfb3562addd9910ef7957508d5552ea0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::power_up</definition>
+        <argsstring>()</argsstring>
+        <name>power_up</name>
+        <briefdescription>
+<para>Iterate over modules, calling power up method. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="297" column="1" bodyfile="src/Manager.cpp" bodystart="391" bodyend="399"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a1c7c446561067b986afc77ed1b4454c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::power_down</definition>
+        <argsstring>()</argsstring>
+        <name>power_down</name>
+        <briefdescription>
+<para>Iterate over modules, calling power down method. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="300" column="1" bodyfile="src/Manager.cpp" bodystart="402" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a4bfaf3aaf89df1f7c9cd8c2142c0cdfd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool LoomManager::add_data</definition>
+        <argsstring>(const char *module, const char *key, const T val)</argsstring>
+        <name>add_data</name>
+        <param>
+          <type>const char *</type>
+          <declname>module</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+<para>Append to a Json object of data. </para>        </briefdescription>
+        <detaileddescription>
+<para>If object is non-empty and contains non-data, will not add and will return false. Only call this after package, otherwise the data will be overriden <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Which module to add data to (will create if it doesn&apos;t exist) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key of data to add </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value of data to add </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if success </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="311" column="1" bodyfile="src/Manager.h" bodystart="311" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ace28cae7092408bc96bf66299e4c2f9a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T LoomManager::get_data_as</definition>
+        <argsstring>(const char *module, const char *key)</argsstring>
+        <name>get_data_as</name>
+        <param>
+          <type>const char *</type>
+          <declname>module</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Get a data value from Json object of data. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="class_loom_module" kindref="compound">LoomModule</ref> key is associated with </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key of data value to find </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Data value if found </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="334" column="1" bodyfile="src/Manager.h" bodystart="334" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a2c8c03e61c5ea0e2d1d86c48179accff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::has_module</definition>
+        <argsstring>(const LoomModule::Type type) const </argsstring>
+        <name>has_module</name>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Save current configuration to SD. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">config_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File to save configuration to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True is success, false if fail or file not found Determine if the manager has a module of the specified type </para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module type to check for </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="355" column="1" bodyfile="src/Manager.cpp" bodystart="477" bodyend="483"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>PRINT INFORMATION</header>
+      <memberdef kind="function" id="class_loom_manager_1a3dcf9e19b7d583aca8a01cfe9f6ba897" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::print_config</definition>
+        <argsstring>(const bool print_modules_config=false)</argsstring>
+        <name>print_config</name>
+        <param>
+          <type>const bool</type>
+          <declname>print_modules_config</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Print the devices current configuration. </para>        </briefdescription>
+        <detaileddescription>
+<para>Lists modules. Optionally also prints configuration of linked modules. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="365" column="1" bodyfile="src/Manager.cpp" bodystart="74" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a0c849e257dfa2a1796daea93d0da6f58" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::list_modules</definition>
+        <argsstring>() const </argsstring>
+        <name>list_modules</name>
+        <briefdescription>
+<para>Print the linked modules. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="370" column="1" bodyfile="src/Manager.cpp" bodystart="129" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a70e8fbf86b96fd3246c2d4422d91139d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::display_data</definition>
+        <argsstring>() const </argsstring>
+        <name>display_data</name>
+        <briefdescription>
+<para>Print out the internal JSON object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="373" column="1" bodyfile="src/Manager.cpp" bodystart="355" bodyend="361"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>ADD MODULE TO MANAGER</header>
+      <memberdef kind="function" id="class_loom_manager_1a4761f8b6d15ed18542d1039e207cd975" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::add_module</definition>
+        <argsstring>(LoomModule *module)</argsstring>
+        <name>add_module</name>
+        <param>
+          <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *</type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Add a module to be managed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="380" column="1" bodyfile="src/Manager.cpp" bodystart="108" bodyend="126"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>GETTERS</header>
+      <memberdef kind="function" id="class_loom_manager_1a19942faf44a0835356c5d3f04ee77a66" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom_manager_1a23170d165993ad196a7604fd08b29400" kindref="member">DeviceType</ref></type>
+        <definition>DeviceType LoomManager::get_device_type</definition>
+        <argsstring>() const </argsstring>
+        <name>get_device_type</name>
+        <briefdescription>
+<para>Get device type. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Device type (Hub/Node) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="388" column="1" bodyfile="src/Manager.h" bodystart="388" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a853b89aea16917b3e7baef7173ef741e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>JsonObject</type>
+        <definition>JsonObject LoomManager::internal_json</definition>
+        <argsstring>(const bool clear=false)</argsstring>
+        <name>internal_json</name>
+        <param>
+          <type>const bool</type>
+          <declname>clear</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Return reference to internal json object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">clear</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether or not to empty Json before returning it </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reference to internal json object </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="393" column="1" bodyfile="src/Manager.cpp" bodystart="257" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a93329cf2288e9467ca5da87059657a21" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::get_device_name</definition>
+        <argsstring>(char *buf) const </argsstring>
+        <name>get_device_name</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+<para>Get the device name, copies into provided buffer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer copy device name into </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="397" column="1" bodyfile="src/Manager.cpp" bodystart="155" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a7642ccf7c0faca1e549f0ec2d4d72400" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * LoomManager::get_device_name</definition>
+        <argsstring>() const </argsstring>
+        <name>get_device_name</name>
+        <briefdescription>
+<para>Get the device name. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>String literal of device name. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="401" column="1" bodyfile="src/Manager.cpp" bodystart="161" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1af71c96f2e245deb12e8b25eb2e11e4db" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t LoomManager::get_instance_num</definition>
+        <argsstring>() const </argsstring>
+        <name>get_instance_num</name>
+        <briefdescription>
+<para>Get device instance number. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Family number </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="405" column="1" bodyfile="src/Manager.h" bodystart="405" bodyend="405"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1aa97a8e46a133c0d32a3dd8c33d5c9b25" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+        <definition>Verbosity LoomManager::get_print_verbosity</definition>
+        <argsstring>() const </argsstring>
+        <name>get_print_verbosity</name>
+        <briefdescription>
+<para>Get print verbosity. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>print verbosity </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="409" column="1" bodyfile="src/Manager.h" bodystart="409" bodyend="409"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1afaaaf2cec1d6d372b0b6a71720944690" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+        <definition>Verbosity LoomManager::get_package_verbosity</definition>
+        <argsstring>() const </argsstring>
+        <name>get_package_verbosity</name>
+        <briefdescription>
+<para>Get package verbosity. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>package verbosity </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="413" column="1" bodyfile="src/Manager.h" bodystart="413" bodyend="413"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a7d282d59fd742664e6bbe33f64241ed3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t LoomManager::get_interval</definition>
+        <argsstring>() const </argsstring>
+        <name>get_interval</name>
+        <briefdescription>
+<para>Get sampling interval. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>sampling interval, in ms </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="417" column="1" bodyfile="src/Manager.h" bodystart="417" bodyend="417"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>SETTERS</header>
+      <memberdef kind="function" id="class_loom_manager_1ab19b6f8d14ddbaf8cdada7e7d4d4a983" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::set_device_name</definition>
+        <argsstring>(const char *device_name)</argsstring>
+        <name>set_device_name</name>
+        <param>
+          <type>const char *</type>
+          <declname>device_name</declname>
+        </param>
+        <briefdescription>
+<para>Set the device name. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">device_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new device name </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="425" column="1" bodyfile="src/Manager.cpp" bodystart="149" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ac8bd2ad89162850e9f7615856ba7cd48" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::set_instance_num</definition>
+        <argsstring>(const uint8_t n)</argsstring>
+        <name>set_instance_num</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Set device instance number. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New instance number </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="429" column="1" bodyfile="src/Manager.h" bodystart="429" bodyend="429"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1aa537a373b1aab6150915c1e27a691d7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::set_print_verbosity</definition>
+        <argsstring>(const Verbosity v, const bool set_modules=false)</argsstring>
+        <name>set_print_verbosity</name>
+        <param>
+          <type>const <ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>set_modules</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Set print verbosity. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New print verbosity </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">set_modules</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether or not to also apply setting to modules </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="434" column="1" bodyfile="src/Manager.cpp" bodystart="169" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1aa9a1e310be9f6c806ac42421648724df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::set_package_verbosity</definition>
+        <argsstring>(const Verbosity v, const bool set_modules=false)</argsstring>
+        <name>set_package_verbosity</name>
+        <param>
+          <type>const <ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>set_modules</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Set package verbosity. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New package verbosity </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">set_modules</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether or not to also apply setting to modules </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="439" column="1" bodyfile="src/Manager.cpp" bodystart="183" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1aba4da59a1f3bf7422be299e6170b2d1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::set_interval</definition>
+        <argsstring>(const uint16_t ms)</argsstring>
+        <name>set_interval</name>
+        <param>
+          <type>const uint16_t</type>
+          <declname>ms</declname>
+        </param>
+        <briefdescription>
+<para>Set default time to use for .<ref refid="class_loom_manager_1a3e57c97dd28717002cf11a1cff794239" kindref="member">pause()</ref> \ .delay(). </para>        </briefdescription>
+        <detaileddescription>
+<para>Pause and delay can still take explicit times, but if not provided, this value will be used </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="444" column="1" bodyfile="src/Manager.cpp" bodystart="469" bodyend="474"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MISCELLANEOUS</header>
+      <memberdef kind="function" id="class_loom_manager_1afbe16976632be98771f6a5ede92ff3fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::flash_LED</definition>
+        <argsstring>(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high=false) const </argsstring>
+        <name>flash_LED</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>time_high</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>time_low</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>end_high</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Flash the built in LED. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of times to flash </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time_high</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Milliseconds to stay on for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time_low</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Milliseconds to stay off for </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="454" column="1" bodyfile="src/Manager.cpp" bodystart="364" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1afcae7948a5a29d179842bcd00de271a0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::flash_LED</definition>
+        <argsstring>(const uint8_t sequence[3]) const </argsstring>
+        <name>flash_LED</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>sequence</declname>
+          <array>[3]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="455" column="1" bodyfile="src/Manager.h" bodystart="455" bodyend="455"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a2592362f66b24ced03f82e35643d1f12" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * LoomManager::enum_device_type_string</definition>
+        <argsstring>(const DeviceType t)</argsstring>
+        <name>enum_device_type_string</name>
+        <param>
+          <type>const <ref refid="class_loom_manager_1a23170d165993ad196a7604fd08b29400" kindref="member">DeviceType</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Get c-string of name associated with device type enum. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>C-string of device type </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="459" column="1" bodyfile="src/Manager.cpp" bodystart="37" bodyend="45"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>MODULE ACCESS</header>
+      <memberdef kind="friend" id="class_loom_manager_1a008d5139e80cc67e9facc1611e7e30be" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class Loom_Interrupt_Manager</definition>
+        <argsstring></argsstring>
+        <name>Loom_Interrupt_Manager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="560" column="1" bodyfile="src/Manager.h" bodystart="560" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_loom_manager_1a9d93d402309f8410307da6ff54acd40d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class Loom_Sleep_Manager</definition>
+        <argsstring></argsstring>
+        <name>Loom_Sleep_Manager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="561" column="1" bodyfile="src/Manager.h" bodystart="561" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_loom_manager_1ad460f63d437defbca6d2c4cf1b03f084" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class LoomRTC</definition>
+        <argsstring></argsstring>
+        <name>LoomRTC</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="562" column="1" bodyfile="src/Manager.h" bodystart="562" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_loom_manager_1a16fed8610f64b07f59a179e88627f381" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class Loom_SD</definition>
+        <argsstring></argsstring>
+        <name>Loom_SD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="563" column="1" bodyfile="src/Manager.h" bodystart="563" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_loom_manager_1a6e9a09b43cf35fd3138c6787b589f320" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class Loom_BatchSD</definition>
+        <argsstring></argsstring>
+        <name>Loom_BatchSD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="564" column="1" bodyfile="src/Manager.h" bodystart="564" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="class_loom_manager_1ac23a5e689f21bc3c5dc04a499b9a905b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class LoomNTPSync</definition>
+        <argsstring></argsstring>
+        <name>LoomNTPSync</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="565" column="1" bodyfile="src/Manager.h" bodystart="565" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a139e842dcaa5ab84587bdb5bc75fd103" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *</type>
+        <definition>LoomModule * LoomManager::find_module</definition>
+        <argsstring>(const LoomModule::Type type, const uint8_t idx=0) const </argsstring>
+        <name>find_module</name>
+        <param>
+          <type>const <ref refid="class_loom_module_1aee91d0a75140d51ee428fc2d4417d865" kindref="member">LoomModule::Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Auxiliary function to search a list of modules for a module of specified type. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type to search for </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="467" column="1" bodyfile="src/Manager.cpp" bodystart="435" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1af8b532b1efb4ba887ceb09edea2d65a9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *</type>
+        <definition>LoomModule * LoomManager::find_module_by_category</definition>
+        <argsstring>(const LoomModule::Category category, const uint8_t idx) const </argsstring>
+        <name>find_module_by_category</name>
+        <param>
+          <type>const <ref refid="class_loom_module_1a0c6ecc60315f95af551138dc83567068" kindref="member">LoomModule::Category</ref></type>
+          <declname>category</declname>
+        </param>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Auxiliary function to search a list of modules for a module of specified category. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">category</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Category to search for </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="471" column="1" bodyfile="src/Manager.cpp" bodystart="452" bodyend="466"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1afb0cc398b36594b1389aaceb0873c9e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___warm_up___manager" kindref="compound">Loom_WarmUp_Manager</ref> &amp;</type>
+        <definition>Loom_WarmUp_Manager &amp; LoomManager::WarmUpManager</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>WarmUpManager</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="476" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="26" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1aa18ec752187b173a50ff1ac4548100a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___sleep___manager" kindref="compound">Loom_Sleep_Manager</ref> &amp;</type>
+        <definition>Loom_Sleep_Manager &amp; LoomManager::SleepManager</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>SleepManager</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="477" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="38" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a3f1035d71a04b36efd65f1cbe7d08b78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___interrupt___manager" kindref="compound">Loom_Interrupt_Manager</ref> &amp;</type>
+        <definition>Loom_Interrupt_Manager &amp; LoomManager::InterruptManager</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>InterruptManager</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="478" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="32" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1af6d071b9bc9e0654b6f5763db83233b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___multiplexer" kindref="compound">Loom_Multiplexer</ref> &amp;</type>
+        <definition>Loom_Multiplexer &amp; LoomManager::Multiplexer</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Multiplexer</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="479" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="45" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a51070b9737159a7880072997297959c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom_n_t_p_sync" kindref="compound">LoomNTPSync</ref> &amp;</type>
+        <definition>LoomNTPSync &amp; LoomManager::NTP</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>NTP</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="480" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="367" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ad80f6ceba81939515ab09f92434bb13e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom_temp_sync" kindref="compound">LoomTempSync</ref> &amp;</type>
+        <definition>LoomTempSync &amp; LoomManager::TempSync</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>TempSync</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="481" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="373" bodyend="377"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a28246e651c56b8c8cc0f5175f098930f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___lo_ra" kindref="compound">Loom_LoRa</ref> &amp;</type>
+        <definition>Loom_LoRa &amp; LoomManager::LoRa</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>LoRa</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="484" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="81" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a00d23f62214984206a17c4b643f9e4f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom__n_r_f" kindref="compound">Loom_nRF</ref> &amp;</type>
+        <definition>Loom_nRF &amp; LoomManager::nRF</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>nRF</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="485" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="87" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a2186c9c3f21fd48dafda59351c65b9bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___bluetooth" kindref="compound">Loom_Bluetooth</ref> &amp;</type>
+        <definition>Loom_Bluetooth &amp; LoomManager::Bluetooth</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Bluetooth</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="486" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="93" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a7d3b807d669ad51f35aafc5115c6583a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___o_l_e_d" kindref="compound">Loom_OLED</ref> &amp;</type>
+        <definition>Loom_OLED &amp; LoomManager::OLED</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>OLED</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="489" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="170" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1abbbbfdf6def923bc70d7e5e7d806fe67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___s_d" kindref="compound">Loom_SD</ref> &amp;</type>
+        <definition>Loom_SD &amp; LoomManager::SDCARD</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>SDCARD</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="490" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="176" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a9fad8dc02b66ec73bb0247b89edf98c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___batch_s_d" kindref="compound">Loom_BatchSD</ref> &amp;</type>
+        <definition>Loom_BatchSD &amp; LoomManager::BATCHSD</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>BATCHSD</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="491" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="182" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ac7f70773b0c757611897f8865f6435ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom_internet_plat" kindref="compound">LoomInternetPlat</ref> &amp;</type>
+        <definition>LoomInternetPlat&amp; LoomManager::InternetPlat</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>InternetPlat</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="494" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a9727086e76045344ab9f10542cf7ab35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___ethernet" kindref="compound">Loom_Ethernet</ref> &amp;</type>
+        <definition>Loom_Ethernet &amp; LoomManager::Ethernet</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Ethernet</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="495" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="109" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a52b36254942ce3e0f91212416258963d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___wi_fi" kindref="compound">Loom_WiFi</ref> &amp;</type>
+        <definition>Loom_WiFi &amp; LoomManager::WiFi</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>WiFi</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="496" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="115" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a0b5e54f112f357169523e993bc49a547" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___l_t_e" kindref="compound">Loom_LTE</ref> &amp;</type>
+        <definition>Loom_LTE &amp; LoomManager::LTE</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>LTE</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="497" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="121" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a302fccc089e8d608548bc58abd8dccca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom_publish_plat" kindref="compound">LoomPublishPlat</ref> &amp;</type>
+        <definition>LoomPublishPlat&amp; LoomManager::PublishPlat</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>PublishPlat</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="500" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ad21d7fa120541af2e2f20c7e4b59d8c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___google_sheets" kindref="compound">Loom_GoogleSheets</ref> &amp;</type>
+        <definition>Loom_GoogleSheets &amp; LoomManager::GoogleSheets</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>GoogleSheets</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="501" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="138" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a4ca73cdf90feff2138e037a19e22f9de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Loom_SpoolPublish &amp;</type>
+        <definition>Loom_SpoolPublish &amp; LoomManager::Spool</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Spool</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="502" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="144" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ab2fb9b98506e41d72a1f39b182d7b87b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___max_pub" kindref="compound">Loom_MaxPub</ref> &amp;</type>
+        <definition>Loom_MaxPub &amp; LoomManager::MaxPub</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>MaxPub</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="503" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="150" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a2a50b8b451f4d9d28cbc702805b9f3dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___max_sub" kindref="compound">Loom_MaxSub</ref> &amp;</type>
+        <definition>Loom_MaxSub &amp; LoomManager::MaxSub</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>MaxSub</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="506" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="160" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1aab5140dd99b464153284e0a7fb4f2aca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___d_s3231" kindref="compound">Loom_DS3231</ref> &amp;</type>
+        <definition>Loom_DS3231 &amp; LoomManager::DS3231</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>DS3231</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="510" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="191" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a80eaaf9c4a44b04fb17059d7b739c30f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___p_c_f8523" kindref="compound">Loom_PCF8523</ref> &amp;</type>
+        <definition>Loom_PCF8523 &amp; LoomManager::PCF8523</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>PCF8523</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="511" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="197" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a564de486f940e0ad9f3a75c97bbf29cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___neopixel" kindref="compound">Loom_Neopixel</ref> &amp;</type>
+        <definition>Loom_Neopixel &amp; LoomManager::Neopixel</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Neopixel</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="514" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="54" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ad4e0fadb443db115e69cb59e191f812f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___relay" kindref="compound">Loom_Relay</ref> &amp;</type>
+        <definition>Loom_Relay &amp; LoomManager::Relay</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Relay</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="515" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="60" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a2af6939f38dc800ae338809e64e7941c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___servo" kindref="compound">Loom_Servo</ref> &amp;</type>
+        <definition>Loom_Servo &amp; LoomManager::Servo</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Servo</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="516" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="66" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a4e1f0a483f7b8e7c94b6e6c6c5e0720d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___stepper" kindref="compound">Loom_Stepper</ref> &amp;</type>
+        <definition>Loom_Stepper &amp; LoomManager::Stepper</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Stepper</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="517" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="72" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a9d12c1b6aaf4faabfcbf9550be3a7d5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___analog" kindref="compound">Loom_Analog</ref> &amp;</type>
+        <definition>Loom_Analog &amp; LoomManager::Analog</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Analog</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="520" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="207" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ad2d0b7ac9986d5d1d7ba31bb6dc7e096" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___digital" kindref="compound">Loom_Digital</ref> &amp;</type>
+        <definition>Loom_Digital &amp; LoomManager::Digital</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Digital</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="521" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="213" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a8a259936dacb423e41abc6e5c0ddc386" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___a_d_s1115" kindref="compound">Loom_ADS1115</ref> &amp;</type>
+        <definition>Loom_ADS1115 &amp; LoomManager::ADS1115</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>ADS1115</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="524" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="221" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ab43299769d25ad470ab0a1af78c5cb9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___a_s7262" kindref="compound">Loom_AS7262</ref> &amp;</type>
+        <definition>Loom_AS7262 &amp; LoomManager::AS7262</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>AS7262</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="525" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="227" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1aacd2f14847285df52cb1c96bedb1199a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___a_s7263" kindref="compound">Loom_AS7263</ref> &amp;</type>
+        <definition>Loom_AS7263 &amp; LoomManager::AS7263</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>AS7263</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="526" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="233" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ab7eb247db4db85bed3233c97bc9a72ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___a_s7265_x" kindref="compound">Loom_AS7265X</ref> &amp;</type>
+        <definition>Loom_AS7265X &amp; LoomManager::AS7265X</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>AS7265X</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="527" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="239" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a551b150bea409c70c39302a03953058b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___f_x_a_s21002" kindref="compound">Loom_FXAS21002</ref> &amp;</type>
+        <definition>Loom_FXAS21002 &amp; LoomManager::FXAS21002</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>FXAS21002</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="528" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="245" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a479be8eb27c108ff4a515e9e6f20b17a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___f_x_o_s8700" kindref="compound">Loom_FXOS8700</ref> &amp;</type>
+        <definition>Loom_FXOS8700 &amp; LoomManager::FXOS8700</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>FXOS8700</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="529" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="251" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1aec4f445bac4549bfacf1e605726a4811" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___l_i_s3_d_h" kindref="compound">Loom_LIS3DH</ref> &amp;</type>
+        <definition>Loom_LIS3DH &amp; LoomManager::LIS3DH</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>LIS3DH</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="530" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="257" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1aa547d240f6e43d8db10e260afe981351" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___m_b1232" kindref="compound">Loom_MB1232</ref> &amp;</type>
+        <definition>Loom_MB1232 &amp; LoomManager::MB1232</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>MB1232</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="531" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="263" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a22e8ddf9132d55c2d4b91e824ce8a2e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___m_m_a8451" kindref="compound">Loom_MMA8451</ref> &amp;</type>
+        <definition>Loom_MMA8451 &amp; LoomManager::MMA8451</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>MMA8451</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="532" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="269" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a8ac3c59cd01edc6c26e204eef8fb8ef5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___m_p_u6050" kindref="compound">Loom_MPU6050</ref> &amp;</type>
+        <definition>Loom_MPU6050 &amp; LoomManager::MPU6050</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>MPU6050</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="533" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="275" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a49f9c27af1f59622a97dd0d968384bc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___m_s5803" kindref="compound">Loom_MS5803</ref> &amp;</type>
+        <definition>Loom_MS5803 &amp; LoomManager::MS5803</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>MS5803</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="534" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="281" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a4ddebb2814e2c4b42604b7e0a31d84e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___s_h_t31_d" kindref="compound">Loom_SHT31D</ref> &amp;</type>
+        <definition>Loom_SHT31D &amp; LoomManager::SHT31D</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>SHT31D</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="535" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="287" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ae0c9f52e3ec5d968d400e2dd7221c91d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___t_m_p007" kindref="compound">Loom_TMP007</ref> &amp;</type>
+        <definition>Loom_TMP007 &amp; LoomManager::TMP007</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>TMP007</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="536" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="293" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a4ba1236ae2fb5fad91a7b7e34270ed7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___t_s_l2561" kindref="compound">Loom_TSL2561</ref> &amp;</type>
+        <definition>Loom_TSL2561 &amp; LoomManager::TSL2561</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>TSL2561</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="537" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="299" bodyend="303"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a5fdae347776c8fe96de34a082100d354" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___t_s_l2591" kindref="compound">Loom_TSL2591</ref> &amp;</type>
+        <definition>Loom_TSL2591 &amp; LoomManager::TSL2591</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>TSL2591</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="538" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="305" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a38313cd58f25f7c3d9766d32bbb5e492" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___z_x_gesture" kindref="compound">Loom_ZXGesture</ref> &amp;</type>
+        <definition>Loom_ZXGesture &amp; LoomManager::ZXGesture</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>ZXGesture</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="539" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="311" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1abb8191fc02e773c230f73e30309bb8c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___s_t_e_m_m_a" kindref="compound">Loom_STEMMA</ref> &amp;</type>
+        <definition>Loom_STEMMA &amp; LoomManager::STEMMA</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>STEMMA</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="540" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="317" bodyend="321"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a7a388fa9da1a6108037116b9d2b7c7af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___decagon5_t_m" kindref="compound">Loom_Decagon5TM</ref> &amp;</type>
+        <definition>Loom_Decagon5TM &amp; LoomManager::Decagon5TM</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>Decagon5TM</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="542" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="326" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a63e0efbece5fad5b581bef2ee659963a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___decagon_g_s3" kindref="compound">Loom_DecagonGS3</ref> &amp;</type>
+        <definition>Loom_DecagonGS3 &amp; LoomManager::DecagonGS3</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>DecagonGS3</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="543" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="332" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a964d0a8bd49d71696b46197daddfb21f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___m_a_x31855" kindref="compound">Loom_MAX31855</ref> &amp;</type>
+        <definition>Loom_MAX31855 &amp; LoomManager::MAX31855</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>MAX31855</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="546" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="341" bodyend="345"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a12838292e4ca2af73099938e616c8a35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___m_a_x31856" kindref="compound">Loom_MAX31856</ref> &amp;</type>
+        <definition>Loom_MAX31856 &amp; LoomManager::MAX31856</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>MAX31856</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="547" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="347" bodyend="351"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ab6a569394d7c9c423b359885aa400951" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_loom___k30" kindref="compound">Loom_K30</ref> &amp;</type>
+        <definition>Loom_K30 &amp; LoomManager::K30</definition>
+        <argsstring>(const uint8_t idx=0)</argsstring>
+        <name>K30</name>
+        <param>
+          <type>const uint8_t</type>
+          <declname>idx</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="550" column="1" bodyfile="src/Manager_Module_Access.cpp" bodystart="357" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a2cbb5e4f1b81ef273b1a07f120cbb06d" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::print_device_label</definition>
+        <argsstring>() const </argsstring>
+        <name>print_device_label</name>
+        <briefdescription>
+<para>Print the device name as &apos;[device_name]&apos;. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="555" column="1" bodyfile="src/Manager.h" bodystart="555" bodyend="555"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a16c9d435d7b930a8f7d50bb37b3299cf" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom___interrupt___manager" kindref="compound">Loom_Interrupt_Manager</ref> *</type>
+        <definition>Loom_Interrupt_Manager* LoomManager::get_interrupt_manager</definition>
+        <argsstring>()</argsstring>
+        <name>get_interrupt_manager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="567" column="1" bodyfile="src/Manager.h" bodystart="567" bodyend="567"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a5762d4b95ffb2726e5165ac4e6c25e2b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom___sleep___manager" kindref="compound">Loom_Sleep_Manager</ref> *</type>
+        <definition>Loom_Sleep_Manager* LoomManager::get_sleep_manager</definition>
+        <argsstring>()</argsstring>
+        <name>get_sleep_manager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="568" column="1" bodyfile="src/Manager.h" bodystart="568" bodyend="568"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1afb53ced7e67a8c4e3b3293b8307c1f7a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_loom_r_t_c" kindref="compound">LoomRTC</ref> *</type>
+        <definition>LoomRTC* LoomManager::get_rtc_module</definition>
+        <argsstring>()</argsstring>
+        <name>get_rtc_module</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="569" column="1" bodyfile="src/Manager.h" bodystart="569" bodyend="569"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a3a5fe171ebada42dae0686c191ab0a94" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::add_device_ID_to_json</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>add_device_ID_to_json</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Used to add device info to data object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="572" column="1" bodyfile="src/Manager.cpp" bodystart="249" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1a1cc5144ba88238597f2277ad3bcaf860" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LoomManager::free_modules</definition>
+        <argsstring>()</argsstring>
+        <name>free_modules</name>
+        <briefdescription>
+<para>Free modules. </para>        </briefdescription>
+        <detaileddescription>
+<para>Used in destructor or when switching configuration </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="576" column="1" bodyfile="src/Manager.cpp" bodystart="378" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_manager_1ac44675a99bae41357de6dcfd0b5854ad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool LoomManager::dispatch_self</definition>
+        <argsstring>(JsonObject json)</argsstring>
+        <name>dispatch_self</name>
+        <param>
+          <type>JsonObject</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+<para>Run dispatch on any commands directed to the manager. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="579" column="1" bodyfile="src/Manager.cpp" bodystart="344" bodyend="352"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="class_loom_manager_1a23170d165993ad196a7604fd08b29400" prot="public" static="no">
+        <name>DeviceType</name>
+        <enumvalue id="class_loom_manager_1a23170d165993ad196a7604fd08b29400a3cc0a3bb62454e5f6414c7adb897b5ff" prot="public">
+          <name>HUB</name>
+          <briefdescription>
+<para>Central device. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_manager_1a23170d165993ad196a7604fd08b29400a0cc25b606fe928a0c9a58f7f209c4495" prot="public">
+          <name>NODE</name>
+          <briefdescription>
+<para>Data collecting / actuating node. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="class_loom_manager_1a23170d165993ad196a7604fd08b29400ad31b9025a6321e1dddf76266123d7e99" prot="public">
+          <name>REPEATER</name>
+          <briefdescription>
+<para>Forwards messages between other devices. </para>          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Different general types of devices. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="140" column="1" bodyfile="src/Manager.h" bodystart="140" bodyend="144"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_loom_manager_1a6495ca9eb825d0ed7985c341b6057be8" prot="private" static="no" mutable="no">
+        <type>const <ref refid="class_factory_base" kindref="compound">FactoryBase</ref> *</type>
+        <definition>const FactoryBase* LoomManager::Factory</definition>
+        <argsstring></argsstring>
+        <name>Factory</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="135" column="1" bodyfile="src/Manager.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_loom_manager_1aac06e8c17477ab5d8991e782f9ffecca" prot="protected" static="no" mutable="no">
+        <type>char</type>
+        <definition>char LoomManager::device_name[20]</definition>
+        <argsstring>[20]</argsstring>
+        <name>device_name</name>
+        <briefdescription>
+<para>The name of the device. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="148" column="1" bodyfile="src/Manager.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1af2ce718d7f1d10bdd48344acabf47488" prot="protected" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t LoomManager::instance</definition>
+        <argsstring></argsstring>
+        <name>instance</name>
+        <briefdescription>
+<para>The instance / channel ID within the subnet. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="149" column="1" bodyfile="src/Manager.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1af5742e2169b750d8b4221778e5c9f629" prot="protected" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t LoomManager::interval</definition>
+        <argsstring></argsstring>
+        <name>interval</name>
+        <briefdescription>
+<para>Default value for <ref refid="class_loom_manager_1a3e57c97dd28717002cf11a1cff794239" kindref="member">pause()</ref> Used so that manager can control interval, rather than code in .ino. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="151" column="1" bodyfile="src/Manager.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1af280305895cc3b2c5022d4a5fabeb2c4" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_manager_1a23170d165993ad196a7604fd08b29400" kindref="member">DeviceType</ref></type>
+        <definition>DeviceType LoomManager::device_type</definition>
+        <argsstring></argsstring>
+        <name>device_type</name>
+        <briefdescription>
+<para>Device type (Hub / Node) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="155" column="1" bodyfile="src/Manager.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1aa5ef4bac083e23282de91ad886ee5c7d" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___warm_up___manager" kindref="compound">Loom_WarmUp_Manager</ref> *</type>
+        <definition>Loom_WarmUp_Manager* LoomManager::warmup_manager</definition>
+        <argsstring></argsstring>
+        <name>warmup_manager</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="158" column="1" bodyfile="src/Manager.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1a9e706e9a8e7acdd2a92ef77121921a0c" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___interrupt___manager" kindref="compound">Loom_Interrupt_Manager</ref> *</type>
+        <definition>Loom_Interrupt_Manager* LoomManager::interrupt_manager</definition>
+        <argsstring></argsstring>
+        <name>interrupt_manager</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="159" column="1" bodyfile="src/Manager.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1a2c63f985019cf7ee5766ab503cd7f562" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom___sleep___manager" kindref="compound">Loom_Sleep_Manager</ref> *</type>
+        <definition>Loom_Sleep_Manager* LoomManager::sleep_manager</definition>
+        <argsstring></argsstring>
+        <name>sleep_manager</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="160" column="1" bodyfile="src/Manager.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1a5ff1841a189242d33d2f0ff313e8a74a" prot="protected" static="no" mutable="no">
+        <type><ref refid="class_loom_r_t_c" kindref="compound">LoomRTC</ref> *</type>
+        <definition>LoomRTC* LoomManager::rtc_module</definition>
+        <argsstring></argsstring>
+        <name>rtc_module</name>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="161" column="1" bodyfile="src/Manager.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1a2880117fb788e2210560e87ed655cb8e" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="class_loom_module" kindref="compound">LoomModule</ref> * &gt;</type>
+        <definition>std::vector&lt;LoomModule*&gt; LoomManager::modules</definition>
+        <argsstring></argsstring>
+        <name>modules</name>
+        <briefdescription>
+<para>Vectors of <ref refid="class_loom_module" kindref="compound">LoomModule</ref> pointers. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="164" column="1" bodyfile="src/Manager.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1a00b6fc4d662e25ea1b88a427909b8a94" prot="protected" static="no" mutable="no">
+        <type><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+        <definition>Verbosity LoomManager::print_verbosity</definition>
+        <argsstring></argsstring>
+        <name>print_verbosity</name>
+        <briefdescription>
+<para>Print detail verbosity. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="166" column="1" bodyfile="src/Manager.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1a7e57c09ed534c554f96c457127294f20" prot="protected" static="no" mutable="no">
+        <type><ref refid="_misc_8h_1abf3be10d03894afb391f3a2935e3b313" kindref="member">Verbosity</ref></type>
+        <definition>Verbosity LoomManager::package_verbosity</definition>
+        <argsstring></argsstring>
+        <name>package_verbosity</name>
+        <briefdescription>
+<para>Package detail verbosity. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="167" column="1" bodyfile="src/Manager.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1ac1b761a5c37d853db374c13a1cb3226c" prot="protected" static="no" mutable="no">
+        <type>StaticJsonDocument&lt; 2000 &gt;</type>
+        <definition>StaticJsonDocument&lt;2000&gt; LoomManager::doc</definition>
+        <argsstring></argsstring>
+        <name>doc</name>
+        <briefdescription>
+<para>Json data. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="169" column="1" bodyfile="src/Manager.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_loom_manager_1a7537185cd89f2b472d338268fa2418c9" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint LoomManager::packet_number</definition>
+        <argsstring></argsstring>
+        <name>packet_number</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>Packet number, incremented each time package is called. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Manager.h" line="171" column="1" bodyfile="src/Manager.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Manager to contain Loom modules and provide users with a simpler API. </para>    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_manager.html">LoomManager Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="1169">
+        <label>Loom_Interrupt_Manager::StopWatchDetails</label>
+      </node>
+      <node id="1164">
+        <label>LoomManager</label>
+        <link refid="class_loom_manager"/>
+        <childnode refid="1165" relation="usage">
+          <edgelabel>warmup_manager</edgelabel>
+        </childnode>
+        <childnode refid="1167" relation="usage">
+          <edgelabel>sleep_manager</edgelabel>
+        </childnode>
+        <childnode refid="1172" relation="usage">
+          <edgelabel>rtc_module</edgelabel>
+        </childnode>
+        <childnode refid="1168" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1166">
+        <label>LoomModule</label>
+        <link refid="class_loom_module"/>
+        <childnode refid="1164" relation="usage">
+          <edgelabel>device_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1173">
+        <label>Loom_Interrupt_Manager::InternalTimerDetails</label>
+      </node>
+      <node id="1168">
+        <label>Loom_Interrupt_Manager</label>
+        <link refid="class_loom___interrupt___manager"/>
+        <childnode refid="1166" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1169" relation="usage">
+          <edgelabel>stopwatch_settings</edgelabel>
+        </childnode>
+        <childnode refid="1170" relation="usage">
+          <edgelabel>int_settings</edgelabel>
+        </childnode>
+        <childnode refid="1167" relation="usage">
+          <edgelabel>Sleep_Manager</edgelabel>
+        </childnode>
+        <childnode refid="1171" relation="usage">
+          <edgelabel>timer_settings</edgelabel>
+        </childnode>
+        <childnode refid="1172" relation="usage">
+          <edgelabel>RTC_Inst</edgelabel>
+        </childnode>
+        <childnode refid="1173" relation="usage">
+          <edgelabel>internal_timer</edgelabel>
+        </childnode>
+      </node>
+      <node id="1167">
+        <label>Loom_Sleep_Manager</label>
+        <link refid="class_loom___sleep___manager"/>
+        <childnode refid="1166" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1168" relation="usage">
+          <edgelabel>interrupt_manager</edgelabel>
+        </childnode>
+      </node>
+      <node id="1165">
+        <label>Loom_WarmUp_Manager</label>
+        <link refid="class_loom___warm_up___manager"/>
+        <childnode refid="1166" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1172">
+        <label>LoomRTC</label>
+        <link refid="class_loom_r_t_c"/>
+        <childnode refid="1166" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1170">
+        <label>Loom_Interrupt_Manager::IntDetails</label>
+      </node>
+      <node id="1171">
+        <label>Loom_Interrupt_Manager::TimerDetails</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Manager.h" line="131" column="1" bodyfile="src/Manager.h" bodystart="130" bodyend="581"/>
+    <listofallmembers>
+      <member refid="class_loom_manager_1a4bfaf3aaf89df1f7c9cd8c2142c0cdfd" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>add_data</name></member>
+      <member refid="class_loom_manager_1a3a5fe171ebada42dae0686c191ab0a94" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>add_device_ID_to_json</name></member>
+      <member refid="class_loom_manager_1a4761f8b6d15ed18542d1039e207cd975" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>add_module</name></member>
+      <member refid="class_loom_manager_1a8a259936dacb423e41abc6e5c0ddc386" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>ADS1115</name></member>
+      <member refid="class_loom_manager_1a9d12c1b6aaf4faabfcbf9550be3a7d5e" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Analog</name></member>
+      <member refid="class_loom_manager_1ab43299769d25ad470ab0a1af78c5cb9b" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>AS7262</name></member>
+      <member refid="class_loom_manager_1aacd2f14847285df52cb1c96bedb1199a" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>AS7263</name></member>
+      <member refid="class_loom_manager_1ab7eb247db4db85bed3233c97bc9a72ed" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>AS7265X</name></member>
+      <member refid="class_loom_manager_1a9fad8dc02b66ec73bb0247b89edf98c4" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>BATCHSD</name></member>
+      <member refid="class_loom_manager_1a315be7f7fe42feb0710b85cc8c023291" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>begin_LED</name></member>
+      <member refid="class_loom_manager_1a15a76615e56881a51a78005ad903db24" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>begin_serial</name></member>
+      <member refid="class_loom_manager_1a2186c9c3f21fd48dafda59351c65b9bc" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Bluetooth</name></member>
+      <member refid="class_loom_manager_1a03b417d8a2d39954723dd33ce4856b07" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>check_serial_for_config</name></member>
+      <member refid="class_loom_manager_1a7a388fa9da1a6108037116b9d2b7c7af" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Decagon5TM</name></member>
+      <member refid="class_loom_manager_1a63e0efbece5fad5b581bef2ee659963a" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>DecagonGS3</name></member>
+      <member refid="class_loom_manager_1aac06e8c17477ab5d8991e782f9ffecca" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>device_name</name></member>
+      <member refid="class_loom_manager_1af280305895cc3b2c5022d4a5fabeb2c4" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>device_type</name></member>
+      <member refid="class_loom_manager_1a23170d165993ad196a7604fd08b29400" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>DeviceType</name></member>
+      <member refid="class_loom_manager_1ad2d0b7ac9986d5d1d7ba31bb6dc7e096" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Digital</name></member>
+      <member refid="class_loom_manager_1affe6f936dd6c9f7f8b489b03786ac83d" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>dispatch</name></member>
+      <member refid="class_loom_manager_1a80fb13974b3bde9b0cedcd43732d7226" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>dispatch</name></member>
+      <member refid="class_loom_manager_1ac44675a99bae41357de6dcfd0b5854ad" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>dispatch_self</name></member>
+      <member refid="class_loom_manager_1a70e8fbf86b96fd3246c2d4422d91139d" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>display_data</name></member>
+      <member refid="class_loom_manager_1ac1b761a5c37d853db374c13a1cb3226c" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>doc</name></member>
+      <member refid="class_loom_manager_1aab5140dd99b464153284e0a7fb4f2aca" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>DS3231</name></member>
+      <member refid="class_loom_manager_1a2592362f66b24ced03f82e35643d1f12" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>enum_device_type_string</name></member>
+      <member refid="class_loom_manager_1a9727086e76045344ab9f10542cf7ab35" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Ethernet</name></member>
+      <member refid="class_loom_manager_1a6495ca9eb825d0ed7985c341b6057be8" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>Factory</name></member>
+      <member refid="class_loom_manager_1a139e842dcaa5ab84587bdb5bc75fd103" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>find_module</name></member>
+      <member refid="class_loom_manager_1af8b532b1efb4ba887ceb09edea2d65a9" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>find_module_by_category</name></member>
+      <member refid="class_loom_manager_1afbe16976632be98771f6a5ede92ff3fe" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>flash_LED</name></member>
+      <member refid="class_loom_manager_1afcae7948a5a29d179842bcd00de271a0" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>flash_LED</name></member>
+      <member refid="class_loom_manager_1a1cc5144ba88238597f2277ad3bcaf860" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>free_modules</name></member>
+      <member refid="class_loom_manager_1a551b150bea409c70c39302a03953058b" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>FXAS21002</name></member>
+      <member refid="class_loom_manager_1a479be8eb27c108ff4a515e9e6f20b17a" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>FXOS8700</name></member>
+      <member refid="class_loom_manager_1af9666106e7f25c4735b22c70dfaab33f" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>get_config</name></member>
+      <member refid="class_loom_manager_1ace28cae7092408bc96bf66299e4c2f9a" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>get_data_as</name></member>
+      <member refid="class_loom_manager_1a93329cf2288e9467ca5da87059657a21" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>get_device_name</name></member>
+      <member refid="class_loom_manager_1a7642ccf7c0faca1e549f0ec2d4d72400" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>get_device_name</name></member>
+      <member refid="class_loom_manager_1a19942faf44a0835356c5d3f04ee77a66" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>get_device_type</name></member>
+      <member refid="class_loom_manager_1af71c96f2e245deb12e8b25eb2e11e4db" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>get_instance_num</name></member>
+      <member refid="class_loom_manager_1a16c9d435d7b930a8f7d50bb37b3299cf" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>get_interrupt_manager</name></member>
+      <member refid="class_loom_manager_1a7d282d59fd742664e6bbe33f64241ed3" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>get_interval</name></member>
+      <member refid="class_loom_manager_1afaaaf2cec1d6d372b0b6a71720944690" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>get_package_verbosity</name></member>
+      <member refid="class_loom_manager_1aa97a8e46a133c0d32a3dd8c33d5c9b25" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>get_print_verbosity</name></member>
+      <member refid="class_loom_manager_1afb53ced7e67a8c4e3b3293b8307c1f7a" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>get_rtc_module</name></member>
+      <member refid="class_loom_manager_1a5762d4b95ffb2726e5165ac4e6c25e2b" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>get_sleep_manager</name></member>
+      <member refid="class_loom_manager_1ad21d7fa120541af2e2f20c7e4b59d8c7" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>GoogleSheets</name></member>
+      <member refid="class_loom_manager_1a2c8c03e61c5ea0e2d1d86c48179accff" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>has_module</name></member>
+      <member refid="class_loom_manager_1af2ce718d7f1d10bdd48344acabf47488" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>instance</name></member>
+      <member refid="class_loom_manager_1a853b89aea16917b3e7baef7173ef741e" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>internal_json</name></member>
+      <member refid="class_loom_manager_1ac7f70773b0c757611897f8865f6435ec" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>InternetPlat</name></member>
+      <member refid="class_loom_manager_1a9e706e9a8e7acdd2a92ef77121921a0c" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>interrupt_manager</name></member>
+      <member refid="class_loom_manager_1a3f1035d71a04b36efd65f1cbe7d08b78" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>InterruptManager</name></member>
+      <member refid="class_loom_manager_1af5742e2169b750d8b4221778e5c9f629" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>interval</name></member>
+      <member refid="class_loom_manager_1ab6a569394d7c9c423b359885aa400951" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>K30</name></member>
+      <member refid="class_loom_manager_1aec4f445bac4549bfacf1e605726a4811" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>LIS3DH</name></member>
+      <member refid="class_loom_manager_1a0c849e257dfa2a1796daea93d0da6f58" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>list_modules</name></member>
+      <member refid="class_loom_manager_1a349a86e686c0b71d8613f1e5a58ea2e3" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>log_all</name></member>
+      <member refid="class_loom_manager_1af59e23602c123c36d4a855e6af6b4d75" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>log_all</name></member>
+      <member refid="class_loom_manager_1a6e9a09b43cf35fd3138c6787b589f320" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>Loom_BatchSD</name></member>
+      <member refid="class_loom_manager_1a008d5139e80cc67e9facc1611e7e30be" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>Loom_Interrupt_Manager</name></member>
+      <member refid="class_loom_manager_1a16fed8610f64b07f59a179e88627f381" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>Loom_SD</name></member>
+      <member refid="class_loom_manager_1a9d93d402309f8410307da6ff54acd40d" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>Loom_Sleep_Manager</name></member>
+      <member refid="class_loom_manager_1a084222072528d9fe59480b0c9e2f5757" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>LoomManager</name></member>
+      <member refid="class_loom_manager_1ac23a5e689f21bc3c5dc04a499b9a905b" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>LoomNTPSync</name></member>
+      <member refid="class_loom_manager_1ad460f63d437defbca6d2c4cf1b03f084" prot="private" virt="non-virtual"><scope>LoomManager</scope><name>LoomRTC</name></member>
+      <member refid="class_loom_manager_1a28246e651c56b8c8cc0f5175f098930f" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>LoRa</name></member>
+      <member refid="class_loom_manager_1a0b5e54f112f357169523e993bc49a547" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>LTE</name></member>
+      <member refid="class_loom_manager_1a964d0a8bd49d71696b46197daddfb21f" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>MAX31855</name></member>
+      <member refid="class_loom_manager_1a12838292e4ca2af73099938e616c8a35" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>MAX31856</name></member>
+      <member refid="class_loom_manager_1ab2fb9b98506e41d72a1f39b182d7b87b" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>MaxPub</name></member>
+      <member refid="class_loom_manager_1a2a50b8b451f4d9d28cbc702805b9f3dc" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>MaxSub</name></member>
+      <member refid="class_loom_manager_1aa547d240f6e43d8db10e260afe981351" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>MB1232</name></member>
+      <member refid="class_loom_manager_1a3202f184c7d76abff38a353347c3f457" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>measure</name></member>
+      <member refid="class_loom_manager_1a22e8ddf9132d55c2d4b91e824ce8a2e6" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>MMA8451</name></member>
+      <member refid="class_loom_manager_1a2880117fb788e2210560e87ed655cb8e" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>modules</name></member>
+      <member refid="class_loom_manager_1a8ac3c59cd01edc6c26e204eef8fb8ef5" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>MPU6050</name></member>
+      <member refid="class_loom_manager_1a49f9c27af1f59622a97dd0d968384bc5" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>MS5803</name></member>
+      <member refid="class_loom_manager_1af6d071b9bc9e0654b6f5763db83233b0" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Multiplexer</name></member>
+      <member refid="class_loom_manager_1a564de486f940e0ad9f3a75c97bbf29cf" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Neopixel</name></member>
+      <member refid="class_loom_manager_1a00d23f62214984206a17c4b643f9e4f6" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>nRF</name></member>
+      <member refid="class_loom_manager_1a51070b9737159a7880072997297959c3" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>NTP</name></member>
+      <member refid="class_loom_manager_1a7d3b807d669ad51f35aafc5115c6583a" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>OLED</name></member>
+      <member refid="class_loom_manager_1ad09d72a0950ee5df48371e4d49a56e68" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>package</name></member>
+      <member refid="class_loom_manager_1a34666ea29808834e120ef169f389387b" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>package</name></member>
+      <member refid="class_loom_manager_1a7e57c09ed534c554f96c457127294f20" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>package_verbosity</name></member>
+      <member refid="class_loom_manager_1a7537185cd89f2b472d338268fa2418c9" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>packet_number</name></member>
+      <member refid="class_loom_manager_1ab06b9f5b623b01cc0966eb84da173238" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>parse_config</name></member>
+      <member refid="class_loom_manager_1a445ca7e4c6f7db0d7dc7c5f4fa8ffea0" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>parse_config_json</name></member>
+      <member refid="class_loom_manager_1adbcbf45453af8fd47dc6c536447540be" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>parse_config_SD</name></member>
+      <member refid="class_loom_manager_1a22d5a375034b484461a9488889cc348a" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>parse_config_serial</name></member>
+      <member refid="class_loom_manager_1a3e57c97dd28717002cf11a1cff794239" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>pause</name></member>
+      <member refid="class_loom_manager_1a8d3dba74d36bf91a7356f08f0012268e" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>pause</name></member>
+      <member refid="class_loom_manager_1a80eaaf9c4a44b04fb17059d7b739c30f" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>PCF8523</name></member>
+      <member refid="class_loom_manager_1a1c7c446561067b986afc77ed1b4454c9" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>power_down</name></member>
+      <member refid="class_loom_manager_1abfb3562addd9910ef7957508d5552ea0" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>power_up</name></member>
+      <member refid="class_loom_manager_1a3dcf9e19b7d583aca8a01cfe9f6ba897" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>print_config</name></member>
+      <member refid="class_loom_manager_1a2cbb5e4f1b81ef273b1a07f120cbb06d" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>print_device_label</name></member>
+      <member refid="class_loom_manager_1a00b6fc4d662e25ea1b88a427909b8a94" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>print_verbosity</name></member>
+      <member refid="class_loom_manager_1a85bcc5929215f48af9dffed13bd78862" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>publish_all</name></member>
+      <member refid="class_loom_manager_1a5cea46f54dd9f891108bc0adf2c2d437" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>publish_all</name></member>
+      <member refid="class_loom_manager_1a302fccc089e8d608548bc58abd8dccca" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>PublishPlat</name></member>
+      <member refid="class_loom_manager_1af62aaa2aea11411f65b3fe1ed2c4c3d7" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>record</name></member>
+      <member refid="class_loom_manager_1ad4e0fadb443db115e69cb59e191f812f" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Relay</name></member>
+      <member refid="class_loom_manager_1a5ff1841a189242d33d2f0ff313e8a74a" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>rtc_module</name></member>
+      <member refid="class_loom_manager_1abbbbfdf6def923bc70d7e5e7d806fe67" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>SDCARD</name></member>
+      <member refid="class_loom_manager_1a2af6939f38dc800ae338809e64e7941c" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Servo</name></member>
+      <member refid="class_loom_manager_1ab19b6f8d14ddbaf8cdada7e7d4d4a983" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>set_device_name</name></member>
+      <member refid="class_loom_manager_1ac8bd2ad89162850e9f7615856ba7cd48" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>set_instance_num</name></member>
+      <member refid="class_loom_manager_1aba4da59a1f3bf7422be299e6170b2d1c" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>set_interval</name></member>
+      <member refid="class_loom_manager_1aa9a1e310be9f6c806ac42421648724df" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>set_package_verbosity</name></member>
+      <member refid="class_loom_manager_1aa537a373b1aab6150915c1e27a691d7a" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>set_print_verbosity</name></member>
+      <member refid="class_loom_manager_1a4ddebb2814e2c4b42604b7e0a31d84e8" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>SHT31D</name></member>
+      <member refid="class_loom_manager_1a2c63f985019cf7ee5766ab503cd7f562" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>sleep_manager</name></member>
+      <member refid="class_loom_manager_1aa18ec752187b173a50ff1ac4548100a5" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>SleepManager</name></member>
+      <member refid="class_loom_manager_1a4ca73cdf90feff2138e037a19e22f9de" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Spool</name></member>
+      <member refid="class_loom_manager_1abb8191fc02e773c230f73e30309bb8c4" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>STEMMA</name></member>
+      <member refid="class_loom_manager_1a4e1f0a483f7b8e7c94b6e6c6c5e0720d" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>Stepper</name></member>
+      <member refid="class_loom_manager_1ad80f6ceba81939515ab09f92434bb13e" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>TempSync</name></member>
+      <member refid="class_loom_manager_1ae0c9f52e3ec5d968d400e2dd7221c91d" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>TMP007</name></member>
+      <member refid="class_loom_manager_1a4ba1236ae2fb5fad91a7b7e34270ed7c" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>TSL2561</name></member>
+      <member refid="class_loom_manager_1a5fdae347776c8fe96de34a082100d354" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>TSL2591</name></member>
+      <member refid="class_loom_manager_1aa5ef4bac083e23282de91ad886ee5c7d" prot="protected" virt="non-virtual"><scope>LoomManager</scope><name>warmup_manager</name></member>
+      <member refid="class_loom_manager_1afb0cc398b36594b1389aaceb0873c9e9" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>WarmUpManager</name></member>
+      <member refid="class_loom_manager_1a52b36254942ce3e0f91212416258963d" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>WiFi</name></member>
+      <member refid="class_loom_manager_1a38313cd58f25f7c3d9766d32bbb5e492" prot="public" virt="non-virtual"><scope>LoomManager</scope><name>ZXGesture</name></member>
+      <member refid="class_loom_manager_1a4dabf340ea6475e6f0ad395e25a56a47" prot="public" virt="virtual"><scope>LoomManager</scope><name>~LoomManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

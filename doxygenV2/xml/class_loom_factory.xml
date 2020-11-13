@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="class_loom_factory" kind="class" language="C++" prot="public">
+    <compoundname>LoomFactory</compoundname>
+    <basecompoundref refid="class_factory_base" prot="public" virt="non-virtual">FactoryBase</basecompoundref>
+    <includes refid="_module___factory_8h" local="no">Module_Factory.h</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="namespace_enable_1af24aafc1e3ae44b565ff729a2ef16a39" kindref="member">Enable::Internet</ref></type>
+        <declname>INTERNET</declname>
+        <defname>INTERNET</defname>
+        <defval><ref refid="namespace_enable_1af24aafc1e3ae44b565ff729a2ef16a39ab1c94ca2fbc3e78fc30069c8d0f01680" kindref="member">Enable::Internet::All</ref></defval>
+      </param>
+      <param>
+        <type><ref refid="namespace_enable_1a2c5357c28618c596547602949f27e4ca" kindref="member">Enable::Sensors</ref></type>
+        <declname>SENSORS</declname>
+        <defname>SENSORS</defname>
+        <defval><ref refid="namespace_enable_1a2c5357c28618c596547602949f27e4caa00d23a76e43b46dae9ec7aa9dcbebb32" kindref="member">Enable::Sensors::Enabled</ref></defval>
+      </param>
+      <param>
+        <type><ref refid="namespace_enable_1adac37ec06673d08a6c6402a0feb1b232" kindref="member">Enable::Radios</ref></type>
+        <declname>RADIOS</declname>
+        <defname>RADIOS</defname>
+        <defval><ref refid="namespace_enable_1a2c5357c28618c596547602949f27e4caa00d23a76e43b46dae9ec7aa9dcbebb32" kindref="member">Enable::Radios::Enabled</ref></defval>
+      </param>
+      <param>
+        <type><ref refid="namespace_enable_1aad5ff0e67e478728f21443865359584b" kindref="member">Enable::Actuators</ref></type>
+        <declname>ACTUATORS</declname>
+        <defname>ACTUATORS</defname>
+        <defval><ref refid="namespace_enable_1a2c5357c28618c596547602949f27e4caa00d23a76e43b46dae9ec7aa9dcbebb32" kindref="member">Enable::Actuators::Enabled</ref></defval>
+      </param>
+      <param>
+        <type><ref refid="namespace_enable_1a91b4292c74e70133aaefa8bcceec2461" kindref="member">Enable::Max</ref></type>
+        <declname>MAX</declname>
+        <defname>MAX</defname>
+        <defval><ref refid="namespace_enable_1af24aafc1e3ae44b565ff729a2ef16a39ab9f5c797ebbf55adccdd8539a65a0241" kindref="member">Enable::Max::Disabled</ref></defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_loom_factory_1a4ebb5c84434beaf0f46307f4cf7cfde8" prot="private" static="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto LoomFactory&lt; INTERNET, SENSORS, RADIOS, ACTUATORS, MAX &gt;::LookupTable</definition>
+        <argsstring></argsstring>
+        <name>LookupTable</name>
+        <initializer>= tuple_cat(
+			<ref refid="namespace_include_1afd5c6184c21e5cbb570f6ffb451fadb2" kindref="member">Include::Common</ref>,
+			factory::select&lt;(int)INTERNET&gt;(
+				<ref refid="namespace_include_1a5f31f767a008f601b5d4f5c3aff90e89" kindref="member">Include::EthernetAndWiFi</ref>,
+				<ref refid="namespace_include_1a68386b4fe2e4f182c18b0f4b1e1ca554" kindref="member">Include::Ethernet</ref>,
+				<ref refid="namespace_include_1a6cf33ac8efc6a5092ce9a6af9cf02d36" kindref="member">Include::WiFi</ref>,
+				<ref refid="namespace_include_1a8d54cbf6e38dd18378d1fbce77da979e" kindref="member">Include::LTE</ref>,
+				<ref refid="namespace_include_1a223a3f93bed9db5706b58e6fd15c8810" kindref="member">Include::None</ref>
+			),
+			factory::select&lt;(int)SENSORS&gt;(
+				<ref refid="namespace_include_1afdc5a0bd51655ca57718cdca40e5b277" kindref="member">Include::Sensors</ref>,
+				<ref refid="namespace_include_1a223a3f93bed9db5706b58e6fd15c8810" kindref="member">Include::None</ref>
+			),
+			factory::select&lt;(int)RADIOS&gt;(
+				<ref refid="namespace_include_1aaef3f142b15f5413c545a4b50a662fcc" kindref="member">Include::Radios</ref>,
+				<ref refid="namespace_include_1a223a3f93bed9db5706b58e6fd15c8810" kindref="member">Include::None</ref>
+			),
+			factory::select&lt;(int)ACTUATORS&gt;(
+				<ref refid="namespace_include_1a40e108fcc93c3c148487421aedb9a250" kindref="member">Include::Actuators</ref>,
+				<ref refid="namespace_include_1a223a3f93bed9db5706b58e6fd15c8810" kindref="member">Include::None</ref>
+			),
+			factory::select&lt;(int)MAX&gt;(
+				<ref refid="namespace_include_1aee5c809c679bf94fd69dc5deff6a90c4" kindref="member">Include::Max</ref>,
+				<ref refid="namespace_include_1a223a3f93bed9db5706b58e6fd15c8810" kindref="member">Include::None</ref>
+			)
+		)</initializer>
+        <briefdescription>
+<para>The factory&apos;s lookup table of modules that can be created, based on the enable values of the classes template parameters. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="329" column="1" bodyfile="src/Module_Factory.h" bodystart="329" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_loom_factory_1a58a9d3e047ee49d9111506390f122abd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomFactory&lt; INTERNET, SENSORS, RADIOS, ACTUATORS, MAX &gt;::LoomFactory</definition>
+        <argsstring>()=default</argsstring>
+        <name>LoomFactory</name>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="359" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_factory_1a15b465cec2e3d8b88493ba773d81aadc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LoomFactory&lt; INTERNET, SENSORS, RADIOS, ACTUATORS, MAX &gt;::~LoomFactory</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LoomFactory</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="362" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_factory_1a9a81e69b81e801e055a7d2b86e24d59b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void LoomFactory&lt; INTERNET, SENSORS, RADIOS, ACTUATORS, MAX &gt;::print_table</definition>
+        <argsstring>() const </argsstring>
+        <name>print_table</name>
+        <reimplements refid="class_factory_base_1a96c50a015c8e2b0e6cc4a8ee48ae2a12">print_table</reimplements>
+        <briefdescription>
+<para>Print the contents of the lookup table. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="365" column="1" bodyfile="src/Module_Factory.h" bodystart="365" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="function" id="class_loom_factory_1a16952c39558fd8fcb317e251e9f02266" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="class_loom_module" kindref="compound">LoomModule</ref> *</type>
+        <definition>LoomModule* LoomFactory&lt; INTERNET, SENSORS, RADIOS, ACTUATORS, MAX &gt;::Create</definition>
+        <argsstring>(LoomManager *manager, JsonVariant module) const </argsstring>
+        <name>Create</name>
+        <reimplements refid="class_factory_base_1a1a3356d8729b56634c3bca85c7530223">Create</reimplements>
+        <param>
+          <type><ref refid="class_loom_manager" kindref="compound">LoomManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>JsonVariant</type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Create LoomManager* manager, a module based on a subset of a Json configuration. </para>        </briefdescription>
+        <detaileddescription>
+<para>Needs name and parameters to the constructor as an array (or the word &apos;default&apos;) if that module has default values for all parameters <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Subset of a Json configuration, used to identify module to create and with what parameters </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="class_loom_module" kindref="compound">LoomModule</ref> if created, nullptr if it could not be created </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Module_Factory.h" line="378" column="1" bodyfile="src/Module_Factory.h" bodystart="378" bodyend="407"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Factory is used by <ref refid="class_loom_manager" kindref="compound">LoomManager</ref> when parsing Json to match module names to their associated constructors, and calling with parameters from the Json. </para>    </briefdescription>
+    <detaileddescription>
+<para>The template parameters are used to select whether certain blocks of modules are included in the lookup table. This is determined at compile time to not include unnecessary module classes and supporting code, thus reducing code size</para><para><simplesect kind="par"><title>Resources</title><para><itemizedlist>
+<listitem><para><ulink url="https://openslab-osu.github.io/Loom/html/class_loom_factory.html">LoomFactory Documentation</ulink> </para></listitem></itemizedlist>
+</para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1096">
+        <label>FactoryBase</label>
+        <link refid="class_factory_base"/>
+      </node>
+      <node id="1095">
+        <label>LoomFactory&lt; INTERNET, SENSORS, RADIOS, ACTUATORS, MAX &gt;</label>
+        <link refid="class_loom_factory"/>
+        <childnode refid="1096" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1098">
+        <label>FactoryBase</label>
+        <link refid="class_factory_base"/>
+      </node>
+      <node id="1097">
+        <label>LoomFactory&lt; INTERNET, SENSORS, RADIOS, ACTUATORS, MAX &gt;</label>
+        <link refid="class_loom_factory"/>
+        <childnode refid="1098" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/Module_Factory.h" line="323" column="1" bodyfile="src/Module_Factory.h" bodystart="322" bodyend="409"/>
+    <listofallmembers>
+      <member refid="class_loom_factory_1a16952c39558fd8fcb317e251e9f02266" prot="public" virt="virtual"><scope>LoomFactory</scope><name>Create</name></member>
+      <member refid="class_factory_base_1a4d5751e4e588002b1f5390124bfc1351" prot="public" virt="non-virtual"><scope>LoomFactory</scope><name>CreateDefault</name></member>
+      <member refid="class_loom_factory_1a4ebb5c84434beaf0f46307f4cf7cfde8" prot="private" virt="non-virtual"><scope>LoomFactory</scope><name>LookupTable</name></member>
+      <member refid="class_loom_factory_1a58a9d3e047ee49d9111506390f122abd" prot="public" virt="non-virtual"><scope>LoomFactory</scope><name>LoomFactory</name></member>
+      <member refid="class_loom_factory_1a9a81e69b81e801e055a7d2b86e24d59b" prot="public" virt="virtual"><scope>LoomFactory</scope><name>print_table</name></member>
+      <member refid="class_loom_factory_1a15b465cec2e3d8b88493ba773d81aadc" prot="public" virt="non-virtual"><scope>LoomFactory</scope><name>~LoomFactory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
