@@ -131,6 +131,8 @@ public:
 	/// @param[out]	json	Object to put data into
 	virtual void 	package(JsonObject json) = 0;
 
+	virtual void diagnose(bool& result) = 0;
+
 	/// Route command to driver
 	virtual bool	dispatch(JsonObject json) {};
 

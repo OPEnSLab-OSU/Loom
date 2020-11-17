@@ -16,7 +16,8 @@ LoomCommPlat::LoomCommPlat(
 		LoomManager* 			manager,
 		const char*							module_name,
 		const LoomModule::Type	module_type,
-		const uint16_t					max_message_len
+		const uint16_t					max_message_len,
+		const bool							override_name
 	)
 	: LoomModule(manager, module_name, module_type )
 	, max_message_len(max_message_len)
@@ -26,26 +27,35 @@ LoomCommPlat::LoomCommPlat(
 	, last_ten_dropped{}
 	, last_ten_dropped_idx(0)
 	, mergeJson(2048)
+	, override_name(override_name)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomCommPlat::print_config() const
 {
+  LMark;
 	LoomModule::print_config();
+  LMark;
 	LPrintln("\tMax Message Length  : ", max_message_len );
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomCommPlat::print_state() const
 {
+  LMark;
 	LoomModule::print_state();
+  LMark;
 	LPrintln("\tDrop Rate Since Start  : ", get_drop_rate() );
+  LMark;
 	LPrintln("\tCurrent Drop Rate  : ", get_last_ten_drop_rate() );
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 float LoomCommPlat::get_drop_rate() const
 {
+  LMark;
 	return (total_packet_count == 0)
 		? 0.0f
 		: static_cast<float>(total_drop_count)*100.0f/static_cast<float>(total_packet_count);
@@ -54,18 +64,26 @@ float LoomCommPlat::get_drop_rate() const
 ///////////////////////////////////////////////////////////////////////////////
 float LoomCommPlat::get_last_ten_drop_rate() const
 {
+  LMark;
 	uint8_t total = 0;
+  LMark;
 	uint8_t min_pak = static_cast<uint8_t>(total_packet_count < 10U ? total_packet_count : 10U);
-	for (uint8_t i = 0; i < min_pak; i++)
+  LMark;
+	for (uint8_t i = 0; i < min_pak; i++){
+   	LMark;
 		if (last_ten_dropped[i])
 			total++;
+  	LMark;
+	}
 	return static_cast<float>(total)*100.0f/static_cast<float>(min_pak);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::receive()
 {
+  LMark;
 	if (device_manager != nullptr) {
+   	LMark;
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)
 		// in order to copy over correctly
 		return receive( device_manager->internal_json(true) );
@@ -76,21 +94,24 @@ bool LoomCommPlat::receive()
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 {
+  LMark;
 	bool status = receive_blocking_impl(json, max_wait_time);
-	
-	// If there is a value called "Num_Package", then it will recognize that there are more packages 
+
+	// If there is a value called "Num_Package", then it will recognize that there are more packages
 	JsonObject checker = device_manager -> internal_json();
 	if(!(checker["Num_Package"].isNull())){
 		status = merge_json(pre_merge_receive_blocking(checker), checker["Num_Package"]);
 	}
-	
+
 	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::receive_blocking(const uint max_wait_time)
 {
+  LMark;
 	if (device_manager != nullptr) {
+   	LMark;
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)
 		// in order to copy over correctly
 		return receive_blocking( device_manager->internal_json(true), max_wait_time );
@@ -120,7 +141,7 @@ JsonObject LoomCommPlat::pre_merge_receive_blocking(JsonObject json){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop){
-	
+
 	// In the json, it will create contents jsonarray to add the upcoming small packages
 	JsonArray newContents = json["contents"];
 	newContents = json.createNestedArray("contents");
@@ -135,9 +156,9 @@ bool LoomCommPlat::merge_json(JsonObject json, const uint8_t loop){
 
 		// Receive a package from the other board
 		bool status = receive_blocking_impl(device_manager -> internal_json(true), 1000);
-	
+
 		// If it fails at least once, return false
-		if(!status){ 
+		if(!status){
 			Loop = 0;
 			return false;
 		}
@@ -184,7 +205,7 @@ bool LoomCommPlat::receive_batch_blocking(uint max_wait_time){
 
 ///////////////////////////////////////////////////////////////////////////////
 bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
-	
+
 	char buffer[max_message_len];
 	uint16_t sizeJsonObject = serializeMsgPack(json, buffer, max_message_len);
 	bool prestatus;
@@ -195,7 +216,7 @@ bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 		prestatus = split_send_notification(json, destination);
 		if (prestatus) status = split_send(json, destination, 0);
 		else{
-			status = false;	
+			status = false;
 		}
 	}
 	// Else, just send as it is
@@ -209,8 +230,11 @@ bool	LoomCommPlat::send(JsonObject json, const uint8_t destination) {
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::send(const uint8_t destination)
 {
+  LMark;
 	if (device_manager != nullptr) {
+   	LMark;
 		JsonObject tmp = device_manager->internal_json();
+   	LMark;
 		if (strcmp(tmp["type"], "data") == 0 )
 			return send(tmp, destination);
 	}
@@ -244,21 +268,21 @@ uint8_t LoomCommPlat::send_batch(const uint8_t destination, int delay_time){
 
 ///////////////////////////////////////////////////////////////////////////////
 uint16_t LoomCommPlat::determine_json_size(JsonObject json){
-	
+
 	// Calculate the size of the JSON Package
 	// https://arduinojson.org/v6/assistant/
 
 	// Calculate the Total Number of JSON Object (Outside)
 	uint16_t jsonObjectSize = JSON_OBJECT_SIZE(json.size());
-	
+
 	// Calculate Internal Json from the Object id
 	jsonObjectSize += JSON_OBJECT_SIZE(json["id"].size());
-	
-	// If there is a timestamp(using RTC), then add that space 
+
+	// If there is a timestamp(using RTC), then add that space
 	if (!(json["timestamp"].isNull())){
 		jsonObjectSize +=JSON_OBJECT_SIZE(json["timestamp"].size());
 	}
-	
+
 	// Add Number of Element in Array and Module name Object per Element in the Array
 	jsonObjectSize += JSON_ARRAY_SIZE(json["contents"].size()) + JSON_OBJECT_SIZE(json["contents"].size());
 
@@ -268,15 +292,15 @@ uint16_t LoomCommPlat::determine_json_size(JsonObject json){
 		jsonObjectSize += JSON_OBJECT_SIZE(json["contents"][index]["data"].size());
 		index += 1;
 	}
-		
+
 	return jsonObjectSize;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destination) {
-		
-	
+
+
 	// This process will copy information about device id, and timestamp from the original package
 	uint8_t numPackage = json["contents"].size();
 	JsonObject object = mergeJson.to<JsonObject>();
@@ -301,12 +325,12 @@ bool LoomCommPlat::split_send_notification(JsonObject json, const uint8_t destin
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const uint8_t index){
-	
-	// This will send each module from the contents array 
+
+	// This will send each module from the contents array
 	int contentIndex = index;
 
 	mergeJson.clear();
-	
+
 	JsonObject tmp = mergeJson.to<JsonObject>();
 	JsonObject compenent = tmp.createNestedObject("contents");
 
@@ -321,12 +345,12 @@ bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const 
 	// Send the small package
 	bool status = send_impl(tmp, destination);
 	if(!status) return false;
-	
+
 	contentIndex++;
 	// If there no more contents in the original json package, then it will return true
 	if(json["contents"][contentIndex].isNull()) return true;
 	// else, it will keep creating and sending small json packages
-	
+
 	split_send(json, destination, contentIndex);
 
 }
@@ -334,10 +358,15 @@ bool LoomCommPlat::split_send(JsonObject json, const uint8_t destination, const 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomCommPlat::broadcast()
 {
+  LMark;
 	if (device_manager != nullptr) {
+   	LMark;
 		JsonObject tmp = device_manager->internal_json();
+   	LMark;
 		if (strcmp(tmp["type"], "data") == 0 ) {
+    	LMark;
 			broadcast(tmp);
+   		LMark;
 		}
 	}
 }
@@ -368,14 +397,21 @@ void LoomCommPlat::broadcast_batch(int delay_time)
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const
 {
+  LMark;
 	memset(buffer, '\0', sizeof(buffer));
+  LMark;
 
 	bool status = serializeMsgPack(json, buffer, max_len);
+  LMark;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
+   	LMark;
 		print_module_label();
+   	LMark;
 		LPrintln(buffer);
+   	LMark;
 		LPrintln("MsgPack size: ", measureMsgPack(json));
+  	LMark;
 	}
 
 	return status;
@@ -384,46 +420,67 @@ bool LoomCommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, co
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomCommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 {
+  LMark;
 	if (print_verbosity == Verbosity::V_HIGH) {
+   	LMark;
 		print_module_label();
+   	LMark;
 		LPrintln("Received: ", (const char*)buffer);
+   	LMark;
 		print_module_label();
 		LPrintln("Received Json Memory Usage: ", measureMsgPack(messageJson));
 	}
 
 	messageJson.clear();
+  LMark;
 
 	if (deserializeMsgPack(messageJson, buffer) != DeserializationError::Ok ) {
+   	LMark;
 		print_module_label();
+   	LMark;
 		LPrintln("Failed to parse MsgPack");
+   	LMark;
 		return false;
 	}
-	
+
 	bool status = json.set(messageJson.as<JsonObject>());
+  LMark;
 	if (!status) return false;
+  LMark;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
+   	LMark;
 		print_module_label();
+   	LMark;
 		LPrintln("Internal messageJson:");
+   	LMark;
 		serializeJsonPretty(messageJson, Serial);
+   	LMark;
 		LPrintln();
+  	LMark;
 
 		// LPrintln("\nJson passed in:");
 		// serializeJsonPretty(json, Serial);
 	}
+	LMark;
+	if(override_name) strcpy(device_manager->temp_device_name, json["id"]["name"]);
+ 	LMark;
 	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoomCommPlat::add_packet_result(const bool did_drop) {
+  LMark;
 	// shift last_ten_dropped by one
 	last_ten_dropped[last_ten_dropped_idx++] = did_drop;
+  LMark;
 	if (last_ten_dropped_idx >= 10)
 		last_ten_dropped_idx = 0;
+  LMark;
 	// add one to the packet total, and maybe one to the drop count
 	total_packet_count++;
+  LMark;
 	if (did_drop)
 		total_drop_count++;
+ LMark;
 }
-
-

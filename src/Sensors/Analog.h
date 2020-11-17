@@ -28,7 +28,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_Analog : public LoomSensor
 {
-	
+
 public:
 
 	/// Different types of conversions from
@@ -48,7 +48,7 @@ public:
 protected:
 
 	/// Which resolution to read at (generally use 12 or 10)
-	uint8_t		read_resolution;	
+	uint8_t		read_resolution;
 
 	/// Whether pins A0-A5 are enabled for analog reading
 	bool		pin_enabled[ANALOG_COUNT];
@@ -59,14 +59,14 @@ protected:
 	/// Battery voltage
 	float		battery;
 
-	/// Enable or disable all conversions	
+	/// Enable or disable all conversions
 	bool		enable_conversions;
 
 	/// Conversion (if any) to apply to analog value when printing / packaging
 	Conversion	conversions[ANALOG_COUNT];
 
 	/// Temperature to use in conversions
-	float		temperature;					
+	float		temperature;
 
 public:
 
@@ -124,6 +124,7 @@ public:
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 	void		add_config(JsonObject json) override;
 
 //=============================================================================
@@ -244,5 +245,3 @@ private:
 	float		convert_salinity(const uint16_t analog) const;
 
 };
-
-

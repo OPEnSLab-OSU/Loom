@@ -13,11 +13,14 @@
 #include "WarmUp_Manager.h"
 #include "Manager.h"
 
-WarmUp::WarmUp(LoomManager* manager, int period) 
+WarmUp::WarmUp(LoomManager* manager, int period)
   : period(period) {
+    LMark;
     static_cast<Loom_WarmUp_Manager*>(manager->find_module(LoomModule::Type::WarmUp_Manager))->Register_WarmUp(this);
+    LMark;
   }
 
 int WarmUp::get_period() {
+  LMark;
   return this->period;
 }

@@ -58,7 +58,7 @@ const byte i2c_address		= 0x40,
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
 	Loom_TMP007(LoomManager* manager, JsonArrayConst p);
-	
+
 	/// Destructor
 	virtual ~Loom_TMP007() = default;
 
@@ -68,6 +68,7 @@ const byte i2c_address		= 0x40,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -78,7 +79,3 @@ const byte i2c_address		= 0x40,
 private:
 
 };
-
-
-
-

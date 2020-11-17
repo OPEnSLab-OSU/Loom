@@ -25,12 +25,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t			mux_port
 	)
 	: LoomI2CSensor(manager, "MS5803", Type::MS5803, i2c_address, mux_port )
 	, inst_MS5803( MS_5803(i2c_address, 512) )
 {
+  LMark;
 
 	// rtcCounter.begin();
 	// rtcCounter.attachInterrupt(escape);
@@ -61,11 +62,14 @@ const byte i2c_address,
 	/////////
 
 	bool setup = !inst_MS5803.initializeMS_5803(); // for some reason this library returns setup incorrectly
+  LMark;
 
 	// if (!setup) active = false;
 
 	print_module_label();
+  LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
+  LMark;
 
 }
 
@@ -76,33 +80,47 @@ Loom_MS5803::Loom_MS5803(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::print_measurements() const
 {
+  LMark;
 	print_module_label();
+  LMark;
 	LPrintln("Measurements:");
+  LMark;
 	LPrintln("\tPressure    : ", pressure , " mbar");
+  LMark;
 	LPrintln("\tTemperature : ", temp     , " C");
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::measure()
 {
+  LMark;
 	inst_MS5803.readSensor();
+  LMark;
 
 	pressure = inst_MS5803.pressure();
+  LMark;
 	temp     = inst_MS5803.temperature();
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::package(JsonObject json)
 {
+  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-	
+  LMark;
+
 	data["pressure"] = pressure;
+  LMark;
 	data["temp"]     = temp;
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_MS5803::diagnose(bool& result){
+  LMark;
+	// implement here
+}
 
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////

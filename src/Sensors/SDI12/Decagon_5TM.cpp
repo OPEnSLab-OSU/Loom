@@ -11,12 +11,13 @@
 #include "Decagon_5TM.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Decagon5TM::Loom_Decagon5TM(	
+Loom_Decagon5TM::Loom_Decagon5TM(
 		LoomManager* manager,
-		const uint8_t		num_samples 
-	) 
-	: LoomSDI12Sensor(manager, "5TM", Type::Decagon5TM, num_samples ) 
+		const uint8_t		num_samples
+	)
+	: LoomSDI12Sensor(manager, "5TM", Type::Decagon5TM, num_samples )
 {
+  LMark;
 
 }
 
@@ -27,27 +28,36 @@ Loom_Decagon5TM::Loom_Decagon5TM(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Decagon5TM::print_config() const
 {
+  LMark;
 	LoomSDI12Sensor::print_config();
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Decagon5TM::print_measurements() const
 {
+  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Decagon5TM::measure()
 {
+  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Decagon5TM::package(JsonObject json)
 {
+  LMark;
 	// package_json(json, module_name, "Temp", temperature);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_Decagon5TM::diagnose(bool& result){
+  LMark;
+	// implement here
+}
 
-
+///////////////////////////////////////////////////////////////////////////////

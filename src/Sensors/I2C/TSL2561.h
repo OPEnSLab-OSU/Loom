@@ -43,7 +43,7 @@ protected:
 	uint16_t	lightFull;		///< Measure full spectrum. Units: lux.
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -76,6 +76,7 @@ const byte i2c_address		= 0x39,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -86,5 +87,3 @@ const byte i2c_address		= 0x39,
 private:
 
 };
-
-

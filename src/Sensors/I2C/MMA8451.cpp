@@ -13,24 +13,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MMA8451::Loom_MMA8451(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t			mux_port,
 		const mma8451_range_t	range
-	) 
+	)
 	: LoomI2CSensor(manager, "MMA8451", Type::MMA8451, i2c_address, mux_port )
 	, range{range}
 {
+  LMark;
 	bool setup = MMA.begin(i2c_address);
+  LMark;
 
 	// Set range
 	MMA.setRange(range);
+  LMark;
 
 	// Configure interrupts
 	// configure_interrupts(); // not verified yet
 
 	if (!setup) active = false;
+  LMark;
 	print_module_label();
+  LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
+  LMark;
 
 }
 
@@ -41,20 +47,29 @@ Loom_MMA8451::Loom_MMA8451(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MMA8451::print_config() const
 {
+  LMark;
 	LoomI2CSensor::print_config();
+  LMark;
 	// LPrintln("\tRange               : ", 2 << MMA.getRange(), "G" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MMA8451::print_measurements() const
 {
+  LMark;
 	print_module_label();
+  LMark;
 	LPrintln("Measurements:");
+  LMark;
 	LPrintln("\tAccel X     : ", accel[0], " m/s^2");
+  LMark;
 	LPrintln("\tAccel Y     : ", accel[1], " m/s^2");
+  LMark;
 	LPrintln("\tAccel Z     : ", accel[2], " m/s^2");
-	
+  LMark;
+
 	LPrint("\tOrientation : ");
+  LMark;
 	switch (orientation) {
 		case MMA8451_PL_PUF: LPrintln("Portrait Up Front");		break;
 		case MMA8451_PL_PUB: LPrintln("Portrait Up Back");		break;
@@ -70,32 +85,47 @@ void Loom_MMA8451::print_measurements() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MMA8451::measure()
 {
+  LMark;
 	// Update sensor
 	MMA.read();
+  LMark;
 
 	// Get a new sensor event
-	sensors_event_t event; 
+	sensors_event_t event;
+  LMark;
 	MMA.getEvent(&event);
+  LMark;
 
 	accel[0] = event.acceleration.x;
+  LMark;
 	accel[1] = event.acceleration.y;
+  LMark;
 	accel[2] = event.acceleration.z;
+  LMark;
 
 	// Get the orientation of the sensor
 	orientation = MMA.getOrientation();
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MMA8451::package(JsonObject json)
 {
+  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-	
+  LMark;
+
 	data["ax"] = accel[0];
+  LMark;
 	data["ay"] = accel[1];
+  LMark;
 	data["az"] = accel[2];
+  LMark;
 
 	if (package_verbosity == Verbosity::V_HIGH) {
+   	LMark;
 		char buf[22];
+   LMark;
 		switch (orientation) {
 			case MMA8451_PL_PUF: strcpy(buf, "Portrait Up Front");		break;
 			case MMA8451_PL_PUB: strcpy(buf, "Portrait Up Back");		break;
@@ -108,8 +138,17 @@ void Loom_MMA8451::package(JsonObject json)
 		}
 
 		data["orient"] = buf;
+  	LMark;
 	}
 }
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_MMA8451::diagnose(bool& result){
+  LMark;
+	// implement here
+}
+
+///////////////////////////////////////////////////////////////////////////////
 
 // ///////////////////////////////////////////////////////////////////////////////
 // void Loom_MMA8451::enable_interrupts(bool enable)
@@ -214,4 +253,4 @@ void Loom_MMA8451::package(JsonObject json)
 // }
 
 // ///////////////////////////////////////////////////////////////////////////////
-// 	
+//

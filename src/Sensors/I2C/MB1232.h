@@ -33,7 +33,7 @@ protected:
 	uint16_t	range;		///< Measure distance. Units: cm.
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -62,6 +62,7 @@ const byte i2c_address		= 0x70,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -72,6 +73,3 @@ const byte i2c_address		= 0x70,
 private:
 
 };
-
-
-

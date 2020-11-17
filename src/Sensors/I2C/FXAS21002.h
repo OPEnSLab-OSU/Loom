@@ -34,13 +34,13 @@ class Loom_FXAS21002 : public LoomI2CSensor
 {
 
 protected:
-	
+
 	Adafruit_FXAS21002C		inst_FXAS21002;		///< Underlying FXAS21002 sensor manager instance
 
 	float					gyro[3];			///< Measured gyro values (x,y,z). Units: °/s
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -69,6 +69,7 @@ const byte i2c_address		= 0x20,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -79,5 +80,3 @@ const byte i2c_address		= 0x20,
 private:
 
 };
-
-

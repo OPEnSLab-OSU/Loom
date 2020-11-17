@@ -18,7 +18,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// Glue code to synchronize an RTC using an InternetPlat. 
+/// Glue code to synchronize an RTC using an InternetPlat.
 /// Always synchronizes the RTC from Loom_Interrupt_Manager::get_RTC_module().
 ///
 /// @note	Requires a LoomRTC and LoomInternetPlat module to work.
@@ -65,6 +65,9 @@ public:
 	/// thier measure methods called regularly.
 	void		measure();
 	void		package(JsonObject json) override { /* do nothing */ };
+	/// No Diagnose necessary
+	/// Implement with empty body.
+	void 		diagnose(bool& result) override { /* do nothing */ }
 	bool		dispatch(JsonObject) override { /* do nothing */}
 
 //=============================================================================
@@ -72,14 +75,14 @@ public:
 /*@{*/ //======================================================================
 
 	void		print_config() const override;
-	void		print_state() const override;	
+	void		print_state() const override;
 
 private:
-	
+
 	/// The actual synchronization function
 	/// @return Time obtained from InternetPlat
 	DateTime m_sync_rtc();
-	
+
 	/// enumerate errors
 	enum class Error {
 		OK,
@@ -90,21 +93,19 @@ private:
 		NON_START,				///< No attempt was made to sync
 		NO_CONNECTION,			///< Repeated attempts were made to sync, but there was no response
 	};
-	
+
 	/// Store the sync interval, in hours
 	const uint			m_sync_interval;
-	
+
 	/// Store the Internet Plat from second stage contsruction
 	LoomInternetPlat*	m_internet;
-	
+
 	/// Store the RTC pointer so we can check the time
 	LoomRTC*			m_rtc;
-	
+
 	/// Store when next to change the RTC
 	DateTime			m_next_sync;
-	
+
 	/// Store if we've successfully accomplished our task
 	Error				m_last_error;
 };
-
-

@@ -35,8 +35,8 @@
 class LoomInternetPlat : public LoomModule
 {
 
-protected:	
-	
+protected:
+
 	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::http_request to a Client class.
 	/// See http_request() for parameter details.
 	void write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
@@ -50,7 +50,7 @@ public:
 //=============================================================================
 ///@name	TYPES
 /*@{*/ //======================================================================
-	
+
 	/// Close the socket and delete the UDP object when the unique ptr dissapears
 	struct UDPDeletor {
 		void operator() (UDP* p) {
@@ -83,9 +83,9 @@ public:
 	/// Loom Internet Platform module constructor.
 	///
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
-	LoomInternetPlat( 
+	LoomInternetPlat(
 			LoomManager* manager,
-			const char* module_name,  
+			const char* module_name,
 			const LoomModule::Type	module_type
 		);
 
@@ -100,6 +100,7 @@ public:
 	/// implement with empty body.
 	virtual void	package(JsonObject json) override { /* do nothing for now */ }
 
+	void 		diagnose(bool& result) override { result = is_connected(); }
 	/// Make HTTP request
 	/// @param[in]	domain	The domain to connect to (e.g "www.google.com")
 	/// @param[in]	url		The URL string to send with the http request, not including the domain (ex. "/arduino?thing=otherthing").
@@ -117,12 +118,12 @@ public:
 
 	/// Make HTTP GET request.
 	/// See http_request() for parameter and return details.
-	ClientSession			http_get_request(const char* domain, const char* url, const char* body = nullptr) 
+	ClientSession			http_get_request(const char* domain, const char* url, const char* body = nullptr)
 							{ return http_request(domain, url, body, "GET"); }
 
 	/// Make HTTP POST request.
 	/// See http_request() for parameter and return details.
-	ClientSession			http_post_request(const char* domain, const char* url, const char* body = nullptr) 
+	ClientSession			http_post_request(const char* domain, const char* url, const char* body = nullptr)
 							{ return http_request(domain, url, body, "POST"); }
 
 	/// Connect to a domain, but don't write any HTTP stuff, Let the module figure that out.

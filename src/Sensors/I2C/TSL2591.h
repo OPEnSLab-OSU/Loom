@@ -44,7 +44,7 @@ protected:
 	uint8_t				timing_level;		///< Sensor integration time setting
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -77,6 +77,7 @@ const byte i2c_address			= 0x29,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -87,5 +88,3 @@ const byte i2c_address			= 0x29,
 private:
 
 };
-
-

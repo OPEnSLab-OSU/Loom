@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Serial_Sensor.cpp
-/// @brief		File for Serial Sensor implementation. 
+/// @brief		File for Serial Sensor implementation.
 /// @author		Eli Winkelman and Kenneth Kang
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
@@ -23,18 +23,26 @@ LoomSerialSensor::LoomSerialSensor(
 ////////////////////////////////////////////////////////////////////////////
 // --- DESTRUCTOR ---
 LoomSerialSensor::~LoomSerialSensor() {
+    LMark;
     delete sensor_serial;
+    LMark;
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // -- PUBLIC METHODS --
 void LoomSerialSensor::print_config() const
 {
+    LMark;
     LoomSensor::print_config();
+    LMark;
     LPrint('\t', "Serial Set         : ");
+    LMark;
     LPrintln(sensor_serial != nullptr);
+    LMark;
 }
 
 void LoomSerialSensor::set_serial(Stream *stream) {
+    LMark;
     sensor_serial = stream;
+    LMark;
 }

@@ -75,6 +75,10 @@ public:
 	/// Implement with empty body.
 	void		package(JsonObject json) override { /* do nothing */ };
 
+	/// No Diagnose necessary
+	/// Implement with empty body.
+	void 		diagnose(bool& result) override { /* do nothing */ }
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -84,12 +88,10 @@ public:
 private:
 
 	void		sync_temp();
-	
+
 	LoomModule*	source;			///< Pointer to module to get temperature from
 	LoomModule* dependant;		///< Pointer to module to forward temperature to
 
 	LoomModule::Type source_type;		///< Type of source module
 	LoomModule::Type dependant_type;	///< Type of dependant module
 };
-
-

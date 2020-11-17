@@ -13,28 +13,32 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Relay::Loom_Relay( 
+Loom_Relay::Loom_Relay(
 		LoomManager* 	manager,
-		const byte					pin 
-	) 
-	: LoomActuator(manager, "Relay", Type::Relay ) 
+		const byte					pin
+	)
+	: LoomActuator(manager, "Relay", Type::Relay )
 	, pin(pin)
 	, on(false)
 {
+  LMark;
 	pinMode(pin, OUTPUT);
+  LMark;
 	digitalWrite(pin, LOW);
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_Relay::Loom_Relay(LoomManager* manager, JsonArrayConst p)
 	: Loom_Relay(manager, (byte)p[0] ) {}
-// explicitly cast because with only one parameter, JsonVariant p[0] can 
+// explicitly cast because with only one parameter, JsonVariant p[0] can
 // implicitly cast to either JsonArrayConst or byte of regular constructor
 
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::add_config(JsonObject json)
 {
+  LMark;
 	// add_config_aux(json, module_name,
 	// 	module_name, pin
 	// );
@@ -43,20 +47,27 @@ void Loom_Relay::add_config(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::print_state() const
 {
+  LMark;
 	print_module_label();
+  LMark;
 	LPrintln("\tRelay ", pin, (on) ? " On" : " Off" );
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::package(JsonObject json)
 {
+  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
+  LMark;
 	data["on"] = on;
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_Relay::dispatch(JsonObject json)
 {
+ 	LMark;
 // 	LPrintln("Command sent to relay is:");
 // 	serializeJsonPretty(json, Serial);
 
@@ -66,27 +77,35 @@ bool Loom_Relay::dispatch(JsonObject json)
 
 
 	JsonArray params = json["params"];
+  LMark;
 	// switch( json["func"].as<const char*>()[0] ) { // works
-	// switch( json["func"].as<unsigned char>() ) { 
+	// switch( json["func"].as<unsigned char>() ) {
 	switch( (char)json["func"] ) {
 		// case 's': if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
 		case 115: if (params.size() >= 1) { set( EXPAND_ARRAY(params, 1) ); } return true;
 	}
-	
+
 	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::set(const bool state)
 {
+  LMark;
 	LPrintln("In set");
+  LMark;
 
 	on = state;
+  LMark;
 	digitalWrite(pin, (on) ? HIGH : LOW);
+  LMark;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
+   	LMark;
 		print_module_label();
+   	LMark;
 		LPrintln("Set relay on pin ", pin, (on) ? " High" : " Low");
+  	LMark;
 	}
 }
 

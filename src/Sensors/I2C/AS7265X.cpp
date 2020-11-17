@@ -13,11 +13,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_AS7265X::Loom_AS7265X(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port,
-		const bool			use_bulb, 
-		const uint8_t		gain, 
-		const uint8_t		mode, 
+		const bool			use_bulb,
+		const uint8_t		gain,
+		const uint8_t		mode,
 		const uint8_t		integration_time
 	)
 	: LoomI2CSensor(manager, "AS7265X", Type::AS7265X, i2c_address, mux_port )
@@ -26,9 +26,12 @@ const byte i2c_address,
 	, mode(mode)
 	, integration_time(integration_time)
 {
+  LMark;
 	bool setup = inst_AS7265X.begin();
+  LMark;
 
 	if (setup) {
+  	LMark;
 
 		// //There are four gain settings. It is possible to saturate the reading so don't simply jump to 64x.
 		// //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -58,13 +61,13 @@ const byte i2c_address,
 		// //White LED has max forward current of 120mA
 		// inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_WHITE); 		//Default
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_25MA, AS7265x_LED_WHITE); 		//Allowed
-		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_WHITE); 		//Allowed 
+		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_WHITE); 		//Allowed
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_100MA, AS7265x_LED_WHITE); 	//Allowed
 
 		// //UV LED has max forward current of 30mA so do not set the drive current higher
 		// inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_UV); 		//Default
 
-		// //IR LED has max forward current of 65mA 
+		// //IR LED has max forward current of 65mA
 		// inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_IR); 		//Default
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_25MA, AS7265x_LED_IR); 		//Allowed
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_IR); 		//Allowed
@@ -83,9 +86,12 @@ const byte i2c_address,
 	}
 
 	if (!setup) active = false;
+  LMark;
 
 	print_module_label();
+  LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -95,8 +101,11 @@ Loom_AS7265X::Loom_AS7265X(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::print_measurements() const
 {
+  LMark;
 	print_module_label();
+  LMark;
 	LPrintln("Measurements:");
+  LMark;
 
 	// UV
 	for (auto i = 0; i < 6; i++) { LPrintln("\tA: ", uv[i]); }
@@ -109,64 +118,109 @@ void Loom_AS7265X::print_measurements() const
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::measure()
 {
+  LMark;
 	if (use_bulb) {
+   	LMark;
 		inst_AS7265X.takeMeasurementsWithBulb();
+  	LMark;
 	} else {
 		inst_AS7265X.takeMeasurements();
+  	LMark;
 	}
-	
+
 	// UV
 	uv[0] = inst_AS7265X.getCalibratedA();
+  LMark;
 	uv[1] = inst_AS7265X.getCalibratedB();
+  LMark;
 	uv[2] = inst_AS7265X.getCalibratedC();
+  LMark;
 	uv[3] = inst_AS7265X.getCalibratedD();
+  LMark;
 	uv[4] = inst_AS7265X.getCalibratedE();
+  LMark;
 	uv[5] = inst_AS7265X.getCalibratedF();
+  LMark;
 
 	// Color
 	color[0] = inst_AS7265X.getCalibratedG();
+  LMark;
 	color[1] = inst_AS7265X.getCalibratedH();
+  LMark;
 	color[2] = inst_AS7265X.getCalibratedI();
+  LMark;
 	color[3] = inst_AS7265X.getCalibratedJ();
+  LMark;
 	color[4] = inst_AS7265X.getCalibratedK();
+  LMark;
 	color[5] = inst_AS7265X.getCalibratedL();
+  LMark;
 
 	// NIR
 	nir[0] = inst_AS7265X.getCalibratedR();
+  LMark;
 	nir[1] = inst_AS7265X.getCalibratedS();
+  LMark;
 	nir[2] = inst_AS7265X.getCalibratedT();
+  LMark;
 	nir[3] = inst_AS7265X.getCalibratedU();
+  LMark;
 	nir[4] = inst_AS7265X.getCalibratedV();
+  LMark;
 	nir[5] = inst_AS7265X.getCalibratedW();
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7265X::package(JsonObject json)
 {
+  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
+  LMark;
 	data["a"] = uv[0];
+  LMark;
 	data["b"] = uv[1];
+  LMark;
 	data["c"] = uv[2];
+  LMark;
 	data["d"] = uv[3];
+  LMark;
 	data["e"] = uv[4];
+  LMark;
 	data["f"] = uv[5];
+  LMark;
 
 	data["g"] = color[0];
+  LMark;
 	data["h"] = color[1];
+  LMark;
 	data["i"] = color[2];
+  LMark;
 	data["j"] = color[3];
+  LMark;
 	data["k"] = color[4];
+  LMark;
 	data["l"] = color[5];
+  LMark;
 
 	data["r"] = nir[0];
+  LMark;
 	data["s"] = nir[1];
+  LMark;
 	data["t"] = nir[2];
+  LMark;
 	data["u"] = nir[3];
+  LMark;
 	data["v"] = nir[4];
+  LMark;
 	data["w"] = nir[5];
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_AS7265X::diagnose(bool& result){
+  LMark;
+	// implement here
+}
 
-
-
+///////////////////////////////////////////////////////////////////////////////

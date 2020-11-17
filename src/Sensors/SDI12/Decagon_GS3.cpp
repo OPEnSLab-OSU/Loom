@@ -13,10 +13,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_DecagonGS3::Loom_DecagonGS3(
 		LoomManager* manager,
-		const uint8_t			num_samples 
-	) 
-	: LoomSDI12Sensor(manager, "GS3", Type::DecagonGS3, num_samples ) 
+		const uint8_t			num_samples
+	)
+	: LoomSDI12Sensor(manager, "GS3", Type::DecagonGS3, num_samples )
 {
+  LMark;
 
 }
 
@@ -27,27 +28,36 @@ Loom_DecagonGS3::Loom_DecagonGS3(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_DecagonGS3::print_config() const
 {
+  LMark;
 	LoomSDI12Sensor::print_config();
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_DecagonGS3::print_measurements() const
 {
+  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_DecagonGS3::measure()
 {
+  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_DecagonGS3::package(JsonObject json)
 {
+  LMark;
 	// package_json(json, module_name, "Temp", temperature);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_DecagonGS3::diagnose(bool& result){
+  LMark;
+	// implement here
+}
 
-
+///////////////////////////////////////////////////////////////////////////////

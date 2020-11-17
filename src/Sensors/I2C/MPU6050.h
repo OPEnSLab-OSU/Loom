@@ -13,7 +13,7 @@
 
 #include "I2C_Sensor.h"
 
-#include <MPU6050_tockn.h>	
+#include <MPU6050_tockn.h>
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -49,9 +49,9 @@ protected:
 	float accAngleX;		///< X-axis acceleration angle
 	float accAngleY;		///< Y-axis acceleration angle
 
-	float gyroAngleX;		///< X-axis acceleration angle. 
-	float gyroAngleY;		///< Y-axis acceleration angle. 
-	float gyroAngleZ;		///< Z-axis acceleration angle. 
+	float gyroAngleX;		///< X-axis acceleration angle.
+	float gyroAngleY;		///< Y-axis acceleration angle.
+	float gyroAngleZ;		///< Z-axis acceleration angle.
 
 	float angleX;			///< X-axis angle.
 	float angleY;			///< Y-axis angle.
@@ -79,7 +79,7 @@ const byte i2c_address		= 0x69,
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
 	Loom_MPU6050(LoomManager* manager, JsonArrayConst p);
-	
+
 	/// Destructor
 	virtual ~Loom_MPU6050() = default;
 
@@ -89,6 +89,7 @@ const byte i2c_address		= 0x69,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 	void		calibrate() override;
 
 //=============================================================================
@@ -101,7 +102,3 @@ const byte i2c_address		= 0x69,
 private:
 
 };
-
-
-
-

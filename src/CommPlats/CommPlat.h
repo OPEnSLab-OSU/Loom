@@ -49,6 +49,7 @@ protected:
 	uint32_t total_drop_count;
 	bool last_ten_dropped[10];
 	uint8_t last_ten_dropped_idx;
+	bool override_name;
 
 
 
@@ -88,7 +89,8 @@ public:
 			LoomManager* manager,
 			const char* module_name,
 			const LoomModule::Type	module_type,
-			const uint16_t			max_message_len
+			const uint16_t			max_message_len,
+			const bool					override_name = false
 		);
 
 	/// Destructor
@@ -99,6 +101,10 @@ public:
 /*@{*/ //======================================================================
 
 	virtual void 	package(JsonObject json) override {};
+
+	/// No Diagnose necessary
+	/// Implement with empty body.
+	void 		diagnose(bool& result) override { /* do nothing */ }
 
 	/// Receive, but block until packet received, or timeout reached
 	/// @param[out]	json			Json object to fill with incoming data

@@ -51,7 +51,7 @@ protected:
 	uint8_t			gesture_speed;	///< The speed of the last measured gesture
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -82,6 +82,7 @@ const byte i2c_address		= 0x10,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -93,5 +94,3 @@ const byte i2c_address		= 0x10,
 private:
 
 };
-
-

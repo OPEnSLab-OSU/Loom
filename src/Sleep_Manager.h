@@ -90,6 +90,10 @@ public:
 	/// Implement with empty body.
 	void		package(JsonObject json) override {}
 
+	/// No Diagnose necessary
+	/// Implement with empty body.
+	void 		diagnose(bool& result) override { /* do nothing */ }
+
 	/// Put into low power state.
 	/// On wake, program will continue from where it went to sleep
 	/// @return Whether or not sleep was successful

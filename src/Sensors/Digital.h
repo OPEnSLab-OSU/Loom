@@ -37,7 +37,7 @@ protected:
 	bool		digital_vals[DIGITAL_COUNT];	///< Array of last read digital values
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -86,6 +86,7 @@ public:
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 	void		add_config(JsonObject json) override;
 
 //=============================================================================
@@ -132,4 +133,3 @@ private:
 	uint8_t		pin_to_index(const uint8_t pin) const;
 
 };
-

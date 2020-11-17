@@ -72,6 +72,10 @@ public:
 	/// Implement with empty body.
 	void	package(JsonObject json) override { /* do nothing for now */ }
 
+	/// No Diagnose necessary
+	/// Implement with empty body.
+	void 		diagnose(bool& result) override { /* do nothing for now*/ }
+
 	/// Publish data.
 	/// @param[in] json JSON object to publish. MUST be formatted as
 	/// 	{ "contents" : [ { "module": "module_name", "data" : {...} }, ... ], "timestamp"(optional) : {...} }

@@ -31,11 +31,11 @@ class LoomLogPlat : public LoomModule
 protected:
 
 	bool			enable_rate_filter;		///< Whether or not to enable a minimum delay between logging
-	uint16_t		min_filter_delay;		///< Minimum delay between logging (milliseconds) 	
+	uint16_t		min_filter_delay;		///< Minimum delay between logging (milliseconds)
 	unsigned long	last_log_millis;		///< Value of millis() at last executed log time
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -45,7 +45,7 @@ public:
 	/// @param[in] 	module_type			Type of the module (provided by derived classes)
 	/// @param[in] 	enable_rate_filter	Whether or not to impose maximum update rate
 	/// @param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
-	LoomLogPlat(	
+	LoomLogPlat(
 			LoomManager* manager,
 			const char* module_name,
 			const LoomModule::Type	module_type,
@@ -64,6 +64,10 @@ public:
 	/// implement with empty body.
 	virtual void 	package(JsonObject json) override {}
 
+	/// No Diagnose necessary
+	/// Implement with empty body.
+	void 		diagnose(bool& result) override { /* do nothing */ }
+
 	/// Log a Json object
 	/// @param[in] json		Json Object to log
 	virtual bool	log(JsonObject json) = 0;
@@ -71,7 +75,7 @@ public:
 	/// Version of log for use with LoomManager.
 	/// Accesses Json from LoomManager.
 	/// Calls derived classes implementations of log(JsonObject json)
-	bool			log();		
+	bool			log();
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -82,10 +86,8 @@ public:
 protected:
 
 	/// Check against millis to determine if time since last
-	/// log exceeds min time 
+	/// log exceeds min time
 	/// @return True if enough time has elapsed
 	bool			check_millis();
 
 };
-
-

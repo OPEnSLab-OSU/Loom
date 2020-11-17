@@ -85,6 +85,7 @@ public:
 	/// @param[in]	retry_count 		Int | <3> | [0-15] | Max number of transmission retries
 	/// @param[in]	retry_timeout 		Int | <200> | [20-500] | Delay between retransmissions (ms)
 	/// @param[in]	multicast_level		Int | <1> | [1-3] | How many levels to propogate message through heirarchy
+	/// @param[in] 	override_name
 	Loom_nRF(
 			LoomManager* manager,
 			const uint16_t		max_message_len		= 120,
@@ -93,7 +94,8 @@ public:
 			const uint8_t		power_level			= 0,
 			const uint8_t		retry_count 		= 3,
 			const uint16_t		retry_timeout 		= 200,
-			const uint8_t		multicast_level		= 1
+			const uint8_t		multicast_level		= 1,
+			const bool 			override_name = false
 		);
 
 	/// Constructor that takes Json Array, extracts args
@@ -123,7 +125,7 @@ public:
 	uint8_t		get_address() const override { return address; }
 
 	/// Get multicast(broadcast) level.
-	/// nRF has varying degrees of broadcast corresponding to 
+	/// nRF has varying degrees of broadcast corresponding to
 	/// depth to broadcast through network tree
 	/// @return Multicast level
 	uint8_t		get_multicast_level() const { return multicast_level; }
@@ -135,7 +137,7 @@ public:
 	void		set_address(const uint8_t addr) override;
 
 	/// Set multicast(broadcast) level.
-	/// nRF has varying degrees of broadcast corresponding to 
+	/// nRF has varying degrees of broadcast corresponding to
 	/// depth to broadcast through network tree
 	/// @param[in]	level 	Multicast level to set to
 	void		set_multicast_level(const uint8_t level) { multicast_level = level; }
@@ -143,5 +145,3 @@ public:
 private:
 
 };
-
-

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Multiplexer.h
-/// @brief		File for Loom_Multiplexer definition, supporting enums, and 
+/// @brief		File for Loom_Multiplexer definition, supporting enums, and
 ///				I2C address selection for conflicts.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -42,7 +42,7 @@ const I2C_Selection i2c_0x29 = I2C_Selection::L_TSL2591;	///< TSL2561 / TSL2591
 const I2C_Selection i2c_0x49 = I2C_Selection::L_AS7265X;	///< TSL2561 / AS7262 / AS7263 / AS7265X
 const I2C_Selection i2c_0x36 = I2C_Selection::L_STEMMA;
 
-// Maybe query DeviceManager if RTC is in use, if not, query 0x68 
+// Maybe query DeviceManager if RTC is in use, if not, query 0x68
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ protected:
 
 	unsigned long	last_update_time;	///< When the sensor list was last updated
     std::vector<byte> i2c_conflicts; ///< List of I2C address conflicts
-    
+
 	const static std::array<byte, 9> alt_addresses;
 
 public:
@@ -113,8 +113,9 @@ public:
 
 	/// Call measure on all connected sensors
 	void		measure();
-	
+
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 	bool		dispatch(JsonObject) override {}
 
 	/// Populate a bundle with a list of sensors currently attached
@@ -192,7 +193,7 @@ private:
 	/// @param[in]	port	The port to get sensor address of
 	/// @return		The I2C address of sensor, 0x00 if no sensor found
 	byte			get_i2c_on_port(const uint8_t port) const;
-    
+
     /// Checks for an I2C conflict with this address
     /// @param[in] address              The I2C address to check for conflicts
     /// @return     True if there is a conflict, false otherwise
@@ -203,8 +204,3 @@ private:
     /// @return     A vector of conflicting I2C addresses
     std::vector<byte> find_i2c_conflicts();
 };
-
-
-
-
-

@@ -71,7 +71,7 @@ public:
 	/// @param[in]	Fain					Set(Gain) | <0> | {0x0000("GAIN_TWOTHIRDS"), 0x0200("GAIN_ONE"), 0x0400("GAIN_TWO" ), 0x0600("GAIN_FOUR"), 0x0800("GAIN_EIGHT"), 0x0A00("GAIN_SIXTEEN")} | The gain setting for the ADS1115. Please do not change this number unless you are familiar with the ADS1115, as an incorrect setting will destroy the ADC!.
 	Loom_ADS1115(
 		LoomManager* manager,
-		const 	byte i2c_address = ADS1015_ADDRESS, 
+		const 	byte i2c_address = ADS1015_ADDRESS,
 		const	uint8_t 		mux_port = 255,
 		const 	bool 			analog_0_enabled = true,
 		const 	bool 			analog_1_enabled = true,
@@ -79,14 +79,14 @@ public:
 		const 	bool 			analog_3_enabled = true,
 		const 	bool 			diff_0_enabled = false,
 		const 	bool 			diff_1_enabled = false,
-		const	Gain			gain = Gain::GAIN_TWOTHIRDS 
+		const	Gain			gain = Gain::GAIN_TWOTHIRDS
 	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
 	Loom_ADS1115(LoomManager* manager, JsonArrayConst p);
-	
+
 	/// Destructor
 	virtual ~Loom_ADS1115() = default;
 
@@ -96,6 +96,7 @@ public:
 
 	void		measure() override;
 	void 		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -127,7 +128,3 @@ private:
 	// Auxiliary functions
 
 };
-
-
-
-

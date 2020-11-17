@@ -37,7 +37,7 @@ protected:
 	float internal_temp;			///< Measured internal temperature
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -68,6 +68,7 @@ public:
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -78,4 +79,3 @@ public:
 private:
 
 };
-

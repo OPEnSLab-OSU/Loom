@@ -17,22 +17,23 @@
 ///////////////////////////////////////////////////////////////////////////////
 Loom_TSL2561::Loom_TSL2561(
 LoomManager* manager,
-const byte i2c_address, 
+const byte i2c_address,
 		const uint8_t		mux_port,
-		const uint8_t		gain, 
+		const uint8_t		gain,
 		const uint8_t		resolution
 	)
 	: LoomI2CSensor(manager, "TSL2561", Type::TSL2561, i2c_address, mux_port )
 	, gain(gain)
 	, resolution(resolution)
-	, inst_TSL2561( (i2c_address == 0x29) 
-						? Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW, 29) 
-						: ( (i2c_address == 39) 
+	, inst_TSL2561( (i2c_address == 0x29)
+						? Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW, 29)
+						: ( (i2c_address == 39)
 								? Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 39)
 								: Adafruit_TSL2561_Unified(TSL2561_ADDR_HIGH , 49)
-						  )  
+						  )
 				  )
 {
+  LMark;
 	// switch (i2c_address) {
 	// 	case 0x29 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW  , 29); break;
 	// 	case 0x39 : inst_TSL2561 = new Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 39); break;
@@ -40,8 +41,10 @@ const byte i2c_address,
 	// }
 
 	bool setup = inst_TSL2561.begin();
+  LMark;
 
 	if (setup) {
+   LMark;
 		switch (gain) {
 			case 1  : inst_TSL2561.setGain(TSL2561_GAIN_1X); break;
 			case 16 : inst_TSL2561.setGain(TSL2561_GAIN_16X); break;
@@ -56,9 +59,12 @@ const byte i2c_address,
 	}
 
 	if (!setup) active = false;
+  LMark;
 
 	print_module_label();
+  LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -68,37 +74,58 @@ Loom_TSL2561::Loom_TSL2561(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::print_measurements() const
 {
+  LMark;
 	print_module_label();
+  LMark;
 	LPrintln("Measurements:");
+  LMark;
 	LPrintln("\tLightIR   : ", lightIR,   " lux");
+  LMark;
 	LPrintln("\tLightFull : ", lightFull, " lux");
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::measure()
 {
+  LMark;
 	uint16_t IR_ar[5], Full_ar[5];
+  LMark;
 
 	for (int i = 0; i < 5; i++) {
+   	LMark;
 		inst_TSL2561.getLuminosity(&Full_ar[i], &IR_ar[i]);
+  	LMark;
 	}
 
 	lightIR   = (IR_ar[0]   + IR_ar[1]   + IR_ar[2]   + IR_ar[3]   + IR_ar[4])   / 5;
+  LMark;
 	lightFull = (Full_ar[0] + Full_ar[1] + Full_ar[2] + Full_ar[3] + Full_ar[4]) / 5;
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_TSL2561::package(JsonObject json)
 {
+  LMark;
 	int lux = inst_TSL2561.calculateLux(lightFull, lightIR);
+  LMark;
 
 	JsonObject data = get_module_data_object(json, module_name);
-	
+  LMark;
+
 	data["IR"]   = lightIR;
+  LMark;
 	data["Full"] = lightFull;
+  LMark;
 	data["Lux"]  = lux;
+ 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_TSL2561::diagnose(bool& result){
+  LMark;
+	// implement here
+}
 
-
+///////////////////////////////////////////////////////////////////////////////

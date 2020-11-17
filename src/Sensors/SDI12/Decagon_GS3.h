@@ -33,7 +33,7 @@ protected:
 	float		elec_cond;		///< Measure electrical conductivity
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -60,6 +60,7 @@ public:
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -71,5 +72,3 @@ public:
 private:
 
 };
-
-

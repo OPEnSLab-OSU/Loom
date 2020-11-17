@@ -20,7 +20,7 @@
 ///
 /// LIS3DH Accelerometer sensor module.
 ///
-/// @note	Needs more work on properly implementing support for the sensors interrupts 
+/// @note	Needs more work on properly implementing support for the sensors interrupts
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___l_i_s3_d_h.html)
@@ -42,7 +42,7 @@ protected:
 	float		accel[3];		///< Measured acceleration values (x,y,z). Units: g.
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -71,6 +71,7 @@ const byte i2c_address		= 0x19,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -81,6 +82,3 @@ const byte i2c_address		= 0x19,
 private:
 
 };
-
-
-

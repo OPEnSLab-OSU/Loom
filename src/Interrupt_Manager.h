@@ -155,6 +155,10 @@ public:
 	/// Implement with empty body.
 	void		package(JsonObject json) override {}
 
+	/// No Diagnose necessary
+	/// Implement with empty body.
+	void 		diagnose(bool& result) override {}
+
 	/// Run any waiting ISRs.
 	/// Flag was set by a top half ISR
 	void		run_pending_ISRs();

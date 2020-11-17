@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_WarmUp_Manager.h
-/// @brief  Header file for Loom Module WarmUp Manager, which is responsible 
+/// @brief  Header file for Loom Module WarmUp Manager, which is responsible
 ///         for handeling any WarmUp related behaviors.
 /// @author		C. Greyston Brady
 /// @date		2020
@@ -42,6 +42,10 @@ class Loom_WarmUp_Manager : public LoomModule {
 
     /// An unfortunate consequence of inheriting from a bloated base class
     void package(JsonObject) {return;}
+
+    /// No Diagnose necessary
+    /// Implement with empty body.
+    void 		diagnose(bool& result) override { /* do nothing */ }
 
   private:
     /// Collection of LoomModule* cast to WarmUp* to access members in an encapsulated fasion

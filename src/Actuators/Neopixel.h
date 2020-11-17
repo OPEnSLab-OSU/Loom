@@ -38,7 +38,7 @@ protected:
 	uint8_t				color_vals[3][3];	///< The associated color values (RGB) for each of the 3 Neopixels
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -68,7 +68,6 @@ public:
 /*@{*/ //======================================================================
 
 	bool		dispatch(JsonObject json) override;
-	void		add_config(JsonObject json) override;
 
 	/// Set Neopixel color.
 	/// @param[in]	port		The port the Neopixel to control is on (0-2 corresponding to A0-A2)
@@ -98,5 +97,3 @@ private:
 
 
 };
-
-

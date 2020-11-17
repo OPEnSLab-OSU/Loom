@@ -13,6 +13,7 @@
 
 #include "Misc.h"
 
+
 #include <ArduinoJson.h>
 
 // Need to undef max and min for vector to work
@@ -170,7 +171,13 @@ protected:
 
 	uint		packet_number = 1;		///< Packet number, incremented each time package is called
 
+	uint8_t		config_count = -1;
+
+	bool 		 	package_fault = false;
+
 public:
+
+	char			temp_device_name[20] = "";
 
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
@@ -206,7 +213,7 @@ public:
 
 	/// Begin Serial, optionally wait for user.
 	/// @param[in]	wait_for_monitor	True to wait for serial monitor to open
-	void		begin_serial(const bool wait_for_monitor = false) const;
+	void		begin_serial(const bool wait_for_monitor = false, const bool begin_fault = false);
 
 	/// Parse a JSON configuration string specifying enabled modules.
 	/// Enabled modules are instantiated with specified settings
@@ -250,6 +257,11 @@ public:
 	/// @param[out]	json	JsonObject of packaged data of enabled modules
 	void		package(JsonObject json);
 
+	/// Diagnostics data of device into provided JsonObject.
+	/// How deetailed data is can be modified with package_verbosity
+	/// @param[out] json JsonObject of diagnostics data of device
+	void 		diagnose(JsonObject json);
+
 	/// Measure and package data.
 	/// Convenience function, current just calls measure then package
 	void		record() { measure(); package(); }
@@ -257,6 +269,10 @@ public:
 	/// Package data of all modules into JsonObject and return
 	/// @return JsonObject of packaged data of enabled modules
 	JsonObject	package();
+
+	/// Run diagnostics on device and write results into JsonObject and return
+	/// @return JsonObject of diagnostics data of device
+	JsonObject diagnose();
 
 	/// Publish
 	/// @param[in]	json	Data object to publish
@@ -298,6 +314,24 @@ public:
 
 	/// Iterate over modules, calling power down method
 	void 		power_down();
+
+	void 		start_fault() const { FeatherFault::StartWDT(FeatherFault::WDTTimeout::WDT_8S); }
+
+	void 		pause_fault() const { FeatherFault::StopWDT(); }
+
+	void 		trap() const {
+		LMark;
+		__builtin_trap();
+		LMark;}
+
+	void 		memory_trap() const {
+		LMark;
+		while(true) {
+			char* thing = (char*)malloc(1024); LMark;
+			thing[0] = 'a'; LMark;
+			delay(500); LMark;
+		}
+	}
 
 	/// Append to a Json object of data.
 	/// If object is non-empty and contains non-data,
@@ -394,11 +428,11 @@ public:
 
 	/// Get the device name, copies into provided buffer.
 	/// @param[out]	buf		The buffer copy device name into
-	void 		get_device_name(char* buf) const;
+	void 		get_device_name(char* buf);
 
 	/// Get the device name
 	/// @return String literal of device name.
-	const char*	get_device_name() const;
+	char*	get_device_name();
 
 	/// Get device instance number.
 	/// @return Family number
