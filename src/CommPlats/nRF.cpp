@@ -1,18 +1,22 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_nRF.cpp
-/// @brief		File for Loom_nRF implementation.
+/// @file		nRF.cpp
+/// @brief		File for nRF implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_RADIOS
+
 #include "nRF.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_nRF::Loom_nRF(
-		LoomManager* manager,
+nRF::nRF(
 		const uint16_t		max_message_len,
 		const uint8_t		address,
 		const uint8_t		data_rate,
@@ -22,7 +26,7 @@ Loom_nRF::Loom_nRF(
 		const uint8_t		multicast_level,
 		const bool			override_name
 	)
-	: LoomCommPlat(manager, "nRF", Type::nRF, max_message_len )
+	: CommPlat("nRF", max_message_len )
 	, data_rate(data_rate)
 	, power_level(power_level)
 	, retry_count(retry_count)
@@ -140,11 +144,11 @@ Loom_nRF::Loom_nRF(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_nRF::Loom_nRF(LoomManager* manager, JsonArrayConst p)
-	: Loom_nRF(manager, EXPAND_ARRAY(p, 8) ) {}
+nRF::nRF(JsonArrayConst p)
+	: nRF(EXPAND_ARRAY(p, 8) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_nRF::~Loom_nRF()
+nRF::~nRF()
 {
   LMark;
 	delete network;
@@ -153,21 +157,10 @@ Loom_nRF::~Loom_nRF()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::add_config(JsonObject json)
+void nRF::print_config() const
 {
   LMark;
-	// add_config_aux(json, module_name,
-	// 	module_name,
-	// 	max_message_len, address, data_rate, power_level,
-	// 	retry_count, retry_timeout, multicast_level
-	// );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::print_config() const
-{
-  LMark;
-	LoomCommPlat::print_config();
+	CommPlat::print_config();
   LMark;
 
 	LPrintln("\tAddress          : ", address );
@@ -183,7 +176,7 @@ void Loom_nRF::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_nRF::receive_blocking_impl(JsonObject json, uint max_wait_time)
+bool nRF::receive_blocking_impl(JsonObject json, uint max_wait_time)
 {
 	bool status = false;
 	LMark;
@@ -214,7 +207,7 @@ bool Loom_nRF::receive_blocking_impl(JsonObject json, uint max_wait_time)
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-bool Loom_nRF::send_impl(JsonObject json, const uint8_t destination)
+bool nRF::send_impl(JsonObject json, const uint8_t destination)
 {
   LMark;
 	char buffer[max_message_len];
@@ -237,7 +230,7 @@ bool Loom_nRF::send_impl(JsonObject json, const uint8_t destination)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::broadcast_impl(JsonObject json)
+void nRF::broadcast_impl(JsonObject json)
 {
   LMark;
 	char buffer[max_message_len];
@@ -265,7 +258,7 @@ void Loom_nRF::broadcast_impl(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_nRF::set_address(const uint8_t addr)    // Need to test this
+void nRF::set_address(const uint8_t addr)    // Need to test this
 {
   LMark;
 	address = addr;
@@ -275,3 +268,5 @@ void Loom_nRF::set_address(const uint8_t addr)    // Need to test this
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_RADIOS

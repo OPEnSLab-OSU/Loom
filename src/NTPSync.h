@@ -1,20 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_NTP_Sync.h
-/// @brief		File for LoomNTPSync definition.
+/// @file		NTP_Sync.h
+/// @brief		File for NTPSync definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 #pragma once
 
 #include "Module.h"
 #include "./InternetPlats/InternetPlat.h"
 #include "./RTC/RTC.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -28,7 +29,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-class LoomNTPSync : public LoomModule
+class NTPSync : public Module
 {
 
 public:
@@ -40,18 +41,17 @@ public:
 	/// NTP Sync module constructor.
 	///
 	/// @param[in]  sync_interval_hours		Int | <0> | [0-999] | What hourly period to sync the RTC, zero for once on startup.
-	LoomNTPSync(
-		LoomManager* manager,
+	NTPSync(
 		const uint		sync_interval_hours		= 0
 	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	LoomNTPSync(LoomManager* manager, JsonArrayConst p);
+	NTPSync(JsonArrayConst p);
 
 	/// Destructor
-	~LoomNTPSync() = default;
+	~NTPSync() = default;
 
 	/// Sync the RTC using NTP from the internet platform specified
 	void	second_stage_ctor() override;
@@ -65,9 +65,6 @@ public:
 	/// thier measure methods called regularly.
 	void		measure();
 	void		package(JsonObject json) override { /* do nothing */ };
-	/// No Diagnose necessary
-	/// Implement with empty body.
-	void 		diagnose(bool& result) override { /* do nothing */ }
 	bool		dispatch(JsonObject) override { /* do nothing */}
 
 //=============================================================================
@@ -98,10 +95,10 @@ private:
 	const uint			m_sync_interval;
 
 	/// Store the Internet Plat from second stage contsruction
-	LoomInternetPlat*	m_internet;
+	InternetPlat*	m_internet;
 
 	/// Store the RTC pointer so we can check the time
-	LoomRTC*			m_rtc;
+	RTC*			m_rtc;
 
 	/// Store when next to change the RTC
 	DateTime			m_next_sync;
@@ -109,3 +106,11 @@ private:
 	/// Store if we've successfully accomplished our task
 	Error				m_last_error;
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, NTPSync, "NTPSync");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

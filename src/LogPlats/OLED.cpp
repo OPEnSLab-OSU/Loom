@@ -1,21 +1,22 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_OLED.cpp
-/// @brief		File for Loom_OLED implementation.
+/// @file		OLED.cpp
+/// @brief		File for OLED implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #include "OLED.h"
+#include "Module_Factory.h"
 
 #include <Adafruit_GFX.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_version_string(const Version v)
+const char* OLED::enum_oled_version_string(const Version v)
 {
   LMark;
 	switch(v) {
@@ -25,7 +26,7 @@ const char* Loom_OLED::enum_oled_version_string(const Version v)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_format_string(const Format f)
+const char* OLED::enum_oled_format_string(const Format f)
 {
   LMark;
 	switch(f) {
@@ -36,7 +37,7 @@ const char* Loom_OLED::enum_oled_format_string(const Format f)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_OLED::enum_oled_freeze_string(const FreezeType f)
+const char* OLED::enum_oled_freeze_string(const FreezeType f)
 {
   LMark;
 	switch(f) {
@@ -47,8 +48,7 @@ const char* Loom_OLED::enum_oled_freeze_string(const FreezeType f)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::Loom_OLED(
-		LoomManager* manager,
+OLED::OLED(
 		const bool			enable_rate_filter,
 		const uint16_t		min_filter_delay,
 		const Version		version,
@@ -58,7 +58,7 @@ Loom_OLED::Loom_OLED(
 		const byte			freeze_pin,
 		const FreezeType	freeze_behavior
 	)
-	: LoomLogPlat(manager, "OLED", Type::OLED, enable_rate_filter, min_filter_delay )
+	: LogPlat("OLED", enable_rate_filter, min_filter_delay )
 	, version(version)
 	, reset_pin(reset_pin)
 	, display_format(display_format)
@@ -86,14 +86,14 @@ Loom_OLED::Loom_OLED(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_OLED::Loom_OLED(LoomManager* manager, JsonArrayConst p)
-	: Loom_OLED(manager, p[0], p[1], (Version)(int)p[2], p[3], (Format)(int)p[4], p[5], p[6], (FreezeType)(int)p[7]) {}
+OLED::OLED(JsonArrayConst p)
+	: OLED(p[0], p[1], (Version)(int)p[2], p[3], (Format)(int)p[4], p[5], p[6], (FreezeType)(int)p[7]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::print_config() const
+void OLED::print_config() const
 {
   LMark;
-	LoomLogPlat::print_config();
+	LogPlat::print_config();
   LMark;
 
 	LPrintln("\tOLED Version        : ", enum_oled_version_string(version) );
@@ -121,7 +121,7 @@ void Loom_OLED::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_OLED::set_freeze_pin(const byte pin)
+void OLED::set_freeze_pin(const byte pin)
 {
   LMark;
 	freeze_pin = pin;
@@ -134,7 +134,7 @@ void Loom_OLED::set_freeze_pin(const byte pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_OLED::log(JsonObject json)
+bool OLED::log(JsonObject json)
 {
   LMark;
 	if ( !check_millis() )

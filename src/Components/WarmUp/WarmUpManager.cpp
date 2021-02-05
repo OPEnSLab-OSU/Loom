@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_WarmUp_Manager.cpp
+/// @file		WarmUpManager.cpp
 /// @brief	Source file for Loom Module Warmup Manager.
 /// @author		C. Greyston Brady
 /// @date		  2020
@@ -8,13 +8,14 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "WarmUp_Manager.h"
+#include "WarmUpManager.h"
 #include "WarmUp.h"
 
-Loom_WarmUp_Manager::Loom_WarmUp_Manager(
-    LoomManager* manager
+using namespace Loom;
+
+WarmUpManager::WarmUpManager(
   )
-  : LoomModule(manager, "WarmUp_Manager", LoomModule::Type::WarmUp_Manager)
+  : Module("WarmUp_Manager")
   , warm(false)
   , start_time(0)
   , warm_duration(0) {
@@ -22,13 +23,10 @@ Loom_WarmUp_Manager::Loom_WarmUp_Manager(
 
 }
 
-Loom_WarmUp_Manager::Loom_WarmUp_Manager(LoomManager* manager, JsonArrayConst)
-  : Loom_WarmUp_Manager(manager) {
-  LMark;
+WarmUpManager::WarmUpManager(JsonArrayConst p)
+  : WarmUpManager() {}
 
-}
-
-void Loom_WarmUp_Manager::warming_Begin() {
+void WarmUpManager::warming_Begin() {
   LMark;
   start_time = millis();
   LMark;
@@ -42,7 +40,7 @@ void Loom_WarmUp_Manager::warming_Begin() {
   return;
 }
 
-void Loom_WarmUp_Manager::warming_Reset() {
+void WarmUpManager::warming_Reset() {
   LMark;
   warm = false;
   LMark;
@@ -51,7 +49,7 @@ void Loom_WarmUp_Manager::warming_Reset() {
   return;
 }
 
-bool Loom_WarmUp_Manager::is_warm() {
+bool WarmUpManager::is_warm() {
   LMark;
   if(!warm) {
     LMark;

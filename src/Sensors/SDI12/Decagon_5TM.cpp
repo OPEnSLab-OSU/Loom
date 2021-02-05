@@ -1,63 +1,55 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Decagon_5TM.cpp
-/// @brief		File for Loom_Decagon5TM implementation. Incomplete.
+/// @file		Decagon_5TM.cpp
+/// @brief		File for Decagon5TM implementation. Incomplete.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
+
 #include "Decagon_5TM.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Decagon5TM::Loom_Decagon5TM(
-		LoomManager* manager,
-		const uint8_t		num_samples
-	)
-	: LoomSDI12Sensor(manager, "5TM", Type::Decagon5TM, num_samples )
+Decagon5TM::Decagon5TM(const uint8_t num_samples)
+	: SDI12Sensor("5TM", num_samples)
 {
-  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Decagon5TM::Loom_Decagon5TM(LoomManager* manager, JsonArrayConst p)
-	: Loom_Decagon5TM(manager, (uint8_t)p[0] ) {}
+Decagon5TM::Decagon5TM(JsonArrayConst p)
+	: Decagon5TM((uint8_t)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Decagon5TM::print_config() const
+void Decagon5TM::print_config() const
 {
-  LMark;
-	LoomSDI12Sensor::print_config();
- 	LMark;
+	SDI12Sensor::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Decagon5TM::print_measurements() const
+void Decagon5TM::print_measurements() const
 {
-  LMark;
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Decagon5TM::measure()
-{
-  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Decagon5TM::package(JsonObject json)
+void Decagon5TM::measure()
 {
-  LMark;
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Decagon5TM::package(JsonObject json)
+{
 	// package_json(json, module_name, "Temp", temperature);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Decagon5TM::diagnose(bool& result){
-  LMark;
-	// implement here
-}
 
-///////////////////////////////////////////////////////////////////////////////
+#endif // ifdef LOOM_INCLUDE_SENSORS

@@ -1,28 +1,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Sleep_Manager.cpp
-/// @brief		File for Loom_Sleep_Manager implementation.
+/// @file		SleepManager.cpp
+/// @brief		File for SleepManager implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Sleep_Manager.h"
+#include "SleepManager.h"
+#include "InterruptManager.h"
 #include "RTC/RTC.h"
+#include "Module_Factory.h"
 
 #include <LowPower.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Sleep_Manager::Loom_Sleep_Manager(
-		LoomManager* 	manager,
+SleepManager::SleepManager(
 		const bool					use_LED,
 		const bool					delay_on_wake,
 		const Mode					sleep_mode,
 		const byte					power_off_pin
 	)
-	: LoomModule(manager, "SleepManager", Type::Sleep_Manager )
+	: Module("SleepManager")
 	, use_LED(use_LED)
 	, delay_on_wake(delay_on_wake)
 	, sleep_mode(Mode::STANDBY)
@@ -33,14 +35,14 @@ Loom_Sleep_Manager::Loom_Sleep_Manager(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Sleep_Manager::Loom_Sleep_Manager(LoomManager* manager, JsonArrayConst p)
-	: Loom_Sleep_Manager(manager, p[0], p[1], (Mode)(int)p[2], p[3]) {}
+SleepManager::SleepManager(JsonArrayConst p)
+	: SleepManager(p[0], p[1], (Mode)(int)p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::print_config() const
+void SleepManager::print_config() const
 {
   LMark;
-	LoomModule::print_config();
+	Module::print_config();
   LMark;
 	LPrintln("\tSleep Mode    : ", enum_sleep_mode_string(sleep_mode) );
   LMark;
@@ -53,10 +55,10 @@ void Loom_Sleep_Manager::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
+void SleepManager::link_device_manager(Manager* LM)
 {
   LMark;
-	LoomModule::link_device_manager(LM);
+	Module::link_device_manager(LM);
   LMark;
 
 	if ( LM ){
@@ -80,7 +82,7 @@ void Loom_Sleep_Manager::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Sleep_Manager::sleep()
+bool SleepManager::sleep()
 {
    	LMark;
 		pre_sleep();
@@ -95,7 +97,7 @@ bool Loom_Sleep_Manager::sleep()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::pre_sleep()
+void SleepManager::pre_sleep()
 {
   LMark;
 	LPrintln("\nEntering STANDBY");
@@ -118,7 +120,7 @@ void Loom_Sleep_Manager::pre_sleep()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Sleep_Manager::post_sleep()
+void SleepManager::post_sleep()
 {
   LMark;
 	// Reenable SysTick Interrupt
@@ -138,7 +140,7 @@ void Loom_Sleep_Manager::post_sleep()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_Sleep_Manager::enum_sleep_mode_string(const Mode m)
+const char* SleepManager::enum_sleep_mode_string(const Mode m)
 {
   LMark;
 	switch(m) {

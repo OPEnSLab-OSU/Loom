@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Macros.h
+/// @file		Macros.h
 /// @brief		File contains general purpose Loom macros
 /// @details
 /// @author		Luke Goertzen
@@ -10,13 +10,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include "FeatherFault.h"
-#include "Adafruit_ASFcore.h"
-// If LOOM_DEBUG was never specified elsewhere, default to enabled
-#ifndef LOOM_DEBUG
-	#define LOOM_DEBUG 1	///< 1 to enable debug prints (and all LPrint(), LPrintln() calls), 0 to disable
-#endif
 
+#include <Arduino.h>
+#include "FeatherFault.h"
+
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
 
 /// \cond DO_NOT_DOCUMENT
 #define EXPAND_ARRAY1(x) x[0]
@@ -100,3 +100,7 @@ void LPrintlnAll(Types... vars)
 /// LPrint Hexadeximal number to Serial in form: DEC (0xHEX) if LOOM_DEBUG enabled, newline added
 #define LPrintln_Dec_Hex(X)    (LOOM_DEBUG==0) ? :  Serial.print(X); Serial.print(" (0x"); Serial.print(X, HEX); Serial.println(")")
 #define LMark FeatherFault::mark()
+
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

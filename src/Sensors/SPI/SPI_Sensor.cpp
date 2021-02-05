@@ -1,24 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SPI_Sensor.cpp
-/// @brief		File for LoomSPISensor implementation.
+/// @file		SPI_Sensor.cpp
+/// @brief		File for SPISensor implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "SPI_Sensor.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSPISensor::LoomSPISensor(
-		LoomManager* manager,
-		const char* module_name,
-		const LoomModule::Type		module_type,
-		const uint8_t				num_samples 
+SPISensor::SPISensor(
+		const char*				module_name,
+		const uint8_t			num_samples 
 	) 
-	: LoomSensor(manager, module_name, module_type, num_samples ) {}
+	: Sensor(module_name, num_samples) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

@@ -1,23 +1,23 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Relay.cpp
-/// @brief		File for Loom_Relay implementation.
+/// @file		Relay.cpp
+/// @brief		File for Relay implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_ACTUATORS
 
 #include "Relay.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Relay::Loom_Relay(
-		LoomManager* 	manager,
-		const byte					pin
-	)
-	: LoomActuator(manager, "Relay", Type::Relay )
+Relay::Relay(const byte pin)
+	: Actuator("Relay")
 	, pin(pin)
 	, on(false)
 {
@@ -29,23 +29,14 @@ Loom_Relay::Loom_Relay(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Relay::Loom_Relay(LoomManager* manager, JsonArrayConst p)
-	: Loom_Relay(manager, (byte)p[0] ) {}
+Relay::Relay(JsonArrayConst p)
+	: Relay((byte)p[0] ) {}
 // explicitly cast because with only one parameter, JsonVariant p[0] can
 // implicitly cast to either JsonArrayConst or byte of regular constructor
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::add_config(JsonObject json)
-{
-  LMark;
-	// add_config_aux(json, module_name,
-	// 	module_name, pin
-	// );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::print_state() const
+void Relay::print_state() const
 {
   LMark;
 	print_module_label();
@@ -55,7 +46,7 @@ void Loom_Relay::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::package(JsonObject json)
+void Relay::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
@@ -65,7 +56,7 @@ void Loom_Relay::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Relay::dispatch(JsonObject json)
+bool Relay::dispatch(JsonObject json)
 {
  	LMark;
 // 	LPrintln("Command sent to relay is:");
@@ -89,7 +80,7 @@ bool Loom_Relay::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Relay::set(const bool state)
+void Relay::set(const bool state)
 {
   LMark;
 	LPrintln("In set");
@@ -110,3 +101,5 @@ void Loom_Relay::set(const bool state)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

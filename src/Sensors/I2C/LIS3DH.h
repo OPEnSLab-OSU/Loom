@@ -1,26 +1,27 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LIS3DH.h
-/// @brief		File for Loom_LIS3DH definition.
+/// @file		LIS3DH.h
+/// @brief		File for LIS3DH definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <SparkFunLIS3DH.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// LIS3DH Accelerometer sensor module.
 ///
-/// @note	Needs more work on properly implementing support for the sensors interrupts
+/// @note	Needs more work on properly implementing support for the sensors interrupts 
 ///
 /// @par Resources
 /// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___l_i_s3_d_h.html)
@@ -32,17 +33,16 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#lis3dh-accelerometer)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_LIS3DH : public LoomI2CSensor
+class LIS3DH : public I2CSensor
 {
-
 protected:
 
-	LIS3DH		inst_LIS3DH;	///< Underlying LIS3DH sensor manager instance
+	::LIS3DH inst_LIS3DH; ///< Underlying LIS3DH sensor manager instance
 
 	float		accel[3];		///< Measured acceleration values (x,y,z). Units: g.
 
 public:
-
+	
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -51,19 +51,18 @@ public:
 	///
 	/// @param[in]	i2c_address				Set(Int) | <0x19> | {0x19} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	Loom_LIS3DH(
-LoomManager* manager,
-const byte i2c_address		= 0x19,
-			const uint8_t	mux_port		= 255
+	LIS3DH(
+			const byte		i2c_address	= 0x19,
+			const uint8_t	mux_port	= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_LIS3DH(LoomManager* manager, JsonArrayConst p);
+	LIS3DH(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_LIS3DH() = default;
+	~LIS3DH() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -71,7 +70,6 @@ const byte i2c_address		= 0x19,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
-	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -82,3 +80,13 @@ const byte i2c_address		= 0x19,
 private:
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, LIS3DH, "LIS3DH");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
+
+

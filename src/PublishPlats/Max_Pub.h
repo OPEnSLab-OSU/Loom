@@ -1,21 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Max_Pub.h
-/// @brief		File for Loom_MaxPub definition.
+/// @brief		File for MaxPub definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
 #pragma once
 
 #include "PublishPlat.h"
 
-
-#define UDP_SEND_OFFSET 8000	///< UDP sending port is this value + device instance number
-
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -27,7 +25,7 @@
 /// - [Loom Max Patches](https://github.com/OPEnSLab-OSU/Max-Loom2)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_MaxPub : public LoomPublishPlat
+class MaxPub : public PublishPlat
 {
 
 protected:
@@ -35,7 +33,7 @@ protected:
 	uint16_t	UDP_port;				///< Which UDP port to transmit on
 	IPAddress	remoteIP;				///< Which IP address to send to
 
-	LoomInternetPlat::UDPPtr UDP_Inst;	///< Pointer to UDP object
+	InternetPlat::UDPPtr UDP_Inst;	///< Pointer to UDP object
 
 public:
 
@@ -44,22 +42,17 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	///
-	/// @param[in]  internet_type	Set(LoomModule::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
-	Loom_MaxPub(
-		LoomManager* manager,
-		const LoomModule::Type		internet_type
-	);
+	MaxPub();
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]  p	The array of constuctor args to expand
-	Loom_MaxPub(LoomManager* manager, JsonArrayConst p );
+	MaxPub(JsonArrayConst p );
 
 	void second_stage_ctor() override;
 
 	/// Destructor
-	~Loom_MaxPub() { if (UDP_Inst) UDP_Inst->stop(); }
+	~MaxPub() { if (UDP_Inst) UDP_Inst->stop(); }
 
 //=============================================================================
 ///@name	OPERATION
@@ -98,8 +91,16 @@ public:
 
 protected:
 
-	bool		send_to_internet(const JsonObject json, LoomInternetPlat* plat) override;
+	bool		send_to_internet(const JsonObject json, InternetPlat* plat) override;
 
 private:
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER_NODEFAULT(Module, MaxPub, "MaxPub");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

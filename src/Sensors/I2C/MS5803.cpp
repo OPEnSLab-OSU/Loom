@@ -1,34 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MS5803.cpp
-/// @brief		File for Loom_MS5803 implementation.
+/// @file		MS5803.cpp
+/// @brief		File for MS5803 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
+
 #include "MS5803.h"
+#include "Module_Factory.h"
 
-
-// #include <setjmp.h>     /* jmp_buf, setjmp, longjmp */
-// #include <RTCCounter.h>
-
-// jmp_buf env;
-// void escape() {
-// 	Serial.println("escape");
-// 	delay(50);
-// 	longjmp(env,101);
-// }
-
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MS5803::Loom_MS5803(
-LoomManager* manager,
-const byte i2c_address,
-		const uint8_t			mux_port
+MS5803::MS5803(
+		const byte		i2c_address,
+		const uint8_t	mux_port
 	)
-	: LoomI2CSensor(manager, "MS5803", Type::MS5803, i2c_address, mux_port )
+	: I2CSensor("MS5803", i2c_address, mux_port)
 	, inst_MS5803( MS_5803(i2c_address, 512) )
 {
   LMark;
@@ -69,16 +61,15 @@ const byte i2c_address,
 	print_module_label();
   LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
-  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MS5803::Loom_MS5803(LoomManager* manager, JsonArrayConst p)
-	: Loom_MS5803(manager, EXPAND_ARRAY(p, 2) ) {}
+MS5803::MS5803(JsonArrayConst p)
+	: MS5803( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MS5803::print_measurements() const
+void MS5803::print_measurements() const
 {
   LMark;
 	print_module_label();
@@ -88,11 +79,10 @@ void Loom_MS5803::print_measurements() const
 	LPrintln("\tPressure    : ", pressure , " mbar");
   LMark;
 	LPrintln("\tTemperature : ", temp     , " C");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MS5803::measure()
+void MS5803::measure()
 {
   LMark;
 	inst_MS5803.readSensor();
@@ -101,11 +91,10 @@ void Loom_MS5803::measure()
 	pressure = inst_MS5803.pressure();
   LMark;
 	temp     = inst_MS5803.temperature();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MS5803::package(JsonObject json)
+void MS5803::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
@@ -114,13 +103,8 @@ void Loom_MS5803::package(JsonObject json)
 	data["pressure"] = pressure;
   LMark;
 	data["temp"]     = temp;
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MS5803::diagnose(bool& result){
-  LMark;
-	// implement here
-}
 
-///////////////////////////////////////////////////////////////////////////////
+#endif // ifdef LOOM_INCLUDE_SENSORS

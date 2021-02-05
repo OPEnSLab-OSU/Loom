@@ -1,20 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_TMP007.h
-/// @brief		File for Loom_TMP007 definition.
+/// @file		TMP007.h
+/// @brief		File for TMP007 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <Adafruit_TMP007.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -28,9 +29,8 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#tmp007-contact-less-infrared-thermopile-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_TMP007 : public LoomI2CSensor
+class TMP007 : public I2CSensor
 {
-
 protected:
 
 	Adafruit_TMP007 inst_tmp007;	///< Underlying TMP007 sensor manager instance
@@ -48,19 +48,18 @@ public:
 	///
 	/// @param[in]	i2c_address			Set(Int) | <0x40> | {0x40, 0x41, 0x42, 0x43, 0x46, 0x47, 0x48} | I2C address
 	/// @param[in]	mux_port			Int | <255> | [0-16] | Port on multiplexer
-	Loom_TMP007(
-LoomManager* manager,
-const byte i2c_address		= 0x40,
-			const uint8_t	mux_port		= 255
+	TMP007(
+			const byte		i2c_address	= 0x40,
+			const uint8_t	mux_port	= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_TMP007(LoomManager* manager, JsonArrayConst p);
-
+	TMP007(JsonArrayConst p);
+	
 	/// Destructor
-	virtual ~Loom_TMP007() = default;
+	virtual ~TMP007() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -68,7 +67,6 @@ const byte i2c_address		= 0x40,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
-	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -79,3 +77,13 @@ const byte i2c_address		= 0x40,
 private:
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, TMP007, "TMP007");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
+
+

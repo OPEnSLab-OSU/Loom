@@ -1,18 +1,22 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LoRa.cpp
-/// @brief		File for Loom_LoRa implementation.
+/// @file		LoRa.cpp
+/// @brief		File for LoRa implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_RADIOS
+
 #include "LoRa.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_LoRa::Loom_LoRa(
-		LoomManager* device_manager,
+LoRa::LoRa(
 		const uint16_t		max_message_len,
 		const uint8_t		address,
 		const uint8_t		power_level,
@@ -20,7 +24,7 @@ Loom_LoRa::Loom_LoRa(
 		const uint16_t		retry_timeout,
 		const bool			override_name
 	)
-	: LoomCommPlat(device_manager, "LoRa", Type::LoRa, max_message_len )
+	: CommPlat("LoRa", max_message_len )
 	, address(address)
 	, power_level( ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23 )
 	, retry_count(retry_count)
@@ -87,38 +91,28 @@ Loom_LoRa::Loom_LoRa(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_LoRa::Loom_LoRa(LoomManager* device_manager, JsonArrayConst p)
-	: Loom_LoRa(device_manager, EXPAND_ARRAY(p, 6) ) {}
+LoRa::LoRa(JsonArrayConst p)
+	: LoRa(EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::add_config(JsonObject json)
-{
-  LMark;
-	// add_config_aux(json, module_name,
-	// 	module_name,
-	// 	max_message_len, address, power_level, retry_count, retry_timeout
-	// );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::power_up() {
+void LoRa::power_up() {
   LMark;
 	driver.available();
  	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::power_down() {
+void LoRa::power_down() {
   LMark;
 	driver.sleep();
  	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::print_config() const
+void LoRa::print_config() const
 {
   LMark;
-	LoomCommPlat::print_config();
+	CommPlat::print_config();
   LMark;
 
 	LPrintln("\tAddress       : ", address );
@@ -132,7 +126,7 @@ void Loom_LoRa::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::set_address(const uint8_t addr)    // Need to test this
+void LoRa::set_address(const uint8_t addr)    // Need to test this
 {
   LMark;
 	address = addr;
@@ -144,7 +138,7 @@ void Loom_LoRa::set_address(const uint8_t addr)    // Need to test this
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time)
+bool LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time)
 {
   LMark;
 	bool status = false;
@@ -170,7 +164,7 @@ bool Loom_LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time)
 		status = msgpack_buffer_to_json(buffer, json);
   	LMark;
 	}
-	
+
 	print_module_label();
 	LPrintln("Receive ", (status) ? "successful" : "failed");
 
@@ -180,7 +174,7 @@ bool Loom_LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::send_impl(JsonObject json, const uint8_t destination)
+bool LoRa::send_impl(JsonObject json, const uint8_t destination)
 {
   LMark;
 	char buffer[max_message_len];
@@ -205,7 +199,7 @@ bool Loom_LoRa::send_impl(JsonObject json, const uint8_t destination)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::send_raw(uint8_t* bytes, const uint8_t len, const uint8_t destination) {
+bool LoRa::send_raw(uint8_t* bytes, const uint8_t len, const uint8_t destination) {
   LMark;
 	bool is_sent = manager.sendtoWait(bytes, len, destination);
   LMark;
@@ -222,7 +216,7 @@ bool Loom_LoRa::send_raw(uint8_t* bytes, const uint8_t len, const uint8_t destin
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::receive_blocking_raw(uint8_t* dest, const uint8_t maxlen, const uint max_wait_time) {
+bool LoRa::receive_blocking_raw(uint8_t* dest, const uint8_t maxlen, const uint max_wait_time) {
   LMark;
 	bool status;
   LMark;
@@ -246,3 +240,7 @@ bool Loom_LoRa::receive_blocking_raw(uint8_t* dest, const uint8_t maxlen, const 
   LMark;
 	return status;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_RADIOS

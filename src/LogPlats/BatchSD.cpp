@@ -1,29 +1,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_BatchSD.cpp
-/// @brief		File for Loom_BatchSD implementation.
+/// @file		BatchSD.cpp
+/// @brief		File for BatchSD implementation.
 /// @author		Adam Kerr
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #include "BatchSD.h"
 #include "Manager.h"
+#include "Module_Factory.h"
 
 #include <SPI.h>
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
 
-Loom_BatchSD::Loom_BatchSD(
-    LoomManager* manager,
+BatchSD::BatchSD(
     const bool			enable_rate_filter,
     const uint16_t		min_filter_delay,
     const byte			chip_select
 
     )
-    : LoomLogPlat(manager, "BatchSD", Type::BATCHSD, enable_rate_filter, min_filter_delay )
+    : LogPlat("BatchSD", enable_rate_filter, min_filter_delay )
     , chip_select(chip_select)
     , doc(2048)
 {
@@ -54,14 +55,14 @@ Loom_BatchSD::Loom_BatchSD(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_BatchSD::Loom_BatchSD(LoomManager* manager, JsonArrayConst p)
-  : Loom_BatchSD(manager,EXPAND_ARRAY(p, 3)) {}
+BatchSD::BatchSD(JsonArrayConst p)
+  : BatchSD(EXPAND_ARRAY(p, 3)) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::print_config() const
+void BatchSD::print_config() const
 {
   LMark;
-  LoomLogPlat::print_config();
+  LogPlat::print_config();
   LMark;
   LPrintln("\tCurrent Batch     : ", batch_counter);
   LMark;
@@ -74,52 +75,48 @@ void Loom_BatchSD::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_BatchSD::dump_batch(int index){
+bool BatchSD::dump_batch(int index){
   LMark;
-  #if LOOM_DEBUG == 1
-    LMark;
-    char file_name[30];
-    LMark;
-    create_file_name(index, file_name);
-    LMark;
-    //digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
-
-    //sd.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
-
-
-    File file = sd.open(file_name, O_READ);
-    LMark;
-
-    if (file) {
-      LMark;
-      print_module_label();
-      LMark;
-      LPrintln("Contents of file: ", file_name);
-      LMark;
-
-      // read from the file until there's nothing else in it:
-      while (file.available())
-        Serial.write(file.read());
-      LMark;
-      LPrintln();
-      LMark;
-      file.close();
-      LMark;
-      return true;
-    } else {
-      // if the file didn't open, print an error:
-      print_module_label();
-      LMark;
-      LPrintln("Error opening ", file_name);
-      LMark;
-      return false;
-    }
-  #endif
+  char file_name[30];
   LMark;
+  create_file_name(index, file_name);
+  LMark;
+  //digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+
+  //sd.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
+
+
+  File file = sd.open(file_name, O_READ);
+  LMark;
+
+  if (file) {
+    LMark;
+    print_module_label();
+    LMark;
+    LPrintln("Contents of file: ", file_name);
+    LMark;
+
+    // read from the file until there's nothing else in it:
+    while (file.available())
+      Serial.write(file.read());
+    LMark;
+    LPrintln();
+    LMark;
+    file.close();
+    LMark;
+    return true;
+  } else {
+    // if the file didn't open, print an error:
+    print_module_label();
+    LMark;
+    LPrintln("Error opening ", file_name);
+    LMark;
+    return false;
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::clear_batch_log(){
+void BatchSD::clear_batch_log(){
   LMark;
   print_module_label();
   LMark;
@@ -150,7 +147,7 @@ void Loom_BatchSD::clear_batch_log(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_BatchSD::store_batch(){
+bool BatchSD::store_batch(){
   LMark;
   JsonObject obj = device_manager->internal_json(false);
   LMark;
@@ -160,7 +157,7 @@ bool Loom_BatchSD::store_batch(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_BatchSD::store_batch_json(JsonObject json){
+bool BatchSD::store_batch_json(JsonObject json){
   LMark;
   // Create file name and add which Batch the packet is from to json
   char file_name[30];
@@ -225,7 +222,7 @@ bool Loom_BatchSD::store_batch_json(JsonObject json){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-JsonObject Loom_BatchSD::get_batch_json(int index){
+JsonObject BatchSD::get_batch_json(int index){
   LMark;
   doc.clear();
   LMark;
@@ -280,7 +277,7 @@ JsonObject Loom_BatchSD::get_batch_json(int index){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::power_up() {
+void BatchSD::power_up() {
   LMark;
   digitalWrite(8, HIGH);
   LMark;
@@ -289,13 +286,12 @@ void Loom_BatchSD::power_up() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::power_down(){
-  LMark;
+void BatchSD::power_down(){
   //do nothing
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::create_file_name(int index, char* name){
+void BatchSD::create_file_name(int index, char* name){
   LMark;
   String file = "Batches/Batch-";
   LMark;
@@ -312,7 +308,7 @@ void Loom_BatchSD::create_file_name(int index, char* name){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-float Loom_BatchSD::get_drop_rate() const
+float BatchSD::get_drop_rate() const
 {
 	return (packet_counter == 0)
 		? 0.0f
@@ -320,7 +316,7 @@ float Loom_BatchSD::get_drop_rate() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_BatchSD::package(JsonObject json) {
+void BatchSD::package(JsonObject json) {
   LMark;
   JsonObject data = get_module_data_object(json, "Batch");
   LMark;

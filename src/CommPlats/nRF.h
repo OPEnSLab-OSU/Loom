@@ -1,14 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_nRF.h
-/// @brief		File for Loom_nRF definition.
+/// @file		nRF.h
+/// @brief		File for nRF definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
 #include "CommPlat.h"
@@ -16,6 +16,9 @@
 #include <RF24Network.h>
 #include <RF24.h>
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
 
 #define NRF_MESSAGE_SIZE 120	///< Max nRF message size
 
@@ -31,7 +34,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#nrf)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_nRF : public LoomCommPlat
+class nRF : public CommPlat
 {
 
 protected:
@@ -86,8 +89,7 @@ public:
 	/// @param[in]	retry_timeout 		Int | <200> | [20-500] | Delay between retransmissions (ms)
 	/// @param[in]	multicast_level		Int | <1> | [1-3] | How many levels to propogate message through heirarchy
 	/// @param[in] 	override_name
-	Loom_nRF(
-			LoomManager* manager,
+	nRF(
 			const uint16_t		max_message_len		= 120,
 			const uint8_t		address 			= 0,
 			const uint8_t		data_rate			= 1,
@@ -101,16 +103,16 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_nRF(LoomManager* manager, JsonArrayConst p);
+	nRF(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_nRF();
+	~nRF();
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	void		add_config(JsonObject json) override;
+
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -145,3 +147,11 @@ public:
 private:
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, nRF, "nRF");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_RADIOS

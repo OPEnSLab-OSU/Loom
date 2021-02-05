@@ -1,21 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Bluetooth.h
-/// @brief		File for Loom_Bluetooth definition. Needs more work.
+/// @file		Bluetooth.h
+/// @brief		File for Bluetooth definition. Needs more work.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
 #include "CommPlat.h"
 
 #include <Adafruit_BluefruitLE_SPI.h>
-#include <Adafruit_BluefruitLE_UART.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -30,7 +30,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#bluetooth)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Bluetooth : public LoomCommPlat
+class Bluetooth : public CommPlat
 {
 
 protected:
@@ -42,7 +42,7 @@ protected:
 	uint8_t spi_RST;	///< SPI reset pin
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -53,8 +53,7 @@ public:
 	/// @param[in] 	spi_CS				SPI chip select pin
 	/// @param[in] 	spi_IRQ				SPI IRQ pin
 	/// @param[in] 	spi_RST				SPI reset pin
-	Loom_Bluetooth(
-			LoomManager* manager,
+	Bluetooth(
 			const uint16_t 		max_message_len		= 120,
 			const uint8_t		spi_CS				= 8,
 			const uint8_t		spi_IRQ				= 7,
@@ -64,28 +63,25 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Bluetooth(LoomManager* manager, JsonArrayConst p);
+	Bluetooth(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Bluetooth() = default;
+	~Bluetooth() = default;
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
-
-	/// Currently no implementation
-	void		add_config(JsonObject json) override;
 
 	/// Allow a phone to connect
 	/// @param[in] connect_timeout		Max time to allow user to try to connect
 	void	 	connect(const uint16_t connect_timeout);
 
 	/// Receive a command from user
-	/// @return Status 
+	/// @return Status
 	// uint8_t		receiveCommand();
 
 
-	/// Gets a command from the ble interface, or times out. 
+	/// Gets a command from the ble interface, or times out.
 	/// This is used in combination with parseCommand if the return value is valid.
 	/// @param[in]	max_timeout		Maximum number of milliseconds to wait for command
 	/// @return Status where:
@@ -127,3 +123,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, Bluetooth, "Bluetooth");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_RADIOS

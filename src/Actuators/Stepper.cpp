@@ -1,22 +1,25 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Stepper.cpp
-/// @brief		File for Loom_Stepper implementation.
+/// @file		Stepper.cpp
+/// @brief		File for Stepper implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_ACTUATORS
 
 #include "Stepper.h"
+#include "Module_Factory.h"
 
 #include <Wire.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::Loom_Stepper(LoomManager* manager)
-	: LoomActuator(manager, "Stepper", Type::Stepper )
+Stepper::Stepper()
+	: Actuator("Stepper")
 {
   LMark;
 	AFMS = new Adafruit_MotorShield();
@@ -35,11 +38,11 @@ Loom_Stepper::Loom_Stepper(LoomManager* manager)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::Loom_Stepper(LoomManager* manager, JsonArrayConst p)
-	: Loom_Stepper(manager) {}
+Stepper::Stepper(JsonArrayConst p)
+	: Stepper() {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Stepper::~Loom_Stepper()
+Stepper::~Stepper()
 {
   LMark;
 	delete AFMS;
@@ -47,16 +50,7 @@ Loom_Stepper::~Loom_Stepper()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Stepper::add_config(JsonObject json)
-{
-  LMark;
-	// add_config_aux(json, module_name,
-	// 	module_name, stepper_count
-	// );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-bool Loom_Stepper::dispatch(JsonObject json)
+bool Stepper::dispatch(JsonObject json)
 {
   LMark;
 	JsonArray params = json["params"];
@@ -68,7 +62,7 @@ bool Loom_Stepper::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Stepper::move_steps(const uint8_t motor, const uint16_t steps, const uint8_t speed, const bool clockwise)
+void Stepper::move_steps(const uint8_t motor, const uint16_t steps, const uint8_t speed, const bool clockwise)
 {
   LMark;
 	if (motor < NUM_STEPPERS) {
@@ -94,3 +88,5 @@ void Loom_Stepper::move_steps(const uint8_t motor, const uint16_t steps, const u
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

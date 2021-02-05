@@ -1,33 +1,37 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Max_Pub.cpp
-/// @brief		File for Loom_MaxPub implementation.
+/// @brief		File for MaxPub implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
 
 #include "Max_Pub.h"
 #include "../SubscribePlats/Max_Sub.h"
 #include "../Manager.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxPub::Loom_MaxPub(
-		LoomManager* manager,
-		const LoomModule::Type	internet_type
-	)
-	: LoomPublishPlat(manager, "MaxPub", Type::MaxPub, internet_type )
+
+#define UDP_SEND_OFFSET 8000 ///< UDP sending port is this value + device instance number
+
+///////////////////////////////////////////////////////////////////////////////
+MaxPub::MaxPub()
+	: PublishPlat("MaxPub")
 	, remoteIP({192,168,1,255})
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::second_stage_ctor()
+void MaxPub::second_stage_ctor()
 {
   LMark;
-	LoomPublishPlat::second_stage_ctor();
+	PublishPlat::second_stage_ctor();
   LMark;
 
 	UDP_port = UDP_SEND_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
@@ -47,14 +51,14 @@ void Loom_MaxPub::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxPub::Loom_MaxPub(LoomManager* manager, JsonArrayConst p)
-	: Loom_MaxPub(manager, (LoomModule::Type)(int)p[0] ) {}
+MaxPub::MaxPub(JsonArrayConst p)
+	: MaxPub() {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::print_config() const
+void MaxPub::print_config() const
 {
   LMark;
-	LoomPublishPlat::print_config();
+	PublishPlat::print_config();
   LMark;
 	LPrintln("\tUDP Port  : ", UDP_port);
   LMark;
@@ -63,7 +67,7 @@ void Loom_MaxPub::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_port(const uint16_t port)
+void MaxPub::set_port(const uint16_t port)
 {
   LMark;
 	UDP_port = port;
@@ -73,7 +77,7 @@ void Loom_MaxPub::set_port(const uint16_t port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
+bool MaxPub::send_to_internet(const JsonObject json, InternetPlat* plat)
 {
   LMark;
 	if (!UDP_Inst) {
@@ -111,7 +115,7 @@ bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_ip(const IPAddress ip)
+void MaxPub::set_ip(const IPAddress ip)
 {
   LMark;
 	remoteIP = ip;
@@ -123,16 +127,16 @@ void Loom_MaxPub::set_ip(const IPAddress ip)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_ip()
+void MaxPub::set_ip()
 {
   LMark;
 	print_module_label();
   LMark;
 	LPrintln("Received command to set IP to send to");
   LMark;
-	Loom_MaxSub* temp;
+	MaxSub* temp;
   LMark;
-	if (device_manager && (temp = (Loom_MaxSub*)&(device_manager->MaxSub())) ) {
+	if (device_manager && ( temp = (device_manager->get<MaxSub>())) ) {
    	LMark;
 		IPAddress ip = temp->get_remote_IP();
    	LMark;
@@ -150,7 +154,7 @@ void Loom_MaxPub::set_ip()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_MaxPub::dispatch(JsonObject json)
+bool MaxPub::dispatch(JsonObject json)
 {
   LMark;
 	JsonArray params = json["params"];
@@ -165,3 +169,5 @@ bool Loom_MaxPub::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

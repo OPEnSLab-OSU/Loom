@@ -1,34 +1,34 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SubscribePlat.cpp
-/// @brief		File for LoomSubscribePlat implementation.
+/// @file		SubscribePlat.cpp
+/// @brief		File for SubscribePlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+
 #include "SubscribePlat.h"
 #include "Manager.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
-LoomSubscribePlat::LoomSubscribePlat(
-		LoomManager* 			manager,
-		const char*							module_name,
-		const LoomModule::Type	module_type,
-		const LoomModule::Type	internet_type
+SubscribePlat::SubscribePlat(
+		const char*							module_name
 	)
-	: LoomModule(manager, module_name, module_type )
+	: Module(module_name)
 	, m_internet( nullptr )
-	, internet_type( internet_type )
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::second_stage_ctor()
+void SubscribePlat::second_stage_ctor()
 {
   LMark;
 	// check to see if we have a device manager
-	if (device_manager == nullptr) {
+	if (!device_manager) {
    	LMark;
 		print_module_label();
    	LMark;
@@ -37,55 +37,39 @@ void LoomSubscribePlat::second_stage_ctor()
 		return;
 	}
 
-	LoomInternetPlat* temp = (LoomInternetPlat*)device_manager->find_module(internet_type);
-  LMark;
-
-	print_module_label();
-  LMark;
-	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
-   	LMark;
-		LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
-   	LMark;
-		m_internet = temp;
-  	LMark;
-	}
-	else {
-   	LMark;
+	LMark;
+	m_internet = device_manager->get<InternetPlat>();
+	LMark;
+	if (!m_internet) {
+		print_module_label();
 		LPrintln("Unable to find internet platform");
-   	LMark;
-		return;
 	}
 
 	// made it here, guess we're good to go!
 	print_module_label();
-  LMark;
 	LPrint("Ready\n");
-  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::print_config() const
+void SubscribePlat::print_config() const
 {
   LMark;
-	LoomModule::print_config();
-  LMark;
-	LPrintln("\tInternet Type: ", (int)internet_type);
- 	LMark;
+	Module::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSubscribePlat::print_state() const
+void SubscribePlat::print_state() const
 {
   LMark;
-	LoomModule::print_state();
+	Module::print_state();
   LMark;
 	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
  	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSubscribePlat::subscribe()
+bool SubscribePlat::subscribe()
 {
   LMark;
 	// call normal subscribe (implemented by derived classes)
@@ -97,3 +81,5 @@ bool LoomSubscribePlat::subscribe()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

@@ -1,25 +1,27 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Neopixel.cpp
-/// @brief		File for Loom_Neopixel implementation.
+/// @file		Neopixel.cpp
+/// @brief		File for Neopixel implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_ACTUATORS
 
 #include "Neopixel.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Neopixel::Loom_Neopixel(
-		LoomManager* 	manager,
+Neopixel::Neopixel(
 		const bool					enableA0,
 		const bool					enableA1,
 		const bool					enableA2
 	)
-	: LoomActuator(manager, "Neopixel", Type::Neopixel)
+	: Actuator("Neopixel")
 	, pin_enabled( {enableA0, enableA1, enableA2} )
 	, pixels( { Adafruit_NeoPixel(1, 14, NEO_GRB + NEO_KHZ800),
 				Adafruit_NeoPixel(1, 15, NEO_GRB + NEO_KHZ800),
@@ -54,14 +56,14 @@ Loom_Neopixel::Loom_Neopixel(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Neopixel::Loom_Neopixel(LoomManager* manager, JsonArrayConst p)
-	: Loom_Neopixel(manager, EXPAND_ARRAY(p, 3) ) {}
+Neopixel::Neopixel(JsonArrayConst p)
+	: Neopixel(EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::print_config() const
+void Neopixel::print_config() const
 {
 	LMark;
-	LoomActuator::print_config();
+	Actuator::print_config();
   LMark;
 
 	for (auto i = 0; i < 3; i++) {
@@ -72,7 +74,7 @@ void Loom_Neopixel::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::print_state() const
+void Neopixel::print_state() const
 {
   LMark;
 	LPrintln(module_name, " State:");
@@ -94,7 +96,7 @@ void Loom_Neopixel::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Neopixel::dispatch(JsonObject json)
+bool Neopixel::dispatch(JsonObject json)
 {
   LMark;
 	JsonArray params = json["params"];
@@ -106,7 +108,7 @@ bool Loom_Neopixel::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::enable_pin(const uint8_t port, const bool state)
+void Neopixel::enable_pin(const uint8_t port, const bool state)
 {
   LMark;
 	pin_enabled[port] = state;
@@ -125,7 +127,7 @@ void Loom_Neopixel::enable_pin(const uint8_t port, const bool state)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Neopixel::set_color(const uint8_t port, const uint8_t chain_num, const uint8_t red, const uint8_t green, const uint8_t blue)
+void Neopixel::set_color(const uint8_t port, const uint8_t chain_num, const uint8_t red, const uint8_t green, const uint8_t blue)
 {
   LMark;
 	if ( pin_enabled[port] ) {
@@ -168,3 +170,5 @@ void Loom_Neopixel::set_color(const uint8_t port, const uint8_t chain_num, const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

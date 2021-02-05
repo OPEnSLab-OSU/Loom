@@ -1,20 +1,20 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_CommPlat.h
-/// @brief		File for LoomCommPlat definition.
+/// @brief		File for CommPlat definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
 #include "Module.h"
 #include "../LogPlats/BatchSD.h"
-#include <Arduino.h>
-#include <ArduinoJson.h>
+
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -27,7 +27,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#telecommunication-capabilities)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomCommPlat : public LoomModule
+class CommPlat : public Module
 {
 
 protected:
@@ -85,26 +85,20 @@ public:
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	max_message_len	The maximum possible message length
-	LoomCommPlat(
-			LoomManager* manager,
+	CommPlat(
 			const char* module_name,
-			const LoomModule::Type	module_type,
 			const uint16_t			max_message_len,
 			const bool					override_name = false
 		);
 
 	/// Destructor
-	virtual ~LoomCommPlat() = default;
+	virtual ~CommPlat() = default;
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
 	virtual void 	package(JsonObject json) override {};
-
-	/// No Diagnose necessary
-	/// Implement with empty body.
-	void 		diagnose(bool& result) override { /* do nothing */ }
 
 	/// Receive, but block until packet received, or timeout reached
 	/// @param[out]	json			Json object to fill with incoming data
@@ -170,14 +164,14 @@ public:
 	///	@return	uint16_t of the value of the json size
 	uint16_t 		determine_json_size(JsonObject json);
 
-	/// If the json is over 251, then it let the user the know that it will be sending 
+	/// If the json is over 251, then it let the user the know that it will be sending
 	/// small mulitple jsons with how many will it be splited into
 	/// @param[in]	json			The original message pacakge
 	/// @param[in]	destination		Address of destination device
 	/// @return true if able to send notification to the other board, false otherwise
-	bool	 		split_send_notification(JsonObject json, const uint8_t destination); 
+	bool	 		split_send_notification(JsonObject json, const uint8_t destination);
 
-	/// The actual processing spliting into small json 
+	/// The actual processing spliting into small json
 	/// @param[in]	json			The original message package
 	/// @param[in]	destination		Address of destination device
 	/// @param[in]	index			Json array Contents part location
@@ -264,3 +258,9 @@ protected:
 	void	add_packet_result(const bool did_drop);
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_RADIOS

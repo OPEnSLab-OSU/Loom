@@ -1,25 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_InternetPlat.h
-/// @brief		File for LoomInternetPlat definition.
+/// @file		InternetPlat.h
+/// @brief		File for InternetPlat definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 #pragma once
 
 #include "Module.h"
 
-#include "Client.h"
-#include "Udp.h"
-#include "SSLClient.h"
+#include <Client.h>
+#include <Udp.h>
+#include <SSLClient.h>
 #undef min
 #undef max
 #include <memory>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -32,12 +33,12 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#internet-capabilities)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomInternetPlat : public LoomModule
+class InternetPlat : public Module
 {
 
 protected:
 
-	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::http_request to a Client class.
+	/// Utility function to write an http reqest based on parameters specified by InternetPlat::http_request to a Client class.
 	/// See http_request() for parameter details.
 	void write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
 
@@ -83,14 +84,12 @@ public:
 	/// Loom Internet Platform module constructor.
 	///
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
-	LoomInternetPlat(
-			LoomManager* manager,
-			const char* module_name,
-			const LoomModule::Type	module_type
+	InternetPlat(
+			const char* module_name
 		);
 
 	/// Destructor
-	virtual ~LoomInternetPlat() = default;
+	virtual ~InternetPlat() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -100,7 +99,6 @@ public:
 	/// implement with empty body.
 	virtual void	package(JsonObject json) override { /* do nothing for now */ }
 
-	void 		diagnose(bool& result) override { result = is_connected(); }
 	/// Make HTTP request
 	/// @param[in]	domain	The domain to connect to (e.g "www.google.com")
 	/// @param[in]	url		The URL string to send with the http request, not including the domain (ex. "/arduino?thing=otherthing").
@@ -159,3 +157,9 @@ private:
 	void	m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

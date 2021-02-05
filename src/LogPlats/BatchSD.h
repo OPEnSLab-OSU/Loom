@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_BatchSD.h
-/// @brief		File for Loom_BatchSD definition.
+/// @file		BatchSD.h
+/// @brief		File for BatchSD definition.
 /// @author		Adam Kerr
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
@@ -14,7 +14,7 @@
 
 #include <SdFat.h>
 
-
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -29,7 +29,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-class Loom_BatchSD : public LoomLogPlat
+class BatchSD : public LogPlat
 {
 protected:
   SdFat sd;               ///< File System Object
@@ -50,8 +50,7 @@ public:
   /// @param[in]	enable_rate_filter			Bool | <true> | {true, false} | Whether or not to impose maximum update rate
   /// @param[in]	min_filter_delay			Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
   /// @param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
-  Loom_BatchSD(
-    LoomManager* manager,
+  BatchSD(
     const bool			enable_rate_filter	= true,
     const uint16_t		min_filter_delay	= 1000,
     const byte			chip_select			= 10
@@ -60,10 +59,10 @@ public:
   /// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-  Loom_BatchSD(LoomManager* manager, JsonArrayConst p);
+  BatchSD(JsonArrayConst p);
 
 	/// Destructor
-  ~Loom_BatchSD() = default;
+  ~BatchSD() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -74,7 +73,7 @@ public:
   // manually expose superclass version of log() that gets json from
 	// linked LoomManager, calling this classes implementation of
 	// 'log(JsonObject json)', which is pure virtual in superclass
-  using LoomLogPlat::log;
+  using LogPlat::log;
 
 
   /// Clears all the files that are being stored in the batch on the SD card
@@ -143,3 +142,9 @@ private:
   /// @return The drop rate from 0 (no drops) to 100 (100% drop)
   float get_drop_rate() const;
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, BatchSD, "BatchSD");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

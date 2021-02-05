@@ -1,19 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Manager.cpp
-/// @brief		File for LoomManager method implementations.
+/// @brief		File for Manager method implementations.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Module.h"
 #include "Manager.h"
 #include "Module_Factory.h"
 #include "Macros.h"
-#include "Interrupt_Manager.h"
-#include "Sleep_Manager.h"
+#include "InterruptManager.h"
+#include "SleepManager.h"
+#include "LogPlats/SD.h"
 
 #include "Sensors/Sensor.h"
 #include "Multiplexer.h"
@@ -23,18 +23,26 @@
 #include "LogPlats/LogPlat.h"
 #include "RTC/RTC.h"
 #include "PublishPlats/PublishPlat.h"
-#include "NTP_Sync.h"
-//#include "I2Cdev.h"
-
+#include "NTPSync.h"
+#include "TemperatureSync.h"
+// #include "I2Cdev.h"
 
 #include <ArduinoJson.h>
 #include <SdFat.h>
 #include <algorithm>
+#include <ranges>
 
-
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomManager::enum_device_type_string(const DeviceType t)
+
+auto module_exists = [](Module* module) { return module != nullptr; };
+auto module_active = [](Module* module) { return module->get_active(); };
+
+namespace views = std::views;
+
+///////////////////////////////////////////////////////////////////////////////
+const char* Manager::enum_device_type_string(const DeviceType t)
 {
   LMark;
 	switch(t) {
@@ -46,8 +54,7 @@ const char* LoomManager::enum_device_type_string(const DeviceType t)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomManager::LoomManager(
-		const FactoryBase*			factory_ptr,
+Manager::Manager(
 		const char*				device_name,
 		const uint8_t			instance,
 		const DeviceType		device_type,
@@ -55,8 +62,7 @@ LoomManager::LoomManager(
 		const Verbosity			package_verbosity,
 		const uint16_t			interval
 	)
-	: Factory(factory_ptr)
-	, instance(instance)
+	: instance(instance)
 	, print_verbosity(print_verbosity)
 	, package_verbosity(package_verbosity)
 	, device_type(device_type)
@@ -68,15 +74,14 @@ LoomManager::LoomManager(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomManager::~LoomManager()
+Manager::~Manager()
 {
   LMark;
 	free_modules();
-  LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::print_config(const bool print_modules_config)
+void Manager::print_config(const bool print_modules_config)
 {
   LMark;
 	print_device_label();
@@ -98,16 +103,15 @@ void LoomManager::print_config(const bool print_modules_config)
 	// Print managed module's configs
 	if (print_modules_config) {
     LMark;
-		for (auto module : modules) {
+    for (auto module : modules | views::filter(module_exists)) {
       LMark;
 			module->print_config();
-      LMark;
 		}
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::begin_serial(const bool wait_for_monitor, const bool begin_fault)
+void Manager::begin_serial(const bool wait_for_monitor, const bool begin_fault)
 {
   LMark;
 	Serial.begin(SERIAL_BAUD);
@@ -127,17 +131,7 @@ void LoomManager::begin_serial(const bool wait_for_monitor, const bool begin_fau
     LMark;
 		pinMode(13, OUTPUT);
     LMark;
-		for( int i = 0; i < 3; i++){
-      LMark;
-			digitalWrite(13, HIGH);
-      LMark;
-			delay(250);
-      LMark;
-			digitalWrite(13, LOW);
-      LMark;
-			delay(250);
-      LMark;
-		}
+    flash_LED(3, 1000, 1000, false);
 		FeatherFault::PrintFault(Serial);
     LMark;
 		delay(3000);
@@ -151,7 +145,7 @@ void LoomManager::begin_serial(const bool wait_for_monitor, const bool begin_fau
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_module(LoomModule* module)
+void Manager::add_module(Module* module)
 {
   LMark;
 
@@ -172,7 +166,7 @@ void LoomManager::add_module(LoomModule* module)
 		return;
 	}
 
-	LPrintln("Adding Module: ", ((LoomModule*)module)->get_module_name() );
+	LPrintln("Adding Module: ", module->get_module_name() );
   LMark;
 
 	modules.emplace_back(module);
@@ -182,7 +176,7 @@ void LoomManager::add_module(LoomModule* module)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::list_modules() const
+void Manager::list_modules() const
 {
   LMark;
 	print_device_label();
@@ -190,30 +184,14 @@ void LoomManager::list_modules() const
 	LPrintln("Modules:");
   LMark;
 
-	auto last_category = LoomModule::Category::Unknown;
-  LMark;
-
-	for (auto module : modules) {
+  for (auto module : modules | views::filter(module_exists) ) {
     LMark;
-		auto category = module->category();
-    LMark;
-		if ( category != last_category ) {
-      LMark;
-			LPrintln("\t", LoomModule::enum_category_string(category), "s");//, " (", modules.size(), "):");
-      LMark;
-			last_category = category;
-      LMark;
-		}
-		if ( module != nullptr ) {
-      LMark;
-			LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
-      LMark;
-		}
+		LPrintln( "\t\t[", module->get_active() ? "+" : "-" , "] ", module->get_module_name() );
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_device_name(const char* device_name)
+void Manager::set_device_name(const char* device_name)
 {
   LMark;
 	snprintf(this->device_name, 20, "%s", device_name);
@@ -221,7 +199,7 @@ void LoomManager::set_device_name(const char* device_name)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::get_device_name(char* buf)
+void Manager::get_device_name(char* buf)
 {
   LMark;
 	if(temp_device_name[0] == '\0') sprintf(buf, "%s", device_name);
@@ -235,7 +213,7 @@ void LoomManager::get_device_name(char* buf)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-char* LoomManager::get_device_name()
+char* Manager::get_device_name()
 {
   LMark;
 	char name[20];
@@ -246,7 +224,7 @@ char* LoomManager::get_device_name()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_print_verbosity(const Verbosity v, const bool set_modules)
+void Manager::set_print_verbosity(const Verbosity v, const bool set_modules)
 {
   LMark;
 	print_verbosity = v;
@@ -254,19 +232,15 @@ void LoomManager::set_print_verbosity(const Verbosity v, const bool set_modules)
 
 	if (set_modules) {
     LMark;
-		for (auto module : modules) {
+    for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
       LMark;
-			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-        LMark;
-				((LoomModule*)module)->set_print_verbosity(v);
-        LMark;
-			}
+      module->set_print_verbosity(v);
 		}
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_package_verbosity(const Verbosity v, const bool set_modules)
+void Manager::set_package_verbosity(const Verbosity v, const bool set_modules)
 {
   LMark;
 	package_verbosity = v;
@@ -274,51 +248,45 @@ void LoomManager::set_package_verbosity(const Verbosity v, const bool set_module
 
 	if (set_modules) {
     LMark;
-		for (auto module : modules) {
+    for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
       LMark;
-			if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-        LMark;
-				((LoomModule*)module)->set_package_verbosity(v);
-        LMark;
-			}
+      module->set_package_verbosity(v);
 		}
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::measure()
+void Manager::measure()
 {
-	for (auto module : modules) {
+  for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
+		// Not within LOOM_INCLUDE_SENSORS as Analog and Digital are always enabled
     LMark;
-		if ( !module->get_active() ) continue;
-    LMark;
+    if (dynamic_cast<Loom::Sensor*>(module)) {
+      LMark;
+			((Sensor*)module)->measure();
+		}
 
-		if ( module->category() == LoomModule::Category::Sensor ) {
+#ifdef LOOM_INCLUDE_SENSORS
+		else if (dynamic_cast<Loom::Multiplexer*>(module) ) {
       LMark;
-			((LoomSensor*)module)->measure();
-      LMark;
+			((Multiplexer*)module)->measure();
 		}
-		else if (
+		// else if (dynamic_cast<Loom::TempSync*>(module)) {
+		// 	((TempSync*)module)->measure();
+		// }
+#endif // ifdef LOOM_INCLUDE_SENSORS
+
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+		else if (dynamic_cast<Loom::NTPSync*>(module)) {
       LMark;
-			(module->get_module_type() == LoomModule::Type::Multiplexer) ) {
-			((Loom_Multiplexer*)module)->measure();
-      LMark;
+			((NTPSync*)module)->measure();
 		}
-		else if (module->get_module_type() == LoomModule::Type::NTP) {
-      LMark;
-			((LoomNTPSync*)module)->measure();
-      LMark;
-		}
-		else if (module->get_module_type() == LoomModule::Type::TempSync) {
-      LMark;
-			((LoomTempSync*)module)->measure();
-      LMark;
-		}
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::package(JsonObject json)
+void Manager::package(JsonObject json)
 {
   LMark;
 	// Add device identification to json
@@ -329,18 +297,14 @@ void LoomManager::package(JsonObject json)
 	add_data("Packet", "Number", packet_number++);
   LMark;
 
-	for (auto module : modules) {
+  for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
     LMark;
-		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-      LMark;
-			((LoomModule*)module)->package( json );
-      LMark;
-		}
+    module->package(json);
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-JsonObject LoomManager::package()
+JsonObject Manager::package()
 {
   LMark;
 	doc.clear();
@@ -360,70 +324,7 @@ JsonObject LoomManager::package()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::diagnose(JsonObject json){
-  LMark;
-	SdFat sd;
-  LMark;
-	int countInternet = 0, countSensor = 0;
-  LMark;
-	bool result;
-  LMark;
-	JsonObject data;
-  LMark;
-	// Add device identification to json
-	add_device_ID_to_json(json);
-  LMark;
-
-	for (auto module : modules) { //Restructure for verbosity ?
-    LMark;
-		result = false;
-    LMark;
-		if ( (module != nullptr) && ( ((LoomModule*)module)->get_active() ) ){
-      LMark;
-			module->diagnose(result);
-      LMark;
-			if( (module->get_module_type() == LoomModule::Type::InternetPlat) && !result)
-				countInternet++; //Check internet platforms are connected
-			else if( (module->get_module_type() == LoomModule::Type::Sensor) && !result)
-				countSensor++; // Check sensor values that they are in range
-			else if ( (module->get_module_type() == LoomModule::Type::Multiplexer) && !result)
-				countSensor++; // Check sensor values that they are in range
-      LMark;
-		}
-	}
-	data = get_module_data_object(json, "Diagnostics");
-  LMark;
-	data["All Modules Created"] = (modules.size() == config_count ? true : false);
-  LMark;
-	data["Sensors Operating"] = (countSensor == 0 ? true : false);
-  LMark;
-	data["Internet Connected"] = (countInternet == 0 ? true : false);
-  LMark;
-	data["SD Found"] = (!sd.begin(SD_CS, SD_SCK_MHZ(50))); // Make sure we can communicate with SD
-  LMark;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-JsonObject LoomManager::diagnose(){
-  LMark;
-	doc.clear();
-  LMark;
-	doc["type"] = "data"; // Create a new type for easier parsing by Spool?
-  LMark;
-	JsonObject json = doc.as<JsonObject>();
-  LMark;
-	diagnose(json);
-  LMark;
-
-	if(doc.memoryUsage() > doc.capacity() - 10)
-		LPrintln("Warning: JSON document overflowed! Loom does not have enough memory for the number of sensors you are reading, please use less sensors or submit an issue.");
-  LMark;
-
-	return json;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::add_device_ID_to_json(JsonObject json)
+void Manager::add_device_ID_to_json(JsonObject json)
 {
   LMark;
 	JsonObject timestamp = json.createNestedObject("id");
@@ -431,11 +332,10 @@ void LoomManager::add_device_ID_to_json(JsonObject json)
 	timestamp["name"]		= device_name;
   LMark;
 	timestamp["instance"]	= instance;
-  LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-JsonObject LoomManager::internal_json(const bool clear)
+JsonObject Manager::internal_json(const bool clear)
 {
   LMark;
 	if (clear) {
@@ -455,54 +355,47 @@ JsonObject LoomManager::internal_json(const bool clear)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::publish_all(const JsonObject json)
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+
+bool Manager::publish_all(const JsonObject json)
 {
   LMark;
-	bool result = true;
+	auto is_publish_plat = [](Module *module) { return dynamic_cast<Loom::PublishPlat*>(module) != nullptr; };
+
   LMark;
+	bool result = true;
 	uint8_t count = 0;
   LMark;
-	for (auto module : modules) {
+	for (auto module : modules | views::filter(module_exists) | views::filter(module_active) | views::filter(is_publish_plat) ) {
     LMark;
-		if ( (module != nullptr) &&
-			 (module->category() == LoomModule::Category::PublishPlat) &&
-			 (module->get_active())
-			) {
-      LMark;
-			result &= ((LoomPublishPlat*)module)->publish( json );
-      LMark;
-			count++;
-      LMark;
-		}
+    result &= ((PublishPlat*)module)->publish( json );
+		count++;
 	}
 	return (count > 0) && result;
 }
 
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+
+
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::log_all(const JsonObject json)
+bool Manager::log_all(const JsonObject json)
 {
   LMark;
+	auto is_log_plat = [](Module *module) { return dynamic_cast<Loom::LogPlat*>(module) != nullptr; };
+
 	bool result = true;
-  LMark;
 	uint8_t count = 0;
   LMark;
-	for(auto module : modules) {
-		if( (module!=nullptr) &&
-		(module->category() == LoomModule::Category::LogPlat) &&
-		(module->get_active())
-		){
-      LMark;
-			result &= ((LoomLogPlat*)module)->log( json );
-      LMark;
-			count++;
-      LMark;
-		}
+	for (auto module : modules | views::filter(module_exists) | views::filter(module_active) | views::filter(is_log_plat)) {
+    LMark;
+    result &= ((LogPlat*)module)->log( json );
+		count++;
 	}
 	return (count > 0) && result;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::dispatch(JsonObject json)
+void Manager::dispatch(JsonObject json)
 {
   LMark;
 	print_device_label();
@@ -531,13 +424,8 @@ void LoomManager::dispatch(JsonObject json)
 
 			// Otherwise iterate over modules until module to handle command is found
 			// LPrintln("Try to dispatch to: ", cmd["module"].as<const char*>() );
-			for (auto module : modules) {
-        LMark;
-				if ( (module != nullptr) &&
-					 ( ((LoomModule*)module)->get_active() ) &&
-					 ( strcmp(cmd["module"].as<const char*>(), module->get_module_name() ) == 0 )
-					){
-          LMark;
+      for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
+				if ( strcmp(cmd["module"].as<const char*>(), module->get_module_name() ) == 0 ) {
 					// LPrintln("Found module");
 					if ( module->dispatch( cmd ) ) break; // move to next command
 				}
@@ -547,7 +435,7 @@ void LoomManager::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::dispatch_self(JsonObject json)
+bool Manager::dispatch_self(JsonObject json)
 {
   LMark;
 	JsonArray params = json["params"];
@@ -561,7 +449,7 @@ bool LoomManager::dispatch_self(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::display_data() const
+void Manager::display_data() const
 {
   LMark;
 	print_device_label();
@@ -571,11 +459,10 @@ void LoomManager::display_data() const
 	serializeJsonPretty(doc, Serial);
   LMark;
 	LPrintln();
-  LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::flash_LED(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high) const
+void Manager::flash_LED(const uint8_t count, const uint8_t time_high, const uint8_t time_low, const bool end_high) const
 {
   LMark;
 	for (int i = 0; i < count; i++) {
@@ -597,7 +484,7 @@ void LoomManager::flash_LED(const uint8_t count, const uint8_t time_high, const 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::free_modules()
+void Manager::free_modules()
 {
   LMark;
 	for (auto module : modules) {
@@ -612,41 +499,32 @@ void LoomManager::free_modules()
 	interrupt_manager = nullptr;
   LMark;
 	sleep_manager = nullptr;
-  LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::power_up()
+void Manager::power_up()
 {
   LMark;
 	// Iterate over list of modules powering them on
-	for (auto module : modules) {
+	for (auto module : modules | views::filter(module_exists)) {
     LMark;
-		if ( module != nullptr ){
-      LMark;
-			((LoomModule*)module)->power_up();
-      LMark;
-		}
+    module->power_up();
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::power_down()
+void Manager::power_down()
 {
   LMark;
 	// Iterate over list of modules powering them off
-	for (auto module : modules) {
+  for (auto module : modules | views::filter(module_exists)) {
     LMark;
-		if ( module != nullptr ){
-      LMark;
-			((LoomModule*)module)->power_down();
-      LMark;
-		}
-	}
+    module->power_down();
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::get_config()
+void Manager::get_config()
 {
   LMark;
 	doc.clear();
@@ -668,64 +546,60 @@ void LoomManager::get_config()
 	JsonArray components = json.createNestedArray("components");
   LMark;
 
-	for (auto module : modules) {
+  for (auto module : modules | views::filter(module_exists)) {
     LMark;
-		if ( module != nullptr ){
-      LMark;
-			((LoomModule*)module)->add_config(json);
-      LMark;
-		}
+    module->add_config(json);
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule*	LoomManager::find_module(const LoomModule::Type type, const uint8_t idx) const
-{
-  LMark;
-	uint8_t current = 0;
-  LMark;
-
-	for (auto module : modules) {
-    LMark;
-		if (type == module->get_module_type()) {
-      LMark;
-			if (current == idx) {
-        LMark;
-				return (LoomModule*)module;
-			} else {
-				current++;
-        LMark;
-			}
-		}
-	}
-	return nullptr;
-}
+// Module*	Manager::find_module(const Module::Type type, const uint8_t idx) const
+// {
+//   LMark;
+// 	uint8_t current = 0;
+//   LMark;
+//
+// 	for (auto module : modules) {
+//     LMark;
+// 		if (type == module->get_module_type()) {
+//       LMark;
+// 			if (current == idx) {
+//         LMark;
+// 				return (Module*)module;
+// 			} else {
+// 				current++;
+//         LMark;
+// 			}
+// 		}
+// 	}
+// 	return nullptr;
+// }
+//
+// ///////////////////////////////////////////////////////////////////////////////
+// Module*	Manager::find_module_by_category(const Module::Category category, const uint8_t idx) const
+// {
+//   LMark;
+// 	uint8_t current = 0;
+//   LMark;
+//
+// 	for (auto module : modules) {
+//     LMark;
+// 		if (category == module->category()) {
+//       LMark;
+// 			if (current == idx) {
+//         LMark;
+// 				return (Module*)module;
+// 			} else {
+// 				current++;
+//         LMark;
+// 			}
+// 		}
+// 	}
+// 	return nullptr;
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModule*	LoomManager::find_module_by_category(const LoomModule::Category category, const uint8_t idx) const
-{
-  LMark;
-	uint8_t current = 0;
-  LMark;
-
-	for (auto module : modules) {
-    LMark;
-		if (category == module->category()) {
-      LMark;
-			if (current == idx) {
-        LMark;
-				return (LoomModule*)module;
-			} else {
-				current++;
-        LMark;
-			}
-		}
-	}
-	return nullptr;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void LoomManager::set_interval(const uint16_t ms)
+void Manager::set_interval(const uint16_t ms)
 {
   LMark;
 	interval = ms;
@@ -737,18 +611,18 @@ void LoomManager::set_interval(const uint16_t ms)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::has_module(const LoomModule::Type type) const
-{
-  LMark;
-	for (auto module : modules) {
-    LMark;
-		if (module->get_module_type() == type) return true;
-	}
-	return false;
-}
+// bool Manager::has_module(const Module::Type type) const
+// {
+//   LMark;
+// 	for (auto module : modules) {
+//     LMark;
+// 		if (module->get_module_type() == type) return true;
+// 	}
+// 	return false;
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::parse_config(const char* json_config)
+bool Manager::parse_config(const char* json_config)
 {
   LMark;
 	// Might need to be even larger
@@ -775,7 +649,7 @@ bool LoomManager::parse_config(const char* json_config)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::parse_config_SD(const char* config_file)
+bool Manager::parse_config_SD(const char* config_file)
 {
   LMark;
 	SdFat sd;	// File system object
@@ -834,7 +708,7 @@ bool LoomManager::parse_config_SD(const char* config_file)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::parse_config_json(JsonObject config)
+bool Manager::parse_config_json(JsonObject config)
 {
   LMark;
 	// Remove current modules
@@ -854,7 +728,7 @@ bool LoomManager::parse_config_json(JsonObject config)
     LMark;
 	}
 
-	// Apply LoomManager General Settings
+	// Apply Manager General Settings
 	JsonObject general = config["general"];
   LMark;
 
@@ -899,32 +773,23 @@ bool LoomManager::parse_config_json(JsonObject config)
 	if (print_verbosity == Verbosity::V_HIGH) {
     LMark;
 		LPrintln("= = = = = Generate Objects = = = = =\n");
-    LMark;
 	}
 
 	// Call module factory creating each module
-	for ( JsonVariant module : config["components"].as<JsonArray>()) {
+  for ( JsonVariant module : config["components"].as<JsonArray>()) {
     LMark;
-		if (Factory) {
-      LMark;
-			add_module(Factory->Create(this, module));
-      LMark;
-		}
+    add_module(Registry<Module>::create(module));
 	}
 	config_count = config["components"].as<JsonArray>().size();
   LMark;
 
 	// Sort modules by type
-	std::sort(modules.begin(), modules.end(), module_sort_comp());
-  LMark;
+	// std::sort(modules.begin(), modules.end(), module_sort_comp());
 
 	// Run second stage constructors
-	for (auto module : modules) {
-    LMark;
+  for (auto module : modules) {
 		if ( module != nullptr ) {
-      LMark;
 			module->second_stage_ctor();
-      LMark;
 		}
 	}
 
@@ -936,72 +801,71 @@ bool LoomManager::parse_config_json(JsonObject config)
     LMark;
 	}
 
-	if(FeatherFault::DidFault()) {
-    LMark;
-		doc.clear();
-    LMark;
-		doc["type"] = "data";
-    LMark;
-		JsonObject json = doc.as<JsonObject>();
-    LMark;
+  package_fault();
 
-		add_device_ID_to_json(json);
-    LMark;
-
-		strcpy(temp_device_name, "Errors");
-    LMark;
-
-		LPrintln("Packaging Fault");
-    LMark;
-		FeatherFault::FaultData error = FeatherFault::GetFault();
-    LMark;
-		JsonObject data = get_module_data_object(json, "Error");
-    LMark;
-		if(error.cause == 1) data["Problem"] = "Hanging";
-		else if(error.cause == 2) data["Problem"] = "Hard_Fault";
-		else if(error.cause == 3) data["Problem"] = "Out_of_Memory";
-		else data["Problem"] = "Unknown_Trigger";
-    LMark;
-		data["Corrupted"] = (error.is_corrupted == 1 ? true : false);
-    LMark;
-		data["Failures"] = error.failnum;
-    LMark;
-		data["File_Source"] = error.file;
-    LMark;
-		data["Line_Number"] = error.line;
-    LMark;
-		serializeJsonPretty(json, Serial);
-    LMark;
-		publish_all(json);
-    LMark;
-		for(auto module : modules) {
-      LMark;
-			if( (module!=nullptr) &&
-			(module->get_module_type() == LoomModule::Type::SDCARD) &&
-			(module->get_active())
-			){
-        LMark;
-				File file;
-        LMark;
-				file.open("Errors.csv", O_WRONLY | O_CREAT | O_EXCL);
-        LMark;
-				((Loom_SD*)module)->save_json( json, "Errors.csv" );
-        LMark;
-			}
-		}
-	}
 	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Manager::package_fault(){
+  if(FeatherFault::DidFault()) {
+    auto is_log_plat = [](Module *module) { return dynamic_cast<Loom::LogPlat*>(module) != nullptr; };
+    LMark;
+    doc.clear();
+    LMark;
+    doc["type"] = "data";
+    LMark;
+    JsonObject json = doc.as<JsonObject>();
+    LMark;
 
+    add_device_ID_to_json(json);
+    LMark;
 
+    strcpy(temp_device_name, "Errors");
+    LMark;
 
-
-
+    LPrintln("Packaging Fault");
+    LMark;
+    FeatherFault::FaultData error = FeatherFault::GetFault();
+    LMark;
+    JsonObject data = get_module_data_object(json, "Error");
+    LMark;
+    if(error.cause == 1) data["Problem"] = "Hanging";
+    else if(error.cause == 2) data["Problem"] = "Hard_Fault";
+    else if(error.cause == 3) data["Problem"] = "Out_of_Memory";
+    else data["Problem"] = "Unknown_Trigger";
+    LMark;
+    data["Corrupted"] = (error.is_corrupted == 1 ? true : false);
+    LMark;
+    data["Failures"] = error.failnum;
+    LMark;
+    data["File_Source"] = error.file;
+    LMark;
+    data["Line_Number"] = error.line;
+    LMark;
+    serializeJsonPretty(json, Serial);
+    LMark;
+    #if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+    publish_all(json);
+    #endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+    LMark;
+    for (auto module : modules | views::filter(module_exists) | views::filter(module_active) | views::filter(is_log_plat)) {
+      LMark;
+      if(dynamic_cast<Loom::SD*>(module)){
+        LMark;
+        File file;
+        LMark;
+        file.open("Errors.csv", O_WRONLY | O_CREAT | O_EXCL);
+        LMark;
+        ((SD*)module)->save_json( json, "Errors.csv" );
+        LMark;
+      }
+    }
+  }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::parse_config_serial()
+bool Manager::parse_config_serial()
 {
   LMark;
 	flash_LED(4, 200, 100, true);
@@ -1047,7 +911,7 @@ bool LoomManager::parse_config_serial()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomManager::check_serial_for_config()
+bool Manager::check_serial_for_config()
 {
   LMark;
 	if (Serial.available()) {

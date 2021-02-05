@@ -1,28 +1,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7263.cpp
-/// @brief		File for Loom_AS7263 implementation.
+/// @file		AS7263.cpp
+/// @brief		File for AS7263 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "AS7263.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7263::Loom_AS7263(
-LoomManager* manager,
-const byte i2c_address,
+AS7263::AS7263(
+		const byte			i2c_address,
 		const uint8_t		mux_port,
 		const bool			use_bulb,
 		const uint8_t		gain,
 		const uint8_t		mode,
 		const uint8_t		integration_time
 	)
-	: LoomI2CSensor(manager, "AS7263", Type::AS7263, i2c_address, mux_port )
+	: I2CSensor("AS7263", i2c_address, mux_port)
 	, use_bulb(use_bulb)
 	, gain(gain)
 	, mode(mode)
@@ -37,33 +39,29 @@ const byte i2c_address,
 	print_module_label();
   LMark;
 	LPrintln("Initialized");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7263::Loom_AS7263(LoomManager* manager, JsonArrayConst p)
-	: Loom_AS7263(manager, EXPAND_ARRAY(p, 6) ) {}
+AS7263::AS7263(JsonArrayConst p)
+	: AS7263(EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::print_config() const
+void AS7263::print_config() const
 {
   LMark;
-	LoomI2CSensor::print_config();
+	I2CSensor::print_config();
   LMark;
 	LPrintln("\tGain     : ", gain);
   LMark;
 	LPrintln("\tMode     : ", mode);
   LMark;
 	LPrintln("\tUse Bulb : ", (use_bulb) ? "True" : "False");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::print_measurements() const
+void AS7263::print_measurements() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("Measurements:");
   LMark;
 	LPrintln("\tNIR R: ", nir_vals[0]);
@@ -77,20 +75,18 @@ void Loom_AS7263::print_measurements() const
 	LPrintln("\tNIR V: ", nir_vals[4]);
   LMark;
 	LPrintln("\tNIR W: ", nir_vals[5]);
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::measure()
+void AS7263::measure()
 {
   LMark;
 	if (use_bulb) {
    	LMark;
 		inst_AS7263.takeMeasurementsWithBulb();
-  	LMark;
 	} else {
+		LMark;
 		inst_AS7263.takeMeasurements();
-  	LMark;
 	}
 
 	nir_vals[0] = inst_AS7263.getR();
@@ -104,11 +100,10 @@ void Loom_AS7263::measure()
 	nir_vals[4] = inst_AS7263.getV();
   LMark;
 	nir_vals[5] = inst_AS7263.getW();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::package(JsonObject json)
+void AS7263::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
@@ -124,13 +119,8 @@ void Loom_AS7263::package(JsonObject json)
 	data["NIR_V"] = nir_vals[4];
   LMark;
 	data["NIR_W"] = nir_vals[5];
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7263::diagnose(bool& result){
-  LMark;
-	// implement here
-}
 
-///////////////////////////////////////////////////////////////////////////////
+#endif // ifdef LOOM_INCLUDE_SENSORS

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_WarmUp.cpp
+/// @file		WarmUp.cpp
 /// @brief	Source file for Loom Module Warmup mixin interface.
 /// @author		C. Greyston Brady
 /// @date		  2020
@@ -10,14 +10,15 @@
 
 #include "WarmUp.h"
 
-#include "WarmUp_Manager.h"
+#include "WarmUpManager.h"
 #include "Manager.h"
 
-WarmUp::WarmUp(LoomManager* manager, int period)
+using namespace Loom;
+
+WarmUp::WarmUp(Manager* manager, int period)
   : period(period) {
     LMark;
-    static_cast<Loom_WarmUp_Manager*>(manager->find_module(LoomModule::Type::WarmUp_Manager))->Register_WarmUp(this);
-    LMark;
+    manager->get<WarmUpManager>()->Register_WarmUp(this);
   }
 
 int WarmUp::get_period() {

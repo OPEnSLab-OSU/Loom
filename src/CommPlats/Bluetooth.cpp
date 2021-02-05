@@ -1,25 +1,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Bluetooth.cpp
-/// @brief		File for Loom_Bluetooth implementation. Needs more work.
+/// @file		Bluetooth.cpp
+/// @brief		File for Bluetooth implementation. Needs more work.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_RADIOS
+#pragma once
+
 #include "Bluetooth.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Bluetooth::Loom_Bluetooth(
-		LoomManager* manager,
+Bluetooth::Bluetooth(
 		const uint16_t 		max_message_len,
 		const uint8_t		spi_CS,
 		const uint8_t		spi_IRQ,
 		const uint8_t		spi_RST
 
 	)
-	: LoomCommPlat(manager, "Bluetooth", Type::Bluetooth, max_message_len )
+	: CommPlat("Bluetooth", max_message_len )
 	, spi_CS(spi_CS)
 	, spi_IRQ(spi_IRQ)
 	, spi_RST(spi_RST)
@@ -34,29 +39,19 @@ Loom_Bluetooth::Loom_Bluetooth(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Bluetooth::Loom_Bluetooth(LoomManager* manager, JsonArrayConst p)
-	: Loom_Bluetooth(manager, EXPAND_ARRAY(p, 4) ) {}
+Bluetooth::Bluetooth(JsonArrayConst p)
+	: Bluetooth(EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::add_config(JsonObject json)
+void Bluetooth::print_config() const
 {
   LMark;
-	// add_config_aux(json, module_name,
-	// 	module_name,
-	// 	max_message_len, spi_CS, spi_IRQ, spi_RST
-	// );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::print_config() const
-{
-  LMark;
-	LoomCommPlat::print_config();
+	CommPlat::print_config();
  	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Bluetooth::connect(const uint16_t connect_timeout)
+void Bluetooth::connect(const uint16_t connect_timeout)
 {
   LMark;
 	uint32_t timeout = millis();
@@ -74,7 +69,7 @@ void Loom_Bluetooth::connect(const uint16_t connect_timeout)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-int8_t Loom_Bluetooth::getCommand(const uint16_t max_timeout )
+int8_t Bluetooth::getCommand(const uint16_t max_timeout )
 {
   LMark;
 	// printCommands();
@@ -132,7 +127,7 @@ int8_t Loom_Bluetooth::getCommand(const uint16_t max_timeout )
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Bluetooth::test_send(const uint8_t val)
+bool Bluetooth::test_send(const uint8_t val)
 {
   LMark;
 	if ( BLE.isConnected() ) {
@@ -146,7 +141,7 @@ bool Loom_Bluetooth::test_send(const uint8_t val)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Bluetooth::test_send_str(const char* string)
+bool Bluetooth::test_send_str(const char* string)
 {
   LMark;
 	if ( BLE.isConnected() ) {
@@ -160,3 +155,5 @@ bool Loom_Bluetooth::test_send_str(const char* string)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_RADIOS

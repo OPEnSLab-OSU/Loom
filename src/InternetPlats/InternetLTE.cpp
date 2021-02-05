@@ -1,27 +1,34 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_IntenertLTE.cpp
-/// @brief		File for Loom_LTE implementation.
+/// @brief		File for LTE implementation.
 /// @author		Adam Kerr, based on work by Noah Koontz
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_LTE
+
 #include "InternetLTE.h"
+#include "Trust_Anchors.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
+
+///////////////////////////////////////////////////////////////////////////////
+
 #define SerialAT Serial1
 TinyGsm modem(SerialAT);
 
-
 ///////////////////////////////////////////////////////////////////////////////
-Loom_LTE::Loom_LTE(
-    LoomManager* manager,
+LTE::LTE(
     const char* apn,
     const char* user,
     const char* pass,
     const int analog_pin
   )
-  : LoomInternetPlat(manager, "LTE", Type::LTE)
+  : InternetPlat("LTE")
   , APN(apn)
   , gprsUser(user)
   , gprsPass(pass)
@@ -63,12 +70,12 @@ Loom_LTE::Loom_LTE(
 
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_LTE::Loom_LTE(LoomManager* manager, JsonArrayConst p)
-  : Loom_LTE(manager, EXPAND_ARRAY(p, 3) ) {}
+LTE::LTE(JsonArrayConst p)
+  : LTE(EXPAND_ARRAY(p, 3) ) {}
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LTE::connect()
+void LTE::connect()
 {
   LMark;
   //Try to connect, attempt connection up to 5 times
@@ -116,7 +123,7 @@ void Loom_LTE::connect()
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LTE::disconnect(){
+void LTE::disconnect(){
   LMark;
   // tells the SARA-R4 to stop
   modem.gprsDisconnect();
@@ -127,7 +134,7 @@ void Loom_LTE::disconnect(){
 
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LTE::is_connected() const
+bool LTE::is_connected() const
 {
   LMark;
   return modem.isGprsConnected();
@@ -136,7 +143,7 @@ bool Loom_LTE::is_connected() const
 
 ///////////////////////////////////////////////////////////////////////////////
 
-LoomInternetPlat::UDPPtr Loom_LTE::open_socket(const uint port)
+InternetPlat::UDPPtr LTE::open_socket(const uint port)
 {
     LMark;
   //Since the TinyGSM library currently does not support UDP socket functionality, this method will always return a null pointer and fail.
@@ -151,10 +158,10 @@ LoomInternetPlat::UDPPtr Loom_LTE::open_socket(const uint port)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LTE::print_config() const
+void LTE::print_config() const
 {
   LMark;
-  LoomInternetPlat::print_config();
+  InternetPlat::print_config();
   LMark;
   LPrint("\tAPN:               :", APN, '\n');
   LMark;
@@ -162,10 +169,10 @@ void Loom_LTE::print_config() const
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LTE::print_state() const
+void LTE::print_state() const
 {
   LMark;
-  LoomInternetPlat::print_state();
+  InternetPlat::print_state();
   LMark;
   LPrintln("\tConnected : ", (modem.isGprsConnected()) ? "True" : "False" );
   LMark;
@@ -179,7 +186,7 @@ void Loom_LTE::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LTE::power_up()
+void LTE::power_up()
 {
   LMark;
   if(!is_connected()){
@@ -199,7 +206,7 @@ void Loom_LTE::power_up()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LTE::power_down()
+void LTE::power_down()
 {
   print_module_label();
   LMark;
@@ -214,3 +221,5 @@ void Loom_LTE::power_down()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_LTE

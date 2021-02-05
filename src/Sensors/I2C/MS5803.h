@@ -1,28 +1,29 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MS5803.h
-/// @brief		File for Loom_MS5803 definition.
+/// @file		MS5803.h
+/// @brief		File for MS5803 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <MS5803_02.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// MS5803 Atmospheric Pressure / Temperature sensor module.
 ///
-/// @attention	Library is modified to support different I2C addresses and will not
+/// @attention	Library is modified to support different I2C addresses and will not 
 ///				compile with Loom without the change.
-///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip)
+///				The modifed verision can be found in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip) 
 ///				repository
 ///
 /// @par Resources
@@ -33,9 +34,8 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ms5803-atmospheric-pressure--temperature-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_MS5803 : public LoomI2CSensor
+class MS5803 : public I2CSensor
 {
-
 protected:
 
 	MS_5803		inst_MS5803;	///< Underlying MS5803 sensor manager instance
@@ -46,7 +46,7 @@ protected:
 	float		temp;			///< Measured temperature. Units: °C.
 
 public:
-
+	
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -55,19 +55,18 @@ public:
 	///
 	/// @param[in]	i2c_address				Set(Int) | <0x76> | {0x76, 0x77} | I2C address (0x76 if CSB (pin 3) is High, 0x77 if CSB is Low)
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	Loom_MS5803(
-LoomManager* manager,
-const byte i2c_address		= 0x76,
-			const uint8_t		mux_port		= 255
+	MS5803(
+			const byte		i2c_address	= 0x76,
+			const uint8_t	mux_port	= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_MS5803(LoomManager* manager, JsonArrayConst p);
+	MS5803(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_MS5803() = default;
+	~MS5803() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -75,7 +74,6 @@ const byte i2c_address		= 0x76,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
-	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -88,7 +86,7 @@ const byte i2c_address		= 0x76,
 /*@{*/ //======================================================================
 
 	/// Get the temperature reading.
-	/// Used by the LoomTempSync module to provide temperature
+	/// Used by the TempSync module to provide temperature
 	/// to other modules.
 	/// @return	The measured temperature
 	float		get_temperature() const { return temp; }
@@ -96,3 +94,13 @@ const byte i2c_address		= 0x76,
 private:
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, MS5803, "MS5803");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
+
+

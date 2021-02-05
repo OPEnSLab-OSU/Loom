@@ -1,63 +1,55 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Decagon_GS3.cpp
-/// @brief		File for Loom_DecagonGS3 implementation. Incomplete.
+/// @file		Decagon_GS3.cpp
+/// @brief		File for DecagonGS3 implementation. Incomplete.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
+
 #include "Decagon_GS3.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_DecagonGS3::Loom_DecagonGS3(
-		LoomManager* manager,
-		const uint8_t			num_samples
-	)
-	: LoomSDI12Sensor(manager, "GS3", Type::DecagonGS3, num_samples )
+DecagonGS3::DecagonGS3(const uint8_t num_samples)
+	: SDI12Sensor("GS3", num_samples)
 {
-  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_DecagonGS3::Loom_DecagonGS3(LoomManager* manager, JsonArrayConst p)
-	: Loom_DecagonGS3(manager, (uint8_t)p[0] ) {}
+DecagonGS3::DecagonGS3(JsonArrayConst p)
+	: DecagonGS3((uint8_t)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DecagonGS3::print_config() const
+void DecagonGS3::print_config() const
 {
-  LMark;
-	LoomSDI12Sensor::print_config();
- 	LMark;
+	SDI12Sensor::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DecagonGS3::print_measurements() const
+void DecagonGS3::print_measurements() const
 {
-  LMark;
-
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_DecagonGS3::measure()
-{
-  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DecagonGS3::package(JsonObject json)
+void DecagonGS3::measure()
 {
-  LMark;
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void DecagonGS3::package(JsonObject json)
+{
 	// package_json(json, module_name, "Temp", temperature);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_DecagonGS3::diagnose(bool& result){
-  LMark;
-	// implement here
-}
 
-///////////////////////////////////////////////////////////////////////////////
+#endif // ifdef LOOM_INCLUDE_SENSORS

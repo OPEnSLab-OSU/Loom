@@ -1,18 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MB1232.h
-/// @brief		File for Loom_MB1232 definition.
+/// @file		MB1232.h
+/// @brief		File for MB1232 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -25,15 +26,14 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mb1232-sonar)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_MB1232 : public LoomI2CSensor
+class MB1232 : public I2CSensor
 {
-
 protected:
 
 	uint16_t	range;		///< Measure distance. Units: cm.
 
 public:
-
+	
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -42,19 +42,18 @@ public:
 	///
 	/// @param[in]	i2c_address				Set(Int) | <0x70> | {0x70} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	Loom_MB1232(
-LoomManager* manager,
-const byte i2c_address		= 0x70,
-			const uint8_t		mux_port		= 255
+	MB1232(
+			const byte		i2c_address		= 0x70,
+			const uint8_t	mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_MB1232(LoomManager* manager, JsonArrayConst p);
+	MB1232(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_MB1232() = default;
+	~MB1232() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -62,7 +61,6 @@ const byte i2c_address		= 0x70,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
-	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -73,3 +71,13 @@ const byte i2c_address		= 0x70,
 private:
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, MB1232, "MB1232");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
+
+

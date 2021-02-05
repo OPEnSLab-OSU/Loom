@@ -1,14 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Multiplexer.cpp
-/// @brief		File for Loom_Multiplexer implementation.
+/// @file		Multiplexer.cpp
+/// @brief		File for Multiplexer implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
+
 #include "Multiplexer.h"
+#include "Module_Factory.h"
 
 // I2C Sensor files
 #include "Sensors/I2C/AS7262.h"
@@ -30,11 +33,13 @@
 
 #include <Wire.h>
 
+using namespace Loom;
 
+///////////////////////////////////////////////////////////////////////////////
 
 // Used to optimize searching for sensors:
 // search addresses in array rather than 0-127
-const std::array<byte, 21> Loom_Multiplexer::known_addresses =
+const std::array<byte, 21> Multiplexer::known_addresses =
 {
 	0x10, ///< ZXGESTURESENSOR
 	0x11, ///< ZXGESTURESENSOR
@@ -59,7 +64,7 @@ const std::array<byte, 21> Loom_Multiplexer::known_addresses =
 	0x77  ///< MS5803
 };
 
-const std::array<byte, 9>  Loom_Multiplexer::alt_addresses = {
+const std::array<byte, 9>  Multiplexer::alt_addresses = {
 	0x70,
 	0x71,
 	0x72,
@@ -72,18 +77,17 @@ const std::array<byte, 9>  Loom_Multiplexer::alt_addresses = {
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Multiplexer::Loom_Multiplexer(
-		LoomManager* 	manager,
+Multiplexer::Multiplexer(
 		const byte					i2c_address,
 		const uint8_t				num_ports,
 		const bool					dynamic_list,
 		const uint					update_period
 	)
-	: LoomModule(manager, "Multiplexer", Type::Multiplexer )
+	: Module("Multiplexer")
 	, i2c_address(i2c_address)
 	, num_ports(num_ports)
 	, update_period(update_period)
-	, sensors(new LoomI2CSensor*[num_ports])
+	, sensors(new I2CSensor*[num_ports])
 	, control_port(num_ports)
 {
   LMark;
@@ -112,11 +116,11 @@ Loom_Multiplexer::Loom_Multiplexer(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Multiplexer::Loom_Multiplexer(LoomManager* manager, JsonArrayConst p)
-	: Loom_Multiplexer(manager, EXPAND_ARRAY(p, 4) ) {}
+Multiplexer::Multiplexer(JsonArrayConst p)
+	: Multiplexer(EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Multiplexer::~Loom_Multiplexer()
+Multiplexer::~Multiplexer()
 {
   LMark;
 	// Free any sensors
@@ -132,85 +136,85 @@ Loom_Multiplexer::~Loom_Multiplexer()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, const uint8_t port)
+I2CSensor* Multiplexer::generate_sensor_object(const byte i2c_address, const uint8_t port)
 {
     LMark;
 		LPrintln("Adding Sensor at address:", i2c_address);
     LMark;
 		switch (i2c_address) {
       LMark;
-			case 0x10 : return new Loom_ZXGesture(device_manager, i2c_address, port);	break;  // ZXGesture
+			case 0x10 : return new ZXGesture(i2c_address, port);	break;  // ZXGesture
       LMark;
-			case 0x11 : return new Loom_ZXGesture(device_manager, i2c_address, port);	break;	// ZXGesture
+			case 0x11 : return new ZXGesture(i2c_address, port);	break;	// ZXGesture
       LMark;
-			case 0x19 : return new Loom_LIS3DH(device_manager, i2c_address, port);		break;	// LIS3DH
+			case 0x19 : return new LIS3DH(i2c_address, port);		break;	// LIS3DH
       LMark;
 
 			case 0x1C : // MMA8451 / FXOS8700
         LMark;
-				if (i2c_0x1C == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(device_manager, i2c_address, port);	// MMA8451
+				if (i2c_0x1C == I2C_Selection::L_MMA8451)  return new MMA8451(i2c_address, port);	// MMA8451
         LMark;
-				if (i2c_0x1C == I2C_Selection::L_FXOS8700) return new Loom_FXOS8700(device_manager, i2c_address, port);	// FXOS8700
+				if (i2c_0x1C == I2C_Selection::L_FXOS8700) return new FXOS8700(i2c_address, port);	// FXOS8700
         LMark;
 			break;
 
 			case 0x1D : // MMA8451 / FXOS8700
         LMark;
-				if (i2c_0x1D == I2C_Selection::L_MMA8451)  return new Loom_MMA8451(device_manager, i2c_address, port);	// MMA8451
+				if (i2c_0x1D == I2C_Selection::L_MMA8451)  return new MMA8451(i2c_address, port);	// MMA8451
         LMark;
-				if (i2c_0x1D == I2C_Selection::L_FXOS8700) return new Loom_FXOS8700(device_manager, i2c_address, port);	// FXOS8700
+				if (i2c_0x1D == I2C_Selection::L_FXOS8700) return new FXOS8700(i2c_address, port);	// FXOS8700
         LMark;
 			break;
 
-			case 0x1E : return new Loom_FXOS8700(device_manager, i2c_address, port);	break;		// FXOS8700
+			case 0x1E : return new FXOS8700(i2c_address, port);	break;		// FXOS8700
       LMark;
-			case 0x1F : return new Loom_FXOS8700(device_manager, i2c_address, port);	break;		// FXOS8700
+			case 0x1F : return new FXOS8700(i2c_address, port);	break;		// FXOS8700
       LMark;
-			case 0x20 : return new Loom_FXAS21002(device_manager, i2c_address, port);	break;		// FXAS21002
+			case 0x20 : return new FXAS21002(i2c_address, port);	break;		// FXAS21002
       LMark;
-			case 0x21 : return new Loom_FXAS21002(device_manager, i2c_address, port);	break;		// FXAS21002
+			case 0x21 : return new FXAS21002(i2c_address, port);	break;		// FXAS21002
       LMark;
 
 			case 0x29 : // TSL2561 / TSL2591
         LMark;
-				if (i2c_0x29 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(device_manager, i2c_address, port);	// TSL2561
+				if (i2c_0x29 == I2C_Selection::L_TSL2561) return new TSL2561(i2c_address, port);	// TSL2561
         LMark;
-				if (i2c_0x29 == I2C_Selection::L_TSL2591) return new Loom_TSL2591(device_manager, i2c_address, port);	// TSL2591
+				if (i2c_0x29 == I2C_Selection::L_TSL2591) return new TSL2591(i2c_address, port);	// TSL2591
         LMark;
 			break;
 
-			case 0x36 : return new Loom_STEMMA(device_manager, i2c_address, port);	break; // STEMMA
+			case 0x36 : return new STEMMA(i2c_address, port);	break; // STEMMA
       LMark;
-			case 0x39 : return new Loom_TSL2561(device_manager, i2c_address, port);	break;	// TSL2561
+			case 0x39 : return new TSL2561(i2c_address, port);	break;	// TSL2561
       LMark;
-			case 0x40 : return new Loom_TMP007(device_manager, i2c_address, port);	break;	// TMP007
+			case 0x40 : return new TMP007(i2c_address, port);	break;	// TMP007
       LMark;
-			case 0x44 : return new Loom_SHT31D(device_manager, i2c_address, port);	break;	// SHT31D
+			case 0x44 : return new SHT31D(i2c_address, port);	break;	// SHT31D
       LMark;
-			case 0x45 : return new Loom_SHT31D(device_manager, i2c_address, port);	break;	// SHT31D
+			case 0x45 : return new SHT31D(i2c_address, port);	break;	// SHT31D
       LMark;
 
 			case 0x49 : // TSL2561 / AS726X / AS7265X
         LMark;
-				if (i2c_0x49 == I2C_Selection::L_TSL2561) return new Loom_TSL2561(device_manager, i2c_address, port);	// TSL2561
+				if (i2c_0x49 == I2C_Selection::L_TSL2561) return new TSL2561(i2c_address, port);	// TSL2561
         LMark;
-				if (i2c_0x49 == I2C_Selection::L_AS7262 ) return new Loom_AS7262(device_manager, i2c_address, port);		// AS7262
+				if (i2c_0x49 == I2C_Selection::L_AS7262 ) return new AS7262(i2c_address, port);		// AS7262
         LMark;
-				if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new Loom_AS7263(device_manager, i2c_address, port);		// AS7263
+				if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new AS7263(i2c_address, port);		// AS7263
         LMark;
-				if (i2c_0x49 == I2C_Selection::L_AS7265X) return new Loom_AS7265X(device_manager, i2c_address, port);	// AS7265X
+				if (i2c_0x49 == I2C_Selection::L_AS7265X) return new AS7265X(i2c_address, port);	// AS7265X
         LMark;
 			break;
 
-			case 0x68 : return new Loom_MPU6050(device_manager, i2c_address, port);	break;	// MPU6050
+			case 0x68 : return new MPU6050(i2c_address, port);	break;	// MPU6050
       LMark;
-			case 0x69 : return new Loom_MPU6050(device_manager, i2c_address, port);	break;	// MPU6050
+			case 0x69 : return new MPU6050(i2c_address, port);	break;	// MPU6050
       LMark;
-			case 0x70 : return new Loom_MB1232(device_manager, i2c_address, port);	break;	// MB1232
+			case 0x70 : return new MB1232(i2c_address, port);	break;	// MB1232
       LMark;
-			case 0x76 : return new Loom_MS5803(device_manager, i2c_address, port);	break;	// MS5803
+			case 0x76 : return new MS5803(i2c_address, port);	break;	// MS5803
       LMark;
-			case 0x77 : return new Loom_MS5803(device_manager, i2c_address, port);	break;	// MS5803
+			case 0x77 : return new MS5803(i2c_address, port);	break;	// MS5803
 
 			default : return nullptr;
 		}
@@ -218,10 +222,10 @@ LoomI2CSensor* Loom_Multiplexer::generate_sensor_object(const byte i2c_address, 
 
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::print_config() const
+void Multiplexer::print_config() const
 {
   LMark;
-	LoomModule::print_config();
+	Module::print_config();
   LMark;
 
 	LPrint("\tI2C Address        : ");
@@ -231,11 +235,10 @@ void Loom_Multiplexer::print_config() const
 	LPrintln("\tNum Ports          : ", num_ports);
   LMark;
 	LPrintln("\tUpdate Period (ms) : ", update_period);
-  LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::print_state() const
+void Multiplexer::print_state() const
 {
   LMark;
 	print_module_label();
@@ -259,11 +262,10 @@ void Loom_Multiplexer::print_state() const
 		}
 	}
 	LPrintln();
-  LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::measure()
+void Multiplexer::measure()
 {
   LMark;
 	refresh_sensors();
@@ -282,7 +284,7 @@ void Loom_Multiplexer::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::print_measurements() const
+void Multiplexer::print_measurements() const
 {
   LMark;
 	for (auto i = 0U; i < num_ports; i++) {
@@ -298,7 +300,7 @@ void Loom_Multiplexer::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::package(JsonObject json)
+void Multiplexer::package(JsonObject json)
 {
   LMark;
 	for (auto i = 0U; i < num_ports; i++) {
@@ -314,13 +316,7 @@ void Loom_Multiplexer::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::diagnose(bool& result){
-  LMark;
-	// implement here
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::get_sensor_list(JsonObject json)
+void Multiplexer::get_sensor_list(JsonObject json)
 {
   LMark;
 	refresh_sensors();
@@ -346,14 +342,14 @@ void Loom_Multiplexer::get_sensor_list(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::refresh_sensors()
+void Multiplexer::refresh_sensors()
 {
   LMark;
 	byte previous, current;
   LMark;
 
-    // update conflicts
-    i2c_conflicts = find_i2c_conflicts();
+  // update conflicts
+  i2c_conflicts = find_i2c_conflicts();
   LMark;
 
 	for (auto i = 0; i < num_ports; i++) {
@@ -396,7 +392,6 @@ void Loom_Multiplexer::refresh_sensors()
 				LPrintln("Free Memory of ", sensors[i]->get_module_name() );
         LMark;
 				delete sensors[i];
-        LMark;
 			}
 
 			// Create new sensor object and setup (in constructor)
@@ -431,7 +426,6 @@ void Loom_Multiplexer::refresh_sensors()
 					delete sensors[i];
           LMark;
 					sensors[i] = nullptr;
-          LMark;
 				}
 
 			}
@@ -443,7 +437,7 @@ void Loom_Multiplexer::refresh_sensors()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
+byte Multiplexer::get_i2c_on_port(const uint8_t port) const
 {
   LMark;
 	tca_select(port);
@@ -454,7 +448,7 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 	// Iterate through known addresses try to get confirmation from sensor
 	// for (auto addr = 1; addr <= 127; addr++) {
 	for (const auto addr : known_addresses) {
-         LMark;
+        LMark;
         // if this address is on the conflict list, skip it
         if (i2c_conflict(addr) || addr == this->i2c_address) { continue; }
 
@@ -470,7 +464,7 @@ byte Loom_Multiplexer::get_i2c_on_port(const uint8_t port) const
 	return 0x00; // No sensor found
 }
 
-bool Loom_Multiplexer::i2c_conflict(byte addr) const {
+bool Multiplexer::i2c_conflict(byte addr) const {
     LMark;
     for (byte conflict : i2c_conflicts)
         if (conflict == addr)
@@ -479,7 +473,7 @@ bool Loom_Multiplexer::i2c_conflict(byte addr) const {
     return false;
 }
 
-std::vector<byte> Loom_Multiplexer::find_i2c_conflicts() {
+std::vector<byte> Multiplexer::find_i2c_conflicts() {
     LMark;
 
     tca_deselect();
@@ -511,7 +505,7 @@ std::vector<byte> Loom_Multiplexer::find_i2c_conflicts() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::tca_select(const uint8_t port) const
+void Multiplexer::tca_select(const uint8_t port) const
 {
   LMark;
 	if (port < num_ports) {
@@ -521,12 +515,11 @@ void Loom_Multiplexer::tca_select(const uint8_t port) const
 		Wire.write(1 << port);
     LMark;
 		Wire.endTransmission();
-    LMark;
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Multiplexer::tca_deselect() const
+void Multiplexer::tca_deselect() const
 {
   LMark;
 	Wire.beginTransmission(i2c_address);
@@ -539,7 +532,7 @@ void Loom_Multiplexer::tca_deselect() const
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_Multiplexer::power_up() {
+void Multiplexer::power_up() {
   LMark;
 // Begin I2C
 	Wire.begin();
@@ -580,6 +573,8 @@ void Loom_Multiplexer::power_up() {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void Loom_Multiplexer::power_down() {
+void Multiplexer::power_down() { }
 
-}
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

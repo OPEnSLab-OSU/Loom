@@ -10,6 +10,8 @@
 
 #include "Misc.h"
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 void print_array(const String data [], const int len, const int format)
 {
@@ -24,3 +26,5 @@ void print_array(const String data [], const int len, const int format)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

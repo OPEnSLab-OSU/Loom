@@ -1,28 +1,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_TSL2561.cpp
-/// @brief		File for Loom_TSL2561 implementation.
+/// @file		TSL2561.cpp
+/// @brief		File for TSL2561 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "TSL2561.h"
+#include "Module_Factory.h"
 
 #include <Adafruit_Sensor.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_TSL2561::Loom_TSL2561(
-LoomManager* manager,
-const byte i2c_address,
-		const uint8_t		mux_port,
-		const uint8_t		gain,
-		const uint8_t		resolution
+TSL2561::TSL2561(
+		const byte		i2c_address,
+		const uint8_t	mux_port,
+		const uint8_t	gain,
+		const uint8_t	resolution
 	)
-	: LoomI2CSensor(manager, "TSL2561", Type::TSL2561, i2c_address, mux_port )
+	: I2CSensor("TSL2561", i2c_address, mux_port)
 	, gain(gain)
 	, resolution(resolution)
 	, inst_TSL2561( (i2c_address == 0x29)
@@ -41,10 +43,9 @@ const byte i2c_address,
 	// }
 
 	bool setup = inst_TSL2561.begin();
-  LMark;
 
 	if (setup) {
-   LMark;
+   	LMark;
 		switch (gain) {
 			case 1  : inst_TSL2561.setGain(TSL2561_GAIN_1X); break;
 			case 16 : inst_TSL2561.setGain(TSL2561_GAIN_16X); break;
@@ -59,34 +60,28 @@ const byte i2c_address,
 	}
 
 	if (!setup) active = false;
-  LMark;
 
 	print_module_label();
-  LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_TSL2561::Loom_TSL2561(LoomManager* manager, JsonArrayConst p)
-	: Loom_TSL2561(manager, EXPAND_ARRAY(p, 4) ) {}
+TSL2561::TSL2561(JsonArrayConst p)
+	: TSL2561(EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::print_measurements() const
+void TSL2561::print_measurements() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("Measurements:");
   LMark;
 	LPrintln("\tLightIR   : ", lightIR,   " lux");
   LMark;
 	LPrintln("\tLightFull : ", lightFull, " lux");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::measure()
+void TSL2561::measure()
 {
   LMark;
 	uint16_t IR_ar[5], Full_ar[5];
@@ -95,17 +90,15 @@ void Loom_TSL2561::measure()
 	for (int i = 0; i < 5; i++) {
    	LMark;
 		inst_TSL2561.getLuminosity(&Full_ar[i], &IR_ar[i]);
-  	LMark;
 	}
 
 	lightIR   = (IR_ar[0]   + IR_ar[1]   + IR_ar[2]   + IR_ar[3]   + IR_ar[4])   / 5;
   LMark;
 	lightFull = (Full_ar[0] + Full_ar[1] + Full_ar[2] + Full_ar[3] + Full_ar[4]) / 5;
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::package(JsonObject json)
+void TSL2561::package(JsonObject json)
 {
   LMark;
 	int lux = inst_TSL2561.calculateLux(lightFull, lightIR);
@@ -119,13 +112,8 @@ void Loom_TSL2561::package(JsonObject json)
 	data["Full"] = lightFull;
   LMark;
 	data["Lux"]  = lux;
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_TSL2561::diagnose(bool& result){
-  LMark;
-	// implement here
-}
 
-///////////////////////////////////////////////////////////////////////////////
+#endif // ifdef LOOM_INCLUDE_SENSORS

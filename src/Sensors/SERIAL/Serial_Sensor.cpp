@@ -8,41 +8,41 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
+
 #include "Serial_Sensor.h"
 
-////////////////////////////////////////////////////////////////////////////
-// --- CONSTRUCTOR ---
-LoomSerialSensor::LoomSerialSensor(
-        LoomManager* Manager,
-        const char*        module_name,
-        const LoomModule::Type module_type,
-        const uint8_t       num_samples
-    )
-    : LoomSensor(Manager, module_name, module_type, num_samples ) {}
+using namespace Loom;
 
 ////////////////////////////////////////////////////////////////////////////
-// --- DESTRUCTOR ---
-LoomSerialSensor::~LoomSerialSensor() {
-    LMark;
+SerialSensor::SerialSensor(
+        const char*            module_name,
+        const uint8_t          num_samples
+    )
+    : Sensor(module_name, num_samples) {}
+
+////////////////////////////////////////////////////////////////////////////
+SerialSensor::~SerialSensor() {
+     LMark;
     delete sensor_serial;
-    LMark;
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// -- PUBLIC METHODS --
-void LoomSerialSensor::print_config() const
+void SerialSensor::print_config() const
 {
     LMark;
-    LoomSensor::print_config();
+    Sensor::print_config();
     LMark;
     LPrint('\t', "Serial Set         : ");
     LMark;
     LPrintln(sensor_serial != nullptr);
-    LMark;
 }
 
-void LoomSerialSensor::set_serial(Stream *stream) {
+void SerialSensor::set_serial(Stream *stream) {
     LMark;
     sensor_serial = stream;
-    LMark;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

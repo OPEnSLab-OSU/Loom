@@ -15,6 +15,7 @@
 #include <ArduinoJson.h>
 #include "Macros.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Add an list of alternating keys and values to a json data object
@@ -39,3 +40,5 @@ void flatten_json_data_array(JsonObject json);
 JsonArray add_config_temp(JsonObject json, const char* module_name);
 
 ///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

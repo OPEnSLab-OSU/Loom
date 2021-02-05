@@ -1,36 +1,42 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Max_Sub.cpp
-/// @brief		File for Loom_MaxSub implementation.
+/// @file		Max_Sub.cpp
+/// @brief		File for MaxSub implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Max_Sub.h"
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
 
+#include "Max_Sub.h"
 #include "../Manager.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxSub::Loom_MaxSub(
-		LoomManager* manager,
-		const LoomModule::Type	internet_type,
+
+#define UDP_RECEIVE_OFFSET 9000 ///< UDP receiving port is this value + device instance number
+
+///////////////////////////////////////////////////////////////////////////////
+MaxSub::MaxSub(
 		const bool				auto_dispatch
 	)
-	: LoomSubscribePlat(manager, "MaxSub", Type::MaxSub, internet_type )
+	: SubscribePlat("MaxSub")
 	, auto_dispatch(auto_dispatch)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxSub::Loom_MaxSub(LoomManager* manager, JsonArrayConst p)
-	: Loom_MaxSub(manager, (LoomModule::Type)(int)p[0], p[1] ) {}
+MaxSub::MaxSub(JsonArrayConst p)
+	: MaxSub((const bool)p[0]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::second_stage_ctor()
+void MaxSub::second_stage_ctor()
 {
   LMark;
-	LoomSubscribePlat::second_stage_ctor();
+	SubscribePlat::second_stage_ctor();
   LMark;
 
 	UDP_port = UDP_RECEIVE_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
@@ -50,7 +56,7 @@ void Loom_MaxSub::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_MaxSub::subscribe(JsonObject json)
+bool MaxSub::subscribe(JsonObject json)
 {
   LMark;
 	// Make sure UDP object exists
@@ -136,17 +142,17 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::print_config() const
+void MaxSub::print_config() const
 {
   LMark;
-	LoomSubscribePlat::print_config();
+	SubscribePlat::print_config();
   LMark;
 	LPrintln("\tUDP Port : ", UDP_port);
  	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxSub::set_port(const uint16_t port)
+void MaxSub::set_port(const uint16_t port)
 {
   LMark;
 	UDP_port = port;
@@ -165,3 +171,5 @@ void Loom_MaxSub::set_port(const uint16_t port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Package.cpp
+/// @file		Package.cpp
 /// @brief		File for implementation of packaging functions.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -10,6 +10,7 @@
 
 #include "Package.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @param[out]		json			Object to add data to
@@ -149,3 +150,5 @@ JsonArray add_config_temp(JsonObject json, const char* module_name)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

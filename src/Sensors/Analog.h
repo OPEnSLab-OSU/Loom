@@ -1,21 +1,23 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Analog.h
-/// @brief		File for Loom_Analog definition.
+/// @file		Analog.h
+/// @brief		File for Analog definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "Sensor.h"
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
+
 #define VBATPIN A7			///< Battery pin
 #define ANALOG_COUNT 6		///< Number of analog pins
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -26,9 +28,8 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Analog : public LoomSensor
+class Analog : public Sensor
 {
-
 public:
 
 	/// Different types of conversions from
@@ -48,7 +49,7 @@ public:
 protected:
 
 	/// Which resolution to read at (generally use 12 or 10)
-	uint8_t		read_resolution;
+	uint8_t		read_resolution;	
 
 	/// Whether pins A0-A5 are enabled for analog reading
 	bool		pin_enabled[ANALOG_COUNT];
@@ -59,14 +60,14 @@ protected:
 	/// Battery voltage
 	float		battery;
 
-	/// Enable or disable all conversions
+	/// Enable or disable all conversions	
 	bool		enable_conversions;
 
 	/// Conversion (if any) to apply to analog value when printing / packaging
 	Conversion	conversions[ANALOG_COUNT];
 
 	/// Temperature to use in conversions
-	float		temperature;
+	float		temperature;					
 
 public:
 
@@ -91,8 +92,7 @@ public:
 	/// @param[in]	convertA4			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A4
 	/// @param[in]	convertA5			Set(Conversion) | <0> | {0("No conversion"), 1("Analog to voltage"), 2("Thermistor" ), 3("pH"), 4("Turbidity"), 5("Electrical Conductivity"), 6("Total Dissolved Solids"), 7("Salinity")} | Conversion to apply to analog readings on pin A5
 	/// @param[in]	temperature			float | <25.0> | [0.-100.] | Temperature to using in conversions
-	Loom_Analog(
-			LoomManager* manager,
+	Analog(
 			const uint8_t		num_samples			= 8,
 			const uint8_t		read_resolution		= 12,
 			const bool			enableA0			= true,
@@ -113,10 +113,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Analog(LoomManager* manager, JsonArrayConst p);
+	Analog(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Analog() = default;
+	~Analog() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -124,7 +124,6 @@ public:
 
 	void		measure() override;
 	void		package(JsonObject json) override;
-	void 		diagnose(bool& result) override;
 	void		add_config(JsonObject json) override;
 
 //=============================================================================
@@ -245,3 +244,9 @@ private:
 	float		convert_salinity(const uint16_t analog) const;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, Analog, "Analog");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

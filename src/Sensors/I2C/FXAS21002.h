@@ -1,20 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_FXAS21002.h
-/// @brief		File for Loom_FXAS21002 definition.
+/// @file		FXAS21002.h
+/// @brief		File for FXAS21002 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <Adafruit_FXAS21002C.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -30,17 +31,16 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#fxas21002-3-axis-gyroscope)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_FXAS21002 : public LoomI2CSensor
+class FXAS21002 : public I2CSensor
 {
-
 protected:
-
+	
 	Adafruit_FXAS21002C		inst_FXAS21002;		///< Underlying FXAS21002 sensor manager instance
 
 	float					gyro[3];			///< Measured gyro values (x,y,z). Units: °/s
 
 public:
-
+	
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -49,19 +49,18 @@ public:
 	///
 	/// @param[in]	i2c_address				Set(Int) | <0x20> | {0x20, 0x21} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	Loom_FXAS21002(
-LoomManager* manager,
-const byte i2c_address		= 0x20,
-			const uint8_t		mux_port		= 255
+	FXAS21002(
+			const byte		i2c_address	= 0x20,
+			const uint8_t	mux_port	= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_FXAS21002(LoomManager* manager, JsonArrayConst p);
+	FXAS21002(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_FXAS21002() = default;
+	~FXAS21002() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -69,7 +68,6 @@ const byte i2c_address		= 0x20,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
-	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -80,3 +78,12 @@ const byte i2c_address		= 0x20,
 private:
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, FXAS21002, "FXAS21002");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
+

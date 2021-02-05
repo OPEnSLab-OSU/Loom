@@ -12,6 +12,10 @@
 
 #include <Arduino.h>
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
+
 /// Different levels of verbosity (for printing or packaging)
 enum class Verbosity {
 	V_OFF,		///< Disable
@@ -28,7 +32,7 @@ enum class Verbosity {
 /// @param[in]	data	Array to print
 /// @param[in]	len		Length of array
 /// @param[in]	format	Display formatting
-template<typename T> 
+template<typename T>
 void print_array(const T data [], const int len, const int format=1)
 {
 	#if LOOM_DEBUG == 1
@@ -46,3 +50,5 @@ void print_array(const T data [], const int len, const int format=1)
 void print_array(const String data [], const int len, const int format=1);
 
 ///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

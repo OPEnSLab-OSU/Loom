@@ -1,29 +1,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_GoogleSheets.cpp
-/// @brief		File for Loom_GoogleSheets implementation.
+/// @file		GoogleSheets.cpp
+/// @brief		File for GoogleSheets implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 
 #include "GoogleSheets.h"
 #include "../Manager.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_GoogleSheets::Loom_GoogleSheets(
-		LoomManager* manager,
+GoogleSheets::GoogleSheets(
 		const char*				module_name,
-		const LoomModule::Type	internet_type,
 		const char*				script_url,
 		const char*				sheet_id,
 		const bool				tab_matches_dev_id,
 		const char*				tab_id
 	)
-	: LoomPublishPlat(manager, module_name, Type::GoogleSheets, internet_type )
+	: PublishPlat(module_name)
 	, m_script_url(script_url)
 	, m_sheet_id(sheet_id)
 	, tab_matches_dev_id(tab_matches_dev_id)
@@ -38,14 +39,14 @@ Loom_GoogleSheets::Loom_GoogleSheets(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_GoogleSheets::Loom_GoogleSheets(LoomManager* manager, JsonArrayConst p)
-	: Loom_GoogleSheets(manager, p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5] ) {}
+GoogleSheets::GoogleSheets(JsonArrayConst p)
+	: GoogleSheets(p[0], p[1], p[2], p[3], p[4] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_GoogleSheets::print_config() const
+void GoogleSheets::print_config() const
 {
   LMark;
-	LoomPublishPlat::print_config();
+	PublishPlat::print_config();
   LMark;
 	LPrint("\t URL: ", m_script_url, "\n");
   LMark;
@@ -56,7 +57,7 @@ void Loom_GoogleSheets::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
+bool GoogleSheets::send_to_internet(const JsonObject json, InternetPlat* plat)
 {
   LMark;
 	// connect to script.google.com
@@ -159,7 +160,7 @@ bool Loom_GoogleSheets::send_to_internet(const JsonObject json, LoomInternetPlat
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json, Print& write)
+bool GoogleSheets::m_serialize_internet_impl(const JsonObject json, Print& write)
 {
   LMark;
 	// step one: package timestamp
@@ -224,3 +225,5 @@ bool Loom_GoogleSheets::m_serialize_internet_impl(const JsonObject json, Print& 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

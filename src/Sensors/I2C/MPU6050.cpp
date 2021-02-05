@@ -1,94 +1,89 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MPU6050.cpp
-/// @brief		File for Loom_MPU6050 implementation.
+/// @file		MPU6050.cpp
+/// @brief		File for MPU6050 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "MPU6050.h"
+#include "Module_Factory.h"
 
-// Unfortunately cannot be inside Loom_MPU6050 class
-// For some reason Wire is not recognized like that
-MPU6050 mpu6050(Wire);
+#include <MPU6050_tockn.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MPU6050::Loom_MPU6050(
-LoomManager* manager,
-const byte i2c_address,
-		const uint8_t		mux_port,
-		const bool			calibrate
+
+::MPU6050 mpu_inst(Wire);
+
+///////////////////////////////////////////////////////////////////////////////
+Loom::MPU6050::MPU6050(
+		const byte		i2c_address,
+		const uint8_t	mux_port,
+		const bool		calibrate
 	)
-	: LoomI2CSensor(manager, "MPU6050", Type::MPU6050, i2c_address, mux_port )
+	: I2CSensor("MPU6050", i2c_address, mux_port )
 {
   LMark;
 	Wire.begin();
   LMark;
-	mpu6050.begin();
-  LMark;
+	mpu_inst.begin();
 
 	if (calibrate) {
-   	LMark;
 		print_module_label();
    	LMark;
-		mpu6050.calcGyroOffsets(true);
-   	LMark;
+		mpu_inst.calcGyroOffsets(true);
 		LPrintln();
-  	LMark;
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MPU6050::Loom_MPU6050(LoomManager* manager, JsonArrayConst p)
-	: Loom_MPU6050(manager, EXPAND_ARRAY(p, 3) ) {}
+Loom::MPU6050::MPU6050(JsonArrayConst p)
+	: MPU6050(EXPAND_ARRAY(p, 3)) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::print_state() const
+void Loom::MPU6050::print_state() const
 {
-  LMark;
-	LoomI2CSensor::print_state();
-  LMark;
+	I2CSensor::print_state();
 
-	LPrintln("\tgyroXoffset : ", mpu6050.getGyroXoffset() );
+	LPrintln("\tgyroXoffset : ", mpu_inst.getGyroXoffset() );
   LMark;
-	LPrintln("\tgyroYoffset : ", mpu6050.getGyroYoffset() );
+	LPrintln("\tgyroYoffset : ", mpu_inst.getGyroYoffset() );
   LMark;
-	LPrintln("\tgyroZoffset : ", mpu6050.getGyroZoffset() );
- 	LMark;
+	LPrintln("\tgyroZoffset : ", mpu_inst.getGyroZoffset() );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::print_measurements() const
+void Loom::MPU6050::print_measurements() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("Measurements:");
   LMark;
 
-	LPrintln("\taccX   : ", accX);
+	LPrintln("\taccX   : ", acc[0]);
   LMark;
-	LPrintln("\taccY   : ", accY);
+	LPrintln("\taccY   : ", acc[1]);
   LMark;
-	LPrintln("\taccZ   : ", accZ);
-  LMark;
-
-	LPrintln("\tgyroX  : ", gyroX);
-  LMark;
-	LPrintln("\tgyroY  : ", gyroY);
-  LMark;
-	LPrintln("\tgyroZ  : ", gyroZ);
+	LPrintln("\taccZ   : ", acc[2]);
   LMark;
 
-	LPrintln("\troll  : ", angleX);
+	LPrintln("\tgyroX  : ", gyro[0]);
   LMark;
-	LPrintln("\tpitch : ", angleY);
+	LPrintln("\tgyroY  : ", gyro[1]);
   LMark;
-	LPrintln("\tyaw   : ", angleZ);
+	LPrintln("\tgyroZ  : ", gyro[2]);
+  LMark;
+
+	LPrintln("\troll  : ", angle[0]);
+  LMark;
+	LPrintln("\tpitch : ", angle[1]);
+  LMark;
+	LPrintln("\tyaw   : ", angle[2]);
   LMark;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
@@ -96,91 +91,90 @@ void Loom_MPU6050::print_measurements() const
 		LPrintln("\ttemp       : ", temp);
   	LMark;
 
-		LPrintln("\taccAngleX  : ", accAngleX);
+		LPrintln("\taccAngleX  : ", accAngle[0]);
    	LMark;
-		LPrintln("\taccAngleY  : ", accAngleY);
+		LPrintln("\taccAngleY  : ", accAngle[1]);
   	LMark;
 
-		LPrintln("\tgyroAngleX : ", gyroAngleX);
+		LPrintln("\tgyroAngleX : ", gyroAngle[0]);
    	LMark;
-		LPrintln("\tgyroAngleY : ", gyroAngleY);
+		LPrintln("\tgyroAngleY : ", gyroAngle[1]);
    	LMark;
-		LPrintln("\tgyroAngleZ : ", gyroAngleZ);
+		LPrintln("\tgyroAngleZ : ", gyroAngle[2]);
   	LMark;
 	}
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::measure()
+void Loom::MPU6050::measure()
 {
   LMark;
-	mpu6050.update();
+	mpu_inst.update();
   LMark;
 
-	temp = mpu6050.getTemp();
+	temp = mpu_inst.getTemp();
   LMark;
 
-	accX = mpu6050.getAccX();
+	acc[0] = mpu_inst.getAccX();
   LMark;
-	accY = mpu6050.getAccY();
+	acc[1] = mpu_inst.getAccY();
   LMark;
-	accZ = mpu6050.getAccZ();
-  LMark;
-
-	gyroX = mpu6050.getGyroX();
-  LMark;
-	gyroY = mpu6050.getGyroY();
-  LMark;
-	gyroZ = mpu6050.getGyroZ();
+	acc[2] = mpu_inst.getAccZ();
   LMark;
 
-	accAngleX = mpu6050.getAccAngleX();
+	gyro[0] = mpu_inst.getGyroX();
   LMark;
-	accAngleY = mpu6050.getAccAngleY();
+	gyro[1] = mpu_inst.getGyroY();
   LMark;
-
-	gyroAngleX = mpu6050.getGyroAngleX();
-  LMark;
-	gyroAngleY = mpu6050.getGyroAngleY();
-  LMark;
-	gyroAngleZ = mpu6050.getGyroAngleZ();
+	gyro[2] = mpu_inst.getGyroZ();
   LMark;
 
-	angleX = mpu6050.getAngleX();
+	accAngle[0] = mpu_inst.getAccAngleX();
   LMark;
-	angleY = mpu6050.getAngleY();
+	accAngle[1] = mpu_inst.getAccAngleY();
   LMark;
-	angleZ = mpu6050.getAngleZ();
- 	LMark;
+
+	gyroAngle[0] = mpu_inst.getGyroAngleX();
+  LMark;
+	gyroAngle[1] = mpu_inst.getGyroAngleY();
+  LMark;
+	gyroAngle[2] = mpu_inst.getGyroAngleZ();
+  LMark;
+
+	angle[0] = mpu_inst.getAngleX();
+  LMark;
+	angle[1] = mpu_inst.getAngleY();
+  LMark;
+	angle[2] = mpu_inst.getAngleZ();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::package(JsonObject json)
+void Loom::MPU6050::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
   LMark;
 
-	data["ax"] = accX;
+	data["ax"] = acc[0];
   LMark;
-	data["ay"] = accY;
+	data["ay"] = acc[1];
   LMark;
-	data["az"] = accZ;
-  LMark;
-
-	data["gx"] = gyroX;
-  LMark;
-	data["gy"] = gyroY;
-  LMark;
-	data["gz"] = gyroZ;
+	data["az"] = acc[2];
   LMark;
 
-	data["roll"] = angleX;
+	data["gx"] = gyro[0];
   LMark;
-	data["pitch"] = angleY;
+	data["gy"] = gyro[1];
   LMark;
-	data["yaw"] = angleZ;
+	data["gz"] = gyro[2];
+  LMark;
+
+	data["roll"]  = angle[0];
+  LMark;
+	data["pitch"] = angle[1];
+  LMark;
+	data["yaw"]   = angle[2];
   LMark;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
@@ -188,37 +182,29 @@ void Loom_MPU6050::package(JsonObject json)
 		data["temp"]		= 	temp;
   	LMark;
 
-		data["accAngleX"]	= 	accAngleX;
+		data["accAngleX"]	= 	accAngle[0];
    	LMark;
-		data["accAngleY"]	= 	accAngleY;
+		data["accAngleY"]	= 	accAngle[1];
   	LMark;
 
-		data["gyroAngleX"]	= 	gyroAngleX;
+		data["gyroAngleX"]	= 	gyroAngle[0];
    	LMark;
-		data["gyroAngleY"]	= 	gyroAngleY;
+		data["gyroAngleY"]	= 	gyroAngle[1];
    	LMark;
-		data["gyroAngleZ"]	=	gyroAngleZ;
-  	LMark;
+		data["gyroAngleZ"]	=	gyroAngle[2];
 	}
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::diagnose(bool& result){
-  LMark;
-	// implement here
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_MPU6050::calibrate()
+void Loom::MPU6050::calibrate()
 {
-  LMark;
 	print_module_label();
   LMark;
-	mpu6050.calcGyroOffsets(true);
-  LMark;
+	mpu_inst.calcGyroOffsets(true);
 	LPrintln();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

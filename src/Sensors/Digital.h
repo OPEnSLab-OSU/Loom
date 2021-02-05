@@ -1,21 +1,23 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Digital.h
-/// @brief		File for Loom_Digital definition.
+/// @file		Digital.h
+/// @brief		File for Digital definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "Sensor.h"
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
+
 /// Number of digital pins
 #define DIGITAL_COUNT 12
-
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -28,16 +30,16 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Digital : public LoomSensor
+class Digital : public Sensor
 {
 
 protected:
 
-	bool		pin_enabled[DIGITAL_COUNT];		///< Array of which pins are enabled
-	bool		digital_vals[DIGITAL_COUNT];	///< Array of last read digital values
+	bool	pin_enabled[DIGITAL_COUNT];		///< Array of which pins are enabled
+	bool	digital_vals[DIGITAL_COUNT];	///< Array of last read digital values
 
 public:
-
+	
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -56,8 +58,7 @@ public:
 	/// @param[in]	enableA3			Bool | <false> | {true, false} | Enable pin A3 for managing
 	/// @param[in]	enableA4			Bool | <false> | {true, false} | Enable pin A4 for managing
 	/// @param[in]	enableA5			Bool | <false> | {true, false} | Enable pin A5 for managing
-	Loom_Digital(
-			LoomManager* manager,
+	Digital(
 			const bool		enable5			= true,
 			const bool		enable6			= true,
 			const bool		enable9			= false,
@@ -75,10 +76,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Digital(LoomManager* manager, JsonArrayConst p);
+	Digital(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Digital() = default;
+	~Digital() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -86,7 +87,6 @@ public:
 
 	void		measure() override;
 	void		package(JsonObject json) override;
-	void 		diagnose(bool& result) override;
 	void		add_config(JsonObject json) override;
 
 //=============================================================================
@@ -133,3 +133,9 @@ private:
 	uint8_t		pin_to_index(const uint8_t pin) const;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, Digital, "Digital");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

@@ -1,20 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7265X.h
-/// @brief		File for Loom_AS7265X definition.
+/// @file		AS7265X.h
+/// @brief		File for AS7265X definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <SparkFun_AS7265X.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -30,12 +31,11 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7265x-spectral-sensor-triad-visible-near-infrared-ultraviolet)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_AS7265X : public LoomI2CSensor
+class AS7265X : public I2CSensor
 {
-
 protected:
 
-	AS7265X		inst_AS7265X;		///< Underlying AS7265X sensor manager instance
+	::AS7265X inst_AS7265X; ///< Underlying AS7265X sensor manager instance
 
 	uint16_t	uv[6];				///< Measured UV bands values. Units: counts / (μW/cm^2)
 	uint16_t	color[6];			///< Measured color bands values. Units: counts / (μW/cm^2)
@@ -48,7 +48,7 @@ protected:
 	uint8_t		integration_time;	///< Integration time setting
 
 public:
-
+	
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -61,9 +61,8 @@ public:
 	/// @param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
 	/// @param[in]	mode					Set(Int) | <3> | { 0("4 channels out of 6"), 1("Different 4 channels out of 6"), 2("All 6 channels continuously"), 3("One-shot reading of all channels") } | Read mode
 	/// @param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
-	Loom_AS7265X(
-LoomManager* manager,
-const byte i2c_address			= 0x49,
+	AS7265X(
+			const byte			i2c_address			= 0x49,
 			const uint8_t		mux_port			= 255,
 			const bool			use_bulb			= false,
 			const uint8_t		gain				= 64,
@@ -74,10 +73,10 @@ const byte i2c_address			= 0x49,
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_AS7265X(LoomManager* manager, JsonArrayConst p);
+	AS7265X(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_AS7265X() = default;
+	~AS7265X() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -85,7 +84,6 @@ const byte i2c_address			= 0x49,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
-	void 		diagnose(bool& result) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -98,12 +96,12 @@ const byte i2c_address			= 0x49,
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// @param[in]	enable	Whether or not to enable
+	/// @param[in]	enable	Whether or not to enable 
 	void		enable_bulb(const bool e) { use_bulb = e; }
 
 	/// Set gain.
 	/// 0: 1x (power-on default), 1: 3.7x, 2: 16x, 3: 64x
-	/// @param[in]	gain	Gain level:
+	/// @param[in]	gain	Gain level: 
 	void		set_gain(const uint8_t gain) { inst_AS7265X.setGain(gain); }
 
 	/// Set mode.
@@ -119,3 +117,11 @@ const byte i2c_address			= 0x49,
 private:
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, AS7265X, "AS7265X");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

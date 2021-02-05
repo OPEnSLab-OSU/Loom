@@ -1,18 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Actuator.h
-/// @brief		File for LoomActuator definition.
+/// @brief		File for Actuator definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_ACTUATORS
 #pragma once
 
 #include "Module.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -25,26 +26,23 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#actuators)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomActuator : public LoomModule
+class Actuator : public Module
 {
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
 	/// Constructor
 	/// @param[in]	module_name		Name of the module (provided by derived classes)
-	/// @param[in] 	module_type		Type of the module (provided by derived classes)
-	LoomActuator( 
-			LoomManager* 			manager,
-			const char*							module_name, 
-			const LoomModule::Type	module_type
+	Actuator(
+			const char*							module_name
 		);
 
 	/// Destructor
-	virtual ~LoomActuator() = default;
+	virtual ~Actuator() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -57,3 +55,8 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

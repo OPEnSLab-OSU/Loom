@@ -1,13 +1,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_RTC.h
-/// @brief		File for LoomRTC definition.
+/// @file		RTC.h
+/// @brief		File for RTC definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
-
 
 #pragma once
 
@@ -15,6 +14,7 @@
 
 #include <OPEnS_RTC.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -26,7 +26,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomRTC : public LoomModule
+class RTC : public Module
 {
 
 public:
@@ -76,17 +76,15 @@ public:
 	/// @param[in]	use_local_time	True for local time, false for UTC time
 	/// @param[in]	custom_time		True for user input time, false otherwise
 
-	LoomRTC(
-			LoomManager* manager,
+	RTC(
 			const char*				module_name,
-			const LoomModule::Type	module_type,
 			TimeZone			timezone,
 			const bool				use_local_time,
 			const bool			custom_time
 		);
 
 	/// Destructor
-	virtual ~LoomRTC() = default;
+	virtual ~RTC() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -123,10 +121,6 @@ public:
 
 	/// Clear alarms
 	virtual void	clear_alarms() = 0;
-
-	/// No Diagnose necessary
-	/// Implement with empty body.
-	void 		diagnose(bool& result) override {}
 
 // Other functions that would be nice:
 	// virtual TimeSpan	get_timer_remaining();
@@ -185,7 +179,7 @@ public:
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
 
-	void 			link_device_manager(LoomManager* LM) override;
+	void 			link_device_manager(Manager* LM) override;
 
 	/// Get string of name associated with time zone enum
 	/// @param[in]	t	TimeZone value to get string of
@@ -249,3 +243,7 @@ protected:
 	DateTime		eu_daylight_to_standard(DateTime local_time);
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

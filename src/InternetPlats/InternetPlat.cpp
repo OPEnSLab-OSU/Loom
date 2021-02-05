@@ -1,25 +1,27 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetPlat.cpp
-/// @brief		File for LoomInternetPlat implementation.
+/// @brief		File for InternetPlat implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+
 #include "InternetPlat.h"
 
-///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::LoomInternetPlat(
-		LoomManager* 			manager,
-		const char* 						module_name,
-		const LoomModule::Type	module_type
-	)
-	: LoomModule(manager, module_name, module_type ) {}
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb)
+InternetPlat::InternetPlat(
+		const char* module_name
+	)
+	: Module(module_name) {}
+
+///////////////////////////////////////////////////////////////////////////////
+InternetPlat::ClientSession InternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb)
 {
   LMark;
 	// * the rainbow connection *
@@ -39,7 +41,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domai
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb)
+void InternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb)
 {
   LMark;
 	// print the initial http request
@@ -66,7 +68,7 @@ void LoomInternetPlat::write_http_request(Stream& client, const char* domain, co
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* domain) {
+InternetPlat::ClientSession InternetPlat::connect_to_domain(const char* domain) {
   LMark;
 	pinMode(8, OUTPUT);
   LMark;
@@ -125,11 +127,11 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* 
 		return ClientSession();
 	}
 	// return a pointer to the client for data reception
-	return LoomInternetPlat::ClientSession(&client);
+	return InternetPlat::ClientSession(&client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress& ip, const uint16_t port) {
+InternetPlat::ClientSession InternetPlat::connect_to_ip(const IPAddress& ip, const uint16_t port) {
   LMark;
 	pinMode(8, OUTPUT);
   LMark;
@@ -187,7 +189,7 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress&
 		return ClientSession();
 	}
 	// return a pointer to the client for data reception
-	return LoomInternetPlat::ClientSession(&client);
+	return InternetPlat::ClientSession(&client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -229,7 +231,7 @@ static void print_unix_time(unsigned long epoch)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint32_t LoomInternetPlat::get_time()
+uint32_t InternetPlat::get_time()
 {
   LMark;
 	auto udp_dev = open_socket(localPort);
@@ -298,7 +300,7 @@ uint32_t LoomInternetPlat::get_time()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const
+void InternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const
 {
   LMark;
 	// set all bytes in the buffer to 0
@@ -332,3 +334,7 @@ void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) con
 	udp_dev.endPacket();
  	LMark;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

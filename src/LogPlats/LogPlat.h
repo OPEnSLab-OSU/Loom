@@ -1,18 +1,18 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LogPlat.h
-/// @brief		File for LoomLogPlat definition.
+/// @file		LogPlat.h
+/// @brief		File for LogPlat definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "Module.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -25,7 +25,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#data-logging)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomLogPlat : public LoomModule
+class LogPlat : public Module
 {
 
 protected:
@@ -42,19 +42,16 @@ public:
 
 	/// Constructor
 	/// @param[in]	module_name			Name of the module (provided by derived classes)
-	/// @param[in] 	module_type			Type of the module (provided by derived classes)
 	/// @param[in] 	enable_rate_filter	Whether or not to impose maximum update rate
 	/// @param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
-	LoomLogPlat(
-			LoomManager* manager,
+	LogPlat(
 			const char* module_name,
-			const LoomModule::Type	module_type,
 			const bool				enable_rate_filter	= true,
 			const uint16_t			min_filter_delay	= 1000
 		);
 
 	/// Destructor
-	virtual ~LoomLogPlat() = default;
+	virtual ~LogPlat() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -63,10 +60,6 @@ public:
 	/// No package necessary for logging platforms.
 	/// implement with empty body.
 	virtual void 	package(JsonObject json) override {}
-
-	/// No Diagnose necessary
-	/// Implement with empty body.
-	void 		diagnose(bool& result) override { /* do nothing */ }
 
 	/// Log a Json object
 	/// @param[in] json		Json Object to log
@@ -91,3 +84,7 @@ protected:
 	bool			check_millis();
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

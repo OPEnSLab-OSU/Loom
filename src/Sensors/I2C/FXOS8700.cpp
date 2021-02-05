@@ -1,26 +1,28 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_FXOS8700.cpp
-/// @brief		File for Loom_FXOS8700 implementation.
+/// @file		FXOS8700.cpp
+/// @brief		File for FXOS8700 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "FXOS8700.h"
+#include "Module_Factory.h"
 
 #include <Adafruit_Sensor.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_FXOS8700::Loom_FXOS8700(
-LoomManager* manager,
-const byte i2c_address,
-		const uint8_t		mux_port
+FXOS8700::FXOS8700(
+		const byte		i2c_address,
+		const uint8_t	mux_port
 	)
-	: LoomI2CSensor(manager, "FXOS8700", Type::FXOS8700, i2c_address, mux_port )
+	: I2CSensor("FXOS8700", i2c_address, mux_port)
 	, inst_FXOS8700(Adafruit_FXOS8700(0x8700A, 0x8700B))
 {
   LMark;
@@ -33,19 +35,16 @@ const byte i2c_address,
 	print_module_label();
   LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_FXOS8700::Loom_FXOS8700(LoomManager* manager, JsonArrayConst p)
-	: Loom_FXOS8700(manager, EXPAND_ARRAY(p, 2) ) {}
+FXOS8700::FXOS8700(JsonArrayConst p)
+	: FXOS8700(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXOS8700::print_measurements() const
+void FXOS8700::print_measurements() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("Measurements:");
   LMark;
 	LPrintln("\tAX: ", accel[0], " m/s^2");
@@ -59,13 +58,11 @@ void Loom_FXOS8700::print_measurements() const
 	LPrintln("\tMY: ", mag[1], " uT");
   LMark;
 	LPrintln("\tMZ: ", mag[2], " uT");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXOS8700::measure()
+void FXOS8700::measure()
 {
-  LMark;
 	sensors_event_t aevent, mevent;
   LMark;
 	inst_FXOS8700.getEvent(&aevent, &mevent);
@@ -83,11 +80,10 @@ void Loom_FXOS8700::measure()
 	mag[1] = mevent.magnetic.y;
   LMark;
 	mag[2] = mevent.magnetic.z;
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXOS8700::package(JsonObject json)
+void FXOS8700::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
@@ -105,13 +101,8 @@ void Loom_FXOS8700::package(JsonObject json)
 	data["my"] = mag[1];
   LMark;
 	data["mz"] = mag[2];
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_FXOS8700::diagnose(bool& result){
-  LMark;
-	// implement here
-}
 
-///////////////////////////////////////////////////////////////////////////////
+#endif // ifdef LOOM_INCLUDE_SENSORS

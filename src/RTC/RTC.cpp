@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_RTC.cpp
-/// @brief		File for LoomRTC implementation.
+/// @brief		File for RTC implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -11,18 +11,19 @@
 #include "RTC.h"
 #include "Manager.h"
 #include "../InternetPlats/InternetPlat.h"
-#include "../Interrupt_Manager.h"
+#include "../InterruptManager.h"
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomRTC::daysOfTheWeek[] =
+const char* RTC::daysOfTheWeek[] =
 	{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 ///////////////////////////////////////////////////////////////////////////////
-const float LoomRTC::timezone_adjustment[] =
+const float RTC::timezone_adjustment[] =
 	{
 		// All of the number represents the difference between UTC
 		1  /* WAT */,
@@ -85,7 +86,7 @@ const float LoomRTC::timezone_adjustment[] =
 	};
 
 ///////////////////////////////////////////////////////////////////////////////
-char* LoomRTC::enum_timezone_string(TimeZone t)
+char* RTC::enum_timezone_string(TimeZone t)
 {
   LMark;
 	switch(t) {
@@ -122,15 +123,13 @@ char* LoomRTC::enum_timezone_string(TimeZone t)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomRTC::LoomRTC(
-		LoomManager* 			manager,
+RTC::RTC(
 		const char*							module_name,
-		const LoomModule::Type	module_type,
 		TimeZone					timezone,
 		const bool							use_local_time,
 		const bool				custom_time
 	)
-	: LoomModule(manager, module_name, module_type )
+	: Module(module_name)
 	, timezone(timezone)
 	, use_local_time(use_local_time)
 	, converted(false)
@@ -140,26 +139,26 @@ LoomRTC::LoomRTC(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_config() const
+void RTC::print_config() const
 {
   LMark;
-	LoomModule::print_config();
+	Module::print_config();
   LMark;
 	LPrintln("\tUse UTC Time      : ", use_local_time);
  	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_state() const
+void RTC::print_state() const
 {
   LMark;
-	LoomModule::print_state();
+	Module::print_state();
   LMark;
 	// print_time();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::package(JsonObject json)
+void RTC::package(JsonObject json)
 {
   LMark;
 	read_rtc();
@@ -186,7 +185,7 @@ void LoomRTC::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_time(const bool verbose)
+void RTC::print_time(const bool verbose)
 {
   LMark;
 	read_rtc();
@@ -215,7 +214,7 @@ void LoomRTC::print_time(const bool verbose)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_DateTime(const DateTime time)
+void RTC::print_DateTime(const DateTime time)
 {
   LMark;
 	LPrint(time.year());   LPrint('/');
@@ -233,7 +232,7 @@ void LoomRTC::print_DateTime(const DateTime time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::read_rtc()
+void RTC::read_rtc()
 {
   LMark;
 	get_datestring();
@@ -243,7 +242,7 @@ void LoomRTC::read_rtc()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::local_rtc(){
+void RTC::local_rtc(){
   LMark;
 	local_time = now();
   LMark;
@@ -271,7 +270,7 @@ void LoomRTC::local_rtc(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomRTC::get_datestring()
+const char* RTC::get_datestring()
 {
   LMark;
 	DateTime time = now();
@@ -282,7 +281,7 @@ const char* LoomRTC::get_datestring()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::get_datestring(char* buf)
+void RTC::get_datestring(char* buf)
 {
   LMark;
 	DateTime time = now();
@@ -294,7 +293,7 @@ void LoomRTC::get_datestring(char* buf)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomRTC::get_timestring()
+const char* RTC::get_timestring()
 {
   LMark;
 	DateTime time = now();
@@ -305,7 +304,7 @@ const char* LoomRTC::get_timestring()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::get_timestring(char* buf)
+void RTC::get_timestring(char* buf)
 {
   LMark;
 	DateTime time = now();
@@ -317,7 +316,7 @@ void LoomRTC::get_timestring(char* buf)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::get_weekday(char* buf)
+void RTC::get_weekday(char* buf)
 {
   LMark;
 	strcpy( buf, daysOfTheWeek[ now().dayOfTheWeek() ] );
@@ -325,7 +324,7 @@ void LoomRTC::get_weekday(char* buf)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::get_timestamp(char* header, char* timestamp, const char delimiter, const uint8_t format)
+void RTC::get_timestamp(char* header, char* timestamp, const char delimiter, const uint8_t format)
 {
   LMark;
 	switch (format) {
@@ -367,7 +366,7 @@ void LoomRTC::get_timestamp(char* header, char* timestamp, const char delimiter,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::init()
+void RTC::init()
 {
   LMark;
 	if (!_begin()) {
@@ -415,7 +414,7 @@ void LoomRTC::init()
  	LMark;
 }
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::set_rtc_to_computer_time()
+void RTC::set_rtc_to_computer_time()
 {
   LMark;
 
@@ -553,7 +552,7 @@ void LoomRTC::set_rtc_to_computer_time()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::set_rtc_to_compile_time()
+void RTC::set_rtc_to_compile_time()
 {
   LMark;
 	// This sets to local time zone
@@ -581,7 +580,7 @@ void LoomRTC::set_rtc_to_compile_time()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::convert_local_to_utc(const bool to_utc)
+void RTC::convert_local_to_utc(const bool to_utc)
 {
   LMark;
 	float adj = ( (to_utc) ? 1. : -1. ) * timezone_adjustment[(int)timezone];
@@ -614,7 +613,7 @@ void LoomRTC::convert_local_to_utc(const bool to_utc)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomRTC::convert_daylight_to_standard(DateTime local_time){
+DateTime RTC::convert_daylight_to_standard(DateTime local_time){
   LMark;
 	/*
 	if(timezone == TimeZone::WAT || timezone == TimeZone::AT ||
@@ -642,7 +641,7 @@ DateTime LoomRTC::convert_daylight_to_standard(DateTime local_time){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomRTC::us_daylight_to_standard(DateTime local_time){
+DateTime RTC::us_daylight_to_standard(DateTime local_time){
   LMark;
 	DateTime time = local_time;
   LMark;
@@ -793,7 +792,7 @@ DateTime LoomRTC::us_daylight_to_standard(DateTime local_time){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomRTC::eu_daylight_to_standard(DateTime local_time){
+DateTime RTC::eu_daylight_to_standard(DateTime local_time){
   LMark;
 
 	DateTime time = local_time;
@@ -884,7 +883,7 @@ DateTime LoomRTC::eu_daylight_to_standard(DateTime local_time){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomRTC::rtc_validity_check()
+bool RTC::rtc_validity_check()
 {
   LMark;
 	DateTime time_check = now();
@@ -908,10 +907,10 @@ bool LoomRTC::rtc_validity_check()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::link_device_manager(LoomManager* LM)
+void RTC::link_device_manager(Manager* LM)
 {
   LMark;
-	LoomModule::link_device_manager(LM);
+	Module::link_device_manager(LM);
   LMark;
 
 	if (LM) {
@@ -931,7 +930,7 @@ void LoomRTC::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::time_adjust(const DateTime time, const bool is_local)
+void RTC::time_adjust(const DateTime time, const bool is_local)
 {
   LMark;
 	_adjust(time);

@@ -1,24 +1,28 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetEthernet.cpp
-/// @brief		File for Loom_Ethernet implementation.
+/// @brief		File for Ethernet implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_ETHERNET
+
 #include "InternetEthernet.h"
 #include "Trust_Anchors.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Ethernet::Loom_Ethernet(
-		LoomManager* manager,
+Ethernet::Ethernet(
 		const char* module_name,
 		const JsonArrayConst	mac,
 		const JsonArrayConst	ip
 	)
-	: LoomInternetPlat(manager, "Ethernet", Type::Ethernet )
+	: InternetPlat("Ethernet")
 	, m_base_client()
 	, m_client(m_base_client, TAs, (size_t)TAs_NUM, A7, 1, SSLClient::SSL_ERROR)
 	, m_mac{}
@@ -52,14 +56,14 @@ Loom_Ethernet::Loom_Ethernet(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Ethernet::Loom_Ethernet(LoomManager* manager, JsonArrayConst p)
-	: Loom_Ethernet(manager, EXPAND_ARRAY(p, 3) ) {}
+Ethernet::Ethernet(JsonArrayConst p)
+	: Ethernet( EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Ethernet::print_config() const
+void Ethernet::print_config() const
 {
   LMark;
-	LoomInternetPlat::print_config();
+	InternetPlat::print_config();
   LMark;
 	LPrint('\t', "MAC:                : [");
   LMark;
@@ -81,17 +85,17 @@ void Loom_Ethernet::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Ethernet::print_state() const
+void Ethernet::print_state() const
 {
   LMark;
-	LoomInternetPlat::print_state();
+	InternetPlat::print_state();
   LMark;
 	LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
  	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Ethernet::connect()
+void Ethernet::connect()
 {
   LMark;
 	pinMode(8, OUTPUT);
@@ -99,24 +103,24 @@ void Loom_Ethernet::connect()
 	digitalWrite(8, HIGH);
   LMark;
 	// initialize ethernet shield for Feather
-	Ethernet.init(10);
+	::Ethernet.init(10);
   LMark;
 
 	// clear the write error
 	m_base_client.clearWriteError();
   LMark;
 
-	if (Ethernet.begin(m_mac) == 0) {
+	if (::Ethernet.begin(m_mac) == 0) {
    	LMark;
 		print_module_label();
    	LMark;
 		LPrintln("Failed to configure Ethernet using DHCP");
    	LMark;
 		// try to congifure using IP address instead of DHCP:
-		Ethernet.begin(m_mac, m_ip);
+		::Ethernet.begin(m_mac, m_ip);
   	LMark;
 	}
-	else m_ip = Ethernet.localIP();
+	else m_ip = ::Ethernet.localIP();
   LMark;
 	m_is_connected = true;
   LMark;
@@ -126,7 +130,7 @@ void Loom_Ethernet::connect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::UDPPtr Loom_Ethernet::open_socket(const uint port)
+InternetPlat::UDPPtr Ethernet::open_socket(const uint port)
 {
   LMark;
 	pinMode(8, OUTPUT);
@@ -144,3 +148,5 @@ LoomInternetPlat::UDPPtr Loom_Ethernet::open_socket(const uint port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_ETHERNET

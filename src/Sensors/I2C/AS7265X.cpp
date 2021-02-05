@@ -1,26 +1,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7265X.cpp
-/// @brief		File for Loom_AS7265X implementation.
+/// @file		AS7265X.cpp
+/// @brief		File for AS7265X implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
+
+#include "Module_Factory.h"
 #include "AS7265X.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7265X::Loom_AS7265X(
-LoomManager* manager,
-const byte i2c_address,
+Loom::AS7265X::AS7265X(
+		const byte			i2c_address,
 		const uint8_t		mux_port,
 		const bool			use_bulb,
 		const uint8_t		gain,
 		const uint8_t		mode,
 		const uint8_t		integration_time
 	)
-	: LoomI2CSensor(manager, "AS7265X", Type::AS7265X, i2c_address, mux_port )
+	: I2CSensor("AS7265X", i2c_address, mux_port)
 	, use_bulb(use_bulb)
 	, gain(gain)
 	, mode(mode)
@@ -28,10 +32,8 @@ const byte i2c_address,
 {
   LMark;
 	bool setup = inst_AS7265X.begin();
-  LMark;
 
 	if (setup) {
-  	LMark;
 
 		// //There are four gain settings. It is possible to saturate the reading so don't simply jump to 64x.
 		// //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -91,15 +93,14 @@ const byte i2c_address,
 	print_module_label();
   LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7265X::Loom_AS7265X(LoomManager* manager, JsonArrayConst p)
-	: Loom_AS7265X(manager, EXPAND_ARRAY(p, 6) ) {}
+Loom::AS7265X::AS7265X(JsonArrayConst p)
+	: AS7265X(EXPAND_ARRAY(p, 6)) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::print_measurements() const
+void Loom::AS7265X::print_measurements() const
 {
   LMark;
 	print_module_label();
@@ -116,16 +117,15 @@ void Loom_AS7265X::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::measure()
+void Loom::AS7265X::measure()
 {
   LMark;
 	if (use_bulb) {
    	LMark;
 		inst_AS7265X.takeMeasurementsWithBulb();
-  	LMark;
 	} else {
+		LMark;
 		inst_AS7265X.takeMeasurements();
-  	LMark;
 	}
 
 	// UV
@@ -168,11 +168,10 @@ void Loom_AS7265X::measure()
 	nir[4] = inst_AS7265X.getCalibratedV();
   LMark;
 	nir[5] = inst_AS7265X.getCalibratedW();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::package(JsonObject json)
+void Loom::AS7265X::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
@@ -214,13 +213,8 @@ void Loom_AS7265X::package(JsonObject json)
 	data["v"] = nir[4];
   LMark;
 	data["w"] = nir[5];
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::diagnose(bool& result){
-  LMark;
-	// implement here
-}
 
-///////////////////////////////////////////////////////////////////////////////
+#endif // ifdef LOOM_INCLUDE_SENSORS
