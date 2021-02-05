@@ -3,8 +3,8 @@
 // This is the simplest example of logging data to Google Sheets
 
 // The only difference between this example an 'Basic' is the LoomFactory
-// settings, the line: 
-//		Loom.GoogleSheets().publish();
+// settings, the line:
+//		Feather.GoogleSheets().publish();
 // and the configuration, enabling logging to Google Sheets.
 
 // In the config, you need:
@@ -14,49 +14,39 @@
 // - For Google sheets parameters, see:
 //   https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets
 
-// Documentation for GoogleSheets: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___google_sheets.html
-// Documentation for Ethernet: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___ethernet.html
-
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > Ethernet
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Enabled
+// Max       > Disabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::All,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
+Loom::Manager Feather{};
 
 
-
-void setup() 
+void setup()
 {
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
-	LPrintln("\n ** Setup Complete ** "); 
+	LPrintln("\n ** Setup Complete ** ");
 }
 
 
-
-void loop() 
+void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
-	Loom.GoogleSheets().publish();
+	Feather.get<Loom::GoogleSheets>()->publish();
 
-	Loom.pause();
+	Feather.pause();
 }

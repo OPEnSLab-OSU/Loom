@@ -1,48 +1,42 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is a basic example that demonstrates how use an OLED display with 
+// This is a basic example that demonstrates how use an OLED display with
 // Loom to display data
 
 // See the documentation for details on OLED configuration options and methods:
-// https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___o_l_e_d.html
+// https://openslab-osu.github.io/Loom/html/class_loom___o_l_e_d.html
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
-
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
-
-LoomManager Loom{ &ModuleFactory };
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Enabled
+// Max       > Enabled
 
 
+using namespace Loom;
 
-void setup() 
-{ 
-	Loom.begin_LED();
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+Loom::Manager Feather{};
+
+void setup()
+{
+	Feather.begin_LED();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
-	Loom.OLED().log();
-	Loom.pause();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
+	Feather.get<Loom::OLED>()->log();
+	Feather.pause();
 }

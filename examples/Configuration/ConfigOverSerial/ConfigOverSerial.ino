@@ -4,7 +4,7 @@
 // via Serial
 
 // The primary difference between this and the 'Basic' example is the
-// 'Loom.parse_config_serial()' line rather than the 'Loom.parse_config(json_config)'
+// 'Feather.parse_config_serial()' line rather than the 'Feather.parse_config(json_config)'
 
 // Upon startup, the device will wait for the user to send a configuration over
 // Serial. The LED will blink a few times when ready to receive.
@@ -12,7 +12,7 @@
 // The LED will blink quickly upon receiving and parsing a valid configuration.
 
 // Additionally, this sketch allows you to send a new configuration during operation
-// to re-configure the device using the: 'Loom.check_serial_for_config();' line
+// to re-configure the device using the: 'Feather.check_serial_for_config();' line
 
 
 // Sending the configuration over Serial can be be done in a variety of ways,
@@ -32,33 +32,27 @@
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config =
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > All
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::All,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
-
+Loom::Manager Feather{};
 
 
 void setup()
 {
-	Loom.begin_LED();
-	Loom.begin_serial(false);
+	Feather.begin_LED();
+	Feather.begin_serial(false);
 
-	// Loom.parse_config(json_config);
-	Loom.parse_config_serial();	// Accept config via Serial
+	// Feather.parse_config(LCONFIG);
+	Feather.parse_config_serial();	// Accept config via Serial
 
-	Loom.print_config();
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -67,11 +61,11 @@ void setup()
 
 void loop()
 {
-	Loom.check_serial_for_config();	// Check if a new config has been sent via Serial
+	Feather.check_serial_for_config();	// Check if a new config has been sent via Serial
 
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
-	Loom.pause();
+	Feather.pause();
 }

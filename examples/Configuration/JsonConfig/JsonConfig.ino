@@ -11,13 +11,13 @@
 // The size of each configuration is listed at the end of setup
 // Note that the pretty formatting takes up more space in memory
 
-// Change the variable passed to Loom.parse_config() to include a different 
+// Change the variable passed to Feather.parse_config() to include a different
 // configuration
 
 // The purpose of this example is simply the different include methods, so
-// there is no code in the loop. 
+// there is no code in the loop.
 
-// You can also load a configuration from an SD card, see the 
+// You can also load a configuration from an SD card, see the
 // Configuration >  LoadConfigSD example for how to do that
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -29,42 +29,42 @@ const char* json_config = "{\"general\":{\"device_name\":\"Device\",\"family\":\
 
 // Define config in external file,
 // compact and in same format as above
-const char* json_config_compact = 
+const char* json_config_compact =
 #include "json_config_compact.h"
 ;
 
-// Define config in external file, 
+// Define config in external file,
 // formatted for readability at size cost
-const char* json_config_pretty = 
+const char* json_config_pretty =
 #include "json_config_pretty.h"
 ;
 
-
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
-
-LoomManager Loom{ &ModuleFactory };
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Enabled
+// Max       > Disabled
 
 
+using namespace Loom;
 
-void setup() 
+Loom::Manager Feather{};
+
+
+void setup()
 {
-	Loom.begin_serial(true);
+	Feather.begin_serial(true);
 
 	LPrintln("\nConfig:\n", json_config, "\n");
 
 	// Parse one of the configs by selecting one of the below 3 lines
-	// Loom.parse_config(json_config);
-	// Loom.parse_config(json_config_compact);
-	Loom.parse_config(json_config_pretty);
+	// Feather.parse_config(LCONFIG);
+	// Feather.parse_config(json_config);
+	// Feather.parse_config(json_config_compact);
+	Feather.parse_config(json_config_pretty);
 
-	Loom.print_config();
+	Feather.print_config();
 
 	LPrintln("strlen json_config: ", strlen(json_config));
 	LPrintln("strlen json_config_compact: ", strlen(json_config_compact));
@@ -75,9 +75,7 @@ void setup()
 
 
 
-void loop() 
+void loop()
 {
 	// No program here, example is for how to include json config
 }
-
-

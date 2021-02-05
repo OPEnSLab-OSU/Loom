@@ -25,32 +25,32 @@ const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::LTE,
-	Enable::Sensors::Disabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > LTE
+// Sensors   > Disabled
+// Radios    > Enabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
 
 void setup()
 {
-	Loom.begin_serial();
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Feather.begin_serial();
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop()
 {
-	if (Loom.LoRa().receive_blocking(5000)) {
-		Loom.display_data();
-		Loom.GoogleSheets().publish();
+	if (Feather.get<Loom::LoRa>()->receive_blocking(5000)) {
+		Feather.display_data();
+		Feather.get<Loom::GoogleSheets>()->publish();
 	}
 }

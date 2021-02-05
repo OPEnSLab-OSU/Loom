@@ -1,62 +1,54 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is a basic example of receiving data via LoRa. 
+// This is a basic example of receiving data via LoRa.
 // While you can do a variety of things with the received data, this example
-// simply prints it and logs it to an SD Card 
+// simply prints it and logs it to an SD Card
 
 // The corresponding example is LoRa > Transmit
 
-// These two examples are the Loom equivalent of the basic RX / TX LoRa 
+// These two examples are the Loom equivalent of the basic RX / TX LoRa
 // examples
 
 // See https://openslab-osu.github.io/Loom/html/class_loom___lo_ra.html
 // for details of LoRa config options
 
-// There is a similar receiving example that, unlike this one, will 
-// block / wait for a packet before continuing, that example is 
+// There is a similar receiving example that, unlike this one, will
+// block / wait for a packet before continuing, that example is
 // LoRa > Receive_Blocking
-
-// Documentation for LoRa: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___lo_ra.html
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
-// Include configuration
-const char* json_config = 
-#include "config.h"
-;
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Disabled
+// Max       > Disabled
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+using namespace Loom;
 
-LoomManager Loom{ &ModuleFactory };
+Loom::Manager Feather{};
 
 
-
-void setup() 
-{ 
-	Loom.begin_serial();
-	Loom.parse_config(json_config);
-	Loom.print_config();
+void setup()
+{
+	Feather.begin_serial();
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
-	if (Loom.LoRa().receive()) {
-		Loom.display_data();
-		Loom.SDCARD().log("received.csv");
+	if (Feather.get<Loom::LoRa>()->receive()) {
+		Feather.display_data();
+		Feather.get<Loom::SD>()->log("received.csv");
 	}
 
-	Loom.pause();	// Pause according to 'interval' in config
+	Feather.pause();	// Pause according to 'interval' in config
 					// This controls the frequency of checking
 					// for incoming data
 }
