@@ -97,6 +97,7 @@ class Loom_LTE: public LoomInternetPlat
 
     void power_up() override;
     void power_down() override;
+    void add_config(JsonObject json) override;
 
     //=============================================================================
     ///@name	PRINT INFORMATION

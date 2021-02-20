@@ -42,7 +42,6 @@ public:
 
 	/// Constructor
 	/// @param[in]	module_name			Name of the module (provided by derived classes)
-	/// @param[in] 	module_type			Type of the module (provided by derived classes)
 	/// @param[in] 	enable_rate_filter	Whether or not to impose maximum update rate
 	/// @param[in] 	min_filter_delay	Minimum update delay, if enable_rate_filter enabled
 	LoomLogPlat(	

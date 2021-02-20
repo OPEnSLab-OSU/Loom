@@ -44,6 +44,7 @@ protected:
 		const byte	chip_select;		///< Chip select pin
 		char		filename[13];		///< String of file to write to if not filename explicitly provided (should not exceed 6 characters)
 		LoomRTC*	RTC_Inst;			///< Pointer to an RTC object for timestamps
+		bool		number_files;
 
 		// SD_Version 		version;
 		// byte 			reset_pin;
@@ -117,6 +118,8 @@ public:
 	
 	void		power_up() override;
 	void 		power_down() override;
+
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -203,7 +206,7 @@ private:
 	/// @param[in]	default_file	File name base if using file numbers, or complete file name if not using numbers
 	/// @param[in]	number_files	True to use numbers and increment number each run. False otherwise.
 	/// @return True is generating filename and opening it works, false otherwise.
-	bool update_filename(const char* default_file, const bool number_files);
+	bool update_filename(const char* default_file);
 
 };
 

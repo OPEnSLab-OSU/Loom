@@ -57,6 +57,8 @@ protected:
 	float angleY;			///< Y-axis angle.
 	float angleZ;			///< Z-axis angle.
 
+	bool calibrate_on_startup;
+
 public:
 
 //=============================================================================
@@ -90,6 +92,7 @@ const byte i2c_address		= 0x69,
 	void		measure() override;
 	void		package(JsonObject json) override;
 	void		calibrate() override;
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

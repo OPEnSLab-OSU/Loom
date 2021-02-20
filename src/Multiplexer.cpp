@@ -109,6 +109,16 @@ Loom_Multiplexer::Loom_Multiplexer(LoomManager* manager, JsonArrayConst p)
 	: Loom_Multiplexer(manager, EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_Multiplexer::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(num_ports);
+	params.add(dynamic_list);
+	params.add(update_period);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 Loom_Multiplexer::~Loom_Multiplexer() 
 {
 	// Free any sensors

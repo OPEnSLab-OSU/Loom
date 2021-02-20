@@ -25,6 +25,13 @@ Loom_Decagon5TM::Loom_Decagon5TM(LoomManager* manager, JsonArrayConst p)
 	: Loom_Decagon5TM(manager, (uint8_t)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_Decagon5TM::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Decagon5TM::print_config() const
 {
 	LoomSDI12Sensor::print_config();

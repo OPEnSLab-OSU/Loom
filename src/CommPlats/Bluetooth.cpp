@@ -37,10 +37,11 @@ Loom_Bluetooth::Loom_Bluetooth(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Bluetooth::add_config(JsonObject json)
 {
-	// add_config_aux(json, module_name,
-	// 	module_name, 
-	// 	max_message_len, spi_CS, spi_IRQ, spi_RST
-	// );
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(max_message_len);
+	params.add(spi_CS);
+	params.add(spi_IRQ);
+	params.add(spi_RST);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

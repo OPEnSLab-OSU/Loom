@@ -81,6 +81,20 @@ Loom_OLED::Loom_OLED(LoomManager* manager, JsonArrayConst p)
 	: Loom_OLED(manager, p[0], p[1], (Version)(int)p[2], p[3], (Format)(int)p[4], p[5], p[6], (FreezeType)(int)p[7]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_OLED::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(enable_rate_filter);
+	params.add(min_filter_delay);
+	params.add((int)version);
+	params.add(reset_pin);
+	params.add((int)display_format);
+	params.add(scroll_duration);
+	params.add(freeze_pin);
+	params.add((int)freeze_behavior);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_OLED::print_config() const
 {
 	LoomLogPlat::print_config();

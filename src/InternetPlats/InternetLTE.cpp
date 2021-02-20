@@ -52,11 +52,19 @@ Loom_LTE::Loom_LTE(
   connect();
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 Loom_LTE::Loom_LTE(LoomManager* manager, JsonArrayConst p)
   : Loom_LTE(manager, EXPAND_ARRAY(p, 3) ) {}
 
+///////////////////////////////////////////////////////////////////////////////
+void Loom_LTE::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(APN);
+	params.add(gprsUser);
+	params.add(gprsPass);
+	params.add(powerPin);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_LTE::connect()
@@ -106,7 +114,6 @@ bool Loom_LTE::is_connected() const
   return modem.isGprsConnected();
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 
 LoomInternetPlat::UDPPtr Loom_LTE::open_socket(const uint port)
@@ -119,14 +126,12 @@ LoomInternetPlat::UDPPtr Loom_LTE::open_socket(const uint port)
   	return UDPPtr();
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_LTE::print_config() const
 {
   LoomInternetPlat::print_config();
   LPrint("\tAPN:               :", APN, '\n');
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_LTE::print_state() const

@@ -75,6 +75,8 @@ public:
 
 	using LoomSubscribePlat::subscribe;
 
+	void		add_config(JsonObject json) override;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================

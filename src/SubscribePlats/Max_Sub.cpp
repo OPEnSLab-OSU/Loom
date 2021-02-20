@@ -27,6 +27,13 @@ Loom_MaxSub::Loom_MaxSub(LoomManager* manager, JsonArrayConst p)
 	: Loom_MaxSub(manager, (LoomModule::Type)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_MaxSub::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(auto_dispatch);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_MaxSub::second_stage_ctor() 
 {
 	LoomSubscribePlat::second_stage_ctor();

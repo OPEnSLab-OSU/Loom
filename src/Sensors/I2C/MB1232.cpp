@@ -44,6 +44,14 @@ Loom_MB1232::Loom_MB1232(LoomManager* manager, JsonArrayConst p)
 	: Loom_MB1232(manager, EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_MB1232::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_MB1232::print_measurements() const
 {
 	print_module_label();

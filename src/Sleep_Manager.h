@@ -95,6 +95,8 @@ public:
 	/// @return Whether or not sleep was successful
 	bool		sleep();
 
+	void		add_config(JsonObject json) override;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================

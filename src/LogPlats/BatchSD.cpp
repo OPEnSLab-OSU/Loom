@@ -27,25 +27,34 @@ Loom_BatchSD::Loom_BatchSD(
     , chip_select(chip_select)
     , doc(2048)
 {
-  digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 
-  bool sd_found = sd.begin(chip_select, SD_SCK_MHZ(50));
-  batch_counter=0;
-  packet_counter=0;
-  drop_count = 0;
-  if(sd_found) {
-    // Setup Directory for Batch Files
-    sd.mkdir("Batches");
-  }
+	bool sd_found = sd.begin(chip_select, SD_SCK_MHZ(50));
+	batch_counter=0;
+	packet_counter=0;
+	drop_count = 0;
+	if(sd_found) {
+		// Setup Directory for Batch Files
+		sd.mkdir("Batches");
+	}
 
-  print_module_label();
-  LPrintln("Initialize ", (sd_found) ? "sucessful" : "failed");
+	print_module_label();
+	LPrintln("Initialize ", (sd_found) ? "sucessful" : "failed");
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_BatchSD::Loom_BatchSD(LoomManager* manager, JsonArrayConst p)
   : Loom_BatchSD(manager,EXPAND_ARRAY(p, 3)) {}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_BatchSD::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(enable_rate_filter);
+	params.add(min_filter_delay);
+	params.add(chip_select);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_BatchSD::print_config() const
@@ -143,17 +152,17 @@ bool Loom_BatchSD::store_batch_json(JsonObject json){
 		LPrintln("Sync Error");
 		return false;
 	}
-  else if(file.getWriteError()){
-    file.close();
-    print_module_label();
-    LPrintln("Write Error");
-    return false;
-  }
-  file.close();
-  packet_counter++;
-  print_module_label();
-  LPrintln("Done writing to Batch");
-  return true;
+	else if(file.getWriteError()){
+		file.close();
+		print_module_label();
+		LPrintln("Write Error");
+		return false;
+	}
+	file.close();
+	packet_counter++;
+	print_module_label();
+	LPrintln("Done writing to Batch");
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -224,5 +233,7 @@ float Loom_BatchSD::get_drop_rate() const
 void Loom_BatchSD::package(JsonObject json) {
   JsonObject data = get_module_data_object(json, "Batch");
 
-  data["Number"] = batch_counter+1;
+	data["Number"] = batch_counter+1;
 }
+
+///////////////////////////////////////////////////////////////////////////////

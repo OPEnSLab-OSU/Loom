@@ -41,6 +41,18 @@ Loom_AS7262::Loom_AS7262(LoomManager* manager, JsonArrayConst p)
 	: Loom_AS7262(manager, EXPAND_ARRAY(p, 6) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_AS7262::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+	params.add(use_bulb);
+	params.add(gain);
+	params.add(mode);
+	params.add(integration_time);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_AS7262::print_config() const
 {
 	LoomI2CSensor::print_config();	

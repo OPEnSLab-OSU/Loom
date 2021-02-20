@@ -43,6 +43,14 @@ Loom_LIS3DH::Loom_LIS3DH(LoomManager* manager, JsonArrayConst p)
 	: Loom_LIS3DH(manager, EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_LIS3DH::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_LIS3DH::print_measurements() const
 {
 	print_module_label();

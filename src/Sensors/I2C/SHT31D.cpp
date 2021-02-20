@@ -33,6 +33,14 @@ Loom_SHT31D::Loom_SHT31D(LoomManager* manager, JsonArrayConst p)
 	: Loom_SHT31D(manager, EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_SHT31D::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_SHT31D::print_measurements() const
 {
 	print_module_label();

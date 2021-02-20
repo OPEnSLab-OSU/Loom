@@ -90,6 +90,8 @@ public:
 	/// Package IP with ID for MaxMSP implementation
 	void			package(JsonObject json) override;
 
+	void			add_config(JsonObject json) override;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================

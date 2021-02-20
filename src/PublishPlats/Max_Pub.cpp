@@ -44,6 +44,12 @@ Loom_MaxPub::Loom_MaxPub(LoomManager* manager, JsonArrayConst p)
 	: Loom_MaxPub(manager, (LoomModule::Type)(int)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_MaxPub::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_MaxPub::print_config() const
 {
 	LoomPublishPlat::print_config();

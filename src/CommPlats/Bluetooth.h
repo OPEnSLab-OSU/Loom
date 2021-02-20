@@ -73,7 +73,6 @@ public:
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	/// Currently no implementation
 	void		add_config(JsonObject json) override;
 
 	/// Allow a phone to connect

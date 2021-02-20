@@ -40,6 +40,14 @@ Loom_WiFi::Loom_WiFi(LoomManager* manager, JsonArrayConst p)
 	: Loom_WiFi(manager, EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_WiFi::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(SSID);
+	params.add(pass);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_WiFi::connect()
 {
 	// clear the write error
@@ -149,11 +157,10 @@ void Loom_WiFi::package(JsonObject json)
 	//JsonObject data = get_module_data_object(json, module_name);
 	auto ip = IPAddress(WiFi.localIP());
 	JsonArray tmp = json["id"].createNestedArray("ip");
-	tmp.add(ip[0]);
-	tmp.add(ip[1]);
-	tmp.add(ip[2]);
-	tmp.add(ip[3]);
-	//data["IP"] = WiFi.localIP();
+	for (auto i = 0; i < 4; i++) {
+		tmp.add(ip[i]);
+	}
+	//data["IP"] = ::WiFi.localIP();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

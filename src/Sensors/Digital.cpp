@@ -68,7 +68,6 @@ void Loom_Digital::add_config(JsonObject json)
 	// 	pin_enabled[6], pin_enabled[7], pin_enabled[8], pin_enabled[9], pin_enabled[10], pin_enabled[11]
 	// );
 	JsonArray params = add_config_temp(json, module_name);
-	params.add(module_name);
 	for (int i = 0; i < 12; i++) {
 		params.add(pin_enabled[i]);
 	}

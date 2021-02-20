@@ -31,9 +31,7 @@ Loom_Servo::Loom_Servo(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Servo::add_config(JsonObject json)
 {
-	// add_config_aux(json, module_name,
-	// 	module_name, servo_count
-	// );
+	JsonArray params = add_config_temp(json, module_name);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

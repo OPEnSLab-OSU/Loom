@@ -159,6 +159,8 @@ public:
 	/// Flag was set by a top half ISR
 	void		run_pending_ISRs();
 
+	void		add_config(JsonObject json) override;
+
 //=============================================================================
 ///@name	EXTERNAL INTERRUPT METHODS
 /*@{*/ //======================================================================

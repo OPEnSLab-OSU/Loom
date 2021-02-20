@@ -70,6 +70,7 @@ const byte i2c_address		= 0x1F,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
