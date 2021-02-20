@@ -117,11 +117,7 @@ nRF::~nRF()
 ///////////////////////////////////////////////////////////////////////////////
 void nRF::add_config(JsonObject json)
 {
-	// add_config_aux(json, module_name,
-	// 	module_name,
-	// 	max_message_len, address, data_rate, power_level,
-	// 	retry_count, retry_timeout, multicast_level	
-	// );
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

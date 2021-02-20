@@ -65,11 +65,6 @@ Digital::Digital(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Digital::add_config(JsonObject json)
 {
-	// add_config_aux(json, module_name,
-	// 	module_name,
-	// 	pin_enabled[0], pin_enabled[1], pin_enabled[2], pin_enabled[3], pin_enabled[4], pin_enabled[5],
-	// 	pin_enabled[6], pin_enabled[7], pin_enabled[8], pin_enabled[9], pin_enabled[10], pin_enabled[11]
-	// );
 	JsonArray params = add_config_temp(json, module_name);
 	params.add(module_name);
 	for (int i = 0; i < 12; i++) {

@@ -69,7 +69,7 @@ protected:
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of Manager
 
 	// Sub Managers, so placed here for ease of access.
-	WarmUpManager*	warmup_manager		= nullptr;
+	WarmUpManager*		warmup_manager		= nullptr;
 	InterruptManager*	interrupt_manager	= nullptr;
 	SleepManager*		sleep_manager		= nullptr;
 	RTC*				rtc_module			= nullptr;

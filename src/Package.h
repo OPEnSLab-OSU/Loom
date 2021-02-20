@@ -17,7 +17,7 @@
 namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Add an list of alternating keys and values to a json data object
+/// Add a list of alternating keys and values to a json data object
 /// under the specified module
 /// @param[out]		json			Object to add data to
 /// @param[in]		module_name		Name of module calling package
