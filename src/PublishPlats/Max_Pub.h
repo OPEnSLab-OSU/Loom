@@ -61,6 +61,7 @@ public:
 /*@{*/ //======================================================================
 
 	bool		dispatch(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

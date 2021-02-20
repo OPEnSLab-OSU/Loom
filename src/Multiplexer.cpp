@@ -113,6 +113,16 @@ Multiplexer::Multiplexer(JsonArrayConst p)
 	: Multiplexer(EXPAND_ARRAY(p, 4) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Multiplexer::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(num_ports);
+	params.add(dynamic_list);
+	params.add(update_period);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 Multiplexer::~Multiplexer() 
 {
 	// Free any sensors

@@ -45,6 +45,14 @@ WiFi::WiFi(JsonArrayConst p)
 	: WiFi(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void WiFi::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(SSID);
+	params.add(pass);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void WiFi::connect()
 {
 	// clear the write error
@@ -158,10 +166,9 @@ void WiFi::package(JsonObject json)
 	//JsonObject data = get_module_data_object(json, module_name);
 	auto ip = IPAddress(::WiFi.localIP());
 	JsonArray tmp = json["id"].createNestedArray("ip");
-	tmp.add(ip[0]);
-	tmp.add(ip[1]);
-	tmp.add(ip[2]);
-	tmp.add(ip[3]);
+	for (auto i = 0; i < 4; i++) {
+		tmp.add(ip[i]);
+	}
 	//data["IP"] = ::WiFi.localIP();
 }
 

@@ -82,7 +82,7 @@ public:
 	// 	Unknown=0,			///< Unknown
 	// 	Other=1,			///< Other
 	// 	Sensor=2,			///< Sensors
-	// 	RTC=3,			///< RTC
+	// 	RTC=3,				///< RTC
 	// 	Actuator=4,			///< Actuators
 	// 	LogPlat=5,			///< LogPlats
 	// 	CommPlat=6,			///< CommPlats
@@ -94,7 +94,7 @@ public:
 protected:
 
 	// const Type		module_type;		///< Module type
-	Manager*	device_manager;		///< Pointer to manager.
+	Manager*		device_manager;		///< Pointer to manager.
 										///< Manager provides to any modules passed to add_module
 	const String	module_name_base;	///< The name of the module (Should have a DEFAULT but can be overriden if provided to constructor)
 	const char* 	module_name;

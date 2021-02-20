@@ -59,6 +59,15 @@ ZXGesture::ZXGesture(JsonArrayConst p)
 	: ZXGesture(p[0], p[1], (Mode)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void ZXGesture::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+	params.add((int)mode);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void ZXGesture::print_config() const
 {
 	I2CSensor::print_config();

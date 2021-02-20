@@ -133,8 +133,8 @@ public:
 	I2CSensor*	get_sensor(uint8_t port) const { return sensors[port]; }
 
 	void power_up() override;
-
 	void power_down() override;
+	void add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

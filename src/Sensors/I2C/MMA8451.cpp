@@ -43,6 +43,15 @@ MMA8451::MMA8451(JsonArrayConst p)
 	: MMA8451(p[0], p[1], (mma8451_range_t)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void MMA8451::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+	params.add((int)range);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void MMA8451::print_config() const
 {
 	I2CSensor::print_config();

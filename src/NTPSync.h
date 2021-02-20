@@ -55,6 +55,8 @@ public:
 	/// Sync the RTC using NTP from the internet platform specified
 	void	second_stage_ctor() override;
 
+	void	add_config(JsonObject json) override;
+
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================

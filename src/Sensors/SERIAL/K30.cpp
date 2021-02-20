@@ -35,6 +35,13 @@ K30::K30(JsonArrayConst p)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void K30::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+    params.add(num_samples);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void K30::sendSensorRequest(byte request[7]) {
     
     if (sensor_serial == nullptr) {

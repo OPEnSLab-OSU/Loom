@@ -84,7 +84,7 @@ public:
 	OLED(
 			const bool			enable_rate_filter		= true,
 			const uint16_t		min_filter_delay		= 300,
-			const Version		type					= Version::FEATHERWING,
+			const Version		version					= Version::FEATHERWING,
 			const byte			reset_pin				= A2,
 			const Format		display_format			= Format::SCROLL,
 			const uint16_t		scroll_duration			= 6000,
@@ -110,6 +110,8 @@ public:
 	// linked Manager, calling this classes implementation of 
 	// 'log(JsonObject json)', which is pure virtual in superclass
 	using LogPlat::log; 
+
+	void add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

@@ -35,6 +35,14 @@ SHT31D::SHT31D(JsonArrayConst p)
 	: SHT31D( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void SHT31D::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void SHT31D::print_measurements() const
 {
 	print_module_label();

@@ -34,12 +34,12 @@ class BatchSD : public LogPlat
 
 protected:
 
-  SdFat sd;               ///< File System Object
-  const byte chip_select; ///< Chip select pin
-  int batch_counter;      ///< Current batch count value
-  int packet_counter;     ///< Current packet count value in a batch
-  int drop_count;         ///< Current count of packets that failed to be sent
-  DynamicJsonDocument doc;
+	SdFat sd;               ///< File System Object
+	const byte chip_select; ///< Chip select pin
+	int batch_counter;      ///< Current batch count value
+	int packet_counter;     ///< Current packet count value in a batch
+	int drop_count;         ///< Current count of packets that failed to be sent
+	DynamicJsonDocument doc;
 
 public:
 
@@ -48,83 +48,84 @@ public:
 /*@{*/ //======================================================================
 
 
-  /// SD Module Constructor
-  ///
-  /// @param[in]	enable_rate_filter			Bool | <true> | {true, false} | Whether or not to impose maximum update rate
-  /// @param[in]	min_filter_delay			Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
-  /// @param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
-  BatchSD(
-    const bool		  enable_rate_filter = true,
-    const uint16_t	min_filter_delay   = 1000,
-    const byte			chip_select			   = 10
-  );
+	/// SD Module Constructor
+	///
+	/// @param[in]	enable_rate_filter			Bool | <true> | {true, false} | Whether or not to impose maximum update rate
+	/// @param[in]	min_filter_delay			Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
+	/// @param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
+	BatchSD(
+		const bool		  enable_rate_filter = true,
+		const uint16_t	min_filter_delay   = 1000,
+		const byte			chip_select			   = 10
+	);
 
-  /// Constructor that takes Json Array, extracts args
+	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-  BatchSD(JsonArrayConst p);
+	BatchSD(JsonArrayConst p);
 
 	/// Destructor
-  ~BatchSD() = default;
+	~BatchSD() = default;
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-  bool		log(JsonObject json) override { return store_batch_json(json); }
+	bool	log(JsonObject json) override { return store_batch_json(json); }
 
-  // manually expose superclass version of log() that gets json from
+	// manually expose superclass version of log() that gets json from
 	// linked Manager, calling this classes implementation of
 	// 'log(JsonObject json)', which is pure virtual in superclass
-  using LogPlat::log;
+	using LogPlat::log;
 
 
-  /// Clears all the files that are being stored in the batch on the SD card
-  void    clear_batch_log();
+	/// Clears all the files that are being stored in the batch on the SD card
+	void	clear_batch_log();
 
-  /// Accesses the internal json from Loom Manager to store to batch using store_batch_json
+	/// Accesses the internal json from Loom Manager to store to batch using store_batch_json
 	/// @return True if success
-  bool    store_batch();
+	bool	store_batch();
 
-  /// Uses JsonObject to write file as packet in the batch onto the SD Card
-  /// @param[in] json   The data to be saved as .json file
-  /// @return True if success
-  bool    store_batch_json(JsonObject json);
+	/// Uses JsonObject to write file as packet in the batch onto the SD Card
+	/// @param[in] json   The data to be saved as .json file
+	/// @return True if success
+	bool	store_batch_json(JsonObject json);
 
 
-  void    power_up() override;
-  void    power_down() override;
+	void	power_up() override;
+	void	power_down() override;
 
-  void    package(JsonObject json);
+	void	package(JsonObject json);
+	void	add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
-  void		print_config() const override;
+	void	print_config() const override;
 
-  /// Prints the contents of a particular packet file in the batch
-  /// @param[in]  index   The index of file in the batch to print
-  /// @return True if success
-  bool    dump_batch(int index);
+	/// Prints the contents of a particular packet file in the batch
+	/// @param[in]  index   The index of file in the batch to print
+	/// @return True if success
+	bool    dump_batch(int index);
 
 //=============================================================================
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
 
-  /// Returns a JsonObject of the packet file (.json) in the batch from the SD card
-  /// @param[in] index    The index of the file in the batch to retrieve
-  /// @return   The JsonObject stored index
-  JsonObject  get_batch_json(int index);
+	/// Returns a JsonObject of the packet file (.json) in the batch from the SD card
+	/// @param[in] index    The index of the file in the batch to retrieve
+	/// @return   The JsonObject stored index
+	JsonObject	get_batch_json(int index);
 
-  /// Get the current amount of packets that are being stored in the batch
-  /// @return   The current number of packets
-  int         get_packet_counter() { return packet_counter; }
+	/// Get the current amount of packets that are being stored in the batch
+	/// @return   The current number of packets
+	int			get_packet_counter() { return packet_counter; }
 
-  /// Updates the count of packets that have failed to send
-  /// @param[in] dropped    The amount of packets that have been dropped during transmit
-  void add_drop_count(uint8_t dropped) { drop_count += dropped; }
+	/// Updates the count of packets that have failed to send
+	/// @param[in] dropped    The amount of packets that have been dropped during transmit
+	void		add_drop_count(uint8_t dropped) { drop_count += dropped; }
 
 //=============================================================================
 ///@name	MISCELLANEOUS
@@ -132,16 +133,16 @@ public:
 
 private:
 
-  /// Creates the proper file name of the file from the batch
-  /// @param[in] index    The index of the file in the batch
-  /// @return The file name to be used for file in batch
-  void create_file_name(int index, char* name);
+	/// Creates the proper file name of the file from the batch
+	/// @param[in] index    The index of the file in the batch
+	/// @return The file name to be used for file in batch
+	void		create_file_name(int index, char* name);
 
-  /// Get the packet drop rate from the current batch
-  /// Keep in mind that this drop rate will not account for retransmissions
-  /// Drops are considered to be failed trainsmission or publishes used in either the Communication or Publish platforms
-  /// @return The drop rate from 0 (no drops) to 100 (100% drop)
-  float get_drop_rate() const;
+	/// Get the packet drop rate from the current batch
+	/// Keep in mind that this drop rate will not account for retransmissions
+	/// Drops are considered to be failed trainsmission or publishes used in either the Communication or Publish platforms
+	/// @return The drop rate from 0 (no drops) to 100 (100% drop)
+	float		get_drop_rate() const;
 
 };
 

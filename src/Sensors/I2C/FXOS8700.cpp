@@ -38,6 +38,14 @@ FXOS8700::FXOS8700(JsonArrayConst p)
 	: FXOS8700(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void FXOS8700::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void FXOS8700::print_measurements() const
 {
 	print_module_label();

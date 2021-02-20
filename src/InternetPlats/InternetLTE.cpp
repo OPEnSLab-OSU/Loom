@@ -59,11 +59,19 @@ LTE::LTE(
   connect();
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 LTE::LTE(JsonArrayConst p)
   : LTE(EXPAND_ARRAY(p, 3) ) {}
 
+///////////////////////////////////////////////////////////////////////////////
+void LET::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(APN);
+	params.add(gprsUser);
+	params.add(gprsPass);
+	params.add(powerPin);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LTE::connect()
@@ -113,9 +121,7 @@ bool LTE::is_connected() const
   return modem.isGprsConnected();
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
-
 InternetPlat::UDPPtr LTE::open_socket(const uint port)
 {
   //Since the TinyGSM library currently does not support UDP socket functionality, this method will always return a null pointer and fail.
@@ -126,14 +132,12 @@ InternetPlat::UDPPtr LTE::open_socket(const uint port)
   	return UDPPtr();
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////
 void LTE::print_config() const
 {
   InternetPlat::print_config();
   LPrint("\tAPN:               :", APN, '\n');
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 void LTE::print_state() const

@@ -28,6 +28,7 @@ Loom::MPU6050::MPU6050(
 		const bool		calibrate
 	)
 	: I2CSensor("MPU6050", i2c_address, mux_port )
+	, calibrate_on_startup(calibrate)
 {
 	Wire.begin();
 	mpu_inst.begin();
@@ -42,6 +43,15 @@ Loom::MPU6050::MPU6050(
 ///////////////////////////////////////////////////////////////////////////////
 Loom::MPU6050::MPU6050(JsonArrayConst p)
 	: MPU6050(EXPAND_ARRAY(p, 3)) {}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom::MPU6050::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+	params.add(calibrate_on_startup);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom::MPU6050::print_state() const

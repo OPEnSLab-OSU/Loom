@@ -33,17 +33,20 @@ namespace Loom {
 class ADS1115 : public I2CSensor
 {
 protected :
-		///< Underlying ADS1115 sensor manager instance
+	///< Underlying ADS1115 sensor manager instance
 
-		// Protected members here (are inherited)
-		Adafruit_ADS1115 ads1115;
-	const bool			analog_enabled[4];
-	const bool			diff_enabled[2];
+	// Protected members here (are inherited)
+	Adafruit_ADS1115 ads1115;
+
+	const bool	analog_enabled[4];
+	const bool	diff_enabled[2];
 	// NOTE: There is an error in the adafruit driver, as the single-ended inputs return unsigned numbers
 	// all outputs in the ADS1115 are signed, so we use a signed number here.
 	// See: https://github.com/adafruit/Adafruit_ADS1X15/pull/9
-	int16_t				analog_reads[4];
-	int16_t				diff_reads[2];
+	int16_t		analog_reads[4];
+	int16_t		diff_reads[2];
+
+	uint32_t	gain;
 
 public:
 	enum class Gain : uint32_t {
@@ -96,6 +99,7 @@ public:
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

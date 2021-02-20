@@ -33,7 +33,7 @@ protected:
 	uint16_t	UDP_port;				///< Which UDP port to receive on
 	bool		auto_dispatch;			///< True to immediately call Manager::dispatch() when packet received
 
-	InternetPlat::UDPPtr UDP_Inst;	///< Pointer to UDP object
+	InternetPlat::UDPPtr UDP_Inst;		///< Pointer to UDP object
 
 public:
 
@@ -70,6 +70,8 @@ public:
 	bool		subscribe(JsonObject json) override;
 
 	using SubscribePlat::subscribe;
+
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

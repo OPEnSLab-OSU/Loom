@@ -79,6 +79,13 @@ InterruptManager::InterruptManager(JsonArrayConst p)
 	: InterruptManager(nullptr ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void InterruptManager::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(0);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void InterruptManager::print_config() const
 {
 	Module::print_config();

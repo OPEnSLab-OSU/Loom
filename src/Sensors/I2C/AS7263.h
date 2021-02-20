@@ -90,6 +90,7 @@ public:
 
 	void		print_config() const override;
 	void		print_measurements() const override;
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	SETTERS

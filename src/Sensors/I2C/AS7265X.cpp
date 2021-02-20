@@ -97,6 +97,18 @@ Loom::AS7265X::AS7265X(JsonArrayConst p)
 	: AS7265X(EXPAND_ARRAY(p, 6)) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom::AS7265X::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+	params.add(use_bulb);
+	params.add(gain);
+	params.add(mode);
+	params.add(integration_time);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom::AS7265X::print_measurements() const
 {
 	print_module_label();

@@ -40,6 +40,17 @@ GoogleSheets::GoogleSheets(JsonArrayConst p)
 	: GoogleSheets(p[0], p[2], p[3], p[4], p[5] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void GoogleSheets::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(module_name);
+	params.add(m_script_url);
+	params.add(m_sheet_id);
+	params.add(tab_matches_dev_id);
+	params.add(m_tab_id);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void GoogleSheets::print_config() const
 {
 	PublishPlat::print_config();

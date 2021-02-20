@@ -48,6 +48,12 @@ MaxPub::MaxPub(JsonArrayConst p)
 	: MaxPub() {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void MaxPub::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void MaxPub::print_config() const
 {
 	PublishPlat::print_config();

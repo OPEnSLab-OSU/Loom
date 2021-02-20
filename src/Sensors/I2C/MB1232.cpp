@@ -48,6 +48,14 @@ MB1232::MB1232(JsonArrayConst p)
 	: MB1232(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void MB1232::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void MB1232::print_measurements() const
 {
 	print_module_label();

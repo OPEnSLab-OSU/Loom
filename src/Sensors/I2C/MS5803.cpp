@@ -66,6 +66,14 @@ MS5803::MS5803(JsonArrayConst p)
 	: MS5803( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void MS5803::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void MS5803::print_measurements() const
 {
 	print_module_label();

@@ -42,7 +42,11 @@ Bluetooth::Bluetooth(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Bluetooth::add_config(JsonObject json)
 {
-
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(max_message_len);
+	params.add(spi_CS);
+	params.add(spi_IRQ);
+	params.add(spi_RST);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

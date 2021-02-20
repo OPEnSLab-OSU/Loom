@@ -42,6 +42,8 @@ protected:
 	float gyroAngle[3];		///< Acceleration angles (x, y, z).
 	float angle[3];			///< X-axis angle. (x, y, z)
 
+	bool calibrate_on_startup;
+
 public:
 
 //=============================================================================
@@ -74,6 +76,7 @@ public:
 	void		measure() override;
 	void		package(JsonObject json) override;
 	void		calibrate() override;
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

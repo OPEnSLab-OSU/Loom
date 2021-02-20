@@ -39,6 +39,16 @@ SleepManager::SleepManager(JsonArrayConst p)
 	: SleepManager(p[0], p[1], (Mode)(int)p[2], p[3]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void SleepManager::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(use_LED);
+	params.add(delay_on_wake);
+	params.add((int)sleep_mode);
+	params.add(power_off_pin);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void SleepManager::print_config() const
 {
 	Module::print_config();

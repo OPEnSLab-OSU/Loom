@@ -36,6 +36,14 @@ TMP007::TMP007(JsonArrayConst p)
 	: TMP007(EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void TMP007::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void TMP007::print_measurements() const
 {
 	print_module_label();

@@ -26,6 +26,7 @@ SD::SD(
 	)
 	: LogPlat("SD", enable_rate_filter, min_filter_delay)
 	, chip_select(chip_select)
+	, number_files(number_files)
 {
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 
@@ -34,7 +35,7 @@ SD::SD(
 
 	if (sd_found) {
 		// Setup file name
-		update_filename(default_file, number_files);
+		update_filename(default_file);
 	} else {
 		active = false;
 	}
@@ -48,7 +49,18 @@ SD::SD(JsonArrayConst p)
 	: SD(EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-bool SD::update_filename(const char* default_file, const bool number_files)
+void SD::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(enable_rate_filter);
+	params.add(min_filter_delay);
+	params.add(chip_select);
+	params.add(filename);
+	params.add(chip_select);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool SD::update_filename(const char* default_file)
 {
 	snprintf(filename, 12, "%s", default_file);	// file before potential modifcation
 	File file;				// file representation

@@ -68,6 +68,13 @@ void NTPSync::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void NTPSync::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(m_sync_interval);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void NTPSync::print_config() const
 {
 	print_module_label();

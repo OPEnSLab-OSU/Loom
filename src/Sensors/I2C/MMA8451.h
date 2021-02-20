@@ -73,6 +73,7 @@ public:
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 	// void		enable_interrupts(bool enable = true);
 	// void 		set_transient_int_threshold(uint8_t range);

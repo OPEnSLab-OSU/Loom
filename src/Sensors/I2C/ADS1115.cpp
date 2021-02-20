@@ -36,6 +36,7 @@ ADS1115::ADS1115(
 	, diff_enabled{ diff_0_enabled, diff_1_enabled }
 	, analog_reads{}
 	, diff_reads()
+	, gain(static_cast<uint32_t>(gain))
 {
 	// Gain is an internal value in this driver, so this function
 	// does not actually write to the I2C bus
@@ -46,6 +47,21 @@ ADS1115::ADS1115(
 ///////////////////////////////////////////////////////////////////////////////
 ADS1115::ADS1115(JsonArrayConst p)
 	: ADS1115(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], (Gain)(uint32_t)p[8] ) {}
+
+///////////////////////////////////////////////////////////////////////////////
+void ADS1115::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+	for (int i = 0; i < 4; i++) {
+		params.add(analog_enabled[i]);
+	}
+	for (int i = 0; i < 2; i++) {
+		params.add(diff_enabled[i]);
+	}
+	params.add((int)gain);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void ADS1115::print_config() const

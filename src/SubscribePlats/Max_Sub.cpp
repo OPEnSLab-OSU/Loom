@@ -33,6 +33,13 @@ MaxSub::MaxSub(JsonArrayConst p)
 	: MaxSub( (const bool)p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Digital::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(auto_dispatch);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void MaxSub::second_stage_ctor() 
 {
 	SubscribePlat::second_stage_ctor();

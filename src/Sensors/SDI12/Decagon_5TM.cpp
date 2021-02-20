@@ -27,6 +27,13 @@ Decagon5TM::Decagon5TM(JsonArrayConst p)
 	: Decagon5TM((uint8_t)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Decagon5TM::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 void Decagon5TM::print_config() const
 {
 	SDI12Sensor::print_config();

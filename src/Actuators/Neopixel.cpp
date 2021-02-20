@@ -53,7 +53,10 @@ Neopixel::Neopixel(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Neopixel::add_config(JsonObject json)
 {
-
+	JsonArray params = add_config_temp(json, module_name);
+	for (auto i = 0; i < 3; i++) {
+		params.add(pin_enabled[i]);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

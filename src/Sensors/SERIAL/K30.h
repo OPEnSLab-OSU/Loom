@@ -62,13 +62,14 @@ public:
     
     /// Destructor
     virtual ~K30() = default;
+
+    void        add_config(JsonObject json) override;
     
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
 
     void        print_measurements()   const override;
-
 
 //=============================================================================
 ///@name	OPERATION

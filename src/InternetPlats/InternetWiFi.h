@@ -92,6 +92,8 @@ public:
 	void			package(JsonObject json) override;
 #endif
 
+	void			add_config(JsonObject json) override;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
