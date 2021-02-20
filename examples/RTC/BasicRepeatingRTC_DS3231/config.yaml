@@ -6,5 +6,5 @@ components:
     params:
       - 11
       - true
-  - name: Interrupt_Manager
+  - name: InterruptManager
   - name: Analog

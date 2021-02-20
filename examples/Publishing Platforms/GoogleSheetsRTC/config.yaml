@@ -8,7 +8,7 @@ components:
   - name: Ethernet
     params:
       - Ether1
-      - - <your-mac-address>
+      - [<your-mac-address>]
       - - 192
         - 168
         - 0

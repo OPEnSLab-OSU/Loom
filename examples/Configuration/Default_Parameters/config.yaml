@@ -5,5 +5,5 @@ general:
 components:
   - name: Analog
   - name: Digital
-  - name: Interrupt_Manager
+  - name: InterruptManager
   - name: Relay

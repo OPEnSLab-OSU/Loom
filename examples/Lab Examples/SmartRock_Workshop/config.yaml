@@ -29,8 +29,8 @@ components:
     params:
       - 11
       - true
-  - name: Interrupt_Manager
-  - name: Sleep_Manager
+  - name: InterruptManager
+  - name: SleepManager
     params:
       - true
       - false
