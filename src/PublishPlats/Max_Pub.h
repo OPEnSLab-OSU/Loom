@@ -42,8 +42,6 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	///
-	/// @param[in]  internet_type	Set(Module::Type) | <7001> | {7001("Ethernet"), 7002("WiFi"), 7003("LTE")} | Code of the desired internet platform.
 	MaxPub();
 
 	/// Constructor that takes Json Array, extracts args
@@ -101,7 +99,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-REGISTER_NODEFAULT(Module, MaxPub, "MaxPub");
+REGISTER(Module, MaxPub, "MaxPub");
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom

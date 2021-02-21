@@ -42,11 +42,9 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	///
-	/// @param[in]  internet_type		Set(Module::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	/// @param[in]	auto_dispatch		True to immediately call Manager::dispatch() when packet received
 	MaxSub(
-		const bool auto_dispatch	
+		const bool auto_dispatch	= true
 	); 
 
 	/// Constructor that takes Json Array, extracts args
@@ -106,7 +104,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-REGISTER_NODEFAULT(Module, MaxSub, "MaxSub");
+REGISTER(Module, MaxSub, "MaxSub");
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom

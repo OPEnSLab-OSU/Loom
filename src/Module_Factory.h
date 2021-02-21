@@ -32,7 +32,7 @@ S* ConstructDefault() { return new T(); }
 /// Creates a new T, returned as S*. S must be base of T
 /// @return The created T
 template <class S, class T>
-S* ConstructDefaultJson(JsonArrayConst p) { return new T(p); }
+S* ConstructJson(JsonArrayConst p) { return new T(p); }
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -49,7 +49,7 @@ public:
 	{										///<  *Needed as an alternative to std::map
 		const char* name;					///< Name of module that will be used to make a new copy
 		const FactoryFunction ctor;			///< Pointer to the Creation function which will be used to CTOR
-		const FactoryFunctionJson ctorJson; ///< Pointer to the CreationJSON function which will be used to CTOR form JSON
+		const FactoryFunctionJson ctorJson; ///< Pointer to the CreationJSON function which will be used to CTOR from JSON
 	};
 
 	
@@ -81,7 +81,7 @@ template <typename T>
 template <class U>
 bool Registry<T>::addNoDefault(const char* name)
 {
-	return add(name, nullptr, ConstructDefaultJson<T, U>);
+	return add(name, nullptr, ConstructJson<T, U>);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ template <typename T>
 template <class U>
 bool Registry<T>::add(const char* name)
 {
-	return add(name, ConstructDefault<T, U>, ConstructDefaultJson<T, U>);
+	return add(name, ConstructDefault<T, U>, ConstructJson<T, U>);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
