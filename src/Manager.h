@@ -357,15 +357,27 @@ public:
 	///	@param[in]	type	Module type to check for
 	bool		has_module(const LoomModule::Type type) const;
 
-#ifdef LOOM_FLASH_CONFIG
+
+	// The following 3 methods only use flash memory if LOOM_FLASH_CONFIG is enabled in the Tools menu
+	// They are still callable without LOOM_FLASH_CONFIG to avoid having to 
+	// comment them out when developing / flashing the Feather frequently
+	// If LOOM_FLASH_CONFIG is disabled:
+	//  - save_flash_config does nothing 
+	//  - load_flash_config does nothing 
+	// - load_persistent_config will still use LCONFIG if available
+
 	/// Save current configuration to flash
 	/// @return True if save successul, false otherwise
-	bool		save_config_flash();
+	bool		save_flash_config();
 
 	/// Load configuration from flash
 	/// @return True if configuration found, false otherwise
-	bool		load_config_flash();
-#endif
+	bool		load_flash_config();
+
+	///	Try to load configuration from flash if available, else try to use LCONFIG
+	/// @return 1 if config loaded from flash, 2 if LCONFIG used, -1 if no config available
+	uint8_t		load_persistent_config();
+
 
 //=============================================================================
 ///@name	PRINT INFORMATION

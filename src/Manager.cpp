@@ -442,53 +442,99 @@ void LoomManager::get_config()
 	return json;
 }
 
-#ifdef LOOM_FLASH_CONFIG
 ///////////////////////////////////////////////////////////////////////////////
-bool Manager::save_config_flash()
+bool Manager::save_flash_config()
 {
-	// Query modules to build current configuration
-	get_config();
+	#ifdef LOOM_FLASH_CONFIG
+
+		// Query modules to build current configuration
+		get_config();
+
+		print_device_label();
+		LPrintln("Json Config Size: ", measureJson(doc));
+		if (measureJson(doc) > JSON_MAX_SIZE) {
+			print_device_label();
+			LPrintln("Json Config too large to save to flash");
+			return false;
+		}
+
+		// Serialize Json config to variable to save
+		FlashConfig_t to_save;
+		to_save.is_valid = true;
+		serializeJson(doc, to_save.json);
+
+		// Save config
+		FlashConfig.write(to_save);
+
+		return true;
+
+	#elif
+
+		LPrintln("! Flash Config Disabled - Enable via Tools menu");
+		return false;
+
+	#endif // of ifdef LOOM_FLASH_CONFIG
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool Manager::load_flash_config()
+{
+	#ifdef LOOM_FLASH_CONFIG
+
+		// Try to read config from flash
+		FlashConfig_t saved = FlashConfig.read();
+
+		// Check if read data is a configuration (won't be the first run after flashing the board) 
+		if (saved.is_valid) {
+			print_device_label();
+			LPrintln("Saved flash config found");
+
+			parse_config(saved.json);
+			return true;
+		} else {
+			print_device_label();
+			LPrintln("No saved flash config found");
+			return false;
+		}
+
+	#elif
+
+		LPrintln("! Flash Config Disabled - Enable via Tools menu");
+		return false;
+
+	#endif // of ifdef LOOM_FLASH_CONFIG
+}
+
+///////////////////////////////////////////////////////////////////////////////
+uint8_t Manager::load_persistent_config()
+{
+	#ifdef LOOM_FLASH_CONFIG
+
+		bool found_flash_config = load_flash_config();
+		if (found_flash_config) {
+			return 1;
+		}
+
+	#elif
+
+		LPrintln("! Flash Config Disabled - Enable via Tools menu");
+
+	#endif // of ifdef LOOM_FLASH_CONFIG
+
+	#ifdef LCONFIG
+		if (!found_flash_config) {
+			print_device_label();
+			LPrintln("Using LCONFIG instead");
+			parse_config(LCONFIG);
+			return 2;
+		}
+	#endif // of LCONFIG
 
 	print_device_label();
-	LPrintln("Json Config Size: ", measureJson(doc));
-	if (measureJson(doc) > JSON_MAX_SIZE) {
-		print_device_label();
-		LPrintln("Json Config too large to save to flash");
-		return false;
-	}
-
-	// Serialize Json config to variable to save
-	FlashConfig_t to_save;
-	to_save.is_valid = true;
-	serializeJson(doc, to_save.json);
-
-	// Save config
-	FlashConfig.write(to_save);
-
-	return true;
+	LPrintln("No configuration available");
+	return -1;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-bool Manager::load_config_flash()
-{
-	// Try to read config from flash
-	FlashConfig_t saved = FlashConfig.read();
-
-	// Check if read data is a configuration (won't be the first run after flashing the board) 
-	if (saved.is_valid) {
-		print_device_label();
-		LPrintln("Saved config found");
-
-		parse_config(saved.json);
-		return true;
-	} else {
-		print_device_label();
-		LPrintln("No saved config found");
-		return false;
-	}
-}
-
-#endif // of ifdef LOOM_FLASH_CONFIG
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomModule*	LoomManager::find_module(const LoomModule::Type type, const uint8_t idx) const
