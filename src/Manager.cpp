@@ -24,7 +24,6 @@
 #include "PublishPlats/PublishPlat.h"
 #include "NTPSync.h"
 #include "TemperatureSync.h"
-// #include "I2Cdev.h"
 
 #include <ArduinoJson.h>
 #include <SdFat.h>
@@ -271,13 +270,6 @@ JsonObject Manager::internal_json(const bool clear)
 	} else {
 		return doc.as<JsonObject>();
 	}
-
-
-	// doc["type"] = "unknown"; // JsonObject::set wont work if there is not anything in object
-	// LPrintln("\nDOC MemoryUsage in internal_json: ", doc.memoryUsage());
-
-	// return doc.as<JsonObject>();
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -525,41 +517,6 @@ uint8_t Manager::load_persistent_config()
 	return -1;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
-// Module*	Manager::find_module(const Module::Type type, const uint8_t idx) const
-// {
-// 	uint8_t current = 0;
-
-// 	for (auto module : modules) {
-// 		if (type == module->get_module_type()) {
-// 			if (current == idx) {
-// 				return (Module*)module;
-// 			} else {
-// 				current++;
-// 			}
-// 		}
-// 	}
-// 	return nullptr;
-// }
-
-///////////////////////////////////////////////////////////////////////////////
-// Module*	Manager::find_module_by_category(const Module::Category category, const uint8_t idx) const
-// {
-// 	uint8_t current = 0;
-
-// 	for (auto module : modules) {
-// 		if (category == module->category()) {
-// 			if (current == idx) {
-// 				return (Module*)module;
-// 			} else {
-// 				current++;
-// 			}
-// 		}
-// 	}
-// 	return nullptr;
-// }
-
 ///////////////////////////////////////////////////////////////////////////////
 void Manager::set_interval(const uint16_t ms)
 {
@@ -567,15 +524,6 @@ void Manager::set_interval(const uint16_t ms)
 	print_device_label();
 	LPrintln("Set interval to: ", interval);
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// bool Manager::has_module(const Module::Type type) const
-// {
-// 	for (auto module : modules) {
-// 		if (module->get_module_type() == type) return true;
-// 	}
-// 	return false;
-// }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Manager::parse_config(const char* json_config)

@@ -139,11 +139,8 @@ public:
 	/// @return True if success
 	bool		parse_config_SD(const char* config_file);
 
-
-
 	bool		parse_config_serial();
 	bool		check_serial_for_config();
-
 
 
 	/// Parse a JSON configuration object specifying enabled modules.
@@ -400,19 +397,6 @@ public:
 //=============================================================================
 ///@name	MODULE ACCESS
 /*@{*/ //======================================================================
-
-	/// Auxiliary function to search a list of modules for a module of specified type
-	/// @param[in]	type	Type to search for
-	// Module*	find_module(const Module::Type type, const uint8_t idx=0) const;
-
-	/// Auxiliary function to search a list of modules for a module of specified category
-	/// @param[in]	category	Category to search for
-	// Module*	find_module_by_category(const Module::Category category, const uint8_t idx) const;
-
-	/// Subscript operator to access modules the manager is maintaining.
-	/// Works like find_module() without the option for an index
-	/// @param[in]	type	Type to search for
-	// Module* operator[](const Module::Type type) const { return find_module(type); };
 
 	template <typename T>
 	T* get(const uint8_t idx=0) const {
