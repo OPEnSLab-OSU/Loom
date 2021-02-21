@@ -26,7 +26,7 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 bool did_serialize = false;
 
@@ -55,8 +55,8 @@ void setup() {
 	
 	// start Loom!
 	if (did_serialize) {
-		Exec.set_print_verbosity(Verbosity::V_LOW);
-		Exec.parse_config_json(doc.as<JsonObject>());
+		Feather.set_print_verbosity(Verbosity::V_LOW);
+		Feather.parse_config_json(doc.as<JsonObject>());
 		LPrintln("\n ** Setup Complete ** ");
 	}
 	else {
@@ -69,15 +69,15 @@ void loop() {
 	Bootloader::run_bootloader();
 	if (did_serialize) {
 		// put your main code here, to run repeatedly:
-		Exec.measure();
-		Exec.package();
-		Exec.display_data();
-		Exec.get<Loom::OLED>()->log();
-		Exec.get<Loom::SD>()->log();
-		Exec.GoogleSheets().publish();
+		Feather.measure();
+		Feather.package();
+		Feather.display_data();
+		Feather.get<Loom::OLED>()->log();
+		Feather.get<Loom::SD>()->log();
+		Feather.GoogleSheets().publish();
 
 		/*
-		if(!Exec.get<Loom::Spool>()->publish()){
+		if(!Feather.get<Loom::Spool>()->publish()){
 			pinMode(13, OUTPUT);
 			digitalWrite(13, HIGH);
 			Serial.println("Broke! press any key to continue...");
@@ -87,6 +87,6 @@ void loop() {
 	}
 
 	const uint32_t start = millis();
-	while (millis() - start < static_cast<uint32_t>(Exec.get_interval())) 
+	while (millis() - start < static_cast<uint32_t>(Feather.get_interval())) 
 		Bootloader::run_bootloader();
 }

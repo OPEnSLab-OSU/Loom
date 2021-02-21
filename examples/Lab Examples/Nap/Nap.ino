@@ -31,7 +31,7 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 //This is the max amount of time that the Sleepy Dog library allows for napping, anything above this will be lowered down to 16000
 //You can change this value to anything you'd like, so long as it's under 16000
@@ -40,9 +40,9 @@ uint16_t ms = 16000;
 
 void setup()
 {
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -50,9 +50,9 @@ void setup()
 
 void loop()
 {
-	Exec.measure();
-	Exec.package();
-	Exec.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
 
 	//This is where the napping process starts

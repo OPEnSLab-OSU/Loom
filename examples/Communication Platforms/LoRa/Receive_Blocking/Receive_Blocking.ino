@@ -34,23 +34,23 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 
 void setup() 
 { 
-	Exec.begin_serial();
-	Exec.parse_config(LCONFIG);
-	Exec.print_config();
+	Feather.begin_serial();
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	if (Exec.get<Loom::LoRa>()->receive_blocking(5000)) {
-		Exec.display_data();
-		Exec.get<Loom::SD>()->log("received.csv");
+	if (Feather.get<Loom::LoRa>()->receive_blocking(5000)) {
+		Feather.display_data();
+		Feather.get<Loom::SD>()->log("received.csv");
 	}
 }

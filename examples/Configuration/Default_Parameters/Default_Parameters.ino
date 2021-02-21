@@ -18,23 +18,23 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() 
 { 
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.print_config(true);
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config(true);
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	Exec.measure();
-	Exec.package();
-	Exec.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
-	Exec.pause();
+	Feather.pause();
 }

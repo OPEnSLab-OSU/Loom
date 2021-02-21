@@ -25,27 +25,27 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() 
 { 
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.nRF().set_print_verbosity(Verbosity::V_HIGH);
-	Exec.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.nRF().set_print_verbosity(Verbosity::V_HIGH);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	if (Exec.get<Loom::nRF>()->receive()) {
-		Exec.display_data();
-		Exec.get<Loom::SD>()->log("nrf.csv");
+	if (Feather.get<Loom::nRF>()->receive()) {
+		Feather.display_data();
+		Feather.get<Loom::SD>()->log("nrf.csv");
 	}
 
-	Exec.pause();	// Pause according to 'interval' in config
+	Feather.pause();	// Pause according to 'interval' in config
 					// This controls the frequency of checking
 					// for incoming data
 

@@ -11,7 +11,7 @@
 // The size of each configuration is listed at the end of setup
 // Note that the pretty formatting takes up more space in memory
 
-// Change the variable passed to Exec.parse_config() to include a different 
+// Change the variable passed to Feather.parse_config() to include a different 
 // configuration
 
 // The purpose of this example is simply the different include methods, so
@@ -49,22 +49,22 @@ const char* json_config_pretty =
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() 
 {
-	Exec.begin_serial(true);
+	Feather.begin_serial(true);
 
 	LPrintln("\nConfig:\n", json_config, "\n");
 
 	// Parse one of the configs by selecting one of the below 3 lines
-	// Exec.parse_config(LCONFIG);
-	// Exec.parse_config(json_config);
-	// Exec.parse_config(json_config_compact);
-	Exec.parse_config(json_config_pretty);
+	// Feather.parse_config(LCONFIG);
+	// Feather.parse_config(json_config);
+	// Feather.parse_config(json_config_compact);
+	Feather.parse_config(json_config_pretty);
 
-	Exec.print_config();
+	Feather.print_config();
 
 	LPrintln("strlen json_config: ", strlen(json_config));
 	LPrintln("strlen json_config_compact: ", strlen(json_config_compact));

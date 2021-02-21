@@ -15,25 +15,25 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() 
 { 
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.print_config();
-	Exec.get<Loom::MPU6050>()->print_state();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
+	Feather.get<Loom::MPU6050>()->print_state();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	Exec.measure();
-	Exec.get<Loom::MPU6050>()->print_measurements();
-	// Exec.package();
-	// Exec.display_data();
+	Feather.measure();
+	Feather.get<Loom::MPU6050>()->print_measurements();
+	// Feather.package();
+	// Feather.display_data();
 
-	Exec.pause();
+	Feather.pause();
 }

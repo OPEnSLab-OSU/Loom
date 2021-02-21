@@ -11,7 +11,7 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 volatile bool rtc_flag = false;
 
@@ -34,13 +34,13 @@ void setup()
 	digitalWrite(6, HIGH);	// Enable 5V rail
 	digitalWrite(13, LOW);
 
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
 	delay(5000);
 	// Register an interrupt on the RTC alarm pin
-	Exec.get<Loom::InterruptManager>()->register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
+	Feather.get<Loom::InterruptManager>()->register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
 	delay(5000);
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -64,18 +64,18 @@ if (rtc_flag) {
 
   // delay(1000);
 
-  Exec.power_up();
+  Feather.power_up();
 }
 
-Exec.measure();
-Exec.package();
-Exec.display_data();
+Feather.measure();
+Feather.package();
+Feather.display_data();
 
-Exec.get<Loom::GoogleSheets>()->publish();
+Feather.get<Loom::GoogleSheets>()->publish();
 
 // set the RTC alarm to a duration of five minutes with TimeSpan
-Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(0,0,5,0));
-Exec.get<Loom::InterruptManager>()->reconnect_interrupt(12);
+Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(0,0,5,0));
+Feather.get<Loom::InterruptManager>()->reconnect_interrupt(12);
 
 
 digitalWrite(13, LOW);
@@ -88,8 +88,8 @@ pinMode(10, INPUT);
 
 
 rtc_flag = false;
-Exec.power_down();
-Exec.get<Loom::SleepManager>()->sleep();
-Exec.power_up();
+Feather.power_down();
+Feather.get<Loom::SleepManager>()->sleep();
+Feather.power_up();
 while (!rtc_flag);
 }

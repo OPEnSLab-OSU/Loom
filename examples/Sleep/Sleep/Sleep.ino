@@ -20,7 +20,7 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 // Detach interrupt on wake
@@ -32,15 +32,15 @@ void wakeISR() {
 
 void setup() 
 {
-	Exec.begin_LED();
+	Feather.begin_LED();
 	digitalWrite(LED_BUILTIN, HIGH);
-	// open Serial Monitor to continue, or use Exec.begin_serial();
+	// open Serial Monitor to continue, or use Feather.begin_serial();
 	// to continue without waiting on user 
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
 
 	// Register ISR to call on wake
-	Exec.get<Loom::InterruptManager>()->register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
+	Feather.get<Loom::InterruptManager>()->register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
 
 	// LowPower.standby();
 	digitalWrite(LED_BUILTIN, LOW);
@@ -57,11 +57,11 @@ void loop()
 	delay(500);
 
 	// Set an alarm 15 seconds into the future
-	Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(0, 0, 0, 15);
+	Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(0, 0, 0, 15);
 
 	// Go to sleep
 	LPrintln("Going to sleep");
-	Exec.get<Loom::SleepManager>()->sleep();
+	Feather.get<Loom::SleepManager>()->sleep();
 
 	// This wont be seen unless you close and reopen Serial Monitor
 	LPrintln("Awake");

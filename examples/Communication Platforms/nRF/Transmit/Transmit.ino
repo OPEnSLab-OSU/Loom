@@ -27,28 +27,28 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() 
 { 
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.get<Loom::nRF>()->set_print_verbosity(Verbosity::V_HIGH);
-	Exec.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.get<Loom::nRF>()->set_print_verbosity(Verbosity::V_HIGH);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	Exec.measure();
-	Exec.package();
-	Exec.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
 	// Select on of the following
-	// Exec.nRF().send(01);		// Send to specific address
-	Exec.get<Loom::nRF>()->broadcast(); // Broadcast to all nRF devices
+	// Feather.nRF().send(01);		// Send to specific address
+	Feather.get<Loom::nRF>()->broadcast(); // Broadcast to all nRF devices
 
-	Exec.pause();	// Delay between interations set with 'interval' in config
+	Feather.pause();	// Delay between interations set with 'interval' in config
 }

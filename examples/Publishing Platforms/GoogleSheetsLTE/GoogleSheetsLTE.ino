@@ -2,7 +2,7 @@
 
 // The only difference between this example an 'Basic' is the LoomFactory
 // settings, the line:
-//		Exec.GoogleSheets().publish();
+//		Feather.GoogleSheets().publish();
 // and the configuration, enabling logging to Google Sheets.
 
 // In the config, you need:
@@ -23,23 +23,23 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() {
-  Exec.begin_serial(true);
-  Exec.parse_config(LCONFIG);
-  Exec.print_config();
+  Feather.begin_serial(true);
+  Feather.parse_config(LCONFIG);
+  Feather.print_config();
 
   LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() {
-  Exec.measure();
-  Exec.package();
-  Exec.display_data();
+  Feather.measure();
+  Feather.package();
+  Feather.display_data();
 
-  Exec.get<Loom::GoogleSheets>()->publish();
+  Feather.get<Loom::GoogleSheets>()->publish();
 
-  Exec.pause();
+  Feather.pause();
 }

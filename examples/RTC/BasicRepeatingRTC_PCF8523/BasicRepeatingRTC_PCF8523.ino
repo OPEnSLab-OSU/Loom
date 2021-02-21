@@ -25,7 +25,7 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 #define ALARM_PIN 6
@@ -33,7 +33,7 @@ Loom::Manager Exec{};
 volatile bool alarmFlag = false;
 volatile int count = 0;
 void alarmISR() { 
-	Exec.get<Loom::InterruptManager>()->get_RTC_module()->clear_alarms();
+	Feather.get<Loom::InterruptManager>()->get_RTC_module()->clear_alarms();
 	count++;
 	alarmFlag = true;
 }
@@ -41,13 +41,13 @@ void alarmISR() {
 
 void setup() 
 { 
-	Exec.begin_LED();
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.print_config();
+	Feather.begin_LED();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
-	Exec.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10));
+	Feather.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10));
 	digitalWrite(LED_BUILTIN, LOW);
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -58,16 +58,16 @@ void loop()
 	if (alarmFlag) {
 		digitalWrite(LED_BUILTIN, HIGH);
 		LPrintln("Alarm triggered, resetting alarm");
-		Exec.pause(1000);
+		Feather.pause(1000);
 		
-		Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10)); 
+		Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10)); 
 
 		digitalWrite(LED_BUILTIN, LOW);
 		alarmFlag = false;
 	}
 
 	LPrintln("Count: ", count);
-	Exec.get<Loom::PCF8523>()->print_time();
-	Exec.pause(1000);
+	Feather.get<Loom::PCF8523>()->print_time();
+	Feather.pause(1000);
 
 }

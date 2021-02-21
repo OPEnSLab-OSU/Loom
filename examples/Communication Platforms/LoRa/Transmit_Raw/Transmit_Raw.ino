@@ -39,30 +39,30 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() 
 { 
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	Exec.measure();
-	Exec.package();
-	Exec.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
     // If you change the name from LoomJSON.h file, then change Loom_Base to the name that you changed. 
 	Loom_Base out_struct;
     
-    const JsonObjectConst internal_data = Exec.internal_json(false);
-	Exec.get<Loom::LoRa>()->send_raw(out_struct.raw, sizeof(out_struct.raw), 1); // This raw data will be send to board id 1
+    const JsonObjectConst internal_data = Feather.internal_json(false);
+	Feather.get<Loom::LoRa>()->send_raw(out_struct.raw, sizeof(out_struct.raw), 1); // This raw data will be send to board id 1
 
-	Exec.pause();	// Delay between interations set with 'interval' in config
+	Feather.pause();	// Delay between interations set with 'interval' in config
 }
 

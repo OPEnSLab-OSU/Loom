@@ -32,7 +32,7 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 #define ALARM_PIN 6		// Wire interrupt on RTC to this pin
@@ -61,20 +61,20 @@ void reedISR() {
 
 void setup() 
 {
-	Exec.begin_LED();
-	Exec.flash_LED(10, 200, 200, true);
-	Exec.begin_serial();
+	Feather.begin_LED();
+	Feather.flash_LED(10, 200, 200, true);
+	Feather.begin_serial();
 
 	pinMode(10, OUTPUT);   
 
-	Exec.parse_config(LCONFIG);
-	Exec.print_config();
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
 	// pinMode(ALARM_PIN, INPUT_PULLUP);
 	// pinMode(REED_PIN, INPUT_PULLUP);
 
-	Exec.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Exec.get<Loom::InterruptManager>()->register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	Feather.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Feather.get<Loom::InterruptManager>()->register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -88,21 +88,21 @@ void loop()
 	digitalWrite(LED_BUILTIN, HIGH);
 
 	digitalWrite(10, HIGH);
-	Exec.pause(200);
+	Feather.pause(200);
 
-	Exec.measure();
+	Feather.measure();
 
 	digitalWrite(10, LOW);
 
-	Exec.package();
-	Exec.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
-	Exec.display_data();
-	Exec.get<Loom::SD>()->log();
+	Feather.package();
+	Feather.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
+	Feather.display_data();
+	Feather.get<Loom::SD>()->log();
 
-	Exec.pause(500);
-	Exec.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Exec.get<Loom::InterruptManager>()->register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
-	Exec.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(600));
+	Feather.pause(500);
+	Feather.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	Feather.get<Loom::InterruptManager>()->register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(600));
 
 	// delay(4000);
 
@@ -110,7 +110,7 @@ void loop()
 	reedFlag = false;
 
 	// Go to sleep
-	Exec.get<Loom::SleepManager>()->sleep();
+	Feather.get<Loom::SleepManager>()->sleep();
 	// 
 	
 }

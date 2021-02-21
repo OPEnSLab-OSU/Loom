@@ -4,7 +4,7 @@
 
 // Make sure your SD Featherwing or breakout is setup correctly, an SD card
 // inserted and stores a configuration in a file with a name matching what is 
-// used in Exec.parse_config_SD() below.
+// used in Feather.parse_config_SD() below.
 
 // If the device fails to load the SD configuration, it will default to the 
 // configuration in the config.h file .
@@ -14,8 +14,8 @@
 // instantiate new ones according to the configuration on the SD card.
 
 // The lines:
-// 		if ( !Exec.parse_config_SD("config.txt") ) {
-// 			Exec.parse_config(LCONFIG);
+// 		if ( !Feather.parse_config_SD("config.txt") ) {
+// 			Feather.parse_config(LCONFIG);
 //		}
 // are the core part of this example, and all that you would have to add to a 
 // different example to add SD config support
@@ -38,29 +38,29 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() 
 { 
-	Exec.begin_serial(true);
+	Feather.begin_serial(true);
 
 	// Get config from SD
 	// Else use LCONFIG
-	if ( !Exec.parse_config_SD("config.txt") ) {
-		Exec.parse_config(LCONFIG);
+	if ( !Feather.parse_config_SD("config.txt") ) {
+		Feather.parse_config(LCONFIG);
 	}
 	
-	Exec.print_config();
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 void loop() 
 {
-	// Exec.measure();
-	// Exec.package();
-	// Exec.display_data();
+	// Feather.measure();
+	// Feather.package();
+	// Feather.display_data();
 
 	// delay(2000);
 }

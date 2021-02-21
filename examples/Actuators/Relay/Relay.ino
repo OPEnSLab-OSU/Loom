@@ -19,14 +19,14 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() 
 { 
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -34,8 +34,8 @@ void setup()
 
 void loop() 
 {
-	Exec.get<Loom::Relay>()->set(true);
-	Exec.pause(2000);
-	Exec.get<Loom::Relay>()->set(false);
-	Exec.pause(2000);
+	Feather.get<Loom::Relay>()->set(true);
+	Feather.pause(2000);
+	Feather.get<Loom::Relay>()->set(false);
+	Feather.pause(2000);
 }

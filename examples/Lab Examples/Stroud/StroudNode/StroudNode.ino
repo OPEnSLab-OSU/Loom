@@ -57,7 +57,7 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 
@@ -67,57 +67,57 @@ void setup()
 	// pinMode(10, OUTPUT);				// To be able to turn sensor on/off
 										// Not currently being used due to conflict with SD CS pin
 
-	Exec.begin_LED();					// LED setup
-	Exec.begin_serial(false);			// Start Serial, false indicates don't wait for Serial Monitor
+	Feather.begin_LED();					// LED setup
+	Feather.begin_serial(false);			// Start Serial, false indicates don't wait for Serial Monitor
 
 	// Try to load SD config based on mode
 	bool use_max = digitalRead(9) == 0; 		// High to use Max, Low to use Google Sheets
 	LPrintln("In ", use_max ? "Max" : "GoogleSheets", " mode");
 
 	bool load_success = (use_max)
-				? Exec.parse_config_SD("Max.txt")
-				: Exec.parse_config_SD("Google.txt");
+				? Feather.parse_config_SD("Max.txt")
+				: Feather.parse_config_SD("Google.txt");
 
 	// If SD config failed, use #include'd config from above
 	if ( !load_success ) {
 		use_max = true; // Fallback configuration provided is for Max use
-		Exec.parse_config(LCONFIG);
+		Feather.parse_config(LCONFIG);
 	}
 
-	Exec.print_config(true);				// Print config
+	Feather.print_config(true);				// Print config
 
 	LPrintln("\n ** Setup Complete ** ");
 
-	Exec.flash_LED(5, 50, 50, false);		// Flash to indicate is setup
+	Feather.flash_LED(5, 50, 50, false);		// Flash to indicate is setup
 }
 
 
 void loop()
 {
 	// digitalWrite(10, HIGH);	// Turn on sensors
-	// Exec.pause(100);			// Warmup time
-	Exec.measure();				// Collect data
+	// Feather.pause(100);			// Warmup time
+	Feather.measure();				// Collect data
 	// digitalWrite(10, LOW);	// Turn off sensors
 
-	Exec.package();				// Build Json from data
-	Exec.display_data();		// Print data (will not work properly if using nap instead of pause below)
+	Feather.package();				// Build Json from data
+	Feather.display_data();		// Print data (will not work properly if using nap instead of pause below)
 
-	Exec.get<Loom::SD>()->log(); // Log to SD
+	Feather.get<Loom::SD>()->log(); // Log to SD
 
 	// The following if statements are a means of having both Max and GoogleSheets modes
 	// work with the same code. If a module exists, it will use it, otherwise it was
 	// probably not instantiated for this mode and will skip it.
 
 	if (Loom.has_module(LoomModule::Type::MaxPub)) {
-		Exec.get<Loom::MaxPub>()->publish(); // Send data to Max
+		Feather.get<Loom::MaxPub>()->publish(); // Send data to Max
 	}
 	if (Loom.has_module(LoomModule::Type::MaxSub)) {
-		Exec.get<Loom::MaxSub>()->subscribe(); // Receive any messages from Max
+		Feather.get<Loom::MaxSub>()->subscribe(); // Receive any messages from Max
 	}
 	if ( Loom.has_module(LoomModule::Type::GoogleSheets) ) {
-		Exec.get<Loom::GoogleSheets>()->publish(); // Send data to Google Sheets
+		Feather.get<Loom::GoogleSheets>()->publish(); // Send data to Google Sheets
 	}
 
-	Exec.pause(); 				// Wait (delay) based on 'interval' value in config
-	//Exec.nap(); 				// Wait (sleepy dog) based on 'interval' value in config
+	Feather.pause(); 				// Wait (delay) based on 'interval' value in config
+	//Feather.nap(); 				// Wait (sleepy dog) based on 'interval' value in config
 }

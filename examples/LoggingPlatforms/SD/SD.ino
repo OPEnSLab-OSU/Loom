@@ -16,14 +16,14 @@
 
 using namespace Loom;
 
-Loom::Manager Exec{};
+Loom::Manager Feather{};
 
 
 void setup() 
 {
-	Exec.begin_serial(true);
-	Exec.parse_config(LCONFIG);
-	Exec.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(LCONFIG);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -31,16 +31,16 @@ void setup()
 
 void loop() 
 {
-	Exec.measure();
-	Exec.package();
-	Exec.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 	
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
-	Exec.get<Loom::SD>()->log();
+	Feather.get<Loom::SD>()->log();
 
 	// Or log to a specific file (does not change what default file is set to)
-	// Exec.get<Loom::SD>()->log("specific.csv");
+	// Feather.get<Loom::SD>()->log("specific.csv");
 
-	Exec.pause();	
+	Feather.pause();	
 }
