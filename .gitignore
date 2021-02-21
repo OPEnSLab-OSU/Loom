@@ -5,3 +5,4 @@ LoomTests
 .vscode
 *.DS_Store
 doxygenV2/
+config_str.h
