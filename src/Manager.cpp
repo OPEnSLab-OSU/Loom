@@ -468,7 +468,7 @@ bool Manager::save_flash_config()
 
 		return true;
 
-	#elif
+	#else
 
 		LPrintln("! Flash Config Disabled - Enable via #define in Loom.h");
 		return false;
@@ -497,7 +497,7 @@ bool Manager::load_flash_config()
 			return false;
 		}
 
-	#elif
+	#else
 
 		LPrintln("! Flash Config Disabled - Enable via #define in Loom.h");
 		return false;
@@ -509,25 +509,19 @@ bool Manager::load_flash_config()
 uint8_t Manager::load_persistent_config()
 {
 	#ifdef LOOM_FLASH_CONFIG
-
 		bool found_flash_config = load_flash_config();
 		if (found_flash_config) {
 			return 1;
 		}
-
-	#elif
-
+	#else
 		LPrintln("! Flash Config Disabled - Enable via Tools menu");
-
 	#endif // of ifdef LOOM_FLASH_CONFIG
 
 	#ifdef LCONFIG
-		if (!found_flash_config) {
-			print_device_label();
-			LPrintln("Using LCONFIG instead");
-			parse_config(LCONFIG);
-			return 2;
-		}
+		print_device_label();
+		LPrintln("Using LCONFIG instead");
+		parse_config(LCONFIG);
+		return 2;
 	#endif // of LCONFIG
 
 	print_device_label();
