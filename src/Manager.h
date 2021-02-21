@@ -15,6 +15,7 @@
 
 #include <ArduinoJson.h>
 
+
 // Need to undef max and min for vector to work
 #undef max
 #undef min
@@ -119,6 +120,8 @@ class FactoryBase;
 								///< You can still instantiate a Loom_SD module with a different chip select
 
 
+#define JSON_MAX_SIZE	2000	///< Define the number of bytes allocated for Json data
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Manager to contain Loom modules and provide users with a simpler API.
@@ -166,9 +169,9 @@ protected:
 	Verbosity	print_verbosity;		///< Print detail verbosity
 	Verbosity	package_verbosity;		///< Package detail verbosity
 
-	StaticJsonDocument<2000> doc;		///< Json data
-
 	uint		packet_number = 1;		///< Packet number, incremented each time package is called
+
+	StaticJsonDocument<JSON_MAX_SIZE> doc;	///< Json data
 
 public:
 
@@ -240,7 +243,7 @@ public:
 
 	/// Get complete configuration of the device.
 	/// Generally used to save configuration to SD
-	void		get_config();
+	JsonObject	get_config();
 
 	/// Measure data of all managed sensors
 	void		measure();
@@ -354,6 +357,15 @@ public:
 	///	@param[in]	type	Module type to check for
 	bool		has_module(const LoomModule::Type type) const;
 
+#ifdef LOOM_FLASH_CONFIG
+	/// Save current configuration to flash
+	/// @return True if save successul, false otherwise
+	bool		save_config_flash();
+
+	/// Load configuration from flash
+	/// @return True if configuration found, false otherwise
+	bool		load_config_flash();
+#endif
 
 //=============================================================================
 ///@name	PRINT INFORMATION

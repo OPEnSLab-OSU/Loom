@@ -31,7 +31,16 @@
 #include <SdFat.h>
 #include <algorithm>
 
+#ifdef LOOM_FLASH_CONFIG
+	#include <FlashStorage.h>
 
+	typedef struct {
+		bool is_valid;
+		char json[JSON_MAX_SIZE];
+	} FlashConfig_t;
+
+	FlashStorage(FlashConfig, FlashConfig_t);
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(const DeviceType t)
@@ -429,7 +438,57 @@ void LoomManager::get_config()
 			((LoomModule*)module)->add_config(json);
 		}
 	}
+
+	return json;
 }
+
+#ifdef LOOM_FLASH_CONFIG
+///////////////////////////////////////////////////////////////////////////////
+bool Manager::save_config_flash()
+{
+	// Query modules to build current configuration
+	get_config();
+
+	print_device_label();
+	LPrintln("Json Config Size: ", measureJson(doc));
+	if (measureJson(doc) > JSON_MAX_SIZE) {
+		print_device_label();
+		LPrintln("Json Config too large to save to flash");
+		return false;
+	}
+
+	// Serialize Json config to variable to save
+	FlashConfig_t to_save;
+	to_save.is_valid = true;
+	serializeJson(doc, to_save.json);
+
+	// Save config
+	FlashConfig.write(to_save);
+
+	return true;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool Manager::load_config_flash()
+{
+	// Try to read config from flash
+	FlashConfig_t saved = FlashConfig.read();
+
+	// Check if read data is a configuration (won't be the first run after flashing the board) 
+	if (saved.is_valid) {
+		print_device_label();
+		LPrintln("Saved config found");
+
+		parse_config(saved.json);
+		return true;
+	} else {
+		print_device_label();
+		LPrintln("No saved config found");
+		return false;
+	}
+}
+
+#endif // of ifdef LOOM_FLASH_CONFIG
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomModule*	LoomManager::find_module(const LoomModule::Type type, const uint8_t idx) const
