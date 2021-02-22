@@ -116,7 +116,6 @@ void LoomManager::begin_serial(const bool wait_for_monitor) const
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomModule* module)
 {
-
 	print_device_label();
 
 	if (module == nullptr) {
@@ -128,7 +127,7 @@ void LoomManager::add_module(LoomModule* module)
 		return;
 	}
 
-	LPrintln("Adding Module: ", ((LoomModule*)module)->get_module_name() );
+	LPrintln("Added module: ", module->get_module_name() );
 
 	modules.emplace_back(module);
 	module->link_device_manager(this);
@@ -773,3 +772,16 @@ bool LoomManager::check_serial_for_config()
 	}
 	return false;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+LoomModule* LoomManager::get_by_name(const char* name) const
+{
+	for (auto module : modules) {
+		if (strcmp(module->get_module_name(), name) == 0) {
+			return module;
+		}
+	}
+	return nullptr;
+}
+
+///////////////////////////////////////////////////////////////////////////////

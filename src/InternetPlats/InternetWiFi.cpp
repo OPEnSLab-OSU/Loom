@@ -11,6 +11,10 @@
 #include "InternetWiFi.h"
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#define MAX_CONNECT_RETRIES 2
+
+///////////////////////////////////////////////////////////////////////////////
 Loom_WiFi::Loom_WiFi(
 		LoomManager* manager,
 		const char* 	ssid,
@@ -78,9 +82,9 @@ void Loom_WiFi::connect()
 				LPrint("Status changed to: ", status, '\n');
 		}
 		delay(2000);
-	} while (status != WL_CONNECTED && attempt_count < 5);
+	} while (status != WL_CONNECTED && attempt_count < MAX_CONNECT_RETRIES);
 
-	if (attempt_count == 5) {
+	if (attempt_count == MAX_CONNECT_RETRIES) {
 		print_module_label();
 		LPrintln("Connection failed!");
 		return;
@@ -160,7 +164,12 @@ void Loom_WiFi::package(JsonObject json)
 	for (auto i = 0; i < 4; i++) {
 		tmp.add(ip[i]);
 	}
-	//data["IP"] = ::WiFi.localIP();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+IPAddress Loom_WiFi::get_ip()
+{
+	return IPAddress(::WiFi.localIP());
 }
 
 ///////////////////////////////////////////////////////////////////////////////

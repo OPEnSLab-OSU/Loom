@@ -35,33 +35,11 @@ void LoomPublishPlat::second_stage_ctor()
 		return;
 	}
 
-	// check if internet platform exist
-	LoomInternetPlat* temp;
-	switch (internet_type) {
-		case LoomModule::Type::Ethernet:
-			temp = (LoomInternetPlat*)&(device_manager->Ethernet() );
-			break;
-		case LoomModule::Type::WiFi:
-			temp = (LoomInternetPlat*)&(device_manager->WiFi() );
-			break;
-		case LoomModule::Type::LTE:
-			temp = (LoomInternetPlat*)&(device_manager->LTE() );
-			break;
-		default:
-			temp = nullptr;
-	}
+	m_internet = (LoomInternetPlat*)device_manager->find_module_by_category(LoomModule::Category::InternetPlat);
 
-
-	print_module_label();
-	// if (temp->category() == LoomModule::Category::InternetPlat) {
-	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
-		LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
-		// m_internet = temp;
-		m_internet = temp;
-	}
-	else {
+	if (!m_internet) {
+		print_module_label();
 		LPrintln("Unable to find internet platform");
-		return;
 	}
 
 	// made it here, guess we're good to go!

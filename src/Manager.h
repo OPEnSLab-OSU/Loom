@@ -573,6 +573,22 @@ public:
     //SERIAL
     Loom_K30&           K30(const uint8_t idx = 0);
 
+	template <typename T>
+	bool remove_module() {
+		uint8_t count = 0;
+		for (auto it = modules.begin(); it != modules.end(); ) {
+			if (dynamic_cast<T*>(*it)) {
+				it = modules.erase(it);
+				count++;
+			} else {
+				it++;
+			}
+		}
+		return count > 0;
+	}
+
+	LoomModule* get_by_name(const char* name) const;
+
 protected:
 
 	/// Print the device name as '[device_name]'

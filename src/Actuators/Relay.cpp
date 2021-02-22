@@ -78,8 +78,6 @@ bool Loom_Relay::dispatch(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::set(const bool state)
 {
-	LPrintln("In set");
-
 	on = state;
 	digitalWrite(pin, (on) ? HIGH : LOW);
 

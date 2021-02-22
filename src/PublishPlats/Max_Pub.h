@@ -14,9 +14,6 @@
 #include "PublishPlat.h"
 
 
-#define UDP_SEND_OFFSET 8000	///< UDP sending port is this value + device instance number
-
-
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Module taking in and translating JSON into data understood by the Google Sheets script API.
@@ -68,6 +65,8 @@ public:
 	bool		dispatch(JsonObject json) override;
 	void		add_config(JsonObject json) override;
 
+	bool		update_remote_ip();
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -96,6 +95,9 @@ public:
 
 	/// Set the IP addres to send to by getting remote IP from MaxSub if available
 	void		set_ip();
+
+	/// Change internet platform being used
+	void		set_internet_plat(InternetPlat* plat);
 
 protected:
 
