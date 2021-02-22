@@ -13,6 +13,8 @@
 #include "Max_Pub.h"
 #include "../SubscribePlats/Max_Sub.h"
 #include "../Manager.h"
+#include "../InternetPlats/InternetWiFi.h"
+#include "../InternetPlats/APWiFi.h"
 #include "Module_Factory.h"
 
 using namespace Loom;
@@ -24,7 +26,8 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 MaxPub::MaxPub()   
 	: PublishPlat("MaxPub")
-	, remoteIP({192,168,1,255})
+	// , remoteIP({192,168,1,255})
+	, remoteIP({10,0,0,255})
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -35,8 +38,9 @@ void MaxPub::second_stage_ctor()
 	UDP_port = UDP_SEND_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
 
 	// Get new UDP pointer	
-	if (m_internet != nullptr) {
+	if (m_internet) {
 		UDP_Inst = m_internet->open_socket(UDP_port);
+		update_remote_ip();
 	} else {
 		print_module_label();
 		LPrintln("No internet platform, could not get UDP object");
@@ -107,9 +111,9 @@ void MaxPub::set_ip()
 {
 	print_module_label();
 	LPrintln("Received command to set IP to send to");
-	MaxSub* temp;
-	if (device_manager && ( temp = (device_manager->get<MaxSub>())) ) {
-		IPAddress ip = temp->get_remote_IP();
+	Module* tmp;
+	if (device_manager && ( tmp = device_manager->get_by_name("MaxSub")) ) {
+		IPAddress ip = ((MaxSub*)tmp)->get_remote_IP();
 		if (ip[0] != 0) {
 			set_ip(ip);
 		} else {
@@ -127,6 +131,37 @@ bool MaxPub::dispatch(JsonObject json)
 		case 's': set_ip(); return true;
 	}
 	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void MaxPub::set_internet_plat(InternetPlat* plat)
+{
+	m_internet = plat;
+	if (m_internet) {
+		set_port(UDP_port);
+		update_remote_ip();
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool MaxPub::update_remote_ip()
+{
+	if (!m_internet || !device_manager) return false;
+
+	IPAddress ip;
+	Module* tmp;
+	if (tmp = device_manager->get_by_name("WiFi")) {
+		ip = ((WiFi*)tmp)->get_ip();
+	} else if (tmp = device_manager->get_by_name("APWiFi")) {	
+		ip = ((APWiFi*)tmp)->get_ip();
+	} else {
+		return false;
+	}
+
+	remoteIP = IPAddress(ip[0], ip[1], ip[2], 255);
+	print_module_label();
+	LPrintln("Set destination IP to: ", remoteIP);
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

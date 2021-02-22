@@ -62,7 +62,7 @@ bool LoomPublishPlatTemplate::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomPublishPlatTemplate::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
+bool LoomPublishPlatTemplate::send_to_internet(const JsonObject json, InternetPlat* plat)
 {
 	
 }

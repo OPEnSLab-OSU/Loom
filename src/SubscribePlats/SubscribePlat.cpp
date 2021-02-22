@@ -33,18 +33,6 @@ void SubscribePlat::second_stage_ctor()
 		return; 
 	}
 
-	// InternetPlat* temp = (InternetPlat*)device_manager->find_module(internet_type);
-
-	// print_module_label();
-	// if (temp != nullptr && temp->get_module_type() != Module::Type::Unknown) {
-	// 	LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
-	// 	m_internet = temp;
-	// }
-	// else {
-	// 	LPrintln("Unable to find internet platform");
-	// 	return;
-	// }
-
 
 	// Check for InternetPlat, in preference of
 	// Ethernet > WiFi > LTE

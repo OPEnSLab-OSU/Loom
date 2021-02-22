@@ -3,12 +3,12 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlatTemplate::LoomInternetPlatTemplate(
+InternetPlatTemplate::InternetPlatTemplate(
 		LoomManager* manager,
 const char* module_name, 
 		int				ex_param
 	) 
-	: LoomInternetPlat( module_name )
+	: InternetPlat( module_name )
 {
 	this->module_type = LoomModule::Type::InternetPlatTemplateType;
 
@@ -16,25 +16,25 @@ const char* module_name,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlatTemplate::LoomInternetPlatTemplate(LoomManager* manager, JsonArrayConst p)
-	: LoomInternetPlatTemplate( EXPAND_ARRAY(p, 2) ) {}
+InternetPlatTemplate::InternetPlatTemplate(LoomManager* manager, JsonArrayConst p)
+	: InternetPlatTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlatTemplate::print_config()
+void InternetPlatTemplate::print_config()
 {
-	LoomInternetPlat::print_config();
+	InternetPlat::print_config();
 	LPrintln('\t', "Description         : ", "value to print" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlatTemplate::print_state()
+void InternetPlatTemplate::print_state()
 {
-	LoomInternetPlat::print_state();
-	// print information about LoomInternetPlatTemplate state 
+	InternetPlat::print_state();
+	// print information about InternetPlatTemplate state 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlatTemplate::package(JsonObject json)
+void InternetPlatTemplate::package(JsonObject json)
 {
 	package_json(json, module_name, 
 		"key1",		"val1",
@@ -45,7 +45,7 @@ void LoomInternetPlatTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomInternetPlatTemplate::dispatch(JsonObject json)
+bool InternetPlatTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
@@ -61,25 +61,25 @@ bool LoomInternetPlatTemplate::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlatTemplate::connect()
+void InternetPlatTemplate::connect()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomInternetPlatTemplate::is_connected()
+bool InternetPlatTemplate::is_connected()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint32_t LoomInternetPlatTemplate::get_time()
+uint32_t InternetPlatTemplate::get_time()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Client& LoomInternetPlatTemplate::http_request(const char* domain, const char* url, const char* body, const char* verb)
+Client& InternetPlatTemplate::http_request(const char* domain, const char* url, const char* body, const char* verb)
 {
 
 }

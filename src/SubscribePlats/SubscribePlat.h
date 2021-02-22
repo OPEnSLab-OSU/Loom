@@ -31,10 +31,10 @@ class SubscribePlat : public Module
 
 protected:
 
-	/// Pointer to internet platform to use to publish
+	/// Pointer to internet platform to use to subscribe
 	InternetPlat*		m_internet;
 	
-	/// Type of internet platform used to publish.
+	/// Type of internet platform used to subscribe.
 	/// Needed because finding the module for m_internet happens in second_stage_ctor(),
 	/// rather than the regular constructor.
 	// const Module::Type	internet_type;
@@ -54,7 +54,7 @@ public:
 
 	/// Constructor.
 	///
-	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Publish platform module name
+	/// @param[in]	module_name			String | <"Internet-Plat"> | null | Subscribe platform module name
 	/// @param[in]	module_type			Type of the module (provided by derived classes)
 	/// @param[in]  internet_type		Set(Module::Type) | <7001> | {7001("Ethernet"), 7002("WiFi")} | Code of the desired internet platform. 
 	SubscribePlat(

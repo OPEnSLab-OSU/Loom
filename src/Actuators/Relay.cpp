@@ -67,8 +67,6 @@ bool Relay::dispatch(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 void Relay::set(const bool state)
 {
-	LPrintln("In set");
-
 	on = state;
 	digitalWrite(pin, (on) ? HIGH : LOW);
 

@@ -39,32 +39,6 @@ void PublishPlat::second_stage_ctor()
 		return;
 	}
 
-	// check if internet platform exist
-	// InternetPlat* temp;
-	// switch (internet_type) {
-	// 	case Module::Type::Ethernet:
-	// 		temp = (InternetPlat*)(device_manager->find_module(Module::Type::Ethernet));
-	// 		break;
-	// 	case Module::Type::WiFi:
-	// 		temp = (InternetPlat*)(device_manager->find_module(Module::Type::WiFi));
-	// 		break;
-	// 	case Module::Type::LTE:
-	// 		temp = (InternetPlat*)(device_manager->find_module(Module::Type::LTE));
-	// 		break;
-	// 	default:
-	// 		temp = nullptr;
-	// }
-
-	// InternetPlat* temp;
-	// if !(   (temp = device_manager->get<Loom::Ethernet>()) 
-	//      || (temp = device_manager->get<Loom::WiFi>())
-	//      || (temp = device_manager->get<Loom::LTE>())
-	//    ) {
-	// 	temp = nullptr;
-	// }
-
-
-
 	// Check for InternetPlat, in preference of
 	// Ethernet > WiFi > LTE
 	// Else set to nullptr
@@ -88,24 +62,11 @@ void PublishPlat::second_stage_ctor()
 	// 	temp = nullptr;
 	// }
 
-
 	m_internet = device_manager->get<InternetPlat>();
 	if (!m_internet) {
 		print_module_label();
 		LPrintln("Unable to find internet platform");
 	}
-
-	// if (temp->category() == Module::Category::InternetPlat) {
-	// if (temp != nullptr && temp->get_module_type() != Module::Type::Unknown) {
-	// if (!temp) {
-	// 	LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
-	// 	// m_internet = temp;
-	// 	m_internet = temp;
-	// }
-	// else {
-	// 	LPrintln("Unable to find internet platform");
-	// 	return;
-	// }
 
 	// made it here, guess we're good to go!
 	print_module_label();

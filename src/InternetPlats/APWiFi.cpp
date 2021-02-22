@@ -1,38 +1,59 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		InternetWiFi.cpp
-/// @brief		File for WiFi implementation.
-/// @author		Noah Koontz
-/// @date		2019
+/// @file		APWiFi.cpp
+/// @brief		File for APWiFi implementation.
+/// @author		Luke Goertzen
+/// @date		2021
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifdef LOOM_INCLUDE_WIFI
 
-#include "InternetWiFi.h"
-#include "Trust_Anchors.h"
-#include "Module_Factory.h"
+#include "APWiFi.h"
+#include "../Manager.h"
 
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-
-#define MAX_CONNECT_RETRIES 2
-
-///////////////////////////////////////////////////////////////////////////////
-WiFi::WiFi(
-		const char* 	ssid,
-		const char* 	pass
-	)
-	: InternetPlat("WiFi")
-	, SSID(ssid)
-	, pass(pass)
-	, m_base_client()
-	, m_client(m_base_client, TAs, (size_t)TAs_NUM, A7, 1, SSLClient::SSL_INFO)
+APWiFi::APWiFi() 
+	: InternetPlat("APWiFi")
+	, password{""}
+	, server{80}
 {
 	// Configure pins for Adafruit ATWINC1500 Feather
-	::WiFi.setPins(8,7,4,2);
+	WiFi.setPins(8,7,4,2);      
+
+	// // Set SSID (get info from manager if available)
+	// if (device_manager) {
+	// 	char tmpBuf[20];
+	// 	device_manager->get_device_name(tmpBuf);
+	// 	SSID = String(tmpBuf) + String(device_manager->get_instance_num());
+	// } else {
+	// 	SSID = String("Feather");
+	// }
+
+	// // Check for the presence of the shield, else disable WiFi module
+	// if (::WiFi.status() == WL_NO_SHIELD) {
+	// 	print_module_label();
+	// 	LPrintln("WiFi shield not present");
+	// 	return;
+	// }
+
+	// start_AP(); // maybe put this in a second stage constructor
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void APWiFi::second_stage_ctor() 
+{
+	// Set SSID (get info from manager if available)
+	if (device_manager) {
+		char tmpBuf[20];
+		device_manager->get_device_name(tmpBuf);
+		SSID = String(tmpBuf) + String(device_manager->get_instance_num());
+	} else {
+		SSID = String("Feather");
+	}
 
 	// Check for the presence of the shield, else disable WiFi module
 	if (::WiFi.status() == WL_NO_SHIELD) {
@@ -41,113 +62,93 @@ WiFi::WiFi(
 		return;
 	}
 
-	connect();
+	start_AP(); // maybe put this in a second stage constructor
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-WiFi::WiFi(JsonArrayConst p)
-	: WiFi(EXPAND_ARRAY(p, 2) ) {}
+APWiFi::APWiFi(JsonArrayConst p)
+	: APWiFi() {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void WiFi::add_config(JsonObject json)
+void APWiFi::add_config(JsonObject json)
 {
 	JsonArray params = add_config_temp(json, module_name);
-	params.add(SSID);
-	params.add(pass);
+	// params.add(SSID);
+	// params.add(pass);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void WiFi::connect()
+bool APWiFi::start_AP()
 {
-	// clear the write error
-	m_base_client.clearWriteError();
-	// Try to connect, attempting the connection up to 5 times (this number is arbitrary)
-	uint8_t attempt_count = 0;
-	uint8_t last_status = 0;
-	uint8_t status = 0;
-	do {
-		print_module_label();
-		LPrintln("Trying to connect to: ", SSID);
+	print_module_label();
+	LPrintln("Starting access point");
 
-		// Check if password provided
-		if (pass == nullptr || pass[0] == '\0' ) {
-			status = ::WiFi.begin(SSID);
-		} else {
-			status = ::WiFi.begin(SSID, pass);
-		}
-		attempt_count++;
-
-		// debug print!
-		if (last_status != status) {
-			print_module_label();
-			const char* text = m_wifi_status_to_string(status);
-			if (text != nullptr)
-				LPrint("Status changed to: ", text, '\n');
-			else
-				LPrint("Status changed to: ", status, '\n');
-		}
-		delay(2000);
-	} while (status != WL_CONNECTED && attempt_count < MAX_CONNECT_RETRIES);
-
-	if (attempt_count == MAX_CONNECT_RETRIES) {
-		print_module_label();
-		LPrintln("Connection failed!");
-		return;
+	auto status = ::WiFi.beginAP(SSID.c_str());
+	
+	if (status != WL_AP_LISTENING) {
+		LPrintln("Creating access point failed");
+		return false;
 	}
+
+	delay(10000);
+	server.begin();
+
 	print_state();
+
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void WiFi::disconnect() 
+void APWiFi::disconnect() 
 {
-	// tell the wifi it's time to stop
 	::WiFi.disconnect();
+	::WiFi.end();
 	delay(200);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool WiFi::is_connected() const
+bool APWiFi::is_connected() const
 {
-	return ::WiFi.status() == WL_CONNECTED;
+	return ::WiFi.status() == WL_CONNECTED; // WL_AP_LISTENING
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-InternetPlat::UDPPtr WiFi::open_socket(const uint port)
+InternetPlat::UDPPtr APWiFi::open_socket(const uint port)
 {
 	// create the unique pointer
-	UDPPtr ptr = UDPPtr(new WiFiUDP());
+	InternetPlat::UDPPtr ptr = InternetPlat::UDPPtr(new WiFiUDP());
 	// use the object created to open a UDP socket
 	if (ptr && ptr->begin(port)) return std::move(ptr);
 	// return a nullptr if any of that failed
-	return UDPPtr();
+	return InternetPlat::UDPPtr();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void WiFi::print_config() const
+void APWiFi::print_config() const
 {
 	InternetPlat::print_config();
 	LPrint("\tSSID:               : ", SSID, '\n');
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void WiFi::print_state() const
+void APWiFi::print_state() const
 {
 	InternetPlat::print_state();
-	const char* text = m_wifi_status_to_string(::WiFi.status());
-	if (text != nullptr)
-		LPrintln("\tWireless state      :", text );
-	else
-	LPrintln("\tWireless state      :", ::WiFi.status() );
-	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False" );
-	LPrintln("\tSSID:               : ", SSID );
-	LPrintln("\tRSSi:               : ", ::WiFi.RSSI(), " dBm" );
-	LPrintln("\tIP Address:         : ", IPAddress(::WiFi.localIP()) );
+	const char *text = m_wifi_status_to_string(WiFi.status());
+	if (text != nullptr) {
+		LPrintln("\tWireless state      :", text);
+	} else {
+		LPrintln("\tWireless state      :", WiFi.status());
+	}
+	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False");
+	LPrintln("\tSSID:               : ", SSID);
+	LPrintln("\tRSSi:               : ", WiFi.RSSI(), " dBm");
+	LPrintln("\tIP Address:         : ", IPAddress(WiFi.localIP()));
 	LPrintln();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char *WiFi::m_wifi_status_to_string(const uint8_t status)
-{
+const char* APWiFi::m_wifi_status_to_string(const uint8_t status) {
 	switch (status) {
 		case WL_NO_SHIELD: return "NO_SHIELD";
 		case WL_IDLE_STATUS: return "IDLE_STATUS";
@@ -163,26 +164,22 @@ const char *WiFi::m_wifi_status_to_string(const uint8_t status)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-#ifdef LOOM_INCLUDE_MAX
-
-void WiFi::package(JsonObject json)
+void APWiFi::package(JsonObject json)
 {
-	//JsonObject data = get_module_data_object(json, module_name);
 	auto ip = IPAddress(::WiFi.localIP());
 	JsonArray tmp = json["id"].createNestedArray("ip");
-	for (auto i = 0; i < 4; i++) {
-		tmp.add(ip[i]);
-	}
+	tmp.add(ip[0]);
+	tmp.add(ip[1]);
+	tmp.add(ip[2]);
+	tmp.add(ip[3]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-IPAddress WiFi::get_ip()
+IPAddress APWiFi::get_ip()
 {
 	return IPAddress(::WiFi.localIP());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-#endif // ifdef LOOM_INCLUDE_MAX
 
 #endif // ifdef LOOM_INCLUDE_WIFI

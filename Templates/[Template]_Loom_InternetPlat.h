@@ -6,10 +6,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// ### (LoomInternetPlat) | dependencies: [] | conflicts: []
+// ### (InternetPlat) | dependencies: [] | conflicts: []
 /// Class description
 // ###
-class LoomInternetPlatTemplate : public LoomInternetPlat
+class InternetPlatTemplate : public InternetPlat
 {
 
 protected:
@@ -23,7 +23,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomInternetPlatTemplate(
+	InternetPlatTemplate(
 			LoomManager* manager,
 const char* module_name			= "InternetPlatTemplate",
 			int				ex_param			= 42
@@ -32,10 +32,10 @@ const char* module_name			= "InternetPlatTemplate",
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomInternetPlatTemplate(LoomManager* manager, JsonArrayConst p);
+	InternetPlatTemplate(LoomManager* manager, JsonArrayConst p);
 	
 	/// Destructor
-	virtual ~LoomInternetPlatTemplate() = default;
+	virtual ~InternetPlatTemplate() = default;
 
 //=============================================================================
 ///@name	OPERATION

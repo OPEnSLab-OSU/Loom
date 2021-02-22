@@ -124,7 +124,6 @@ void Manager::begin_serial(const bool wait_for_monitor) const
 ///////////////////////////////////////////////////////////////////////////////
 void Manager::add_module(Module* module)
 {
-
 	print_device_label();
 
 	if (module == nullptr) {
@@ -136,7 +135,7 @@ void Manager::add_module(Module* module)
 		return;
 	}
 
-	LPrintln("Adding Module: ", module->get_module_name() );
+	LPrintln("Added module: ", module->get_module_name() );
 
 	modules.emplace_back(module);
 	module->link_device_manager(this);
@@ -203,6 +202,7 @@ void Manager::set_package_verbosity(const Verbosity v, const bool set_modules)
 void Manager::measure()
 {
 	for (auto module : modules | views::filter(module_exists) | views::filter(module_active)) {
+
 		// Not within LOOM_INCLUDE_SENSORS as Analog and Digital are always enabled
 		if (dynamic_cast<Loom::Sensor*>(module)) {
 			((Sensor*)module)->measure();
@@ -624,6 +624,8 @@ bool Manager::parse_config_json(JsonObject config)
 
 	// Call registry to create each module
 	for ( JsonVariant module : config["components"].as<JsonArray>()) {
+		print_device_label();
+		LPrintln("Adding module: ", module["name"].as<const char*>());
 		add_module(Registry<Module>::create(module));
 	}
 
@@ -703,3 +705,15 @@ bool Manager::check_serial_for_config()
 	return false;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+Module* Manager::get_by_name(const char* name) const
+{
+	for (auto module : modules) {
+		if (strcmp(module->get_module_name(), name) == 0) {
+			return module;
+		}
+	}
+	return nullptr;
+}
+
+///////////////////////////////////////////////////////////////////////////////
