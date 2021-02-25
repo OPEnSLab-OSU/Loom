@@ -18,7 +18,7 @@
 			'name':'Ethernet',\
 			'params':[\
 				'Ether1',\
-				[<your-mac-address>],\
+				['<your-mac-address>'],\
 				[192,168,0,1]\
 			]\
 		},\
@@ -30,7 +30,7 @@
 				'/macros/s/<your-script-id>/exec',\
 				'<your-sheet-id>',\
 /*true to autoname tab*/				true,\
-/*not used if previous param is true*/	'<your-tab-name>',\
+/*not used if previous param is true*/	'<your-tab-name>'\
 			]\
 		}\
 	]\

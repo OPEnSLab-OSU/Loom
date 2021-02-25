@@ -84,6 +84,7 @@ const byte i2c_address		= 0x44,
 	/// to other modules.
 	/// @return	The measured temperature
 	float		get_temperature() const { return temp; }
+	float		get_humidity() const { return humid; }
 	
 private:
 
