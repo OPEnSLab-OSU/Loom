@@ -8,16 +8,12 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifdef LOOM_INCLUDE_WIFI
-
 #include "APWiFi.h"
 #include "../Manager.h"
 
-using namespace Loom;
-
 ///////////////////////////////////////////////////////////////////////////////
-APWiFi::APWiFi() 
-	: InternetPlat("APWiFi")
+Loom_APWiFi::Loom_APWiFi() 
+	: LoomInternetPlat("APWiFi")
 	, password{""}
 	, server{80}
 {
@@ -44,7 +40,7 @@ APWiFi::APWiFi()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void APWiFi::second_stage_ctor() 
+void Loom_APWiFi::second_stage_ctor() 
 {
 	// Set SSID (get info from manager if available)
 	if (device_manager) {
@@ -56,7 +52,7 @@ void APWiFi::second_stage_ctor()
 	}
 
 	// Check for the presence of the shield, else disable WiFi module
-	if (::WiFi.status() == WL_NO_SHIELD) {
+	if (WiFi.status() == WL_NO_SHIELD) {
 		print_module_label();
 		LPrintln("WiFi shield not present");
 		return;
@@ -66,11 +62,11 @@ void APWiFi::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-APWiFi::APWiFi(JsonArrayConst p)
-	: APWiFi() {}
+Loom_APWiFi::Loom_APWiFi(JsonArrayConst p)
+	: Loom_APWiFi() {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void APWiFi::add_config(JsonObject json)
+void Loom_APWiFi::add_config(JsonObject json)
 {
 	JsonArray params = add_config_temp(json, module_name);
 	// params.add(SSID);
@@ -78,12 +74,12 @@ void APWiFi::add_config(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool APWiFi::start_AP()
+bool Loom_APWiFi::start_AP()
 {
 	print_module_label();
 	LPrintln("Starting access point");
 
-	auto status = ::WiFi.beginAP(SSID.c_str());
+	auto status = WiFi.beginAP(SSID.c_str());
 	
 	if (status != WL_AP_LISTENING) {
 		LPrintln("Creating access point failed");
@@ -99,41 +95,41 @@ bool APWiFi::start_AP()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void APWiFi::disconnect() 
+void Loom_APWiFi::disconnect() 
 {
-	::WiFi.disconnect();
-	::WiFi.end();
+	WiFi.disconnect();
+	WiFi.end();
 	delay(200);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool APWiFi::is_connected() const
+bool Loom_APWiFi::is_connected() const
 {
-	return ::WiFi.status() == WL_CONNECTED; // WL_AP_LISTENING
+	return WiFi.status() == WL_CONNECTED; // WL_AP_LISTENING
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-InternetPlat::UDPPtr APWiFi::open_socket(const uint port)
+LoomInternetPlat::UDPPtr Loom_APWiFi::open_socket(const uint port)
 {
 	// create the unique pointer
-	InternetPlat::UDPPtr ptr = InternetPlat::UDPPtr(new WiFiUDP());
+	LoomInternetPlat::UDPPtr ptr = LoomInternetPlat::UDPPtr(new WiFiUDP());
 	// use the object created to open a UDP socket
 	if (ptr && ptr->begin(port)) return std::move(ptr);
 	// return a nullptr if any of that failed
-	return InternetPlat::UDPPtr();
+	return LoomInternetPlat::UDPPtr();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void APWiFi::print_config() const
+void Loom_APWiFi::print_config() const
 {
-	InternetPlat::print_config();
+	LoomInternetPlat::print_config();
 	LPrint("\tSSID:               : ", SSID, '\n');
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void APWiFi::print_state() const
+void Loom_APWiFi::print_state() const
 {
-	InternetPlat::print_state();
+	LoomInternetPlat::print_state();
 	const char *text = m_wifi_status_to_string(WiFi.status());
 	if (text != nullptr) {
 		LPrintln("\tWireless state      :", text);
@@ -148,7 +144,7 @@ void APWiFi::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* APWiFi::m_wifi_status_to_string(const uint8_t status) {
+const char* Loom_APWiFi::m_wifi_status_to_string(const uint8_t status) {
 	switch (status) {
 		case WL_NO_SHIELD: return "NO_SHIELD";
 		case WL_IDLE_STATUS: return "IDLE_STATUS";
@@ -164,9 +160,9 @@ const char* APWiFi::m_wifi_status_to_string(const uint8_t status) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void APWiFi::package(JsonObject json)
+void Loom_APWiFi::package(JsonObject json)
 {
-	auto ip = IPAddress(::WiFi.localIP());
+	auto ip = IPAddress(WiFi.localIP());
 	JsonArray tmp = json["id"].createNestedArray("ip");
 	tmp.add(ip[0]);
 	tmp.add(ip[1]);
@@ -175,11 +171,9 @@ void APWiFi::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-IPAddress APWiFi::get_ip()
+IPAddress Loom_APWiFi::get_ip()
 {
-	return IPAddress(::WiFi.localIP());
+	return IPAddress(WiFi.localIP());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-#endif // ifdef LOOM_INCLUDE_WIFI
