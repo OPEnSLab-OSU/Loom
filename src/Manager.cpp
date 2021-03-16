@@ -470,7 +470,7 @@ bool Manager::save_flash_config()
 
 	#elif
 
-		LPrintln("! Flash Config Disabled - Enable via Tools menu");
+		LPrintln("! Flash Config Disabled - Enable via #define in Loom.h");
 		return false;
 
 	#endif // of ifdef LOOM_FLASH_CONFIG
@@ -499,7 +499,7 @@ bool Manager::load_flash_config()
 
 	#elif
 
-		LPrintln("! Flash Config Disabled - Enable via Tools menu");
+		LPrintln("! Flash Config Disabled - Enable via #define in Loom.h");
 		return false;
 
 	#endif // of ifdef LOOM_FLASH_CONFIG

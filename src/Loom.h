@@ -14,6 +14,7 @@ This is the Doxygen generated documentation of the Loom library code.
 
 
 #define LOOM_DEBUG 1
+#define LOOM_FLASH_CONFIG 1
 
 // Preamble will only need to include leaves in the hierarchy
 // abstract (non-leaves) already included by leaves
