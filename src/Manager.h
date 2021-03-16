@@ -112,7 +112,7 @@ class LoomTempSync;
 
 class FactoryBase;
 
-
+#define LOOM_FLASH_CONFIG 1
 
 #define SERIAL_BAUD		115200	///< Serial Baud Rate
 #define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
@@ -358,7 +358,7 @@ public:
 	bool		has_module(const LoomModule::Type type) const;
 
 
-	// The following 3 methods only use flash memory if LOOM_FLASH_CONFIG is enabled via #define in Loom.h
+	// The following 3 methods only use flash memory if LOOM_FLASH_CONFIG is enabled via #define near the top of this file
 	// They are still callable without LOOM_FLASH_CONFIG to avoid having to 
 	// comment them out when developing / flashing the Feather frequently
 	// If LOOM_FLASH_CONFIG is disabled:
@@ -376,7 +376,7 @@ public:
 
 	///	Try to load configuration from flash if available, else try to use LCONFIG
 	/// @return 1 if config loaded from flash, 2 if LCONFIG used, -1 if no config available
-	uint8_t		load_persistent_config();
+	uint8_t		load_persistent_config(const char* config_json_fallback);
 
 
 //=============================================================================

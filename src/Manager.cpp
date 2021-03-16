@@ -31,7 +31,7 @@
 #include <SdFat.h>
 #include <algorithm>
 
-#ifdef LOOM_FLASH_CONFIG
+#if LOOM_FLASH_CONFIG == 1
 	#include <FlashStorage.h>
 
 	typedef struct {
@@ -445,7 +445,7 @@ JsonObject LoomManager::get_config()
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::save_flash_config()
 {
-	#ifdef LOOM_FLASH_CONFIG
+	#if LOOM_FLASH_CONFIG == 1
 
 		// Query modules to build current configuration
 		get_config();
@@ -470,16 +470,16 @@ bool LoomManager::save_flash_config()
 
 	#else
 
-		LPrintln("! Flash Config Disabled - Enable via #define in Loom.h");
+		LPrintln("! Flash Config Disabled - Enable via #define in Manager.h");
 		return false;
 
-	#endif // of ifdef LOOM_FLASH_CONFIG
+	#endif // of if LOOM_FLASH_CONFIG == 1
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::load_flash_config()
 {
-	#ifdef LOOM_FLASH_CONFIG
+	#if LOOM_FLASH_CONFIG == 1
 
 		// Try to read config from flash
 		FlashConfig_t saved = FlashConfig.read();
@@ -499,33 +499,32 @@ bool LoomManager::load_flash_config()
 
 	#else
 
-		LPrintln("! Flash Config Disabled - Enable via #define in Loom.h");
+		LPrintln("! Flash Config Disabled - Enable via #define in Manager.h");
 		return false;
 
-	#endif // of ifdef LOOM_FLASH_CONFIG
+	#endif // of if LOOM_FLASH_CONFIG == 1
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint8_t LoomManager::load_persistent_config()
+uint8_t LoomManager::load_persistent_config(const char* config_json_fallback)
 {
-	#ifdef LOOM_FLASH_CONFIG
+	#if LOOM_FLASH_CONFIG == 1
 		bool found_flash_config = load_flash_config();
 		if (found_flash_config) {
 			return 1;
 		}
 	#else
-		LPrintln("! Flash Config Disabled - Enable via Tools menu");
-	#endif // of ifdef LOOM_FLASH_CONFIG
-
-	#ifdef LCONFIG
-		print_device_label();
-		LPrintln("Using LCONFIG instead");
-		parse_config(LCONFIG);
-		return 2;
-	#endif // of LCONFIG
+		LPrintln("! Flash Config Disabled - Enable via #define in Manager.h");
+	#endif // of if LOOM_FLASH_CONFIG == 1
 
 	print_device_label();
-	LPrintln("No configuration available");
+	LPrintln("Using hardcoded json from config.h instead");
+	if (parse_config(config_json_fallback)) {
+		return 2;
+	}
+	
+	print_device_label();
+	LPrintln("No valid configuration available");
 	return -1;
 }
 
