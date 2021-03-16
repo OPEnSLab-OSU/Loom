@@ -419,7 +419,7 @@ void LoomManager::power_down()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::get_config()
+JsonObject LoomManager::get_config()
 {
 	doc.clear();
 	doc["type"] = "config";
@@ -443,7 +443,7 @@ void LoomManager::get_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Manager::save_flash_config()
+bool LoomManager::save_flash_config()
 {
 	#ifdef LOOM_FLASH_CONFIG
 
@@ -477,7 +477,7 @@ bool Manager::save_flash_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Manager::load_flash_config()
+bool LoomManager::load_flash_config()
 {
 	#ifdef LOOM_FLASH_CONFIG
 
@@ -506,7 +506,7 @@ bool Manager::load_flash_config()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint8_t Manager::load_persistent_config()
+uint8_t LoomManager::load_persistent_config()
 {
 	#ifdef LOOM_FLASH_CONFIG
 		bool found_flash_config = load_flash_config();
