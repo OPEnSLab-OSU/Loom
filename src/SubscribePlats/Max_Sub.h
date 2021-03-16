@@ -50,7 +50,7 @@ public:
 	Loom_MaxSub(
 		LoomManager* manager,
 		const LoomModule::Type	internet_type,
-		const bool				auto_dispatch	
+		const bool				auto_dispatch	= true
 	); 
 
 	/// Constructor that takes Json Array, extracts args

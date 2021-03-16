@@ -87,6 +87,7 @@ bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat
 	UDP_Inst->beginPacket(remoteIP, UDP_port);
 	serializeJson(json, (*UDP_Inst) );
 	UDP_Inst->endPacket(); // Mark the end of the OSC Packet
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
