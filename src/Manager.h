@@ -494,6 +494,10 @@ public:
 	/// @param[in]	category	Category to search for
 	LoomModule*	find_module_by_category(const LoomModule::Category category, const uint8_t idx) const;
 
+	/// Function to search list of modules for a module of specified type and remove it
+	/// @param[in]	type	Type to search for
+	bool		remove_module(const LoomModule::Type type, const uint8_t idx=0);
+
 	///////////////////////////////////////////////////////////////////////////
 
 	// Other
@@ -572,20 +576,6 @@ public:
 
     //SERIAL
     Loom_K30&           K30(const uint8_t idx = 0);
-
-	template <typename T>
-	bool remove_module() {
-		uint8_t count = 0;
-		for (auto it = modules.begin(); it != modules.end(); ) {
-			if (dynamic_cast<T*>(*it)) {
-				it = modules.erase(it);
-				count++;
-			} else {
-				it++;
-			}
-		}
-		return count > 0;
-	}
 
 	LoomModule* get_by_name(const char* name) const;
 

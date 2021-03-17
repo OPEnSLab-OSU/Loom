@@ -21,8 +21,11 @@
 #define UDP_SEND_OFFSET 8000 ///< UDP sending port is this value + device instance number
 
 ///////////////////////////////////////////////////////////////////////////////
-MaxPub::MaxPub()   
-	: PublishPlat("MaxPub")
+Loom_MaxPub::Loom_MaxPub(
+		LoomManager* 			manager,
+		const LoomModule::Type	internet_type
+	)
+	: LoomPublishPlat(manager, "MaxPub", Type::MaxPub, internet_type)
 	// , remoteIP({192,168,1,255})
 	, remoteIP({10,0,0,255})
 {}
@@ -131,7 +134,7 @@ bool Loom_MaxPub::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_internet_plat(InternetPlat* plat)
+void Loom_MaxPub::set_internet_plat(LoomInternetPlat* plat)
 {
 	m_internet = plat;
 	if (m_internet) {
@@ -143,21 +146,20 @@ void Loom_MaxPub::set_internet_plat(InternetPlat* plat)
 ///////////////////////////////////////////////////////////////////////////////
 bool Loom_MaxPub::update_remote_ip()
 {
-	if (!m_internet || !device_manager) return false;
+	if (!m_internet) return false;
 
 	IPAddress ip;
-	Module* tmp;
-	if (tmp = device_manager->get_by_name("WiFi")) {
-		ip = ((WiFi*)tmp)->get_ip();
-	} else if (tmp = device_manager->get_by_name("APWiFi")) {	
-		ip = ((APWiFi*)tmp)->get_ip();
+	if (m_internet->get_module_type() == LoomModule::Type::WiFi) {
+		ip = ((Loom_WiFi*)m_internet)->get_ip();
+	} else if (m_internet->get_module_type() == LoomModule::Type::APWiFi) {
+		ip = ((Loom_APWiFi*)m_internet)->get_ip();
 	} else {
 		return false;
 	}
 
 	remoteIP = IPAddress(ip[0], ip[1], ip[2], 255);
 	print_module_label();
-	LPrintln("Set destination IP to: ", remoteIP);
+	LPrintln("Set destination IP to :", remoteIP);
 	return true;
 }
 

@@ -12,31 +12,15 @@
 #include "../Manager.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_APWiFi::Loom_APWiFi() 
-	: LoomInternetPlat("APWiFi")
+Loom_APWiFi::Loom_APWiFi(	
+		LoomManager*	manager
+	) 
+	: LoomInternetPlat(manager, "APWiFi", Type::APWiFi )
 	, password{""}
 	, server{80}
 {
 	// Configure pins for Adafruit ATWINC1500 Feather
 	WiFi.setPins(8,7,4,2);      
-
-	// // Set SSID (get info from manager if available)
-	// if (device_manager) {
-	// 	char tmpBuf[20];
-	// 	device_manager->get_device_name(tmpBuf);
-	// 	SSID = String(tmpBuf) + String(device_manager->get_instance_num());
-	// } else {
-	// 	SSID = String("Feather");
-	// }
-
-	// // Check for the presence of the shield, else disable WiFi module
-	// if (::WiFi.status() == WL_NO_SHIELD) {
-	// 	print_module_label();
-	// 	LPrintln("WiFi shield not present");
-	// 	return;
-	// }
-
-	// start_AP(); // maybe put this in a second stage constructor
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -62,13 +46,13 @@ void Loom_APWiFi::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_APWiFi::Loom_APWiFi(JsonArrayConst p)
-	: Loom_APWiFi() {}
+Loom_APWiFi::Loom_APWiFi(LoomManager* manager, JsonArrayConst p)
+	: Loom_APWiFi(manager) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_APWiFi::add_config(JsonObject json)
 {
-	JsonArray params = add_config_temp(json, module_name);
+	// JsonArray params = add_config_temp(json, module_name);
 	// params.add(SSID);
 	// params.add(pass);
 }

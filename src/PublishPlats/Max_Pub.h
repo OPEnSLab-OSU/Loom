@@ -97,7 +97,7 @@ public:
 	void		set_ip();
 
 	/// Change internet platform being used
-	void		set_internet_plat(InternetPlat* plat);
+	void		set_internet_plat(LoomInternetPlat* plat);
 
 protected:
 

@@ -708,13 +708,6 @@ bool LoomManager::parse_config_json(JsonObject config)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::parse_config_serial()
 {
 	flash_LED(4, 200, 100, true);
@@ -782,6 +775,31 @@ LoomModule* LoomManager::get_by_name(const char* name) const
 		}
 	}
 	return nullptr;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::remove_module(const LoomModule::Type type, const uint8_t idx)
+{
+	print_device_label();
+	uint8_t current = 0;
+
+	for (auto it = modules.begin(); it != modules.end(); it++) {	
+		auto module = *it;
+
+		if (module->get_module_type() == type) {
+			if (current == idx) {
+				LPrintln("Removing : ", module->get_module_name());
+				delete module;
+				modules.erase(it);
+				return true;
+			} else {
+				current++;
+			}
+		}
+	}
+
+	LPrintln("No module found to remove");
+	return false; // module not found
 }
 
 ///////////////////////////////////////////////////////////////////////////////

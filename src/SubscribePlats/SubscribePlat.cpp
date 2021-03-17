@@ -14,7 +14,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 LoomSubscribePlat::LoomSubscribePlat(	
 		LoomManager* 			manager,
-		const char*							module_name,
+		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const LoomModule::Type	internet_type
 	) 
@@ -32,19 +32,23 @@ void LoomSubscribePlat::second_stage_ctor()
 		LPrint("No Device Manager!\n"); 
 		return; 
 	}
-	
-	m_internet = (LoomInternetPlat*)device_manager->find_module_by_category(LoomModule::Category::InternetPlat);
 
-	if (!m_internet) {
-		print_module_label();
-		LPrintln("Unable to find internet platform");
+	// check if internet platform exist
+	LoomInternetPlat* temp = (LoomInternetPlat*)device_manager->find_module(internet_type);
+
+	print_module_label();
+	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
+		LPrintln("Found internet module: ", temp->get_module_name() , " (", (int)temp->get_module_type() , ")");
+		m_internet = temp;
 	}
-
+	else {
+		LPrintln("Unable to find internet platform");
+		return;
+	}
 
 	// made it here, guess we're good to go!
 	print_module_label();
 	LPrint("Ready\n");
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

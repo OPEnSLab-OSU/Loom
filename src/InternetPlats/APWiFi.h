@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include "Module.h"
 #include "InternetPlat.h"
 
 #include <WiFi101.h>
@@ -46,12 +47,14 @@ public:
 	/// Constructor
 	/// @param[in]	ssid	WiFi network name
 	/// @param[in]	pass	WiFi network password. Leave as empty string if network has no password.
-	Loom_APWiFi();
+	Loom_APWiFi(
+		LoomManager* manager
+	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_APWiFi(JsonArrayConst p );
+	Loom_APWiFi(LoomManager* manager, JsonArrayConst p );
 
 	/// Destructor
 	virtual ~Loom_APWiFi() = default;

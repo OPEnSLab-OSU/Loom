@@ -79,7 +79,7 @@ bool Loom_MaxSub::subscribe(JsonObject json)
 	}
 
 	//Not sure why this code being here made any difference...
-    auto status = ::WiFi.status();
+    auto status = WiFi.status();
 
 
 	if (wifi_mode == WiFiMode::AP) {
@@ -171,7 +171,7 @@ void Loom_MaxSub::set_port(const uint16_t port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool MaxSub::dispatch(JsonObject json)
+bool Loom_MaxSub::dispatch(JsonObject json)
 {
 	JsonArray params = json["params"];
 	switch( (char)json["func"] ) {
@@ -188,7 +188,7 @@ bool Loom_MaxSub::goto_ap_mode()
 	get_wifi_mode(); 
 
 	bool success = true;
-	InternetPlat* previous_wifi = m_internet;
+	LoomInternetPlat* previous_wifi = m_internet;
 
 	switch (wifi_mode) {
 		case WiFiMode::AP: // Already in AP mode
@@ -205,7 +205,7 @@ bool Loom_MaxSub::goto_ap_mode()
 			previous_wifi->disconnect();
 
 			// Instantiate APWiFi module
-			m_internet = new APWiFi();
+			m_internet = new Loom_APWiFi(device_manager);
 
 			// Confirm connection 
 			// if (! m_internet->is_connected()) {
@@ -226,7 +226,7 @@ bool Loom_MaxSub::goto_ap_mode()
 			m_internet->second_stage_ctor();
 
 			// Successfully switched, remove WiFI module and switch WiFi mode
-			device_manager->remove_module<WiFi>();
+			device_manager->remove_module(LoomModule::Type::WiFi);
 			wifi_mode = WiFiMode::CLIENT;
 			break;
 		}
@@ -245,9 +245,9 @@ bool Loom_MaxSub::goto_ap_mode()
 
 	// Reopen MaxPub socket 
 	if (device_manager) {
-		Module* tmp = device_manager->get_by_name("MaxPub");
+		Loom_MaxPub* tmp = (Loom_MaxPub*)device_manager->find_module(LoomModule::Type::MaxPub);
 		if (tmp) {
-			((MaxPub*)tmp)->set_internet_plat(m_internet);
+			tmp->set_internet_plat(m_internet);
 		}
 	}
 
@@ -264,7 +264,7 @@ bool Loom_MaxSub::goto_client_mode(const char* ssid, const char* pass)
 	get_wifi_mode(); 
 
 	bool success = true;
-	InternetPlat* previous_wifi = m_internet;
+	LoomInternetPlat* previous_wifi = m_internet;
 
 	switch (wifi_mode) {
 		case WiFiMode::AP: 
@@ -276,7 +276,7 @@ bool Loom_MaxSub::goto_client_mode(const char* ssid, const char* pass)
 			previous_wifi->disconnect(); 
 
 			// Instantiate WiFi module
-			m_internet = new Loom::WiFi(ssid, pass);
+			m_internet = new Loom_WiFi(device_manager, ssid, pass);
 
 			// Test connection
 			if (! m_internet->is_connected()) {
@@ -295,7 +295,7 @@ bool Loom_MaxSub::goto_client_mode(const char* ssid, const char* pass)
 			}
 
 			// Successfully switched, remove AP WiFI module and switch WiFi mode
-			device_manager->remove_module<APWiFi>();
+			device_manager->remove_module(LoomModule::Type::APWiFi);
 			wifi_mode = WiFiMode::CLIENT;
 			break;
 		}
@@ -309,7 +309,7 @@ bool Loom_MaxSub::goto_client_mode(const char* ssid, const char* pass)
 			previous_wifi->disconnect(); 
 
 			// Instantiate WiFi module
-			m_internet = new Loom::WiFi(ssid, pass);
+			m_internet = new Loom_WiFi(device_manager, ssid, pass);
 
 			// Test connection
 			if (! m_internet->is_connected()) {
@@ -322,7 +322,7 @@ bool Loom_MaxSub::goto_client_mode(const char* ssid, const char* pass)
 			// Successfully switched, remove AP WiFI module, switch WiFi mode, 
 			// and pass new WiFi module to manager
 			if (device_manager) {
-				device_manager->remove_module<WiFi>();
+				device_manager->remove_module(LoomModule::Type::WiFi);
 				device_manager->add_module(m_internet);
 			} else {
 				success = false;
@@ -347,9 +347,9 @@ bool Loom_MaxSub::goto_client_mode(const char* ssid, const char* pass)
 
 	// Reopen MaxPub socket 
 	if (device_manager) {
-		Module* tmp = device_manager->get_by_name("MaxPub");
+		Loom_MaxPub* tmp = (Loom_MaxPub*)device_manager->find_module(LoomModule::Type::MaxPub);
 		if (tmp) {
-			((MaxPub*)tmp)->set_internet_plat(m_internet);
+			tmp->set_internet_plat(m_internet);
 		}
 	}
 
@@ -364,10 +364,9 @@ Loom_MaxSub::WiFiMode Loom_MaxSub::get_wifi_mode()
 	wifi_mode = WiFiMode::INVALID;
 
 	if (m_internet) {
-		Module* tmp;
-		if (tmp = device_manager->get_by_name("APWiFi")) {
+		if (m_internet->get_module_type() == LoomModule::Type::APWiFi) {
 			wifi_mode = WiFiMode::AP;
-		} else if (tmp = device_manager->get_by_name("WiFi")) {	
+		} else if (m_internet->get_module_type() == LoomModule::Type::WiFi) {	
 			wifi_mode = WiFiMode::CLIENT;
 		}
 	}
