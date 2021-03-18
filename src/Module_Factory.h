@@ -31,6 +31,7 @@
 #include "InternetPlats/InternetEthernet.h"
 #include "InternetPlats/InternetWiFi.h"
 #include "InternetPlats/InternetLTE.h"
+#include "InternetPlats/APWiFi.h"
 
 // PublishPlats
 #include "PublishPlats/GoogleSheets.h"
@@ -193,7 +194,8 @@ namespace Include
 	/// Max modules
 	constexpr auto Max = std::make_tuple(
 				factory::NameModulePair{"MaxPub",		Construct<Loom_MaxPub>,			nullptr },
-				factory::NameModulePair{"MaxSub",		Construct<Loom_MaxSub>,			nullptr }
+				factory::NameModulePair{"MaxSub",		Construct<Loom_MaxSub>,			nullptr },
+				factory::NameModulePair{"APWiFi",		Construct<Loom_APWiFi>,			ConstructDefault<Loom_APWiFi> }
 			);
 
 	/// Ethernet and WiFi modules
