@@ -112,7 +112,8 @@ class LoomTempSync;
 
 class FactoryBase;
 
-#define LOOM_FLASH_CONFIG 1
+#define LOOM_FLASH_CONFIG 1		///< Whether or not to enable saving configs to flash, 
+								///< disable if not necessary to preserve flash memory
 
 #define SERIAL_BAUD		115200	///< Serial Baud Rate
 #define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
