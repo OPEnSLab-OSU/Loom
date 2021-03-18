@@ -8,7 +8,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <LoomForMax.h>
+#include <Loom.h>
 
 // In config, instance number is number to set ModuleCore to in Max MSP
 
