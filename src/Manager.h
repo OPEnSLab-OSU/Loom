@@ -493,7 +493,7 @@ public:
 
 	/// Auxiliary function to search a list of modules for a module of specified category
 	/// @param[in]	category	Category to search for
-	LoomModule*	find_module_by_category(const LoomModule::Category category, const uint8_t idx) const;
+	LoomModule*	find_module_by_category(const LoomModule::Category category, const uint8_t idx=0) const;
 
 	/// Function to search list of modules for a module of specified type and remove it
 	/// @param[in]	type	Type to search for

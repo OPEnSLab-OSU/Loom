@@ -60,7 +60,7 @@ public:
 		LoomManager* manager,
 		const char*				module_name,
 		const LoomModule::Type	module_type,
-		const LoomModule::Type	internet_type
+		const LoomModule::Type	internet_type // currently does nothing
 	);
 
 	/// Destructor

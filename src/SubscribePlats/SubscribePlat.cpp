@@ -33,8 +33,8 @@ void LoomSubscribePlat::second_stage_ctor()
 		return; 
 	}
 
-	// check if internet platform exist
-	LoomInternetPlat* temp = (LoomInternetPlat*)device_manager->find_module(internet_type);
+	// check if internet platform exists
+	LoomInternetPlat* temp = (LoomInternetPlat*)device_manager->find_module_by_category(LoomModule::Category::InternetPlat);
 
 	print_module_label();
 	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
