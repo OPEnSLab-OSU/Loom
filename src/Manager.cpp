@@ -425,9 +425,13 @@ JsonObject LoomManager::get_config()
 	JsonObject json = doc.as<JsonObject>();
 
 	// Add general device identification
-	JsonObject general_info 	= json.createNestedObject("general");
-	general_info["name"]		= device_name;
-	general_info["instance"]	= instance;
+	JsonObject general_info = json.createNestedObject("general");
+	general_info["name"] = device_name;
+	general_info["instance"] = instance;
+	general_info["interval"] = interval;
+	general_info["device_type"] = (int)device_type;
+	general_info["print_verbosity"] = (int)print_verbosity;
+	general_info["package_verbosity"] = (int)package_verbosity;
 
 	// Start array for modules to add config objects to
 	JsonArray components = json.createNestedArray("components");
