@@ -44,6 +44,7 @@ Loom_MaxSub::Loom_MaxSub(LoomManager* manager, JsonArrayConst p)
 void Loom_MaxSub::add_config(JsonObject json)
 {
 	JsonArray params = add_config_temp(json, module_name);
+	params.add((int)internet_type);
 	params.add(auto_dispatch);
 }
 
