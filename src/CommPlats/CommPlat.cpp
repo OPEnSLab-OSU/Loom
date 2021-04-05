@@ -35,23 +35,16 @@ CommPlat::CommPlat(
 ///////////////////////////////////////////////////////////////////////////////
 void CommPlat::print_config() const
 {
-  LMark;
 	Module::print_config();
-  LMark;
 	LPrintln("\tMax Message Length  : ", max_message_len );
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void CommPlat::print_state() const
 {
-  LMark;
 	Module::print_state();
-  LMark;
 	LPrintln("\tDrop Rate Since Start  : ", get_drop_rate() );
-  LMark;
 	LPrintln("\tCurrent Drop Rate  : ", get_last_ten_drop_rate() );
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -66,16 +59,11 @@ float CommPlat::get_drop_rate() const
 ///////////////////////////////////////////////////////////////////////////////
 float CommPlat::get_last_ten_drop_rate() const
 {
-  LMark;
 	uint8_t total = 0;
-  LMark;
 	uint8_t min_pak = static_cast<uint8_t>(total_packet_count < 10U ? total_packet_count : 10U);
-  LMark;
 	for (uint8_t i = 0; i < min_pak; i++){
-   	LMark;
 		if (last_ten_dropped[i])
 			total++;
-  	LMark;
 	}
 	return static_cast<float>(total)*100.0f/static_cast<float>(min_pak);
 }
@@ -83,9 +71,7 @@ float CommPlat::get_last_ten_drop_rate() const
 ///////////////////////////////////////////////////////////////////////////////
 bool CommPlat::receive()
 {
-  LMark;
 	if (device_manager != nullptr) {
-   	LMark;
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)
 		// in order to copy over correctly
 		return receive( device_manager->internal_json(true) );
@@ -96,7 +82,6 @@ bool CommPlat::receive()
 ///////////////////////////////////////////////////////////////////////////////
 bool CommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 {
-  LMark;
 	bool status = receive_blocking_impl(json, max_wait_time);
 
 	// If there is a value called "Num_Package", then it will recognize that there are more packages
@@ -111,9 +96,7 @@ bool CommPlat::receive_blocking(JsonObject json, const uint max_wait_time)
 ///////////////////////////////////////////////////////////////////////////////
 bool CommPlat::receive_blocking(const uint max_wait_time)
 {
-  LMark;
 	if (device_manager != nullptr) {
-   	LMark;
 		// Loom_Manager's json needs to be cleared (passing true to internal_json)
 		// in order to copy over correctly
 		return receive_blocking( device_manager->internal_json(true), max_wait_time );
@@ -361,15 +344,11 @@ bool CommPlat::split_send(JsonObject json, const uint8_t destination, const uint
 ///////////////////////////////////////////////////////////////////////////////
 void CommPlat::broadcast()
 {
-  LMark;
 	if (device_manager != nullptr) {
-   	LMark;
 		JsonObject tmp = device_manager->internal_json();
-   	LMark;
 		if (strcmp(tmp["type"], "data") == 0 ) {
     	LMark;
 			broadcast(tmp);
-   		LMark;
 		}
 	}
 }
@@ -399,21 +378,15 @@ void CommPlat::broadcast_batch(int delay_time)
 ///////////////////////////////////////////////////////////////////////////////
 bool CommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const uint16_t max_len) const
 {
-  LMark;
 	memset(buffer, '\0', sizeof(buffer));
   LMark;
 
 	bool status = serializeMsgPack(json, buffer, max_len);
-  LMark;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln(buffer);
-   	LMark;
 		LPrintln("MsgPack size: ", measureMsgPack(json));
-  	LMark;
 	}
 
 	return status;
@@ -422,69 +395,48 @@ bool CommPlat::json_to_msgpack_buffer(JsonObjectConst json, char* buffer, const 
 ///////////////////////////////////////////////////////////////////////////////
 bool CommPlat::msgpack_buffer_to_json(const char* buffer, JsonObject json)
 {
-  LMark;
 	if (print_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Received: ", (const char*)buffer);
-   	LMark;
 		print_module_label();
 		LPrintln("Received Json Memory Usage: ", measureMsgPack(messageJson));
 	}
 
 	messageJson.clear();
-  LMark;
 
 	if (deserializeMsgPack(messageJson, buffer) != DeserializationError::Ok ) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Failed to parse MsgPack");
-   	LMark;
 		return false;
 	}
 
 	bool status = json.set(messageJson.as<JsonObject>());
-  LMark;
 	if (!status) return false;
-  LMark;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Internal messageJson:");
-   	LMark;
 		serializeJsonPretty(messageJson, Serial);
-   	LMark;
 		LPrintln();
-  	LMark;
 
 		// LPrintln("\nJson passed in:");
 		// serializeJsonPretty(json, Serial);
 	}
 	LMark;
 	if(override_name) strcpy(device_manager->temp_device_name, json["id"]["name"]);
- 	LMark;
 	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void CommPlat::add_packet_result(const bool did_drop) {
-  LMark;
 	// shift last_ten_dropped by one
 	last_ten_dropped[last_ten_dropped_idx++] = did_drop;
-  LMark;
 	if (last_ten_dropped_idx >= 10)
 		last_ten_dropped_idx = 0;
-  LMark;
 	// add one to the packet total, and maybe one to the drop count
 	total_packet_count++;
-  LMark;
 	if (did_drop)
 		total_drop_count++;
- LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

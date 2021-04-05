@@ -35,11 +35,8 @@ MAX31855::MAX31855(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void MAX31855::print_measurements() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("\tTemperature   : ", temperature, " °C");
-  LMark;
 	LPrintln("\tInternal Temp : ", internal_temp, " °C");
 }
 
@@ -48,22 +45,14 @@ void MAX31855::measure()
 {
   LMark;
 	int i = num_samples;
-  LMark;
 	float int_temp = 0, temp = 0, t;
-  LMark;
 
 	while (i--) {
-   	LMark;
 		int_temp += inst_max.readInternal();
-   	LMark;
 		t = inst_max.readCelsius();
-   	LMark;
 		if (isnan(t)) {
-    	LMark;
 			print_module_label();
-    	LMark;
 			LPrintln("Something wrong with thermocouple!");
-    	LMark;
 			break;
 		} else {
 			temp += t;
@@ -71,7 +60,6 @@ void MAX31855::measure()
 	}
 
 	internal_temp = int_temp / num_samples;
-  LMark;
 	temperature   = temp / num_samples;
 }
 
@@ -80,12 +68,9 @@ void MAX31855::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 	data["temp"] = temperature;
-  LMark;
 
 	if (package_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		data["internal"] = internal_temp;
 	}
 }

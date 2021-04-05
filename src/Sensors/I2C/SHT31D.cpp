@@ -26,7 +26,6 @@ SHT31D::SHT31D(
 	bool setup = inst_sht31d.begin(i2c_address);
 
 	if (!setup) active = false;
-  LMark;
 
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
@@ -41,9 +40,7 @@ void SHT31D::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-  LMark;
 	LPrintln("\tTemp  : ", temp, " C");
-  LMark;
 	LPrintln("\tHumid : ", humid);
 }
 
@@ -52,14 +49,10 @@ void SHT31D::measure()
 {
   LMark;
 	float t = inst_sht31d.readTemperature();
-  LMark;
 	float h = inst_sht31d.readHumidity();
-  LMark;
 
 	if ((!isnan(t)) && (!isnan(h))) {
-   	LMark;
 		temp = t;
-   	LMark;
 		humid = h;
 	} else {
 		print_module_label();
@@ -72,10 +65,8 @@ void SHT31D::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 
 	data["temp"]  = temp;
-  LMark;
 	data["humid"] = humid;
 }
 

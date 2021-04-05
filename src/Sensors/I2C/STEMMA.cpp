@@ -26,7 +26,6 @@ STEMMA::STEMMA(
     ss = Adafruit_seesaw();
 
     LPrintln(i2c_address);
-    LMark;
     // Try to setup sensor
     bool setup = ss.begin(i2c_address);
 
@@ -45,9 +44,7 @@ void STEMMA::print_measurements() const
 {
     print_module_label();
     LPrintln("Measurements:");
-    LMark;
     LPrintln("\tTemperature: ", temperature);
-    LMark;
     LPrintln("\tCapacitive: ", capacitive);
 }
 
@@ -55,7 +52,6 @@ void STEMMA::print_measurements() const
 void STEMMA::measure() {
     LMark;
     temperature = ss.getTemp();
-    LMark;
     capacitive = ss.touchRead(0);
 }
 
@@ -63,10 +59,8 @@ void STEMMA::measure() {
 void STEMMA::package(JsonObject json) {
     LMark;
     JsonObject data = get_module_data_object(json, module_name);
-    LMark;
 
     data["temperature"] = temperature;
-    LMark;
     data["capactive"] = capacitive;
 }
 

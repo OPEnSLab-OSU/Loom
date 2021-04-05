@@ -24,9 +24,7 @@ Sensor::Sensor(
 ///////////////////////////////////////////////////////////////////////////////
 void Sensor::print_config() const
 {
-  LMark;
 	Module::print_config();
-  LMark;
 	LPrintln("\tNum Samples         : ", num_samples);
 }
 

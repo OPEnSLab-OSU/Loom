@@ -15,6 +15,11 @@
 
 #include <Loom.h>
 
+// Include configuration
+const char* json_config =
+#include "config.h"
+;
+
 // In Tools menu, set:
 // Internet  > Disabled
 // Sensors   > Enabled
@@ -54,7 +59,7 @@ void setup()
 	digitalWrite(13, LOW);
 
 	Feather.begin_serial(true);
-	Feather.parse_config(LCONFIG);
+	Feather.parse_config(json_config);
 	Feather.print_config();
 
 	// Register an interrupt on the RTC alarm pin

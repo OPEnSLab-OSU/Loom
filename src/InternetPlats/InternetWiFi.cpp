@@ -30,15 +30,11 @@ WiFi::WiFi(
   LMark;
 	// Configure pins for Adafruit ATWINC1500 Feather
 	::WiFi.setPins(8,7,4,2);
-  LMark;
 
 	// Check for the presence of the shield, else disable WiFi module
 	if (::WiFi.status() == WL_NO_SHIELD) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("WiFi shield not present");
-   	LMark;
 		return;
 	}
 
@@ -52,59 +48,41 @@ WiFi::WiFi(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void WiFi::connect()
 {
-  LMark;
 	// clear the write error
 	m_base_client.clearWriteError();
-  LMark;
 	// Try to connect, attempting the connection up to 5 times (this number is arbitrary)
 	uint8_t attempt_count = 0;
-  LMark;
 	uint8_t last_status = 0;
-  LMark;
 	uint8_t status = 0;
-  LMark;
 	do {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Trying to connect to: ", SSID);
-  	LMark;
 
 		// Check if password provided
 		if (pass == nullptr || pass[0] == '\0' ) {
     	LMark;
 			status = ::WiFi.begin(SSID);
-   		LMark;
 		} else {
 			status = ::WiFi.begin(SSID, pass);
-   		LMark;
 		}
 		attempt_count++;
-  	LMark;
 
 		// debug print!
 		if (last_status != status) {
-    	LMark;
 			print_module_label();
     	LMark;
 			const char* text = m_wifi_status_to_string(status);
-    	LMark;
 			if (text != nullptr)
 				LPrint("Status changed to: ", text, '\n');
 			else
 				LPrint("Status changed to: ", status, '\n');
-   		LMark;
 		}
 		delay(2000);
-  	LMark;
 	} while (status != WL_CONNECTED && attempt_count < 5);
 
 	if (attempt_count == 5) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Connection failed!");
-   	LMark;
 		return;
 	}
 	print_state();
@@ -112,10 +90,8 @@ void WiFi::connect()
 
 ///////////////////////////////////////////////////////////////////////////////
 void WiFi::disconnect() {
-  LMark;
 	// tell the wifi it's time to stop
 	::WiFi.disconnect();
-  LMark;
 	delay(200);
 }
 
@@ -132,10 +108,8 @@ InternetPlat::UDPPtr WiFi::open_socket(const uint port)
   LMark;
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new WiFiUDP());
-  LMark;
 	// use the object created to open a UDP socket
 	if (ptr && ptr->begin(port)) return std::move(ptr);
-  LMark;
 	// return a nullptr if any of that failed
 	return UDPPtr();
 }
@@ -143,36 +117,25 @@ InternetPlat::UDPPtr WiFi::open_socket(const uint port)
 ///////////////////////////////////////////////////////////////////////////////
 void WiFi::print_config() const
 {
-  LMark;
 	InternetPlat::print_config();
-  LMark;
 	LPrint("\tSSID:               : ", SSID, '\n');
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void WiFi::print_state() const
 {
-  LMark;
 	InternetPlat::print_state();
-  LMark;
 	const char* text = m_wifi_status_to_string(::WiFi.status());
   LMark;
 	if (text != nullptr)
 		LPrintln("\tWireless state      :", text );
 	else
 		LPrintln("\tWireless state      :", ::WiFi.status() );
-  LMark;
 	LPrintln("\tConnected:          : ", (is_connected()) ? "True" : "False" );
-  LMark;
 	LPrintln("\tSSID:               : ", SSID );
-  LMark;
 	LPrintln("\tRSSi:               : ", ::WiFi.RSSI(), " dBm" );
-  LMark;
 	LPrintln("\tIP Address:         : ", IPAddress(::WiFi.localIP()) );
-  LMark;
 	LPrintln();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -202,15 +165,10 @@ void WiFi::package(JsonObject json)
 	auto ip = IPAddress(::WiFi.localIP());
   LMark;
 	JsonArray tmp = json["id"].createNestedArray("ip");
-  LMark;
 	tmp.add(ip[0]);
-  LMark;
 	tmp.add(ip[1]);
-  LMark;
 	tmp.add(ip[2]);
-  LMark;
 	tmp.add(ip[3]);
-  LMark;
 	//data["IP"] = ::WiFi.localIP();
 }
 

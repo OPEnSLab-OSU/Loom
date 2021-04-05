@@ -18,6 +18,10 @@
 
 #include "wiring_private.h"
 
+// Include configuration
+const char* json_config =
+#include "config.h"
+;
 
 // In Tools menu, set:
 // Internet  > Disabled
@@ -38,7 +42,7 @@ void setup() {
   Serial2.begin(9600);
 
   Feather.begin_serial(true);
-  Feather.parse_config(LCONFIG);
+  Feather.parse_config(json_config);
   Feather.print_config();
 
   //Assign pins 10 & 11 SERCOM functionality

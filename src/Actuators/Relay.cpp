@@ -21,11 +21,8 @@ Relay::Relay(const byte pin)
 	, pin(pin)
 	, on(false)
 {
-  LMark;
 	pinMode(pin, OUTPUT);
-  LMark;
 	digitalWrite(pin, LOW);
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -38,27 +35,20 @@ Relay::Relay(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Relay::print_state() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("\tRelay ", pin, (on) ? " On" : " Off" );
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Relay::package(JsonObject json)
 {
-  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 	data["on"] = on;
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Relay::dispatch(JsonObject json)
 {
- 	LMark;
 // 	LPrintln("Command sent to relay is:");
 // 	serializeJsonPretty(json, Serial);
 
@@ -82,21 +72,14 @@ bool Relay::dispatch(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 void Relay::set(const bool state)
 {
-  LMark;
 	LPrintln("In set");
-  LMark;
 
 	on = state;
-  LMark;
 	digitalWrite(pin, (on) ? HIGH : LOW);
-  LMark;
 
 	if (print_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Set relay on pin ", pin, (on) ? " High" : " Low");
-  	LMark;
 	}
 }
 

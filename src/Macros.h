@@ -92,13 +92,13 @@ void LPrintlnAll(Types... vars)
 }
 
 /// LPrint Hexadeximal number to Serial if LOOM_DEBUG enabled, no newline
-#define LPrint_Hex(X)      (LOOM_DEBUG==0) ? :  Serial.print(X, HEX)
+#define LPrint_Hex(X) Serial.print(X, HEX)
 /// LPrint Hexadeximal number to Serial if LOOM_DEBUG enabled, newline added
-#define LPrintln_Hex(X)    (LOOM_DEBUG==0) ? :  Serial.println(X, HEX)
+#define LPrintln_Hex(X) Serial.println(X, HEX)
 /// LPrint Hexadeximal number to Serial in form: DEC (0xHEX) if LOOM_DEBUG enabled, newline added
-#define LPrint_Dec_Hex(X)      (LOOM_DEBUG==0) ? :  Serial.print(X); Serial.print(" (0x"); Serial.print(X, HEX); Serial.print(")")
+#define LPrint_Dec_Hex(X) Serial.print(X); Serial.print(" (0x"); Serial.print(X, HEX); Serial.print(")")
 /// LPrint Hexadeximal number to Serial in form: DEC (0xHEX) if LOOM_DEBUG enabled, newline added
-#define LPrintln_Dec_Hex(X)    (LOOM_DEBUG==0) ? :  Serial.print(X); Serial.print(" (0x"); Serial.print(X, HEX); Serial.println(")")
+#define LPrintln_Dec_Hex(X) Serial.print(X); Serial.print(" (0x"); Serial.print(X, HEX); Serial.println(")")
 #define LMark FeatherFault::mark()
 
 ///////////////////////////////////////////////////////////////////////////////

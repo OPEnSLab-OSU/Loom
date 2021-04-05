@@ -13,6 +13,11 @@
 
 #include <Loom.h>
 
+// Include configuration
+const char* json_config =
+#include "config.h"
+;
+
 // In Tools menu, set:
 // Internet  > LTE // To save storage, use 'Disabled' for any sections that are not included in the config file
 // Sensors   > Enabled
@@ -31,7 +36,7 @@ int counter;
 void setup()
 {
 	Feather.begin_serial(true);
-	Feather.parse_config(LCONFIG);
+	Feather.parse_config(json_config);
 	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");

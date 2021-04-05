@@ -31,7 +31,6 @@ Ethernet::Ethernet(
 {
   LMark;
 	if (!mac.isNull()) {
-   	LMark;
 		for (auto i = 0; i < 6; i++)
 			this->m_mac[i] = mac[i];
 	}
@@ -41,17 +40,13 @@ Ethernet::Ethernet(
 	// try to connect to internet
 	connect();
 
-  LMark;
 
 	print_module_label();
-  LMark;
 	if (is_connected()) {
-    LMark;
 	 	LPrintln("Successfully connected to internet");
   	LMark;
 	} else {
 	 	LPrintln("Failed to connect to internet");
-  	LMark;
 	}
 }
 
@@ -62,87 +57,62 @@ Ethernet::Ethernet(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Ethernet::print_config() const
 {
-  LMark;
 	InternetPlat::print_config();
-  LMark;
 	LPrint('\t', "MAC:                : [");
   LMark;
 	for (auto i = 0; i < 6; i++) {
-   	LMark;
 		LPrint_Hex(m_mac[i]);
-   	LMark;
 		if (i < 5) LPrint(",");
 		else 	   LPrintln("]");
-  	LMark;
 	}
 	LPrint('\t', "IP:                 : " );
-  LMark;
 	LPrint(  m_ip[0], ".", m_ip[1], ".");
-  LMark;
 	LPrintln(m_ip[2], ".", m_ip[3]);
-  LMark;
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Ethernet::print_state() const
 {
-  LMark;
 	InternetPlat::print_state();
-  LMark;
 	LPrintln('\t', "Connected:          : ", (is_connected()) ? "True" : "False" );
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Ethernet::connect()
 {
-  LMark;
 	pinMode(8, OUTPUT);
-  LMark;
 	digitalWrite(8, HIGH);
-  LMark;
 	// initialize ethernet shield for Feather
 	::Ethernet.init(10);
   LMark;
 
 	// clear the write error
 	m_base_client.clearWriteError();
-  LMark;
 
 	if (::Ethernet.begin(m_mac) == 0) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Failed to configure Ethernet using DHCP");
    	LMark;
 		// try to congifure using IP address instead of DHCP:
 		::Ethernet.begin(m_mac, m_ip);
-  	LMark;
 	}
 	else m_ip = ::Ethernet.localIP();
-  LMark;
 	m_is_connected = true;
-  LMark;
 
 	if (!m_is_connected) m_client.stop();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 InternetPlat::UDPPtr Ethernet::open_socket(const uint port)
 {
-  LMark;
 	pinMode(8, OUTPUT);
-  LMark;
 	digitalWrite(8, HIGH);
-  LMark;
 	// create the unique pointer
 	UDPPtr ptr = UDPPtr(new EthernetUDP());
   LMark;
 	// use the object created to open a UDP socket
 	if(ptr && ptr->begin(port)) return std::move(ptr);
-  LMark;
 	// return a nullptr if any of that failed
 	return UDPPtr();
 }

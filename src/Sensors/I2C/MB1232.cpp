@@ -30,22 +30,15 @@ MB1232::MB1232(
 {
   LMark;
 	Wire.beginTransmission(i2c_address);
-  LMark;
 
 	Wire.write(RangeCommand);
-  LMark;
 	Wire.endTransmission();
-  LMark;
 	delay(100);
-  LMark;
 
 	Wire.requestFrom(i2c_address, byte(2));
-  LMark;
 	bool setup = (Wire.available() >= 2);
-  LMark;
 
 	if (!setup) active = false;
-  LMark;
 
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
@@ -60,7 +53,6 @@ void MB1232::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-  LMark;
 	LPrintln("\tRange: ", range, " cm");
 }
 
@@ -69,29 +61,20 @@ void MB1232::measure()
 {
   LMark;
 	Wire.beginTransmission(i2c_address);
-  LMark;
 
 	Wire.write(RangeCommand);
-  LMark;
 	Wire.endTransmission();
-  LMark;
 	delay(100);
-  LMark;
 
 	Wire.requestFrom(0x70, byte(2));
-  LMark;
 	if (Wire.available() >= 2) {
-   	LMark;
 		// The sensor communicates two bytes, each a range. The
 		// high byte is typically zero, in which case the low
 		// byte is equal to the range, so only the range is transmitted.
 		// The low byte will not be less than 20.
 		byte high = Wire.read();
-   	LMark;
 		byte low  = Wire.read();
-   	LMark;
 		byte tmp  = Wire.read();
-    LMark;
 
 		range = (high * 256) + low;
 	} else {
@@ -105,7 +88,6 @@ void MB1232::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 
 	data["range"] = range;
 }

@@ -34,12 +34,10 @@ Loom::LIS3DH::LIS3DH(
   LMark;
 
 	bool setup = inst_LIS3DH.begin();
-  LMark;
 
 	if (!setup) active = false;
 
 	print_module_label();
-  LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 }
 
@@ -52,11 +50,8 @@ void Loom::LIS3DH::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-  LMark;
 	LPrintln("\tAccel X: ", accel[0]);
-  LMark;
 	LPrintln("\tAccel Y: ", accel[1]);
-  LMark;
 	LPrintln("\tAccel Z: ", accel[2]);
 }
 
@@ -65,9 +60,7 @@ void Loom::LIS3DH::measure()
 {
   LMark;
 	accel[0] = inst_LIS3DH.readFloatAccelX();
-  LMark;
 	accel[1] = inst_LIS3DH.readFloatAccelY();
-  LMark;
 	accel[2] = inst_LIS3DH.readFloatAccelZ();
 }
 
@@ -76,12 +69,9 @@ void Loom::LIS3DH::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 
 	data["ax"] = accel[0];
-  LMark;
 	data["ay"] = accel[1];
-  LMark;
 	data["az"] = accel[2];
 }
 

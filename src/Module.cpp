@@ -27,40 +27,29 @@ Module::Module(
 ///////////////////////////////////////////////////////////////////////////////
 void Module::link_device_manager(Manager* LM)
 {
-  LMark;
 	device_manager = LM;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Module::print_module_label() const
 {
-  LMark;
 	LPrint("[", module_name, "] ");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Module::print_config() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("Config:");
-  LMark;
 	LPrintln("\tModule Active    : ", (active)      ? "Enabled" : "Disabled" );
-  LMark;
 	LPrintln("\tPrint Verbosity  : ", enum_verbosity_string(print_verbosity) );
-  LMark;
 	LPrintln("\tPackage Verbosity: ", enum_verbosity_string(package_verbosity) );
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Module::print_state() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("State:");
 }
 
@@ -74,13 +63,9 @@ void Module::get_module_name(char* buf) const
 ///////////////////////////////////////////////////////////////////////////////
 void Module::set_print_verbosity(const Verbosity v)
 {
-  LMark;
 	print_verbosity = v;
-  LMark;
 	if (print_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Set print verbosity to: ", enum_verbosity_string(v));
 	}
 }
@@ -88,13 +73,9 @@ void Module::set_print_verbosity(const Verbosity v)
 ///////////////////////////////////////////////////////////////////////////////
 void Module::set_package_verbosity(const Verbosity v)
 {
-  LMark;
 	package_verbosity = v;
-  LMark;
 	if (print_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Set package verbosity verbosity to: ", enum_verbosity_string(v));
 	}
 }
@@ -112,7 +93,7 @@ const char* Module::enum_verbosity_string(const Verbosity v)
 ///////////////////////////////////////////////////////////////////////////////
 // Module::Category Module::category() const
 // {
-//   LMark;
+//
 // 	switch( (int)module_type / 1000 ) {
 // 		case 1 : return Category::Other;		// Other
 // 		case 2 : return Category::Sensor;		// Sensors
@@ -130,7 +111,7 @@ const char* Module::enum_verbosity_string(const Verbosity v)
 ///////////////////////////////////////////////////////////////////////////////
 // const char* Module::enum_category_string(const Category c)
 // {
-//   LMark;
+//
 // 	switch ( (int)c ) {
 // 		case 1 : return "Other";		// Other
 // 		case 2 : return "Sensor";		// Sensors

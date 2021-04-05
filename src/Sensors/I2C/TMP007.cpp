@@ -27,7 +27,6 @@ TMP007::TMP007(
 	bool setup = inst_tmp007.begin();
 
 	if (!setup) active = false;
-  LMark;
 
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
@@ -42,9 +41,7 @@ void TMP007::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-  LMark;
 	LPrintln("\tObject Temp : ", object_temp);
-  LMark;
 	LPrintln("\tDie Temp    : ", die_temp);
 }
 
@@ -53,7 +50,6 @@ void TMP007::measure()
 {
   LMark;
 	object_temp	= inst_tmp007.readObjTempC();
-  LMark;
 	die_temp	= inst_tmp007.readDieTempC();
 }
 
@@ -62,10 +58,8 @@ void TMP007::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 
 	data["objTemp"] = object_temp;
-  LMark;
 	data["dieTemp"] = die_temp;
 }
 

@@ -31,7 +31,6 @@ void I2CSensor::print_config() const
 {
 	Sensor::print_config();
 	LPrint("\tI2C Address         : ");
-  LMark;
 	LPrintln_Dec_Hex(i2c_address);
 }
 

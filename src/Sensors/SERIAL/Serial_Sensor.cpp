@@ -30,16 +30,12 @@ SerialSensor::~SerialSensor() {
 ////////////////////////////////////////////////////////////////////////////
 void SerialSensor::print_config() const
 {
-    LMark;
     Sensor::print_config();
-    LMark;
     LPrint('\t', "Serial Set         : ");
-    LMark;
     LPrintln(sensor_serial != nullptr);
 }
 
 void SerialSensor::set_serial(Stream *stream) {
-    LMark;
     sensor_serial = stream;
 }
 

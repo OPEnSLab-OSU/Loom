@@ -45,7 +45,6 @@ TSL2561::TSL2561(
 	bool setup = inst_TSL2561.begin();
 
 	if (setup) {
-   	LMark;
 		switch (gain) {
 			case 1  : inst_TSL2561.setGain(TSL2561_GAIN_1X); break;
 			case 16 : inst_TSL2561.setGain(TSL2561_GAIN_16X); break;
@@ -74,9 +73,7 @@ void TSL2561::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-  LMark;
 	LPrintln("\tLightIR   : ", lightIR,   " lux");
-  LMark;
 	LPrintln("\tLightFull : ", lightFull, " lux");
 }
 
@@ -85,15 +82,12 @@ void TSL2561::measure()
 {
   LMark;
 	uint16_t IR_ar[5], Full_ar[5];
-  LMark;
 
 	for (int i = 0; i < 5; i++) {
-   	LMark;
 		inst_TSL2561.getLuminosity(&Full_ar[i], &IR_ar[i]);
 	}
 
 	lightIR   = (IR_ar[0]   + IR_ar[1]   + IR_ar[2]   + IR_ar[3]   + IR_ar[4])   / 5;
-  LMark;
 	lightFull = (Full_ar[0] + Full_ar[1] + Full_ar[2] + Full_ar[3] + Full_ar[4]) / 5;
 }
 
@@ -102,15 +96,11 @@ void TSL2561::package(JsonObject json)
 {
   LMark;
 	int lux = inst_TSL2561.calculateLux(lightFull, lightIR);
-  LMark;
 
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 
 	data["IR"]   = lightIR;
-  LMark;
 	data["Full"] = lightFull;
-  LMark;
 	data["Lux"]  = lux;
 }
 

@@ -30,7 +30,6 @@ Servo::Servo()
 	servo_driver.begin();
   LMark;
 	servo_driver.setPWMFreq(60);
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -40,39 +39,29 @@ Servo::Servo(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Servo::print_state() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("\tServo Positions:" );
-  LMark;
 	for (int i = 0; i < NUM_SERVOS; i++) {
-   	LMark;
 		LPrintln("\t\tDegree ", i, ": ", positions[i] );
-  	LMark;
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Servo::package(JsonObject json)
 {
-  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 	char buf[8];
-  LMark;
 	for (auto i = 0; i < NUM_SERVOS; i++) {
    	LMark;
 		sprintf(buf, "Servo%d", i);
    	LMark;
 		data[buf] = positions[i];
-  	LMark;
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Servo::dispatch(JsonObject json)
 {
-  LMark;
 	JsonArray params = json["params"];
   LMark;
 	switch( (char)json["func"] ) {
@@ -84,21 +73,15 @@ bool Servo::dispatch(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 void Servo::set_degree(const uint8_t servo, const uint8_t degree)
 {
-  LMark;
 	if (servo < NUM_SERVOS) {
    	LMark;
 		servo_driver.setPWM(servo, 0, map(degree, 0, 180, SERVOMIN, SERVOMAX));
-   	LMark;
 		positions[servo]          = degree;
-  	LMark;
 	}
 
 	if (print_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Set servo ", servo, "to degree ", degree);
-  	LMark;
 	}
 }
 

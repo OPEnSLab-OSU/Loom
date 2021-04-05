@@ -15,6 +15,11 @@
 
 #include <Loom.h>
 
+// Include configuration
+const char* json_config =
+#include "config.h"
+;
+
 // In Tools menu, set:
 // Internet  > Disabled
 // Sensors   > Enabled
@@ -48,7 +53,7 @@ void setup()
 	digitalWrite(13, LOW);
 
 	Feather.begin_serial(true);
-	Feather.parse_config(LCONFIG);
+	Feather.parse_config(json_config);
 	Feather.print_config();
 
 	// Register an interrupt on the RTC alarm pin
@@ -96,12 +101,9 @@ void loop()
 	pinMode(24, INPUT);
 	pinMode(10, INPUT);
 
-	// Sleep Manager autmatically calls power_down on every sensor before sleeping
-	// And power_up after waking.
-
 	rtc_flag = false;
-	Loom.power_down();
+	Feather.power_down();
 	Feather.get<Loom::SleepManager>()->sleep();
-	Loom.power_up();
+	Feather.power_up();
 	while (!rtc_flag);
 }

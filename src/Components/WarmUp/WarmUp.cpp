@@ -17,11 +17,9 @@ using namespace Loom;
 
 WarmUp::WarmUp(Manager* manager, int period)
   : period(period) {
-    LMark;
     manager->get<WarmUpManager>()->Register_WarmUp(this);
   }
 
 int WarmUp::get_period() {
-  LMark;
   return this->period;
 }

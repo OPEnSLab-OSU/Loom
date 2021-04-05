@@ -21,7 +21,6 @@ DS3231::DS3231(
 	)
 	: RTC("DS3231", timezone, use_local_time, custom_time)
 {
-  LMark;
 	init();
   LMark;
 
@@ -31,7 +30,6 @@ DS3231::DS3231(
   LMark;
 
 	clear_alarms();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -48,53 +46,37 @@ bool DS3231::_begin()
 ///////////////////////////////////////////////////////////////////////////////
 void DS3231::print_config() const
 {
-  LMark;
 	RTC::print_config();
-  LMark;
 	// will print out alarm info
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void DS3231::set_alarm(DateTime time)
 {
-  LMark;
 	if (print_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrintln("Setting alarm for: ");
-   	LMark;
 		print_DateTime(time);
-  	LMark;
 	}
 
 	// Set alarm 1
 	rtc_inst.setAlarm(ALM1_MATCH_HOURS, time.second(), time.minute(), time.hour(), 0);
   LMark;
 	rtc_inst.alarmInterrupt(1, true);
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void DS3231::clear_alarms()
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("Clearing DS3231 alarms");
   LMark;
 	rtc_inst.armAlarm(1, false);
-  LMark;
 	rtc_inst.clearAlarm(1);
-  LMark;
 	rtc_inst.alarmInterrupt(1, false);
-  LMark;
 	rtc_inst.armAlarm(2, false);
-  LMark;
 	rtc_inst.clearAlarm(2);
-  LMark;
 	rtc_inst.alarmInterrupt(2, false);
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

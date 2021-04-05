@@ -26,20 +26,15 @@ PublishPlat::PublishPlat(
 ///////////////////////////////////////////////////////////////////////////////
 void PublishPlat::second_stage_ctor()
 {
-  LMark;
 	// check to see if we have a device manager
 	if (!device_manager) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrint("No Device Manager!\n");
-   	LMark;
 		return;
 	}
 
 	LMark;
 	m_internet = device_manager->get<InternetPlat>();
-	LMark;
 	if (!m_internet) {
 		print_module_label();
 		LPrintln("Unable to find internet platform");
@@ -56,14 +51,10 @@ bool PublishPlat::publish(const JsonObject json)
   LMark;
 	// check validity
 	if (m_internet == nullptr  || !m_validate_json(json)){
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrint("Could not publish without ");
-   	LMark;
 		if(m_internet == nullptr) LPrint("internet module\n");
 		else LPrint("valid data.\n");
-   	LMark;
 		return false;
 	}
 	// guess we're good to go
@@ -99,13 +90,10 @@ uint8_t PublishPlat::publish_batch()
 ///////////////////////////////////////////////////////////////////////////////
 bool PublishPlat::publish()
 {
-  LMark;
 	if (device_manager != nullptr) {
    	LMark;
 		JsonObject tmp = device_manager->internal_json();
-   	LMark;
 		if (strcmp(tmp["type"], "data") == 0 ) {
-    	LMark;
 			return publish(tmp);
 		}
 	}
@@ -115,18 +103,15 @@ bool PublishPlat::publish()
 ///////////////////////////////////////////////////////////////////////////////
 void PublishPlat::print_config() const
 {
-  LMark;
 	Module::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void PublishPlat::print_state() const
 {
-  LMark;
 	Module::print_state();
   LMark;
 	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -144,19 +129,12 @@ bool PublishPlat::m_validate_json(const JsonObjectConst json) const
 		m_print_json_error("contents is not an array");
 	// check that every item in contents is an object with a module name
 	else {
-   	LMark;
 		bool valid = true;
-   	LMark;
 		const JsonArrayConst ray = json["contents"];
-   	LMark;
 		for (const auto elem : ray) {
-    	LMark;
 			if (!elem["module"].is<const char*>()) {
-     		LMark;
 				valid = false;
-     		LMark;
 				m_print_json_error("contents array does not contain objects with a module key");
-     		LMark;
 				break;
 			}
 		}
@@ -168,11 +146,8 @@ bool PublishPlat::m_validate_json(const JsonObjectConst json) const
 ///////////////////////////////////////////////////////////////////////////////
 void PublishPlat::m_print_json_error(const char* str) const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrint("Publish data is invalid: ", str, "\n");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

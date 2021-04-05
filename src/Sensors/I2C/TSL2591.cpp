@@ -31,7 +31,6 @@ TSL2591::TSL2591(
 {
   LMark;
 	bool setup = inst_tsl2591.begin();
-  LMark;
 
 	if (setup) {
 		switch(gain_level) {
@@ -54,7 +53,6 @@ TSL2591::TSL2591(
 	}
 
 	if (!setup) active = false;
-  LMark;
 
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
@@ -69,11 +67,8 @@ void TSL2591::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-  LMark;
 	LPrintln("\tVis  : ", vis);
-  LMark;
 	LPrintln("\tIR   : ", ir);
-  LMark;
 	LPrintln("\tFull : ", full);
 }
 
@@ -82,9 +77,7 @@ void TSL2591::measure()
 {
   LMark;
 	vis  = inst_tsl2591.getLuminosity(TSL2591_VISIBLE);
-  LMark;
 	ir   = inst_tsl2591.getLuminosity(TSL2591_INFRARED);
-  LMark;
 	full = inst_tsl2591.getLuminosity(TSL2591_FULLSPECTRUM);
 }
 
@@ -93,12 +86,9 @@ void TSL2591::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 
 	data["Vis"]  = vis;
-  LMark;
 	data["IR"]   = ir;
-  LMark;
 	data["Full"] = full;
 }
 

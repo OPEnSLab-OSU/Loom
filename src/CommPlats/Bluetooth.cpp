@@ -35,7 +35,6 @@ Bluetooth::Bluetooth(
 	BLE.begin();
   LMark;
 	BLE.setMode(BLUEFRUIT_MODE_DATA); // set to simple UART back and forth comms
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -45,23 +44,17 @@ Bluetooth::Bluetooth(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Bluetooth::print_config() const
 {
-  LMark;
 	CommPlat::print_config();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Bluetooth::connect(const uint16_t connect_timeout)
 {
-  LMark;
 	uint32_t timeout = millis();
-  LMark;
 
 	LPrintln("[BLE_C] timeout: ", timeout );
-  LMark;
 
 	while ( !BLE.isConnected() ) {
-   	LMark;
 		if ( ( millis() - timeout ) > connect_timeout ){
 			return;
 		}
@@ -71,40 +64,28 @@ void Bluetooth::connect(const uint16_t connect_timeout)
 ///////////////////////////////////////////////////////////////////////////////
 int8_t Bluetooth::getCommand(const uint16_t max_timeout )
 {
-  LMark;
 	// printCommands();
 	BLE.println("Enter Command.");
-  LMark;
 	char cmd_buffer [32] = {0};
 	uint32_t timeout = millis();
-  LMark;
 
 	while ( !BLE.available() ) {
-   	LMark;
 		if ( millis() - timeout > max_timeout ) {
-    	LMark;
 			BLE.println("timed out");
-    	LMark;
 			return -1;
 		}
 	}
 
 	uint8_t index = 0;
-  LMark;
 
 	timeout = millis();
-  LMark;
 	while ( BLE.available() && index < sizeof(cmd_buffer) - 1) {
    	LMark;
 		cmd_buffer[index] = BLE.read();
-   	LMark;
 		index++;
-  	LMark;
 	}
 	cmd_buffer[index] = 0;
-  LMark;
 	BLE.println( cmd_buffer );
- 	LMark;
 
 	// for( int i = 0; i< NUMCOMMANDS; i++)
 	// {
@@ -122,18 +103,14 @@ int8_t Bluetooth::getCommand(const uint16_t max_timeout )
 
 	// }
 	delay(5000);
-  LMark;
 	return -2;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool Bluetooth::test_send(const uint8_t val)
 {
-  LMark;
 	if ( BLE.isConnected() ) {
-   	LMark;
 		BLE.print(val);
-   	LMark;
 		return true;
 	} else {
 		return false;
@@ -143,11 +120,8 @@ bool Bluetooth::test_send(const uint8_t val)
 ///////////////////////////////////////////////////////////////////////////////
 bool Bluetooth::test_send_str(const char* string)
 {
-  LMark;
 	if ( BLE.isConnected() ) {
-   	LMark;
 		BLE.print(string);
-   	LMark;
 		return true;
 	} else {
 		return false;

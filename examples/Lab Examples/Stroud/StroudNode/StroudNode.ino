@@ -48,6 +48,11 @@
 
 #include <Loom.h>
 
+// Include configuration
+const char* json_config =
+#include "config.h"
+;
+
 // In Tools menu, set:
 // Internet  > WiFi,
 // Sensors   > Enabled
@@ -81,7 +86,7 @@ void setup()
 	// If SD config failed, use #include'd config from above
 	if ( !load_success ) {
 		use_max = true; // Fallback configuration provided is for Max use
-		Feather.parse_config(LCONFIG);
+		Feather.parse_config(json_config);
 	}
 
 	Feather.print_config(true);				// Print config

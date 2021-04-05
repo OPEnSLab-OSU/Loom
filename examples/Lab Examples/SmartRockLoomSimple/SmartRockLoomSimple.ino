@@ -23,6 +23,11 @@
 
 #include <Loom.h>
 
+// Include configuration
+const char* json_config =
+#include "config.h"
+;
+
 // In Tools menu, set:
 // Internet  > Disabled
 // Sensors   > Enabled
@@ -67,7 +72,7 @@ void setup()
 
 	pinMode(10, OUTPUT);
 
-	Feather.parse_config(LCONFIG);
+	Feather.parse_config(json_config);
 	Feather.print_config();
 
 	// pinMode(ALARM_PIN, INPUT_PULLUP);

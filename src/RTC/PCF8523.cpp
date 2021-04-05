@@ -23,9 +23,7 @@ PCF8523::PCF8523(
 {
   LMark;
 	init();
-  LMark;
 	clear_alarms();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -37,17 +35,13 @@ bool PCF8523::_begin()
 {
   LMark;
 	rtc_inst.begin();
-  LMark;
 	rtc_inst.stop_32768_clkout();
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void PCF8523::print_config() const
 {
-  LMark;
 	RTC::print_config();
-  LMark;
 	// will print out alarm info
 }
 
@@ -57,12 +51,9 @@ void PCF8523::set_alarm(DateTime time)
   LMark;
 	// Don't set alarm for current minute
 	DateTime tmp = (now().minute() != time.minute()) ? time : time+TimeSpan(60);
-  LMark;
 
 	rtc_inst.set_alarm(tmp.day(), tmp.hour(), tmp.minute() );
-  LMark;
 	rtc_inst.enable_alarm(true);
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

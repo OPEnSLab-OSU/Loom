@@ -30,7 +30,6 @@ SleepManager::SleepManager(
 	, sleep_mode(Mode::STANDBY)
 	, power_off_pin(power_off_pin)
 {
-  LMark;
 	pinMode(power_off_pin, OUTPUT);
 }
 
@@ -41,17 +40,11 @@ SleepManager::SleepManager(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void SleepManager::print_config() const
 {
-  LMark;
 	Module::print_config();
-  LMark;
 	LPrintln("\tSleep Mode    : ", enum_sleep_mode_string(sleep_mode) );
-  LMark;
 	LPrintln("\tUse LED       : ", (use_LED) ? "Enabled" : "Disabled" );
-  LMark;
 	LPrintln("\tDelay on Wake : ", (delay_on_wake) ? "Enabled" : "Disabled" );
-  LMark;
 	LPrintln("\t\t Interrupt? ", interrupt_manager ? "+" : "-");
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,24 +52,17 @@ void SleepManager::link_device_manager(Manager* LM)
 {
   LMark;
 	Module::link_device_manager(LM);
-  LMark;
 
 	if ( LM ){
-  	LMark;
 
 		// Set manager's sleep manager
 		LM->sleep_manager = this;
-  	LMark;
 
 		// Link to interrupt manager
 		auto interrupt_manager = LM->get_interrupt_manager();
-   	LMark;
 		if ( interrupt_manager ) {
-    	LMark;
 			link_interrupt_manager(interrupt_manager);
-    	LMark;
 			interrupt_manager->link_sleep_manager(this);
-   		LMark;
 		}
 	}
 }
@@ -84,16 +70,12 @@ void SleepManager::link_device_manager(Manager* LM)
 ///////////////////////////////////////////////////////////////////////////////
 bool SleepManager::sleep()
 {
-   	LMark;
 		pre_sleep();
-  	LMark;
 
 		LowPower.standby();
-   	LMark;
 		// This is where programs waits until waking
 
 		post_sleep();
- 		LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -101,22 +83,16 @@ void SleepManager::pre_sleep()
 {
   LMark;
 	LPrintln("\nEntering STANDBY");
-  LMark;
 	Serial.flush();
-  LMark;
 	Serial.end();
-  LMark;
 	USBDevice.detach();
-  LMark;
 
 	// Disable SysTick Interrupt
 	// See https://community.atmel.com/comment/2616121#comment-2616121
 	// calls to delay() and Serial.xx() will not work after this line
 	SysTick->CTRL = 0;
-  LMark;
 
 	digitalWrite(LED_BUILTIN, LOW);
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -129,12 +105,9 @@ void SleepManager::post_sleep()
 	SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk
 				| SysTick_CTRL_TICKINT_Msk
 				| SysTick_CTRL_ENABLE_Msk;
-  LMark;
 
 	if (use_LED) {
-   	LMark;
 		digitalWrite(LED_BUILTIN, HIGH);
-  	LMark;
 	}
 
 }
@@ -142,15 +115,10 @@ void SleepManager::post_sleep()
 ///////////////////////////////////////////////////////////////////////////////
 const char* SleepManager::enum_sleep_mode_string(const Mode m)
 {
-  LMark;
 	switch(m) {
-   	LMark;
 		case Mode::IDLE				: return "Idle";
-   	LMark;
 		case Mode::STANDBY			: return "Standby";
-   	LMark;
 		case Mode::OPENS_LOWPOWER	: return "OPEnS_Lowpower";
-   	LMark;
 		default : return "";
 	}
 }

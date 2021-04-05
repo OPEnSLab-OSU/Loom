@@ -59,7 +59,6 @@ void setup()
 	LPrintln("\nConfig:\n", json_config, "\n");
 
 	// Parse one of the configs by selecting one of the below 3 lines
-	// Feather.parse_config(LCONFIG);
 	// Feather.parse_config(json_config);
 	// Feather.parse_config(json_config_compact);
 	Feather.parse_config(json_config_pretty);

@@ -26,11 +26,9 @@ MMA8451::MMA8451(
 {
   LMark;
 	bool setup = MMA.begin(i2c_address);
-  LMark;
 
 	// Set range
 	MMA.setRange(range);
-  LMark;
 
 	// Configure interrupts
 	// configure_interrupts(); // not verified yet
@@ -56,15 +54,11 @@ void MMA8451::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-  LMark;
 	LPrintln("\tAccel X     : ", accel[0], " m/s^2");
-  LMark;
 	LPrintln("\tAccel Y     : ", accel[1], " m/s^2");
-  LMark;
 	LPrintln("\tAccel Z     : ", accel[2], " m/s^2");
 
 	LPrint("\tOrientation : ");
-  LMark;
 	switch (orientation) {
 		case MMA8451_PL_PUF: LPrintln("Portrait Up Front");		break;
 		case MMA8451_PL_PUB: LPrintln("Portrait Up Back");		break;
@@ -86,16 +80,11 @@ void MMA8451::measure()
 
 	// Get a new sensor event
 	sensors_event_t event;
-  LMark;
 	MMA.getEvent(&event);
-  LMark;
 
 	accel[0] = event.acceleration.x;
-  LMark;
 	accel[1] = event.acceleration.y;
-  LMark;
 	accel[2] = event.acceleration.z;
-  LMark;
 
 	// Get the orientation of the sensor
 	orientation = MMA.getOrientation();
@@ -106,19 +95,13 @@ void MMA8451::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 
 	data["ax"] = accel[0];
-  LMark;
 	data["ay"] = accel[1];
-  LMark;
 	data["az"] = accel[2];
-  LMark;
 
 	if (package_verbosity == Verbosity::V_HIGH) {
-   	LMark;
 		char buf[22];
-   	LMark;
 		switch (orientation) {
 			case MMA8451_PL_PUF: strcpy(buf, "Portrait Up Front");		break;
 			case MMA8451_PL_PUB: strcpy(buf, "Portrait Up Back");		break;

@@ -44,41 +44,28 @@ Analog::Analog(
   LMark;
 	// Set Analog Read Resolution
 	analogReadResolution(read_resolution);
-  LMark;
 
 	// Set enabled pins
 	pin_enabled[0] = enableA0;
-  LMark;
 	pin_enabled[1] = enableA1;
-  LMark;
 	pin_enabled[2] = enableA2;
-  LMark;
 	pin_enabled[3] = enableA3;
-  LMark;
 	pin_enabled[4] = enableA4;
-  LMark;
 	pin_enabled[5] = enableA5;
 
 
 	for (auto i = 0; i < ANALOG_COUNT; i++) {
-   LMark;
 		if (pin_enabled[i]) {
-    	LMark;
 			pinMode(14+i, INPUT);
 		}
 	}
 
 	// Set conversions
 	conversions[0] = convertA0;
-  LMark;
 	conversions[1] = convertA1;
-  LMark;
 	conversions[2] = convertA2;
-  LMark;
 	conversions[3] = convertA3;
-  LMark;
 	conversions[4] = convertA4;
-  LMark;
 	conversions[5] = convertA5;
 }
 
@@ -94,19 +81,13 @@ void Analog::add_config(JsonObject json)
 {
   LMark;
 	JsonArray params = add_config_temp(json, module_name);
-  LMark;
 	params.add(module_name);
-  LMark;
 	params.add(num_samples);
-  LMark;
 	params.add(read_resolution);
-  LMark;
 	for (auto i = 0; i < 6; i++) {
-   	LMark;
 		params.add(pin_enabled[i]);
 	}
 	for (auto i = 0; i < 6; i++) {
-   	LMark;
 		params.add((int)conversions[i]);
 	}
 }
@@ -114,7 +95,6 @@ void Analog::add_config(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 float Analog::convert(const uint8_t pin, const uint16_t analog) const
 {
-  LMark;
 	switch(conversions[pin]) {
 		case Conversion::VOLTAGE 		: return convert_voltage(analog);
 		case Conversion::THERMISTOR 	: return convert_thermistor(analog);
@@ -130,7 +110,6 @@ float Analog::convert(const uint8_t pin, const uint16_t analog) const
 ///////////////////////////////////////////////////////////////////////////////
 const char* Analog::conversion_name(const Conversion conversion)
 {
-  LMark;
 	switch(conversion) {
 		case Conversion::VOLTAGE 		: return "voltage";
 		case Conversion::THERMISTOR 	: return "thermistor";
@@ -146,24 +125,16 @@ const char* Analog::conversion_name(const Conversion conversion)
 ///////////////////////////////////////////////////////////////////////////////
 void Analog::print_config() const
 {
-  LMark;
 	Sensor::print_config();
-  LMark;
 
 	LPrintln("\tAnalog Resolution : ", read_resolution);
-  LMark;
 	LPrint("\tEnabled Pins        : ");
-  LMark;
 	for (auto i = 0; i < ANALOG_COUNT; i++) {
-   LMark;
 		if (pin_enabled[i]) {
-    LMark;
 			LPrint("A", i, ", ");
-   LMark;
 		}
 	}
 	LPrintln("\n\tTemperature        : ", temperature);
- LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -171,19 +142,13 @@ void Analog::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-  LMark;
 	LPrintln("\tBattery = ", battery);
   LMark;
 	for (auto i = 0; i < ANALOG_COUNT; i++) {
-   	LMark;
 		if ( (!enable_conversions) || (conversions[i] == Conversion::NONE) ) {
-    	LMark;
 			LPrintln("\tA", i, " = ", analog_vals[i]);
-   		LMark;
 		} else {
-			LMark;
 			LPrint("\tA", i, " = ", analog_vals[i]);
-    	LMark;
 			LPrintln( "  [ ", convert(i, analog_vals[i]), " (converted) ]" );
 		}
 	}
@@ -198,7 +163,6 @@ void Analog::measure()
 
 	for (auto i = 0; i < 6; i++) {
 		if (pin_enabled[i]) {
-    	LMark;
 			analog_vals[i] = read_analog(i);
 		}
 	}
@@ -207,23 +171,17 @@ void Analog::measure()
 ///////////////////////////////////////////////////////////////////////////////
 void Analog::package(JsonObject json)
 {
-  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 	data["Vbat"] = battery;
-  LMark;
 	char buf[12];
   LMark;
 	for (auto i = 0; i < ANALOG_COUNT; i++) {
-   LMark;
 		if (pin_enabled[i]) {
 			if (!enable_conversions || conversions[i] == Conversion::NONE) {
-     		LMark;
 				sprintf(buf, "%s[%d]", "A", i);
 			} else {
 				sprintf(buf, "%s[%d]", conversion_name(get_conversion(i)), i);
 			}
-			LMark;
 			data[buf] = (!enable_conversions || conversions[i] == Conversion::NONE)
 						 ? analog_vals[i]
 						 : convert(i, analog_vals[i]);
@@ -234,18 +192,14 @@ void Analog::package(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 int Analog::get_analog_val(const uint8_t pin) const
 {
-  LMark;
 	return ( (pin >= 0) && (pin < ANALOG_COUNT) ) ? analog_vals[pin] : -1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void Analog::set_pin_enabled(const uint8_t pin, const bool e)
 {
-  LMark;
 	pin_enabled[pin] = e;
-  LMark;
 	if (pin_enabled[pin]) {
-   	LMark;
 		pinMode(14+pin, INPUT);
 	}
 }
@@ -257,7 +211,6 @@ uint16_t Analog::read_analog(const uint8_t chnl) const
 	int reading = 0;
 
 	while (i--) {
-   	LMark;
 		reading += analogRead(chnl);
 	}
 
@@ -274,7 +227,6 @@ uint16_t Analog::read_analog(const uint8_t chnl) const
 ///////////////////////////////////////////////////////////////////////////////
 float Analog::convert_voltage(const uint16_t analog) const
 {
-  LMark;
 	return analog*3.3/pow(2, read_resolution);
 }
 
@@ -288,40 +240,26 @@ float Analog::convert_voltage(const uint16_t analog) const
 #define range_resol  		4095
 float Analog::convert_thermistor(const uint16_t analog) const
 {
-  LMark;
 	float average = analog;
-  LMark;
 
 	#if reverse_connect == 0
-   	LMark;
 		average = range_resol / average - 1;
-   	LMark;
 		average = SERIESRESISTOR / average;
-  	LMark;
 	#endif
 	#if reverse_connect == 1
-   	LMark;
 		average = range_resol / average - 1;
-   	LMark;
 		average = SERIESRESISTOR * average;
 	#endif
 	// Serial.print("Thermistor resistance ");
 	// Serial.println(average);
 
 	float steinhart;
-  LMark;
 	steinhart = average / THERMISTORNOMINAL;     // (R/Ro)
-  LMark;
 	steinhart = log(steinhart);                  // ln(R/Ro)
-  LMark;
 	steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
-  LMark;
 	steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
-  LMark;
 	steinhart = 1.0 / steinhart;                 // Invert
-  LMark;
 	steinhart -= 273.15;                         // convert to C
-  LMark;
 
 	return steinhart;
 }
@@ -337,10 +275,8 @@ float Analog::convert_pH(const uint16_t analog) const
 	// return 1000.*convert_voltage(analog); // return millivolts
 
 	float voltage = convert_voltage(analog);
-  LMark;
 
 	float pHValue = 3.5*voltage + PH_Offset;
-  LMark;
 
 	return pHValue;
 }
@@ -374,10 +310,8 @@ float Analog::convert_turbidity(const uint16_t analog) const
 
 float Analog::convert_EC(const uint16_t analog) const
 {
-  LMark;
 	// float temperature = 25.0;
 	float voltage = convert_voltage(analog);
-  LMark;
 
 	//old block of code don't use for now
 	//float compensation_coefficient = 1.0 + 0.02 * (EC_TEMP - 25.0); // temperature compensation formula: fFinalResult(25^C) = fFinalResult(current)/(1.0+0.02*(fTP-25.0));
@@ -386,11 +320,8 @@ float Analog::convert_EC(const uint16_t analog) const
 
 	//newer block of code
 	float EC = ( 133.42 * voltage * voltage * voltage - 255.86 * voltage * voltage + 857.39 * voltage ); //convert voltage value to EC value
-  LMark;
 	float compensation_coefficient = 1.0 + 0.02 * (temperature - 25.0);
-  LMark;
 	float compensationEC = EC/compensation_coefficient;
-  LMark;
 
 	return compensationEC;
 }
@@ -398,7 +329,6 @@ float Analog::convert_EC(const uint16_t analog) const
 ///////////////////////////////////////////////////////////////////////////////
 float Analog::convert_TDS(const uint16_t analog) const
 {
-	LMark;
 	return convert_EC(analog)/2.;
 }
 
@@ -406,6 +336,5 @@ float Analog::convert_TDS(const uint16_t analog) const
 float Analog::convert_salinity(const uint16_t analog) const
 {
 	// Probably doesn't actually give a value of any worth right now...
-	LMark;
 	return (analog-76) / .0928;
 }

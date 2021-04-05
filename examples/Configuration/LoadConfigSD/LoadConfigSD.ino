@@ -15,7 +15,7 @@
 
 // The lines:
 // 		if ( !Feather.parse_config_SD("config.txt") ) {
-// 			Feather.parse_config(LCONFIG);
+// 			Feather.parse_config(json_config);
 //		}
 // are the core part of this example, and all that you would have to add to a
 // different example to add SD config support
@@ -26,7 +26,12 @@
 
 #include <Loom.h>
 
-// LCONFIG is used if SD config not found
+
+// Include configuration
+const char* json_config =
+#include "config.h"
+;
+// json_config is used if SD config not found
 
 
 // In Tools menu, set:
@@ -46,9 +51,9 @@ void setup()
 	Feather.begin_serial(true);
 
 	// Get config from SD
-	// Else use LCONFIG
+	// Else use json_config
 	if ( !Feather.parse_config_SD("config.txt") ) {
-		Feather.parse_config(LCONFIG);
+		Feather.parse_config(json_config);
 	}
 
 	Feather.print_config();

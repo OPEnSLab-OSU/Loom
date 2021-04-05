@@ -26,20 +26,13 @@ SubscribePlat::SubscribePlat(
 ///////////////////////////////////////////////////////////////////////////////
 void SubscribePlat::second_stage_ctor()
 {
-  LMark;
 	// check to see if we have a device manager
 	if (!device_manager) {
-   	LMark;
 		print_module_label();
-   	LMark;
 		LPrint("No Device Manager!\n");
-   	LMark;
 		return;
 	}
-
-	LMark;
 	m_internet = device_manager->get<InternetPlat>();
-	LMark;
 	if (!m_internet) {
 		print_module_label();
 		LPrintln("Unable to find internet platform");
@@ -54,27 +47,21 @@ void SubscribePlat::second_stage_ctor()
 ///////////////////////////////////////////////////////////////////////////////
 void SubscribePlat::print_config() const
 {
-  LMark;
 	Module::print_config();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void SubscribePlat::print_state() const
 {
-  LMark;
 	Module::print_state();
-  LMark;
 	LPrintln("\tInternet Connected: ", m_internet != nullptr && m_internet->is_connected());
- 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool SubscribePlat::subscribe()
 {
-  LMark;
 	// call normal subscribe (implemented by derived classes)
 	if (device_manager != nullptr) {
-   	LMark;
 		return subscribe( device_manager->internal_json(true) );  // true to clear json
 	}
 	return false;

@@ -11,6 +11,11 @@
 
 #include <Loom.h>
 
+// Include configuration
+const char* json_config =
+#include "config.h"
+;
+
 // In Tools menu, set:
 // Internet  > Disabled
 // Sensors   > Enabled
@@ -37,7 +42,7 @@ void setup()
 	// open Serial Monitor to continue, or use Feather.begin_serial();
 	// to continue without waiting on user
 	Feather.begin_serial(true);
-	Feather.parse_config(LCONFIG);
+	Feather.parse_config(json_config);
 
 	// Register ISR to call on wake
 	Feather.get<Loom::InterruptManager>()->register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);

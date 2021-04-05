@@ -17,6 +17,11 @@
 
 #include <Loom.h>
 
+// Include configuration
+const char* json_config =
+#include "config.h"
+;
+
 // In Tools menu, set:
 // Internet  > Disabled
 // Sensors   > Enabled
@@ -33,7 +38,7 @@ Loom::Manager Feather{};
 void setup()
 {
 	Feather.begin_serial(true);
-	Feather.parse_config(LCONFIG);
+	Feather.parse_config(json_config);
 	Feather.get<Loom::nRF>()->set_print_verbosity(Verbosity::V_HIGH);
 	Feather.print_config();
 

@@ -54,12 +54,10 @@ MS5803::MS5803(
 	/////////
 
 	bool setup = !inst_MS5803.initializeMS_5803(); // for some reason this library returns setup incorrectly
-  LMark;
 
 	// if (!setup) active = false;
 
 	print_module_label();
-  LMark;
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
 
 }
@@ -71,13 +69,9 @@ MS5803::MS5803(JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void MS5803::print_measurements() const
 {
-  LMark;
 	print_module_label();
-  LMark;
 	LPrintln("Measurements:");
-  LMark;
 	LPrintln("\tPressure    : ", pressure , " mbar");
-  LMark;
 	LPrintln("\tTemperature : ", temp     , " C");
 }
 
@@ -86,10 +80,8 @@ void MS5803::measure()
 {
   LMark;
 	inst_MS5803.readSensor();
-  LMark;
 
 	pressure = inst_MS5803.pressure();
-  LMark;
 	temp     = inst_MS5803.temperature();
 }
 
@@ -98,10 +90,8 @@ void MS5803::package(JsonObject json)
 {
   LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-  LMark;
 
 	data["pressure"] = pressure;
-  LMark;
 	data["temp"]     = temp;
 }
 
