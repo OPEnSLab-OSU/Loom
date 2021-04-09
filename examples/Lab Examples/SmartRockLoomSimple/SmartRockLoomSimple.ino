@@ -78,8 +78,8 @@ void setup()
 	// pinMode(ALARM_PIN, INPUT_PULLUP);
 	// pinMode(REED_PIN, INPUT_PULLUP);
 
-	Feather.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Feather.get<Loom::InterruptManager>()->register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -102,12 +102,12 @@ void loop()
 	Feather.package();
 	Feather.add_data("wakeType", "type", alarmFlag ? "alarm" : "reed");
 	Feather.display_data();
-	Feather.get<Loom::SD>()->log();
+	getSD(Feather).log();
 
 	Feather.pause(500);
-	Feather.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Feather.get<Loom::InterruptManager>()->register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
-	Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(600));
+	getInterruptManager(Feather).register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).register_ISR(REED_PIN, reedISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(600));
 
 	// delay(4000);
 
@@ -115,7 +115,7 @@ void loop()
 	reedFlag = false;
 
 	// Go to sleep
-	Feather.get<Loom::SleepManager>()->sleep();
+	getSleepManager(Feather).sleep();
 	//
 
 }

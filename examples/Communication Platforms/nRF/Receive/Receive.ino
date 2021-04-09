@@ -45,9 +45,9 @@ void setup()
 
 void loop()
 {
-	if (Feather.get<Loom::nRF>()->receive()) {
+	if (getnRF(Feather).receive()) {
 		Feather.display_data();
-		Feather.get<Loom::SD>()->log("nrf.csv");
+		getSD(Feather).log("nrf.csv");
 	}
 
 	Feather.pause();	// Pause according to 'interval' in config

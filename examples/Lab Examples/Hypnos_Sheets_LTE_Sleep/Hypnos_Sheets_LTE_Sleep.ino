@@ -60,7 +60,7 @@ void setup()
 
 	delay(5000);
 	// Register an interrupt on the RTC alarm pin
-	Feather.get<Loom::InterruptManager>()->register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
 	delay(5000);
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -91,11 +91,11 @@ Feather.measure();
 Feather.package();
 Feather.display_data();
 
-Feather.get<Loom::GoogleSheets>()->publish();
+getGoogleSheets(Feather).publish();
 
 // set the RTC alarm to a duration of five minutes with TimeSpan
-Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(0,0,5,0));
-Feather.get<Loom::InterruptManager>()->reconnect_interrupt(12);
+getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(0,0,5,0));
+getInterruptManager(Feather).reconnect_interrupt(12);
 
 
 digitalWrite(13, LOW);
@@ -109,7 +109,7 @@ pinMode(10, INPUT);
 
 rtc_flag = false;
 Feather.power_down();
-Feather.get<Loom::SleepManager>()->sleep();
+getSleepManager(Feather).sleep();
 Feather.power_up();
 while (!rtc_flag);
 }

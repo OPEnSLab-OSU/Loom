@@ -50,7 +50,7 @@ void loop()
 	Feather.display_data();
 
 	// Send to address 1
-	Feather.get<Loom::LoRa>()->send(1);
+	getLoRa(Feather).send(1);
 
 	Feather.pause();	// Delay between interations set with 'interval' in config
 }

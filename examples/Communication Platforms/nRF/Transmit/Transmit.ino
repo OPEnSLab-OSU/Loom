@@ -39,7 +39,7 @@ void setup()
 {
 	Feather.begin_serial(true);
 	Feather.parse_config(json_config);
-	Feather.get<Loom::nRF>()->set_print_verbosity(Verbosity::V_HIGH);
+	getnRF(Feather).set_print_verbosity(Verbosity::V_HIGH);
 	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -53,7 +53,7 @@ void loop()
 
 	// Select on of the following
 	// Feather.nRF().send(01);		// Send to specific address
-	Feather.get<Loom::nRF>()->broadcast(); // Broadcast to all nRF devices
+	getnRF(Feather).broadcast(); // Broadcast to all nRF devices
 
 	Feather.pause();	// Delay between interations set with 'interval' in config
 }

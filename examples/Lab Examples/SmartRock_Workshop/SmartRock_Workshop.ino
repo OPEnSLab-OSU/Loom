@@ -63,7 +63,7 @@ void setup()
 	Feather.print_config();
 
 	// Register an interrupt on the RTC alarm pin
-	Feather.get<Loom::InterruptManager>()->register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 	Serial.flush();
@@ -110,11 +110,11 @@ void loop()
 	Feather.measure();
 	Feather.package();
 	Feather.display_data();
-	Feather.get<Loom::SD>()->log();
+	getSD(Feather).log();
 
 	// set the RTC alarm to a duration of 10 seconds with TimeSpan
-	Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(0,0,mins,secs));
-	Feather.get<Loom::InterruptManager>()->reconnect_interrupt(12);
+	getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(0,0,mins,secs));
+	getInterruptManager(Feather).reconnect_interrupt(12);
 
 	digitalWrite(13, LOW);
 	digitalWrite(5, HIGH); // Enable 3.3V rail
@@ -127,6 +127,6 @@ void loop()
 	// And power_up after waking.
 
 	rtc_flag = false;
-	Feather.get<Loom::SleepManager>()->sleep();
+	getSleepManager(Feather).sleep();
 	while (!rtc_flag);
 }

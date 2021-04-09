@@ -48,9 +48,9 @@ void setup()
 
 void loop()
 {
-	if (Feather.get<Loom::LoRa>()->receive()) {
+	if (getLoRa(Feather).receive()) {
 		Feather.display_data();
-		Feather.get<Loom::SD>()->log("received.csv");
+		getSD(Feather).log("received.csv");
 	}
 
 	Feather.pause();	// Pause according to 'interval' in config

@@ -57,7 +57,7 @@ void loop()
 
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
-	Feather.get<Loom::SD>()->log();
+	getSD(Feather).log();
 
 	Feather.pause();
 }

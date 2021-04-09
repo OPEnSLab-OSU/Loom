@@ -42,6 +42,6 @@ void loop()
 	Feather.measure();
 	Feather.package();
 	Feather.display_data();
-	Feather.get<Loom::OLED>()->log();
+	getOLED(Feather).log();
 	Feather.pause();
 }

@@ -107,20 +107,20 @@ void loop()
 	Feather.package();				// Build Json from data
 	Feather.display_data();		// Print data (will not work properly if using nap instead of pause below)
 
-	Feather.get<Loom::SD>()->log(); // Log to SD
+	getSD(Feather).log(); // Log to SD
 
 	// The following if statements are a means of having both Max and GoogleSheets modes
 	// work with the same code. If a module exists, it will use it, otherwise it was
 	// probably not instantiated for this mode and will skip it.
 
 	if (Loom.has_module(LoomModule::Type::MaxPub)) {
-		Feather.get<Loom::MaxPub>()->publish(); // Send data to Max
+		getMaxPub(Feather).publish(); // Send data to Max
 	}
 	if (Loom.has_module(LoomModule::Type::MaxSub)) {
-		Feather.get<Loom::MaxSub>()->subscribe(); // Receive any messages from Max
+		getMaxSub(Feather).subscribe(); // Receive any messages from Max
 	}
 	if ( Loom.has_module(LoomModule::Type::GoogleSheets) ) {
-		Feather.get<Loom::GoogleSheets>()->publish(); // Send data to Google Sheets
+		getGoogleSheets(Feather).publish(); // Send data to Google Sheets
 	}
 
 	Feather.pause(); 				// Wait (delay) based on 'interval' value in config

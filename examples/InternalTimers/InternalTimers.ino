@@ -78,21 +78,21 @@ void setup()
 	// 1)
 	// Repeating alarm, runs ISR immediately on timer elapsed
 	// Toggles the LED every 5 seconds
-	Feather.get<Loom::InterruptManager>()->register_internal_timer(5, toggle, true, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).register_internal_timer(5, toggle, true, ISR_Type::IMMEDIATE);
 
 	// 2)
 	// Single alarm, runs ISR immediately on timer elapsed
 	// Turns LED on after 5 seconds
-	// Feather.get<Loom::InterruptManager>()->register_internal_timer(5, toggle, false, ISR_Type::IMMEDIATE);
+	// getInterruptManager(Feather).register_internal_timer(5, toggle, false, ISR_Type::IMMEDIATE);
 
 	// 3)
 	// Repeating alarm, runs ISR only after run_pending_ISRs called
 	// Could also manually call .get_internal_timer_flag() and .clear_internal_timer_flag()
-	// Feather.get<Loom::InterruptManager>()->register_internal_timer(5, toggle, true, ISR_Type::CHECK_FLAG);
+	// getInterruptManager(Feather).register_internal_timer(5, toggle, true, ISR_Type::CHECK_FLAG);
 
 	// 4)
 	// Single alarm, runs ISR only after run_pending_ISRs called
-	// Feather.get<Loom::InterruptManager>()->register_internal_timer(5, toggle, false, ISR_Type::CHECK_FLAG);
+	// getInterruptManager(Feather).register_internal_timer(5, toggle, false, ISR_Type::CHECK_FLAG);
 
 
 	// Start LED off
@@ -108,7 +108,7 @@ void loop()
 	// Demonstrating disabling alarm,
 	// In this case, only after ISR triggers 5 times
 	if (count > 4) {
-		Feather.get<Loom::InterruptManager>()->internal_timer_enable(false);
+		getInterruptManager(Feather).internal_timer_enable(false);
 	}
 
 }

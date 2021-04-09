@@ -45,7 +45,7 @@ void setup()
 	Feather.parse_config(json_config);
 
 	// Register ISR to call on wake
-	Feather.get<Loom::InterruptManager>()->register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
 
 	// LowPower.standby();
 	digitalWrite(LED_BUILTIN, LOW);
@@ -62,11 +62,11 @@ void loop()
 	delay(500);
 
 	// Set an alarm 15 seconds into the future
-	Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(0, 0, 0, 15);
+	getInterruptManager(Feather).RTC_alarm_duration(0, 0, 0, 15);
 
 	// Go to sleep
 	LPrintln("Going to sleep");
-	Feather.get<Loom::SleepManager>()->sleep();
+	getSleepManager(Feather).sleep();
 
 	// This wont be seen unless you close and reopen Serial Monitor
 	LPrintln("Awake");

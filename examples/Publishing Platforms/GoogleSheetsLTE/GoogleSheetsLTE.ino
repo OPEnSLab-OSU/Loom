@@ -44,7 +44,7 @@ void loop() {
   Feather.package();
   Feather.display_data();
 
-  Feather.get<Loom::GoogleSheets>()->publish();
+  getGoogleSheets(Feather).publish();
 
   Feather.pause();
 }

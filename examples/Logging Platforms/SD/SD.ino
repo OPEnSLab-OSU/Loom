@@ -42,7 +42,7 @@ void loop()
 
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
-	Feather.get<Loom::SD>()->log();
+	getSD(Feather).log();
 
 	// Or log to a specific file (does not change what default file is set to)
 	// Feather.get<Loom::SD>()->log("specific.csv");

@@ -31,7 +31,7 @@ volatile bool alarmFlag = false;
 void alarmISR() {
 	detachInterrupt(digitalPinToInterrupt(ALARM_PIN));
 
-	Feather.get<Loom::InterruptManager>()->get_RTC_module()->clear_alarms();
+	getInterruptManager(Feather).get_RTC_module()->clear_alarms();
 
 	alarmFlag = true;
 }
@@ -44,8 +44,8 @@ void setup()
 	Feather.parse_config(json_config);
 	Feather.print_config();
 
-	Feather.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10));
+	getInterruptManager(Feather).register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(10));
 	digitalWrite(LED_BUILTIN, LOW);
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -63,8 +63,8 @@ void loop()
 		// Feather.get<Loom::InterruptManager>()->get_RTC_module()->clear_alarms();
 		// post sleep calls this, and in this example it is in the ISR
 
-		Feather.get<Loom::InterruptManager>()->reconnect_interrupt(ALARM_PIN);
-		Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10));
+		getInterruptManager(Feather).reconnect_interrupt(ALARM_PIN);
+		getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(10));
 
 		digitalWrite(LED_BUILTIN, LOW);
 		alarmFlag = false;

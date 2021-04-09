@@ -38,7 +38,7 @@ Loom::Manager Feather{};
 volatile bool alarmFlag = false;
 volatile int count = 0;
 void alarmISR() {
-	Feather.get<Loom::InterruptManager>()->get_RTC_module()->clear_alarms();
+	getInterruptManager(Feather).get_RTC_module()->clear_alarms();
 	count++;
 	alarmFlag = true;
 }
@@ -51,8 +51,8 @@ void setup()
 	Feather.parse_config(json_config);
 	Feather.print_config();
 
-	Feather.get<Loom::InterruptManager>()->register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10));
+	getInterruptManager(Feather).register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(10));
 	digitalWrite(LED_BUILTIN, LOW);
 
 	LPrintln("\n ** Setup Complete ** ");
@@ -65,14 +65,14 @@ void loop()
 		LPrintln("Alarm triggered, resetting alarm");
 		Feather.pause(1000);
 
-		Feather.get<Loom::InterruptManager>()->RTC_alarm_duration(TimeSpan(10));
+		getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(10));
 
 		digitalWrite(LED_BUILTIN, LOW);
 		alarmFlag = false;
 	}
 
 	LPrintln("Count: ", count);
-	Feather.get<Loom::PCF8523>()->print_time();
+	getPCF8523(Feather).print_time();
 	Feather.pause(1000);
 
 }

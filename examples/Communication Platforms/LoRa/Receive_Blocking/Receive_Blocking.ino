@@ -51,8 +51,8 @@ void setup()
 
 void loop()
 {
-	if (Feather.get<Loom::LoRa>()->receive_blocking(5000)) {
+	if (getLoRa(Feather).receive_blocking(5000)) {
 		Feather.display_data();
-		Feather.get<Loom::SD>()->log("received.csv");
+		getSD(Feather).log("received.csv");
 	}
 }

@@ -70,7 +70,9 @@ This is the Doxygen generated documentation of the Loom library code.
 // Max
 #if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
     #include "PublishPlats/Max_Pub.h"
+    Loom::MaxPub getMaxPub(Loom::Manager feather) {return *(feather.get<Loom::MaxPub>());}
     #include "SubscribePlats/Max_Sub.h"
+    Loom::MaxSub getMaxSub(Loom::Manager feather) {return *(feather.get<Loom::MaxSub>());}
 #endif
 
 // LogPlats

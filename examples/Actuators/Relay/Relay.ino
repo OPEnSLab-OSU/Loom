@@ -39,8 +39,8 @@ void setup()
 
 void loop()
 {
-	Feather.get<Loom::Relay>()->set(true);
+	getRelay(Feather).set(true);
 	Feather.pause(2000);
-	Feather.get<Loom::Relay>()->set(false);
+	getRelay(Feather).set(false);
 	Feather.pause(2000);
 }

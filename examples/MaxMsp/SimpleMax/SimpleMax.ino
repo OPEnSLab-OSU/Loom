@@ -59,7 +59,7 @@ void loop()
 	Feather.measure();
 	Feather.package();
 	Feather.display_data();
-	Feather.get<Loom::MaxPub>()->publish();
-	Feather.get<Loom::MaxSub>()->subscribe();
+	getMaxPub(Feather).publish();
+	getMaxSub(Feather).subscribe();
 	Feather.pause();
 }
