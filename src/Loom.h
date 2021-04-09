@@ -75,13 +75,17 @@ This is the Doxygen generated documentation of the Loom library code.
 
 // LogPlats
 #include "LogPlats/OLED.h"
+Loom::OLED getOLED(Loom::Manager feather) { return *(feather.get<Loom::OLED>()); }
 #include "LogPlats/SD.h"
 Loom::SD getSD(Loom::Manager feather) {return *(feather.get<Loom::SD>());}
 #include "LogPlats/BatchSD.h"
+Loom::BatchSD getBatchSD(Loom::Manager feather) { return *(feather.get<Loom::BatchSD>()); }
 
 // // RTC
 #include "RTC/DS3231.h"
+Loom::DS3231 getDS3231(Loom::Manager feather) { return *(feather.get<Loom::DS3231>()); }
 #include "RTC/PCF8523.h"
+Loom::PCF8523 getPCF8523(Loom::Manager feather) { return *(feather.get<Loom::PCF8523>()); }
 
 // Sensors
 #include "Sensors/Analog.h"
@@ -126,4 +130,6 @@ Loom::SD getSD(Loom::Manager feather) {return *(feather.get<Loom::SD>());}
 // General
 #include "Components/WarmUp/WarmUpManager.h"
 #include "InterruptManager.h"
+Loom::InterruptManager getInterruptManager(Loom::Manager feather) { return *(feather.get<Loom::InterruptManager>()); }
 #include "SleepManager.h"
+Loom::SleepManager getSleepManager(Loom::Manager feather) { return *(feather.get<Loom::SleepManager>()); }
