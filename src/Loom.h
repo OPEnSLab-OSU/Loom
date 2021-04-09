@@ -31,16 +31,23 @@ This is the Doxygen generated documentation of the Loom library code.
 // Actuators
 #ifdef LOOM_INCLUDE_ACTUATORS
     #include "Actuators/Neopixel.h"
+    Loom::Neopixel getNeopixel(Loom::Manager feather) {return *(feather.get<Loom::Neopixel>());}
     #include "Actuators/Relay.h"
+    Loom::Relay getRelay(Loom::Manager feather) {return *(feather.get<Loom::Relay>());}
     #include "Actuators/Servo.h"
+    Loom::Servo getServo(Loom::Manager feather) {return *(feather.get<Loom::Servo>());}
     #include "Actuators/Stepper.h"
+    Loom::Stepper getStepper(Loom::Manager feather) {return *(feather.get<Loom::Stepper>());}
 #endif
 
 // CommPlats
 #ifdef LOOM_INCLUDE_RADIOS
     #include "CommPlats/LoRa.h"
+    Loom::LoRa getLoRa(Loom::Manager feather) {return *(feather.get<Loom::LoRa>());}
     #include "CommPlats/nRF.h"
+    Loom::nRF getnRF(Loom::Manager feather) {return *(feather.get<Loom::nRF>());}
     #include "CommPlats/Bluetooth.h"
+    Loom::Bluetooth getBluetooth(Loom::Manager feather) {return *(feather.get<Loom::Bluetooth>());}
 #endif
 
 // InternetPlats
@@ -57,6 +64,7 @@ This is the Doxygen generated documentation of the Loom library code.
 // PublishPlats
 #if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
     #include "PublishPlats/GoogleSheets.h"
+    Loom::GoogleSheets getGoogleSheets(Loom::Manager feather) {return *(feather.get<Loom::GoogleSheets>());}
 #endif
 
 // Max
@@ -68,6 +76,7 @@ This is the Doxygen generated documentation of the Loom library code.
 // LogPlats
 #include "LogPlats/OLED.h"
 #include "LogPlats/SD.h"
+Loom::SD getSD(Loom::Manager feather) {return *(feather.get<Loom::SD>());}
 #include "LogPlats/BatchSD.h"
 
 // // RTC
