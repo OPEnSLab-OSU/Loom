@@ -238,7 +238,7 @@ bool Loom_MaxSub::goto_ap_mode()
 
 	if (!success) {
 		print_module_label();
-		LPrintln("Failed to switch to AP mode");
+		LPrintln("Failed to swtich to AP mode");
 		delete m_internet;
 		m_internet = previous_wifi;
 		m_internet->connect();
@@ -255,7 +255,9 @@ bool Loom_MaxSub::goto_ap_mode()
 	UDP_Inst = m_internet->open_socket(UDP_port);
 
 	// Save config
-	device_manager->save_flash_config();
+	if (device_manager) {
+		device_manager->save_flash_config();
+	}
 
 	return success;
 
@@ -360,7 +362,9 @@ bool Loom_MaxSub::goto_client_mode(const char* ssid, const char* pass)
 	UDP_Inst = m_internet->open_socket(UDP_port);
 	
 	// Save config
-	device_manager->save_flash_config();
+	if (device_manager) {
+		device_manager->save_flash_config();
+	}
 
 	return success;
 }
