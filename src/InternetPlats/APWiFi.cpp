@@ -52,9 +52,7 @@ Loom_APWiFi::Loom_APWiFi(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_APWiFi::add_config(JsonObject json)
 {
-	// JsonArray params = add_config_temp(json, module_name);
-	// params.add(SSID);
-	// params.add(pass);
+	JsonArray params = add_config_temp(json, module_name);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
