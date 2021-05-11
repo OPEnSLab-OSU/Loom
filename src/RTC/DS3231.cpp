@@ -34,6 +34,14 @@ Loom_DS3231::Loom_DS3231(LoomManager* manager, JsonArrayConst p)
 	: Loom_DS3231(manager, (TimeZone)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_DS3231::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add((int)timezone);
+	params.add(use_utc_time);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 bool Loom_DS3231::_begin()
 {
 	return rtc_inst.begin();

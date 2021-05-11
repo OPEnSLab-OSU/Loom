@@ -51,10 +51,10 @@ Loom_Neopixel::Loom_Neopixel(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Neopixel::add_config(JsonObject json)
 {
-	// add_config_aux(json, module_name,
-	// 	module_name,
-	// 	pin_enabled[0], pin_enabled[1], pin_enabled[2]
-	// );
+	JsonArray params = add_config_temp(json, module_name);
+	for (auto i = 0; i < 3; i++) {
+		params.add(pin_enabled[i]);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -35,22 +35,8 @@ void LoomPublishPlat::second_stage_ctor()
 		return;
 	}
 
-	// check if internet platform exist
-	LoomInternetPlat* temp;
-	switch (internet_type) {
-		case LoomModule::Type::Ethernet:
-			temp = (LoomInternetPlat*)&(device_manager->Ethernet() );
-			break;
-		case LoomModule::Type::WiFi:
-			temp = (LoomInternetPlat*)&(device_manager->WiFi() );
-			break;
-		case LoomModule::Type::LTE:
-			temp = (LoomInternetPlat*)&(device_manager->LTE() );
-			break;
-		default:
-			temp = nullptr;
-	}
-
+	// check if internet platform exists
+	LoomInternetPlat* temp = (LoomInternetPlat*)device_manager->find_module_by_category(LoomModule::Category::InternetPlat);
 
 	print_module_label();
 	// if (temp->category() == LoomModule::Category::InternetPlat) {

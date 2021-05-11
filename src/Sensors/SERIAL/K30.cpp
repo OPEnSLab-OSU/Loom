@@ -30,7 +30,13 @@ Loom_K30::Loom_K30(LoomManager* manager, JsonArrayConst p)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_K30::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+    params.add(num_samples);
+}
 
+///////////////////////////////////////////////////////////////////////////////
 void Loom_K30::sendSensorRequest(byte request[7]) {
     
     if (sensor_serial == nullptr) {

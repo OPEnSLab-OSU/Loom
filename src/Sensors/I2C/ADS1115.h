@@ -41,8 +41,10 @@ protected:
 	// NOTE: There is an error in the adafruit driver, as the single-ended inputs return unsigned numbers
 	// all outputs in the ADS1115 are signed, so we use a signed number here.
 	// See: https://github.com/adafruit/Adafruit_ADS1X15/pull/9
-	int16_t				analog_reads[4];
-	int16_t				diff_reads[2];
+	int16_t		analog_reads[4];
+	int16_t		diff_reads[2];
+
+	uint32_t	gain;
 
 public:
 	enum class Gain : uint32_t {
@@ -95,7 +97,8 @@ public:
 /*@{*/ //======================================================================
 
 	void		measure() override;
-	void 		package(JsonObject json) override;
+	void		package(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

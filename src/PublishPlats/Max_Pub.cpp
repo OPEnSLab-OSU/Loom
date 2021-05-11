@@ -12,15 +12,23 @@
 #include "Max_Pub.h"
 #include "../SubscribePlats/Max_Sub.h"
 #include "../Manager.h"
+#include "../InternetPlats/InternetWiFi.h"
+#include "../InternetPlats/APWiFi.h"
+#include "Module_Factory.h"
 
+///////////////////////////////////////////////////////////////////////////////
+
+#define UDP_SEND_OFFSET 8000 ///< UDP sending port is this value + device instance number
 
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(
-		LoomManager* manager,
+		LoomManager* 			manager,
 		const LoomModule::Type	internet_type
-	)   
-	: LoomPublishPlat(manager, "MaxPub", Type::MaxPub, internet_type )
-	, remoteIP({192,168,1,255})
+	)
+	: LoomPublishPlat(manager, "MaxPub", Type::MaxPub, internet_type)
+	// , remoteIP({192,168,1,255})
+	// , remoteIP({10,0,0,255})
+	, remoteIP({255,255,255,255})
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -31,8 +39,9 @@ void Loom_MaxPub::second_stage_ctor()
 	UDP_port = UDP_SEND_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
 
 	// Get new UDP pointer	
-	if (m_internet != nullptr) {
+	if (m_internet) {
 		UDP_Inst = m_internet->open_socket(UDP_port);
+		update_remote_ip();
 	} else {
 		print_module_label();
 		LPrintln("No internet platform, could not get UDP object");
@@ -42,6 +51,13 @@ void Loom_MaxPub::second_stage_ctor()
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MaxPub::Loom_MaxPub(LoomManager* manager, JsonArrayConst p)
 	: Loom_MaxPub(manager, (LoomModule::Type)(int)p[0] ) {}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_MaxPub::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add((int)internet_type);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MaxPub::print_config() const
@@ -81,6 +97,7 @@ bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat
 	UDP_Inst->beginPacket(remoteIP, UDP_port);
 	serializeJson(json, (*UDP_Inst) );
 	UDP_Inst->endPacket(); // Mark the end of the OSC Packet
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -116,6 +133,36 @@ bool Loom_MaxPub::dispatch(JsonObject json)
 		case 's': set_ip(); return true;
 	}
 	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_MaxPub::set_internet_plat(LoomInternetPlat* plat)
+{
+	m_internet = plat;
+	if (m_internet) {
+		set_port(UDP_port);
+		update_remote_ip();
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool Loom_MaxPub::update_remote_ip()
+{
+	if (!m_internet) return false;
+
+	IPAddress ip;
+	if (m_internet->get_module_type() == LoomModule::Type::WiFi) {
+		ip = ((Loom_WiFi*)m_internet)->get_ip();
+	} else if (m_internet->get_module_type() == LoomModule::Type::APWiFi) {
+		ip = ((Loom_APWiFi*)m_internet)->get_ip();
+	} else {
+		return false;
+	}
+
+	remoteIP = IPAddress(ip[0], ip[1], ip[2], 255);
+	print_module_label();
+	LPrintln("Set destination IP to :", remoteIP);
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

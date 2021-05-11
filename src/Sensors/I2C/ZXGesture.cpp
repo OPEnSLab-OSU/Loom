@@ -57,6 +57,15 @@ Loom_ZXGesture::Loom_ZXGesture(LoomManager* manager, JsonArrayConst p)
 	: Loom_ZXGesture(manager, p[0], p[1], (Mode)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_ZXGesture::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+	params.add((int)mode);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_ZXGesture::print_config() const
 {
 	LoomI2CSensor::print_config();

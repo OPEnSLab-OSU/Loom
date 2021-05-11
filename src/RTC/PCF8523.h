@@ -64,6 +64,7 @@ public:
 	DateTime	now() const override { return rtc_inst.now(); }
 	void		set_alarm(DateTime time) override;
 	void		clear_alarms() override { rtc_inst.clear_rtc_interrupt_flags(); }
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION

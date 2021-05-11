@@ -79,6 +79,13 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(LoomManager* manager, JsonArrayCo
 	: Loom_Interrupt_Manager(manager, nullptr ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_Interrupt_Manager::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(0);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Interrupt_Manager::print_config() const
 {
 	LoomModule::print_config();

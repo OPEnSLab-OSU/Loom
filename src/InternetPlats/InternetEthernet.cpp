@@ -47,6 +47,20 @@ Loom_Ethernet::Loom_Ethernet(LoomManager* manager, JsonArrayConst p)
 	: Loom_Ethernet(manager, EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_Ethernet::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	JsonArray mac = params.createNestedArray();
+	for (auto i = 0; i < 6; i++) {
+		mac.add(m_mac[i]);
+	}
+	JsonArray ip = params.createNestedArray();
+	for (auto i = 0; i < 4; i++) {
+		ip.add(m_ip[i]);
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_Ethernet::print_config() const
 {
 	LoomInternetPlat::print_config();

@@ -14,9 +14,6 @@
 #include "SubscribePlat.h"
 
 
-#define UDP_RECEIVE_OFFSET 9000		///< UDP receiving port is this value + device instance number
-
-
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Module for receiving data from Max
@@ -29,6 +26,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Loom_MaxSub : public LoomSubscribePlat 
 {
+public:
+//=============================================================================
+///@name	TYPES
+/*@{*/ //======================================================================
+
+	enum class WiFiMode {
+		AP, CLIENT, INVALID
+	};
 
 protected:
 	
@@ -36,6 +41,8 @@ protected:
 	bool		auto_dispatch;			///< True to immediately call LoomManager::dispatch() when packet received
 
 	LoomInternetPlat::UDPPtr UDP_Inst;	///< Pointer to UDP object
+
+	WiFiMode	wifi_mode;				///< WiFi Mode
 
 public:
 
@@ -50,7 +57,7 @@ public:
 	Loom_MaxSub(
 		LoomManager* manager,
 		const LoomModule::Type	internet_type,
-		const bool				auto_dispatch	
+		const bool				auto_dispatch	= true
 	); 
 
 	/// Constructor that takes Json Array, extracts args
@@ -73,7 +80,18 @@ public:
 
 	bool		subscribe(JsonObject json) override;
 
-	using LoomSubscribePlat::subscribe;
+	using 		LoomSubscribePlat::subscribe;
+
+	/// Route commands
+	virtual bool dispatch(JsonObject json) override;
+
+	/// Go to Access Point WiFi mode
+	bool		goto_ap_mode();
+
+	/// Go to Client WiFi mode 
+	bool		goto_client_mode(const char* ssid, const char* pass);
+
+	void		add_config(JsonObject json) override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -92,6 +110,10 @@ public:
 	/// Get the last IP address received from
 	/// @return Last IP address
 	IPAddress	get_remote_IP() const { return (UDP_Inst) ? UDP_Inst->remoteIP() : IPAddress(0,0,0,0); }
+
+	/// Get which WiFi mode is being used
+	/// @return WiFi mode
+	WiFiMode	get_wifi_mode();
 
 //=============================================================================
 ///@name	SETTERS

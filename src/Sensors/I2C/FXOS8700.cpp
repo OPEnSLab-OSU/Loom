@@ -36,6 +36,14 @@ Loom_FXOS8700::Loom_FXOS8700(LoomManager* manager, JsonArrayConst p)
 	: Loom_FXOS8700(manager, EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_FXOS8700::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_FXOS8700::print_measurements() const
 {
 	print_module_label();

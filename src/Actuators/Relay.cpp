@@ -35,9 +35,8 @@ Loom_Relay::Loom_Relay(LoomManager* manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::add_config(JsonObject json)
 {
-	// add_config_aux(json, module_name,
-	// 	module_name, pin
-	// );
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(pin);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -79,8 +78,6 @@ bool Loom_Relay::dispatch(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_Relay::set(const bool state)
 {
-	LPrintln("In set");
-
 	on = state;
 	digitalWrite(pin, (on) ? HIGH : LOW);
 

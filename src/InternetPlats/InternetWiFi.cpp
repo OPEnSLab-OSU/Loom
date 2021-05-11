@@ -11,6 +11,10 @@
 #include "InternetWiFi.h"
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#define MAX_CONNECT_RETRIES 2
+
+///////////////////////////////////////////////////////////////////////////////
 Loom_WiFi::Loom_WiFi(
 		LoomManager* manager,
 		const char* 	ssid,
@@ -38,6 +42,14 @@ Loom_WiFi::Loom_WiFi(
 ///////////////////////////////////////////////////////////////////////////////
 Loom_WiFi::Loom_WiFi(LoomManager* manager, JsonArrayConst p)
 	: Loom_WiFi(manager, EXPAND_ARRAY(p, 2) ) {}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_WiFi::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(SSID);
+	params.add(pass);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_WiFi::connect()
@@ -70,9 +82,9 @@ void Loom_WiFi::connect()
 				LPrint("Status changed to: ", status, '\n');
 		}
 		delay(2000);
-	} while (status != WL_CONNECTED && attempt_count < 5);
+	} while (status != WL_CONNECTED && attempt_count < MAX_CONNECT_RETRIES);
 
-	if (attempt_count == 5) {
+	if (attempt_count == MAX_CONNECT_RETRIES) {
 		print_module_label();
 		LPrintln("Connection failed!");
 		return;
@@ -149,11 +161,15 @@ void Loom_WiFi::package(JsonObject json)
 	//JsonObject data = get_module_data_object(json, module_name);
 	auto ip = IPAddress(WiFi.localIP());
 	JsonArray tmp = json["id"].createNestedArray("ip");
-	tmp.add(ip[0]);
-	tmp.add(ip[1]);
-	tmp.add(ip[2]);
-	tmp.add(ip[3]);
-	//data["IP"] = WiFi.localIP();
+	for (auto i = 0; i < 4; i++) {
+		tmp.add(ip[i]);
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+IPAddress Loom_WiFi::get_ip()
+{
+	return IPAddress(::WiFi.localIP());
 }
 
 ///////////////////////////////////////////////////////////////////////////////

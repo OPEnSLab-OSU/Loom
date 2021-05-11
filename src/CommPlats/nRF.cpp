@@ -113,11 +113,14 @@ Loom_nRF::~Loom_nRF()
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_nRF::add_config(JsonObject json)
 {
-	// add_config_aux(json, module_name,
-	// 	module_name,
-	// 	max_message_len, address, data_rate, power_level,
-	// 	retry_count, retry_timeout, multicast_level	
-	// );
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(max_message_len);
+	params.add(address);
+	params.add(data_rate);
+	params.add(power_level);
+	params.add(retry_count);
+	params.add(retry_timeout);
+	params.add(multicast_level);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -31,7 +31,16 @@
 #include <SdFat.h>
 #include <algorithm>
 
+#if LOOM_FLASH_CONFIG == 1
+	#include <FlashStorage.h>
 
+	typedef struct {
+		bool is_valid;
+		char json[JSON_MAX_SIZE];
+	} FlashConfig_t;
+
+	FlashStorage(FlashConfig, FlashConfig_t);
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 const char* LoomManager::enum_device_type_string(const DeviceType t)
@@ -107,7 +116,6 @@ void LoomManager::begin_serial(const bool wait_for_monitor) const
 ///////////////////////////////////////////////////////////////////////////////
 void LoomManager::add_module(LoomModule* module)
 {
-
 	print_device_label();
 
 	if (module == nullptr) {
@@ -119,7 +127,7 @@ void LoomManager::add_module(LoomModule* module)
 		return;
 	}
 
-	LPrintln("Adding Module: ", ((LoomModule*)module)->get_module_name() );
+	LPrintln("Added module: ", module->get_module_name() );
 
 	modules.emplace_back(module);
 	module->link_device_manager(this);
@@ -410,16 +418,20 @@ void LoomManager::power_down()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomManager::get_config()
+JsonObject LoomManager::get_config()
 {
 	doc.clear();
 	doc["type"] = "config";
 	JsonObject json = doc.as<JsonObject>();
 
 	// Add general device identification
-	JsonObject general_info 	= json.createNestedObject("general");
-	general_info["name"]		= device_name;
-	general_info["instance"]	= instance;
+	JsonObject general_info = json.createNestedObject("general");
+	general_info["name"] = device_name;
+	general_info["instance"] = instance;
+	general_info["interval"] = interval;
+	general_info["device_type"] = (int)device_type;
+	general_info["print_verbosity"] = (int)print_verbosity;
+	general_info["package_verbosity"] = (int)package_verbosity;
 
 	// Start array for modules to add config objects to
 	JsonArray components = json.createNestedArray("components");
@@ -429,7 +441,96 @@ void LoomManager::get_config()
 			((LoomModule*)module)->add_config(json);
 		}
 	}
+
+	return json;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::save_flash_config()
+{
+	#if LOOM_FLASH_CONFIG == 1
+
+		// Query modules to build current configuration
+		get_config();
+
+		print_device_label();
+		LPrintln("Json Config Size: ", measureJson(doc));
+		if (measureJson(doc) > JSON_MAX_SIZE) {
+			print_device_label();
+			LPrintln("Json Config too large to save to flash");
+			return false;
+		}
+
+		// Serialize Json config to variable to save
+		FlashConfig_t to_save;
+		to_save.is_valid = true;
+		serializeJson(doc, to_save.json);
+
+		// Save config
+		FlashConfig.write(to_save);
+
+		return true;
+
+	#else
+
+		LPrintln("! Flash Config Disabled - Enable via #define in Manager.h");
+		return false;
+
+	#endif // of if LOOM_FLASH_CONFIG == 1
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::load_flash_config()
+{
+	#if LOOM_FLASH_CONFIG == 1
+
+		// Try to read config from flash
+		FlashConfig_t saved = FlashConfig.read();
+
+		// Check if read data is a configuration (won't be the first run after flashing the board) 
+		if (saved.is_valid) {
+			print_device_label();
+			LPrintln("Saved flash config found");
+
+			parse_config(saved.json);
+			return true;
+		} else {
+			print_device_label();
+			LPrintln("No saved flash config found");
+			return false;
+		}
+
+	#else
+
+		LPrintln("! Flash Config Disabled - Enable via #define in Manager.h");
+		return false;
+
+	#endif // of if LOOM_FLASH_CONFIG == 1
+}
+
+///////////////////////////////////////////////////////////////////////////////
+uint8_t LoomManager::load_persistent_config(const char* config_json_fallback)
+{
+	#if LOOM_FLASH_CONFIG == 1
+		bool found_flash_config = load_flash_config();
+		if (found_flash_config) {
+			return 1;
+		}
+	#else
+		LPrintln("! Flash Config Disabled - Enable via #define in Manager.h");
+	#endif // of if LOOM_FLASH_CONFIG == 1
+
+	print_device_label();
+	LPrintln("Using hardcoded json from config.h instead");
+	if (parse_config(config_json_fallback)) {
+		return 2;
+	}
+	
+	print_device_label();
+	LPrintln("No valid configuration available");
+	return -1;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 LoomModule*	LoomManager::find_module(const LoomModule::Type type, const uint8_t idx) const
@@ -611,13 +712,6 @@ bool LoomManager::parse_config_json(JsonObject config)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////
 bool LoomManager::parse_config_serial()
 {
 	flash_LED(4, 200, 100, true);
@@ -675,3 +769,41 @@ bool LoomManager::check_serial_for_config()
 	}
 	return false;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+LoomModule* LoomManager::get_by_name(const char* name) const
+{
+	for (auto module : modules) {
+		if (strcmp(module->get_module_name(), name) == 0) {
+			return module;
+		}
+	}
+	return nullptr;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+bool LoomManager::remove_module(const LoomModule::Type type, const uint8_t idx)
+{
+	print_device_label();
+	uint8_t current = 0;
+
+	for (auto it = modules.begin(); it != modules.end(); it++) {	
+		auto module = *it;
+
+		if (module->get_module_type() == type) {
+			if (current == idx) {
+				LPrintln("Removing : ", module->get_module_name());
+				delete module;
+				modules.erase(it);
+				return true;
+			} else {
+				current++;
+			}
+		}
+	}
+
+	LPrintln("No module found to remove");
+	return false; // module not found
+}
+
+///////////////////////////////////////////////////////////////////////////////

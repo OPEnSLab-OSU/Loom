@@ -63,6 +63,13 @@ void LoomNTPSync::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void LoomNTPSync::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(m_sync_interval);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void LoomNTPSync::print_config() const
 {
 	print_module_label();

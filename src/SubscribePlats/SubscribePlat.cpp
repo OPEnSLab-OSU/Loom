@@ -14,7 +14,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 LoomSubscribePlat::LoomSubscribePlat(	
 		LoomManager* 			manager,
-		const char*							module_name,
+		const char*				module_name,
 		const LoomModule::Type	module_type,
 		const LoomModule::Type	internet_type
 	) 
@@ -33,7 +33,8 @@ void LoomSubscribePlat::second_stage_ctor()
 		return; 
 	}
 
-	LoomInternetPlat* temp = (LoomInternetPlat*)device_manager->find_module(internet_type);
+	// check if internet platform exists
+	LoomInternetPlat* temp = (LoomInternetPlat*)device_manager->find_module_by_category(LoomModule::Category::InternetPlat);
 
 	print_module_label();
 	if (temp != nullptr && temp->get_module_type() != LoomModule::Type::Unknown) {
@@ -48,7 +49,6 @@ void LoomSubscribePlat::second_stage_ctor()
 	// made it here, guess we're good to go!
 	print_module_label();
 	LPrint("Ready\n");
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

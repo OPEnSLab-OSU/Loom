@@ -74,6 +74,7 @@ const byte i2c_address		= 0x1D,
 
 	void		measure() override;
 	void		package(JsonObject json) override;
+	void		add_config(JsonObject json) override;
 
 	// void		enable_interrupts(bool enable = true);
 	// void 		set_transient_int_threshold(uint8_t range);

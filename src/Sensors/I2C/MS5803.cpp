@@ -11,17 +11,6 @@
 #include "MS5803.h"
 
 
-// #include <setjmp.h>     /* jmp_buf, setjmp, longjmp */
-// #include <RTCCounter.h>
-
-// jmp_buf env;
-// void escape() {
-// 	Serial.println("escape");
-// 	delay(50);
-// 	longjmp(env,101);
-// }
-
-
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(
 LoomManager* manager,
@@ -72,6 +61,14 @@ const byte i2c_address,
 ///////////////////////////////////////////////////////////////////////////////
 Loom_MS5803::Loom_MS5803(LoomManager* manager, JsonArrayConst p)
 	: Loom_MS5803(manager, EXPAND_ARRAY(p, 2) ) {}
+
+///////////////////////////////////////////////////////////////////////////////
+void Loom_MS5803::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_MS5803::print_measurements() const

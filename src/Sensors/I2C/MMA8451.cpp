@@ -39,6 +39,15 @@ Loom_MMA8451::Loom_MMA8451(LoomManager* manager, JsonArrayConst p)
 	: Loom_MMA8451(manager, p[0], p[1], (mma8451_range_t)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_MMA8451::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+	params.add((int)range);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_MMA8451::print_config() const
 {
 	LoomI2CSensor::print_config();

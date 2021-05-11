@@ -70,10 +70,12 @@ Loom_LoRa::Loom_LoRa(LoomManager* device_manager, JsonArrayConst p)
 ///////////////////////////////////////////////////////////////////////////////
 void Loom_LoRa::add_config(JsonObject json)
 {
-	// add_config_aux(json, module_name,
-	// 	module_name, 
-	// 	max_message_len, address, power_level, retry_count, retry_timeout
-	// );
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(max_message_len);
+	params.add(address);
+	params.add(power_level);
+	params.add(retry_count);
+	params.add(retry_timeout);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

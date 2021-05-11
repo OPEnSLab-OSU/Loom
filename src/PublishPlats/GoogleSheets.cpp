@@ -39,6 +39,17 @@ Loom_GoogleSheets::Loom_GoogleSheets(LoomManager* manager, JsonArrayConst p)
 	: Loom_GoogleSheets(manager, p[0], (LoomModule::Type)(int)p[1], p[2], p[3], p[4], p[5] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_GoogleSheets::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(module_name);
+	params.add(m_script_url);
+	params.add(m_sheet_id);
+	params.add(tab_matches_dev_id);
+	params.add(m_tab_id);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_GoogleSheets::print_config() const
 {
 	LoomPublishPlat::print_config();

@@ -15,6 +15,7 @@
 
 #include <ArduinoJson.h>
 
+
 // Need to undef max and min for vector to work
 #undef max
 #undef min
@@ -111,13 +112,16 @@ class LoomTempSync;
 
 class FactoryBase;
 
-
+#define LOOM_FLASH_CONFIG 1		///< Whether or not to enable saving configs to flash, 
+								///< disable if not necessary to preserve flash memory
 
 #define SERIAL_BAUD		115200	///< Serial Baud Rate
 #define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
 #define SD_CS			10		///< SD chip select used in parse_config_SD().
 								///< You can still instantiate a Loom_SD module with a different chip select
 
+
+#define JSON_MAX_SIZE	2000	///< Define the number of bytes allocated for Json data
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -166,9 +170,9 @@ protected:
 	Verbosity	print_verbosity;		///< Print detail verbosity
 	Verbosity	package_verbosity;		///< Package detail verbosity
 
-	StaticJsonDocument<2000> doc;		///< Json data
-
 	uint		packet_number = 1;		///< Packet number, incremented each time package is called
+
+	StaticJsonDocument<JSON_MAX_SIZE> doc;	///< Json data
 
 public:
 
@@ -240,7 +244,7 @@ public:
 
 	/// Get complete configuration of the device.
 	/// Generally used to save configuration to SD
-	void		get_config();
+	JsonObject	get_config();
 
 	/// Measure data of all managed sensors
 	void		measure();
@@ -353,6 +357,27 @@ public:
 	/// Determine if the manager has a module of the specified type
 	///	@param[in]	type	Module type to check for
 	bool		has_module(const LoomModule::Type type) const;
+
+
+	// The following 3 methods only use flash memory if LOOM_FLASH_CONFIG is enabled via #define near the top of this file
+	// They are still callable without LOOM_FLASH_CONFIG to avoid having to 
+	// comment them out when developing / flashing the Feather frequently
+	// If LOOM_FLASH_CONFIG is disabled:
+	//  - save_flash_config does nothing 
+	//  - load_flash_config does nothing 
+	//  - load_persistent_config will still use LCONFIG if available
+
+	/// Save current configuration to flash
+	/// @return True if save successul, false otherwise
+	bool		save_flash_config();
+
+	/// Load configuration from flash
+	/// @return True if configuration found, false otherwise
+	bool		load_flash_config();
+
+	///	Try to load configuration from flash if available, else try to use LCONFIG
+	/// @return 1 if config loaded from flash, 2 if LCONFIG used, -1 if no config available
+	uint8_t		load_persistent_config(const char* config_json_fallback);
 
 
 //=============================================================================
@@ -468,7 +493,11 @@ public:
 
 	/// Auxiliary function to search a list of modules for a module of specified category
 	/// @param[in]	category	Category to search for
-	LoomModule*	find_module_by_category(const LoomModule::Category category, const uint8_t idx) const;
+	LoomModule*	find_module_by_category(const LoomModule::Category category, const uint8_t idx=0) const;
+
+	/// Function to search list of modules for a module of specified type and remove it
+	/// @param[in]	type	Type to search for
+	bool		remove_module(const LoomModule::Type type, const uint8_t idx=0);
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -548,6 +577,8 @@ public:
 
     //SERIAL
     Loom_K30&           K30(const uint8_t idx = 0);
+
+	LoomModule* get_by_name(const char* name) const;
 
 protected:
 

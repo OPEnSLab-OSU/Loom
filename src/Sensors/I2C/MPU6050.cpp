@@ -40,6 +40,15 @@ Loom_MPU6050::Loom_MPU6050(LoomManager* manager, JsonArrayConst p)
 	: Loom_MPU6050(manager, EXPAND_ARRAY(p, 3) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_MPU6050::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add(i2c_address);
+	params.add(port_num);
+	params.add(calibrate_on_startup);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Loom_MPU6050::print_state() const
 {
 	LoomI2CSensor::print_state();

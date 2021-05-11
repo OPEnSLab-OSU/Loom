@@ -86,7 +86,6 @@ Loom_Analog::Loom_Analog(LoomManager* manager, JsonArrayConst p)
 void Loom_Analog::add_config(JsonObject json)
 {
 	JsonArray params = add_config_temp(json, module_name);
-	params.add(module_name);
 	params.add(num_samples);
 	params.add(read_resolution);
 	for (auto i = 0; i < 6; i++) {

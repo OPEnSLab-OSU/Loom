@@ -29,6 +29,14 @@ Loom_PCF8523::Loom_PCF8523(LoomManager* manager, JsonArrayConst p)
 	: Loom_PCF8523(manager, (TimeZone)(int)p[0], p[1] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
+void Loom_PCF8523::add_config(JsonObject json)
+{
+	JsonArray params = add_config_temp(json, module_name);
+	params.add((int)timezone);
+	params.add(use_utc_time);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 bool Loom_PCF8523::_begin()
 {
 	rtc_inst.begin();
