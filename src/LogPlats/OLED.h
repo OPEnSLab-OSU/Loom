@@ -80,7 +80,7 @@ public:
 	/// @param[in]	display_format			Set(Format) | <A0> | {0("4 pairs"), 1("8 pairs"), 2("Scrolling")} | How to display the key value pairs of a bundle
 	/// @param[in]	scroll_duration			Int | <6000> | [500-30000] | The time (ms) to complete full scroll cycle if display_format is SCROLL
 	/// @param[in]	freeze_pin				Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to pause the display
-	/// @param[in]	freeze_behavior			Set(FreezeType) | <2> | {O("Disable"), 1("Pause Data"), 2("Pause Data and Scroll")} | How freezing the display should behave
+	/// @param[in]	freeze_behavior			Set(FreezeType) | <2> | {0("Disable"), 1("Pause Data"), 2("Pause Data and Scroll")} | How freezing the display should behave
 	OLED(
 			const bool			enable_rate_filter		= true,
 			const uint16_t		min_filter_delay		= 300,
