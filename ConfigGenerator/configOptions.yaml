@@ -1,0 +1,1899 @@
+general:
+- parameter: device_name
+  details:
+    type: String
+    default: Default
+    range: null
+    description: Manager name
+- parameter: instance
+  details:
+    type: Int
+    default: 1
+    range:
+    - 0
+    - 99
+    description: Device instance number on its subnet
+- parameter: device_type
+  details:
+    type: Set(DeviceType)
+    default: 1
+    set:
+    - 0
+    - 1
+    - 2
+    description: Device's topological type
+- parameter: print_verbosity
+  details:
+    type: Set(Verbosity)
+    default: 1
+    set:
+    - 0
+    - 1
+    - 2
+    description: How detailed prints to the Serial Monitor should be
+- parameter: package_verbosity
+  details:
+    type: Set(Verbosity)
+    default: 2
+    set:
+    - 0
+    - 1
+    - 2
+    description: How detailed to package data
+- parameter: interval
+  details:
+    type: Int
+    default: 1
+    range:
+    - 0
+    - 60000
+    description: Default milliseconds to pause
+components:
+- module: Multiplexer
+  category: Module
+  description: Multiplexer manager for interfacing with multiple I2C sensors
+  resources:
+    Documentation: https://openslab-osu.github.io/Loom/html/class_loom___multiplexer.html
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 113
+      set:
+      - 113
+      description: I2C address
+  - parameter: num_ports
+    details:
+      type: Int
+      default: 8
+      range:
+      - 1
+      - 8
+      description: Number of ports available
+  - parameter: dynamic_list
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Whether or not to automatically check for new sensors
+  - parameter: update_period
+    details:
+      type: Int
+      default: 5000
+      range:
+      - 500
+      - 30000
+      description: The time between sensor list updates (if dynamic_list enabled)
+- module: AS7263
+  category: I2CSensor
+  description: AS7263 Near Infrared spectrum spectral sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___a_s7263.html
+    'Product Page: SparkFun Spectral Sensor Breakout - AS7263 NIR': https://www.sparkfun.com/products/14351
+    'Dependency: Sparkfun AS726X Arduino Library': https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X/tree/master/Libraries/Arduino
+    'Hookup Guide: AS726X NIR/VIS Spectral Sensor': https://learn.sparkfun.com/tutorials/as726x-nirvi
+    Hardware GitHub: https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X
+    'Datasheet: AS7263': https://cdn.sparkfun.com/assets/1/b/7/3/b/AS7263.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7263-spectral-sensor-near-infrared
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 73
+      set:
+      - 73
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+  - parameter: use_bulb
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Whether or not to use bulb
+  - parameter: gain
+    details:
+      type: Set(Int)
+      default: 1
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      description: Gain level
+  - parameter: mode
+    details:
+      type: Set(Int)
+      default: 3
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      description: Read mode
+  - parameter: integration_time
+    details:
+      type: Int
+      default: 50
+      range:
+      - 0
+      - 255
+      description: Integration time (time will be 2.8ms * [integration value])
+- module: ZXGesture
+  category: I2CSensor
+  description: "ZXGesture position / gesture sensor module.\n@note\tOnly position\
+    \ or gestures can be measured at a given time, not both."
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___z_x_gesture.html
+    'Product Page: Sparkfun ZX Distance and Gesture Sensor': https://www.sparkfun.com/products/13162
+    'Dependency: SparkFun ZX Distance and Gesture Sensor Arduino Library': https://github.com/sparkfun/SparkFun_ZX_Distance_and_Gesture_Sensor_Arduino_Library
+    'Datasheet: ZX SparkFun Sensor Datasheet': https://cdn.sparkfun.com/assets/learn_tutorials/3/4/5/XYZ_Interactive_Technologies_-_ZX_SparkFun_Sensor_Datasheet.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#zx-distance-and-gesture-sensor
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 16
+      set:
+      - 16
+      - 17
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+  - parameter: mode
+    details:
+      type: Set(ZXMode)
+      default: 0
+      set:
+      - 0
+      - 1
+      description: Gain level
+- module: MMA8451
+  category: I2CSensor
+  description: MMA8451 accelerometer sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___m_m_a8451.html
+    "Product Page: Adafruit Triple-Axis Accelerometer - \xB12/4/8g @ 14-bit - MMA8451": https://www.adafruit.com/product/2019
+    'Dependency: Adafruit_MMA8451_Library': https://github.com/adafruit/Adafruit_MMA8451_Library
+    'Dependency: Adafruit_Sensor': https://github.com/adafruit/Adafruit_Sensor
+    'Datasheet: Xtrinsic MMA8451Q 3-Axis, 14-bit/8-bit Digital Accelerometer': https://cdn-shop.adafruit.com/datasheets/MMA8451Q-1.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mma8451-triple-axis-accelerometer
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 29
+      set:
+      - 28
+      - 29
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+  - parameter: range
+    details:
+      type: Set()
+      default: MMA8451
+      set: null
+      description: MMA8451 module name
+- module: ADS1115
+  category: I2CSensor
+  description: ADS1115 External ADC sensor module.
+  resources:
+    Module Documentation: TODO
+    'Product Page: ADS1115 16-Bit ADC': https://www.adafruit.com/product/1085
+    'Dependency: Adafruit ADS1X15 Arduino Library': https://github.com/adafruit/Adafruit_ADS1X15
+    'Hookup Guide: ADS1115 Assembly and Wiring': https://learn.adafruit.com/adafruit-4-channel-adc-breakouts/assembly-and-wiring
+    'Datasheet: ADS1115': https://cdn-shop.adafruit.com/datasheets/ads1115.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ads1115-16-bit-adc
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 16
+      set:
+      - 16
+      - 17
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+  - parameter: analog_0_enabled
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable A0 for reading
+  - parameter: analog_1_enabled
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable A1 for reading
+  - parameter: analog_2_enabled
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable A2 for reading
+  - parameter: analog_3_enabled
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable A3 for reading
+  - parameter: diff_0_enabled
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable a differential measurement between A0 and A1
+  - parameter: diff_1_enabled
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable a differential measurement between A2 and A3
+  - parameter: Fain
+    details:
+      type: Set(Gain)
+      default: 0
+      set:
+      - 0
+      - 512
+      - 1024
+      - 1536
+      - 2048
+      - 2560
+      description: The gain setting for the ADS1115. Please do not change this number
+        unless you are familiar with the ADS1115, as an incorrect setting will destroy
+        the ADC!.
+- module: LIS3DH
+  category: I2CSensor
+  description: "LIS3DH Accelerometer sensor module.\n@note\tNeeds more work on properly\
+    \ implementing support for the sensors interrupts "
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___l_i_s3_d_h.html
+    'Product Page: SparkFun Triple Axis Accelerometer Breakout - LIS3DH': https://www.sparkfun.com/products/13963
+    'Dependency: Sparkfun LIS3DH Arduino Library': https://github.com/sparkfun/SparkFun_LIS3DH_Arduino_Library
+    'Hookup Guide: LIS3DH': https://learn.sparkfun.com/tutorials/lis3dh-hookup-guide
+    Hardware GitHub: https://github.com/sparkfun/LIS3DH_Breakout
+    'Datasheet: LIS3DH': https://cdn.sparkfun.com/assets/b/c/1/3/a/CD00274221.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#lis3dh-accelerometer
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 25
+      set:
+      - 25
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+- module: MPU6050
+  category: I2CSensor
+  description: "MPU6050 6 axis gyroscope and accelerometer  sensor module.\n@attention\t\
+    Need to modify line 7 of MPU6050_tockn.h to have I2C address of 0x69"
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___m_p_u6050.html
+    "Product Page: Amazon \u2013Gy-521 MPU-6050 MPU6050 Module 3 Axis Analog Gyro Sensors+ 3 Axis Accelerometer Module": https://www.amazon.com/MPU-6050-MPU6050-Accelerometer-Gyroscope-Converter/dp/B008BOPN40
+    'Dependency: MPU6050_tockn': https://github.com/tockn/MPU6050_tockn
+    'Previous Dependency: MPU6050': https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050
+    'Datasheet: MPU6050': https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mpu_inst-accelerometer--gyroscope
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 105
+      set:
+      - 104
+      - 105
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+  - parameter: calibrate
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Whether or not to calibrate at start
+- module: MB1232
+  category: I2CSensor
+  description: MB1232 Sonar sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___m_b1232.html
+    'Product Page: MB1232 I2CXL-MaxSonar-EZ3': https://www.maxbotix.com/Ultrasonic_Sensors/MB1232.htm
+    'Datasheet: I2CXL-MaxSonar- EZTM Series': https://www.maxbotix.com/documents/I2CXL-MaxSonar-EZ_Datasheet.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#mb1232-sonar
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 112
+      set:
+      - 112
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+- module: STEMMA
+  category: I2CSensor
+  description: ''
+  resources: {}
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 54
+      set:
+      - 54
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+- module: AS7265X
+  category: I2CSensor
+  description: AS72625X 3 Spectrum (Visible, near IR, UV) spectral sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___a_s7265_x.html
+    'Product Page: SparkFun Triad Spectroscopy Sensor - AS7265x': https://www.sparkfun.com/products/15050
+    'Dependency: SparkFun_AS7265x_Arduino_Library': https://github.com/sparkfun/SparkFun_AS7265x_Arduino_Library
+    'Datasheet: AS72625X': https://cdn.sparkfun.com/assets/c/2/9/0/a/AS7265x_Datasheet.pdf
+    'Hookup Guide: Spectral Triad (AS7265x)': https://learn.sparkfun.com/tutorials/spectral-triad-as7265x-hookup-guide
+    Hardware GitHub: https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS7265x
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7265x-spectral-sensor-triad-visible-near-infrared-ultraviolet
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 73
+      set:
+      - 73
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+  - parameter: use_bulb
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Whether or not to use bulb
+  - parameter: gain
+    details:
+      type: Set(Int)
+      default: 1
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      description: Gain level
+  - parameter: mode
+    details:
+      type: Set(Int)
+      default: 3
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      description: Read mode
+  - parameter: integration_time
+    details:
+      type: Int
+      default: 50
+      range:
+      - 0
+      - 255
+      description: Integration time (time will be 2.8ms * [integration value])
+- module: TSL2561
+  category: I2CSensor
+  description: TSL2561 Luminosity sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___t_s_l2561.html
+    'Product Page: Adafruit TSL2561 Digital Luminosity/Lux/Light Sensor Breakout': https://www.adafruit.com/product/439
+    'Dependency: Adafruit_TSL2561': https://github.com/adafruit/Adafruit_TSL2561
+    'Dependency: Adafruit_Sensor': https://github.com/adafruit/Adafruit_Sensor
+    'Datasheet: Light-To-Digital Converter': https://cdn-shop.adafruit.com/datasheets/TSL2561.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#tsl2561-luminosity-sensor
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 57
+      set:
+      - 41
+      - 57
+      - 73
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+  - parameter: gain
+    details:
+      type: Set(Int)
+      default: 1
+      set:
+      - 1
+      - 16
+      description: Gain level
+  - parameter: resolution
+    details:
+      type: Set(Int)
+      default: 3
+      set:
+      - 1
+      - 2
+      - 3
+      description: Resolution
+- module: FXOS8700
+  category: I2CSensor
+  description: FXOS8700 3-Axis Acceleromter/Magnetometer sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___f_x_o_s8700.html
+    'Product Page: Adafruit Precision NXP 9-DOF Breakout Board - FXOS8700 + FXAS21002': https://www.adafruit.com/product/3463
+    'Dependency: Adafruit_FXOS8700': https://github.com/adafruit/Adafruit_FXOS8700
+    'Dependency: Adafruit_AHRS': https://github.com/adafruit/Adafruit_AHRS
+    'Dependency: Adafruit_Sensor': https://github.com/adafruit/Adafruit_Sensor
+    'Datasheet: FXOS8700CQ': https://cdn-learn.adafruit.com/assets/assets/000/043/458/original/FXOS8700CQ.pdf?1499125614
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#fxos8700-3-axis-accelerometermagentometer
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 31
+      set:
+      - 28
+      - 29
+      - 30
+      - 31
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+- module: TMP007
+  category: I2CSensor
+  description: TMP007 thermopile temperature sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___t_m_p007.html
+    'Product Page: Contact-less Infrared Thermopile Sensor Breakout - TMP007': https://www.adafruit.com/product/2023
+    'Dependency: Adafruit_TMP007_Library': https://github.com/adafruit/Adafruit_TMP007_Library
+    DataSheet: https://cdn-shop.adafruit.com/datasheets/tmp007.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#tmp007-contact-less-infrared-thermopile-sensor
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 64
+      set:
+      - 64
+      - 65
+      - 66
+      - 67
+      - 70
+      - 71
+      - 72
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+- module: MS5803
+  category: I2CSensor
+  description: "MS5803 Atmospheric Pressure / Temperature sensor module.\n@attention\t\
+    Library is modified to support different I2C addresses and will not \n\t\t\t\t\
+    compile with Loom without the change.\n\t\t\t\tThe modifed verision can be found\
+    \ in the [Loom_Auxiliary](https://github.com/OPEnSLab-OSU/Loom_Auxiliary/blob/master/Dependencies/Dependencies_Individual/MS5803_02.zip)\
+    \ \n\t\t\t\trepository"
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___m_s5803.html
+    'Product Page: MS580302BA01-00 Miniature Altimeter Module': https://www.digikey.com/product-detail/en/te-connectivity-measurement-specialties/MS580302BA01-00/223-1624-5-ND/5277629
+    'Dependency: MS5803_2': https://github.com/millerlp/MS5803_02
+    'Datasheet: MS5803-02BA': https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=MS5803-02BA&DocType=Data+Sheet&DocLang=English
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ms5803-atmospheric-pressure--temperature-sensor
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 118
+      set:
+      - 118
+      - 119
+      description: I2C address (0x76 if CSB (pin 3) is High, 0x77 if CSB is Low)
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+- module: FXAS21002
+  category: I2CSensor
+  description: FXAS21002 3-Axis Gyroscope sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___f_x_a_s21002.html
+    'Product Page: Adafruit Precision NXP 9-DOF Breakout Board - FXOS8700 + FXAS21002': https://www.adafruit.com/product/3463
+    'Dependency: Adafruit_FXAS21002C': https://github.com/adafruit/Adafruit_FXAS21002C
+    'Dependency: Adafruit_AHRS': https://github.com/adafruit/Adafruit_AHRS
+    'Dependency: Adafruit_Sensor': https://github.com/adafruit/Adafruit_Sensor
+    'Datasheet: 3-Axis Digital Angular Rate Gyroscope': https://cdn-learn.adafruit.com/assets/assets/000/040/671/original/FXAS21002.pdf?1491475056
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#fxas21002-3-axis-gyroscope
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 32
+      set:
+      - 32
+      - 33
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+- module: AS7262
+  category: I2CSensor
+  description: AS7262 Visible spectrum spectral sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___a_s7262.html
+    'Product Page: SparkFun Spectral Sensor Breakout - AS7262 Visible': https://www.sparkfun.com/products/14347
+    'Dependency: Sparkfun AS726X Arduino Library': https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X/tree/master/Libraries/Arduino
+    'Hookup Guide: AS726X NIR/VIS Spectral Sensor': https://learn.sparkfun.com/tutorials/as726x-nirvi
+    Hardware GitHub: https://github.com/sparkfun/Qwiic_Spectral_Sensor_AS726X
+    'Datasheet: AS7262': https://cdn.sparkfun.com/assets/f/b/c/c/f/AS7262.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7262-spectral-sensor-visible
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 73
+      set:
+      - 73
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+  - parameter: use_bulb
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Whether or not to use bulb
+  - parameter: gain
+    details:
+      type: Set(Int)
+      default: 1
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      description: Gain level
+  - parameter: mode
+    details:
+      type: Set(Int)
+      default: 3
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      description: Read mode
+  - parameter: integration_time
+    details:
+      type: Int
+      default: 50
+      range:
+      - 0
+      - 255
+      description: Integration time (time will be 2.8ms * [integration value])
+- module: TSL2591
+  category: I2CSensor
+  description: TSL2591 Lux sensor module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___t_s_l2591.html
+    'Product Page: Adafruit TSL2591 High Dynamic Range Digital Light Sensor': https://www.adafruit.com/product/1980
+    'Dependency: Adafruit_TSL2591_Library': https://github.com/adafruit/Adafruit_TSL2591_Library
+    'Dependency: Adafruit_Sensor': https://github.com/adafruit/Adafruit_Sensor
+    'Datasheet: TSL2591': https://cdn-shop.adafruit.com/datasheets/TSL25911_Datasheet_EN_v1.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#tsl2591-light-sensor
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 41
+      set:
+      - 41
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+  - parameter: gain_level
+    details:
+      type: Set(Int)
+      default: 1
+      set:
+      - 1
+      description: Gain level
+  - parameter: timing_level
+    details:
+      type: Set(Int)
+      default: 0
+      set:
+      - 0
+      description: Timing level
+- module: SHT31D
+  category: I2CSensor
+  description: SHT31D Temperature / Humidty sensor module
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___s_h_t31_d.html
+    'Product Page: Adafruit Sensirion SHT31-D - Temperature & Humidity Sensor': https://www.adafruit.com/product/2857
+    'Dependency: Adafruit_SHT31': https://github.com/adafruit/Adafruit_SHT31
+    'Datasheet: Datasheet SHT3x-DIS': https://cdn-shop.adafruit.com/product-files/2857/Sensirion_Humidity_SHT3x_Datasheet_digital-767294.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sht31-d-temperature--humidity
+  settings:
+  - parameter: i2c_address
+    details:
+      type: Set(Int)
+      default: 68
+      set:
+      - 68
+      - 69
+      description: I2C address
+  - parameter: mux_port
+    details:
+      type: Int
+      default: 255
+      range:
+      - 0
+      - 16
+      description: Port on multiplexer
+- module: MAX31856
+  category: SPISensor
+  description: MAX31856 thermocouple module. Measures temperature.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___m_a_x31856.html
+    'Product Page: Adafruit Universal Thermocouple Amplifier MAX31856 Breakout': https://www.adafruit.com/product/3263
+    'Dependency: Adafruit_MAX31856': https://github.com/adafruit/Adafruit_MAX31856
+  settings:
+  - parameter: module_name
+    details:
+      type: String
+      default: MAX31856
+      range: null
+      description: MAX31856 module name
+  - parameter: num_samples
+    details:
+      type: Set(Int)
+      default: 8
+      set:
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      description: How many samples to take and average
+  - parameter: CS_pin
+    details:
+      type: Set(Int)
+      default: 10
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used for chip select
+  - parameter: SPI_a
+    details:
+      type: Set(Int)
+      default: 10
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used for Software Serial a
+  - parameter: SPI_b
+    details:
+      type: Set(Int)
+      default: 11
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used for Software Serial b
+  - parameter: SPI_c
+    details:
+      type: Set(Int)
+      default: 12
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used for Software Serial c
+  - parameter: SPI_d
+    details:
+      type: Set(Int)
+      default: 13
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used for Software Serial d
+- module: MAX31855
+  category: SPISensor
+  description: MAX31855 thermocouple temperature module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___m_a_x31856.html
+    'Product Page: Thermocouple Amplifier MAX31855 breakout board': https://www.adafruit.com/product/269
+    'Dependency: Adafruit-MAX31855-library': https://github.com/adafruit/Adafruit-MAX31855-library
+  settings:
+  - parameter: module_name
+    details:
+      type: String
+      default: MAX31856
+      range: null
+      description: MAX31856 module name
+  - parameter: num_samples
+    details:
+      type: Set(Int)
+      default: 4
+      set:
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      description: How many samples to take and average
+  - parameter: CS_pin
+    details:
+      type: Set(Int)
+      default: 10
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used for chip select
+- module: Analog
+  category: Sensor
+  description: Analog pin manager module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___analog.html
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors
+  settings:
+  - parameter: num_samples
+    details:
+      type: Set(Int)
+      default: 8
+      set:
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      description: How many samples to take and average
+  - parameter: read_resolution
+    details:
+      type: Int
+      default: 12
+      range:
+      - 8
+      - 12
+      description: How many bits to read analog values at
+  - parameter: enableA0
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable pin A0 for managing
+  - parameter: enableA1
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable pin A1 for managing
+  - parameter: enableA2
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable pin A2 for managing
+  - parameter: enableA3
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable pin A3 for managing
+  - parameter: enableA4
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable pin A4 for managing
+  - parameter: enableA5
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable pin A5 for managing
+  - parameter: convertA0
+    details:
+      type: Set(Conversion)
+      default: 0
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      description: Conversion to apply to analog readings on pin A0
+  - parameter: convertA1
+    details:
+      type: Set(Conversion)
+      default: 0
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      description: Conversion to apply to analog readings on pin A1
+  - parameter: convertA2
+    details:
+      type: Set(Conversion)
+      default: 0
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      description: Conversion to apply to analog readings on pin A2
+  - parameter: convertA3
+    details:
+      type: Set(Conversion)
+      default: 0
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      description: Conversion to apply to analog readings on pin A3
+  - parameter: convertA4
+    details:
+      type: Set(Conversion)
+      default: 0
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      description: Conversion to apply to analog readings on pin A4
+  - parameter: convertA5
+    details:
+      type: Set(Conversion)
+      default: 0
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      description: Conversion to apply to analog readings on pin A5
+  - parameter: temperature
+    details:
+      type: float
+      default: 25.0
+      range: null
+      description: Temperature to using in conversions
+- module: Digital
+  category: Sensor
+  description: 'Digital pin manager module.
+
+    Available digital pins 5, 6, 9, 10, 11, 12, A0(14), A1(15), A2(16), A3(17), A4(18),
+    A5(19)'
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___digital.html
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#spi-sensors
+  settings:
+  - parameter: enable5
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable pin 5 for managing
+  - parameter: enable6
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Enable pin 6 for managing
+  - parameter: enable9
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin 9 for managing
+  - parameter: enable10
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin 10 for managing
+  - parameter: enable11
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin 11 for managing
+  - parameter: enable12
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin 12 for managing
+  - parameter: enableA0
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin A0 for managing
+  - parameter: enableA1
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin A1 for managing
+  - parameter: enableA2
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin A2 for managing
+  - parameter: enableA3
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin A3 for managing
+  - parameter: enableA4
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin A4 for managing
+  - parameter: enableA5
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Enable pin A5 for managing
+- module: Decagon5TM
+  category: SDI12Sensor
+  description: Decagon 5TM soil moisture sensor module. Incomplete.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___decagon5_t_m.html
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sdi-12-sensors
+  settings:
+  - parameter: num_samples
+    details:
+      type: Set(Int)
+      default: 8
+      set:
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      description: How many samples to take and average
+- module: DecagonGS3
+  category: SDI12Sensor
+  description: Decagon GS3 soil moisture sensor module. Incomplete.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___decagon_g_s3.html
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sdi-12-sensors
+  settings:
+  - parameter: num_samples
+    details:
+      type: Set(Int)
+      default: 8
+      set:
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      description: How many samples to take and average
+- module: nRF
+  category: CommPlat
+  description: Nordic Radio communication platform module
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom__n_r_f.html
+    'Dependency: RF24': https://github.com/nRF24/RF24
+    'Dependency: RF24Network': https://github.com/nRF24/RF24Network
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#nrf
+  settings:
+  - parameter: max_message_len
+    details:
+      type: Set(Int)
+      default: 120
+      set:
+      - 120
+      description: The maximum possible message length
+  - parameter: address
+    details:
+      type: Int
+      default: 1
+      range:
+      - 0
+      - 99
+      description: This device's nRF address
+  - parameter: data_rate
+    details:
+      type: Set(Int)
+      default: 0
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      description: Transmission data rate
+  - parameter: power_level
+    details:
+      type: Set(Int)
+      default: 0
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      description: Transmission ower level
+  - parameter: retry_count
+    details:
+      type: Int
+      default: 3
+      range:
+      - 0
+      - 15
+      description: Max number of transmission retries
+  - parameter: retry_timeout
+    details:
+      type: Int
+      default: 200
+      range:
+      - 20
+      - 500
+      description: Delay between retransmissions (ms)
+  - parameter: multicast_level
+    details:
+      type: Int
+      default: 1
+      range:
+      - 1
+      - 3
+      description: How many levels to propogate message through heirarchy
+- module: Bluetooth
+  category: CommPlat
+  description: 'Bluetooth communication platform module.
+
+    Needs more work for complete functionality.'
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___bluetooth.html
+    'Product Page: Adafruit Feather M0 Bluefruit LE': https://www.adafruit.com/product/2995
+    'Dependency: Adafruit_BluefruitLE_nRF51': https://github.com/adafruit/Adafruit_BluefruitLE_nRF51
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#bluetooth
+  settings: []
+- module: LoRa
+  category: CommPlat
+  description: LoRa communication platform module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___lo_ra.html
+    'Product Page: Adafruit Feather M0 LoRa': https://www.adafruit.com/product/3178
+    'Documentation: RadioHead Library': https://www.airspayce.com/mikem/arduino/RadioHead/index.html
+    'Dependency: RadioHead': https://github.com/adafruit/RadioHead
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#lora
+  settings:
+  - parameter: max_message_len
+    details:
+      type: Set(Int)
+      default: 255
+      set:
+      - 255
+      description: The maximum possible message length
+  - parameter: address
+    details:
+      type: Int
+      default: 1
+      range:
+      - 0
+      - 99
+      description: This device's LoRa address
+  - parameter: power_level
+    details:
+      type: Int
+      default: 23
+      range:
+      - 5
+      - 23
+      description: Transmission power level, low to high power
+  - parameter: retry_count
+    details:
+      type: Int
+      default: 3
+      range:
+      - 0
+      - 15
+      description: Max number of transmission retries
+  - parameter: retry_timeout
+    details:
+      type: Int
+      default: 200
+      range:
+      - 20
+      - 500
+      description: Delay between retransmissions (ms)
+- module: OLED
+  category: LogPlat
+  description: OLED logging platform module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___o_l_e_d.html
+    "Product Page: Adafruit Featherwing OLED \u2013 128x32": https://www.adafruit.com/product/2900
+    'Product Page: Adafruit Monochrome 128x32 I2C OLED': https://www.adafruit.com/product/2927
+    'Dependency: Adafruit_SSD1306': https://github.com/adafruit/Adafruit_SSD1306
+    'Dependency: Adafruit-GFX-Library': https://github.com/adafruit/Adafruit-GFX-Library
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#oled-display
+  settings:
+  - parameter: enable_rate_filter
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Whether or not to impose maximum update rate
+  - parameter: min_filter_delay
+    details:
+      type: Int
+      default: 300
+      range:
+      - 50
+      - 5000
+      description: Minimum update delay, if enable_rate_filter enabled
+  - parameter: type
+    details:
+      type: Set(Version)
+      default: 0
+      set:
+      - 0
+      - 1
+      description: Which version of the OLED is being used
+  - parameter: reset_pin
+    details:
+      type: Set(Int)
+      default: 14
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used for reseting. Only applies to breakout
+        version
+  - parameter: display_format
+    details:
+      type: Set(Format)
+      default: A0
+      set:
+      - 0
+      - 1
+      - 2
+      description: How to display the key value pairs of a bundle
+  - parameter: scroll_duration
+    details:
+      type: Int
+      default: 6000
+      range:
+      - 500
+      - 30000
+      description: The time (ms) to complete full scroll cycle if display_format is
+        SCROLL
+  - parameter: freeze_pin
+    details:
+      type: Set(Int)
+      default: 10
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used to pause the display
+  - parameter: freeze_behavior
+    details:
+      type: Set(FreezeType)
+      default: 2
+      set:
+      - 0
+      - 1
+      - 2
+      description: How freezing the display should behave
+- module: SD
+  category: LogPlat
+  description: SD logging platform module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___s_d.html
+    'Product Page: Adafruit Adalogger Featherwing': https://www.adafruit.com/product/2922
+    'Product Page: Adafruit SD Breakout': https://www.adafruit.com/product/254
+    'Dependency: SD': https://github.com/arduino-libraries/SD
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card
+  settings:
+  - parameter: enable_rate_filter
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Whether or not to impose maximum update rate
+  - parameter: min_filter_delay
+    details:
+      type: Int
+      default: 1000
+      range:
+      - 100
+      - 5000
+      description: Minimum update delay, if enable_rate_filter enabled
+  - parameter: chip_select
+    details:
+      type: Set(Int)
+      default: 10
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin to use for chip select
+  - parameter: default_file_base
+    details:
+      type: String
+      default: test
+      range: null
+      description: File to write to if none explicity provided (should be <= 6 characters,
+        don't add extension)
+  - parameter: number_files
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: True to number files with run number, false to not.
+- module: BatchSD
+  category: LogPlat
+  description: Batch SD logging platform module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___s_d.html
+    'Product Page: Adafruit Adalogger Featherwing': https://www.adafruit.com/product/2922
+    'Product Page: Adafruit SD Breakout': https://www.adafruit.com/product/254
+    'Dependency: SD': https://github.com/arduino-libraries/SD
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card
+  settings:
+  - parameter: enable_rate_filter
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Whether or not to impose maximum update rate
+  - parameter: min_filter_delay
+    details:
+      type: Int
+      default: 1000
+      range:
+      - 100
+      - 5000
+      description: Minimum update delay, if enable_rate_filter enabled
+  - parameter: chip_select
+    details:
+      type: Set(Int)
+      default: 10
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin to use for chip select
+- module: NTPSync
+  category: Module
+  description: "Glue code to synchronize an RTC using an InternetPlat. \nAlways synchronizes\
+    \ the RTC from InterruptManager::get_RTC_module().\n@note\tRequires a RTC and\
+    \ InternetPlat module to work."
+  resources:
+    Documentation: https://openslab-osu.github.io/Loom/html/class_loom_n_t_p_sync.html
+  settings:
+  - parameter: sync_interval_hours
+    details:
+      type: Int
+      default: 0
+      range:
+      - 0
+      - 999
+      description: What hourly period to sync the RTC, zero for once on startup.
+- module: MaxPub
+  category: PublishPlat
+  description: Module taking in and translating JSON into data understood by the Google
+    Sheets script API.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___max_pub.html
+    Max 8: https://cycling74.com
+    Loom Max Patches: https://github.com/OPEnSLab-OSU/Max-Loom2
+  settings: []
+- module: PCF8523
+  category: RTC
+  description: 'PCF8523 RTC module.
+
+    OPEnS Lab usually uses the PCF8523 on the Adafruit Adalogger Featherwing'
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___p_c_f8523.html
+    'Product Page: Adafruit Adalogger Featherwing - RTC + SD': https://www.adafruit.com/product/2922
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#adalogger--pcf8523-rtc
+  settings:
+  - parameter: timezone
+    details:
+      type: Set(TimeZone)
+      default: 11
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      description: Which timezone device is in
+  - parameter: use_utc_time
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: True for UTC time, false for local time
+- module: DS3231
+  category: RTC
+  description: DS3231 RTC module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___d_s3231.html
+    'Product Page: Adafruit DS3231 Precision RTC FeatherWing': https://www.adafruit.com/product/3028
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ds3231-rtc
+  settings:
+  - parameter: timezone
+    details:
+      type: Set(TimeZone)
+      default: 11
+      set:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      description: Which timezone device is in
+  - parameter: use_utc_time
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: True for UTC time, false for local time
+- module: MaxSub
+  category: SubscribePlat
+  description: Module for receiving data from Max
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___max_sub.html
+    Max 8: https://cycling74.com
+    Loom Max Patches: https://github.com/OPEnSLab-OSU/Max-Loom2
+  settings: []
+- module: Relay
+  category: Actuator
+  description: Relay actuator module
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___relay.html
+    'Product Page: Adafruit Latching Relay Featherwing': https://www.adafruit.com/product/3191
+    Relay Datasheet: https://cdn-shop.adafruit.com/product-files/3191/G5LE-14-DC3-Omron-datasheet-10841140.pdf
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#relay
+  settings:
+  - parameter: pin
+    details:
+      type: Set(Int)
+      default: 10
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used to control the relay
+- module: Neopixel
+  category: Actuator
+  description: Neopixel tri-color LED actuator module
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___neopixel.html
+    'Product Page: Adafruit Neopixel': https://www.adafruit.com/category/168
+    Dependency: https://github.com/adafruit/Adafruit_NeoPixel
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#neopixel
+  settings:
+  - parameter: enableA0
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Whether or not to use pin A0 for Neopixel
+  - parameter: enableA1
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Whether or not to use pin A1 for Neopixel
+  - parameter: enableA2
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Whether or not to use pin A2 for Neopixel
+- module: Servo
+  category: Actuator
+  description: Servo actuator module
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___servo.html
+    'Product Page: Adafruit Servo Featherwing': https://www.adafruit.com/product/2928
+    'Dependency: Adafruit-PWM-Servo-Driver': https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
+    Datasheet: https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf
+    'Product Page: Adafruit Servo': https://www.adafruit.com/product/169
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#servos-8-channel-pwm-or-servo-featherwing
+  settings: []
+- module: Stepper
+  category: Actuator
+  description: Stepper actuator module.
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___stepper.html
+    'Product Page: Adafruit Stepper Feather': https://www.adafruit.com/product/2927
+    'Dependency: Adafruit-PWM-Servo-Driver': https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
+    'Dependency: Adafruit_Motor_Shield_V2_Library': https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library
+    'Datasheet: Motor Driver': https://cdn-shop.adafruit.com/datasheets/TB6612FNG_datasheet_en_20121101.pdf
+    'Product Page: Adafruit Stepper Motor': https://www.adafruit.com/product/324
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#stepper-motors-dc-motor--stepper-featherwing
+  settings: []
+- module: Ethernet
+  category: InternetPlat
+  description: "InternetPlat built off of SSLClient running over an Ethernet Featherwing.\n\
+    @attention\tRequires 7KB of free SRAM at runtime to use."
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___ethernet.html
+    'Product Page: Adafruit Ethernet Featherwing': https://www.adafruit.com/product/3201
+    'Dependency: EthernetLarge': https://github.com/OPEnSLab-OSU/EthernetLarge
+    'Dependency: SSLClient': https://github.com/OPEnSLab-OSU/SSLClient
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#ethernet
+  settings: []
+- module: APWiFi
+  category: InternetPlat
+  description: WiFi InternetPlat
+  resources:
+    'Product Page: Adafruit Feather M0 WiFi': https://www.adafruit.com/product/3010
+    'Dependency: WiFi101': https://github.com/arduino-libraries/WiFi101
+  settings: []
+- module: WiFi
+  category: InternetPlat
+  description: "WiFi InternetPlat\n@attention\tRequires 7KB of free SRAM at runtime\
+    \ to use."
+  resources:
+    Module Documentation: https://openslab-osu.github.io/Loom/html/class_loom___wifi.html
+    'Product Page: Adafruit Feather M0 WiFi': https://www.adafruit.com/product/3010
+    'Dependency: WiFi201': https://github.com/OPEnSLab-OSU/WiFi201
+    'Dependency: WiFi101': https://github.com/arduino-libraries/WiFi101
+    Hardware Support: https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#wifi
+  settings: []
+- module: SleepManager
+  category: Module
+  description: Submanager to manage sleep functionality.
+  resources:
+    Documentation: https://openslab-osu.github.io/Loom/html/class_loom___sleep___manager.html
+  settings:
+  - parameter: use_LED
+    details:
+      type: Bool
+      default: true
+      set:
+      - true
+      - false
+      description: Whether or not to use LED to indicate wake state
+  - parameter: delay_on_wake
+    details:
+      type: Bool
+      default: false
+      set:
+      - true
+      - false
+      description: Whether or not to delay upon waking to allow time to open Serial
+        Monitor
+  - parameter: sleep_mode
+    details:
+      type: Set(Mode)
+      default: 1
+      set:
+      - 0
+      - 1
+      - 2
+      description: Which Mode to use
+  - parameter: power_off_pin
+    details:
+      type: Set(Int)
+      default: 10
+      set:
+      - 5
+      - 6
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      description: Which pin should be used to power off board
+- module: InterruptManager
+  category: Module
+  description: Submanager for managing interrupts, timers, and stopwatches.
+  resources:
+    Documentation: https://openslab-osu.github.io/Loom/html/class_loom___interrupt___manager.html
+  settings:
+  - parameter: RTC_Inst
+    details:
+      type: Set(Int)
+      default: 0
+      set:
+      - 0
+      description: OLED module name
