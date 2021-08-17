@@ -1,15 +1,27 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		ActuatorTemplate.h
+/// @brief		File for ActuatorTemplate definition
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_ACTUATORS
 #pragma once
 
 #include "Actuator.h"
 
+namespace  {
 
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// ### (LoomActuator) | dependencies: [] | conflicts: []
+// ### (Actuator) | dependencies: [] | conflicts: []
 /// Class description
 // ###
-class LoomActuatorTemplate : public LoomActuator
+class ActuatorTemplate : public Actuator
 {
 
 protected:
@@ -23,19 +35,17 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomActuatorTemplate(
-LoomManager* manager,
-const char* module_name		= "ActuatorTemplate",
+	ActuatorTemplate(
 			int 			ex_param		= 42
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomActuatorTemplate(LoomManager* manager, JsonArrayConst p);
-	
+	ActuatorTemplate(JsonArrayConst p);
+
 	/// Destructor
-	virtual ~LoomActuatorTemplate() = default;
+	virtual ~ActuatorTemplate() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -43,7 +53,7 @@ const char* module_name		= "ActuatorTemplate",
 
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
-	void		power_down() override {} 
+	void		power_down() override {}
 	void		power_up() override {}
 
 //=============================================================================
@@ -77,6 +87,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, ActuatorTemplate, "ActuatorTemplate");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
 
-
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

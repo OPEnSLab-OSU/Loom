@@ -1,40 +1,52 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		I2CSensorTemplate.cpp
+/// @brief		File for I2CSensorTemplate implementation.
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "[Template]_Loom_I2CSensor.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomI2CSensorTemplate::LoomI2CSensorTemplate(
-		byte			i2c_address, 
-		LoomManager* manager,
-const char* module_name 
-	) 
-	: LoomI2CSensor( module_name, i2c_address )
+I2CSensorTemplate::I2CSensorTemplate(
+		byte			i2c_address,
+		uint8_t	mux_port
+	)
+	: I2CSensor( "I2CSensorTemplate", i2c_address, mux_port )
 {
-	this->module_type = LoomModule::Type::I2CSensorTemplateType;
+	this->module_type = Module::Type::I2CSensorTemplateType;
 
 	// Initialize member variables
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomI2CSensorTemplate::LoomI2CSensorTemplate(LoomManager* manager, JsonArrayConst p)
-	: LoomI2CSensorTemplate( EXPAND_ARRAY(p, 2) ) {}
+I2CSensorTemplate::I2CSensorTemplate(JsonArrayConst p)
+	: I2CSensorTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomI2CSensorTemplate::print_config()
+void I2CSensorTemplate::print_config()
 {
-	LoomI2CSensor::print_config();
+	I2CSensor::print_config();
 	LPrintln('\t', "Description         : ", "value to print" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomI2CSensorTemplate::print_state()
+void I2CSensorTemplate::print_state()
 {
-	LoomI2CSensor::print_state();
-	// print information about LoomI2CSensorTemplate state 
+	I2CSensor::print_state();
+	// print information about I2CSensorTemplate state
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomI2CSensorTemplate::print_measurements()
+void I2CSensorTemplate::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -43,15 +55,15 @@ void LoomI2CSensorTemplate::print_measurements()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomI2CSensorTemplate::measure()
+void I2CSensorTemplate::measure()
 {
 	// measure data from sensor
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomI2CSensorTemplate::package(JsonObject json)
+void I2CSensorTemplate::package(JsonObject json)
 {
-	package_json(json, module_name, 
+	package_json(json, module_name,
 		"key1",		"val1",
 		"key2",		"val2"
 	);
@@ -60,13 +72,13 @@ void LoomI2CSensorTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomI2CSensorTemplate::dispatch(JsonObject json)
+bool I2CSensorTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		return functionRoute(
 			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } } 
+			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } }
 		);
 		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
 		// Change to match the parameters of your method
@@ -76,10 +88,11 @@ bool LoomI2CSensorTemplate::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomI2CSensorTemplate::calibrate()
+void I2CSensorTemplate::calibrate()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-	
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

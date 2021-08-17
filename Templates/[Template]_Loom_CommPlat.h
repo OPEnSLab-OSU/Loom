@@ -1,15 +1,27 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		CommPlatTemplate.h
+/// @brief		File for CommPlatTemplate definition.
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
 #include "CommPlat.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// ### (LoomCommPlat) | dependencies: [] | conflicts: []
+// ### (CommPlat) | dependencies: [] | conflicts: []
 /// Class description
 // ###
-class LoomCommPlatTemplate : public LoomCommPlat
+class CommPlatTemplate : public CommPlat
 {
 
 protected:
@@ -23,19 +35,17 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomCommPlatTemplate(
-LoomManager* manager,
-const char* module_name		= "CommPlatTemplate",
+	CommPlatTemplate(
 			uint			max_message_len	= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomCommPlatTemplate(LoomManager* manager, JsonArrayConst p);
-	
+	CommPlatTemplate(JsonArrayConst p);
+
 	/// Destructor
-	virtual ~LoomCommPlatTemplate() = default;
+	virtual ~CommPlatTemplate() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -43,7 +53,7 @@ const char* module_name		= "CommPlatTemplate",
 
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
-	void		power_down() override {} 
+	void		power_down() override {}
 	void		power_up() override {}
 
 	bool		receive(JsonObject json) override;
@@ -84,6 +94,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, CommPlatTemplate, "CommPlatTemplate");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
 
-
+#endif // ifdef LOOM_INCLUDE_RADIOS

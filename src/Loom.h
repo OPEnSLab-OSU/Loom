@@ -31,23 +31,23 @@ This is the Doxygen generated documentation of the Loom library code.
 // Actuators
 #ifdef LOOM_INCLUDE_ACTUATORS
     #include "Actuators/Neopixel.h"
-    Loom::Neopixel getNeopixel(Loom::Manager feather) {return *(feather.get<Loom::Neopixel>());}
+    Loom::Neopixel& getNeopixel(const Loom::Manager& feather) {return *(feather.get<Loom::Neopixel>());}
     #include "Actuators/Relay.h"
-    Loom::Relay getRelay(Loom::Manager feather) {return *(feather.get<Loom::Relay>());}
+    Loom::Relay& getRelay(const Loom::Manager& feather) {return *(feather.get<Loom::Relay>());}
     #include "Actuators/Servo.h"
-    Loom::Servo getServo(Loom::Manager feather) {return *(feather.get<Loom::Servo>());}
+    Loom::Servo& getServo(const Loom::Manager& feather) {return *(feather.get<Loom::Servo>());}
     #include "Actuators/Stepper.h"
-    Loom::Stepper getStepper(Loom::Manager feather) {return *(feather.get<Loom::Stepper>());}
+    Loom::Stepper& getStepper(const Loom::Manager& feather) {return *(feather.get<Loom::Stepper>());}
 #endif
 
 // CommPlats
 #ifdef LOOM_INCLUDE_RADIOS
     #include "CommPlats/LoRa.h"
-    Loom::LoRa getLoRa(Loom::Manager feather) {return *(feather.get<Loom::LoRa>());}
+    Loom::LoRa& getLoRa(const Loom::Manager& feather) {return *(feather.get<Loom::LoRa>());}
     #include "CommPlats/nRF.h"
-    Loom::nRF getnRF(Loom::Manager feather) {return *(feather.get<Loom::nRF>());}
+    Loom::nRF& getnRF(const Loom::Manager& feather) {return *(feather.get<Loom::nRF>());}
     #include "CommPlats/Bluetooth.h"
-    Loom::Bluetooth getBluetooth(Loom::Manager feather) {return *(feather.get<Loom::Bluetooth>());}
+    Loom::Bluetooth& getBluetooth(const Loom::Manager& feather) {return *(feather.get<Loom::Bluetooth>());}
 #endif
 
 // InternetPlats
@@ -64,30 +64,32 @@ This is the Doxygen generated documentation of the Loom library code.
 // PublishPlats
 #if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
     #include "PublishPlats/GoogleSheets.h"
-    Loom::GoogleSheets getGoogleSheets(Loom::Manager feather) {return *(feather.get<Loom::GoogleSheets>());}
+    Loom::GoogleSheets& getGoogleSheets(const Loom::Manager& feather) {return *(feather.get<Loom::GoogleSheets>());}
 #endif
 
 // Max
 #if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
     #include "PublishPlats/Max_Pub.h"
-    Loom::MaxPub getMaxPub(Loom::Manager feather) {return *(feather.get<Loom::MaxPub>());}
+    Loom::MaxPub& getMaxPub(const Loom::Manager& feather) {return *(feather.get<Loom::MaxPub>());}
     #include "SubscribePlats/Max_Sub.h"
-    Loom::MaxSub getMaxSub(Loom::Manager feather) {return *(feather.get<Loom::MaxSub>());}
+    Loom::MaxSub& getMaxSub(const Loom::Manager& feather) {return *(feather.get<Loom::MaxSub>());}
 #endif
 
+//Loom::SD& getSD(Loom::Manager feather) {return *(feather.get<Loom::SD>());}
 // LogPlats
 #include "LogPlats/OLED.h"
-Loom::OLED getOLED(Loom::Manager feather) { return *(feather.get<Loom::OLED>()); }
+Loom::OLED& getOLED(const Loom::Manager& feather) { return *(feather.get<Loom::OLED>()); }
 #include "LogPlats/SD.h"
-Loom::SD getSD(Loom::Manager feather) {return *(feather.get<Loom::SD>());}
+//Loom::SD* getSD(Loom::Manager feather) {return feather.get<Loom::SD>();}
+Loom::SD& getSD(const Loom::Manager& feather) { return *(feather.get<Loom::SD>()); }
 #include "LogPlats/BatchSD.h"
-Loom::BatchSD getBatchSD(Loom::Manager feather) { return *(feather.get<Loom::BatchSD>()); }
+Loom::BatchSD& getBatchSD(const Loom::Manager& feather) { return *(feather.get<Loom::BatchSD>()); }
 
 // // RTC
 #include "RTC/DS3231.h"
-Loom::DS3231 getDS3231(Loom::Manager feather) { return *(feather.get<Loom::DS3231>()); }
+Loom::DS3231& getDS3231(const Loom::Manager& feather) { return *(feather.get<Loom::DS3231>()); }
 #include "RTC/PCF8523.h"
-Loom::PCF8523 getPCF8523(Loom::Manager feather) { return *(feather.get<Loom::PCF8523>()); }
+Loom::PCF8523& getPCF8523(const Loom::Manager& feather) { return *(feather.get<Loom::PCF8523>()); }
 
 // Sensors
 #include "Sensors/Analog.h"
@@ -132,6 +134,6 @@ Loom::PCF8523 getPCF8523(Loom::Manager feather) { return *(feather.get<Loom::PCF
 // General
 #include "Components/WarmUp/WarmUpManager.h"
 #include "InterruptManager.h"
-Loom::InterruptManager getInterruptManager(Loom::Manager feather) { return *(feather.get<Loom::InterruptManager>()); }
+Loom::InterruptManager& getInterruptManager(const Loom::Manager& feather) { return *(feather.get<Loom::InterruptManager>()); }
 #include "SleepManager.h"
-Loom::SleepManager getSleepManager(Loom::Manager feather) { return *(feather.get<Loom::SleepManager>()); }
+Loom::SleepManager& getSleepManager(const Loom::Manager& feather) { return *(feather.get<Loom::SleepManager>()); }

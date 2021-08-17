@@ -1,40 +1,52 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		SensorTemplate.cpp
+/// @brief		File for SensorTemplate implementation.
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "[Template]_Loom_Sensor.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSensorTemplate::LoomSensorTemplate(
-		LoomManager* manager,
-const char* module_name, 
+SensorTemplate::SensorTemplate(
+const char* module_name,
 		int 			num_samples
-	) 
-	: LoomSensor( module_name, num_samples )
+	)
+	: Sensor( module_name )
 {
-	this->module_type = LoomModule::Type::SensorTemplateType;
+	this->module_type = Module::Type::SensorTemplateType;
 
 	// Initialize member variables
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSensorTemplate::LoomSensorTemplate(LoomManager* manager, JsonArrayConst p)
-	: LoomSensorTemplate( EXPAND_ARRAY(p, 2) ) {}
+SensorTemplate::SensorTemplate(JsonArrayConst p)
+	: SensorTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSensorTemplate::print_config()
+void SensorTemplate::print_config()
 {
-	LoomSensor::print_config();
+	Sensor::print_config();
 	LPrintln('\t', "Description         : ", "value to print" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSensorTemplate::print_state()
+void SensorTemplate::print_state()
 {
-	LoomSensor::print_state();
-	// print information about LoomSensorTemplate state 
+	Sensor::print_state();
+	// print information about SensorTemplate state
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSensorTemplate::print_measurements()
+void SensorTemplate::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -43,15 +55,15 @@ void LoomSensorTemplate::print_measurements()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSensorTemplate::measure()
+void SensorTemplate::measure()
 {
 	// measure data from sensor
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSensorTemplate::package(JsonObject json)
+void SensorTemplate::package(JsonObject json)
 {
-	package_json(json, module_name, 
+	package_json(json, module_name,
 		"key1",		"val1",
 		"key2",		"val2"
 	);
@@ -60,13 +72,13 @@ void LoomSensorTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSensorTemplate::dispatch(JsonObject json)
+bool SensorTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		return functionRoute(
 			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } } 
+			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } }
 		);
 		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
 		// Change to match the parameters of your method
@@ -76,10 +88,11 @@ bool LoomSensorTemplate::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSensorTemplate::calibrate()
+void SensorTemplate::calibrate()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-	
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

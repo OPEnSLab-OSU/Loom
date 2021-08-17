@@ -1,42 +1,53 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		ActuatorTemplate.cpp
+/// @brief		File for ActuatorTemplate implementation
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
-#include "[Template]_Loom_Actuator.h"
+#ifdef LOOM_INCLUDE_ACTUATORS
 
+#include "[Template]_Actuator.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomActuatorTemplate::LoomActuatorTemplate(
-		LoomManager*	manager,
-		const char*		module_name, 
+ActuatorTemplate::ActuatorTemplate(
 		int						ex_param
-	) 
-	: LoomActuator( module_name )
+	)
+	: Actuator( "ActuatorTempate" )
 {
-	this->module_type = LoomModule::Type::ActuatorTemplateType;
+	this->module_type = Module::Type::ActuatorTemplateType;
 
 	// Initialize member variables
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomActuatorTemplate::LoomActuatorTemplate(LoomManager* manager, JsonArrayConst p)
-	: LoomActuatorTemplate( EXPAND_ARRAY(p, 2) ) {}
+ActuatorTemplate::ActuatorTemplate(JsonArrayConst p)
+	: ActuatorTemplate( EXPAND_ARRAY(p, 1) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomActuatorTemplate::print_config()
+void ActuatorTemplate::print_config()
 {
-	LoomActuator::print_config();
+	Actuator::print_config();
 	LPrintln('\t', "Description         : ", "value to print" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomActuatorTemplate::print_state()
+void ActuatorTemplate::print_state()
 {
-	LoomActuator::print_state();
-	// print information about LoomActuatorTemplate state 
+	Actuator::print_state();
+	// print information about ActuatorTemplate state
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomActuatorTemplate::package(JsonObject json)
+void ActuatorTemplate::package(JsonObject json)
 {
-	package_json(json, module_name, 
+	package_json(json, module_name,
 		"key1",		"val1",
 		"key2",		"val2"
 	);
@@ -45,13 +56,13 @@ void LoomActuatorTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomActuatorTemplate::dispatch(JsonObject json)
+bool ActuatorTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		return functionRoute(
 			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } } 
+			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } }
 		);
 		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
 		// Change to match the parameters of your method
@@ -62,4 +73,4 @@ bool LoomActuatorTemplate::dispatch(JsonObject json)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

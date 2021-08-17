@@ -1,15 +1,27 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		SDI12SensorTemplate.h
+/// @brief		File for SDI12SensorTemplate definition.
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "SDI12_Sensor.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// ### (LoomSDI12Sensor) | dependencies: [] | conflicts: []
+// ### (SDI12Sensor) | dependencies: [] | conflicts: []
 /// Class description
 // ###
-class LoomSDI12SensorTemplate : public LoomSDI12Sensor
+class SDI12SensorTemplate : public SDI12Sensor
 {
 
 protected:
@@ -23,8 +35,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomSDI12SensorTemplate(
-			LoomManager* manager,
+	SDI12SensorTemplate(
 const char* module_name		= "SDI12SensorTemplate",
 			int				num_samples		= 1
 		);
@@ -32,10 +43,10 @@ const char* module_name		= "SDI12SensorTemplate",
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomSDI12SensorTemplate(LoomManager* manager, JsonArrayConst p);
-	
+	SDI12SensorTemplate(JsonArrayConst p);
+
 	/// Destructor
-	virtual ~LoomSDI12SensorTemplate() = default;
+	virtual ~SDI12SensorTemplate() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -45,7 +56,7 @@ const char* module_name		= "SDI12SensorTemplate",
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
 	void		calibrate() override;
-	void		power_down() override {} 
+	void		power_down() override {}
 	void		power_up() override {}
 
 //=============================================================================
@@ -80,6 +91,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, SDI12SensorTemplate, "SDI12SensorTemplate");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
 
-
+#endif // ifdef LOOM_INCLUDE_SENSORS

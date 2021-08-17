@@ -1,42 +1,53 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		InternetPlatTemplate.cpp
+/// @brief		File for InternetPlatTemplate implementation
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_ETHERNET
 
 #include "[Template]_Loom_InternetPlat.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlatTemplate::LoomInternetPlatTemplate(
-		LoomManager* manager,
-const char* module_name, 
+InternetPlatTemplate::InternetPlatTemplate(
 		int				ex_param
-	) 
-	: LoomInternetPlat( module_name )
+	)
+	: InternetPlat( "InternetPlatTemplate" )
 {
-	this->module_type = LoomModule::Type::InternetPlatTemplateType;
+	this->module_type = Module::Type::InternetPlatTemplateType;
 
 	// Initialize member variables
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlatTemplate::LoomInternetPlatTemplate(LoomManager* manager, JsonArrayConst p)
-	: LoomInternetPlatTemplate( EXPAND_ARRAY(p, 2) ) {}
+InternetPlatTemplate::InternetPlatTemplate(JsonArrayConst p)
+	: InternetPlatTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlatTemplate::print_config()
+void InternetPlatTemplate::print_config()
 {
-	LoomInternetPlat::print_config();
+	InternetPlat::print_config();
 	LPrintln('\t', "Description         : ", "value to print" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlatTemplate::print_state()
+void InternetPlatTemplate::print_state()
 {
-	LoomInternetPlat::print_state();
-	// print information about LoomInternetPlatTemplate state 
+	InternetPlat::print_state();
+	// print information about InternetPlatTemplate state
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlatTemplate::package(JsonObject json)
+void InternetPlatTemplate::package(JsonObject json)
 {
-	package_json(json, module_name, 
+	package_json(json, module_name,
 		"key1",		"val1",
 		"key2",		"val2"
 	);
@@ -45,13 +56,13 @@ void LoomInternetPlatTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomInternetPlatTemplate::dispatch(JsonObject json)
+bool InternetPlatTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		return functionRoute(
 			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } } 
+			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } }
 		);
 		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
 		// Change to match the parameters of your method
@@ -61,32 +72,29 @@ bool LoomInternetPlatTemplate::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlatTemplate::connect()
+void InternetPlatTemplate::connect()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomInternetPlatTemplate::is_connected()
+bool InternetPlatTemplate::is_connected()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint32_t LoomInternetPlatTemplate::get_time()
+uint32_t InternetPlatTemplate::get_time()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Client& LoomInternetPlatTemplate::http_request(const char* domain, const char* url, const char* body, const char* verb)
+Client& InternetPlatTemplate::http_request(const char* domain, const char* url, const char* body, const char* verb)
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
+#endif // ifdef LOOM_INCLUDE_ETHERNET

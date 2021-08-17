@@ -1,43 +1,53 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		LogPlatTemplate.h
+/// @brief		File for LogPlatTemplate implementation
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 
 #include "[Template]_Loom_LogPlat.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomLogPlatTemplate::LoomLogPlatTemplate(
-		LoomManager* manager,
-const char* module_name, 
-		bool			enable_rate_filter, 
-		uint			min_filter_delay, 
-	) 
-	: LoomLogPlat( module_name, enable_rate_filter, min_filter_delay )
+LogPlatTemplate::LogPlatTemplate(
+		bool			enable_rate_filter,
+		uint			min_filter_delay,
+	)
+	: LogPlat( "LogPlatTemplate", enable_rate_filter, min_filter_delay )
 {
-	this->module_type = LoomModule::Type::LogPlatTemplateType;
+	this->module_type = Module::Type::LogPlatTemplateType;
 
 	// Initialize member variables
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomLogPlatTemplate::LoomLogPlatTemplate(LoomManager* manager, JsonArrayConst p)
-	: LoomLogPlatTemplate( EXPAND_ARRAY(p, 3) ) {}
+LogPlatTemplate::LogPlatTemplate(JsonArrayConst p)
+	: LogPlatTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomLogPlatTemplate::print_config()
+void LogPlatTemplate::print_config()
 {
-	LoomLogPlat::print_config();
+	LogPlat::print_config();
 	LPrintln('\t', "Description         : ", "value to print" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomLogPlatTemplate::print_state()
+void LogPlatTemplate::print_state()
 {
-	LoomLogPlat::print_state();
-	// print information about LoomLogPlatTemplate state 
+	LogPlat::print_state();
+	// print information about LogPlatTemplate state
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomLogPlatTemplate::package(JsonObject json)
+void LogPlatTemplate::package(JsonObject json)
 {
-	package_json(json, module_name, 
+	package_json(json, module_name,
 		"key1",		"val1",
 		"key2",		"val2"
 	);
@@ -46,13 +56,13 @@ void LoomLogPlatTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomLogPlatTemplate::dispatch(JsonObject json)
+bool LogPlatTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		return functionRoute(
 			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } } 
+			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } }
 		);
 		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
 		// Change to match the parameters of your method
@@ -62,9 +72,9 @@ bool LoomLogPlatTemplate::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomLogPlatTemplate::log(JsonObject json) 
+void LogPlatTemplate::log(JsonObject json)
 {
-	
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
