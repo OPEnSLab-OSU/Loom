@@ -78,13 +78,19 @@ public:
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	/// Get the temperature reading.
+	/// Get the temperature and humidity reading.
 	/// Used by the TempSync module to provide temperature
 	/// to other modules.
 	/// @return	The measured temperature
 	float		get_temperature() const { return temp; }
-	
-private:
+
+public:
+
+
+
+	float		get_humid() const { return humid; }
+
+public:
 
 };
 
