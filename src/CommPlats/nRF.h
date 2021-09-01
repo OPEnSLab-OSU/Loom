@@ -82,7 +82,7 @@ public:
 	/// nRF module constructor
 	///
 	/// @param[in]	max_message_len		Set(Int) | <120> | {120("Max length")} | The maximum possible message length
-	/// @param[in]	address 			Int | <01> | [0-99] | This device's nRF address
+	/// @param[in]	address 			Int | <00> | [0-99] | This device's nRF address
 	/// @param[in]	data_rate			Set(Int) | <0> | {0("Default"), 1("250KBPS"), 2("1MBPS"), 3("2MBPS")} | Transmission data rate
 	/// @param[in]	power_level			Set(Int) | <0> | {0("Default"), 1("Min"), 2("Low"), 3("High"), 4("Max")} | Transmission ower level
 	/// @param[in]	retry_count 		Int | <3> | [0-15] | Max number of transmission retries
