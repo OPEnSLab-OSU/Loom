@@ -34,8 +34,9 @@ PCF8523::PCF8523(JsonArrayConst p)
 bool PCF8523::_begin()
 {
   LMark;
-	rtc_inst.begin();
+	bool success = rtc_inst.begin();
 	rtc_inst.stop_32768_clkout();
+	return success;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
