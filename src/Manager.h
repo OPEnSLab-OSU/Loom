@@ -228,7 +228,8 @@ public:
 	void 		trap() const {
 		LMark;
 		__builtin_trap();
-		LMark;}
+		LMark;
+	}
 
 	void 		memory_trap() const {
 		LMark;

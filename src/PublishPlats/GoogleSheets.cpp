@@ -81,7 +81,6 @@ bool GoogleSheets::send_to_internet(const JsonObject json, InternetPlat* plat)
    	LMark;
 		device_manager->get_device_name(buf);
 	}
-
 	if ((tab_matches_dev_id && device_manager) || (device_manager && strstr(buf, "Errors"))){
    	LMark;
 		snprintf(buf, 20, "%s%d", buf, device_manager->get_instance_num());
@@ -89,7 +88,7 @@ bool GoogleSheets::send_to_internet(const JsonObject json, InternetPlat* plat)
 	} else {
 		network->print(m_tab_id);
 	}
-
+	
 	network->print("&key2=deviceID&val2=");
 
 	// Get device ID from manager
@@ -101,11 +100,11 @@ bool GoogleSheets::send_to_internet(const JsonObject json, InternetPlat* plat)
 	} else {
 		network->print("Unknown");
 	}
+	
 
 	network->print("&key3=full_data&val3=");
 	// next print the body data, converted in real time
 	m_serialize_internet_impl(json, *network);
-
 	// that should finish off the URL, so print the rest of the HTTP request
 	network->print(" HTTP/1.1\r\nUser-Agent: LoomOverSSLClient\r\nHost: script.google.com\r\nConnection: close\r\n\r\n");
 	// all ready to go!
@@ -168,6 +167,7 @@ bool GoogleSheets::m_serialize_internet_impl(const JsonObject json, Print& write
 			write.print('~');
 		}
 	}
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
