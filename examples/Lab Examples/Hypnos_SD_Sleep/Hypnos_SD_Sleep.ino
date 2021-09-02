@@ -23,9 +23,9 @@ const char* json_config =
 // In Tools menu, set:
 // Internet  > Disabled
 // Sensors   > Enabled
-// Radios    > Enabled
-// Actuators > Enabled
-// Max       > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
 using namespace Loom;
 
@@ -41,13 +41,13 @@ void wakeISR_RTC() {
 
 void setup()
 {
-	// Needs to be done for Hypno Board
+	// Needs to be done for Hypnos Board
 	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
 	pinMode(6, OUTPUT);		// Enable control of 5V rail
 	pinMode(12, INPUT_PULLUP);		// Enable waiting for RTC interrupt, MUST use a pullup since signal is active low
 	pinMode(13, OUTPUT);
 
-	//See Above
+	// See Above
 	digitalWrite(5, LOW);	// Enable 3.3V rail
 	digitalWrite(6, HIGH);	// Enable 5V rail
 	digitalWrite(13, LOW);

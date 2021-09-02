@@ -9,7 +9,7 @@
 
 // In the config, you need:
 // - MAC address for the Ethernet module (you could also replace Ethenet with WiFi)
-//		You can use 'default' instead of a parameter list for Ethenet if you
+//		You can use 'default' instead of a parameter list for Ethernet if you
 //		are not on a network that restricts to only registered MAC addresses
 // - For Google sheets parameters, see:
 //   https://github.com/OPEnSLab-OSU/Loom/wiki/Using-Loom-with-Google-Sheets
@@ -27,7 +27,7 @@ const char* json_config =
 // Internet  > Ethernet
 // Sensors   > Enabled
 // Radios    > Disabled
-// Actuators > Enabled
+// Actuators > Disabled
 // Max       > Disabled
 
 using namespace Loom;

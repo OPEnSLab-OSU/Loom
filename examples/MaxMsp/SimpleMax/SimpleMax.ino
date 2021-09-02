@@ -32,10 +32,11 @@ const char* json_config =
 #include "config.h"
 ;
 
+// You may change what you have enabled depending on which config you are using
 // In Tools menu, set:
 // Internet  > WiFi
 // Sensors   > Enabled
-// Radios    > Enabled
+// Radios    > Disabled
 // Actuators > Enabled
 // Max       > Enabled
 

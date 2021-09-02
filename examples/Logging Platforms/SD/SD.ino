@@ -15,9 +15,9 @@ const char* json_config =
 // In Tools menu, set:
 // Internet  > Disabled
 // Sensors   > Enabled
-// Radios    > Enabled
-// Actuators > Enabled
-// Max       > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
 using namespace Loom;
 
@@ -45,7 +45,7 @@ void loop()
 	getSD(Feather).log();
 
 	// Or log to a specific file (does not change what default file is set to)
-	// Feather.get<Loom::SD>()->log("specific.csv");
+	// getSD(Feather)log("specific.csv");
 
 	Feather.pause();
 }

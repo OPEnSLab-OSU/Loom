@@ -33,7 +33,7 @@ using namespace Loom;
 Loom::Manager Feather{};
 
 
-#define ALARM_PIN 6
+#define ALARM_PIN 12
 
 volatile bool alarmFlag = false;
 volatile int count = 0;

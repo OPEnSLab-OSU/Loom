@@ -20,7 +20,7 @@ const char* json_config =
 // Internet  > Ethernet
 // Sensors   > Enabled
 // Radios    > Disabled
-// Actuators > Enabled
+// Actuators > Disabled
 // Max       > Disabled
 
 

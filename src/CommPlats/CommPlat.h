@@ -108,7 +108,7 @@ public:
 
 	/// Build json from packet if any exists
 	/// @param[out]	json	Json object to fill with incoming data
-	bool			receive(JsonObject json) { return receive_blocking(json, 0); }
+	bool			receive(JsonObject json) { return receive_blocking(json, 1000); }
 
 	///	Receive and immediately create a batch file from JSON receieved
 	/// @return True if packet was recieved and stored in batch

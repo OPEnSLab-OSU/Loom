@@ -24,7 +24,7 @@
 		},\
 		{\
 			'name':'DS3231',\
-			'params':[11,true]\
+			'params':[11,true,false]\
 		},\
 		{\
 			'name':'NTP_Sync',\
@@ -34,7 +34,6 @@
 			'name':'GoogleSheets',\
 			'params':[\
 				'Goog',\
-				7001,\
 				'/macros/s/<your-script-id>/exec',\
 				'<your-sheet-id>',\
 /*true to autoname tab*/				true,\

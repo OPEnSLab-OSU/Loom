@@ -22,9 +22,9 @@ const char* json_config =
 // In Tools menu, set:
 // Internet  > Disabled
 // Sensors   > Enabled
-// Radios    > Enabled
-// Actuators > Enabled
-// Max       > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
 using namespace Loom;
 
@@ -33,11 +33,9 @@ Loom::Manager Feather{};
 
 void setup()
 {
-	// Needs to be done for Hypno Board
+	// Needs to be done for Hypnos Board
 	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
 	pinMode(6, OUTPUT);		// Enable control of 5V rail
-
-	//See Above
 	digitalWrite(5, LOW);	// Enable 3.3V rail
 	digitalWrite(6, HIGH);	// Enable 5V rail
 

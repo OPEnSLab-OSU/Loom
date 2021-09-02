@@ -25,7 +25,7 @@ const char* json_config =
 // Internet  > WiFi
 // Sensors   > Enabled
 // Radios    > Disabled
-// Actuators > Enabled
+// Actuators > Disabled
 // Max       > Disabled
 
 using namespace Loom;

@@ -15,8 +15,8 @@ const char* json_config =
 // In Tools menu, set:
 // Internet  > WiFi
 // Sensors   > Enabled
-// Radios    > Enabled
-// Actuators > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
 // Max       > Enabled
 
 using namespace Loom;

@@ -26,7 +26,7 @@ const char* json_config =
 // In Tools menu, set:
 // Internet  > Disabled
 // Sensors   > Enabled
-// Radios    > Enabled
+// Radios    > Disabled
 // Actuators > Disabled
 // Max       > Disabled
 
@@ -62,7 +62,7 @@ void loop() {
   Feather.measure(); // Sample attached sensors
   Feather.package(); // Format data for display and SD
   Feather.display_data(); // display printed JSON formatted data on serial monitor
-  Feather.get<Loom::SD>()->log(); // Loggin K30 Data value into SDCard
+  Feather.getSD().log(); // Loggin K30 Data value into SDCard
   Feather.pause();
 }
 

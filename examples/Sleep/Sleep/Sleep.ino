@@ -30,7 +30,7 @@ Loom::Manager Feather{};
 
 // Detach interrupt on wake
 void wakeISR() {
-	detachInterrupt(6);
+	detachInterrupt(12);
 	LPrintln("Alarm went off");
 }
 
@@ -45,7 +45,7 @@ void setup()
 	Feather.parse_config(json_config);
 
 	// Register ISR to call on wake
-	getInterruptManager(Feather).register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).register_ISR(12, wakeISR, LOW, ISR_Type::IMMEDIATE);
 
 	// LowPower.standby();
 	digitalWrite(LED_BUILTIN, LOW);

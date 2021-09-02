@@ -25,7 +25,7 @@ using namespace Loom;
 Loom::Manager Feather{};
 
 
-#define ALARM_PIN 6
+#define ALARM_PIN 12
 
 volatile bool alarmFlag = false;
 void alarmISR() {
@@ -39,6 +39,12 @@ void alarmISR() {
 
 void setup()
 {
+	// Needs to be done for Hypnos Board
+	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
+	pinMode(6, OUTPUT);		// Enable control of 5V rail
+	digitalWrite(5, LOW);	// Enable 3.3V rail
+	digitalWrite(6, HIGH);	// Enable 5V rail
+
 	Feather.begin_LED();
 	Feather.begin_serial(true);
 	Feather.parse_config(json_config);
@@ -60,7 +66,7 @@ void loop()
 
 		// Don't call RTC_alarm_duration before reconnect_interrupt
 		// unless sleeping or calling:
-		// Feather.get<Loom::InterruptManager>()->get_RTC_module()->clear_alarms();
+		// getInterruptManager(Feather).get_RTC_module()->clear_alarms();
 		// post sleep calls this, and in this example it is in the ISR
 
 		getInterruptManager(Feather).reconnect_interrupt(ALARM_PIN);

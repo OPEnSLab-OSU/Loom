@@ -63,34 +63,34 @@ void setup()
 	Feather.parse_config(json_config);
 	Feather.print_config();
 
-  Feather.InterruptManager().register_ISR(24, ISR_pin24, LOW, ISR_Type::IMMEDIATE);
-  Feather.InterruptManager().register_ISR(23, ISR_pin23, LOW, ISR_Type::IMMEDIATE);
-  Feather.InterruptManager().register_ISR(21, ISR_pin21, LOW, ISR_Type::IMMEDIATE);
-  Feather.InterruptManager().register_ISR(20, ISR_pin20, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(24, ISR_pin24, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(23, ISR_pin23, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(21, ISR_pin21, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(20, ISR_pin20, LOW, ISR_Type::IMMEDIATE);
 
-  Feather.InterruptManager().register_ISR(13, ISR_pin13, LOW, ISR_Type::IMMEDIATE);
-  Feather.InterruptManager().register_ISR(12, ISR_pin12, LOW, ISR_Type::IMMEDIATE);
-  Feather.InterruptManager().register_ISR(11, ISR_pin11, LOW, ISR_Type::IMMEDIATE);
-  Feather.InterruptManager().register_ISR(10, ISR_pin10, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(13, ISR_pin13, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(12, ISR_pin12, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(11, ISR_pin11, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(10, ISR_pin10, LOW, ISR_Type::IMMEDIATE);
 
-  Feather.InterruptManager().register_ISR(6, ISR_pin6, LOW, ISR_Type::IMMEDIATE);
-  Feather.InterruptManager().register_ISR(5, ISR_pin5, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(6, ISR_pin6, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(5, ISR_pin5, LOW, ISR_Type::IMMEDIATE);
 
-  Feather.InterruptManager().register_ISR(A1, ISR_pinA1, LOW, ISR_Type::IMMEDIATE);
-  Feather.InterruptManager().register_ISR(A2, ISR_pinA2, LOW, ISR_Type::IMMEDIATE);
-  Feather.InterruptManager().register_ISR(A4, ISR_pinA4, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(A1, ISR_pinA1, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(A2, ISR_pinA2, LOW, ISR_Type::IMMEDIATE);
+  getInterruptManager(Feather).register_ISR(A4, ISR_pinA4, LOW, ISR_Type::IMMEDIATE);
 
       // 0 uses the same interrupt number as pin 24, so these pins are exclusive. For more details look at the Feather M0 pinout
-  // Feather.InterruptManager().register_ISR(0, ISR_pin0, LOW, ISR_Type::IMMEDIATE);
+  // getInterruptManager(Feather).register_ISR(0, ISR_pin0, LOW, ISR_Type::IMMEDIATE);
       // 1 uses the same interrupt number as pin 23, so these pins are exclusive. For more details look at the Feather M0 pinout
-  // Feather.InterruptManager().register_ISR(1, ISR_pin1, LOW, ISR_Type::IMMEDIATE);
+  // getInterruptManager(Feather).register_ISR(1, ISR_pin1, LOW, ISR_Type::IMMEDIATE);
       // 9 uses the same interrupt number as pin 21, so these pins are exclusive. For more details look at the Feather M0 pinout
-  // Feather.InterruptManager().register_ISR(9, ISR_pin9, LOW, ISR_Type::IMMEDIATE);
+  // getInterruptManager(Feather).register_ISR(9, ISR_pin9, LOW, ISR_Type::IMMEDIATE);
       // A0 and A5 use the same interrupt number as pin 10, so these three pins are exclusive. For more details look at the Feather M0 pinout
-  // Feather.InterruptManager().register_ISR(A0, ISR_pinA0, FALLING, ISR_Type::IMMEDIATE);
-  // Feather.InterruptManager().register_ISR(A5, ISR_pinA5, FALLING, ISR_Type::IMMEDIATE);
+  // getInterruptManager(Feather).register_ISR(A0, ISR_pinA0, FALLING, ISR_Type::IMMEDIATE);
+  // getInterruptManager(Feather).register_ISR(A5, ISR_pinA5, FALLING, ISR_Type::IMMEDIATE);
       // A3 use the same interrupt number as pin 6, so these two pins are exclusive. For more details look at the Feather M0 pinout
-  // Feather.InterruptManager().register_ISR(A3, ISR_pinA3, FALLING, ISR_Type::IMMEDIATE);
+  // getInterruptManager(Feather).register_ISR(A3, ISR_pinA3, FALLING, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 }
@@ -101,29 +101,29 @@ void loop()
   flag = false;
   while(!flag) Feather.pause();
 
-  Feather.InterruptManager().reconnect_interrupt(24);
-  Feather.InterruptManager().reconnect_interrupt(23);
-  Feather.InterruptManager().reconnect_interrupt(21);
-  Feather.InterruptManager().reconnect_interrupt(20);
+  getInterruptManager(Feather).reconnect_interrupt(24);
+  getInterruptManager(Feather).reconnect_interrupt(23);
+  getInterruptManager(Feather).reconnect_interrupt(21);
+  getInterruptManager(Feather).reconnect_interrupt(20);
 
-  Feather.InterruptManager().reconnect_interrupt(13);
-  Feather.InterruptManager().reconnect_interrupt(12);
-  Feather.InterruptManager().reconnect_interrupt(11);
-  Feather.InterruptManager().reconnect_interrupt(10);
+  getInterruptManager(Feather).reconnect_interrupt(13);
+  getInterruptManager(Feather).reconnect_interrupt(12);
+  getInterruptManager(Feather).reconnect_interrupt(11);
+  getInterruptManager(Feather).reconnect_interrupt(10);
 
-  Feather.InterruptManager().reconnect_interrupt(6);
-  Feather.InterruptManager().reconnect_interrupt(5);
+  getInterruptManager(Feather).reconnect_interrupt(6);
+  getInterruptManager(Feather).reconnect_interrupt(5);
 
-  Feather.InterruptManager().reconnect_interrupt(A1);
-  Feather.InterruptManager().reconnect_interrupt(A2);
-  Feather.InterruptManager().reconnect_interrupt(A4);
+  getInterruptManager(Feather).reconnect_interrupt(A1);
+  getInterruptManager(Feather).reconnect_interrupt(A2);
+  getInterruptManager(Feather).reconnect_interrupt(A4);
 
-  // Feather.InterruptManager().reconnect_interrupt(0);
-  // Feather.InterruptManager().reconnect_interrupt(1);
-	// Feather.InterruptManager().reconnect_interrupt(9);
-  // Feather.InterruptManager().reconnect_interrupt(A0);
-  // Feather.InterruptManager().reconnect_interrupt(A5);
-  // Feather.InterruptManager().reconnect_interrupt(A3);
+  // getInterruptManager(Feather).reconnect_interrupt(0);
+  // getInterruptManager(Feather).reconnect_interrupt(1);
+	// getInterruptManager(Feather).reconnect_interrupt(9);
+  // getInterruptManager(Feather).reconnect_interrupt(A0);
+  // getInterruptManager(Feather).reconnect_interrupt(A5);
+  // getInterruptManager(Feather).reconnect_interrupt(A3);
 }
 
 void ISR_pin24(){

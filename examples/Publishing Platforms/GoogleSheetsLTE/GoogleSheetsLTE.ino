@@ -23,7 +23,7 @@ const char* json_config =
 // Internet  > LTE
 // Sensors   > Enabled
 // Radios    > Disabled
-// Actuators > Enabled
+// Actuators > Disabled
 // Max       > Disabled
 
 using namespace Loom;
