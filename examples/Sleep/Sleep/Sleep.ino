@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // This example demonstrates how to put device to sleep and wake via
-// DS3231 RTC alarm connected to pin 6.
+// DS3231 RTC alarm connected to pin 12.
 
 // The built-in LED will blink once the device is awake.
 
@@ -37,6 +37,12 @@ void wakeISR() {
 
 void setup()
 {
+	// Needs to be done for Hypnos Board
+	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
+	pinMode(6, OUTPUT);		// Enable control of 5V rail
+	pinMode(12, INPUT_PULLUP);		// Enable waiting for RTC interrupt, MUST use a pullup since signal is active low
+	pinMode(13, OUTPUT);
+
 	Feather.begin_LED();
 	digitalWrite(LED_BUILTIN, HIGH);
 	// open Serial Monitor to continue, or use Feather.begin_serial();
@@ -66,7 +72,9 @@ void loop()
 
 	// Go to sleep
 	LPrintln("Going to sleep");
+	Feather.power_down();
 	getSleepManager(Feather).sleep();
+	Feather.power_up();
 
 	// This wont be seen unless you close and reopen Serial Monitor
 	LPrintln("Awake");

@@ -69,9 +69,9 @@ public:
 	/// @param[in]	analog_3_enabled		Bool | <true> | {true, false} | Enable A3 for reading
 	/// @param[in]	diff_0_enabled			Bool | <false> | {true, false} | Enable a differential measurement between A0 and A1
 	/// @param[in]	diff_1_enabled			Bool | <false> | {true, false} | Enable a differential measurement between A2 and A3
-	/// @param[in]	Fain				 	Set(Gain) | <0> | {0x0000("GAIN_TWOTHIRDS"), 0x0200("GAIN_ONE"), 0x0400("GAIN_TWO" ), 0x0600("GAIN_FOUR"), 0x0800("GAIN_EIGHT"), 0x0A00("GAIN_SIXTEEN")} | The gain setting for the ADS1115. Please do not change this number unless you are familiar with the ADS1115, as an incorrect setting will destroy the ADC!.
+	/// @param[in]	Gain				 	Set(Gain) | <0> | {0x0000("GAIN_TWOTHIRDS"), 0x0200("GAIN_ONE"), 0x0400("GAIN_TWO" ), 0x0600("GAIN_FOUR"), 0x0800("GAIN_EIGHT"), 0x0A00("GAIN_SIXTEEN")} | The gain setting for the ADS1115. Please do not change this number unless you are familiar with the ADS1115, as an incorrect setting will destroy the ADC!.
 	ADS1115(
-		const	byte		i2c_address			= ADS1015_ADDRESS, 
+		const	byte		i2c_address			= ADS1015_ADDRESS,
 		const	uint8_t		mux_port			= 255,
 		const	bool		analog_0_enabled	= true,
 		const	bool		analog_1_enabled	= true,
@@ -79,14 +79,14 @@ public:
 		const	bool		analog_3_enabled	= true,
 		const	bool		diff_0_enabled		= false,
 		const	bool		diff_1_enabled		= false,
-		const	Gain		gain				= Gain::GAIN_TWOTHIRDS 
+		const	Gain		gain				= Gain::GAIN_TWOTHIRDS
 	);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
 	ADS1115(JsonArrayConst p);
-	
+
 	/// Destructor
 	virtual ~ADS1115() = default;
 
@@ -134,5 +134,3 @@ REGISTER(Module, ADS1115, "ADS1115");
 }; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
-
-
