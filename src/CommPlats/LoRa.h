@@ -138,6 +138,8 @@ public:
 
 	uint8_t		get_address() const override { return address; }
 
+	int16_t     get_signal_strength() const { return signal_strength; }
+
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
