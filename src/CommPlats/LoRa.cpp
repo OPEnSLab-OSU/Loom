@@ -66,7 +66,20 @@ LoRa::LoRa(
 	manager.setRetries(retry_count);
   LMark;
 
-	driver.setModemConfig(RH_RF95::Bw500Cr45Sf128);
+	// Using default settings
+	//driver.setModemConfig(RH_RF95::Bw125Cr45Sf128);
+
+	// Setting bandwidth
+	driver.setSignalBandwidth(125000);
+  LMark;
+
+	// Setting Spreading Factor (2^10 = 1024)
+	driver.setSpreadingFactor(10); 
+  LMark;
+
+	// Setting Coding Rate (4/8)
+	driver.setCodingRate4(8);	
+  LMark;
 
 	driver.sleep();
 }
