@@ -37,7 +37,7 @@ void setup()
 {
 	Feather.begin_serial(true);
 	Feather.parse_config(json_config);
-	Feather.nRF().set_print_verbosity(Verbosity::V_HIGH);
+	getnRF(Feather).set_print_verbosity(Verbosity::V_HIGH);
 	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
