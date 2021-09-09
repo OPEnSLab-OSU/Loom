@@ -160,7 +160,7 @@ bool nRF::receive_blocking_impl(JsonObject json, uint max_wait_time)
 	return status;
 }
 
-// ///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 bool nRF::send_impl(JsonObject json, const uint8_t destination)
 {
 	char buffer[max_message_len];
@@ -171,6 +171,7 @@ bool nRF::send_impl(JsonObject json, const uint8_t destination)
 	RF24NetworkHeader header(destination);
   LMark;
 	bool is_sent = network->write( header, buffer, measureMsgPack(json) );
+	// bool is_sent = network->write( header, buffer, 120 );
 
 	print_module_label();
 	LPrintln("Send " , (is_sent) ? "successful" : "failed" );

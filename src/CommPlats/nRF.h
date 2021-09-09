@@ -90,7 +90,7 @@ public:
 	/// @param[in]	multicast_level		Int | <1> | [1-3] | How many levels to propogate message through heirarchy
 	/// @param[in] 	override_name
 	nRF(
-			const uint16_t		max_message_len		= 120,
+			const uint16_t		max_message_len		= 252,
 			const uint8_t		address 			= 0,
 			const uint8_t		data_rate			= 1,
 			const uint8_t		power_level			= 0,
