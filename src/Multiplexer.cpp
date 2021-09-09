@@ -14,6 +14,7 @@
 #include "Module_Factory.h"
 
 // I2C Sensor files
+#include "Sensors/I2C/ADS1115.h"
 #include "Sensors/I2C/AS7262.h"
 #include "Sensors/I2C/AS7263.h"
 #include "Sensors/I2C/AS7265X.h"
@@ -26,7 +27,6 @@
 #include "Sensors/I2C/MS5803.h"
 #include "Sensors/I2C/SHT31D.h"
 #include "Sensors/I2C/TMP007.h"
-#include "Sensors/I2C/TSL2561.h"
 #include "Sensors/I2C/TSL2591.h"
 #include "Sensors/I2C/ZXGesture.h"
 #include "Sensors/I2C/STEMMA.h"
@@ -50,13 +50,12 @@ const std::array<byte, 21> Multiplexer::known_addresses =
 	0x1F, ///< FXOS8700
 	0x20, ///< FXAS21002
 	0x21, ///< FXAS21002
-	0x29, ///< TSL2561 / TSL2591
+	0x29, ///< TSL2591
 	0x36, ///< STEMMA
-	0x39, ///< TSL2561
 	0x40, ///< TMP007
 	0x44, ///< SHT31D
 	0x45, ///< SHT31D
-	0x49, ///< TSL2561 / AS726X / AS7265X
+	0x49, ///< AS726X / AS7265X
 	0x68, ///< MPU6050
 	0x69, ///< MPU6050
 	0x70, ///< MB1232
@@ -150,19 +149,16 @@ I2CSensor* Multiplexer::generate_sensor_object(const byte i2c_address, const uin
 			case 0x20 : return new FXAS21002(i2c_address, port);	break;		// FXAS21002
 			case 0x21 : return new FXAS21002(i2c_address, port);	break;		// FXAS21002
 
-			case 0x29 : // TSL2561 / TSL2591
-				if (i2c_0x29 == I2C_Selection::L_TSL2561) return new TSL2561(i2c_address, port);	// TSL2561
+			case 0x29 : // TSL2591
 				if (i2c_0x29 == I2C_Selection::L_TSL2591) return new TSL2591(i2c_address, port);	// TSL2591
 			break;
 
 			case 0x36 : return new STEMMA(i2c_address, port);	break; // STEMMA
-			case 0x39 : return new TSL2561(i2c_address, port);	break;	// TSL2561
 			case 0x40 : return new TMP007(i2c_address, port);	break;	// TMP007
 			case 0x44 : return new SHT31D(i2c_address, port);	break;	// SHT31D
 			case 0x45 : return new SHT31D(i2c_address, port);	break;	// SHT31D
 
-			case 0x49 : // TSL2561 / AS726X / AS7265X
-				if (i2c_0x49 == I2C_Selection::L_TSL2561) return new TSL2561(i2c_address, port);	// TSL2561
+			case 0x49 : // AS726X / AS7265X
 				if (i2c_0x49 == I2C_Selection::L_AS7262 ) return new AS7262(i2c_address, port);		// AS7262
 				if (i2c_0x49 == I2C_Selection::L_AS7263 ) return new AS7263(i2c_address, port);		// AS7263
 				if (i2c_0x49 == I2C_Selection::L_AS7265X) return new AS7265X(i2c_address, port);	// AS7265X
