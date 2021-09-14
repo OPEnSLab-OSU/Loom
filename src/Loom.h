@@ -109,7 +109,6 @@ Loom::PCF8523& getPCF8523(const Loom::Manager& feather) { return *(feather.get<L
     #include "Sensors/I2C/MS5803.h"
     #include "Sensors/I2C/SHT31D.h"
     #include "Sensors/I2C/TMP007.h"
-    #include "Sensors/I2C/TSL2561.h"
     #include "Sensors/I2C/TSL2591.h"
     #include "Sensors/I2C/ZXGesture.h"
     #include "Sensors/I2C/STEMMA.h"

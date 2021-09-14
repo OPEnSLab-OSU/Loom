@@ -52,7 +52,7 @@ void loop()
 	Feather.display_data();
 
 	// Select on of the following
-	// Feather.nRF().send(01);		// Send to specific address
+	// getnRF(Feather).send(01);		// Send to specific address
 	getnRF(Feather).broadcast(); // Broadcast to all nRF devices
 
 	Feather.pause();	// Delay between interations set with 'interval' in config
