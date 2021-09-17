@@ -406,6 +406,18 @@ void Manager::free_modules()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+void Manager::pause(const uint32_t ms) const {
+	LMark;
+	if (ms > 7500) {
+		unsigned long start = millis();
+		while( (millis() - start) < ms) {
+			delay(1000);
+			LMark;
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
 void Manager::power_up()
 {
   LMark;

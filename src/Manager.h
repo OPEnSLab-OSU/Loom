@@ -207,11 +207,11 @@ public:
 	void		dispatch() { dispatch( internal_json() ); }
 
 	/// Delay milliseconds.
-	void		pause(const uint16_t ms) const { delay(ms); }
+	void		pause(const uint32_t ms) const;
 
 	/// Delay milliseconds based on interval member.
 	/// Uses interval member as value
-	void		pause() const { delay(interval); }
+	void		pause() const { pause(interval) }
 
 	/// Iterate over modules, calling power up method
 	void 		power_up();
