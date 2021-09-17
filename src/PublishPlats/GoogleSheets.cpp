@@ -168,6 +168,7 @@ bool GoogleSheets::m_serialize_internet_impl(const JsonObject json, Print& write
 			write.print('~');
 		}
 	}
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
