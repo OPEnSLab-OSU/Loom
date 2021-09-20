@@ -33,12 +33,12 @@ Loom::LIS3DH::LIS3DH(
 	inst_LIS3DH.settings.zAccelEnabled   = 1;
   LMark;
 
-	bool setup = inst_LIS3DH.begin();
-
-	if (!setup) active = false;
+	// will be 0 if begin() was successful
+	status_t setup = inst_LIS3DH.begin();
+	if (setup != 0) active = false;
 
 	print_module_label();
-	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
+	LPrintln("Initialize ", (setup == 0) ? "successful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
