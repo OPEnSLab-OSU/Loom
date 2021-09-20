@@ -211,7 +211,7 @@ public:
 
 	/// Delay milliseconds based on interval member.
 	/// Uses interval member as value
-	void		pause() const { pause(interval) }
+	void		pause() const { pause(interval); }
 
 	/// Iterate over modules, calling power up method
 	void 		power_up();

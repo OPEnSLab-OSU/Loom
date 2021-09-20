@@ -414,6 +414,8 @@ void Manager::pause(const uint32_t ms) const {
 			delay(1000);
 			LMark;
 		}
+	} else {
+		delay(ms);
 	}
 }
 
