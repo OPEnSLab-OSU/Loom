@@ -23,7 +23,6 @@ JsonObject get_module_data_object(JsonObject json, const char* module_name)
 		contents = json.createNestedArray("contents");
 	}
 
-	LPrintln("searching for module:", module_name);
 	// Find module object if it exists
 	JsonObject compenent;
   LMark;

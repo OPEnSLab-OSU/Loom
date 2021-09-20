@@ -618,9 +618,14 @@ bool Manager::parse_config_json(JsonObject config)
 	}
 
 	// Call module factory creating each module
-  for ( JsonVariant module : config["components"].as<JsonArray>()) {
+  for ( JsonVariant modulekey : config["components"].as<JsonArray>()) {
     LMark;
-    add_module(Registry<Module>::create(module));
+		Module* module = Registry<Module>::create(modulekey);
+		if (module == nullptr) {
+			print_device_label();
+			LPrintln("Invalid module key: '", modulekey["name"].as<String>(), "'");
+		}
+    add_module(module);
 	}
 	config_count = config["components"].as<JsonArray>().size();
 
