@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		K30.h
-/// @brief		File for K30 CO2 Sensor definition. 
+/// @brief		File for K30 CO2 Sensor definition.
 /// @author		Eli Winkelman and Kenneth Kang
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
@@ -39,11 +39,11 @@ class K30 : public SerialSensor
 
     //Using pin 12 for Rx and pin 11 for Tx
     Uart* K30_Serial = nullptr; //Sets up a virtual serial port
-    
+
     void sendSensorRequest(byte request[7]);
     int readSensorResponse(byte packet[7]);
-    
-    
+
+
 public:
 
 //=============================================================================
@@ -57,12 +57,12 @@ public:
             const char* module_name = "K30",
             int         num_samples = 1
          );
-    
+
     K30(JsonArrayConst p);
-    
+
     /// Destructor
     virtual ~K30() = default;
-    
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -76,11 +76,11 @@ public:
 
     void        measure() override;
     void        package(JsonObject json) override;
-    
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-REGISTER_NODEFAULT(Module, K30, "K30");
+REGISTER(Module, K30, "K30");
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom
