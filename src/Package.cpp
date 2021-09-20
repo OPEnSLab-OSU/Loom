@@ -17,17 +17,20 @@ namespace Loom {
 /// @param[in]		module_name		Name of module calling package
 JsonObject get_module_data_object(JsonObject json, const char* module_name)
 {
+	JsonObject data;
 	JsonArray contents = json["contents"];
 	if (contents.isNull()) {
 		contents = json.createNestedArray("contents");
 	}
 
+	LPrintln("searching for module:", module_name);
 	// Find module object if it exists
 	JsonObject compenent;
   LMark;
 	for (auto module_obj : contents) {
 		if ( strcmp(module_obj["module"], module_name) == 0 ) {
 			compenent = module_obj;
+			data = compenent["data"];
 			break;
 		}
 	}
@@ -35,7 +38,6 @@ JsonObject get_module_data_object(JsonObject json, const char* module_name)
 	// If module object does not exist yet
 	// create object, specify module name,
 	// and create data array
-	JsonObject data;
   LMark;
 	if (compenent.isNull()) {
 		compenent = contents.createNestedObject();
