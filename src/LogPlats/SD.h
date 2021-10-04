@@ -57,7 +57,7 @@ public:
 	///
 	/// @param[in]	enable_rate_filter			Bool | <true> | {true, false} | Whether or not to impose maximum update rate
 	/// @param[in]	min_filter_delay			Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
-	/// @param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
+	/// @param[in]	chip_select					Set(Int) | <11> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
 	/// @param[in]	default_file_base			String | <"test"> | null | File to write to if none explicity provided (should be <= 6 characters, don't add extension)
 	/// @param[in]	number_files				Bool | <true> | {true, false} | True to number files with run number, false to not.
 	SD(
