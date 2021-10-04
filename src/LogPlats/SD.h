@@ -63,7 +63,7 @@ public:
 	SD(
 			const bool			enable_rate_filter	= true,
 			const uint16_t		min_filter_delay	= 1000,
-			const byte			chip_select			= 10,
+			const byte			chip_select			= 11,
 			const char*			default_file		= "test",
 			const bool			number_files		= true
 
