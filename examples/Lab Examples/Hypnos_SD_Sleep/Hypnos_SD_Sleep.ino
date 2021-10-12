@@ -77,7 +77,7 @@ void loop()
 	if (rtc_flag) {
 		pinMode(23, OUTPUT);
 		pinMode(24, OUTPUT);
-		pinMode(10, OUTPUT);
+		pinMode(11, OUTPUT);
 
     // delay(1000);
 
@@ -99,7 +99,7 @@ void loop()
 	digitalWrite(6, LOW);  // Enable 5V rail
 	pinMode(23, INPUT);
 	pinMode(24, INPUT);
-	pinMode(10, INPUT);
+	pinMode(11, INPUT);
 
 	rtc_flag = false;
 	Feather.power_down();
