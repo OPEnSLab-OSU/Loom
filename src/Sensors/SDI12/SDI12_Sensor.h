@@ -46,20 +46,29 @@ namespace Loom {
 				0B00000000
 			};
 
+			// Comma seperated string of data readings from the SDI12 interface
+			String readData = "";
+
 			// Check if there is a activity at that set address
 			bool checkActive(char i);
 
 			// Scan the address space setting active addresses as taken
-			void scanAddresses();
+			void scanAddressSpace();
 
 			// Checks if there is an active sensor on the address
-			bool isTaken(byte i);
+			bool isTaken(char i);
 
 			// Sets the specified address to taken, returns false if already taken
-			bool setTaken(byte i);
+			bool setTaken(char i);
+
+			// Returns a char array of all the taken addresses 
+			char* getTaken();
 
 			//Convert the ascii characters to numbers between 0 and 61 inclusive to represent the 62 possible address
 			byte charToDec(char i);
+
+			// Send a generic command over SDI 12 to a specific address
+			String sendCommand(char addr, String command);
 
 		public:
 			
@@ -85,6 +94,8 @@ namespace Loom {
 				void package(JsonObject json) override;
 				void power_up() override;
 				void power_down() override;
+
+				
 
 			//=============================================================================
 			///@name	PRINT INFORMATION
