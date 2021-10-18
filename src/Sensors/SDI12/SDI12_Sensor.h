@@ -15,6 +15,7 @@
 #include <SDI12.h>
 #include <Arduino.h>
 
+
 namespace Loom {
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -92,10 +93,7 @@ namespace Loom {
 
 				void measure() override;
 				void package(JsonObject json) override;
-				void power_up() override;
-				void power_down() override;
-
-				
+				void power_up() override;				
 
 			//=============================================================================
 			///@name	PRINT INFORMATION

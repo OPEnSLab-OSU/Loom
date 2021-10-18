@@ -12,6 +12,7 @@
 
 #include "SDI12_Sensor.h"
 #include <Arduino.h>
+#include <string.h>
 
 using namespace Loom;
 
@@ -160,7 +161,9 @@ void SDI12Sensor::measure(){
 
 			// If the length of the returned data was larger than a given value
 			if(response.length() > 1){
-				readData += response + ",";
+
+				// [SDI12 Address]:[Sensor Data],...
+				readData += activeAddr[i] +":" + response + ",";
 			}
 		}
 		else{
@@ -208,6 +211,23 @@ String SDI12Sensor::sendCommand(char addr, String command){
 
 	// If no data was recieived return an empty string
 	return "";
+}
+
+void K30::print_measurements() const {
+
+	// Print the name of the module
+	print_module_label();
+	char * splitSensorReadings;
+	splitSensorReadings = strtok(readData.c_str(), ",");
+
+	LPrintln("Measurements: ");
+
+	while (splitSensorReadings != NULL){
+		
+		LPrintln(splitSensorReadings);
+		splitSensorReadings = strtok(NULL, ",")
+	}
+	LPrintln()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
