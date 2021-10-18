@@ -13,6 +13,7 @@
 #include "SDI12_Sensor.h"
 #include <Arduino.h>
 #include <string.h>
+#include <vector>
 
 using namespace Loom;
 
@@ -217,17 +218,48 @@ void K30::print_measurements() const {
 
 	// Print the name of the module
 	print_module_label();
-	char * splitSensorReadings;
-	splitSensorReadings = strtok(readData.c_str(), ",");
+    vector<string> out;
+    tokenize(readData, ',', out);
 
-	LPrintln("Measurements: ");
 
-	while (splitSensorReadings != NULL){
-		
-		LPrintln(splitSensorReadings);
-		splitSensorReadings = strtok(NULL, ",")
+	// Print out the sensor and address combo
+	for (size_t = 0; i < out.size(); i++){
+		LPrintLn(out[i]);
 	}
-	LPrintln()
+}
+
+void K30::package(JsonObject json){
+	LMark;
+	JsonObject data = get_module_data_object(json, module_name);
+
+	// Comma seperated segments
+	vector<string> sensors;
+    tokenize(readData, ',', sensors);
+
+	// Colon seperated address and sensor reading
+	for (size_t = 0; i < out.size(); i++){
+		vector<string> splitSensor;
+		tokenize(out[i], ':', splitSensor);
+
+
+		// JSON Output
+		data[splitSensor[0]] = splitSensor[1];
+	}
+
+}
+
+// Splits a string at a delimiter and returns a vector
+void tokenize(std::string const &str, const char delim,
+            std::vector<std::string> &out)
+{
+    size_t start;
+    size_t end = 0;
+ 
+    while ((start = str.find_first_not_of(delim, end)) != std::string::npos)
+    {
+        end = str.find(delim, start);
+        out.push_back(str.substr(start, end - start));
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

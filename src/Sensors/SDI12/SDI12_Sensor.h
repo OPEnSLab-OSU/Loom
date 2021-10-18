@@ -14,6 +14,7 @@
 #include "../Sensor.h"
 #include <SDI12.h>
 #include <Arduino.h>
+#include <vector>
 
 
 namespace Loom {
@@ -102,10 +103,7 @@ namespace Loom {
 				void print_measurements() const override;
 
 		private:
-
-			
-
-	};
+			void tokenize(std::string const &str, const char delim, std::vector<std::string> &out);
 
 	REGISTER(Module, SDI12_Sensor, "SD12");
 	///////////////////////////////////////////////////////////////////////////////
