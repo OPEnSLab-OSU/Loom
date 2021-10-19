@@ -38,7 +38,7 @@ ADS1114::ADS1114(
 	// Gain is an internal value in this driver, so this function
 	// does not actually write to the I2C bus
 	LPrintln("setting gain: ",(uint32_t)gain);
-	ads1114.setGain(static_cast<adsGain_t>(static_cast<uint32_t>(gain)));
+	ads1114.setGain(static_cast<ads1114Gain_t>(static_cast<uint32_t>(gain)));
 	ads1114.begin();
 }
 
