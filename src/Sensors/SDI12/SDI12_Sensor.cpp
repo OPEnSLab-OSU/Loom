@@ -11,29 +11,31 @@
 #ifdef LOOM_INCLUDE_SENSORS
 
 #include "SDI12_Sensor.h"
-#include <Arduino.h>
-#include <string.h>
-#include <vector>
 
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-SDI12Sensor::SDI12Sensor(const char* module_name, const uint8_t	num_samples, int sdiPin) 
-: Sensor(module_name, num_samples), SDI12Interface(sdiPin) {
-	SDI12Interface.begin();
-	delay(500); // Wait for things to settle
+SDI12Sensor::SDI12Sensor(
+		const uint8_t			sdiPin,
+		const char*				module_name,
+		const uint8_t			num_samples 
+	) 
+	: Sensor(module_name, num_samples), 
+	mySDI12(sdiPin) {
 
-	// Spray the entire list of addresses to find which ones are active
-	scanAddressSpace();
-}
+		// Init the SDI12 sens
+		mySDI12.begin();
+		delay(100);
 
-// Basic .begin call to the SDI 12 interface
-void SDI12Sensor::power_up(){
-	
-}
+		// Get the list of active addresses
+		scanAddressSpace();
+	}
 
 //Scan the entire address space to find active devices, should take about 2 seconds cause SDI12 is slow
 void SDI12Sensor::scanAddressSpace(){
+	LPrintln("Scanning SDI12 Address Space this make take a little while...");
+
+	// Scan over the characters that can be used as addresses for refrencing the sensors
 	for (char i = '0'; i <= '9'; i++){
 		if(checkActive(i)){
 			setTaken(i);
@@ -60,7 +62,7 @@ char* SDI12Sensor::getTaken(){
 
 	// Quickly init the addrs list with some character outside the normal range
 	for(int j = 0; j < 62; j++){
-		addrs[j] = '-'
+		addrs[j] = '-';
 	}
 
 	int count = 0;
@@ -85,6 +87,8 @@ char* SDI12Sensor::getTaken(){
 		}
 	}
 	LMark;
+
+	LPrintln("Active SDI-12 Addresses: ", addrs);
 	return addrs;
 }
 
@@ -99,13 +103,12 @@ bool SDI12Sensor::isTaken(byte i){
 
 // Check if there is a device at the address
 bool SDI12Sensor::checkActive(char i){
-
 	// Attempt to contact the sensor 3 times
 	for (int j =0; j < 3; j++){
-		if(sendCommand(i, "!").length > 1) return true;
+		if(sendCommand(i, "!").length() > 0) return true;
 	}
 
-	SDI12Interface.clearBuffer();
+	mySDI12.clearBuffer();
 	return false;
 }
 
@@ -116,7 +119,7 @@ bool SDI12Sensor::setTaken(byte i){
 	i = charToDec(i);
 	byte j = i / 8; // Byte #
 	byte k = i % 8; // Bit #
-	addressRegister[j] |= (1 << k)
+	addressRegister[j] |= (1 << k);
 	return !initStatus;
 }
 
@@ -129,55 +132,7 @@ byte SDI12Sensor::charToDec(char i){
 	else return i;
 }
 
-// Measures and then Reads the most recent measurements from the sensor
-void SDI12Sensor::measure(){
-	String response = "";
-	readData = "";
-	char* activeAddrs = getTaken();
-	for(int i = 0; i < sizeof(activeAddrs)/sizeof(activeAddrs[0]); i++){
-		// Send the measure command to the specified address as long as it is a valid address
-		if(activeAddrs[i] != '-')
-		{
-			// Find out the wait time for the sensor
-			response = sendCommand(activeAddrs[i], "M!");
-
-			// How long we need to wait for data in seconds
-			unsigned int waitTime = 0;
-			waitTime = response.substring(1,4).toInt();
-
-			// When we got the data
-			unsigned long timerStart = millis();
-
-			// Hold until the time is complete or the sensor interrupts us
-			while((millis() - timerStart) < (1000*wait)){
-				if(SDI12Interface.available()){
-					SDI12Interface.clearBuffer();
-					break;
-				}
-			}
-
-			// Clear buffer before sending data request
-			SDI12Interface.clearBuffer();
-
-			// Requests the data from the last measurement
-			response = sendCommand(activeAddr[i], "D0!");
-
-			// If the length of the returned data was larger than a given value
-			if(response.length() > 1){
-
-				// [SDI12 Address]:[Sensor Data],...
-				readData += activeAddr[i] +":" + response + ",";
-			}
-		}
-		else{
-			break;
-		}
-		
-	}
-
-}
-
-// Sends a command over SDI12 to a device and returns the result
+// Sends a command over SDI12 to a device and returns the first message
 String SDI12Sensor::sendCommand(char addr, String command){
 	String fullCommand = "";
 	String commandResult = "";
@@ -187,17 +142,49 @@ String SDI12Sensor::sendCommand(char addr, String command){
 
 
 	// Send the given command to the interface
-	SDI12Interface.sendCommand(fullCommand);
+	mySDI12.sendCommand(fullCommand);
+	LMark;
+	// Delay for 30ms cause SDI12 is slow af
+	delay(30);
+
+	commandResult = read_next_message();
+
+	// Clear the serial buffer
+	mySDI12.clearBuffer();
+
+	return commandResult;
+
+	// If no data was recieived return an empty string
+	return "";
+}
+
+// Sends a command over SDI12 to a device and returns the entire buffer
+String SDI12Sensor::sendCommand_allBuffer(char addr, String command){
+	String fullCommand = "";
+	String commandResult = "";
+
+	fullCommand += addr;
+	fullCommand += command; // [address][command]
+
+
+	// Send the given command to the interface
+	mySDI12.sendCommand(fullCommand);
 	LMark;
 	// Delay for 30ms cause SDI12 is slow af
 	delay(30);
 
 	// While there is data to be read, read it
-	while (SDI12Interface.available()){
-		char c = SDI12Interface.read();
+	while (mySDI12.available()){
+		char c = mySDI12.read();
 
 		// Make sure the character is not a new line character
-		if ((c != '\n') && (c != '\r')){
+		if (c == '\n') {
+			commandResult += "<LF>";
+		}
+		else if (c == '\r'){
+			commandResult += "<CR>";
+		}
+		else{
 			commandResult += c;
 			delay(10); // Wait 10ms because it takes rougly 7.5ms per character
 		}
@@ -205,10 +192,10 @@ String SDI12Sensor::sendCommand(char addr, String command){
 	LMark;
 
 	// Clear the serial buffer
-	SDI12Interface.clearBuffer();
+	mySDI12.clearBuffer();
 
 	// If data was actually stored in the commandResult then return the result
-	if(commandResult.length > 1){
+	if(commandResult.length() > 1){
 		return commandResult;
 	}
 
@@ -216,53 +203,33 @@ String SDI12Sensor::sendCommand(char addr, String command){
 	return "";
 }
 
-void K30::print_measurements() const {
+/**
+ * Read next message in the message queue 
+ */ 
+String SDI12Sensor::read_next_message(){
+	String sdiResponse = "";
 
-	// Print the name of the module
-	print_module_label();
-    vector<string> out;
-    tokenize(readData, ',', out);
+	while (mySDI12.available()){
+		char c = mySDI12.read();
 
+		// If we reached the end of the line break out of the loop
+		if(c == '\n'){
+			break;
+		}
 
-	// Print out the sensor and address combo
-	for (size_t = 0; i < out.size(); i++){
-		LPrintLn(out[i]);
+		// Add the read byte to the response
+		sdiResponse += c;
+
+		// Wait 20ms cause SDI12 is slow
+		delay(20);
 	}
-}
-
-void K30::package(JsonObject json){
-	LMark;
-	JsonObject data = get_module_data_object(json, module_name);
-
-	// Comma seperated segments
-	vector<string> sensors;
-    tokenize(readData, ',', sensors);
-
-	// Colon seperated address and sensor reading
-	for (size_t = 0; i < out.size(); i++){
-		vector<string> splitSensor;
-		tokenize(out[i], ':', splitSensor);
-
-
-		// JSON Output
-		data[splitSensor[0]] = splitSensor[1];
+	if(sdiResponse[sdiResponse.length()-1] == '\r'){
+		sdiResponse[sdiResponse.length()-1] = '\0'; // Replace carriage return with null terminator byte
 	}
 
+	return sdiResponse;
 }
 
-// Splits a string at a delimiter and returns a vector
-void tokenize(std::string const &str, const char delim,
-            std::vector<std::string> &out)
-{
-    size_t start;
-    size_t end = 0;
- 
-    while ((start = str.find_first_not_of(delim, end)) != std::string::npos)
-    {
-        end = str.find(delim, start);
-        out.push_back(str.substr(start, end - start));
-    }
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 
