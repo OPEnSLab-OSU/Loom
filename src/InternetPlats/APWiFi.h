@@ -8,6 +8,7 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_WIFI
 #pragma once
 
 #include "Module.h"
@@ -19,6 +20,8 @@
 #undef max
 #include <memory>
 
+namespace Loom {
+
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// WiFi InternetPlat
@@ -28,7 +31,7 @@
 /// - [Dependency: WiFi101](https://github.com/arduino-libraries/WiFi101)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_APWiFi : public LoomInternetPlat
+class APWiFi : public InternetPlat
 {
 
 protected:
@@ -47,17 +50,15 @@ public:
 	/// Constructor
 	/// @param[in]	ssid	WiFi network name
 	/// @param[in]	pass	WiFi network password. Leave as empty string if network has no password.
-	Loom_APWiFi(
-		LoomManager* manager
-	);
+	APWiFi();
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_APWiFi(LoomManager* manager, JsonArrayConst p );
+	APWiFi(JsonArrayConst p);
 
 	/// Destructor
-	virtual ~Loom_APWiFi() = default;
+	virtual ~APWiFi() = default;
 
 	void second_stage_ctor() override;
 
@@ -94,7 +95,7 @@ public:
 
 private:
 
-	LoomInternetPlat::UDPPtr open_socket(const uint port) override;
+	InternetPlat::UDPPtr open_socket(const uint port) override;
 
 	/// Package IP with ID for MaxMSP implementation
 	void			package(JsonObject json) override;
@@ -110,3 +111,11 @@ private:
 	virtual ClientSession	connect_to_domain(const char* domain) override {}
 	virtual ClientSession	connect_to_ip(const IPAddress& ip, const uint16_t port) override {}
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, APWiFi, "APWiFi");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_WIFI
