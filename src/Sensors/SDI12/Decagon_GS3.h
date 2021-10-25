@@ -12,6 +12,7 @@
 #pragma once
 
 #include "SDI12_Sensor.h"
+#include <SDI12.h>
 
 namespace Loom {
 
@@ -32,6 +33,7 @@ protected:
 	float		dielec_perm;	///< Measured dielectric permativity
 	float		temp;			///< Measured temperature
 	float		elec_cond;		///< Measure electrical conductivity
+	SDI12		mySDI12;
 
 public:
 	

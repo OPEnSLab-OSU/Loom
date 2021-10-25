@@ -83,7 +83,7 @@ namespace Loom {
 				/// @param[in]	module_type		Type of the module (provided by derived classes)
 				/// @param[in]	num_samples		The number of samples to take and average
 				/// @param[in]  sdiPin			Pin for the SDI12 serial to origininate from
-				SDI12Sensor(const char* module_name = "SDI12", const uint8_t num_samples = 1, int sdiPin);
+				SDI12Sensor(int sdiPin, const char* module_name, const uint8_t num_samples = 1);
 
 				/// Destructor
 				virtual ~SDI12Sensor() = default;
@@ -104,8 +104,6 @@ namespace Loom {
 
 		private:
 			void tokenize(std::string const &str, const char delim, std::vector<std::string> &out);
-
-	REGISTER(Module, SDI12_Sensor, "SD12");
 	///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom
