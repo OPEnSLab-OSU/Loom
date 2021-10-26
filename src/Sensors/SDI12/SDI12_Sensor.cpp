@@ -35,7 +35,7 @@ SDI12Sensor::SDI12Sensor(
 void SDI12Sensor::scanAddressSpace(){
 	LPrintln("Scanning SDI12 Address Space this make take a little while...");
 
-	// Scan over the characters that can be used as addresses for refrencing the sensors
+	// Scan over the characters that can be used as addresses for referencing the sensors
 	for (char i = '0'; i <= '9'; i++){
 		if(checkActive(i)){
 			setTaken(i);
