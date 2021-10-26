@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Decagon_GS3.h
-/// @brief		File for DecagonGS3 definition. Incomplete.
-/// @author		Luke Goertzen
-/// @date		2019
+/// @brief		File for DecagonGS3 definition.
+/// @author		Will Richards
+/// @date		2021
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -12,6 +12,7 @@
 #pragma once
 
 #include "SDI12_Sensor.h"
+#include <SDI12.h>
 
 namespace Loom {
 
@@ -29,9 +30,20 @@ class DecagonGS3 : public SDI12Sensor
 
 protected:
 
-	float		dielec_perm;	///< Measured dielectric permativity
-	float		temp;			///< Measured temperature
-	float		elec_cond;		///< Measure electrical conductivity
+	uint8_t		pinAddr;
+
+	float		dielec_perm = 0;	///< Measured dielectric permativity
+	float		temp = 0;			///< Measured temperature
+	float		elec_cond = 0;		///< Measure electrical conductivity
+	
+	String		sdiResponse = "";
+	String		myCommand = "";
+	char		buf[20];
+	char*		p;
+	char		sensorAddress = -1;
+
+	void parse_results();
+
 
 public:
 	
@@ -43,6 +55,7 @@ public:
 	///
 	/// @param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	DecagonGS3(
+			const uint8_t	pinAddr = 11,
 			const uint8_t	num_samples	= 1
 		);
 
@@ -61,6 +74,9 @@ public:
 	void		measure() override;
 	void		package(JsonObject json) override;
 
+	void		power_up() override;
+	void		power_down() override;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -73,8 +89,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// Uncomment once implemented
-// REGISTER(Module, DecagonGS3, "DecagonGS3");
+REGISTER(Module, DecagonGS3, "DecagonGS3");
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom
