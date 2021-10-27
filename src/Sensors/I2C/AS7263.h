@@ -13,7 +13,7 @@
 
 #include "I2C_Sensor.h"
 
-#include <AS726X.h>
+#include <Adafruit_AS726x.h>
 
 namespace Loom {
 
@@ -35,19 +35,20 @@ class AS7263 : public I2CSensor
 {
 protected:
 
-	AS726X		inst_AS7263;		///< Underlying AS7263 sensor manager instance
+	// AS726X		inst_AS7263;		///< Underlying AS7263 sensor manager instance
+	Adafruit_AS726x		inst_AS7263;		///< Underlying AS7263 sensor manager instance
 
 	uint16_t	nir_vals[6];		///< Measured near-infra-red band values (r,s,t,u,v,w).
 									///< Units: counts / (μW/cm^2).
 
-	
+
 	bool		use_bulb;			///< Whether or not to use bulb
 	uint8_t		gain;				///< Gain setting
 	uint8_t		mode;				///< Sensor read mode
 	uint8_t		integration_time;	///< Integration time setting
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -109,7 +110,7 @@ public:
 	///		1: Continuous reading of RTUX
 	///		2: Continuous reading of all channels (power-on default)
 	///		3: One-shot reading of all channels
-	void		set_mode(const uint8_t mode) { inst_AS7263.setMeasurementMode(mode); }
+	// void		set_mode(const uint8_t mode) { inst_AS7263.setMeasurementMode(mode); }
 
 	/// Set integration time.
 	/// Time will be 2.8ms * [integration value]  (0-255), 50 is default
@@ -127,4 +128,3 @@ REGISTER(Module, AS7263, "AS7263");
 }; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
-

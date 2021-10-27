@@ -14,7 +14,8 @@
 #include "I2C_Sensor.h"
 
 #undef enableInterrupt
-#include <AS726X.h>
+// #include <AS726X.h>
+#include <Adafruit_AS726x.h>
 
 namespace Loom {
 
@@ -36,7 +37,8 @@ class AS7262 : public I2CSensor
 {
 protected:
 
-	AS726X		inst_AS7262;		///< Underlying AS7262 sensor manager instance
+	// AS726X		inst_AS7262;		///< Underlying AS7262 sensor manager instance
+	Adafruit_AS726x		inst_AS7262;		///< Underlying AS7262 sensor manager instance
 
 	uint16_t	color_vals[6];		///< Measured color band values (violet, blue, green, yellow, orange, red).
 									///< Units: counts / (μW/cm^2).
@@ -96,7 +98,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// @param[in]	enable	Whether or not to enable 
+	/// @param[in]	enable	Whether or not to enable
 	void		enable_bulb(const bool enable) { use_bulb = enable; }
 
 	/// Set gain.
@@ -109,7 +111,7 @@ public:
 	///		1: Continuous reading of GYOR
 	///		2: Continuous reading of all channels (power-on default)
 	///		3: One-shot reading of all channels
-	void		set_mode(const uint8_t mode) { inst_AS7262.setMeasurementMode(mode); }
+	// void		set_mode(const uint8_t mode) { inst_AS7262.setMeasurementMode(mode); }
 
 	/// Set integration time.
 	/// Time will be 2.8ms * [integration value]  (0-255), 50 is default
@@ -127,4 +129,3 @@ REGISTER(Module, AS7262, "AS7262");
 }; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
-

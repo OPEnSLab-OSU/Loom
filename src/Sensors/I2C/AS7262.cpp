@@ -32,7 +32,11 @@ AS7262::AS7262(
 
 {
   LMark;
-	inst_AS7262.begin(Wire, gain, mode);
+	// inst_AS7262.begin(Wire, gain, mode);
+	inst_AS7262.begin(&Wire);
+	inst_AS7262.setGain(gain);
+	inst_AS7262.setConversionType(mode);
+
 	inst_AS7262.setIntegrationTime(integration_time);
 
 	print_module_label();
@@ -69,18 +73,29 @@ void AS7262::print_measurements() const
 void AS7262::measure()
 {
   LMark;
-	if (use_bulb) {
-		inst_AS7262.takeMeasurementsWithBulb();
-	} else {
-		inst_AS7262.takeMeasurements();
+	// if (use_bulb) {
+	// 	inst_AS7262.takeMeasurementsWithBulb();
+	// } else {
+	// 	inst_AS7262.takeMeasurements();
+	// }
+	inst_AS7262.startMeasurement();
+	while(!inst_AS7262.dataReady()){
+		delay(5);
 	}
 
-	color_vals[0] = inst_AS7262.getViolet();
-	color_vals[1] = inst_AS7262.getBlue();
-	color_vals[2] = inst_AS7262.getGreen();
-	color_vals[3] = inst_AS7262.getYellow();
-	color_vals[4] = inst_AS7262.getOrange();
-	color_vals[5] = inst_AS7262.getRed();
+	color_vals[0] = inst_AS7262.readViolet();
+	color_vals[1] = inst_AS7262.readBlue();
+	color_vals[2] = inst_AS7262.readGreen();
+	color_vals[3] = inst_AS7262.readYellow();
+	color_vals[4] = inst_AS7262.readOrange();
+	color_vals[5] = inst_AS7262.readRed();
+
+	// color_vals[0] = inst_AS7262.getViolet();
+	// color_vals[1] = inst_AS7262.getBlue();
+	// color_vals[2] = inst_AS7262.getGreen();
+	// color_vals[3] = inst_AS7262.getYellow();
+	// color_vals[4] = inst_AS7262.getOrange();
+	// color_vals[5] = inst_AS7262.getRed();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

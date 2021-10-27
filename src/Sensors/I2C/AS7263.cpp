@@ -31,7 +31,8 @@ AS7263::AS7263(
 	, integration_time(integration_time)
 {
   LMark;
-	inst_AS7263.begin(Wire, gain, mode);
+	// inst_AS7263.begin(Wire, gain, mode);
+	inst_AS7263.begin(&Wire);
 	inst_AS7263.setIntegrationTime(integration_time);
 
 	print_module_label();
@@ -68,18 +69,30 @@ void AS7263::print_measurements() const
 void AS7263::measure()
 {
   LMark;
-	if (use_bulb) {
-		inst_AS7263.takeMeasurementsWithBulb();
-	} else {
-		inst_AS7263.takeMeasurements();
+	// if (use_bulb) {
+	// 	inst_AS7263.takeMeasurementsWithBulb();
+	// } else {
+	// 	inst_AS7263.takeMeasurements();
+	// }
+
+	inst_AS7263.startMeasurement();
+	while(!inst_AS7263.dataReady()){
+		delay(5);
 	}
 
-	nir_vals[0] = inst_AS7263.getR();
-	nir_vals[1] = inst_AS7263.getS();
-	nir_vals[2] = inst_AS7263.getT();
-	nir_vals[3] = inst_AS7263.getU();
-	nir_vals[4] = inst_AS7263.getV();
-	nir_vals[5] = inst_AS7263.getW();
+	nir_vals[0] = inst_AS7263.readChannel(0x08);
+	nir_vals[1] = inst_AS7263.readChannel(0x0A);
+	nir_vals[2] = inst_AS7263.readChannel(0x0C);
+	nir_vals[3] = inst_AS7263.readChannel(0x0E);
+	nir_vals[4] = inst_AS7263.readChannel(0x10);
+	nir_vals[5] = inst_AS7263.readChannel(0x12);
+
+	// nir_vals[0] = inst_AS7263.getR();
+	// nir_vals[1] = inst_AS7263.getS();
+	// nir_vals[2] = inst_AS7263.getT();
+	// nir_vals[3] = inst_AS7263.getU();
+	// nir_vals[4] = inst_AS7263.getV();
+	// nir_vals[5] = inst_AS7263.getW();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
