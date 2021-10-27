@@ -65,7 +65,7 @@ bool SD::update_filename(const char* default_file, const bool number_files)
 		}
 
 		const uint8_t base_len = strlen(filename);
-		snprintf(filename, 13, "%s00.csv", filename);
+		snprintf(filename, 13, "%s000.csv", filename);
 
 		// Determine next file number
 		while (sd.exists(filename)) {
