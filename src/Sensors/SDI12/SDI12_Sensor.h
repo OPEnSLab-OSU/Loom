@@ -2,7 +2,7 @@
 ///
 /// @file		SDI12_Sensor.h
 /// @brief		File for SDI12Sensor definition. Incomplete.
-/// @author		
+/// @author
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
@@ -61,7 +61,7 @@ protected:
 	String read_next_message(); // Read the next message out of the buffer
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -84,7 +84,7 @@ public:
 /*@{*/ //======================================================================
 	String sendCommand(char addr, String command);	// Returns just the next command in the buffer
 	String sendCommand_allBuffer(char addr, String command);	// Returns the entire buffer
-	char* getTaken();	// Returns a char array of all the taken addresses 
+	char* getTaken();	// Returns a char array of all the taken addresses
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -98,4 +98,3 @@ private:
 }; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
-

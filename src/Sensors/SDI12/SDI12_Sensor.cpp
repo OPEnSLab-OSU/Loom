@@ -18,9 +18,9 @@ using namespace Loom;
 SDI12Sensor::SDI12Sensor(
 		const uint8_t			sdiPin,
 		const char*				module_name,
-		const uint8_t			num_samples 
-	) 
-	: Sensor(module_name, num_samples), 
+		const uint8_t			num_samples
+	)
+	: Sensor(module_name, num_samples),
 	mySDI12(sdiPin) {
 
 		// Init the SDI12 sens
@@ -204,8 +204,8 @@ String SDI12Sensor::sendCommand_allBuffer(char addr, String command){
 }
 
 /**
- * Read next message in the message queue 
- */ 
+ * Read next message in the message queue
+ */
 String SDI12Sensor::read_next_message(){
 	String sdiResponse = "";
 
