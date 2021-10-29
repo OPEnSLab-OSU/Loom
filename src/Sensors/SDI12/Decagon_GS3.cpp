@@ -28,11 +28,11 @@ DecagonGS3::DecagonGS3(const uint8_t addr, const uint8_t num_samples)
 
 	// Check if the sensor address actually changed
 	if(sensorAddress != '-'){
-		Serial.print("\n=== Decagon initialized successfully ===\n");
+		Serial.print("\n=== Decagon initialized successfully ===\n");  
   	} else {
-    	Serial.print("\n=== Decagon failed to initialize ===\n");
+    	Serial.print("\n=== Decagon failed to initialize ===\n"); 
   	}
-
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ void DecagonGS3::package(JsonObject json)
 
 /**
  * Called by the module manager when the feather needs to wake back up
- */
+ */ 
 void DecagonGS3::power_up(){
 	pinMode(pinAddr, OUTPUT);
 }
@@ -91,7 +91,7 @@ void DecagonGS3::power_up(){
 
 /**
  * Called by the module manager when the feather is sleeping
- */
+ */ 
 void DecagonGS3::power_down(){
 	pinMode(pinAddr, INPUT);
 }

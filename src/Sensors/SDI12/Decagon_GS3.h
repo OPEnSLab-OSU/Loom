@@ -14,8 +14,6 @@
 #include "SDI12_Sensor.h"
 #include <SDI12.h>
 
-#define DATAPIN 11
-
 namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -31,23 +29,13 @@ class DecagonGS3 : public SDI12Sensor
 {
 
 protected:
-	SDI12 inst_GS3;
-
-	String sdiResponse;
-	String command;
-	// address is a char as per the SDI-12 protocol
-	// you'll have to cast it to int if you want to display it properly
-	char address;
-
-	char buf[20];
-	char* p;
 
 	uint8_t		pinAddr;
 
 	float		dielec_perm = 0;	///< Measured dielectric permativity
 	float		temp = 0;			///< Measured temperature
 	float		elec_cond = 0;		///< Measure electrical conductivity
-
+	
 	String		sdiResponse = "";
 	String		myCommand = "";
 	char		buf[20];
@@ -58,7 +46,7 @@ protected:
 
 
 public:
-
+	
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -98,18 +86,6 @@ public:
 
 private:
 
-
-	// tokenize the Decagon sdiResponse into the three meaningful float data measurements
-	void parse_results();
-
-	// reads the entire available Decagon buffer (may read multiple messages)
-	void read_buffer();
-
-	// reads just the next message in the Decagon buffer, stopping at CRLF
-	void read_next_message();
-
-	// broadcast query to SDI12 sensors, set sensor_address to the first response
-	void get_address();
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -119,3 +95,5 @@ REGISTER(Module, DecagonGS3, "DecagonGS3");
 }; // namespace Loom
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
+
+
