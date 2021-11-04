@@ -2,8 +2,8 @@
 ///
 /// @file		SDI12_Sensor.cpp
 /// @brief		File for SDI12Sensor implementation.
-/// @author		Luke Goertzen
-/// @date		2019
+/// @author		Will Richards
+/// @date		2021
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -57,38 +57,31 @@ void SDI12Sensor::scanAddressSpace(){
 }
 
 // Returns a list will all active addresses at the front, that way when a 0 value is hit we can break
-char* SDI12Sensor::getTaken(){
-	static char addrs[62];
+std::vector<char> SDI12Sensor::getTaken(){
+	std::vector<char> addrs;
 
-	// Quickly init the addrs list with some character outside the normal range
-	for(int j = 0; j < 62; j++){
-		addrs[j] = '-';
-	}
-
-	int count = 0;
 	for (char i = '0'; i <= '9'; i++){
 		if(isTaken(i)){
-			addrs[count] = i;
-			count++;
+			addrs.push_back(i);
 		}
 	}
 	LMark;
 	for(char i = 'a'; i <= 'z'; i++){
 		if(isTaken(i)){
-			addrs[count] = i;
-			count++;
+			addrs.push_back(i);
 		}
 	}
 	LMark;
 	for (char i = 'A'; i <= 'Z'; i++){
 		if(isTaken(i)){
-			addrs[count] = i;
-			count++;
+			addrs.push_back(i);
 		}
 	}
 	LMark;
 
-	LPrintln("Active SDI-12 Addresses: ", addrs);
+	for (char i : addrs){
+		LPrintln("Active SDI-12 Address: ", i);
+	}
 	return addrs;
 }
 
@@ -186,7 +179,7 @@ String SDI12Sensor::sendCommand_allBuffer(char addr, String command){
 		}
 		else{
 			commandResult += c;
-			delay(10); // Wait 10ms because it takes rougly 7.5ms per character
+			delay(10); // Wait 10ms because it takes roughly 7.5ms per character
 		}
 	}
 	LMark;
