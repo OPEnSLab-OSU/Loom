@@ -116,6 +116,8 @@ Loom::PCF8523& getPCF8523(const Loom::Manager& feather) { return *(feather.get<L
     #include "Sensors/SDI12/Decagon_5TM.h"
     #include "Sensors/SDI12/Decagon_GS3.h"
 
+    #include "Sensors/SDI12/Teros.h"
+
     #include "Sensors/SPI/MAX31855.h"
     #include "Sensors/SPI/MAX31856.h"
 

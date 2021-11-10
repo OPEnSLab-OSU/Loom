@@ -27,7 +27,7 @@ DecagonGS3::DecagonGS3(const uint8_t addr, const uint8_t num_samples)
 
 
 	// Check if the sensor address actually changed
-	if(sensorAddress != '-'){
+	if(sensorAddress != -1){
 		Serial.print("\n=== Decagon initialized successfully ===\n");  
   	} else {
     	Serial.print("\n=== Decagon failed to initialize ===\n"); 

@@ -2,8 +2,8 @@
 ///
 /// @file		SDI12_Sensor.h
 /// @brief		File for SDI12Sensor definition. Incomplete.
-/// @author		
-/// @date		2019
+/// @author		Will Richards
+/// @date		2021
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -13,6 +13,7 @@
 
 #include "../Sensor.h"
 #include <SDI12.h>
+#include <vector>
 
 namespace Loom {
 
@@ -84,7 +85,7 @@ public:
 /*@{*/ //======================================================================
 	String sendCommand(char addr, String command);	// Returns just the next command in the buffer
 	String sendCommand_allBuffer(char addr, String command);	// Returns the entire buffer
-	char* getTaken();	// Returns a char array of all the taken addresses 
+	std::vector<char> getTaken();	// Returns a char array of all the taken addresses 
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
