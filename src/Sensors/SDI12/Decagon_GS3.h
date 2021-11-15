@@ -37,7 +37,6 @@ protected:
 	float		elec_cond = 0;		///< Measure electrical conductivity
 	
 	String		sdiResponse = "";
-	String		myCommand = "";
 	char		buf[20];
 	char*		p;
 	char		sensorAddress = -1;

@@ -27,6 +27,17 @@ namespace Loom {
 class Decagon5TM : public SDI12Sensor
 {
 protected:
+	uint8_t		pinAddr;
+
+	float		dielec_perm = 0;	///< Measured dielectric permativity
+	float		temp = 0;			///< Measured temperature
+	
+	String		sdiResponse = "";
+	char		buf[20];
+	char*		p;
+	char		sensorAddress = -1;
+
+	void parse_results();
 
 public:
 	
@@ -57,6 +68,9 @@ public:
 	void		measure() override;
 	void		package(JsonObject json) override;
 
+	void		power_up() override;
+	void		power_down() override;
+
 //=============================================================================
 ///@name	PRINT INFORMATION
 /*@{*/ //======================================================================
@@ -69,8 +83,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-// Uncomment once implemented
-// REGISTER(Module, Decagon5TM, "Decagon5TM");
+REGISTER(Module, Decagon5TM, "Decagon5TM");
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom
