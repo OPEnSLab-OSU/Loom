@@ -84,10 +84,16 @@ void Teros::package(JsonObject json)
 	LMark;
 	JsonObject data = get_module_data_object(json, module_name);
 
-	for (int i = 0; i < sensorAddresses.size(); i++){
-		String sensorInst = String("Sensor #") + String(i);
-		data[sensorInst]["moisture"]	= moisture[i];
-		data[sensorInst]["temperature"]	= temp[i];
+	if(sensorAddresses.size() > 1){
+		for (int i = 0; i < sensorAddresses.size(); i++){
+			String sensorInst = String("Sensor #") + String(i);
+			data[sensorInst]["moisture"]	= moisture[i];
+			data[sensorInst]["temperature"]	= temp[i];
+		}
+	}
+	else{
+		data["moisture"] = moisture[0];
+		data["temperature"] = temp[0]
 	}
 }
 
@@ -104,6 +110,14 @@ void Teros::power_up(){
  */ 
 void Teros::power_down(){
 	pinMode(pinAddr, INPUT);
+}
+
+/**
+ * Clear all the sensor vectors
+ */ 
+void DecagonGS3::clear_vectors(){
+	moisture.clear();
+	temp.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

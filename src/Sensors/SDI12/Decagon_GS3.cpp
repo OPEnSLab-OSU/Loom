@@ -23,11 +23,11 @@ DecagonGS3::DecagonGS3(const uint8_t addr, const uint8_t num_samples)
 	LMark;
 
 	// Try to get the first address in the address buffer
-	sensorAddress = getTaken()[0];
+	sensorAddresses = getTaken();
 
 
 	// Check if the sensor address actually changed
-	if(sensorAddress != -1){
+	if(sensorAddresses.size() > 0){
 		Serial.print("\n=== Decagon initialized successfully ===\n");  
   	} else {
     	Serial.print("\n=== Decagon failed to initialize ===\n"); 
@@ -50,35 +50,56 @@ void DecagonGS3::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-	LPrintln("\tConductivity: ", elec_cond);
-	LPrintln("\tTemperature: ", temp);
-	LPrintln("\tMoisture: ", dielec_perm);
+
+	for (int i = 0; i < sensorAddresses.size(); i++){
+		LPrintln("Device #", i);
+		LPrintln("\tTemperature: ", temp[i]);
+		LPrintln("\tMoisture: ", dielec_perm[i]);
+		LPrintln("\tConductivity: ", elec_cond[i]);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void DecagonGS3::measure()
 {
-	LMark;
-	// Measure the data from the sensor
-	sendCommand(sensorAddress, "M!");
-	LMark;
+	// Loop over the SDI addresses and pull measurement data from each sensor
+	for (char i : sensorAddresses){
+		// Measure the data from the sensor
+		sendCommand(i, "M!");
+		LMark;
 
-	// Poll data from the sensor
-	sdiResponse = sendCommand(sensorAddress, "D0!");
+		// Poll data from the sensor
+		sdiResponse = sendCommand(i, "D0!");
 
-	LMark;
-	parse_results();
+		LMark;
+		parse_results();
+	}
 	LMark;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 void DecagonGS3::package(JsonObject json)
 {
+	
 	LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-	data["moisture"]	= dielec_perm;
-	data["temperature"]	= temp;
-	data["conductivity"]	= elec_cond;
+
+	// Only use multiple sensor format if there is actually more than 1 sensor
+	if(sensorAddresses.size() > 1){
+		for (int i = 0; i < sensorAddresses.size(); i++){
+			String sensorInst = String("Sensor #") + String(i);
+			data[sensorInst]["moisture"]	= dielec_perm[i];
+			data[sensorInst]["temperature"]	= temp[i];
+			data[sensorInst]["conductivity"]= elec_cond[i];
+		}
+	}
+	else{
+		data["moisture"] = dielec_perm[0];
+		data["temperature"] = temp[0];
+		data["conductivity"] = elec_cond[0];
+	}
+
+	clear_vectors();
 }
 
 /**
@@ -96,6 +117,15 @@ void DecagonGS3::power_down(){
 	pinMode(pinAddr, INPUT);
 }
 
+/**
+ * Clear all the sensor vectors
+ */ 
+void DecagonGS3::clear_vectors(){
+	dielec_perm.clear();
+	temp.clear();
+	elec_cond.clear();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 void DecagonGS3::parse_results(){
 	sdiResponse.toCharArray(buf, sizeof(buf));
@@ -103,9 +133,9 @@ void DecagonGS3::parse_results(){
 
 	// Read out the results and parse out each of the data readings and pares them to floats
 	strtok_r(p, "+", &p);
-	dielec_perm = atof(strtok_r(NULL, "+", &p));
-	temp = atof(strtok_r(NULL, "+", &p));
-	elec_cond = atof(strtok_r(NULL, "+", &p));
+	dielec_perm.push_back(atof(strtok_r(NULL, "+", &p)));
+	temp.push_back(atof(strtok_r(NULL, "+", &p)));
+	elec_cond.push_back(atof(strtok_r(NULL, "+", &p)));
 }
 
 ///////////////////////////////////////////////////////////////////////////////

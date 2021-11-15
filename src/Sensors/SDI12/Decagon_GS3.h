@@ -13,6 +13,7 @@
 
 #include "SDI12_Sensor.h"
 #include <SDI12.h>
+#include <vector>
 
 namespace Loom {
 
@@ -32,17 +33,17 @@ protected:
 
 	uint8_t		pinAddr;
 
-	float		dielec_perm = 0;	///< Measured dielectric permativity
-	float		temp = 0;			///< Measured temperature
-	float		elec_cond = 0;		///< Measure electrical conductivity
+	std::vector<float>		dielec_perm;	///< Measured dielectric permativity
+	std::vector<float>		temp;			///< Measured temperature
+	std::vector<float>		elec_cond;		///< Measure electrical conductivity
 	
 	String		sdiResponse = "";
 	char		buf[20];
 	char*		p;
-	char		sensorAddress = -1;
+	std::vector<char>		sensorAddresses;
 
 	void parse_results();
-
+	void clear_vectors();
 
 public:
 	

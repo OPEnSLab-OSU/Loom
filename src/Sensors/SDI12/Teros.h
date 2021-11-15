@@ -43,7 +43,7 @@ protected:
 	std::vector<char>		sensorAddresses;
 
 	void parse_results();
-
+	void clear_vectors();
 
 public:
 	
