@@ -93,7 +93,7 @@ void Teros::package(JsonObject json)
 	}
 	else{
 		data["moisture"] = moisture[0];
-		data["temperature"] = temp[0]
+		data["temperature"] = temp[0];
 	}
 }
 
@@ -115,7 +115,7 @@ void Teros::power_down(){
 /**
  * Clear all the sensor vectors
  */ 
-void DecagonGS3::clear_vectors(){
+void Teros::clear_vectors(){
 	moisture.clear();
 	temp.clear();
 }
