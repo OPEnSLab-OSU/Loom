@@ -31,11 +31,11 @@ class DecagonGS3 : public SDI12Sensor
 
 protected:
 
-	uint8_t		pinAddr;
+	char		sensorAddr;
 
-	std::vector<float>		dielec_perm;	///< Measured dielectric permativity
-	std::vector<float>		temp;			///< Measured temperature
-	std::vector<float>		elec_cond;		///< Measure electrical conductivity
+	float		dielec_perm;	///< Measured dielectric permativity
+	float		temp;			///< Measured temperature
+	float		elec_cond;		///< Measure electrical conductivity
 	
 	String		sdiResponse = "";
 	char		buf[20];
@@ -55,14 +55,10 @@ public:
 	///
 	/// @param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	DecagonGS3(
-			const uint8_t	pinAddr = 11,
-			const uint8_t	num_samples	= 1
+			SDI12 sdiInterface,
+			char addr,
+			String moduleName
 		);
-
-	/// Constructor that takes Json Array, extracts args
-	/// and delegates to regular constructor
-	/// @param[in]	p		The array of constuctor args to expand
-	DecagonGS3(JsonArrayConst p);
 
 	/// Destructor
 	~DecagonGS3() = default;
@@ -73,9 +69,6 @@ public:
 
 	void		measure() override;
 	void		package(JsonObject json) override;
-
-	void		power_up() override;
-	void		power_down() override;
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -89,7 +82,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-REGISTER(Module, DecagonGS3, "DecagonGS3");
+//REGISTER(Module, DecagonGS3, "DecagonGS3");
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom

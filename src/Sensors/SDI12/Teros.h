@@ -14,6 +14,7 @@
 #include "SDI12_Sensor.h"
 #include <SDI12.h>
 #include <vector>
+#include <map>
 
 namespace Loom {
 
@@ -35,15 +36,27 @@ protected:
 
 	std::vector<float>		moisture;	// Moisture reading
 	std::vector<float>		temp;		// Temperature reading
+	std::vector<float>		elec_cond;	// Electrical conductivity
 	
 	String		sdiResponse = "";
 	String		myCommand = "";
 	char		buf[20];
 	char*		p;
-	std::vector<char>		sensorAddresses;
 
-	void parse_results();
+	// List of sensors <Sensor Address, Sensor Version> and a vector of all sensor addresses
+	std::map<char, int>		sensors;
+	std::vector<char>		sensor_addresses;
+
+	// Parse the measurement results into their own variables
+	void parse_results(char addr);
+
+	// Clear the vectors containing the sensor readings
 	void clear_vectors();
+
+	// Get the version of the connected teros sensor
+	int get_teros_version(char addr);
+
+
 
 public:
 	

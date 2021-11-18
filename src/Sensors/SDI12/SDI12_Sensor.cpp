@@ -16,20 +16,12 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 SDI12Sensor::SDI12Sensor(
-		const uint8_t			sdiPin,
+		SDI12&					sdiInterface,
 		const char*				module_name,
 		const uint8_t			num_samples 
 	) 
 	: Sensor(module_name, num_samples), 
-	mySDI12(sdiPin) {
-
-		// Init the SDI12 sens
-		mySDI12.begin();
-		delay(100);
-
-		// Get the list of active addresses
-		scanAddressSpace();
-	}
+	mySDI12(sdiInterface) {}
 
 //Scan the entire address space to find active devices, should take about 2 seconds cause SDI12 is slow
 void SDI12Sensor::scanAddressSpace(){
@@ -54,6 +46,11 @@ void SDI12Sensor::scanAddressSpace(){
 		}
 	}
 	LMark;
+}
+
+// Returns a reference to the SDI12 interface being used by the sensor
+SDI12& SDI12Sensor::get_SDI12_interface(){
+	return mySDI12;
 }
 
 // Returns a list will all active addresses at the front, that way when a 0 value is hit we can break

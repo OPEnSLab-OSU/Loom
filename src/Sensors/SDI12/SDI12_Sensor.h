@@ -61,6 +61,8 @@ protected:
 
 	String read_next_message(); // Read the next message out of the buffer
 
+	SDI12& get_SDI12_interface(); // Return a reference to the SDI12 class we are using to communicate
+
 public:
 	
 //=============================================================================
@@ -72,7 +74,7 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	num_samples		The number of samples to take and average
 	SDI12Sensor(
-			const uint8_t			sdiPin,
+			SDI12&					sdiInterface,
 			const char*				module_name,
 			const uint8_t			num_samples = 1
 		);

@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Decagon_5TM.h
-/// @brief		File for Decagon5TM definition. Incomplete.
-/// @author		Luke Goertzen
-/// @date		2019
+/// @file		SDI12_Device.h
+/// @brief		File for SDI_Device definition.
+/// @author		Will Richards
+/// @date		2021
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -12,32 +12,36 @@
 #pragma once
 
 #include "SDI12_Sensor.h"
+#include <map>
+#include <vector>
+#include <string>
 
 namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// Decagon 5TM soil moisture sensor module. Incomplete.
+/// Overall class for handling all interaction with different types of SDI12 Devices
 ///
 /// @par Resources
-/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom___decagon5_t_m.html)
+/// - [Module Documentation](https://openslab-osu.github.io/Loom/html/class_loom_s_d_i12_sensor.html)
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sdi-12-sensors)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Decagon5TM : public SDI12Sensor
+class SDI_Device : public SDI12Sensor
 {
+
 protected:
-	uint8_t		pinAddr;
 
-	float		dielec_perm = 0;	///< Measured dielectric permativity
-	float		temp = 0;			///< Measured temperature
+	std::vector<SDI12Sensor&> sensorArray;
 	
-	String		sdiResponse = "";
-	char		buf[20];
-	char*		p;
-	char		sensorAddress = -1;
+	// Get the sensor name from the I! call
+	String get_sensor_type(char addr);
 
-	void parse_results();
+	// Split a string by a specified delimeter and get the "split value" at that index
+	String parse_string_by_delimeter(string str, const char* delim, int index);
+
+	// Given a sensor name map the name to the correct sensor, create it and then push it onto the vector
+	void parse_sensors(String sensorName, std::vector<SDI12Sensor> sensorArray);
 
 public:
 	
@@ -45,21 +49,21 @@ public:
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
-	/// Decagon 5TM module constructor
-	///
-	/// @param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
-	Decagon5TM(
-			const uint8_t 	sdiPin = 11,
-			const uint8_t	num_samples	= 1
+	/// Constructor
+	/// @param[in]	module_name		Name of the module (provided by derived classes)
+	/// @param[in]	module_type		Type of the module (provided by derived classes)
+	/// @param[in]	num_samples		The number of samples to take and average
+	SDI_Device(
+			const uint8_t			addr = 11
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Decagon5TM(JsonArrayConst p);
+	SDI_Device(JsonArrayConst p);
 
 	/// Destructor
- 	~Decagon5TM() = default;
+	~SDI_Device() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -83,7 +87,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-//REGISTER(Module, Decagon5TM, "Decagon5TM");
+REGISTER(Module, SDI_Device, "SDIDevice");
 ///////////////////////////////////////////////////////////////////////////////
 
 }; // namespace Loom
