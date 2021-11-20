@@ -22,9 +22,13 @@ DecagonGS3::DecagonGS3(const uint8_t addr, const uint8_t num_samples)
 {
 	LMark;
 
-	// Try to get the first address in the address buffer
-	sensorAddresses = getTaken();
-
+	// Only add the sensor addresses that are actually GS3 sensors
+	for (char i : getTaken())
+	{
+		if(get_sensor_type(i) == "GS3"){
+			sensorAddresses.push_back(i);
+		}
+	}
 
 	// Check if the sensor address actually changed
 	if(sensorAddresses.size() > 0){

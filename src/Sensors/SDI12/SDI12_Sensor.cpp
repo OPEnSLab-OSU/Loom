@@ -224,6 +224,35 @@ String SDI12Sensor::read_next_message(){
 }
 
 
+/**
+ * Get the sensor type at the given address
+ */ 
+String SDI12Sensor::get_sensor_type(char addr){
+	char buf[20];
+	String response = sendCommand(addr, "I!");
+	response.toCharArray(buf, sizeof(buf));
+
+	return parse_string_by_delimeter(buf, " ", 1);
+}
+
+/**
+ * Parse a string given a delimeter to split at and the index we wish to get
+ */ 
+String SDI12Sensor::parse_string_by_delimeter(String str, const char* delim, int index){
+	char* p;
+    char* result = strtok_r((char*)str.c_str(), delim, &p);
+    
+	// If we are only asking for the 0th index simply return, if not loop replacing the previous value with null until we get to the desired index
+    if(index == 0)
+        return String(result);
+    else{
+        for(int i = 0; i < index; i++)
+            result = strtok_r(NULL, delim, &p);
+        return String(result);
+    }
+    
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 #endif // ifdef LOOM_INCLUDE_SENSORS

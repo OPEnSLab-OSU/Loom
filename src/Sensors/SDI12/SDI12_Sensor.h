@@ -14,6 +14,7 @@
 #include "../Sensor.h"
 #include <SDI12.h>
 #include <vector>
+#include <string.h>
 
 namespace Loom {
 
@@ -60,6 +61,9 @@ protected:
 	byte charToDec(char i);
 
 	String read_next_message(); // Read the next message out of the buffer
+
+	String get_sensor_type(char addr);
+	String parse_string_by_delimeter(String str, const char* delim, int index);
 
 public:
 	
