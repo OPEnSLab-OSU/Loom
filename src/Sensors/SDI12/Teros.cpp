@@ -17,27 +17,13 @@
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Teros::Teros(const uint8_t addr, const uint8_t num_samples)
-	: SDI12Sensor(addr, "Teros", num_samples), pinAddr(addr)
-{
-	LMark;
+Teros::Teros(SDI12& sdiInterface, char addr, String moduleName, const uint8_t terosVersion)
+	: SDI12Sensor(sdiInterface, moduleName.c_str())
+	, sensorAddr(addr)
+	, terosVersion(terosVersion) {
 
-	// Try to get the first address in the address buffer
-	sensorAddresses = getTaken();
-
-
-	// Check if the sensor address actually changed
-	if(sensorAddresses.size() > 0 ){
-		Serial.print("\n=== Decagon initialized successfully ===\n");  
-  	} else {
-    	Serial.print("\n=== Decagon failed to initialize ===\n"); 
-  	}
-	
-}
-
-///////////////////////////////////////////////////////////////////////////////
-Teros::Teros(JsonArrayConst p)
-	: Teros(EXPAND_ARRAY(p, 2) ) {}
+		LPrintln("\t- Teros version: ", terosVersion, " Initialized at address: ", addr);
+	}
 
 ///////////////////////////////////////////////////////////////////////////////
 void Teros::print_config() const
@@ -50,12 +36,10 @@ void Teros::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
-
-	for (int i = 0; i < sensorAddresses.size(); i++){
-		LPrintln("Device #", i);
-		LPrintln("\tTemperature: ", temp[i]);
-		LPrintln("\tMoisture: ", moisture[i]);
-	}
+	LPrintln("\tTemperature: ", temp);
+	LPrintln("\tMoisture: ", moisture);
+	if(terosVersion > 11)
+		LPrintln("\tConductivity: ", elec_cond);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -63,20 +47,20 @@ void Teros::measure()
 {
 	LMark;
 	
-	// Loop over the SDI addresses and pull measurement data from each sensor
-	for (char i : sensorAddresses){
-		// Measure the data from the sensor
-		sendCommand(i, "M!");
-		LMark;
+	
+	// Measure the data from the sensor
+	sendCommand(sensorAddr, "M!");
+	LMark;
 
-		// Poll data from the sensor
-		sdiResponse = sendCommand(i, "D0!");
-
-		LMark;
-		parse_results();
-	}
+	// Poll data from the sensor
+	sdiResponse = sendCommand(sensorAddr, "D0!");
+	
+	LMark;
+	parse_results();
+	
 	LMark;
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////
 void Teros::package(JsonObject json)
@@ -84,40 +68,11 @@ void Teros::package(JsonObject json)
 	LMark;
 	JsonObject data = get_module_data_object(json, module_name);
 
-	if(sensorAddresses.size() > 1){
-		for (int i = 0; i < sensorAddresses.size(); i++){
-			String sensorInst = String("Sensor #") + String(i);
-			data[sensorInst]["moisture"]	= moisture[i];
-			data[sensorInst]["temperature"]	= temp[i];
-		}
-	}
-	else{
-		data["moisture"] = moisture[0];
-		data["temperature"] = temp[0];
-	}
-}
-
-/**
- * Called by the module manager when the feather needs to wake back up
- */ 
-void Teros::power_up(){
-	pinMode(pinAddr, OUTPUT);
-}
-
-
-/**
- * Called by the module manager when the feather is sleeping
- */ 
-void Teros::power_down(){
-	pinMode(pinAddr, INPUT);
-}
-
-/**
- * Clear all the sensor vectors
- */ 
-void Teros::clear_vectors(){
-	moisture.clear();
-	temp.clear();
+	data["moisture"]			= moisture;
+	data["temperature"]			= temp;
+	if(terosVersion > 11)
+		data["conductivity"] 	= elec_cond;
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -127,8 +82,11 @@ void Teros::parse_results(){
 
 	// Read out the results and parse out each of the data readings and pares them to floats
 	strtok_r(p, "+", &p);
-	moisture.push_back(atof(strtok_r(NULL, "+", &p)));
-	temp.push_back(atof(strtok_r(NULL, "+", &p)));
+	moisture = atof(strtok_r(NULL, "+", &p));
+	temp = atof(strtok_r(NULL, "+", &p));
+	if (terosVersion > 11)
+		elec_cond = atof(strtok_r(NULL, "+", &p));
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
