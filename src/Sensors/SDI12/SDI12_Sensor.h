@@ -30,7 +30,7 @@ class SDI12Sensor : public Sensor
 {
 
 protected:
-	SDI12 mySDI12; // SDI12 Object
+	SDI12 sdiInterface; // SDI12 Object
 
 	// Register representing each sensors address connected to the sdi device
 	byte addressRegister[8] = {
@@ -63,6 +63,12 @@ protected:
 
 	SDI12& get_SDI12_interface(); // Return a reference to the SDI12 class we are using to communicate
 
+	// Poll the sensor at the given address for info (I!) and then parse out the sensor name
+	String get_sensor_type(char addr);
+
+	// Given a string split by delimeter and return the requested index
+	String parse_string_by_delimeter(String str, const char* delim, int index);
+
 public:
 	
 //=============================================================================
@@ -74,9 +80,8 @@ public:
 	/// @param[in]	module_type		Type of the module (provided by derived classes)
 	/// @param[in]	num_samples		The number of samples to take and average
 	SDI12Sensor(
-			SDI12&					sdiInterface,
-			const char*				module_name,
-			const uint8_t			num_samples = 1
+			SDI12&					sdiReference,
+			const char*				module_name
 		);
 
 	/// Destructor

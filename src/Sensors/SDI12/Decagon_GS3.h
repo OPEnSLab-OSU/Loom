@@ -40,7 +40,6 @@ protected:
 	String		sdiResponse = "";
 	char		buf[20];
 	char*		p;
-	std::vector<char>		sensorAddresses;
 
 	void parse_results();
 	void clear_vectors();
@@ -55,7 +54,7 @@ public:
 	///
 	/// @param[in]	num_samples			Set(Int) | <8> | {1, 2, 4, 8, 16} | How many samples to take and average
 	DecagonGS3(
-			SDI12 sdiInterface,
+			SDI12& sdiInterface,
 			char addr,
 			String moduleName
 		);

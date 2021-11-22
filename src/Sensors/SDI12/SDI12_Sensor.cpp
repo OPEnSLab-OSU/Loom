@@ -16,12 +16,11 @@ using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 SDI12Sensor::SDI12Sensor(
-		SDI12&					sdiInterface,
-		const char*				module_name,
-		const uint8_t			num_samples 
+		SDI12&					sdiReference,
+		const char*				module_name 
 	) 
-	: Sensor(module_name, num_samples), 
-	mySDI12(sdiInterface) {}
+	: Sensor(module_name, 1), 
+	sdiInterface(sdiReference) {}
 
 //Scan the entire address space to find active devices, should take about 2 seconds cause SDI12 is slow
 void SDI12Sensor::scanAddressSpace(){
@@ -50,7 +49,7 @@ void SDI12Sensor::scanAddressSpace(){
 
 // Returns a reference to the SDI12 interface being used by the sensor
 SDI12& SDI12Sensor::get_SDI12_interface(){
-	return mySDI12;
+	return sdiInterface;
 }
 
 // Returns a list will all active addresses at the front, that way when a 0 value is hit we can break
@@ -76,8 +75,9 @@ std::vector<char> SDI12Sensor::getTaken(){
 	}
 	LMark;
 
+	// Loop over the list of found addresses and prints them out
 	for (char i : addrs){
-		LPrintln("Active SDI-12 Address: ", i);
+		LPrintln("Active SDI-12 Address at ", i);
 	}
 	return addrs;
 }
@@ -98,7 +98,7 @@ bool SDI12Sensor::checkActive(char i){
 		if(sendCommand(i, "!").length() > 0) return true;
 	}
 
-	mySDI12.clearBuffer();
+	sdiInterface.clearBuffer();
 	return false;
 }
 
@@ -132,7 +132,7 @@ String SDI12Sensor::sendCommand(char addr, String command){
 
 
 	// Send the given command to the interface
-	mySDI12.sendCommand(fullCommand);
+	sdiInterface.sendCommand(fullCommand);
 	LMark;
 	// Delay for 30ms cause SDI12 is slow af
 	delay(30);
@@ -140,7 +140,7 @@ String SDI12Sensor::sendCommand(char addr, String command){
 	commandResult = read_next_message();
 
 	// Clear the serial buffer
-	mySDI12.clearBuffer();
+	sdiInterface.clearBuffer();
 
 	return commandResult;
 
@@ -158,14 +158,14 @@ String SDI12Sensor::sendCommand_allBuffer(char addr, String command){
 
 
 	// Send the given command to the interface
-	mySDI12.sendCommand(fullCommand);
+	sdiInterface.sendCommand(fullCommand);
 	LMark;
 	// Delay for 30ms cause SDI12 is slow af
 	delay(30);
 
 	// While there is data to be read, read it
-	while (mySDI12.available()){
-		char c = mySDI12.read();
+	while (sdiInterface.available()){
+		char c = sdiInterface.read();
 
 		// Make sure the character is not a new line character
 		if (c == '\n') {
@@ -182,7 +182,7 @@ String SDI12Sensor::sendCommand_allBuffer(char addr, String command){
 	LMark;
 
 	// Clear the serial buffer
-	mySDI12.clearBuffer();
+	sdiInterface.clearBuffer();
 
 	// If data was actually stored in the commandResult then return the result
 	if(commandResult.length() > 1){
@@ -199,8 +199,8 @@ String SDI12Sensor::sendCommand_allBuffer(char addr, String command){
 String SDI12Sensor::read_next_message(){
 	String sdiResponse = "";
 
-	while (mySDI12.available()){
-		char c = mySDI12.read();
+	while (sdiInterface.available()){
+		char c = sdiInterface.read();
 
 		// If we reached the end of the line break out of the loop
 		if(c == '\n'){
@@ -221,6 +221,34 @@ String SDI12Sensor::read_next_message(){
 }
 
 
+/**
+ * Get the sensor type at the given address
+ */ 
+String SDI12Sensor::get_sensor_type(char addr){
+	char buf[20];
+	String response = sendCommand(addr, "I!");
+	response.toCharArray(buf, sizeof(buf));
+
+	return parse_string_by_delimeter(buf, " ", 1);
+}
+
+/**
+ * Parse a string given a delimeter to split at and the index we wish to get
+ */ 
+String SDI12Sensor::parse_string_by_delimeter(String str, const char* delim, int index){
+	char* p;
+    char* result = strtok_r((char*)str.c_str(), delim, &p);
+    
+	// If we are only asking for the 0th index simply return, if not loop replacing the previous value with null until we get to the desired index
+    if(index == 0)
+        return String(result);
+    else{
+        for(int i = 0; i < index; i++)
+            result = strtok_r(NULL, delim, &p);
+        return String(result);
+    }
+    
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 #endif // ifdef LOOM_INCLUDE_SENSORS
