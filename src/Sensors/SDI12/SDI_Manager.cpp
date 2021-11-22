@@ -17,6 +17,7 @@
 // SDI12 Sensors
 #include "Decagon_GS3.h"
 #include "Teros.h"
+#include "Decagon_5TM.h"
 
 using namespace Loom;
 
@@ -100,6 +101,16 @@ void SDI_Manager::package(JsonObject json)
 
 ///////////////////////////////////////////////////////////////////////////////
 
+void SDI_Manager::power_up(){
+	pinMode(pinAddr, OUTPUT);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void SDI_Manager::power_down(){
+	pinMode(pinAddr, INPUT);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 void SDI_Manager::construct_sensors(){
@@ -107,19 +118,23 @@ void SDI_Manager::construct_sensors(){
 	// Loop over the collected sensors
 	for (auto sensor : sensorsInfo){
 		// If the sensor is a Decagon_GS3, construct a new sensor and add it to the vector contain all active SDI sensors
-		if (sensor.second == "GS3"){
+		if (sensor.second.indexOf("GS3") != -1){
 			sensors.push_back(new DecagonGS3(get_SDI12_interface(), sensor.first, (String("GS3_") + sensor.first) ) );
 		}
 
 		// Teros 11
-		else if(sensor.second == "TER11"){
+		else if(sensor.second.indexOf("TER11") != -1){
 			sensors.push_back(new Teros(get_SDI12_interface(), sensor.first, (String("Teros11_") + sensor.first), 11) );
 		}
 
 		// Teros 12
-		else if(sensor.second == "TER12")
-		{
+		else if(sensor.second.indexOf("TER12") != -1){
 			sensors.push_back(new Teros(get_SDI12_interface(), sensor.first, (String("Teros12_") + sensor.first), 12) );
+		}
+
+		// Decagon 5TM
+		else if(sensor.second.indexOf("5TM") != -1){
+			sensors.push_back(new Decagon5TM(get_SDI12_interface(), sensor.first, (String("5TM_") + sensor.first ) ) );
 		}
 	}
 }

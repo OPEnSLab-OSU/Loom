@@ -225,11 +225,9 @@ String SDI12Sensor::read_next_message(){
  * Get the sensor type at the given address
  */ 
 String SDI12Sensor::get_sensor_type(char addr){
-	char buf[20];
 	String response = sendCommand(addr, "I!");
-	response.toCharArray(buf, sizeof(buf));
-
-	return parse_string_by_delimeter(buf, " ", 1);
+	response.trim();
+	return response;
 }
 
 /**

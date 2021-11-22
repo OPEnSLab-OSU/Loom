@@ -67,12 +67,16 @@ namespace Loom {
 			void		measure() override;
 			void		package(JsonObject json) override;
 
+			void		power_up() override;
+			void 		power_down() override;
+
 		//=============================================================================
 		///@name	PRINT INFORMATION
 		/*@{*/ //======================================================================
 
 			void		print_config() const override;
 			void		print_measurements() const override;
+			
 
 		private:
 
