@@ -143,9 +143,6 @@ String SDI12Sensor::sendCommand(char addr, String command){
 	sdiInterface.clearBuffer();
 
 	return commandResult;
-
-	// If no data was recieived return an empty string
-	return "";
 }
 
 // Sends a command over SDI12 to a device and returns the entire buffer
