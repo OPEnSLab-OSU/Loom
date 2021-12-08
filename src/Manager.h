@@ -74,6 +74,7 @@ class Loom_K30;
 class Loom_LoRa;
 class Loom_nRF;
 class Loom_Bluetooth;
+class Loom_FW;
 
 // LogPlats
 class Loom_OLED;
@@ -484,6 +485,7 @@ public:
 	Loom_LoRa&			LoRa(const uint8_t idx = 0);
 	Loom_nRF&			nRF(const uint8_t idx = 0);
 	Loom_Bluetooth& 	Bluetooth(const uint8_t idx = 0);
+	Loom_FW&            FW(const uint8_t idx = 0);
 
 	// LogPlats
 	Loom_OLED&			OLED(const uint8_t idx = 0);

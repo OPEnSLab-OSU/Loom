@@ -1,0 +1,13 @@
+"{\
+	'general':\
+	{\
+		'name':'Device',\
+		'instance':1\
+	},\
+	'components':[\
+		{\
+			'name':'FW',\
+			'params':[255,1,5,200]\
+		}\
+	]\
+}"

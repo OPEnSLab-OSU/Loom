@@ -59,7 +59,7 @@ public:
 		// LogPlats
 		LogPlat=5000,		OLED, SDCARD, BATCHSD,
 		// CommPlats
-		CommPlat=6000,		LoRa, nRF, Bluetooth,
+		CommPlat=6000,		LoRa, nRF, Bluetooth, FW,
 		// InternetPlats
 		InternetPlat=7000,	Ethernet, WiFi, LTE,
 		// PublishPlats

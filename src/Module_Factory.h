@@ -26,6 +26,7 @@
 #include "CommPlats/LoRa.h"
 #include "CommPlats/nRF.h"
 #include "CommPlats/Bluetooth.h"
+#include "CommPlats/FW.h"
 
 // InternetPlats
 #include "InternetPlats/InternetEthernet.h"
@@ -187,7 +188,8 @@ namespace Include
 	constexpr auto Radios = std::make_tuple(
 				factory::NameModulePair{"LoRa",			Construct<Loom_LoRa>,			ConstructDefault<Loom_LoRa> },
 				factory::NameModulePair{"nRF",			Construct<Loom_nRF>,			ConstructDefault<Loom_nRF> },
-				factory::NameModulePair{"Bluetooth",	Construct<Loom_Bluetooth>,		ConstructDefault<Loom_Bluetooth> }
+				factory::NameModulePair{"Bluetooth",	Construct<Loom_Bluetooth>,		ConstructDefault<Loom_Bluetooth> },
+				factory::NameModulePair{"FW",           Construct<Loom_FW>,             ConstructDefault<Loom_FW>}
 			);
 
 	/// Max modules

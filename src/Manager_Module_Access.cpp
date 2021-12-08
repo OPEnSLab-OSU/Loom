@@ -96,6 +96,11 @@ Loom_Bluetooth& LoomManager::Bluetooth(const uint8_t idx)
 	return (*(Loom_Bluetooth*)( (tmp) ? tmp : nullptr ));
 }
 
+Loom_FW& LoomManager::FW(const uint8_t idx)
+{
+	LoomModule* tmp = find_module(LoomModule::Type::FW, idx);
+	return (*(Loom_FW*)( (tmp) ? tmp : nullptr ));
+}
 ///////////////////////////////////////////////////////////////////////////////
 // --- InternetPlats ---
 
