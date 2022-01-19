@@ -48,6 +48,8 @@ This is the Doxygen generated documentation of the Loom library code.
     Loom::nRF& getnRF(const Loom::Manager& feather) {return *(feather.get<Loom::nRF>());}
     #include "CommPlats/Bluetooth.h"
     Loom::Bluetooth& getBluetooth(const Loom::Manager& feather) {return *(feather.get<Loom::Bluetooth>());}
+    #include "CommPlats/FW.h"
+    Loom::FW& getFW(const Loom::Manager& feather) {return *(feather.get<Loom::FW>());}
 #endif
 
 // InternetPlats

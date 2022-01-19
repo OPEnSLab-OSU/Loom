@@ -1,0 +1,18 @@
+"{\
+	'general':\
+	{\
+		'name':'Device',\
+		'instance':0,\
+		'interval':100\
+	},\
+	'components':[\
+		{\
+			'name':'FW',\
+			'params':[255,0,3,200]\
+		},\
+		{\
+			'name':'SD',\
+			'params':[true,1000,10,'datafile',false]\
+		}\
+	]\
+}"
