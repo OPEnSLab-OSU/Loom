@@ -1,5 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
+/// NOTE: Make sure to change the value of RH_SERIAL_MAX_PAYLOAD_LEN in RH_Serial.h
+/// if you want to send large payloads.  By default, this value is not large enough
+/// to use the example sketches.
+
 // This is a basic example of receiving data via Freewave.
 // While you can do a variety of things with the received data, this example
 // simply prints it and logs it to an SD Card

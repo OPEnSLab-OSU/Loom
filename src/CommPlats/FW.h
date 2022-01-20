@@ -7,7 +7,10 @@
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
-
+/// NOTE: Make sure to change the value of RH_SERIAL_MAX_PAYLOAD_LEN in RH_Serial.h
+/// if you want to send large payloads.  By default, this value is not large enough
+/// to use the example sketches.
+///////////////////////////////////////////////////////////////////////////////
 #ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
