@@ -50,7 +50,7 @@ void loop()
 	Feather.display_data();
 
 	// Send to address 1
-	getFW(Feather).send(1);
+	getFW(Feather).send(0);
 
 	Feather.pause();	// Delay between interations set with 'interval' in config
 }
