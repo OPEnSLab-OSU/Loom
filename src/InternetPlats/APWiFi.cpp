@@ -16,9 +16,11 @@
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-APWiFi::APWiFi()
+
+APWiFi::APWiFi(const char* ssid, const char* pass)
 	: InternetPlat("APWiFi")
-	, password{""}
+	, SSID(ssid)
+	, password(pass)
 	, server{80}
 {
 	// Configure pins for Adafruit ATWINC1500 Feather
@@ -26,6 +28,12 @@ APWiFi::APWiFi()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+APWiFi::APWiFi(JsonArrayConst p)
+	: APWiFi( EXPAND_ARRAY(p, 2) ) {}
+
+///////////////////////////////////////////////////////////////////////////////
+
 void APWiFi::second_stage_ctor()
 {
 	// Set SSID (get info from manager if available)
@@ -48,16 +56,14 @@ void APWiFi::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-APWiFi::APWiFi(LoomManager* manager, JsonArrayConst p)
-	: APWiFi(manager) {}
 
-///////////////////////////////////////////////////////////////////////////////
 void APWiFi::add_config(JsonObject json)
 {
 	JsonArray params = add_config_temp(json, module_name);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
 bool APWiFi::start_AP()
 {
 	print_module_label();
@@ -79,6 +85,7 @@ bool APWiFi::start_AP()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
 void APWiFi::disconnect()
 {
 	WiFi.disconnect();
@@ -87,12 +94,14 @@ void APWiFi::disconnect()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
 bool APWiFi::is_connected() const
 {
 	return WiFi.status() == WL_CONNECTED; // WL_AP_LISTENING
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
 InternetPlat::UDPPtr APWiFi::open_socket(const uint port)
 {
 	// create the unique pointer
@@ -104,6 +113,7 @@ InternetPlat::UDPPtr APWiFi::open_socket(const uint port)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
 void APWiFi::print_config() const
 {
 	InternetPlat::print_config();
@@ -111,6 +121,7 @@ void APWiFi::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
 void APWiFi::print_state() const
 {
 	InternetPlat::print_state();
@@ -128,6 +139,7 @@ void APWiFi::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
 const char* APWiFi::m_wifi_status_to_string(const uint8_t status) {
 	switch (status) {
 		case WL_NO_SHIELD: return "NO_SHIELD";

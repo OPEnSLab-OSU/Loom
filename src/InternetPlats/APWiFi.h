@@ -50,7 +50,7 @@ public:
 	/// Constructor
 	/// @param[in]	ssid	WiFi network name
 	/// @param[in]	pass	WiFi network password. Leave as empty string if network has no password.
-	APWiFi();
+	APWiFi(const char* ssid, const char* pass);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor

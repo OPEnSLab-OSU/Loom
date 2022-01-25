@@ -68,10 +68,11 @@ bool MaxSub::subscribe(JsonObject json)
 	if ( UDP_Inst->parsePacket() ) {
 
 		messageJson.clear();
-   	LMark;
-		if ( deserializeJson(messageJson, (*UDP_Inst) ) != DeserializationError::Ok ) {
+   		LMark;
+		DeserializationError error = deserializeJson(messageJson, (*UDP_Inst) );
+		if (error != DeserializationError::Ok) {
 			print_module_label();
-			LPrintln("Failed to parse MsgPack");
+			LPrintln("Failed to parse JSON data from UDP stream, Error: ", error.c_str());
 			return false;
 		}
 
@@ -81,12 +82,14 @@ bool MaxSub::subscribe(JsonObject json)
 			return false;
 		}
 
+		// Check our print verbosity and the print the desired amount of data based on that
 		if (print_verbosity == Verbosity::V_HIGH) {
 			print_module_label();
 			LPrint("From IP: ");
-    	LMark;
+
+    		LMark;
 			IPAddress remote = UDP_Inst->remoteIP();
-    	LMark;
+    		LMark;
 			for (auto i=0; i < 4; i++) {
 				LPrint(remote[i]);
 				if (i < 3) {
@@ -98,7 +101,7 @@ bool MaxSub::subscribe(JsonObject json)
 
 			print_module_label();
 			LPrintln("Internal messageJson:");
-    	LMark;
+    		LMark;
 			serializeJsonPretty(messageJson, Serial);
 			LPrintln();
 		}
