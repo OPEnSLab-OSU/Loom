@@ -24,6 +24,7 @@ SDI12Sensor::SDI12Sensor(
 
 //Scan the entire address space to find active devices, should take about 2 seconds cause SDI12 is slow
 void SDI12Sensor::scanAddressSpace(){
+	print_module_label();
 	LPrintln("Scanning SDI12 Address Space this make take a little while...");
 
 	// Scan over the characters that can be used as addresses for refrencing the sensors

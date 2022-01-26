@@ -41,10 +41,12 @@ SDI_Manager::SDI_Manager(const uint8_t sdiPin)
 
 		// If no addresses were found, inform the user and deactivate the module
 		if(takenAddrs.size() <= 0){
+			print_module_label();
 			LPrintln("=== No SDI12 Devices Found ===");
 			active = false;
 		}
 		else{
+			print_module_label();
 			LPrintln("=== SDI12 Devices Have Been Found ===");
 		}
 

@@ -20,6 +20,7 @@ using namespace Loom;
 DecagonGS3::DecagonGS3(SDI12& sdiInterface, char addr, String moduleName)
 	: SDI12Sensor(sdiInterface, moduleName.c_str()), sensorAddr(addr)
 {	
+	print_module_label();
 	LPrintln("\t- GS3 Initialized at address: ", addr);
 }
 
