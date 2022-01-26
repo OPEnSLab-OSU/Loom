@@ -85,11 +85,24 @@ bool MaxPub::send_to_internet(const JsonObject json, InternetPlat* plat)
 		LPrintln("Sending to remoteIP: ", remoteIP);
 	}
 
-	// Send Json
-	UDP_Inst->beginPacket(remoteIP, UDP_port);
-  LMark;
-	serializeJson(json, (*UDP_Inst) );
-	UDP_Inst->endPacket(); // Mark the end of the OSC Packet
+	// Attempt to open a UDP connection to the broadcast IP
+	if(UDP_Inst->beginPacket(remoteIP, UDP_port) != 1){
+		print_module_label();
+		LPrintln("The specified IP address or port were invalid : ", remoteIP, ":", UDP_port);
+	}
+
+	// Check for serialization errors
+	auto error = serializeJson(json, (*UDP_Inst) );
+	if(error){
+		print_module_label();
+		LPrintln("An error ocurred when attempting to serialize the JSON packet")
+	}
+	
+	// Check for errors closing the packet
+	if(UDP_Inst->endPacket() != 1){ // Mark the end of the OSC Packet
+		print_module_label();
+		LPrintln("An error ocurred when attempting to end the current packet");
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
