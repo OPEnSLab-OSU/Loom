@@ -67,7 +67,7 @@ bool FW::send_impl(JsonObject json, const uint8_t destination)
   bool is_sent = manager.sendtoWait( (uint8_t*)buffer, measureMsgPack(json), destination );
 
   print_module_label();
-  LPrintln("Send " , (is_sent) ? "successful" : "failed" );
+  LPrintln("Ack " , (is_sent) ? "received" : "not received" );
   signal_strength = driver.lastRssi();
   // driver.sleep();
   return is_sent;
@@ -91,7 +91,10 @@ bool FW::receive_blocking_impl(JsonObject json, uint max_wait_time)
   }
 
   print_module_label();
-  LPrintln("Receive ", (status) ? "successful" : "failed");
+  if (status)
+    LPrintln("Receive successful");
+  else
+    LPrintln("No packet receieved");
 
   // driver.sleep();
   return status;
