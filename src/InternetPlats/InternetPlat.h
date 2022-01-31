@@ -137,6 +137,8 @@ public:
 	/// @returns A client reference. The client::connected method will return true if the connection succeeded, and false otherwise.
 	virtual ClientSession	connect_to_ip(const IPAddress& ip, const uint16_t port);
 
+	ClientSession get_client_session();
+
 	/// Open a UDP socket for sending and recieving incoming data.
 	/// @warning Be careful about recieving data from an open socket!
 	/// @returns A UDP socket for transmitting and recieving, or a nullptr if opening the socket failed. The socket will automatically

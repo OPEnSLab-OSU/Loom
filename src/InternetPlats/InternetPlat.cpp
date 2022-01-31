@@ -142,6 +142,14 @@ InternetPlat::ClientSession InternetPlat::connect_to_ip(const IPAddress& ip, con
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+InternetPlat::ClientSession InternetPlat::get_client_session(){
+	SSLClient& client = get_client();
+	return InternetPlat::ClientSession(&client);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
 constexpr static unsigned int localPort = 8888;		// Local port to listen for UDP packets on
 constexpr static int NTP_PACKET_SIZE = 48; 			// NTP time stamp is in the first 48 bytes of the message
 /// Static NTP time server

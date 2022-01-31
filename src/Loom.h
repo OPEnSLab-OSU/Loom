@@ -52,10 +52,10 @@ This is the Doxygen generated documentation of the Loom library code.
 
 // InternetPlats
 #ifdef LOOM_INCLUDE_WIFI
-    #include "InternetPlats/InternetEthernet.h"
+    #include "InternetPlats/InternetWiFi.h"
 #endif
 #ifdef LOOM_INCLUDE_ETHERNET
-    #include "InternetPlats/InternetWiFi.h"
+    #include "InternetPlats/InternetEthernet.h"
 #endif
 #ifdef LOOM_INCLUDE_LTE
     #include "InternetPlats/InternetLTE.h"
@@ -65,6 +65,9 @@ This is the Doxygen generated documentation of the Loom library code.
 #if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
     #include "PublishPlats/GoogleSheets.h"
     Loom::GoogleSheets& getGoogleSheets(const Loom::Manager& feather) {return *(feather.get<Loom::GoogleSheets>());}
+
+    #include "PublishPlats/MQTT_Pub.h"
+    Loom::MQTTPub& getMQTTPub(const Loom::Manager& feather) { return *(feather.get<Loom::MQTTPub>()); }
 #endif
 
 // Max
@@ -107,7 +110,7 @@ Loom::PCF8523& getPCF8523(const Loom::Manager& feather) { return *(feather.get<L
     #include "Sensors/I2C/MMA8451.h"
     #include "Sensors/I2C/MPU6050.h"
     #include "Sensors/I2C/MS5803.h"
-    #include "Sensors/I2C/SHT31D.h"
+    #include "Sensors/I2C/SHT31D.h" 
     #include "Sensors/I2C/TMP007.h"
     #include "Sensors/I2C/TSL2591.h"
     #include "Sensors/I2C/ZXGesture.h"
