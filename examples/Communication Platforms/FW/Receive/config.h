@@ -8,7 +8,7 @@
 	'components':[\
 		{\
 			'name':'FW',\
-			'params':[255,0,3,200]\
+			'params':[255,3,200]\
 		},\
 		{\
 			'name':'SD',\

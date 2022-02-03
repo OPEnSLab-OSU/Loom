@@ -40,7 +40,6 @@ public:
   bool send_impl(JsonObject json, const uint8_t destination);
   FW(
     const uint16_t max_message_len = RH_SERIAL_MAX_MESSAGE_LEN,///If things aren't sending, make sure to check this value in RH_Serial.h
-    const uint8_t address = 0,
     const uint8_t retry_count = 3,
     const uint16_t retry_timeout = 200
     );

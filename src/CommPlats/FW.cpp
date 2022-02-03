@@ -13,20 +13,21 @@
 #include "FW.h"
 #include "Module_Factory.h"
 
+#include "Manager.h"
+
 using namespace Loom;
 
 //////////////////////////////////////////////////////////////////////////////
 
 FW::FW(
 		const uint16_t		max_message_len,
-		const uint8_t		address,
 		const uint8_t		retry_count,
 		const uint16_t		retry_timeout)
   : CommPlat("FW", max_message_len )
   , max_message_len(max_message_len)
-  , address(address)
   , retry_count(retry_count)
   , retry_timeout(retry_timeout)
+  , address(device_manager->get_instance_num())///< Note: Instance number is set in the sketch's config.h file.
   , serial1(Serial1)///< Adding to option to change the serial port might be good at some point.
   , driver(serial1)
   , manager(driver, address)
@@ -54,7 +55,7 @@ FW::FW(
 };
 
 FW::FW(JsonArrayConst p)
-  : FW(EXPAND_ARRAY(p, 4) ) {}
+  : FW(EXPAND_ARRAY(p, 3) ) {}
 
 /// Note: the send and receive implementations are almost exactly the same as LoRa
 /// since they both use RadioHead.
@@ -126,6 +127,8 @@ void FW::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Note: Be careful using this function, since it will most likely make your
+/// Instance number and RadioHead address mismatched
 void FW::set_address(const uint8_t addr)
 {
 	address = addr;
