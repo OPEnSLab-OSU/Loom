@@ -8,7 +8,7 @@
 	'components':[\
 		{\
 			'name':'LoRa',\
-			'params':[255,1,23,3,200]\
+			'params':[255,23,3,200]\
 		},\
 		{\
 			'name':'SD',\

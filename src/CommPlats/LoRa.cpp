@@ -13,20 +13,21 @@
 #include "LoRa.h"
 #include "Module_Factory.h"
 
+#include "Manager.h"
+
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
 LoRa::LoRa(
 		const uint16_t		max_message_len,
-		const uint8_t		address,
 		const uint8_t		power_level,
 		const uint8_t		retry_count,
 		const uint16_t		retry_timeout,
 		const bool			override_name
 	)
 	: CommPlat("LoRa", max_message_len )
-	, address(address)
 	, power_level( ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23 )
+	, address(device_manager->get_instance_num())///<Note: Instance number is set in the sketch's config.h file.
 	, retry_count(retry_count)
 	, retry_timeout(retry_timeout)
 	, driver{ RFM95_CS, RFM95_INT }
@@ -86,7 +87,7 @@ LoRa::LoRa(
 
 ///////////////////////////////////////////////////////////////////////////////
 LoRa::LoRa(JsonArrayConst p)
-	: LoRa(EXPAND_ARRAY(p, 6) ) {}
+	: LoRa(EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void LoRa::power_up() {
@@ -140,7 +141,10 @@ bool LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time)
 	}
 
 	print_module_label();
-	LPrintln("Receive ", (status) ? "successful" : "failed");
+  	if (status)
+  	  LPrintln("Receive successful");
+  	else
+  	  LPrintln("No packet receieved");
 
 	driver.sleep();
 	return status;
@@ -157,7 +161,7 @@ bool LoRa::send_impl(JsonObject json, const uint8_t destination)
 	bool is_sent = manager.sendtoWait( (uint8_t*)buffer, measureMsgPack(json), destination );
 
 	print_module_label();
-	LPrintln("Send " , (is_sent) ? "successful" : "failed" );
+  	LPrintln("Ack " , (is_sent) ? "received" : "not received" );
   LMark;
 	signal_strength = driver.lastRssi();
   LMark;
@@ -171,7 +175,7 @@ bool LoRa::send_raw(uint8_t* bytes, const uint8_t len, const uint8_t destination
 	bool is_sent = manager.sendtoWait(bytes, len, destination);
 
 	print_module_label();
-	LPrintln("Send " , (is_sent) ? "successful" : "failed" );
+  	LPrintln("Ack " , (is_sent) ? "received" : "not received" );
   LMark;
 	signal_strength = driver.lastRssi();
   LMark;

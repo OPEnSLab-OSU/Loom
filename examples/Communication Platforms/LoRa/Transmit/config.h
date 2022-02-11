@@ -2,7 +2,7 @@
 	'general':\
 	{\
 		'name':'Device',\
-		'instance':1,\
+		'instance':0,\
 		'interval':2000\
 	},\
 	'components':[\
@@ -29,7 +29,6 @@
 			'name':'LoRa',\
 			'params':[\
 				255,\
-				0,\
 				23,\
 				3,\
 				200\

@@ -103,7 +103,6 @@ public:
 	/// @param[in] 	override_name
 	LoRa(
 			const uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
-			const uint8_t		address				= 0,
 			const uint8_t		power_level 		= 23,
 			const uint8_t		retry_count			= 3,
 			const uint16_t		retry_timeout		= 200,
