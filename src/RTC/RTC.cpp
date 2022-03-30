@@ -342,7 +342,7 @@ void RTC::set_rtc_to_computer_time()
 
 	// Entering the year
 	print_module_label();
-	LPrintln("Enter the Year (20xx)");
+	LPrintln("Enter the Year (Four digits, e.g. 2020)");
   LMark;
 	while(computer_year == ""){
 		computer_year = Serial.readStringUntil('\n');
