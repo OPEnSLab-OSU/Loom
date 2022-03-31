@@ -342,7 +342,7 @@ void RTC::set_rtc_to_computer_time()
 
 	// Entering the year
 	print_module_label();
-	LPrintln("Enter the Year");
+	LPrintln("Enter the Year (Four digits, e.g. 2020)");
   LMark;
 	while(computer_year == ""){
 		computer_year = Serial.readStringUntil('\n');
@@ -352,7 +352,7 @@ void RTC::set_rtc_to_computer_time()
 
 	// Entering the month
 	print_module_label();
-	LPrintln("Enter the Month");
+	LPrintln("Enter the Month (1 ~ 12)");
   LMark;
 	while(computer_month == ""){
 		computer_month = Serial.readStringUntil('\n');
@@ -362,7 +362,7 @@ void RTC::set_rtc_to_computer_time()
 
 	// Entering the day
 	print_module_label();
-	LPrintln("Enter the Day");
+	LPrintln("Enter the Day (1 ~ 31)");
   LMark;
 	while(computer_day  == ""){
 		computer_day = Serial.readStringUntil('\n');
