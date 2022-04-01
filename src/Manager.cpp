@@ -68,6 +68,7 @@ Manager::Manager(
 	, interval(interval)
 {
 	snprintf(this->device_name, 20, "%s", device_name);
+	read_serial_no();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -748,4 +749,22 @@ bool Manager::check_serial_for_config()
 		return status;
 	}
 	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+void Manager::read_serial_no()
+{
+	// Serial numbers are made up of four words located at these specific registers (see datasheet)
+	uint32_t sn_words[4];
+	sn_words[0] = *(volatile uint32_t *)(0x0080A00C);
+	sn_words[1] = *(volatile uint32_t *)(0x0080A040);
+	sn_words[2] = *(volatile uint32_t *)(0x0080A044);
+	sn_words[3] = *(volatile uint32_t *)(0x0080A048);
+
+	// Take these raw values and convert them into a string of hex characters
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			sprintf(serial_no + (i * 8) + (j * 2), "%02X", (uint8_t)(sn_words[i] >> ((3 - j) * 8)));
+		}
+	}
 }

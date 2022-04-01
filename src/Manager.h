@@ -32,6 +32,7 @@ class SleepManager;
 class InterruptManager;
 
 
+#define SERIAL_NO_LEN 	32		///< The length of the built-in serial number for Feather M0s
 #define SERIAL_BAUD		115200	///< Serial Baud Rate
 #define MAX_SERIAL_WAIT	20000	///< Maximum number of milliseconds to wait for user given 'begin_serial(true)'
 #define SD_CS			10		///< SD chip select used in parse_config_SD().
@@ -60,11 +61,12 @@ public:
 
 protected:
 
-	char		device_name[20];	///< The name of the device
-	uint8_t		instance;			///< The instance / channel ID within the subnet
+	char		device_name[20];		///< The name of the device
+	uint8_t		instance;				///< The instance / channel ID within the subnet
 
-	uint16_t	interval;			///< Default value for pause()
-									///< Used so that manager can control interval, rather than code in .ino
+	uint16_t	interval;				///< Default value for pause()
+										///< Used so that manager can control interval, rather than code in .ino
+	char serial_no[SERIAL_NO_LEN + 1]; 	///< Holds the serial number of the Feather M0 that Loom is running on
 
 	/// Device type (Hub / Node)
 	DeviceType	device_type;	// Maybe remove if using Hub, Node, and Repeater become subclasses of Manager
@@ -171,6 +173,9 @@ public:
 	/// Measure and package data.
 	/// Convenience function, current just calls measure then package
 	void		record() { measure(); package(); }
+
+	/// Returns the serial number of the Feather M0 Loom is running on.
+	const char* get_serial_no() { return serial_no; }
 
 	/// Package data of all modules into JsonObject and return
 	/// @return JsonObject of packaged data of enabled modules
@@ -450,6 +455,9 @@ private:
 
 	/// Used to add device info to data object
 	void add_device_ID_to_json(JsonObject json);
+
+	/// Reads the serial number from memory
+	void read_serial_no();
 
 	/// Free modules.
 	/// Used in destructor or when switching configuration
