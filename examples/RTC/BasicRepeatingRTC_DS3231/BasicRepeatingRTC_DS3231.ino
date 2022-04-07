@@ -1,11 +1,22 @@
 ///////////////////////////// IMPORTANT ////////////////////////////////////////////////////////////////////////////////////////////////////
 // This example uses a config.h that allows you to set an initial custom time for the RTC (usually your local time).                      //
+// In the config file, you will notice this component:                                                                                    //
+//                                                                                                                                        //
+// {\                                                                                                                                     //
+//     'name':'DS3231',\                                                                                                                  //
+//     'params':[11,true,true]\                                                                                                           //
+// },\                                                                                                                                    //
+//                                                                                                                                        //
+// The first parameter is the timezone, a list of which can be found on the wiki at the link below.                                       //
+// The second parameter allows local time to be displayed alongside UTC time if set to true.                                              //
+// The third parameter allows you to enter a custom time using the serial monitor when the RTC is reset if set to true.                   //
+//                                                                                                                                        //
 // Upon sketch upload, click the magnifying glass in the top-right corner of the IDE to open the serial monitor.                          //
 // You will then be prompted to enter a year, month, day, hour, minute, and second.                                                       //
 // You can enter this information via an input field at the top of the serial monitor and hitting Enter or clicking Send.                 //
 // The time will be converted to UTC for display in the serial monitor, but the custom time will also appear in your log file on the SD.  //
 // If you are not prompted to enter a custom time, the RTC should be reset if it does not match the time you'd like.                      //
-// Visit the Loom wiki for RTC reset instructions: https://github.com/OPEnSLab-OSU/Loom/wiki/Setting-Custom-RTC-Time                      //
+// Visit the Loom wiki for RTC reset instructions: https://github.com/OPEnSLab-OSU/Loom/wiki/Custom-RTC-Time                              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // This is a basic example of settings a repeating alarm with the DS3231 RTC.
