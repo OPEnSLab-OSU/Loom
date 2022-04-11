@@ -221,16 +221,16 @@ bool SD::save_json(JsonObject json, const char* name)
 	// Don't log if no data
 	if (contents.isNull()) return false;
 
-
-	// Create Header Rows
-	if ( file.curPosition() == 0) {
-
+	// Print the header rows if they have not already been printed
+	static bool headers_printed = false;
+	if (!headers_printed) {
 		// Create Header Row 1 (Categories)
 		_write_json_header_part1(file, dev_id, timestamp, contents);
 
 		// Create Header Row 2 (Column names)
 		_write_json_header_part2(file, dev_id, timestamp, contents);
 
+		headers_printed = true;
 	}
 
 	// Write data values
