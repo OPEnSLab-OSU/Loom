@@ -160,8 +160,8 @@ void RTC::package(JsonObject json)
    	LMark;
 		local_rtc();
 		JsonObject data = get_module_data_object(json, "LocalTime");
-		sprintf(local_datestring, "%d/%d/%d", local_time.year(), local_time.month(), local_time.day());
-		sprintf(local_timestring, "%d:%d:%d", local_time.hour(), local_time.minute(), local_time.second());
+		sprintf(local_datestring, "%d/%02d/%02d", local_time.year(), local_time.month(), local_time.day());
+		sprintf(local_timestring, "%02d:%02d:%02d", local_time.hour(), local_time.minute(), local_time.second());
 		data["Date"] = local_datestring;
 		data["Time"] = local_timestring;
 		data["TimeZone"] = enum_timezone_string(timezone);
@@ -227,7 +227,7 @@ const char* RTC::get_datestring()
 {
 	DateTime time = now();
   LMark;
-	sprintf(datestring, "%d/%d/%d", time.year(), time.month(), time.day() );
+	sprintf(datestring, "%d/%02d/%02d", time.year(), time.month(), time.day() );
 	return datestring;
 }
 
@@ -236,7 +236,7 @@ void RTC::get_datestring(char* buf)
 {
 	DateTime time = now();
   LMark;
-	sprintf(buf, "%d/%d/%d", time.year(), time.month(), time.day() );
+	sprintf(buf, "%d/%02d/%02d", time.year(), time.month(), time.day() );
 	strcpy(datestring, buf);
 }
 
@@ -245,7 +245,7 @@ const char* RTC::get_timestring()
 {
 	DateTime time = now();
   LMark;
-	sprintf(timestring, "%d:%d:%d", time.hour(), time.minute(), time.second() );
+	sprintf(timestring, "%02d:%02d:%02d", time.hour(), time.minute(), time.second() );
 	return timestring;
 }
 
@@ -254,7 +254,7 @@ void RTC::get_timestring(char* buf)
 {
 	DateTime time = now();
   LMark;
-	sprintf(buf, "%d:%d:%d", time.hour(), time.minute(), time.second() );
+	sprintf(buf, "%02d:%02d:%02d", time.hour(), time.minute(), time.second() );
 	strcpy(timestring, buf);
 }
 
