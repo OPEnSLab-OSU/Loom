@@ -1,60 +1,63 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SD.cpp
-/// @brief		File for Loom_SD implementation.
+/// @file		SD.cpp
+/// @brief		File for SD implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #include "SD.h"
 #include "Manager.h"
+#include "Module_Factory.h"
 
 #include <SPI.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_SD::Loom_SD(
-		LoomManager* manager,
-		const bool			enable_rate_filter, 
-		const uint16_t		min_filter_delay, 
-		const byte			chip_select, 
+SD::SD(
+		const bool			enable_rate_filter,
+		const uint16_t		min_filter_delay,
+		const byte			chip_select,
 		const char*			default_file,
 		const bool			number_files
 	)
-	: LoomLogPlat(manager, "SD", Type::SDCARD, enable_rate_filter, min_filter_delay )
+	: LogPlat("SD", enable_rate_filter, min_filter_delay )
 	, chip_select(chip_select)
 {
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+  LMark;
 
 	// bool sd_found = sd.begin(chip_select);
 	bool sd_found = sd.begin(chip_select, SD_SCK_MHZ(50));
 
 	if (sd_found) {
+   	LMark;
 		// Setup file name
 		update_filename(default_file, number_files);
 	} else {
 		active = false;
 	}
 
-	print_module_label();	
+	print_module_label();
 	LPrintln("Initialize ", (sd_found) ? "sucessful" : "failed");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_SD::Loom_SD(LoomManager* manager, JsonArrayConst p)
-	: Loom_SD(manager, EXPAND_ARRAY(p, 5) ) {}
+SD::SD(JsonArrayConst p)
+	: SD(EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_SD::update_filename(const char* default_file, const bool number_files)
+bool SD::update_filename(const char* default_file, const bool number_files)
 {
+  LMark;
 	snprintf(filename, 12, "%s", default_file);	// file before potential modifcation
 	File file;				// file representation
 
 	if (number_files) {	// Use numbers
-		
+
 		if ( strlen(filename) > 6) {
 			print_module_label();
 			LPrintln("filename too long, truncating");
@@ -62,7 +65,7 @@ bool Loom_SD::update_filename(const char* default_file, const bool number_files)
 		}
 
 		const uint8_t base_len = strlen(filename);
-		snprintf(filename, 13, "%s00.csv", filename);
+		snprintf(filename, 13, "%s000.csv", filename);
 
 		// Determine next file number
 		while (sd.exists(filename)) {
@@ -79,7 +82,7 @@ bool Loom_SD::update_filename(const char* default_file, const bool number_files)
 				return false;
 			}
 		}
-		
+
 	} else {			// Don't use numbers
 		if ( strlen(filename) > 8) {
 			print_module_label();
@@ -107,49 +110,52 @@ bool Loom_SD::update_filename(const char* default_file, const bool number_files)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::print_config() const
+void SD::print_config() const
 {
-	LoomLogPlat::print_config();
+	LogPlat::print_config();
 
 	// LPrintln("\tChip Select Pin     : ", chip_select);
 
 	// LPrintln("\tSD Version        : ", enum_oled_version_string(version) );
 	// if (version == BREAKOUT) {
-	// 	LPrintln("\tReset Pin           : ", reset_pin );		
+	// 	LPrintln("\tReset Pin           : ", reset_pin );
 	// }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::link_device_manager(LoomManager* LM)
+void SD::link_device_manager(Manager* LM)
 {
-	LoomModule::link_device_manager(LM);
+	Module::link_device_manager(LM);
 
 	// If no currently linked RTC object, try to get one from Manager
 	if ( (RTC_Inst == NULL) && (LM != NULL) ){
+   	LMark;
 		RTC_Inst = LM->get_rtc_module();
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::set_filename(const char* name) 
-{ 
-	snprintf(this->filename, 13, "%s", name); 
+void SD::set_filename(const char* name)
+{
+	snprintf(this->filename, 13, "%s", name);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::empty_file(const char* name)
+void SD::empty_file(const char* name)
 {
+  LMark;
 	sd.remove(name);
 	File file = sd.open(name, O_WRITE);
 	file.close();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_SD::dump_file(const char* name) 
+bool SD::dump_file(const char* name)
 {
 	#if LOOM_DEBUG == 1
 
 		digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+  	LMark;
 
 		sd.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
 
@@ -159,9 +165,10 @@ bool Loom_SD::dump_file(const char* name)
 			LPrintln("Contents of file: ", name);
 
 			// read from the file until there's nothing else in it:
-			while (file.available()) 
+			while (file.available())
 				Serial.write(file.read());
 			Serial.println();
+    	LMark;
 			file.close();
 			return true;
 		} else {
@@ -174,11 +181,13 @@ bool Loom_SD::dump_file(const char* name)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_SD::log(const char* name)
+bool SD::log(const char* name)
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();
+   	LMark;
 		if (strcmp(tmp["type"], "data") == 0 ) {
+    	LMark;
 			return save_json(tmp, name);
 		}
 	}
@@ -186,7 +195,7 @@ bool Loom_SD::log(const char* name)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_SD::save_json(JsonObject json, const char* name)
+bool SD::save_json(JsonObject json, const char* name)
 {
 	if ( !check_millis() ) return false;
 
@@ -208,7 +217,7 @@ bool Loom_SD::save_json(JsonObject json, const char* name)
 	JsonObject dev_id    = json["id"];
 	JsonObject timestamp = json["timestamp"];
 	JsonArray  contents  = json["contents"];
-	
+
 	// Don't log if no data
 	if (contents.isNull()) return false;
 
@@ -243,10 +252,10 @@ bool Loom_SD::save_json(JsonObject json, const char* name)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::_write_json_header_part1(File& file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const
+void SD::_write_json_header_part1(File& file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const
 {
 	// Print device indentifcation headers
-	if (!dev_id.isNull()) { 
+	if (!dev_id.isNull()) {
 		file.print("ID");
 		for (JsonPair dataPoint : dev_id) {
 			file.print(',');
@@ -254,7 +263,7 @@ void Loom_SD::_write_json_header_part1(File& file, JsonObject dev_id, JsonObject
 	}
 
 	// Print timestamp headers
-	if (!timestamp.isNull()) { 
+	if (!timestamp.isNull()) {
 		file.print("Timestamp");
 		for (JsonPair dataPoint : timestamp) {
 			file.print(',');
@@ -263,8 +272,9 @@ void Loom_SD::_write_json_header_part1(File& file, JsonObject dev_id, JsonObject
 
 	// Print module data headers
 	for (JsonObject module : contents) {
+   	LMark;
 		file.print(module["module"].as<const char*>());
-		
+
 		JsonObject data = module["data"];
 		if (data.isNull()) continue;
 
@@ -277,19 +287,21 @@ void Loom_SD::_write_json_header_part1(File& file, JsonObject dev_id, JsonObject
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::_write_json_header_part2(File& file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const
+void SD::_write_json_header_part2(File& file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const
 {
 	// Print device indentifcation headers
-	if (!dev_id.isNull()) { 
+	if (!dev_id.isNull()) {
 		for (JsonPair dataPoint : dev_id) {
+    	LMark;
 			file.print(dataPoint.key().c_str());
 			file.print(',');
 		}
 	}
 
 	// Print timestamp headers
-	if (!timestamp.isNull()) { 
+	if (!timestamp.isNull()) {
 		for (JsonPair dataPoint : timestamp) {
+    	LMark;
 			file.print(dataPoint.key().c_str());
 			file.print(',');
 		}
@@ -301,6 +313,7 @@ void Loom_SD::_write_json_header_part2(File& file, JsonObject dev_id, JsonObject
 		if (data.isNull()) continue;
 
 		for (JsonPair dataPoint : data) {
+    	LMark;
 			file.print(dataPoint.key().c_str());
 			file.print(',');
 		}
@@ -310,46 +323,52 @@ void Loom_SD::_write_json_header_part2(File& file, JsonObject dev_id, JsonObject
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::_write_json_data(File& file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const
+void SD::_write_json_data(File& file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const
 {
-	if (!dev_id.isNull()) { 
+	if (!dev_id.isNull()) {
 		for (JsonPair dataPoint : dev_id) {
-			JsonVariant val = dataPoint.value();	
+    	LMark;
+			JsonVariant val = dataPoint.value();
 			if (val.is<int>()) {
+     		LMark;
 				file.print(dataPoint.value().as<int>());
 			} else if (val.is<char*>() || val.is<const char*>() ) {
 				file.print(dataPoint.value().as<const char*>());
-			} 
+			}
 			file.print(',');
 		}
 	}
 
-	if (!timestamp.isNull()) { 
+	if (!timestamp.isNull()) {
+   	LMark;
 		for (JsonPair dataPoint : timestamp) {
-			JsonVariant val = dataPoint.value();				
+    	LMark;
+			JsonVariant val = dataPoint.value();
 			if (val.is<char*>() || val.is<const char*>() ) {
+     		LMark;
 				file.print(dataPoint.value().as<const char*>());
-			} 
+			}
 			file.print(',');
 		}
 	}
-	
+
 	for (JsonObject module : contents) {
 		JsonObject data = module["data"];
 		if (data.isNull()) continue;
 
 		for (JsonPair dataPoint : data) {
+    	LMark;
 			JsonVariant val = dataPoint.value();
 			if (val.is<int>()) {
 				file.print(dataPoint.value().as<int>());
 			} else if (val.is<bool>()) {
-				file.print(dataPoint.value().as<bool>());								
+				file.print(dataPoint.value().as<bool>());
 			} else if (val.is<float>()) {
-				file.print(dataPoint.value().as<float>());				
+				file.print(dataPoint.value().as<float>());
 			} else if (val.is<char*>() || val.is<const char*>() ) {
 				file.print(dataPoint.value().as<const char*>());
-			} 
-			file.print(",");		
+			}
+			file.print(",");
 		}
 	}
 
@@ -357,25 +376,25 @@ void Loom_SD::_write_json_data(File& file, JsonObject dev_id, JsonObject timesta
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::power_up() {
+void SD::power_up() {
 	digitalWrite(8, HIGH); // LoRa fix
 	// re-begin SD
 	sd.begin(chip_select, SD_SCK_MHZ(50));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SD::power_down() {
+void SD::power_down() {
 	// do nothing
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-// void Loom_SD::print_directory(File dir, const uint8_t numTabs) const
+// void SD::print_directory(File dir, const uint8_t numTabs) const
 // {
 // 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
 
 // 	while (true) {
 // 		File entry =  dir.openNextFile();
-		
+
 // 		if ( !entry ) break;	// no more files
 
 // 		for (auto i = 0; i < numTabs; i++) {
@@ -396,7 +415,3 @@ void Loom_SD::power_down() {
 // }
 
 // ///////////////////////////////////////////////////////////////////////////////
-
-
-
-

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_RTC.cpp
-/// @brief		File for LoomRTC implementation.
+/// @brief		File for RTC implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -11,81 +11,82 @@
 #include "RTC.h"
 #include "Manager.h"
 #include "../InternetPlats/InternetPlat.h"
-#include "../Interrupt_Manager.h"
+#include "../InterruptManager.h"
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomRTC::daysOfTheWeek[] = 
+const char* RTC::daysOfTheWeek[] =
 	{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 ///////////////////////////////////////////////////////////////////////////////
-const float LoomRTC::timezone_adjustment[] =
+const float RTC::timezone_adjustment[] =
 	{
-		// All of the number represents the difference between UTC 
+		// All of the number represents the difference between UTC
 		1  /* WAT */,
 
 		2  /* AT  */,
-		
+
 		3  /* ADT */,
-		
-		4  /* AST */, 
-		
+
+		4  /* AST */,
+
 		4  /* EDT */,
-		
+
 		5  /* EST */,
-		
+
 		5  /* CDT */,
-		
+
 		6  /* CST */,
-		
+
 		6  /* MDT */,
-		
+
 		7  /* MST */,
-		
+
 		7  /* PDT */,
-		
+
 		8  /* PST */,
-		
+
 		8  /* AKDT */,
-		
+
 		9  /* AKST */,
-		
+
 		9 /* HST */,
-		
+
 		11 /* SST */,
-		
+
 		0  /* GMT */,
-		
+
 		-1 /* BST */,
-		
+
 		-1 /* CET */,
-		
+
 		-2 /* EET */,
-		
+
 		-3 /* EEST */,
-		
+
 		-3 /* BRT  */,
-		
+
 		-4 /* ZP4 */,
-		
+
 		-5 /* ZP5 */,
-		
+
 		-6 /* ZP6 */,
-		
+
 		-7 /* ZP7 */,
-		
+
 		-8 /* AWST*/,
-		
+
 		-9.5 /* ACST*/,
-		
+
 		-10 /* AEST*/
 	};
 
 ///////////////////////////////////////////////////////////////////////////////
-char* LoomRTC::enum_timezone_string(TimeZone t)
+char* RTC::enum_timezone_string(TimeZone t)
 {
 	switch(t) {
 		case TimeZone::WAT  : return "WAT";
@@ -121,15 +122,13 @@ char* LoomRTC::enum_timezone_string(TimeZone t)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomRTC::LoomRTC(	
-		LoomManager* 			manager,
+RTC::RTC(
 		const char*							module_name,
-		const LoomModule::Type	module_type,
 		TimeZone					timezone,
 		const bool							use_local_time,
 		const bool				custom_time
-	) 
-	: LoomModule(manager, module_name, module_type )
+	)
+	: Module(module_name)
 	, timezone(timezone)
 	, use_local_time(use_local_time)
 	, converted(false)
@@ -139,25 +138,26 @@ LoomRTC::LoomRTC(
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_config() const
+void RTC::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 	LPrintln("\tUse UTC Time      : ", use_local_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_state() const
+void RTC::print_state() const
 {
-	LoomModule::print_state();
+	Module::print_state();
 	// print_time();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::package(JsonObject json)
+void RTC::package(JsonObject json)
 {
 	read_rtc();
 	package_json_timestamp(json, datestring, timestring);
 	if (use_local_time){
+   	LMark;
 		local_rtc();
 		JsonObject data = get_module_data_object(json, "LocalTime");
 		sprintf(local_datestring, "%d/%d/%d", local_time.year(), local_time.month(), local_time.day());
@@ -169,7 +169,7 @@ void LoomRTC::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_time(const bool verbose)
+void RTC::print_time(const bool verbose)
 {
 	read_rtc();
 	print_module_label();
@@ -187,35 +187,35 @@ void LoomRTC::print_time(const bool verbose)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::print_DateTime(const DateTime time)
+void RTC::print_DateTime(const DateTime time)
 {
 	LPrint(time.year());   LPrint('/');
 	LPrint(time.month());  LPrint('/');
 	LPrint(time.day());    LPrint(' ');
 	LPrint(time.hour());   LPrint(':');
 	LPrint(time.minute()); LPrint(':');
-	LPrintln(time.second()); 
+	LPrintln(time.second());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::read_rtc()
+void RTC::read_rtc()
 {
 	get_datestring();
 	get_timestring();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::local_rtc(){
+void RTC::local_rtc(){
 	local_time = now();
 	float adj = -1. * timezone_adjustment[(int)timezone];
 	int min;
 
-	if ( (adj-(int)adj) == 0 ) { 
+	if ( (adj-(int)adj) == 0 ) {
 		min = 0;
-	} else if ( (adj-(int)adj) > 0 ) { 
+	} else if ( (adj-(int)adj) > 0 ) {
 		min = 30;
-	} else { 
-		min = -30; 
+	} else {
+		min = -30;
 	}
 
 	local_time = local_time + TimeSpan(0, (int)adj, min, 0);
@@ -223,71 +223,77 @@ void LoomRTC::local_rtc(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomRTC::get_datestring()
+const char* RTC::get_datestring()
 {
 	DateTime time = now();
+  LMark;
 	sprintf(datestring, "%d/%d/%d", time.year(), time.month(), time.day() );
 	return datestring;
-} 
+}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::get_datestring(char* buf)
+void RTC::get_datestring(char* buf)
 {
 	DateTime time = now();
+  LMark;
 	sprintf(buf, "%d/%d/%d", time.year(), time.month(), time.day() );
 	strcpy(datestring, buf);
-} 
+}
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* LoomRTC::get_timestring()
+const char* RTC::get_timestring()
 {
 	DateTime time = now();
+  LMark;
 	sprintf(timestring, "%d:%d:%d", time.hour(), time.minute(), time.second() );
 	return timestring;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::get_timestring(char* buf)
+void RTC::get_timestring(char* buf)
 {
 	DateTime time = now();
+  LMark;
 	sprintf(buf, "%d:%d:%d", time.hour(), time.minute(), time.second() );
 	strcpy(timestring, buf);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::get_weekday(char* buf)
+void RTC::get_weekday(char* buf)
 {
+  LMark;
 	strcpy( buf, daysOfTheWeek[ now().dayOfTheWeek() ] );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::get_timestamp(char* header, char* timestamp, const char delimiter, const uint8_t format)
+void RTC::get_timestamp(char* header, char* timestamp, const char delimiter, const uint8_t format)
 {
+  LMark;
 	switch (format) {
 		case 1 :
-			sprintf(header, "Date%c", delimiter); 
-			sprintf(timestamp, "%s%c ", get_timestring() ); 
+			sprintf(header, "Date%c", delimiter);
+			sprintf(timestamp, "%s%c ", get_timestring() );
 			break;
 		case 2 :
-			sprintf(header, "Date%c", delimiter); 
-			sprintf(timestamp, "%s%c ", get_datestring() ); 
+			sprintf(header, "Date%c", delimiter);
+			sprintf(timestamp, "%s%c ", get_datestring() );
 			break;
 		case 3 :
-			sprintf(header, "Date%c Time%c ", delimiter, delimiter); 
-			sprintf(timestamp, "%s%c %s%c ", get_datestring(), delimiter, get_timestring(), delimiter ); 
+			sprintf(header, "Date%c Time%c ", delimiter, delimiter);
+			sprintf(timestamp, "%s%c %s%c ", get_datestring(), delimiter, get_timestring(), delimiter );
 			break;
 		case 4 :
-			sprintf(header, "Date_Time", delimiter); 
-			sprintf(timestamp, "%s %s%c ", get_datestring(), get_timestring(), delimiter ); 
+			sprintf(header, "Date_Time", delimiter);
+			sprintf(timestamp, "%s %s%c ", get_datestring(), get_timestring(), delimiter );
 			break;
-		default : 
-			strcpy(header, ""); 
-			strcpy(timestamp, ""); 
+		default :
+			strcpy(header, "");
+			strcpy(timestamp, "");
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::init()
+void RTC::init()
 {
 	if (!_begin()) {
 		print_module_label();
@@ -299,7 +305,7 @@ void LoomRTC::init()
 	LPrintln("Current Time (before possible reset)");
 	print_time();
 
-	// The following section checks if RTC is running, else sets 
+	// The following section checks if RTC is running, else sets
 	// the time to the time that the sketch was compiled
 	if (!_initialized()) {
 		print_module_label();
@@ -319,7 +325,7 @@ void LoomRTC::init()
 	print_time();
 }
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::set_rtc_to_computer_time()
+void RTC::set_rtc_to_computer_time()
 {
 
 	// initialized variable for user input
@@ -337,15 +343,17 @@ void LoomRTC::set_rtc_to_computer_time()
 	// Entering the year
 	print_module_label();
 	LPrintln("Enter the Year");
+  LMark;
 	while(computer_year == ""){
 		computer_year = Serial.readStringUntil('\n');
 	}
 	print_module_label();
 	LPrintln("Year Entered: ", computer_year);
-	
+
 	// Entering the month
 	print_module_label();
 	LPrintln("Enter the Month");
+  LMark;
 	while(computer_month == ""){
 		computer_month = Serial.readStringUntil('\n');
 	}
@@ -355,6 +363,7 @@ void LoomRTC::set_rtc_to_computer_time()
 	// Entering the day
 	print_module_label();
 	LPrintln("Enter the Day");
+  LMark;
 	while(computer_day  == ""){
 		computer_day = Serial.readStringUntil('\n');
 	}
@@ -364,6 +373,7 @@ void LoomRTC::set_rtc_to_computer_time()
 	// Entering the hour
 	print_module_label();
 	LPrintln("Enter the Hour (0 ~ 23)");
+  LMark;
 	while(computer_hour == ""){
 		computer_hour = Serial.readStringUntil('\n');
 	}
@@ -373,6 +383,7 @@ void LoomRTC::set_rtc_to_computer_time()
 	// Entering the minute
 	print_module_label();
 	LPrintln("Enter the Minute (0 ~ 59)");
+  LMark;
 	while(computer_min == ""){
 		computer_min = Serial.readStringUntil('\n');
 	}
@@ -382,6 +393,7 @@ void LoomRTC::set_rtc_to_computer_time()
 	// Entering the second
 	print_module_label();
 	LPrintln("Enter the Second (0 ~ 59)");
+  LMark;
 	while(computer_sec == ""){
 		computer_sec = Serial.readStringUntil('\n');
 	}
@@ -390,7 +402,7 @@ void LoomRTC::set_rtc_to_computer_time()
 
 	// Adjust to user input time
 	_adjust(DateTime(computer_year.toInt(), computer_month.toInt(), computer_day.toInt(), computer_hour.toInt(), computer_min.toInt(), computer_sec.toInt()));
-		
+
 	print_module_label();
 	LPrintln("Time set to user input time:");
 	print_time();
@@ -398,60 +410,63 @@ void LoomRTC::set_rtc_to_computer_time()
 	// Adjust to UTC time as default time
 	convert_local_to_utc();
 
-	// If local time is enable, measure local time 
+	// If local time is enable, measure local time
 	if(use_local_time){
 		local_rtc();
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::set_rtc_to_compile_time()
+void RTC::set_rtc_to_compile_time()
 {
+  LMark;
 	// This sets to local time zone
 	_adjust( DateTime(F(__DATE__), F(__TIME__)) );
-	
+
 	print_module_label();
 	LPrintln("Time set to compile time:");
 	print_time();
 
 	// Adjust to UTC time as default time
 	convert_local_to_utc();
-	
-	// If local time is enable, measure local time 
+
+	// If local time is enable, measure local time
 	if(use_local_time){
 		local_rtc();
 	}
-		
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::convert_local_to_utc(const bool to_utc)
+void RTC::convert_local_to_utc(const bool to_utc)
 {
+  LMark;
 	float adj = ( (to_utc) ? 1. : -1. ) * timezone_adjustment[(int)timezone];
 	int min;
 
-	if ( (adj-(int)adj) == 0 ) { 
+	if ( (adj-(int)adj) == 0 ) {
 		min = 0;
-	} else if ( (adj-(int)adj) > 0 ) { 
+	} else if ( (adj-(int)adj) > 0 ) {
 		min = 30;
-	} else { 
-		min = -30; 
+	} else {
+		min = -30;
 	}
 
 	DateTime utc_time = now() + TimeSpan(0, (int)adj, min, 0);
 
 	print_module_label();
 	LPrintln("Adjusting time to ", (to_utc) ? "UTC" : "Local");
+  LMark;
 
 	_adjust(utc_time);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomRTC::convert_daylight_to_standard(DateTime local_time){
+DateTime RTC::convert_daylight_to_standard(DateTime local_time){
 	/*
-	if(timezone == TimeZone::WAT || timezone == TimeZone::AT || 
-	   timezone == TimeZone::HST || timezone == TimeZone::BRT || 
-	   timezone == TimeZone::ZP4 || timezone == TimeZone::ZP5 || 
+	if(timezone == TimeZone::WAT || timezone == TimeZone::AT ||
+	   timezone == TimeZone::HST || timezone == TimeZone::BRT ||
+	   timezone == TimeZone::ZP4 || timezone == TimeZone::ZP5 ||
 	   timezone == TimeZone::ZP6 || timezone == TimeZone::ZP7 ||
 	   timezone == TimeZone::AWST || timezone == TimeZone::ACST ||
 	   timezone == TimeZone::AEST || timezone == TimeZone::CET) LPrintln("No daylight saving or summer time in this time zone");
@@ -474,21 +489,22 @@ DateTime LoomRTC::convert_daylight_to_standard(DateTime local_time){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomRTC::us_daylight_to_standard(DateTime local_time){
+DateTime RTC::us_daylight_to_standard(DateTime local_time){
 	DateTime time = local_time;
-	if(time.dayOfTheWeek() == 0 && time.month() == 3 && 
-	   time.day() >= 8 && time.day() <= 16 && time.hour() >= 2 && 
+  LMark;
+	if(time.dayOfTheWeek() == 0 && time.month() == 3 &&
+	   time.day() >= 8 && time.day() <= 16 && time.hour() >= 2 &&
 	   time.minute() >= 0 && time.second() >= 0 && converted == false){
-		   print_module_label();
-		   LPrintln("Switch to Daylight Saving Time");
-		   time = time + TimeSpan(0, 1, 0, 0);
+		  print_module_label();
+		  LPrintln("Switch to Daylight Saving Time");
+		  time = time + TimeSpan(0, 1, 0, 0);
 			converted = true;
 		   	switch(timezone) {
 				case TimeZone::AST :
 					timezone = TimeZone::ADT;
 					LPrintln("Switched from AST to ADT");
 					break;
-				
+
 				case TimeZone::EST :
 					timezone = TimeZone::EDT;
 					LPrintln("Switched from EST to EDT");
@@ -513,27 +529,27 @@ DateTime LoomRTC::us_daylight_to_standard(DateTime local_time){
 					timezone = TimeZone::AKDT;
 					LPrintln("Switched from AKST to AKDT");
 					break;
-				
+
 				default:
 					LPrintln("If you get false time read, please submit a Github issue. If not, ignore this message.");
 					break;
 			   }
-		
+
 	   }
-	else if(time.dayOfTheWeek() == 0 && time.month() == 11 && 
-	   		time.day() >= 1 && time.day() <= 8 && time.hour() >= 2 && 
+	else if(time.dayOfTheWeek() == 0 && time.month() == 11 &&
+	   		time.day() >= 1 && time.day() <= 8 && time.hour() >= 2 &&
 	   		time.minute() >= 0 && time.second() >= 0 && converted == false){
 				print_module_label();
 				LPrintln("Switch to Standard Time");
 				time = time + TimeSpan(0, -1, 0, 0);
 				converted = true;
-				print_module_label();			
+				print_module_label();
 				switch(timezone) {
 					case TimeZone::ADT :
 						timezone = TimeZone::AST;
 						LPrintln("Switched from ADT to AST");
 						break;
-				
+
 					case TimeZone::EDT :
 						timezone = TimeZone::EST;
 						LPrintln("Switched from EDT to EST");
@@ -558,7 +574,7 @@ DateTime LoomRTC::us_daylight_to_standard(DateTime local_time){
 						timezone = TimeZone::AKST;
 						LPrintln("Switched from AKDT to AKST");
 						break;
-					
+
 					default:
 						LPrintln("If you get false time read, please submit a Github issue. If not, ignore this message.");
 						break;
@@ -571,17 +587,18 @@ DateTime LoomRTC::us_daylight_to_standard(DateTime local_time){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomRTC::eu_daylight_to_standard(DateTime local_time){
+DateTime RTC::eu_daylight_to_standard(DateTime local_time){
 
 	DateTime time = local_time;
-	if(time.dayOfTheWeek() == 0 && time.month() == 3 && 
-	   time.day() >= 25 && time.day() <= 31 && time.hour() >= 1 && 
+  LMark;
+	if(time.dayOfTheWeek() == 0 && time.month() == 3 &&
+	   time.day() >= 25 && time.day() <= 31 && time.hour() >= 1 &&
 	   time.minute() >= 0 && time.second() >= 0 && converted == false){
-		   print_module_label();
-		   LPrintln("Switch to Summer Time");
-		   time = time + TimeSpan(0, 1, 0, 0);
-		   converted = true;
-		   print_module_label();
+		   	print_module_label();
+		   	LPrintln("Switch to Summer Time");
+		   	time = time + TimeSpan(0, 1, 0, 0);
+		   	converted = true;
+		   	print_module_label();
 				switch(timezone) {
 					case TimeZone::GMT :
 						timezone = TimeZone::BST;
@@ -598,8 +615,8 @@ DateTime LoomRTC::eu_daylight_to_standard(DateTime local_time){
 						break;
 				}
 	   }
-	else if(time.dayOfTheWeek() == 0 && time.month() == 10 && 
-	   		time.day() >= 25 && time.day() <= 31 && time.hour() >= 1 && 
+	else if(time.dayOfTheWeek() == 0 && time.month() == 10 &&
+	   		time.day() >= 25 && time.day() <= 31 && time.hour() >= 1 &&
 	   		time.minute() >= 0 && time.second() >= 0 && converted == false){
 				print_module_label();
 				LPrintln("Switch to Standard Time");
@@ -616,13 +633,13 @@ DateTime LoomRTC::eu_daylight_to_standard(DateTime local_time){
 						timezone = TimeZone::EET;
 						LPrintln("Switched from EEST to EET");
 						break;
-				
+
 					default:
-						LPrintln("If you get false time read, please submit a Github issue. If not, ignore this message.");		
-						break;		
+						LPrintln("If you get false time read, please submit a Github issue. If not, ignore this message.");
+						break;
 				}
 			}
-	
+
 	else if ((time.dayOfTheWeek() != 0) && converted == true){
 		converted = false;
 	}
@@ -631,7 +648,7 @@ DateTime LoomRTC::eu_daylight_to_standard(DateTime local_time){
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomRTC::rtc_validity_check()
+bool RTC::rtc_validity_check()
 {
 	DateTime time_check = now();
 	int y = time_check.year();
@@ -648,24 +665,27 @@ bool LoomRTC::rtc_validity_check()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::link_device_manager(LoomManager* LM)
+void RTC::link_device_manager(Manager* LM)
 {
-	LoomModule::link_device_manager(LM);
+	Module::link_device_manager(LM);
 
 	if (LM) {
-		// Set manager's interrupt manager 
+   	LMark;
+		// Set manager's interrupt manager
 		LM->rtc_module = this;
 
 		auto interrupt_manager = LM->get_interrupt_manager();
 		if (interrupt_manager) {
+    	LMark;
 			interrupt_manager->set_RTC_module( this );
 		}
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomRTC::time_adjust(const DateTime time, const bool is_local)
+void RTC::time_adjust(const DateTime time, const bool is_local)
 {
+  LMark;
 	_adjust(time);
 
 	// Check if source time is not in desired mode
@@ -674,9 +694,8 @@ void LoomRTC::time_adjust(const DateTime time, const bool is_local)
 	}
 
 	print_module_label();
-	LPrint("Adjusted time to: "); 
-	print_DateTime(now());	
+	LPrint("Adjusted time to: ");
+	print_DateTime(now());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-

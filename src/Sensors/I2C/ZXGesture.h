@@ -1,20 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_ZXGesture.h
-/// @brief		File for Loom_ZXGesture definition.
+/// @file		ZXGesture.h
+/// @brief		File for ZXGesture definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <ZX_Sensor.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -30,9 +31,8 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#zx-distance-and-gesture-sensor)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_ZXGesture : public LoomI2CSensor
+class ZXGesture : public I2CSensor
 {
-
 public:
 
 	/// Different modes of the ZX gesture sensor
@@ -61,20 +61,19 @@ public:
 	/// @param[in]	i2c_address				Set(Int) | <0x10> | {0x10, 0x11} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
 	/// @param[in]	mode					Set(ZXMode) | <0> | { 0("Position"), 1("Gesture") } | Gain level
-	Loom_ZXGesture(
-LoomManager* manager,
-const byte i2c_address		= 0x10,
-			const uint8_t		mux_port		= 255,
-			const Mode			mode			= Mode::POS
+	ZXGesture(
+			const byte		i2c_address	= 0x10,
+			const uint8_t	mux_port	= 255,
+			const Mode		mode		= Mode::POS
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_ZXGesture(LoomManager* manager, JsonArrayConst p);
+	ZXGesture(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_ZXGesture() = default;
+	~ZXGesture() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -94,4 +93,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, ZXGesture, "ZXGesture");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

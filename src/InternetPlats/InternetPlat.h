@@ -1,25 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_InternetPlat.h
-/// @brief		File for LoomInternetPlat definition.
+/// @file		InternetPlat.h
+/// @brief		File for InternetPlat definition.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
 #pragma once
 
 #include "Module.h"
 
-#include "Client.h"
-#include "Udp.h"
-#include "SSLClient.h"
+#include <Client.h>
+#include <Udp.h>
+#include <SSLClient.h>
 #undef min
 #undef max
 #include <memory>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -32,12 +33,12 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#internet-capabilities)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomInternetPlat : public LoomModule
+class InternetPlat : public Module
 {
 
-protected:	
-	
-	/// Utility function to write an http reqest based on parameters specified by LoomInternetPlat::http_request to a Client class.
+protected:
+
+	/// Utility function to write an http reqest based on parameters specified by InternetPlat::http_request to a Client class.
 	/// See http_request() for parameter details.
 	void write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb);
 
@@ -50,7 +51,7 @@ public:
 //=============================================================================
 ///@name	TYPES
 /*@{*/ //======================================================================
-	
+
 	/// Close the socket and delete the UDP object when the unique ptr dissapears
 	struct UDPDeletor {
 		void operator() (UDP* p) {
@@ -83,14 +84,12 @@ public:
 	/// Loom Internet Platform module constructor.
 	///
 	/// @param[in]	module_name		String | <"Internet-Plat"> | null | Internet Platform module name
-	LoomInternetPlat( 
-			LoomManager* manager,
-			const char* module_name,  
-			const LoomModule::Type	module_type
+	InternetPlat(
+			const char* module_name
 		);
 
 	/// Destructor
-	virtual ~LoomInternetPlat() = default;
+	virtual ~InternetPlat() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -117,12 +116,12 @@ public:
 
 	/// Make HTTP GET request.
 	/// See http_request() for parameter and return details.
-	ClientSession			http_get_request(const char* domain, const char* url, const char* body = nullptr) 
+	ClientSession			http_get_request(const char* domain, const char* url, const char* body = nullptr)
 							{ return http_request(domain, url, body, "GET"); }
 
 	/// Make HTTP POST request.
 	/// See http_request() for parameter and return details.
-	ClientSession			http_post_request(const char* domain, const char* url, const char* body = nullptr) 
+	ClientSession			http_post_request(const char* domain, const char* url, const char* body = nullptr)
 							{ return http_request(domain, url, body, "POST"); }
 
 	/// Connect to a domain, but don't write any HTTP stuff, Let the module figure that out.
@@ -158,3 +157,9 @@ private:
 	void	m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

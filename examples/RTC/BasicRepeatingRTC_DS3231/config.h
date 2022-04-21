@@ -7,10 +7,10 @@
 	'components':[\
 		{\
 			'name':'DS3231',\
-			'params':[11,false, false]\
+			'params':[11,true,false]\
 		},\
 		{\
-			'name':'Interrupt_Manager',\
+			'name':'InterruptManager',\
 			'params':'default'\
 		},\
 		{\

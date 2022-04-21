@@ -16,20 +16,20 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 volatile bool rtc_flag = false;
 
@@ -39,36 +39,36 @@ void wakeISR_RTC() {
 	rtc_flag = true;
 }
 
-void setup() 
+void setup()
 {
-	// Needs to be done for Hypno Board
-	pinMode(5, OUTPUT);		// Enable control of 3.3V rail 
-	pinMode(6, OUTPUT);		// Enable control of 5V rail 
+	// Needs to be done for Hypnos Board
+	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
+	pinMode(6, OUTPUT);		// Enable control of 5V rail
 	pinMode(12, INPUT_PULLUP);		// Enable waiting for RTC interrupt, MUST use a pullup since signal is active low
-  pinMode(13, OUTPUT);
+	pinMode(13, OUTPUT);
 
-	//See Above
+	// See Above
 	digitalWrite(5, LOW);	// Enable 3.3V rail
 	digitalWrite(6, HIGH);	// Enable 5V rail
-  digitalWrite(13, LOW);
+	digitalWrite(13, LOW);
 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
 	// Register an interrupt on the RTC alarm pin
-	Loom.InterruptManager().register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
 
 	LPrintln("\n ** Setup Complete ** ");
 	Serial.flush();
 }
 
 
-void loop() 
+void loop()
 {
 	digitalWrite(5, LOW); // Disable 3.3V rail
-  digitalWrite(6, HIGH);  // Disable 5V rail
-  digitalWrite(13, HIGH);
+	digitalWrite(6, HIGH);  // Disable 5V rail
+	digitalWrite(13, HIGH);
 
 	// As it turns out, if the SD card is initialized and you change
 	// the states of the pins to ANY VALUE, the SD card will fail to
@@ -77,34 +77,33 @@ void loop()
 	if (rtc_flag) {
 		pinMode(23, OUTPUT);
 		pinMode(24, OUTPUT);
-		pinMode(10, OUTPUT);
+		pinMode(11, OUTPUT);
 
     // delay(1000);
 
-		Loom.power_up();
+		Feather.power_up();
 	}
 
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
-	Loom.SDCARD().log();
+	getSD(Feather).log();
 
 	// set the RTC alarm to a duration of 10 seconds with TimeSpan
-	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(0,0,0,10));
-	Loom.InterruptManager().reconnect_interrupt(12);
+	getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(0,0,0,10));
+	getInterruptManager(Feather).reconnect_interrupt(12);
 
-  digitalWrite(13, LOW);
+	digitalWrite(13, LOW);
 	digitalWrite(5, HIGH); // Enable 3.3V rail
 	digitalWrite(6, LOW);  // Enable 5V rail
 	pinMode(23, INPUT);
 	pinMode(24, INPUT);
-	pinMode(10, INPUT);
+	pinMode(11, INPUT);
 
-	// Sleep Manager autmatically calls power_down on every sensor before sleeping
-	// And power_up after waking.
-
-  rtc_flag = false;
-	Loom.SleepManager().sleep();
+	rtc_flag = false;
+	Feather.power_down();
+	getSleepManager(Feather).sleep();
+	Feather.power_up();
 	while (!rtc_flag);
 }

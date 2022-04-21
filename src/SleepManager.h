@@ -1,18 +1,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Sleep_Manager.h
-/// @brief		File for Loom_Sleep_Manager definition.
+/// @file		SleepManager.h
+/// @brief		File for SleepManager definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "Module.h"
-#include "Interrupt_Manager.h"
 #include "Manager.h"
 
 #include <OPEnS_RTC.h>
@@ -20,9 +18,11 @@
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+namespace Loom {
 
-class Loom_Interrupt_Manager;
+///////////////////////////////////////////////////////////////////////////////
 
+class InterruptManager;
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -32,7 +32,7 @@ class Loom_Interrupt_Manager;
 /// - [Documentation](https://openslab-osu.github.io/Loom/html/class_loom___sleep___manager.html)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Sleep_Manager : public LoomModule
+class SleepManager : public Module
 {
 
 public:
@@ -46,7 +46,7 @@ public:
 
 protected:
 
-	Loom_Interrupt_Manager* interrupt_manager;	///< Pointer to interrupt_manager instance
+	InterruptManager* interrupt_manager;	///< Pointer to interrupt_manager instance
 
 	bool 		use_LED;			///< Whether or not to use LED to indicate wake status
 	bool		delay_on_wake;		///< Whether to provide delay on wake.
@@ -66,8 +66,7 @@ public:
 	/// @param[in]	delay_on_wake		Bool | <false> | {true, false} | Whether or not to delay upon waking to allow time to open Serial Monitor
 	/// @param[in]	sleep_mode			Set(Mode) | <1> | { 0("Idle"), 1("Standby"), 2("Opens Low Power")} | Which Mode to use
 	/// @param[in]	power_off_pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to power off board
-	Loom_Sleep_Manager(
-			LoomManager* manager,
+	SleepManager(
 			const bool		use_LED				= true,
 			const bool		delay_on_wake		= false,
 			const Mode		sleep_mode			= Mode::STANDBY,
@@ -77,10 +76,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Sleep_Manager(LoomManager* manager, JsonArrayConst p);
+	SleepManager(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Sleep_Manager() = default;
+	~SleepManager() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -115,7 +114,7 @@ public:
 
 	/// Set pointer to interrupt manager
 	/// @param[in]	IM	Pointer to an interrupt manager
-	void 		link_interrupt_manager(Loom_Interrupt_Manager* IM) { interrupt_manager = IM; }
+	void 		link_interrupt_manager(InterruptManager* IM) { interrupt_manager = IM; }
 
 	/// Set the sleep mode to use
 	/// @param[in]	mode	The Mode to set to
@@ -125,7 +124,7 @@ public:
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================
 
-	void 		link_device_manager(LoomManager* LM) override;
+	void 		link_device_manager(Manager* LM) override;
 
 	/// Convert enum of sleep mode to a c-string
 	/// @param[in]	m	Sleep to get string of
@@ -140,3 +139,9 @@ private:
 	/// Handles post-sleep operations
 	void		post_sleep();
 };
+
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, SleepManager, "SleepManager");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

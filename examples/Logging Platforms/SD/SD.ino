@@ -3,52 +3,49 @@
 // This is a basic example that demonstrates how to log data to an SD card
 // using Loom.
 
-// Documentation for SD: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___s_d.html
-
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
-
-void setup() 
+void setup()
 {
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 
-void loop() 
+void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
-	
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
+
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
-	Loom.SDCARD().log();
+	getSD(Feather).log();
 
-	// Or log to a specific file (does not change what default file is set to)	
-	// Loom.SDCARD().log("specific.csv");
+	// Or log to a specific file (does not change what default file is set to)
+	// getSD(Feather)log("specific.csv");
 
-	Loom.pause();	
+	Feather.pause();
 }

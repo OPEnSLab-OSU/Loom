@@ -1,13 +1,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SD.h
-/// @brief		File for Loom_SD definition.
+/// @file		SD.h
+/// @brief		File for SD definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
-
 
 #pragma once
 
@@ -16,10 +15,10 @@
 #include <SdFat.h>
 #include "../RTC/RTC.h"
 
-
 // See if there is any difference to use the SD breakout
 // enum SD_Version { FEATHERWING, BREAKOUT };
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -33,7 +32,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sd-card)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_SD : public LoomLogPlat
+class SD : public LogPlat
 {
 
 protected:
@@ -43,13 +42,13 @@ protected:
 
 		const byte	chip_select;		///< Chip select pin
 		char		filename[13];		///< String of file to write to if not filename explicitly provided (should not exceed 6 characters)
-		LoomRTC*	RTC_Inst;			///< Pointer to an RTC object for timestamps
+		RTC*	RTC_Inst;			///< Pointer to an RTC object for timestamps
 
 		// SD_Version 		version;
 		// byte 			reset_pin;
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -58,14 +57,13 @@ public:
 	///
 	/// @param[in]	enable_rate_filter			Bool | <true> | {true, false} | Whether or not to impose maximum update rate
 	/// @param[in]	min_filter_delay			Int | <1000> | [100-5000] | Minimum update delay, if enable_rate_filter enabled
-	/// @param[in]	chip_select					Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
+	/// @param[in]	chip_select					Set(Int) | <11> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin to use for chip select
 	/// @param[in]	default_file_base			String | <"test"> | null | File to write to if none explicity provided (should be <= 6 characters, don't add extension)
 	/// @param[in]	number_files				Bool | <true> | {true, false} | True to number files with run number, false to not.
-	Loom_SD(
-			LoomManager* manager,
+	SD(
 			const bool			enable_rate_filter	= true,
 			const uint16_t		min_filter_delay	= 1000,
-			const byte			chip_select			= 10,
+			const byte			chip_select			= 11,
 			const char*			default_file		= "test",
 			const bool			number_files		= true
 
@@ -76,17 +74,17 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_SD(LoomManager* manager, JsonArrayConst p);
+	SD(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_SD() = default;
+	~SD() = default;
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
 
-	// void		log() override;  
+	// void		log() override;
 
 	bool		log(JsonObject json) override { return save_json(json, filename); }
 
@@ -96,13 +94,13 @@ public:
 	bool		log(const char* name);
 
 	// manually expose superclass version of log() that gets json from
-	// linked LoomManager, calling this classes implementation of 
+	// linked LoomManager, calling this classes implementation of
 	// 'log(JsonObject json)', which is pure virtual in superclass
-	using LoomLogPlat::log; 
+	using LogPlat::log;
 
 	/// Save data to SD card in CSV format.
 	/// Format:
-	/// Identification Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ...   
+	/// Identification Date Time ModuleA key1 val1 key2 val2 ... ModuleB key1 val1 ...
 	/// @param[in]	json		The data to be saved
 	/// @param[in]	filename	The file to save to
 	bool		save_json(JsonObject json, const char* name);
@@ -114,7 +112,7 @@ public:
 	/// Clear a file (remove contents but not file itself)
 	/// @param[in]	filename	Name of file to empty
 	void		empty_file(const char* name);
-	
+
 	void		power_up() override;
 	void 		power_down() override;
 
@@ -137,7 +135,7 @@ public:
 
 	/// Return pointer to the currently linked RTC object
 	/// @return		Current RTC object
-	LoomRTC*	get_RTC_module() const { return RTC_Inst; }
+	RTC*	get_RTC_module() const { return RTC_Inst; }
 
 	/// Get the current default file to write to
 	/// @return Default file
@@ -151,11 +149,11 @@ public:
 	/// Generally only called when device manager links module
 	/// to provide pointer both directions
 	/// @param[in]	LM	LoomManager to point to
-	void		link_device_manager(LoomManager* LM) override;
+	void		link_device_manager(Manager* LM) override;
 
 	/// Set the RTC module to use for timers
 	/// @param[in]	RTC_Inst	Pointer to the RTC object
-	void		set_RTC_module(LoomRTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
+	void		set_RTC_module(RTC* RTC_Inst) { this->RTC_Inst = RTC_Inst; }
 
 	/// Set default file to write to
 	/// @param[in]	filename	New default file (max 8 characters excluding extension)
@@ -197,7 +195,7 @@ private:
 	void _write_json_data(File& file, JsonObject dev_id, JsonObject timestamp, JsonArray contents) const;
 
 	/// When instantiating the SD module, you provide a file name base, to which a number is appended.
-	/// This number represents the run number, starting at 0. 
+	/// This number represents the run number, starting at 0.
 	/// For example, if you use the file name base 'data', the first run will generate a file named: 'data00.csv'.
 	/// The next run of the program will produce 'data01.csv' and so on
 	/// @param[in]	default_file	File name base if using file numbers, or complete file name if not using numbers
@@ -207,4 +205,8 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, SD, "SD");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom

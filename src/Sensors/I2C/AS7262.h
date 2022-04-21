@@ -1,20 +1,23 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7262.h
-/// @brief		File for Loom_AS7262 definition.
+/// @file		AS7262.h
+/// @brief		File for AS7262 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
-#include <AS726X.h>
+#undef enableInterrupt
+// #include <AS726X.h>
+#include <Adafruit_AS726x.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -30,12 +33,12 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#as7262-spectral-sensor-visible)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_AS7262 : public LoomI2CSensor
+class AS7262 : public I2CSensor
 {
-
 protected:
 
-	AS726X		inst_AS7262;		///< Underlying AS7262 sensor manager instance
+	// AS726X		inst_AS7262;		///< Underlying AS7262 sensor manager instance
+	Adafruit_AS726x		inst_AS7262;		///< Underlying AS7262 sensor manager instance
 
 	uint16_t	color_vals[6];		///< Measured color band values (violet, blue, green, yellow, orange, red).
 									///< Units: counts / (μW/cm^2).
@@ -59,9 +62,8 @@ public:
 	/// @param[in]	gain					Set(Int) | <1> | { 0("1x"), 1("3.7x"), 2("16x"), 3("64x") } | Gain level
 	/// @param[in]	mode					Set(Int) | <3> | { 0("Continuous reading of VBGY"), 1("Continuous reading of GYOR"), 2("Continuous reading all channels"), 3("One-shot reading of all channels") } | Read mode
 	/// @param[in]	integration_time		Int | <50> | [0-255] | Integration time (time will be 2.8ms * [integration value])
-	Loom_AS7262(
-LoomManager* manager,
-const byte i2c_address			= 0x49,
+	AS7262(
+			const byte			i2c_address			= 0x49,
 			const uint8_t		mux_port			= 255,
 			const bool			use_bulb			= false,
 			const uint8_t		gain				= 1,
@@ -72,10 +74,10 @@ const byte i2c_address			= 0x49,
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_AS7262(LoomManager* manager, JsonArrayConst p);
+	AS7262(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_AS7262() = default;
+	~AS7262() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -96,7 +98,7 @@ const byte i2c_address			= 0x49,
 /*@{*/ //======================================================================
 
 	/// Set whether not bulb is used for active light source
-	/// @param[in]	enable	Whether or not to enable 
+	/// @param[in]	enable	Whether or not to enable
 	void		enable_bulb(const bool enable) { use_bulb = enable; }
 
 	/// Set gain.
@@ -109,7 +111,7 @@ const byte i2c_address			= 0x49,
 	///		1: Continuous reading of GYOR
 	///		2: Continuous reading of all channels (power-on default)
 	///		3: One-shot reading of all channels
-	void		set_mode(const uint8_t mode) { inst_AS7262.setMeasurementMode(mode); }
+	// void		set_mode(const uint8_t mode) { inst_AS7262.setMeasurementMode(mode); }
 
 	/// Set integration time.
 	/// Time will be 2.8ms * [integration value]  (0-255), 50 is default
@@ -120,3 +122,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, AS7262, "AS7262");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

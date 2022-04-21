@@ -1,60 +1,56 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is a basic example of sending data via LoRa. 
+// This is a basic example of sending data via LoRa.
 
 // The corresponding example is LoRa > Receive (or Receive_Blocking)
 
-// These two examples are the Loom equivalent of the basic RX / TX LoRa 
+// These two examples are the Loom equivalent of the basic RX / TX LoRa
 // examples
 
 // See https://openslab-osu.github.io/Loom/html/class_loom___lo_ra.html
 // for details of LoRa config options
 
-// While you can send whatever data you collect, for the purposes of this 
+// While you can send whatever data you collect, for the purposes of this
 // example, only analog data is being collected
-
-// Documentation for LoRa: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___lo_ra.html
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
-
-void setup() 
-{ 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+void setup()
+{
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
 	// Send to address 1
-	Loom.LoRa().send(1);
+	getLoRa(Feather).send(1);
 
-	Loom.pause();	// Delay between interations set with 'interval' in config
+	Feather.pause();	// Delay between interations set with 'interval' in config
 }
-

@@ -1,40 +1,52 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		SDI12SensorTemplate.cpp
+/// @brief		File for SDI12SensorTemplate implementation.
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "[Template]_Loom_SDI12_Sensor.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSDI12SensorTemplate::LoomSDI12SensorTemplate(
-		LoomManager* manager,
+SDI12SensorTemplate::SDI12SensorTemplate(
 const char* module_name,
 		int				num_samples
-	) 
-	: LoomSDI12Sensor( module_name, num_samples )
+	)
+	: SDI12Sensor( module_name, num_samples )
 {
-	this->module_type = LoomModule::Type::SDI12SensorTemplateType;
+	this->module_type = Module::Type::SDI12SensorTemplateType;
 
 	// Initialize member variables
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSDI12SensorTemplate::LoomSDI12SensorTemplate(LoomManager* manager, JsonArrayConst p)
-	: LoomSDI12SensorTemplate( EXPAND_ARRAY(p, 3) ) {}
+SDI12SensorTemplate::SDI12SensorTemplate(JsonArrayConst p)
+	: SDI12SensorTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSDI12SensorTemplate::print_config()
+void SDI12SensorTemplate::print_config()
 {
-	LoomSDI12Sensor::print_config();
+	SDI12Sensor::print_config();
 	LPrintln('\t', "Description         : ", "value to print" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSDI12SensorTemplate::print_state()
+void SDI12SensorTemplate::print_state()
 {
-	LoomSDI12Sensor::print_state();
-	// print information about LoomSDI12SensorTemplate state 
+	SDI12Sensor::print_state();
+	// print information about SDI12SensorTemplate state
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSDI12SensorTemplate::print_measurements()
+void SDI12SensorTemplate::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -43,15 +55,15 @@ void LoomSDI12SensorTemplate::print_measurements()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSDI12SensorTemplate::measure()
+void SDI12SensorTemplate::measure()
 {
 	// measure data from sensor
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSDI12SensorTemplate::package(JsonObject json)
+void SDI12SensorTemplate::package(JsonObject json)
 {
-	package_json(json, module_name, 
+	package_json(json, module_name,
 		"key1",		"val1",
 		"key2",		"val2"
 	);
@@ -60,13 +72,13 @@ void LoomSDI12SensorTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSDI12SensorTemplate::dispatch(JsonObject json)
+bool SDI12SensorTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		return functionRoute(
 			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } } 
+			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } }
 		);
 		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
 		// Change to match the parameters of your method
@@ -76,10 +88,11 @@ bool LoomSDI12SensorTemplate::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSDI12SensorTemplate::calibrate()
+void SDI12SensorTemplate::calibrate()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-	
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

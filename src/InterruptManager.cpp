@@ -1,29 +1,32 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Interrupt_Manager.cpp
-/// @brief		File for Loom_Interrupt_Manager implementation
+/// @file		InterruptManager.cpp
+/// @brief		File for InterruptManager implementation
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "Interrupt_Manager.h"
-#include "Sleep_Manager.h"
+#include "InterruptManager.h"
+#include "SleepManager.h"
 #include "RTC/RTC.h"
 #include "Manager.h"
+#include "Module_Factory.h"
 
 #define EI_NOTEXTERNAL
 #include <EnableInterrupt.h>
 
+using namespace Loom;
+
 
 ///////////////////////////////////////////////////////////////////////////////
 
-bool Loom_Interrupt_Manager::interrupt_triggered[InteruptRange] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+bool InterruptManager::interrupt_triggered[InteruptRange] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 ///////////////////////////////////////////////////////////////////////////////
 
-const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
+const ISRFuncPtr InterruptManager::default_ISRs[InteruptRange] =
 {
 	default_ISR_0,  default_ISR_1,  default_ISR_2,  default_ISR_3,
 	default_ISR_4,  default_ISR_5,  default_ISR_6,  default_ISR_7,
@@ -32,7 +35,7 @@ const ISRFuncPtr Loom_Interrupt_Manager::default_ISRs[InteruptRange] =
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-const char* Loom_Interrupt_Manager::interrupt_type_to_string(const uint8_t type)
+const char* InterruptManager::interrupt_type_to_string(const uint8_t type)
 {
 	switch(type) {
 		case 0  : return "LOW";
@@ -45,11 +48,10 @@ const char* Loom_Interrupt_Manager::interrupt_type_to_string(const uint8_t type)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Interrupt_Manager::Loom_Interrupt_Manager(
-		LoomManager* manager,
-		LoomRTC*		RTC_Inst
+InterruptManager::InterruptManager(
+		RTC*		RTC_Inst
 	)
-	: LoomModule(manager, "InterruptManager", Type::Interrupt_Manager )
+	: Module("InterruptManager")
 	, RTC_Inst(RTC_Inst)
 {
 
@@ -57,6 +59,7 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 
 	for (auto i = 0; i < InteruptRange; i++) {
 		int_settings[i] = {-1, nullptr, 0, ISR_Type::IMMEDIATE, true};
+
 	}
 	for (auto i = 0; i < MaxTimerCount; i++) {
 		timer_settings[i] = {nullptr, 0, false, false};
@@ -75,13 +78,13 @@ Loom_Interrupt_Manager::Loom_Interrupt_Manager(
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_Interrupt_Manager::Loom_Interrupt_Manager(LoomManager* manager, JsonArrayConst p)
-	: Loom_Interrupt_Manager(manager, nullptr ) {}
+InterruptManager::InterruptManager(JsonArrayConst p)
+	: InterruptManager(nullptr ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::print_config() const
+void InterruptManager::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 
 	LPrintln("\tInterrupts Enabled  : ", (interrupts_enabled) ? "True" : "False" );
 
@@ -121,15 +124,16 @@ void Loom_Interrupt_Manager::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::print_state() const
+void InterruptManager::print_state() const
 {
-	LoomModule::print_state();
+	Module::print_state();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::link_device_manager(LoomManager* LM)
+void InterruptManager::link_device_manager(Manager* LM)
 {
-	LoomModule::link_device_manager(LM);
+  LMark;
+	Module::link_device_manager(LM);
 
 	if ( LM ){
 
@@ -152,13 +156,13 @@ void Loom_Interrupt_Manager::link_device_manager(LoomManager* LM)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::link_sleep_manager(Loom_Sleep_Manager* SM)
+void InterruptManager::link_sleep_manager(SleepManager* SM)
 {
-	Sleep_Manager = SM;
+	SleepMngr = SM;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::run_pending_ISRs() {
+void InterruptManager::run_pending_ISRs() {
 	// Run any bottom half ISRs of interrupts
 	run_ISR_bottom_halves();
 	// Run 'ISR' functions for elapsed timers
@@ -168,7 +172,7 @@ void Loom_Interrupt_Manager::run_pending_ISRs() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::set_enable_interrupt(const uint32_t pin, const bool state)
+void InterruptManager::set_enable_interrupt(const uint32_t pin, const bool state)
 {
 	int i = pin_to_interrupt(pin);
 	if(i == 16) {
@@ -180,11 +184,12 @@ void Loom_Interrupt_Manager::set_enable_interrupt(const uint32_t pin, const bool
 	else{
 		print_module_label();
 		LPrintln("Error: Pin ", pin, " has not been registered yet");
+
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::register_ISR(const uint32_t pin, const ISRFuncPtr ISR, const uint32_t signal_type, const ISR_Type run_type)
+void InterruptManager::register_ISR(const uint32_t pin, const ISRFuncPtr ISR, const uint32_t signal_type, const ISR_Type run_type)
 {
 	int i = pin_to_interrupt(pin);
 	if(i == 16) {
@@ -199,6 +204,7 @@ void Loom_Interrupt_Manager::register_ISR(const uint32_t pin, const ISRFuncPtr I
 		LPrint("Registering ISR on pin ", pin);
 		LPrint(" to be triggered on ", signal_type);
 		LPrintln(" and is ", (run_type==ISR_Type::IMMEDIATE) ? "immediate" : "delay" );
+		LMark;
 		int_settings[i] = { pin, ISR, signal_type, run_type, (ISR) ? true : false };
 	}
  	else{
@@ -212,6 +218,7 @@ void Loom_Interrupt_Manager::register_ISR(const uint32_t pin, const ISRFuncPtr I
 
 	// If ISR provided
 	if (ISR != nullptr) {
+    LMark;
 
 		ISRFuncPtr tmpISR = (run_type==ISR_Type::IMMEDIATE) ? ISR : default_ISRs[i];
 
@@ -229,7 +236,7 @@ void Loom_Interrupt_Manager::register_ISR(const uint32_t pin, const ISRFuncPtr I
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::reconnect_interrupt(const uint32_t pin)
+bool InterruptManager::reconnect_interrupt(const uint32_t pin)
 {
 	int i = pin_to_interrupt(pin);
 	if(i == 16) {
@@ -238,6 +245,7 @@ bool Loom_Interrupt_Manager::reconnect_interrupt(const uint32_t pin)
 		return false;
 	}
 	IntDetails settings;
+  LMark;
 	if(int_settings[i].pin == pin) settings = int_settings[i];
 	else{
 		print_module_label();
@@ -251,6 +259,7 @@ bool Loom_Interrupt_Manager::reconnect_interrupt(const uint32_t pin)
 
 	// If ISR provided
 	if (settings.ISR != nullptr) {
+    LMark;
 		ISRFuncPtr tmpISR = (settings.run_type == ISR_Type::IMMEDIATE) ? settings.ISR : default_ISRs[i];
 		attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (settings.type<5) ? settings.type : 0 );
 		attachInterrupt(digitalPinToInterrupt(pin), tmpISR, (settings.type<5) ? settings.type : 0 );
@@ -259,24 +268,26 @@ bool Loom_Interrupt_Manager::reconnect_interrupt(const uint32_t pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::unregister_ISR(const uint32_t pin, const uint32_t signal_type)
+void InterruptManager::unregister_ISR(const uint32_t pin, const uint32_t signal_type)
 {
 	// Set interrupt to be the default
 	register_ISR(pin, nullptr, signal_type, ISR_Type::IMMEDIATE);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::run_ISR_bottom_halves()
+void InterruptManager::run_ISR_bottom_halves()
 {
 	if (interrupts_enabled) {
 
 		// For each interrupt pin
 		for (int i = 0; i < 16; i++) {
+      LMark;
 
 			// If pin enabled and bottom half ISR provided
 			// ISR will be Null if no interrupt on that pin,
 			// or if ISR on pin is set to immediate (dont want to rerun the ISR here)
 			if ( (interrupt_triggered[i]) && (int_settings[i].ISR != nullptr) ) {
+        LMark;
 
 				// LPrintln("I: ", i);
 
@@ -299,7 +310,7 @@ void Loom_Interrupt_Manager::run_ISR_bottom_halves()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::interrupt_reset(const uint32_t pin)
+void InterruptManager::interrupt_reset(const uint32_t pin)
 {
 	int i = pin_to_interrupt(pin);
 	if(i == 16) {
@@ -307,7 +318,6 @@ void Loom_Interrupt_Manager::interrupt_reset(const uint32_t pin)
 		LPrintln("Error: Pin ", pin, " is not valid");
 		return;
 	}
-
 	detachInterrupt(digitalPinToInterrupt(pin));
 	delay(20);
 
@@ -323,19 +333,19 @@ void Loom_Interrupt_Manager::interrupt_reset(const uint32_t pin)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_duration(const TimeSpan duration)
+bool InterruptManager::RTC_alarm_duration(const TimeSpan duration)
 {
 	return (RTC_Inst) ? RTC_alarm_at(RTC_Inst->now() + duration) : false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_duration(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds)
+bool InterruptManager::RTC_alarm_duration(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds)
 {
 	return RTC_alarm_duration( TimeSpan(days, hours, minutes, seconds) );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
+bool InterruptManager::RTC_alarm_at(DateTime future_time)
 {
 	// Don't sleep if no RTC to wake up device
 	if (RTC_Inst == nullptr) {
@@ -344,6 +354,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 
 	print_module_label();
 	LPrint("Will set alarm for : ");
+  LMark;
 	RTC_Inst->print_DateTime(future_time);
 
 	// Don't set alarm at time in the past
@@ -364,6 +375,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 
 		print_module_label();
 		LPrint("Will instead try to set alarm for : ");
+    LMark;
 		RTC_Inst->print_DateTime(future_time);
 
 	}
@@ -374,7 +386,7 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(DateTime future_time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_at(const uint8_t hour, const uint8_t minute, const uint8_t second)
+bool InterruptManager::RTC_alarm_at(const uint8_t hour, const uint8_t minute, const uint8_t second)
 {
 	// Don't sleep if no RTC to wake up device
 	if (RTC_Inst == nullptr) {
@@ -384,28 +396,30 @@ bool Loom_Interrupt_Manager::RTC_alarm_at(const uint8_t hour, const uint8_t minu
 	// Call RTC_alarm_at(DateTime future_time) with that time today
 	// That function will adjust to following day if necessary
 	DateTime now = RTC_Inst->now();
+  LMark;
 	return RTC_alarm_at( DateTime(now.year(), now.month(), now.day(), hour, minute, second) );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_duration_from_last(const TimeSpan duration)
+bool InterruptManager::RTC_alarm_duration_from_last(const TimeSpan duration)
 {
 	return (RTC_Inst) ? RTC_alarm_at(last_alarm_time + duration) : false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::RTC_alarm_duration_from_last(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds)
+bool InterruptManager::RTC_alarm_duration_from_last(const uint8_t days, const uint8_t hours, const uint8_t minutes, const uint8_t seconds)
 {
 	return RTC_alarm_duration_from_last( TimeSpan(days, hours, minutes, seconds) );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::check_timers()
+void InterruptManager::check_timers()
 {
 	// Check each timer
 	for (auto i = 0; i < MaxTimerCount; i++) {
 		// If enabled and expired
 		if ( (timer_settings[i].enabled) && (timers[i].isExpired()) ){
+      LMark;
 			// Run associated ISR
 			timer_settings[i].ISR();
 
@@ -420,9 +434,10 @@ void Loom_Interrupt_Manager::check_timers()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::register_timer(const uint8_t timer_num, const unsigned long duration, const ISRFuncPtr ISR, const bool repeat)
+void InterruptManager::register_timer(const uint8_t timer_num, const unsigned long duration, const ISRFuncPtr ISR, const bool repeat)
 {
 	if (timer_num < MaxTimerCount) {
+    LMark;
 		timer_settings[timer_num] = { ISR, duration, repeat, true };
 		timers[timer_num].start(duration, AsyncDelay::MILLIS);
 	} else {
@@ -432,8 +447,9 @@ void Loom_Interrupt_Manager::register_timer(const uint8_t timer_num, const unsig
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::clear_timer(const uint8_t timer_num)
+void InterruptManager::clear_timer(const uint8_t timer_num)
 {
+  LMark;
 	if (timer_num < MaxTimerCount) {
 		if (print_verbosity == Verbosity::V_HIGH) {
 			print_module_label();
@@ -448,7 +464,7 @@ void Loom_Interrupt_Manager::clear_timer(const uint8_t timer_num)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::register_internal_timer(const uint duration, const ISRFuncPtr ISR, const bool repeat, const ISR_Type run_type)
+void InterruptManager::register_internal_timer(const uint duration, const ISRFuncPtr ISR, const bool repeat, const ISR_Type run_type)
 {
 	internal_timer.ISR		= ISR;
 	internal_timer.run_type	= run_type;
@@ -471,13 +487,15 @@ void Loom_Interrupt_Manager::register_internal_timer(const uint duration, const 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_Interrupt_Manager::run_pending_internal_timer_ISR()
+bool InterruptManager::run_pending_internal_timer_ISR()
 {
+  LMark;
 	if ( (internal_timer.run_type == ISR_Type::CHECK_FLAG) &&
 		 (internal_timer.ISR != nullptr) &&
 		 (rtcCounter.getFlag()) ) {
 		rtcCounter.clearFlag();
 		LPrintln("Executing ISR");
+    LMark;
 		internal_timer.ISR();
 		return true;
 	}
@@ -485,7 +503,7 @@ bool Loom_Interrupt_Manager::run_pending_internal_timer_ISR()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::internal_timer_enable(const bool enable)
+void InterruptManager::internal_timer_enable(const bool enable)
 {
 	internal_timer.enabled = enable;
 
@@ -503,7 +521,7 @@ void Loom_Interrupt_Manager::internal_timer_enable(const bool enable)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_Interrupt_Manager::unregister_internal_timer()
+void InterruptManager::unregister_internal_timer()
 {
 	rtcCounter.disableAlarm();
 	rtcCounter.detachInterrupt();
@@ -516,7 +534,7 @@ void Loom_Interrupt_Manager::unregister_internal_timer()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint32_t Loom_Interrupt_Manager::pin_to_interrupt(uint32_t pin){
+uint32_t InterruptManager::pin_to_interrupt(uint32_t pin){
 	if(pin == 11) return 0;
 	else if(pin == 13) return 1;
 	else if(pin == 10 || pin == A0 || pin == A5) return 2;

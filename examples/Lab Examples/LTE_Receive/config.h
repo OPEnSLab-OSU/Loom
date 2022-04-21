@@ -18,8 +18,7 @@
     {\
       'name':'GoogleSheets',\
       'params':[\
-        'Google',\
-        7003,\
+        'Goog',\
         '/macros/s/<your-script-id>/exec',\
 				'<your-sheet-id>',\
 /*true to autoname tab*/				true,\

@@ -1,48 +1,47 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is an example to use with the Loom Multiplexer to enable you to 
+// This is an example to use with the Loom Multiplexer to enable you to
 // dynamically connect any Loom-supported I2C sensors
 
 // The code is essentially the same a 'Basic', the only real different is the
 // enabling of the Multiplexer in the configuration.
-
-// Documentation for Multiplexer: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___multiplexer.html
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
-
-LoomManager Loom{ &ModuleFactory };
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
 
+using namespace Loom;
 
-void setup() 
-{ 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+Loom::Manager Feather{};
+
+
+
+void setup()
+{
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
-	Loom.pause();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
+	Feather.pause();
 }

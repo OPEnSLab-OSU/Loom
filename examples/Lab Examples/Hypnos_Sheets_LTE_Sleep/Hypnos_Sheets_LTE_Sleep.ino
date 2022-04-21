@@ -1,3 +1,19 @@
+///////////////////////////////////////////////////////////////////////////////
+
+// This is an example that demonstrates usage of the Hypnos board
+// Deep sleep functionality alongside with LTE and publishing to Google Sheets
+
+// The Hypnos board includes
+// - SD
+// - DS3231 RTC
+// - SparkFun LTE CAT Shield
+// - Ability to power of peripherals
+
+// Further details about the Hypnos board can be found here:
+// https://github.com/OPEnSLab-OSU/OPEnS-Lab-Home/wiki/Hypnos
+
+///////////////////////////////////////////////////////////////////////////////
+
 #include <Loom.h>
 
 // Include configuration
@@ -5,16 +21,17 @@ const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::LTE,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > LTE
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 volatile bool rtc_flag = false;
 
@@ -30,21 +47,21 @@ void setup()
 	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
 	pinMode(6, OUTPUT);		// Enable control of 5V rail
 	pinMode(12, INPUT_PULLUP);		// Enable waiting for RTC interrupt, MUST use a pullup since signal is active low
-  pinMode(13, OUTPUT);
+	pinMode(13, OUTPUT);
 
 	//See Above
 	digitalWrite(5, LOW);	// Enable 3.3V rail
 	digitalWrite(6, HIGH);	// Enable 5V rail
-  digitalWrite(13, LOW);
+	digitalWrite(13, LOW);
 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
-  delay(5000);
+	delay(5000);
 	// Register an interrupt on the RTC alarm pin
-	Loom.InterruptManager().register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
-  delay(5000);
+	getInterruptManager(Feather).register_ISR(12, wakeISR_RTC, LOW, ISR_Type::IMMEDIATE);
+	delay(5000);
 
 	LPrintln("\n ** Setup Complete ** ");
 	Serial.flush();
@@ -67,18 +84,18 @@ if (rtc_flag) {
 
   // delay(1000);
 
-  Loom.power_up();
+  Feather.power_up();
 }
 
-Loom.measure();
-Loom.package();
-Loom.display_data();
+Feather.measure();
+Feather.package();
+Feather.display_data();
 
-Loom.GoogleSheets().publish();
+getGoogleSheets(Feather).publish();
 
 // set the RTC alarm to a duration of five minutes with TimeSpan
-Loom.InterruptManager().RTC_alarm_duration(TimeSpan(0,0,5,0));
-Loom.InterruptManager().reconnect_interrupt(12);
+getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(0,0,5,0));
+getInterruptManager(Feather).reconnect_interrupt(12);
 
 
 digitalWrite(13, LOW);
@@ -91,8 +108,8 @@ pinMode(10, INPUT);
 
 
 rtc_flag = false;
-Loom.power_down();
-Loom.SleepManager().sleep();
-Loom.power_up();
+Feather.power_down();
+getSleepManager(Feather).sleep();
+Feather.power_up();
 while (!rtc_flag);
 }

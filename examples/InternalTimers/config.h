@@ -6,7 +6,7 @@
 	},\
 	'components':[\
 		{\
-			'name':'Interrupt_Manager',\
+			'name':'InterruptManager',\
 			'params':'default'\
 		}\
 	]\

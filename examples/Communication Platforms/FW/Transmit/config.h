@@ -1,0 +1,37 @@
+"{\
+	'general':\
+	{\
+		'name':'Device',\
+		'instance':1,\
+		'interval':2000\
+	},\
+	'components':[\
+		{\
+			'name':'Analog',\
+			'params':[\
+				8,\
+				12,\
+				true,\
+				true,\
+				true,\
+				true,\
+				true,\
+				true,\
+				0,\
+				0,\
+				0,\
+				0,\
+				0,\
+				0\
+			]\
+		},\
+		{\
+			'name':'FW',\
+			'params':[\
+				255,\
+				3,\
+				200\
+			]\
+		}\
+	]\
+}"

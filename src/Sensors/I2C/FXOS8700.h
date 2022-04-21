@@ -1,20 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_FXOS8700.h
-/// @brief		File for Loom_FXOS8700 definition.
+/// @file		FXOS8700.h
+/// @brief		File for FXOS8700 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <Adafruit_FXOS8700.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -30,9 +31,8 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#fxos8700-3-axis-accelerometermagentometer)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_FXOS8700 : public LoomI2CSensor
+class FXOS8700 : public I2CSensor
 {
-
 protected:
 
 	Adafruit_FXOS8700	inst_FXOS8700;		///< Underlying FXOS8700 sensor manager instance
@@ -50,19 +50,18 @@ public:
 	///
 	/// @param[in]	i2c_address				Set(Int) | <0x1F> | {0x1C, 0x1D, 0x1E, 0x1F} | I2C address
 	/// @param[in]	mux_port				Int | <255> | [0-16] | Port on multiplexer
-	Loom_FXOS8700(
-LoomManager* manager,
-const byte i2c_address		= 0x1F,
-			const uint8_t		mux_port		= 255
+	FXOS8700(
+			const byte		i2c_address		= 0x1F,
+			const uint8_t	mux_port		= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_FXOS8700(LoomManager* manager, JsonArrayConst p);
+	FXOS8700(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_FXOS8700() = default;
+	~FXOS8700() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -81,4 +80,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, FXOS8700, "FXOS8700");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

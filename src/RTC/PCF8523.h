@@ -1,18 +1,18 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_PCF8523.h
-/// @brief		File for Loom_PCF8523 definition.
+/// @file		PCF8523.h
+/// @brief		File for PCF8523 definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #pragma once
 
 #include "RTC.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -26,15 +26,16 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#adalogger--pcf8523-rtc)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_PCF8523 : public LoomRTC
+class PCF8523 : public RTC
 {
 
 protected:
 
-	PCF8523		rtc_inst;		///< Underlying PCF8523 manager instance
+	// not sure where this came from??
+	RTC_PCF8523		rtc_inst;		///< Underlying PCF8523 manager instance
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -45,8 +46,7 @@ public:
 	/// @param[in]	use_local_time		Bool | <false> | {true, false} | True for local time, false for UTC time
 	/// @param[in]	custom_time			Bool | <false> | {true, false} | True for user input local time, false otherwise
 
-	Loom_PCF8523(
-			LoomManager* manager,
+	PCF8523(
 			TimeZone		timezone			= TimeZone::PST,
 			const bool			use_local_time		= false,
 			const bool			custom_time 		= false
@@ -55,10 +55,10 @@ public:
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_PCF8523(LoomManager* manager, JsonArrayConst p);
+	PCF8523(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_PCF8523() = default;
+	~PCF8523() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -82,4 +82,8 @@ protected:
 
 };
 
-				
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, PCF8523, "PCF8523");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

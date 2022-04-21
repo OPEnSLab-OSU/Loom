@@ -1,14 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Stepper.h
-/// @brief		File for Loom_Stepper definition.
+/// @file		Stepper.h
+/// @brief		File for Stepper definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_ACTUATORS
 #pragma once
 
 #include "Actuator.h"
@@ -16,6 +16,9 @@
 #include <Adafruit_MotorShield.h>
 #include <Adafruit_PWMServoDriver.h>
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
 
 /// Number of possible steppers.
 /// Dependent on stepper controller breakout.
@@ -36,40 +39,39 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#stepper-motors-dc-motor--stepper-featherwing)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Stepper : public LoomActuator
+class Stepper : public Actuator
 {
 
 protected:
 
 	/// Underlying motor shield controller
-	Adafruit_MotorShield*	AFMS;	
+	Adafruit_MotorShield*	AFMS;
 
 	/// Array of stepper controllers
-	Adafruit_StepperMotor*	motors[NUM_STEPPERS];		
+	Adafruit_StepperMotor*	motors[NUM_STEPPERS];
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
 	/// Constructor
-	Loom_Stepper(LoomManager* manager);
+	Stepper();
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Stepper(LoomManager* manager, JsonArrayConst p);
+	Stepper(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Stepper();
+	~Stepper();
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
 	bool		dispatch(JsonObject json) override;
-	void		add_config(JsonObject json) override;
 
 	/// Move specified stepper specified steps, speed, and direction
 	/// @param[in]	motor		Which stepper to move (0-3)
@@ -89,3 +91,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, Stepper, "Stepper");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

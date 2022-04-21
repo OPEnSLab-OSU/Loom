@@ -1,15 +1,26 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		ModuleTemplate.h
+/// @brief		File for ModuleTemplate definition
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include "Module.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// ### (LoomModule) | dependencies: [] | conflicts: []
+// ### (Module) | dependencies: [] | conflicts: []
 /// Class description
 // ###
-class LoomModuleTemplate : public LoomModule
+class ModuleTemplate : public Module
 {
 
 protected:
@@ -23,19 +34,17 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomModuleTemplate(
-			LoomManager* manager,
-const char* module_name		= "ModuleTemplate",
+	ModuleTemplate(
 			int 			ex_param		= 42
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomModuleTemplate(LoomManager* manager, JsonArrayConst p);
-	
+	ModuleTemplate(JsonArrayConst p);
+
 	/// Destructor
-	virtual ~LoomModuleTemplate() = default;
+	virtual ~ModuleTemplate() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -43,7 +52,7 @@ const char* module_name		= "ModuleTemplate",
 
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
-	void		power_down() override {} 
+	void		power_down() override {}
 	void		power_up() override {}
 
 //=============================================================================
@@ -77,6 +86,8 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, ModuleTemplate, "ModuleTemplate");
+///////////////////////////////////////////////////////////////////////////////
 
-
-
+}; // namespace Loom

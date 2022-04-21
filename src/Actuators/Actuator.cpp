@@ -8,17 +8,19 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_ACTUATORS
 
 #include "Actuator.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomActuator::LoomActuator( 
-		LoomManager* 			manager,
-		const char*							module_name,
-		const LoomModule::Type	module_type 
-	) 
-	: LoomModule(manager, module_name, module_type )
+Actuator::Actuator(
+		const char* module_name
+	)
+	: Module(module_name)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

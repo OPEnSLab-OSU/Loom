@@ -10,14 +10,14 @@
   [\
     {\
       'name':'DS3231',\
-      'params':[11,true]\
+      'params':[11,true,false]\
     },\
     {\
-      'name':'Interrupt_Manager',\
+      'name':'InterruptManager',\
       'params':[0]\
     },\
     {\
-      'name':'Sleep_Manager',\
+      'name':'SleepManager',\
       'params':[true,false,1]\
     }\
   ]\

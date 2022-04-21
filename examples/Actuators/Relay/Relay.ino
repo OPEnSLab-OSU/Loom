@@ -1,49 +1,46 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is simple example that is used to toggle a relay on and off for 2 
+// This is simple example that is used to toggle a relay on and off for 2
 // seconds each.
 
 // The only configuration value the relay needs is the pin of the relay
 // which is currently set to pin 10 in the config
-
-// Documentation for Relay: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___relay.html 
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Enabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
-
-void setup() 
-{ 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+void setup()
+{
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 
-void loop() 
+void loop()
 {
-	Loom.Relay().set(true);
-	Loom.pause(2000);
-	Loom.Relay().set(false);
-	Loom.pause(2000);
+	getRelay(Feather).set(true);
+	Feather.pause(2000);
+	getRelay(Feather).set(false);
+	Feather.pause(2000);
 }

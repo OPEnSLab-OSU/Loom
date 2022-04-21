@@ -1,31 +1,36 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_AS7265X.cpp
-/// @brief		File for Loom_AS7265X implementation.
+/// @file		AS7265X.cpp
+/// @brief		File for AS7265X implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
+
+#include "Module_Factory.h"
 #include "AS7265X.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7265X::Loom_AS7265X(
-LoomManager* manager,
-const byte i2c_address, 
+Loom::AS7265X::AS7265X(
+		const byte			i2c_address,
 		const uint8_t		mux_port,
-		const bool			use_bulb, 
-		const uint8_t		gain, 
-		const uint8_t		mode, 
+		const bool			use_bulb,
+		const uint8_t		gain,
+		const uint8_t		mode,
 		const uint8_t		integration_time
 	)
-	: LoomI2CSensor(manager, "AS7265X", Type::AS7265X, i2c_address, mux_port )
+	: I2CSensor("AS7265X", i2c_address, mux_port)
 	, use_bulb(use_bulb)
 	, gain(gain)
 	, mode(mode)
 	, integration_time(integration_time)
 {
+  LMark;
 	bool setup = inst_AS7265X.begin();
 
 	if (setup) {
@@ -58,13 +63,13 @@ const byte i2c_address,
 		// //White LED has max forward current of 120mA
 		// inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_WHITE); 		//Default
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_25MA, AS7265x_LED_WHITE); 		//Allowed
-		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_WHITE); 		//Allowed 
+		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_WHITE); 		//Allowed
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_100MA, AS7265x_LED_WHITE); 	//Allowed
 
 		// //UV LED has max forward current of 30mA so do not set the drive current higher
 		// inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_UV); 		//Default
 
-		// //IR LED has max forward current of 65mA 
+		// //IR LED has max forward current of 65mA
 		// inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_12_5MA, AS7265x_LED_IR); 		//Default
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_25MA, AS7265x_LED_IR); 		//Allowed
 		// //inst_AS7265X.setBulbCurrent(AS7265X_LED_CURRENT_LIMIT_50MA, AS7265x_LED_IR); 		//Allowed
@@ -89,11 +94,11 @@ const byte i2c_address,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_AS7265X::Loom_AS7265X(LoomManager* manager, JsonArrayConst p)
-	: Loom_AS7265X(manager, EXPAND_ARRAY(p, 6) ) {}
+Loom::AS7265X::AS7265X(JsonArrayConst p)
+	: AS7265X(EXPAND_ARRAY(p, 6)) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::print_measurements() const
+void Loom::AS7265X::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -107,14 +112,15 @@ void Loom_AS7265X::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::measure()
+void Loom::AS7265X::measure()
 {
+  LMark;
 	if (use_bulb) {
 		inst_AS7265X.takeMeasurementsWithBulb();
 	} else {
 		inst_AS7265X.takeMeasurements();
 	}
-	
+
 	// UV
 	uv[0] = inst_AS7265X.getCalibratedA();
 	uv[1] = inst_AS7265X.getCalibratedB();
@@ -141,8 +147,9 @@ void Loom_AS7265X::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_AS7265X::package(JsonObject json)
+void Loom::AS7265X::package(JsonObject json)
 {
+  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
 	data["a"] = uv[0];
 	data["b"] = uv[1];
@@ -168,5 +175,4 @@ void Loom_AS7265X::package(JsonObject json)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
+#endif // ifdef LOOM_INCLUDE_SENSORS

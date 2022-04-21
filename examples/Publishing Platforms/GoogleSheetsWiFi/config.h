@@ -22,11 +22,10 @@
 			'name':'GoogleSheets',\
 			'params':[\
 				'Goog',\
-				7002,\
 				'/macros/s/<your-script-id>/exec',\
 				'<your-sheet-id>',\
 /*true to autoname tab*/				true,\
-/*not used if previous param is true*/	'<your-tab-name>'\
+/*not used if previous param is true*/	'<your-tab-name>',\
 			]\
 		}\
 	]\

@@ -1,13 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_WarmUp_Manager.h
-/// @brief  Header file for Loom Module WarmUp Manager, which is responsible 
+/// @file		WarmUpManager.h
+/// @brief  Header file for Loom Module WarmUp Manager, which is responsible
 ///         for handeling any WarmUp related behaviors.
 /// @author		C. Greyston Brady
 /// @date		2020
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
+
+#pragma once
 
 #include "Module.h"
 
@@ -17,13 +19,15 @@
 #undef max;
 #include <vector>;
 
+namespace Loom {
+
 class WarmUp;
 
-class Loom_WarmUp_Manager : public LoomModule {
+class WarmUpManager : public Module {
   public:
     ///Constructor
-    Loom_WarmUp_Manager(LoomManager* manager);
-    Loom_WarmUp_Manager(LoomManager* manager, JsonArrayConst);
+    WarmUpManager();
+    WarmUpManager(JsonArrayConst);
 
     /// Registers a module as a WarmUp Interface providing access;
     template<typename T>
@@ -56,3 +60,7 @@ class Loom_WarmUp_Manager : public LoomModule {
     /// Time stamp for begining of warming period
     unsigned long start_time;
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

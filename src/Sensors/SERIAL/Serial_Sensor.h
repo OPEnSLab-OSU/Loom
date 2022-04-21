@@ -8,19 +8,22 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "../Sensor.h"
+
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Abstract root for Serial/UART sensor modules.
 /// @par Resources
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#serial-sensors)
-/// - [Serial Sensor Setup](https://learn.adafruit.com/using-atsamd21-sercom-to-add-more-spi-i2c-serial-ports/creating-a-new-serial)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class LoomSerialSensor : public LoomSensor {
+class SerialSensor : public Sensor 
+{
 
 protected:
 
@@ -37,15 +40,13 @@ public:
         /// @param[in]    module_name        Name of the module (provided by derived classes)
         /// @param[in]    module_type        Type of the module (provided by derived classes)
         /// @param[in]    num_samples        The number of samples to take and average
-    LoomSerialSensor(
-            LoomManager* Manager,
-            const char*        module_name,
-            const LoomModule::Type module_type,
-            const uint8_t       num_samples
+    SerialSensor(
+            const char*            module_name,
+            const uint8_t          num_samples
     );
     
     /// Destructor
-    virtual ~LoomSerialSensor();
+    virtual ~SerialSensor();
     
     //=============================================================================
     ///@name    PRINT INFORMATION
@@ -61,4 +62,11 @@ public:
     void set_serial(Stream* stream);
     
 private:
+
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

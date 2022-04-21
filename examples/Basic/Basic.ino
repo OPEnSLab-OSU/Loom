@@ -1,12 +1,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // This is simple one of the simplest examples of using Loom. The code used
-// in this example shows up in the majority of other cases as well. 
+// in this example shows up in the majority of other cases as well.
 
 // The include, config, LoomFactory, and LoomManager are typically used in
 // this way.
 
-// The setup almost always includes what is in this example, and in many 
+// The setup almost always includes what is in this example, and in many
 // cases, no further setup is necessary
 
 // The loop is also the start of what most cases use, namely: measure,
@@ -15,44 +15,41 @@
 
 // The configuration currently expects the relay is connected to pin 10
 
-// Documentation for Analog: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___analog.html
-
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
-
-void setup() 
-{ 
-	Loom.begin_LED();
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+void setup()
+{
+	Feather.begin_LED();
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
-	Loom.pause();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
+	Feather.pause();
 }

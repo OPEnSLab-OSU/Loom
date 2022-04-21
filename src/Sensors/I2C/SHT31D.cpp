@@ -1,25 +1,28 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SHT31D.cpp
-/// @brief		File for Loom_SHT31D implementation.
+/// @file		SHT31D.cpp
+/// @brief		File for SHT31D implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "SHT31D.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_SHT31D::Loom_SHT31D(
-LoomManager* manager,
-const byte i2c_address,
-		const uint8_t		mux_port
+SHT31D::SHT31D(
+		const byte		i2c_address,
+		const uint8_t	mux_port
 	)
-	: LoomI2CSensor(manager, "SHT31D", Type::SHT31D, i2c_address, mux_port )
+	: I2CSensor("SHT31D", i2c_address, mux_port)
 {
+  LMark;
 	bool setup = inst_sht31d.begin(i2c_address);
 
 	if (!setup) active = false;
@@ -29,11 +32,11 @@ const byte i2c_address,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_SHT31D::Loom_SHT31D(LoomManager* manager, JsonArrayConst p)
-	: Loom_SHT31D(manager, EXPAND_ARRAY(p, 2) ) {}
+SHT31D::SHT31D(JsonArrayConst p)
+	: SHT31D( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SHT31D::print_measurements() const
+void SHT31D::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -42,8 +45,9 @@ void Loom_SHT31D::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SHT31D::measure()
+void SHT31D::measure()
 {
+  LMark;
 	float t = inst_sht31d.readTemperature();
 	float h = inst_sht31d.readHumidity();
 
@@ -57,13 +61,15 @@ void Loom_SHT31D::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_SHT31D::package(JsonObject json)
+void SHT31D::package(JsonObject json)
 {
+  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["temp"]  = temp;
 	data["humid"] = humid;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
+#endif // ifdef LOOM_INCLUDE_SENSORS

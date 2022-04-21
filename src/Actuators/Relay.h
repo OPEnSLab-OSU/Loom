@@ -1,18 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Relay.h
-/// @brief		File for Loom_Relay definition.
+/// @file		Relay.h
+/// @brief		File for Relay definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_ACTUATORS
 #pragma once
 
 #include "Actuator.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -25,16 +26,16 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#relay)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Relay : public LoomActuator
+class Relay : public Actuator
 {
 
 protected:
-	
+
 	byte 	pin;	///< The digital pin the relay is connect to
 	bool	on;		///< Whether the relay is on or off
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
@@ -42,18 +43,17 @@ public:
 	/// Constructor.
 	///
 	/// @param[in]	pin		Set(Int) | <10> | {5, 6, 9, 10, 11, 12, 13, 14("A0"), 15("A1"), 16("A2"), 17("A3"), 18("A4"), 19("A5")} | Which pin should be used to control the relay
-	Loom_Relay(
-			LoomManager* 	manager,
+	Relay(
 			const byte					pin				= 10
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Relay(LoomManager* manager, JsonArrayConst p);
+	Relay(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Relay() = default;
+	~Relay() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -61,7 +61,6 @@ public:
 
 	void		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
-	void		add_config(JsonObject json) override;
 
 	/// Set relay state
 	/// @param[in]	state	The state to set relay to (True=HIGH, False=LOW)
@@ -77,6 +76,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, Relay, "Relay");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
 
-
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

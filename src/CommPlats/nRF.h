@@ -1,14 +1,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_nRF.h
-/// @brief		File for Loom_nRF definition.
+/// @file		nRF.h
+/// @brief		File for nRF definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
 #include "CommPlat.h"
@@ -16,6 +16,9 @@
 #include <RF24Network.h>
 #include <RF24.h>
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
 
 #define NRF_MESSAGE_SIZE 120	///< Max nRF message size
 
@@ -31,7 +34,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#nrf)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_nRF : public LoomCommPlat
+class nRF : public CommPlat
 {
 
 protected:
@@ -79,36 +82,37 @@ public:
 	/// nRF module constructor
 	///
 	/// @param[in]	max_message_len		Set(Int) | <120> | {120("Max length")} | The maximum possible message length
-	/// @param[in]	address 			Int | <01> | [0-99] | This device's nRF address
+	/// @param[in]	address 			Int | <00> | [0-99] | This device's nRF address
 	/// @param[in]	data_rate			Set(Int) | <0> | {0("Default"), 1("250KBPS"), 2("1MBPS"), 3("2MBPS")} | Transmission data rate
 	/// @param[in]	power_level			Set(Int) | <0> | {0("Default"), 1("Min"), 2("Low"), 3("High"), 4("Max")} | Transmission ower level
 	/// @param[in]	retry_count 		Int | <3> | [0-15] | Max number of transmission retries
 	/// @param[in]	retry_timeout 		Int | <200> | [20-500] | Delay between retransmissions (ms)
 	/// @param[in]	multicast_level		Int | <1> | [1-3] | How many levels to propogate message through heirarchy
-	Loom_nRF(
-			LoomManager* manager,
-			const uint16_t		max_message_len		= 120,
+	/// @param[in] 	override_name
+	nRF(
+			const uint16_t		max_message_len		= 252,
 			const uint8_t		address 			= 0,
 			const uint8_t		data_rate			= 1,
 			const uint8_t		power_level			= 0,
 			const uint8_t		retry_count 		= 3,
 			const uint16_t		retry_timeout 		= 200,
-			const uint8_t		multicast_level		= 1
+			const uint8_t		multicast_level		= 1,
+			const bool 			override_name = false
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_nRF(LoomManager* manager, JsonArrayConst p);
+	nRF(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_nRF();
+	~nRF();
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	void		add_config(JsonObject json) override;
+
 
 //=============================================================================
 ///@name	PRINT INFORMATION
@@ -123,7 +127,7 @@ public:
 	uint8_t		get_address() const override { return address; }
 
 	/// Get multicast(broadcast) level.
-	/// nRF has varying degrees of broadcast corresponding to 
+	/// nRF has varying degrees of broadcast corresponding to
 	/// depth to broadcast through network tree
 	/// @return Multicast level
 	uint8_t		get_multicast_level() const { return multicast_level; }
@@ -135,7 +139,7 @@ public:
 	void		set_address(const uint8_t addr) override;
 
 	/// Set multicast(broadcast) level.
-	/// nRF has varying degrees of broadcast corresponding to 
+	/// nRF has varying degrees of broadcast corresponding to
 	/// depth to broadcast through network tree
 	/// @param[in]	level 	Multicast level to set to
 	void		set_multicast_level(const uint8_t level) { multicast_level = level; }
@@ -144,4 +148,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, nRF, "nRF");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_RADIOS

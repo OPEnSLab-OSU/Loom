@@ -9,14 +9,18 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#pragma once
+
+namespace Loom {
+
 // Forward Declarations
 class WarmUp_Manager;
-class LoomManager;
+class Manager;
 
 class WarmUp {
   public:
     /// Constructor
-    WarmUp(LoomManager* manager, int period = 0);
+    WarmUp(Manager* manager, int period = 0);
 
     int get_period();
 
@@ -25,3 +29,7 @@ class WarmUp {
     int period;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom

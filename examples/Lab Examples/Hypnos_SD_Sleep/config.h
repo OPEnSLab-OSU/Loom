@@ -20,11 +20,11 @@
 			'params':'default'\
 		},\
 		{\
-			'name':'Interrupt_Manager',\
+			'name':'InterruptManager',\
 			'params':[0]\
 		},\
 		{\
-			'name':'Sleep_Manager',\
+			'name':'SleepManager',\
 			'params':[true,false,1]\
 		}\
 	]\

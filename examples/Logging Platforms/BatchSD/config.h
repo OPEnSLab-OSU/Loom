@@ -12,7 +12,7 @@
 		},\
 		{\
 			'name':'SD',\
-			'params':[true,1000,10,'data',true]\
+			'params':[true,1000,11,'data',true]\
 		},\
     		{\
       			'name':'BatchSD',\
@@ -24,7 +24,7 @@
 		},\
 	    	{\
 	      		'name':'GoogleSheets',\
-	      		'params':['Goog', 7003,'/macros/s/<your-script-id>/exec',\
+	      		'params':['Goog', '/macros/s/<your-script-id>/exec',\
 	        '<your-sheet-id>',\
 	/*true to autoname tab*/				true,\
 	/*not used if previous param is true*/	'<your-tab-name>'\

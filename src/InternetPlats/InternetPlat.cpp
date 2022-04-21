@@ -1,39 +1,43 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_InternetPlat.cpp
-/// @brief		File for LoomInternetPlat implementation.
+/// @brief		File for InternetPlat implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+
 #include "InternetPlat.h"
 
-///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::LoomInternetPlat(
-		LoomManager* 			manager,
-		const char* 						module_name,
-		const LoomModule::Type	module_type
-	)
-	: LoomModule(manager, module_name, module_type ) {}
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb)
+InternetPlat::InternetPlat(
+		const char* module_name
+	)
+	: Module(module_name) {}
+
+///////////////////////////////////////////////////////////////////////////////
+InternetPlat::ClientSession InternetPlat::http_request(const char* domain, const char* url, const char* body, const char* verb)
 {
+  LMark;
 	// * the rainbow connection *
 	ClientSession client = connect_to_domain(domain);
 	if (!client) return ClientSession();
 	// ok next, make the http request
 	print_module_label();
 	LPrint("Writing http: ", domain, "\n");
+  LMark;
 	write_http_request(*client, domain, url, body, verb);
 	// return the client for data reception
 	return std::move(client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb)
+void InternetPlat::write_http_request(Stream& client, const char* domain, const char* url, const char* body, const char* verb)
 {
 	// print the initial http request
 	client.print(verb);
@@ -50,7 +54,7 @@ void LoomInternetPlat::write_http_request(Stream& client, const char* domain, co
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* domain) {
+InternetPlat::ClientSession InternetPlat::connect_to_domain(const char* domain) {
 	pinMode(8, OUTPUT);
 	digitalWrite(8, HIGH);
 	// if we're not currently connected to the internet, try to bring it back
@@ -63,21 +67,25 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* 
 	}
 	// I guess we are connected! lets go
 	SSLClient& client = get_client();
+  LMark;
 	// if the socket is somehow still open, close it
 	if (client.connected()) client.stop();
 	// and clear a write error if there is any
 	if (client.getWriteError()) client.clearWriteError();
+  LMark;
 	// * the rainbow connection *
 	int status = client.connect(domain, 443);
 	if (!status) {
 		// log fail, attempt repair, and return
 		print_module_label();
+   	LMark;
 		LPrint("Connect failed with error ", client.getWriteError(), "\n");
 		print_state();
 		// if the underlying client is unhappy, we may need to reset the connection
 		if (client.getWriteError() == SSLClient::SSL_CLIENT_WRTIE_ERROR || client.getWriteError() == SSLClient::SSL_CLIENT_CONNECT_FAIL) {
 			print_module_label();
 			LPrintln("Attempting to cycle the connection: ");
+    	LMark;
 			disconnect();
 			delay(500);
 			connect();
@@ -86,22 +94,25 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_domain(const char* 
 		return ClientSession();
 	}
 	// return a pointer to the client for data reception
-	return LoomInternetPlat::ClientSession(&client);
+	return InternetPlat::ClientSession(&client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress& ip, const uint16_t port) {
+InternetPlat::ClientSession InternetPlat::connect_to_ip(const IPAddress& ip, const uint16_t port) {
 	pinMode(8, OUTPUT);
 	digitalWrite(8, HIGH);
 	// if we're not currently connected to the internet, try to bring it back
 	if (!is_connected()) connect();
+  LMark;
 	if (!is_connected()) {
 		print_module_label();
 		LPrint("Did not attempt to connect, as we are not connected to the internet\n");
 		print_state();
+   	LMark;
 		return ClientSession();
 	}
 	SSLClient& client = get_client();
+  LMark;
 	// if the socket is somehow still open, close it
 	if (client.connected()) client.stop();
 	// and clear a write error if there is any
@@ -117,15 +128,17 @@ LoomInternetPlat::ClientSession LoomInternetPlat::connect_to_ip(const IPAddress&
 		if (client.getWriteError() == SSLClient::SSL_CLIENT_WRTIE_ERROR) {
 			print_module_label();
 			LPrint("Attempting to cycle the connection: ");
+    	LMark;
 			disconnect();
 			delay(500);
+    	LMark;
 			connect();
 			print_state();
 		}
 		return ClientSession();
 	}
 	// return a pointer to the client for data reception
-	return LoomInternetPlat::ClientSession(&client);
+	return InternetPlat::ClientSession(&client);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,12 +156,14 @@ static void print_unix_time(unsigned long epoch)
 	// print the hour, minute and second:
 	// LPrint("The UTC time is ");       // UTC is the time at Greenwich Meridian (GMT)
 	LPrint((epoch  % 86400L) / 3600, ":"); // print the hour (86400 equals secs per day)
+  LMark;
 	if (((epoch % 3600) / 60) < 10) {
 		// In the first 10 minutes of each hour, we'll want a leading '0'
 		LPrint('0');
 	}
 	LPrint((epoch  % 3600) / 60, ":"); // print the minute (3600 equals secs per minute)
 	if ((epoch % 60) < 10) {
+   	LMark;
 		// In the first 10 seconds of each minute, we'll want a leading '0'
 		LPrint('0');
 	}
@@ -157,8 +172,9 @@ static void print_unix_time(unsigned long epoch)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-uint32_t LoomInternetPlat::get_time()
+uint32_t InternetPlat::get_time()
 {
+  LMark;
 	auto udp_dev = open_socket(localPort);
 
 	if (!udp_dev) {
@@ -167,6 +183,7 @@ uint32_t LoomInternetPlat::get_time()
 	}
 
 	byte packet_buffer[NTP_PACKET_SIZE]; 		//buffer to hold incoming and outgoing packets
+  LMark;
 
 	m_send_NTP_packet(*udp_dev, packet_buffer); // send an NTP packet to a time server
 
@@ -205,7 +222,7 @@ uint32_t LoomInternetPlat::get_time()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const
+void InternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) const
 {
 	// set all bytes in the buffer to 0
 	memset(packet_buffer, 0, NTP_PACKET_SIZE);
@@ -219,10 +236,17 @@ void LoomInternetPlat::m_send_NTP_packet(UDP& udp_dev, byte packet_buffer[]) con
 	packet_buffer[13] = 0x4E;
 	packet_buffer[14] = 49;
 	packet_buffer[15] = 52;
+  LMark;
 
 	// all NTP fields have been given values, now
 	// you can send a packet requesting a timestamp:
 	udp_dev.beginPacket(time_server, 123); // NTP requests are to port 123
+  LMark;
 	udp_dev.write(packet_buffer, NTP_PACKET_SIZE);
+  LMark;
 	udp_dev.endPacket();
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

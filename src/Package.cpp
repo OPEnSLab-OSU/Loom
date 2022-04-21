@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Package.cpp
+/// @file		Package.cpp
 /// @brief		File for implementation of packaging functions.
 /// @author		Luke Goertzen
 /// @date		2019
@@ -10,12 +10,14 @@
 
 #include "Package.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @param[out]		json			Object to add data to
 /// @param[in]		module_name		Name of module calling package
 JsonObject get_module_data_object(JsonObject json, const char* module_name)
 {
+	JsonObject data;
 	JsonArray contents = json["contents"];
 	if (contents.isNull()) {
 		contents = json.createNestedArray("contents");
@@ -23,21 +25,23 @@ JsonObject get_module_data_object(JsonObject json, const char* module_name)
 
 	// Find module object if it exists
 	JsonObject compenent;
+  LMark;
 	for (auto module_obj : contents) {
 		if ( strcmp(module_obj["module"], module_name) == 0 ) {
 			compenent = module_obj;
+			data = compenent["data"];
 			break;
 		}
 	}
 
 	// If module object does not exist yet
-	// create object, specify module name, 
+	// create object, specify module name,
 	// and create data array
-	JsonObject data;
+  LMark;
 	if (compenent.isNull()) {
 		compenent = contents.createNestedObject();
 		compenent["module"] = module_name;
-		data = compenent.createNestedObject("data"); 
+		data = compenent.createNestedObject("data");
 	}
 
 	return data;
@@ -49,7 +53,7 @@ JsonObject get_module_data_object(JsonObject json, const char* module_name)
 /// @param[in]		time	Date string of timestamp
 void package_json_timestamp(JsonObject json, const char* date, const char* time)
 {
-	// Note that if the keys are the same as the ones added by the Google script 
+	// Note that if the keys are the same as the ones added by the Google script
 	// for received time, only one value will be kept
 	JsonObject timestamp = json.createNestedObject("timestamp");
 	timestamp["date"] = date;
@@ -62,12 +66,14 @@ void flatten_json_data_object(JsonObject json)
 {
 	// Get / Create array for module data blocks
 	JsonArray contents = json["contents"];
-	if (contents.isNull()) return; 
+  LMark;
+	if (contents.isNull()) return;
 
 	JsonObject flatData = json.createNestedObject("flatObj");
 
 	// Iterate over modules
 	JsonObject data;
+  LMark;
 	for (auto module_obj : contents) {
 		for (JsonPair kv : module_obj["data"].as<JsonObject>()) {
 			flatData[kv.key()] = kv.value();
@@ -79,14 +85,16 @@ void flatten_json_data_object(JsonObject json)
 /// @param[out]		json	Object to flatten data of
 void flatten_json_data_array(JsonObject json)
 {
+  LMark;
 	// Get / Create array for module data blocks
 	JsonArray contents = json["contents"];
-	if (contents.isNull()) return; 
+	if (contents.isNull()) return;
 
 	JsonArray flatData = json.createNestedArray("flatArray");
 
 	// Iterate over modules
 	JsonObject data;
+  LMark;
 	for (auto module_obj : contents) {
 		for (JsonPair kv : module_obj["data"].as<JsonObject>()) {
 			flatData.add(kv.key());
@@ -98,6 +106,7 @@ void flatten_json_data_array(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 JsonArray add_config_temp(JsonObject json, const char* module_name)
 {
+  LMark;
 	JsonArray components = json["components"];
 	if (components.isNull()) {
 		components = json.createNestedArray("components");
@@ -106,9 +115,8 @@ JsonArray add_config_temp(JsonObject json, const char* module_name)
 	JsonObject config_info = components.createNestedObject();
 	config_info["name"] = module_name;
 	return config_info.createNestedArray("params");
-} 
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
+}; // namespace Loom

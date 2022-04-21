@@ -1,20 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_SHT31D.h
-/// @brief		File for Loom_SHT31D definition.
+/// @file		SHT31D.h
+/// @brief		File for SHT31D definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "I2C_Sensor.h"
 
 #include <Adafruit_SHT31.h>
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 ///
@@ -28,9 +29,8 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#sht31-d-temperature--humidity)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_SHT31D : public LoomI2CSensor
+class SHT31D : public I2CSensor
 {
-
 protected:
 	
 	Adafruit_SHT31	inst_sht31d;	///< Underlying SHT31D sensor manager instance
@@ -48,19 +48,18 @@ public:
 	///
 	/// @param[in]	i2c_address			Set(Int) | <0x44> | {0x44, 0x45} | I2C address
 	/// @param[in]	mux_port			Int | <255> | [0-16] | Port on multiplexer
-	Loom_SHT31D(
-LoomManager* manager,
-const byte i2c_address		= 0x44,
-			const uint8_t		mux_port		= 255
+	SHT31D(
+			const byte		i2c_address	= 0x44,
+			const uint8_t	mux_port	= 255
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_SHT31D( LoomManager* manager, JsonArrayConst p );
+	SHT31D(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_SHT31D() = default;
+	~SHT31D() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -79,15 +78,27 @@ const byte i2c_address		= 0x44,
 ///@name	GETTERS
 /*@{*/ //======================================================================
 
-	/// Get the temperature reading.
-	/// Used by the LoomTempSync module to provide temperature
+	/// Get the temperature and humidity reading.
+	/// Used by the TempSync module to provide temperature
 	/// to other modules.
 	/// @return	The measured temperature
 	float		get_temperature() const { return temp; }
-	float		get_humidity() const { return humid; }
-	
-private:
+
+public:
+
+
+
+	float		get_humid() const { return humid; }
+
+public:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, SHT31D, "SHT31D");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_SENSORS
 

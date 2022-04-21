@@ -1,15 +1,27 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		SensorTemplate.h
+/// @brief		File for SensorTemplate definition.
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "Sensor.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// ### (LoomSensor) | dependencies: [] | conflicts: []
+// ### (Sensor) | dependencies: [] | conflicts: []
 /// Class description
 // ###
-class LoomSensorTemplate : public LoomSensor
+class SensorTemplate : public Sensor
 {
 
 protected:
@@ -23,8 +35,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomSensorTemplate(
-			LoomManager* manager,
+	SensorTemplate(
 const char* module_name		= "SensorTemplate",
 			int 			num_samples		= 4
 		);
@@ -32,10 +43,10 @@ const char* module_name		= "SensorTemplate",
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomSensorTemplate(LoomManager* manager, JsonArrayConst p);
-	
+	SensorTemplate(JsonArrayConst p);
+
 	/// Destructor
-	virtual ~LoomSensorTemplate() = default;
+	virtual ~SensorTemplate() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -45,7 +56,7 @@ const char* module_name		= "SensorTemplate",
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
 	void		calibrate() override;
-	void		power_down() override {} 
+	void		power_down() override {}
 	void		power_up() override {}
 
 //=============================================================================
@@ -80,6 +91,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, SensorTemplate, "SensorTemplate");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
 
-
+#endif // ifdef LOOM_INCLUDE_SENSORS

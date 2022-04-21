@@ -16,11 +16,11 @@
 			'params':'default'\
 		},\
 		{\
-			'name':'Interrupt_Manager',\
+			'name':'InterruptManager',\
 			'params':[0]\
 		},\
 		{\
-			'name':'Sleep_Manager',\
+			'name':'SleepManager',\
 			'params':[true,false,1]\
 		},\
     {\
@@ -31,7 +31,6 @@
 			'name':'GoogleSheets',\
 			'params':[\
 				'Goog',\
-				7003,\
 				'/macros/s/<your-script-id>/exec',\
 				'<your-sheet-id>',\
 /*true to autoname tab*/				true,\

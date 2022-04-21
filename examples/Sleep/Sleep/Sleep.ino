@@ -1,57 +1,57 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This example demonstrates how to put device to sleep and wake via 
-// DS3231 RTC alarm connected to pin 6.
+// This example demonstrates how to put device to sleep and wake via
+// DS3231 RTC alarm connected to pin 12.
 
 // The built-in LED will blink once the device is awake.
 
 // This is not a repeating sleep-wake cycle example.
-
-// Documentation for Sleep Manager: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___sleep___manager.html
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
 
-
+Loom::Manager Feather{};
 
 
 // Detach interrupt on wake
-void wakeISR() { 
-	detachInterrupt(6); 
-	LPrintln("Alarm went off"); 
+void wakeISR() {
+	detachInterrupt(12);
+	LPrintln("Alarm went off");
 }
 
 
-
-void setup() 
+void setup()
 {
-	Loom.begin_LED();
+	// Needs to be done for Hypnos Board
+	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
+	pinMode(6, OUTPUT);		// Enable control of 5V rail
+	pinMode(12, INPUT_PULLUP);		// Enable waiting for RTC interrupt, MUST use a pullup since signal is active low
+	pinMode(13, OUTPUT);
+
+	Feather.begin_LED();
 	digitalWrite(LED_BUILTIN, HIGH);
-	// open Serial Monitor to continue, or use Loom.begin_serial();
-	// to continue without waiting on user 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
+	// open Serial Monitor to continue, or use Feather.begin_serial();
+	// to continue without waiting on user
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
 
 	// Register ISR to call on wake
-	Loom.InterruptManager().register_ISR(6, wakeISR, LOW, ISR_Type::IMMEDIATE);
-	
+	getInterruptManager(Feather).register_ISR(12, wakeISR, LOW, ISR_Type::IMMEDIATE);
 
 	// LowPower.standby();
 	digitalWrite(LED_BUILTIN, LOW);
@@ -60,7 +60,7 @@ void setup()
 }
 
 
-void loop() 
+void loop()
 {
 	digitalWrite(LED_BUILTIN, HIGH);
 	delay(500);
@@ -68,11 +68,13 @@ void loop()
 	delay(500);
 
 	// Set an alarm 15 seconds into the future
-	Loom.InterruptManager().RTC_alarm_duration(0, 0, 0, 15);
+	getInterruptManager(Feather).RTC_alarm_duration(0, 0, 0, 15);
 
 	// Go to sleep
 	LPrintln("Going to sleep");
-	Loom.SleepManager().sleep();
+	Feather.power_down();
+	getSleepManager(Feather).sleep();
+	Feather.power_up();
 
 	// This wont be seen unless you close and reopen Serial Monitor
 	LPrintln("Awake");

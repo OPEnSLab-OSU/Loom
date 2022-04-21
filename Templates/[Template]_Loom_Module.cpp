@@ -1,42 +1,51 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		ModuleTemplate.h
+/// @brief		File for ModuleTemplate implementation
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
 
 #include "[Template]_Loom_Module.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModuleTemplate::LoomModuleTemplate(
-		LoomManager* manager,
-		const char* module_name, 
+ModuleTemplate::ModuleTemplate(
 		int				ex_param
-	) 
-	: LoomModule(manager, module_name )
+	)
+	: Module( "ModuleTemplate" )
 {
-	this->module_type = LoomModule::Type::ModuleTemplateType;
+	this->module_type = Module::Type::ModuleTemplateType;
 
 	// Initialize member variables
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomModuleTemplate::LoomModuleTemplate(LoomManager* manager, JsonArrayConst p)
-	: LoomModuleTemplate( EXPAND_ARRAY(p, 2) ) {}
+ModuleTemplate::ModuleTemplate(JsonArrayConst p)
+	: ModuleTemplate( EXPAND_ARRAY(p, 1) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModuleTemplate::print_config()
+void ModuleTemplate::print_config()
 {
-	LoomModule::print_config();
+	Module::print_config();
 	LPrintln('\t', "Description         : ", "value to print" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModuleTemplate::print_state()
+void ModuleTemplate::print_state()
 {
-	LoomModule::print_state();
-	// print information about LoomModuleTemplate state 
+	Module::print_state();
+	// print information about ModuleTemplate state
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomModuleTemplate::package(JsonObject json)
+void ModuleTemplate::package(JsonObject json)
 {
-	package_json(json, module_name, 
+	package_json(json, module_name,
 		"key1",		"val1",
 		"key2",		"val2"
 	);
@@ -45,13 +54,13 @@ void LoomModuleTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomModuleTemplate::dispatch(JsonObject json)
+bool ModuleTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		return functionRoute(
 			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } } 
+			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } }
 		);
 		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
 		// Change to match the parameters of your method
@@ -61,5 +70,3 @@ bool LoomModuleTemplate::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
-

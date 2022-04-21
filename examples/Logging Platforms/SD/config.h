@@ -12,10 +12,10 @@
 		},\
 		{\
 			'name':'SD',\
-			'params':[true,1000,10,'data',true]\
+			'params':[true,1000,11,'data',true]\
 		},\
 		{\
-			'name':'PCF8523',\
+			'name':'DS3234',\
 			'params':'default'\
 		}\
 	]\

@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Sensor.cpp
-/// @brief		File for LoomSensor implementation.
+/// @file		Sensor.cpp
+/// @brief		File for Sensor implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
@@ -10,21 +10,21 @@
 
 #include "Sensor.h"
 
+using namespace Loom;
+
 ///////////////////////////////////////////////////////////////////////////////
-LoomSensor::LoomSensor(	
-		LoomManager* 			manager,
-		const char*							module_name,
-		const LoomModule::Type	module_type,
-		const uint8_t						num_samples 
-	) 
-	: LoomModule(manager, module_name, module_type ) 
+Sensor::Sensor(
+		const char*				module_name,
+		const uint8_t			num_samples
+	)
+	: Module(module_name)
 	, num_samples(num_samples)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSensor::print_config() const
+void Sensor::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 	LPrintln("\tNum Samples         : ", num_samples);
 }
 

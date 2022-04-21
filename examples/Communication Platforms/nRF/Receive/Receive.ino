@@ -1,56 +1,56 @@
 ///////////////////////////////////////////////////////////////////////////////
 
-// This is a basic example of receiving data via nRF. 
+// This is a basic example of receiving data via nRF.
 // While you can do a variety of things with the received data, this example
-// simply prints it and logs it to an SD Card 
+// simply prints it and logs it to an SD Card
 
 // The corresponding example is nRF > Transmit
 
-// These two examples are the Loom equivalent of the basic RX / TX nRF 
+// These two examples are the Loom equivalent of the basic RX / TX nRF
 // examples
 
-// Documentation for nRF: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom__n_r_f.html
+// See https://openslab-osu.github.io/Loom/html/class_loom__n_r_f.html
+// for details of nRF config options
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Enabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
-
-void setup() 
-{ 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.nRF().set_print_verbosity(Verbosity::V_HIGH);
-	Loom.print_config();
+void setup()
+{
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	getnRF(Feather).set_print_verbosity(Verbosity::V_HIGH);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
-	if (Loom.nRF().receive()) {
-		Loom.display_data();
-		Loom.SDCARD().log("nrf.csv");
+	if (getnRF(Feather).receive()) {
+		Feather.display_data();
+		getSD(Feather).log("nrf.csv");
 	}
 
-	Loom.pause();	// Pause according to 'interval' in config
+	Feather.pause();	// Pause according to 'interval' in config
 					// This controls the frequency of checking
 					// for incoming data
 

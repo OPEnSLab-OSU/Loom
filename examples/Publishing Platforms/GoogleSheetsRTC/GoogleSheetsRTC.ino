@@ -7,9 +7,6 @@
 // using the NTP_Sync module
 // (Google Sheets logging is not necessary for this synchronization)
 
-// Documentation for GoogleSheets: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___google_sheets.html
-// Documentation for DS3231 RTC: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___d_s3231.html
-
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
@@ -19,39 +16,36 @@ const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::All,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Ethernet
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
 
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
 void setup()
 {
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
-
-
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 
-
 void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
-	Loom.GoogleSheets().publish();
+	getGoogleSheets(Feather).publish();
 
-	Loom.pause();
+	Feather.pause();
 }

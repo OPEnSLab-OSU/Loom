@@ -1,15 +1,27 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		SPISensorTemplate.h
+/// @brief		File for SPISensorTemplate definition.
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_SENSORS
 #pragma once
 
 #include "SPI_Sensor.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// ### (LoomSPISensor) | dependencies: [] | conflicts: []
+// ### (SPISensor) | dependencies: [] | conflicts: []
 /// Class description
 // ###
-class LoomSPISensorTemplate : public LoomSPISensor
+class SPISensorTemplate : public SPISensor
 {
 
 protected:
@@ -23,8 +35,7 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomSPISensorTemplate(
-			LoomManager* manager,
+	SPISensorTemplate(
 const char* module_name		= "SPISensorTemplate"
 			int				num_samples		= 1
 		);
@@ -32,10 +43,10 @@ const char* module_name		= "SPISensorTemplate"
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomSPISensorTemplate(LoomManager* manager, JsonArrayConst p);
-	
+	SPISensorTemplate(JsonArrayConst p);
+
 	/// Destructor
-	virtual ~LoomSPISensorTemplate() = default;
+	virtual ~SPISensorTemplate() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -45,7 +56,7 @@ const char* module_name		= "SPISensorTemplate"
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
 	void		calibrate() override;
-	void		power_down() override {} 
+	void		power_down() override {}
 	void		power_up() override {}
 
 //=============================================================================
@@ -80,6 +91,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, SPISensorTemplate, "SPISensorTemplate");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
 
-
+#endif // ifdef LOOM_INCLUDE_SENSORS

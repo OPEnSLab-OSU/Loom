@@ -1,37 +1,43 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// @file		Loom_Max_Pub.cpp
-/// @brief		File for Loom_MaxPub implementation.
+/// @brief		File for MaxPub implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))
 
 #include "Max_Pub.h"
 #include "../SubscribePlats/Max_Sub.h"
 #include "../Manager.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxPub::Loom_MaxPub(
-		LoomManager* manager,
-		const LoomModule::Type	internet_type
-	)   
-	: LoomPublishPlat(manager, "MaxPub", Type::MaxPub, internet_type )
+
+#define UDP_SEND_OFFSET 8000 ///< UDP sending port is this value + device instance number
+
+///////////////////////////////////////////////////////////////////////////////
+MaxPub::MaxPub()
+	: PublishPlat("MaxPub")
 	, remoteIP({192,168,1,255})
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::second_stage_ctor() 
+void MaxPub::second_stage_ctor()
 {
-	LoomPublishPlat::second_stage_ctor();
+	PublishPlat::second_stage_ctor();
+  LMark;
 
 	UDP_port = UDP_SEND_OFFSET + ((device_manager) ? device_manager->get_instance_num() : 0);
 
-	// Get new UDP pointer	
+	// Get new UDP pointer
 	if (m_internet != nullptr) {
+   	LMark;
 		UDP_Inst = m_internet->open_socket(UDP_port);
 	} else {
 		print_module_label();
@@ -40,29 +46,31 @@ void Loom_MaxPub::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MaxPub::Loom_MaxPub(LoomManager* manager, JsonArrayConst p)
-	: Loom_MaxPub(manager, (LoomModule::Type)(int)p[0] ) {}
+MaxPub::MaxPub(JsonArrayConst p)
+	: MaxPub() {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::print_config() const
+void MaxPub::print_config() const
 {
-	LoomPublishPlat::print_config();
+	PublishPlat::print_config();
 	LPrintln("\tUDP Port  : ", UDP_port);
 	LPrintln("\tRemote IP : ", remoteIP);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_port(const uint16_t port)
+void MaxPub::set_port(const uint16_t port)
 {
 	UDP_port = port;
+  LMark;
 	UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat)
+bool MaxPub::send_to_internet(const JsonObject json, InternetPlat* plat)
 {
 	if (!UDP_Inst) {
-		// Try to get UDP 
+   	LMark;
+		// Try to get UDP
 		UDP_Inst = (m_internet != nullptr) ? m_internet->open_socket(UDP_port) : nullptr;
 		// Check if still null
 		if (!UDP_Inst) {
@@ -77,14 +85,15 @@ bool Loom_MaxPub::send_to_internet(const JsonObject json, LoomInternetPlat* plat
 		LPrintln("Sending to remoteIP: ", remoteIP);
 	}
 
-	// Send Json	
+	// Send Json
 	UDP_Inst->beginPacket(remoteIP, UDP_port);
+  LMark;
 	serializeJson(json, (*UDP_Inst) );
 	UDP_Inst->endPacket(); // Mark the end of the OSC Packet
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_ip(const IPAddress ip)
+void MaxPub::set_ip(const IPAddress ip)
 {
 	remoteIP = ip;
 	print_module_label();
@@ -92,14 +101,16 @@ void Loom_MaxPub::set_ip(const IPAddress ip)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MaxPub::set_ip()
+void MaxPub::set_ip()
 {
 	print_module_label();
 	LPrintln("Received command to set IP to send to");
-	Loom_MaxSub* temp;
-	if (device_manager && (temp = (Loom_MaxSub*)&(device_manager->MaxSub())) ) {
+	MaxSub* temp;
+	if (device_manager && ( temp = (device_manager->get<MaxSub>())) ) {
+   	LMark;
 		IPAddress ip = temp->get_remote_IP();
 		if (ip[0] != 0) {
+    	LMark;
 			set_ip(ip);
 		} else {
 			print_module_label();
@@ -109,9 +120,10 @@ void Loom_MaxPub::set_ip()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_MaxPub::dispatch(JsonObject json)
+bool MaxPub::dispatch(JsonObject json)
 {
 	JsonArray params = json["params"];
+  LMark;
 	switch( (char)json["func"] ) {
 		case 's': set_ip(); return true;
 	}
@@ -120,10 +132,4 @@ bool Loom_MaxPub::dispatch(JsonObject json)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
+#endif // if defined(LOOM_INCLUDE_MAX) && (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET))

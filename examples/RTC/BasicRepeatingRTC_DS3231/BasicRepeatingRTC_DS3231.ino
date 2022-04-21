@@ -4,70 +4,73 @@
 
 // This program can be used as a base to an RTC interrupt driven program
 
-// Documentation for DS3231 RTC: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___d_s3231.html
-
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
-
-#define ALARM_PIN 6
+#define ALARM_PIN 12
 
 volatile bool alarmFlag = false;
-void alarmISR() { 
-	detachInterrupt(digitalPinToInterrupt(ALARM_PIN)); 
+void alarmISR() {
+	detachInterrupt(digitalPinToInterrupt(ALARM_PIN));
 
-	Loom.InterruptManager().get_RTC_module()->clear_alarms();
+	getInterruptManager(Feather).get_RTC_module()->clear_alarms();
 
 	alarmFlag = true;
 }
 
 
-void setup() 
-{ 
-	Loom.begin_LED();
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+void setup()
+{
+	// Needs to be done for Hypnos Board
+	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
+	pinMode(6, OUTPUT);		// Enable control of 5V rail
+	digitalWrite(5, LOW);	// Enable 3.3V rail
+	digitalWrite(6, HIGH);	// Enable 5V rail
 
-	Loom.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(10));
+	Feather.begin_LED();
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
+
+	getInterruptManager(Feather).register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(10));
 	digitalWrite(LED_BUILTIN, LOW);
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
 	if (alarmFlag) {
 		digitalWrite(LED_BUILTIN, HIGH);
 		LPrintln("Alarm triggered, resetting alarm");
-		Loom.pause(1000);
-		
-		// Don't call RTC_alarm_duration before reconnect_interrupt 
+		Feather.pause(1000);
+
+		// Don't call RTC_alarm_duration before reconnect_interrupt
 		// unless sleeping or calling:
-		// Loom.InterruptManager().get_RTC_module()->clear_alarms();
+		// getInterruptManager(Feather).get_RTC_module()->clear_alarms();
 		// post sleep calls this, and in this example it is in the ISR
-		
-		Loom.InterruptManager().reconnect_interrupt(ALARM_PIN); 
-		Loom.InterruptManager().RTC_alarm_duration(TimeSpan(10)); 
+
+		getInterruptManager(Feather).reconnect_interrupt(ALARM_PIN);
+		getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(10));
 
 		digitalWrite(LED_BUILTIN, LOW);
 		alarmFlag = false;

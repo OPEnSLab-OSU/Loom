@@ -1,25 +1,30 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_MMA8451.cpp
-/// @brief		File for Loom_MMA8451 implementation.
+/// @file		MMA8451.cpp
+/// @brief		File for MMA8451 implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_SENSORS
+
 #include "MMA8451.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MMA8451::Loom_MMA8451(
-LoomManager* manager,
-const byte i2c_address, 
+MMA8451::MMA8451(
+		const byte				i2c_address,
 		const uint8_t			mux_port,
 		const mma8451_range_t	range
-	) 
-	: LoomI2CSensor(manager, "MMA8451", Type::MMA8451, i2c_address, mux_port )
+	)
+	: I2CSensor("MMA8451", i2c_address, mux_port)
 	, range{range}
 {
+  LMark;
 	bool setup = MMA.begin(i2c_address);
 
 	// Set range
@@ -31,29 +36,28 @@ const byte i2c_address,
 	if (!setup) active = false;
 	print_module_label();
 	LPrintln("Initialize ", (setup) ? "sucessful" : "failed");
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_MMA8451::Loom_MMA8451(LoomManager* manager, JsonArrayConst p)
-	: Loom_MMA8451(manager, p[0], p[1], (mma8451_range_t)(int)p[2]) {}
+MMA8451::MMA8451(JsonArrayConst p)
+	: MMA8451(p[0], p[1], (mma8451_range_t)(int)p[2]) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::print_config() const
+void MMA8451::print_config() const
 {
-	LoomI2CSensor::print_config();
+	I2CSensor::print_config();
 	// LPrintln("\tRange               : ", 2 << MMA.getRange(), "G" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::print_measurements() const
+void MMA8451::print_measurements() const
 {
 	print_module_label();
 	LPrintln("Measurements:");
 	LPrintln("\tAccel X     : ", accel[0], " m/s^2");
 	LPrintln("\tAccel Y     : ", accel[1], " m/s^2");
 	LPrintln("\tAccel Z     : ", accel[2], " m/s^2");
-	
+
 	LPrint("\tOrientation : ");
 	switch (orientation) {
 		case MMA8451_PL_PUF: LPrintln("Portrait Up Front");		break;
@@ -68,13 +72,14 @@ void Loom_MMA8451::print_measurements() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::measure()
+void MMA8451::measure()
 {
+  LMark;
 	// Update sensor
 	MMA.read();
 
 	// Get a new sensor event
-	sensors_event_t event; 
+	sensors_event_t event;
 	MMA.getEvent(&event);
 
 	accel[0] = event.acceleration.x;
@@ -86,10 +91,11 @@ void Loom_MMA8451::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_MMA8451::package(JsonObject json)
+void MMA8451::package(JsonObject json)
 {
+  LMark;
 	JsonObject data = get_module_data_object(json, module_name);
-	
+
 	data["ax"] = accel[0];
 	data["ay"] = accel[1];
 	data["az"] = accel[2];
@@ -112,19 +118,19 @@ void Loom_MMA8451::package(JsonObject json)
 }
 
 // ///////////////////////////////////////////////////////////////////////////////
-// void Loom_MMA8451::enable_interrupts(bool enable)
+// void MMA8451::enable_interrupts(bool enable)
 // {
 
 // }
 
 // ///////////////////////////////////////////////////////////////////////////////
-// void Loom_MMA8451::set_transient_int_threshold(uint8_t range)
+// void MMA8451::set_transient_int_threshold(uint8_t range)
 // {
 // 	MMA.setTransientIntThreshold(range);
 // }
 
 // ///////////////////////////////////////////////////////////////////////////////
-// void Loom_MMA8451::configure_interrupts()
+// void MMA8451::configure_interrupts()
 // {
 // 	uint8_t dataToWrite = 0;
 // 	// MMA8451_REG_CTRL_REG2
@@ -213,5 +219,6 @@ void Loom_MMA8451::package(JsonObject json)
 // 	dataToWrite = 0;
 // }
 
-// ///////////////////////////////////////////////////////////////////////////////
-// 	
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

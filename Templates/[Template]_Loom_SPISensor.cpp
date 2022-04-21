@@ -1,39 +1,52 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		SPISensorTemplate.cpp
+/// @brief		File for SPISensorTemplate implementation.
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_SENSORS
 
 #include "[Template]_Loom_SPISensor.h"
+#include "Module_Factory.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSPISensorTemplate::LoomSPISensorTemplate(
-		byte			i2c_address, 
+SPISensorTemplate::SPISensorTemplate(
+		char* 		module_name,
 		int				num_samples
-	) 
-	: LoomSPISensor( module_name, num_samples )
+	)
+	: SPISensor( module_name, num_samples )
 {
-	this->module_type = LoomModule::Type::SPISensorTemplateType;
+	this->module_type = Module::Type::SPISensorTemplateType;
 
 	// Initialize member variables
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomSPISensorTemplate::LoomSPISensorTemplate(LoomManager* manager, JsonArrayConst p)
-	: LoomSPISensorTemplate( EXPAND_ARRAY(p, 2) ) {}
+SPISensorTemplate::SPISensorTemplate(JsonArrayConst p)
+	: SPISensorTemplate( EXPAND_ARRAY(p, 2) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSPISensorTemplate::print_config()
+void SPISensorTemplate::print_config()
 {
-	LoomSPISensor::print_config();
+	SPISensor::print_config();
 	LPrintln('\t', "Description         : ", "value to print" );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSPISensorTemplate::print_state()
+void SPISensorTemplate::print_state()
 {
-	LoomSPISensor::print_state();
-	// print information about LoomSPISensorTemplate state 
+	SPISensor::print_state();
+	// print information about SPISensorTemplate state
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSPISensorTemplate::print_measurements()
+void SPISensorTemplate::print_measurements()
 {
 	print_module_label();
 	LPrintln("Measurements:");
@@ -42,15 +55,15 @@ void LoomSPISensorTemplate::print_measurements()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSPISensorTemplate::measure()
+void SPISensorTemplate::measure()
 {
 	// measure data from sensor
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSPISensorTemplate::package(JsonObject json)
+void SPISensorTemplate::package(JsonObject json)
 {
-	package_json(json, module_name, 
+	package_json(json, module_name,
 		"key1",		"val1",
 		"key2",		"val2"
 	);
@@ -59,13 +72,13 @@ void LoomSPISensorTemplate::package(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomSPISensorTemplate::dispatch(JsonObject json)
+bool SPISensorTemplate::dispatch(JsonObject json)
 {
 	if ( strcmp(json["module"], module_name) == 0 ) {
 		JsonArray params = json["params"];
 		return functionRoute(
 			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } } 
+			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } }
 		);
 		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
 		// Change to match the parameters of your method
@@ -75,10 +88,11 @@ bool LoomSPISensorTemplate::dispatch(JsonObject json)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomSPISensorTemplate::calibrate()
+void SPISensorTemplate::calibrate()
 {
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-	
+
+#endif // ifdef LOOM_INCLUDE_SENSORS

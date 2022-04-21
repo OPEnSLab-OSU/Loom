@@ -1,43 +1,47 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_NTP_Sync.cpp
-/// @brief		File for LoomNTPSync implementation.
+/// @file		NTPSync.cpp
+/// @brief		File for NTPSync implementation.
 /// @author		Noah Koontz
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "NTP_Sync.h"
+#if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))
+
+#include "NTPSync.h"
 #include "Manager.h"
+#include "Module_Factory.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomNTPSync::LoomNTPSync(
-		LoomManager* 	manager,
+NTPSync::NTPSync(
 		const uint          sync_interval_hours
-	) 
-	: LoomModule(manager, "NTP", Type::NTP )
+	)
+	: Module("NTP")
 	, m_sync_interval( sync_interval_hours )
 	, m_internet( nullptr )
 	, m_rtc( nullptr )
 	, m_next_sync( 1 )
-	, m_last_error( LoomNTPSync::Error::NON_START ) 
+	, m_last_error( NTPSync::Error::NON_START )
 	{}
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomNTPSync::LoomNTPSync(LoomManager* manager, JsonArrayConst p)
-	: LoomNTPSync(manager, (uint)p[0] ) {}
+NTPSync::NTPSync(JsonArrayConst p)
+	: NTPSync((uint)p[0] ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::second_stage_ctor() 
+void NTPSync::second_stage_ctor()
 {
 	// check to see if we have a device manager
 	if (device_manager == nullptr) { m_last_error = Error::INVAL_DEVICE_MANAGE; return; }
 	// check if internet platform exist
 
 	// Try to get internet platform from manager
-	LoomModule* temp = device_manager->find_module_by_category(LoomModule::Category::InternetPlat, 0);
-	if (temp != nullptr) m_internet = (LoomInternetPlat*)temp;
+	InternetPlat* temp = device_manager->get<InternetPlat>();
+	if (temp != nullptr) m_internet = (InternetPlat*)temp;
 	else {
 		m_last_error = Error::INVAL_INTERNET;
 		print_module_label();
@@ -45,7 +49,7 @@ void LoomNTPSync::second_stage_ctor()
 		return;
 	}
 	// same for RTC
-	LoomRTC* rtc_temp = device_manager->get_rtc_module();
+	RTC* rtc_temp = device_manager->get_rtc_module();
 	if (rtc_temp != nullptr) {
 		m_rtc = rtc_temp;
 		print_module_label();
@@ -63,7 +67,7 @@ void LoomNTPSync::second_stage_ctor()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::print_config() const
+void NTPSync::print_config() const
 {
 	print_module_label();
 	if (m_sync_interval == 0) LPrintln("\tNTPSync set to synchronize once.");
@@ -71,7 +75,7 @@ void LoomNTPSync::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::print_state() const 
+void NTPSync::print_state() const
 {
 	print_module_label();
 	if (m_last_error != Error::OK) LPrint("\tNTPSync in error state: ", static_cast<uint8_t>(m_last_error), "\n");
@@ -80,8 +84,9 @@ void LoomNTPSync::print_state() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomNTPSync::measure() 
+void NTPSync::measure()
 {
+  LMark;
 	// if a sync is requested
 	if (m_next_sync.unixtime() != 0 && m_rtc->now().secondstime() > m_next_sync.secondstime()) {
 		// if the engine is operating correctly
@@ -91,6 +96,7 @@ void LoomNTPSync::measure()
 			int attempt_count = 0;
 			// repeat synchronize if this is the first power on
 			do {
+     		LMark;
 				timeNow = m_sync_rtc();
 				if (timeNow.unixtime() != 0) m_next_sync = DateTime(0);
 				else delay(100);
@@ -116,8 +122,9 @@ void LoomNTPSync::measure()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-DateTime LoomNTPSync::m_sync_rtc() 
+DateTime NTPSync::m_sync_rtc()
 {
+  LMark;
 	// it is presumed that the objects this function needs are in working order
 	// get the current time from the internet
 	const unsigned long epoch = m_internet->get_time();
@@ -129,6 +136,7 @@ DateTime LoomNTPSync::m_sync_rtc()
 	}
 	// send it to the rtc
 	const DateTime time(epoch);
+  LMark;
 	m_rtc->time_adjust(time);
 	m_last_error = Error::OK;
 	// log boi
@@ -138,3 +146,5 @@ DateTime LoomNTPSync::m_sync_rtc()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+#endif // if (defined(LOOM_INCLUDE_WIFI) || defined(LOOM_INCLUDE_ETHERNET) || defined(LOOM_INCLUDE_LTE))

@@ -1,36 +1,34 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LogPlat.cpp
-/// @brief		File for LoomLogPlat implementation.
+/// @file		LogPlat.cpp
+/// @brief		File for LogPlat implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
 #include "LogPlat.h"
 #include "Manager.h"
 
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-LoomLogPlat::LoomLogPlat( 
-		LoomManager* 			manager,
-		const char* 						module_name, 
-		const LoomModule::Type	module_type,
+LogPlat::LogPlat(
+		const char* 						module_name,
 		const bool							enable_rate_filter,
 		const uint16_t					min_filter_delay
 	)
-	: LoomModule(manager, module_name, module_type )
+	: Module(module_name)
 	, enable_rate_filter(enable_rate_filter)
 	, min_filter_delay(min_filter_delay)
 	, last_log_millis(0)
 {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void LoomLogPlat::print_config() const
+void LogPlat::print_config() const
 {
-	LoomModule::print_config();
+	Module::print_config();
 
 	LPrintln("\tEnable Log Filter   : ", (enable_rate_filter) ? "Enabled" : "Disabled" );
 	if (enable_rate_filter) {
@@ -39,7 +37,7 @@ void LoomLogPlat::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomLogPlat::check_millis() 
+bool LogPlat::check_millis()
 {
 	if ( (millis() > min_filter_delay) && ( (millis()-last_log_millis) < min_filter_delay ) ) {
 		print_module_label();
@@ -52,7 +50,7 @@ bool LoomLogPlat::check_millis()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool LoomLogPlat::log()
+bool LogPlat::log()
 {
 	if (device_manager != nullptr) {
 		JsonObject tmp = device_manager->internal_json();

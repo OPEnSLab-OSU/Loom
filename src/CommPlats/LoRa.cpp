@@ -1,32 +1,38 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LoRa.cpp
-/// @brief		File for Loom_LoRa implementation.
+/// @file		LoRa.cpp
+/// @brief		File for LoRa implementation.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef LOOM_INCLUDE_RADIOS
+
 #include "LoRa.h"
+#include "Module_Factory.h"
+
+#include "Manager.h"
+
+using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_LoRa::Loom_LoRa(
-		LoomManager* device_manager,
+LoRa::LoRa(
 		const uint16_t		max_message_len,
-		const uint8_t		address,
 		const uint8_t		power_level,
 		const uint8_t		retry_count,
-		const uint16_t		retry_timeout 	
+		const uint16_t		retry_timeout,
+		const bool			override_name
 	)
-	: LoomCommPlat(device_manager, "LoRa", Type::LoRa, max_message_len )
-	, address(address)
+	: CommPlat("LoRa", max_message_len )
 	, power_level( ( (power_level >= 5) && (power_level <= 23) ) ? power_level : 23 )
+	, address(device_manager->get_instance_num())///<Note: Instance number is set in the sketch's config.h file.
 	, retry_count(retry_count)
 	, retry_timeout(retry_timeout)
 	, driver{ RFM95_CS, RFM95_INT }
 	, manager{ driver, address }
-{ 
+{
 	pinMode(8, INPUT_PULLUP);
 	pinMode(RFM95_RST, OUTPUT);
 	digitalWrite(RFM95_RST, HIGH);
@@ -37,7 +43,7 @@ Loom_LoRa::Loom_LoRa(
 	status = manager.init();
 	print_module_label();
 	LPrintln("\tInitializing Manager ", (status) ? "Success" : "Failed");
-	
+
 	// Set Frequency
 	status = driver.setFrequency(RF95_FREQ);
 	print_module_label();
@@ -46,50 +52,57 @@ Loom_LoRa::Loom_LoRa(
 	// Set Power Level
 	print_module_label();
 	LPrintln("\tSetting Power Level to ", power_level);
+  LMark;
 	driver.setTxPower(power_level, false);
 
 	// Set Retry Delay
 	print_module_label();
 	LPrintln("\tSetting retry timeout to ", retry_timeout, " ms");
+  LMark;
 	manager.setTimeout(retry_timeout);
 
 	// Set Max Retry Count
 	print_module_label();
 	LPrintln("\tSetting max retry count ", retry_count);
 	manager.setRetries(retry_count);
+  LMark;
 
-	driver.setModemConfig(RH_RF95::Bw500Cr45Sf128);
+	// Using default settings
+	//driver.setModemConfig(RH_RF95::Bw125Cr45Sf128);
+
+	// Setting bandwidth
+	driver.setSignalBandwidth(125000);
+  LMark;
+
+	// Setting Spreading Factor (2^10 = 1024)
+	driver.setSpreadingFactor(10); 
+  LMark;
+
+	// Setting Coding Rate (4/8)
+	driver.setCodingRate4(8);	
+  LMark;
 
 	driver.sleep();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-Loom_LoRa::Loom_LoRa(LoomManager* device_manager, JsonArrayConst p)
-	: Loom_LoRa(device_manager, EXPAND_ARRAY(p, 5) ) {}
+LoRa::LoRa(JsonArrayConst p)
+	: LoRa(EXPAND_ARRAY(p, 5) ) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::add_config(JsonObject json)
-{
-	// add_config_aux(json, module_name,
-	// 	module_name, 
-	// 	max_message_len, address, power_level, retry_count, retry_timeout
-	// );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::power_up() {
+void LoRa::power_up() {
 	driver.available();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::power_down() {
+void LoRa::power_down() {
 	driver.sleep();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::print_config() const
+void LoRa::print_config() const
 {
-	LoomCommPlat::print_config();
+	CommPlat::print_config();
 
 	LPrintln("\tAddress       : ", address );
 	LPrintln("\tPower Level   : ", power_level );
@@ -98,15 +111,16 @@ void Loom_LoRa::print_config() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void Loom_LoRa::set_address(const uint8_t addr)    // Need to test this
-{ 
+void LoRa::set_address(const uint8_t addr)    // Need to test this
+{
 	address = addr;
+  LMark;
 	manager.setThisAddress(addr);
 	driver.sleep();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time) 
+bool LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time)
 {
 	bool status = false;
 	uint8_t len = max_message_len;
@@ -115,62 +129,78 @@ bool Loom_LoRa::receive_blocking_impl(JsonObject json, uint max_wait_time)
 	memset(buffer, '\0', max_message_len);
 	if (max_wait_time == 0)
 		status = manager.recvfromAck( (uint8_t*)buffer, &len, &from );
-	else 
+	else
 		status = manager.recvfromAckTimeout( (uint8_t*)buffer, &len, max_wait_time, &from );
-	
+  LMark;
+
 	if (status) {
+   	LMark;
 		signal_strength = driver.lastRssi();
+   	LMark;
 		status = msgpack_buffer_to_json(buffer, json);
 	}
-	
+
 	print_module_label();
-	LPrintln("Receive ", (status) ? "successful" : "failed");
+  	if (status)
+  	  LPrintln("Receive successful");
+  	else
+  	  LPrintln("No packet receieved");
 
 	driver.sleep();
 	return status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::send_impl(JsonObject json, const uint8_t destination) 
+bool LoRa::send_impl(JsonObject json, const uint8_t destination)
 {
 	char buffer[max_message_len];
+  LMark;
 	bool to_msgpack = json_to_msgpack_buffer(json, buffer, max_message_len);
 	if (!to_msgpack) return false;
 
 	bool is_sent = manager.sendtoWait( (uint8_t*)buffer, measureMsgPack(json), destination );
 
 	print_module_label();
-	LPrintln("Send " , (is_sent) ? "successful" : "failed" );
+  	LPrintln("Ack " , (is_sent) ? "received" : "not received" );
+  LMark;
 	signal_strength = driver.lastRssi();
+  LMark;
 	driver.sleep();
 	return is_sent;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::send_raw(uint8_t* bytes, const uint8_t len, const uint8_t destination) {
+bool LoRa::send_raw(uint8_t* bytes, const uint8_t len, const uint8_t destination) {
+  LMark;
 	bool is_sent = manager.sendtoWait(bytes, len, destination);
 
 	print_module_label();
-	LPrintln("Send " , (is_sent) ? "successful" : "failed" );
+  	LPrintln("Ack " , (is_sent) ? "received" : "not received" );
+  LMark;
 	signal_strength = driver.lastRssi();
+  LMark;
 	driver.sleep();
 	return is_sent;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool Loom_LoRa::receive_blocking_raw(uint8_t* dest, const uint8_t maxlen, const uint max_wait_time) {
+bool LoRa::receive_blocking_raw(uint8_t* dest, const uint8_t maxlen, const uint max_wait_time) {
 	bool status;
 	uint8_t len = maxlen;
 	uint8_t from;
 	memset(dest, '\0', maxlen);
 	if (max_wait_time == 0)
 		status = manager.recvfromAck( dest, &len, &from );
-	else 
+	else
 		status = manager.recvfromAckTimeout( dest, &len, max_wait_time, &from );
-	
+
 	if (status)
 		signal_strength = driver.lastRssi();
 
 	driver.sleep();
 	return status;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+#endif // ifdef LOOM_INCLUDE_RADIOS

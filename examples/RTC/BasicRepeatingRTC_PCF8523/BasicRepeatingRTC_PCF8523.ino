@@ -6,76 +6,73 @@
 
 // Note that the PCF8523 is different than the DS3231 in a few aspects
 // - Alarms only have minute (rather than second) precision
-//		Any alarms set for the current minute will be delayed until the 
+//		Any alarms set for the current minute will be delayed until the
 //		start of the next minute
 // - The interrupt is a constant low signal, rather than a squareware
 //		No need to detach the interrupts, just clear the alarms
-
-// Documentation for PCF8523 RTC: https://openslab-osu.github.io/Loom/doxygenV2/html/class_loom___p_c_f8523.html
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Disabled,
-	Enable::Actuators::Disabled,
-	Enable::Max::Disabled
-> ModuleFactory{};
-
-LoomManager Loom{ &ModuleFactory };
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
 
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
-#define ALARM_PIN 6
+#define ALARM_PIN 12
 
 volatile bool alarmFlag = false;
 volatile int count = 0;
-void alarmISR() { 
-	Loom.InterruptManager().get_RTC_module()->clear_alarms();
+void alarmISR() {
+	getInterruptManager(Feather).get_RTC_module()->clear_alarms();
 	count++;
 	alarmFlag = true;
 }
 
 
-void setup() 
-{ 
-	Loom.begin_LED();
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+void setup()
+{
+	Feather.begin_LED();
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
-	Loom.InterruptManager().register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
-	Loom.InterruptManager().RTC_alarm_duration(TimeSpan(10));
+	getInterruptManager(Feather).register_ISR(ALARM_PIN, alarmISR, LOW, ISR_Type::IMMEDIATE);
+	getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(10));
 	digitalWrite(LED_BUILTIN, LOW);
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
 	if (alarmFlag) {
 		digitalWrite(LED_BUILTIN, HIGH);
 		LPrintln("Alarm triggered, resetting alarm");
-		Loom.pause(1000);
-		
-		Loom.InterruptManager().RTC_alarm_duration(TimeSpan(10)); 
+		Feather.pause(1000);
+
+		getInterruptManager(Feather).RTC_alarm_duration(TimeSpan(10));
 
 		digitalWrite(LED_BUILTIN, LOW);
 		alarmFlag = false;
 	}
 
 	LPrintln("Count: ", count);
-	Loom.PCF8523().print_time();
-	Loom.pause(1000);
+	getPCF8523(Feather).print_time();
+	Feather.pause(1000);
 
 }

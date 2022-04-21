@@ -15,50 +15,47 @@
 #include <Loom.h>
 
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::Disabled,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > Disabled
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Disabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
-
-void setup() 
+void setup()
 {
-	// Needs to be done for Hypno Board
-	pinMode(5, OUTPUT);		// Enable control of 3.3V rail 
-	pinMode(6, OUTPUT);		// Enable control of 5V rail 
-
-	//See Above
+	// Needs to be done for Hypnos Board
+	pinMode(5, OUTPUT);		// Enable control of 3.3V rail
+	pinMode(6, OUTPUT);		// Enable control of 5V rail
 	digitalWrite(5, LOW);	// Enable 3.3V rail
 	digitalWrite(6, HIGH);	// Enable 5V rail
 
-	Loom.begin_serial(true);
-	Loom.parse_config(json_config);
-	Loom.print_config();
+	Feather.begin_serial(true);
+	Feather.parse_config(json_config);
+	Feather.print_config();
 
 	LPrintln("\n ** Setup Complete ** ");
 }
 
 
-void loop() 
+void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
 
 	// Log using default filename as provided in configuration
 	// in this case, 'datafile.csv'
-	Loom.SDCARD().log();
+	getSD(Feather).log();
 
-	Loom.pause();	
+	Feather.pause();
 }

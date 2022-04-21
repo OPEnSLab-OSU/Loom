@@ -1,15 +1,27 @@
+///////////////////////////////////////////////////////////////////////////////
+///
+/// @file		InternetPlatTemplate.h
+/// @brief		File for InternetPlatTemplate definition
+/// @author		FirstName LastName
+/// @date		Year
+/// @copyright	GNU General Public License v3.0
+///
+///////////////////////////////////////////////////////////////////////////////
+
+#ifdef LOOM_INCLUDE_INTERNETPLATTEMPLATE
 #pragma once
 
 #include "InternetPlat.h"
 
+namespace Loom {
 
 ///////////////////////////////////////////////////////////////////////////////
 
 
-// ### (LoomInternetPlat) | dependencies: [] | conflicts: []
+// ### (InternetPlat) | dependencies: [] | conflicts: []
 /// Class description
 // ###
-class LoomInternetPlatTemplate : public LoomInternetPlat
+class InternetPlatTemplate : public InternetPlat
 {
 
 protected:
@@ -23,19 +35,17 @@ public:
 /*@{*/ //======================================================================
 
 	/// Constructor
-	LoomInternetPlatTemplate(
-			LoomManager* manager,
-const char* module_name			= "InternetPlatTemplate",
+	InternetPlatTemplate(
 			int				ex_param			= 42
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// \param[in]	p		The array of constuctor args to expand
-	LoomInternetPlatTemplate(LoomManager* manager, JsonArrayConst p);
-	
+	InternetPlatTemplate(JsonArrayConst p);
+
 	/// Destructor
-	virtual ~LoomInternetPlatTemplate() = default;
+	virtual ~InternetPlatTemplate() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -43,7 +53,7 @@ const char* module_name			= "InternetPlatTemplate",
 
 	void 		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
-	void		power_down() override {} 
+	void		power_down() override {}
 	void		power_up() override {}
 
 	void 		connect() override;
@@ -82,6 +92,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, InternetPlatTemplate, "InternetPlatTemplate");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
 
-
+#endif // ifdef LOOM_INCLUDE_InternetPlatTemplate

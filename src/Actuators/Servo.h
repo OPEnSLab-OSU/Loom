@@ -1,20 +1,23 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_Servo.h
-/// @brief		File for Loom_Servo definition.
+/// @file		Servo.h
+/// @brief		File for Servo definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_ACTUATORS
 #pragma once
 
 #include "Actuator.h"
 
 #include <Adafruit_PWMServoDriver.h>
 
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
 
 /// Number of possible servos.
 /// Dependent on servo controller breakout.
@@ -34,7 +37,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#servos-8-channel-pwm-or-servo-featherwing)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_Servo : public LoomActuator
+class Servo : public Actuator
 {
 
 protected:
@@ -44,21 +47,21 @@ protected:
 	uint8_t		positions[NUM_SERVOS];		///< Positions of the servos
 
 public:
-	
+
 //=============================================================================
 ///@name	CONSTRUCTORS / DESTRUCTOR
 /*@{*/ //======================================================================
 
 	/// Constructor
-	Loom_Servo(LoomManager* manager);
+	Servo();
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_Servo(LoomManager* manager, JsonArrayConst p);
+	Servo(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_Servo() = default;
+	~Servo() = default;
 
 //=============================================================================
 ///@name	OPERATION
@@ -66,7 +69,6 @@ public:
 
 	void		package(JsonObject json) override;
 	bool		dispatch(JsonObject json) override;
-	void		add_config(JsonObject json) override;
 
 	/// Set servo position.
 	/// @param[in]	servo		The servo number to control
@@ -83,3 +85,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, Servo, "Servo");
+///////////////////////////////////////////////////////////////////////////////
+
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_ACTUATORS

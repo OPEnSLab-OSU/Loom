@@ -7,42 +7,39 @@
 #include <Loom.h>
 
 // In config, instance number is number to set ModuleCore to in Max MSP
-
 // Include configuration
-const char* json_config = 
+const char* json_config =
 #include "config.h"
 ;
 
-// Set enabled modules
-LoomFactory<
-	Enable::Internet::WiFi,
-	Enable::Sensors::Enabled,
-	Enable::Radios::Enabled,
-	Enable::Actuators::Enabled,
-	Enable::Max::Enabled
-> ModuleFactory{};
+// In Tools menu, set:
+// Internet  > WiFi
+// Sensors   > Enabled
+// Radios    > Disabled
+// Actuators > Disabled
+// Max       > Enabled
 
-LoomManager Loom{ &ModuleFactory };
+using namespace Loom;
+
+Loom::Manager Feather{};
 
 
+void setup()
+{
+	Feather.begin_LED();
+	Feather.begin_serial(false);
+	Feather.parse_config(json_config);
+	Feather.print_config(true);
 
-void setup() 
-{ 
-	Loom.begin_LED();
-	Loom.begin_serial(false);
-	Loom.parse_config(json_config);
-	Loom.print_config(true);
-
-	
 	LPrintln("\n ** Setup Complete ** ");
 }
 
-void loop() 
+void loop()
 {
-	Loom.measure();
-	Loom.package();
-	Loom.display_data();
-	Loom.MaxPub().publish();
-	Loom.MaxSub().subscribe();
-	Loom.pause();
+	Feather.measure();
+	Feather.package();
+	Feather.display_data();
+	getMaxPub(Feather).publish();
+	getMaxSub(Feather).subscribe();
+	Feather.pause();
 }

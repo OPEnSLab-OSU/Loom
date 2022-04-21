@@ -1,20 +1,25 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
-/// @file		Loom_LoRa.h
-/// @brief		File for Loom_LoRa definition.
+/// @file		LoRa.h
+/// @brief		File for LoRa definition.
 /// @author		Luke Goertzen
 /// @date		2019
 /// @copyright	GNU General Public License v3.0
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-
+#ifdef LOOM_INCLUDE_RADIOS
 #pragma once
 
 #include "CommPlat.h"
 
 #include <RH_RF95.h>
 #include <RHReliableDatagram.h>
+
+namespace Loom {
+
+///////////////////////////////////////////////////////////////////////////////
+
 
 // LoRa Chip pins
 #define RFM95_CS  8		//< LoRa hip select pin
@@ -38,7 +43,7 @@
 ///	- [Hardware Support](https://github.com/OPEnSLab-OSU/Loom/wiki/Hardware-Support#lora)
 ///
 ///////////////////////////////////////////////////////////////////////////////
-class Loom_LoRa : public LoomCommPlat
+class LoRa : public CommPlat
 {
 
 protected:
@@ -95,28 +100,27 @@ public:
 	/// @param[in]	power_level					Int | <23> | [5-23] | Transmission power level, low to high power
 	/// @param[in]	retry_count					Int | <3> | [0-15] | Max number of transmission retries
 	/// @param[in]	retry_timeout				Int | <200>| [20-500] | Delay between retransmissions (ms)
-	Loom_LoRa(
-			LoomManager* device_manager,
+	/// @param[in] 	override_name
+	LoRa(
 			const uint16_t		max_message_len		= RH_RF95_MAX_MESSAGE_LEN,
-			const uint8_t		address				= 0,
 			const uint8_t		power_level 		= 23,
 			const uint8_t		retry_count			= 3,
-			const uint16_t		retry_timeout		= 200
+			const uint16_t		retry_timeout		= 200,
+			const bool			override_name 	= false
 		);
 
 	/// Constructor that takes Json Array, extracts args
 	/// and delegates to regular constructor
 	/// @param[in]	p		The array of constuctor args to expand
-	Loom_LoRa(LoomManager* device_manager, JsonArrayConst p);
+	LoRa(JsonArrayConst p);
 
 	/// Destructor
-	~Loom_LoRa() = default;
+	~LoRa() = default;
 
 //=============================================================================
 ///@name	OPERATION
 /*@{*/ //======================================================================
 
-	void		add_config(JsonObject json) override;
 
 	void 		power_up() override;
 	void 		power_down() override;
@@ -133,6 +137,8 @@ public:
 
 	uint8_t		get_address() const override { return address; }
 
+	int16_t     get_signal_strength() const { return signal_strength; }
+
 //=============================================================================
 ///@name	SETTERS
 /*@{*/ //======================================================================
@@ -143,4 +149,10 @@ private:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+REGISTER(Module, LoRa, "LoRa");
+///////////////////////////////////////////////////////////////////////////////
 
+}; // namespace Loom
+
+#endif // ifdef LOOM_INCLUDE_RADIOS
