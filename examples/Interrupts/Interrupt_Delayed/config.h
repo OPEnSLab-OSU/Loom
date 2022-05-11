@@ -1,0 +1,15 @@
+"{\
+	'general':\
+	{\
+		'name':'Device',\
+		'instance':1,\
+		'interval':500,\
+		'print_verbosity':2\
+	},\
+	'components':[\
+		{\
+			'name':'InterruptManager',\
+			'params':[0]\
+		}\
+	]\
+}"
