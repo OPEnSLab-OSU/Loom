@@ -8,90 +8,74 @@
 ///
 ///////////////////////////////////////////////////////////////////////////////
 
-#define LOOM_INCLUDE_SENSORS // DELETE ME
 #ifdef LOOM_INCLUDE_SENSORS
 
 #include "MAX31865.h"
 #include "Module_Factory.h"
 
+#define RNOMINAL    1000.0
+#define RREF        4300.0
+
 using namespace Loom;
 
 ///////////////////////////////////////////////////////////////////////////////
-SPISensorTemplate::SPISensorTemplate(
-		char* 		module_name,
-		int				num_samples
+MAX31865::MAX31865(
+		uint8_t				    num_samples,
+        uint8_t                 CS_pin
 	)
-	: SPISensor( module_name, num_samples )
+	: SPISensor("MAX31865", num_samples)
+    , inst_max(Adafruit_MAX31865(CS_pin))
 {
-	this->module_type = Module::Type::SPISensorTemplateType;
-
-	// Initialize member variables
+    LMark;
+	
+    inst_max.begin(MAX31865_2WIRE);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-SPISensorTemplate::SPISensorTemplate(JsonArrayConst p)
-	: SPISensorTemplate( EXPAND_ARRAY(p, 2) ) {}
+MAX31865::MAX31865(JsonArrayConst p)
+	: MAX31865(EXPAND_ARRAY(p, 2)) {}
 
 ///////////////////////////////////////////////////////////////////////////////
-void SPISensorTemplate::print_config()
-{
-	SPISensor::print_config();
-	LPrintln('\t', "Description         : ", "value to print" );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void SPISensorTemplate::print_state()
-{
-	SPISensor::print_state();
-	// print information about SPISensorTemplate state
-}
-
-///////////////////////////////////////////////////////////////////////////////
-void SPISensorTemplate::print_measurements()
+void MAX31865::print_measurements() const
 {
 	print_module_label();
-	LPrintln("Measurements:");
-	LPrintln("\t", "Key1  : ", val1);
-	LPrintln("\t", "Key2  : ", val2);
+	LPrintln("\tTemp: ", temperature, " C");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void SPISensorTemplate::measure()
+void MAX31865::measure()
 {
-	// measure data from sensor
-}
+    LMark;
 
-///////////////////////////////////////////////////////////////////////////////
-void SPISensorTemplate::package(JsonObject json)
-{
-	package_json(json, module_name,
-		"key1",		"val1",
-		"key2",		"val2"
-	);
-	// keys must be c-strings
-	// values can be int, float, bool, c-string
-}
+	int i = num_samples;
+	float temp = 0;
 
-///////////////////////////////////////////////////////////////////////////////
-bool SPISensorTemplate::dispatch(JsonObject json)
-{
-	if ( strcmp(json["module"], module_name) == 0 ) {
-		JsonArray params = json["params"];
-		return functionRoute(
-			json["func"],
-			"method_to_run", [this, params]() { if (params.size() >= 5) { method_to_run( EXPAND_ARRAY(params, 5) ); } else { LPrintln("Not enough parameters"); } }
-		);
-		// The `5`s in the above command correspond to the number of parameters to `method_to_run`
-		// Change to match the parameters of your method
-	} else {
-		return false;
+	while (i--) {
+		temp += inst_max.temperature(RNOMINAL, RREF);
+
+        // Check and print any faults
+        uint8_t fault = inst_max.readFault();
+        if (fault && (print_verbosity == Verbosity::V_HIGH)) {
+            if (fault & MAX31865_FAULT_HIGHTHRESH)  LPrintln("RTD High Threshold"); 
+            if (fault & MAX31865_FAULT_LOWTHRESH)   LPrintln("RTD Low Threshold"); 
+            if (fault & MAX31865_FAULT_REFINLOW)    LPrintln("REFIN- > 0.85 x Bias"); 
+            if (fault & MAX31865_FAULT_REFINHIGH)   LPrintln("REFIN- < 0.85 x Bias - FORCE- open"); 
+            if (fault & MAX31865_FAULT_RTDINLOW)    LPrintln("RTDIN- < 0.85 x Bias - FORCE- open"); 
+            if (fault & MAX31865_FAULT_OVUV)        LPrintln("Under/Over voltage"); 
+            break;
+        }
 	}
+
+	temperature = temp / num_samples;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void SPISensorTemplate::calibrate()
+void MAX31865::package(JsonObject json)
 {
+    LMark;
 
+	JsonObject data = get_module_data_object(json, "MAX31865");
+	data["temp"] = temperature;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
