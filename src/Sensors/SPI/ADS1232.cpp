@@ -25,8 +25,9 @@ ADS1232::ADS1232(
 	: SPISensor("ADS1232", num_samples)
     , inst_ads(ADS1232_Lib(pdwn, sclk, dout))
 {
+    // Don't appear to be called automatically on initialization
     this->power_up();
-	this->calibrate(); // perhaps automatic
+	this->calibrate();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

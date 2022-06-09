@@ -44,7 +44,7 @@ public:
 	///
 	/// @param[in] num_samples | How many samples to take and average
 	/// @param[in] dout | Data out pin
-	/// @param[in] sclck | Clock pin
+	/// @param[in] sclk | Clock pin
 	/// @param[in] pdwn | Power down pin
 	ADS1232(
 		uint8_t num_samples		= 1,
