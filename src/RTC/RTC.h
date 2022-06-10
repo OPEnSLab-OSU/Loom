@@ -175,6 +175,14 @@ public:
 	/// @param[out]	buf		Buffer to fill
 	void			get_weekday(char* buf);
 
+	/// Get if using local time
+	/// @return	Is using local time
+	bool is_using_local_time() { return use_local_time; }
+
+	/// Get DateTime in local time
+	/// @return	DateTime object in local time
+	DateTime get_local_rtc() { this->local_rtc(); return local_time; }
+
 //=============================================================================
 ///@name	MISCELLANEOUS
 /*@{*/ //======================================================================

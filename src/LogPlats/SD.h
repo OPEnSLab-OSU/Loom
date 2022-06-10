@@ -42,7 +42,7 @@ protected:
 
 		const byte	chip_select;		///< Chip select pin
 		char		filename[13];		///< String of file to write to if not filename explicitly provided (should not exceed 6 characters)
-		RTC*	RTC_Inst;			///< Pointer to an RTC object for timestamps
+		RTC*	RTC_Inst = NULL;			///< Pointer to an RTC object for timestamps
 
 		// SD_Version 		version;
 		// byte 			reset_pin;
