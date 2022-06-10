@@ -33,6 +33,8 @@ class ADS1232 : public SPISensor
 protected:
 	ADS1232_Lib inst_ads;
 	float weight;
+	long offset;
+	float scale;
 
 public:
 
@@ -46,11 +48,15 @@ public:
 	/// @param[in] dout | Data out pin
 	/// @param[in] sclk | Clock pin
 	/// @param[in] pdwn | Power down pin
+	/// @param[in] offset | Calibration offset value
+	/// @param[in] scale | Calibration scale value
 	ADS1232(
 		uint8_t num_samples		= 1,
 		uint8_t dout 			= A0,
 		uint8_t sclk 			= A1,
-		uint8_t pdwn 			= A2
+		uint8_t pdwn 			= A2,
+		long offset			= 8403613,
+		float scale			= 2041.46
 	);
 
 	/// Constructor that takes Json Array, extracts args

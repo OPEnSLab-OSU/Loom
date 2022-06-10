@@ -20,11 +20,16 @@ ADS1232::ADS1232(
 		uint8_t num_samples,
 		uint8_t dout,
 		uint8_t sclk,
-		uint8_t pdwn
+		uint8_t pdwn,
+		long offset,
+		float scale
 	)
 	: SPISensor("ADS1232", num_samples)
     , inst_ads(ADS1232_Lib(pdwn, sclk, dout))
 {
+	this->offset = offset;
+	this->scale = scale;
+
     // Don't appear to be called automatically on initialization
     this->power_up();
 	this->calibrate();
@@ -61,8 +66,8 @@ void ADS1232::package(JsonObject json)
 ///////////////////////////////////////////////////////////////////////////////
 void ADS1232::calibrate()
 {
-    inst_ads.OFFSET = 8403613; // Set to "Calibration offset" from calibration (8527704)
-    inst_ads.SCALE = 2041.46; // Set to "Calibration Scale value" from calibration (427.06) 
+    inst_ads.OFFSET = this->offset; // Set to "Calibration offset" from calibration (8527704)
+    inst_ads.SCALE = this->scale; // Set to "Calibration Scale value" from calibration (427.06) 
 }
 
 ///////////////////////////////////////////////////////////////////////////////
