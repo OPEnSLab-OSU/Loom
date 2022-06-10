@@ -18,14 +18,11 @@ using namespace Loom;
 ///////////////////////////////////////////////////////////////////////////////
 ADS1232::ADS1232(
 		uint8_t num_samples,
-		uint8_t dout,
-		uint8_t sclk,
-		uint8_t pdwn,
 		long offset,
 		float scale
 	)
 	: SPISensor("ADS1232", num_samples)
-    , inst_ads(ADS1232_Lib(pdwn, sclk, dout))
+    , inst_ads(ADS1232_Lib(A2, A1, A0))
 {
 	this->offset = offset;
 	this->scale = scale;
@@ -37,7 +34,7 @@ ADS1232::ADS1232(
 
 ///////////////////////////////////////////////////////////////////////////////
 ADS1232::ADS1232(JsonArrayConst p)
-	: ADS1232(EXPAND_ARRAY(p, 4)) {}
+	: ADS1232(EXPAND_ARRAY(p, 3)) {}
 
 ///////////////////////////////////////////////////////////////////////////////
 void ADS1232::print_measurements() const
