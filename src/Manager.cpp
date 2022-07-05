@@ -168,7 +168,7 @@ void Manager::get_device_name(char* buf)
 	if(temp_device_name[0] == '\0') sprintf(buf, "%s", device_name);
 	else {
     LMark;
-		sprintf(buf, "%s", temp_device_name);
+		sprintf(buf, "%s", device_name);
 		strcpy(temp_device_name, "");
 	}
 }
