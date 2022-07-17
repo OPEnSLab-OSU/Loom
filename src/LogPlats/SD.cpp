@@ -16,6 +16,28 @@
 
 using namespace Loom;
 
+// Necessary for non-member callback function to access RTC instance
+static RTC* RTC_callback = NULL;
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Called when the SD library is about to modify a file
+static void dateTime(uint16_t* date, uint16_t* time)
+{
+	if (RTC_callback) {
+		DateTime now;
+
+		if (RTC_callback->is_using_local_time()) {
+			now = RTC_callback->get_local_rtc();
+		} else {
+			now = RTC_callback->now();
+		}
+
+		*date = FAT_DATE(now.year(), now.month(), now.day());
+		*time = FAT_TIME(now.hour(), now.minute(), now.second());
+	}
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 SD::SD(
 		const bool			enable_rate_filter,
@@ -28,8 +50,8 @@ SD::SD(
 	, chip_select(chip_select)
 {
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
-  LMark;
 
+	LMark;
 	// bool sd_found = sd.begin(chip_select);
 	bool sd_found = sd.begin(chip_select, SD_SCK_MHZ(50));
 
@@ -200,6 +222,10 @@ bool SD::save_json(JsonObject json, const char* name)
 	if ( !check_millis() ) return false;
 
 	digitalWrite(8, HIGH); // if using LoRa, need to temporarily prevent it from using SPI
+
+	// Set file modification date/time
+	RTC_callback = RTC_Inst;
+	SdFile::dateTimeCallback(dateTime);
 
 	// sd.begin(chip_select); // It seems that SD card may become 'unsetup' sometimes, so re-setup
 	File file;
