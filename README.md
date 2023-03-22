@@ -1,3 +1,6 @@
+<b>THIS VERSION OF LOOM HAS BEEN DEPRECATED AND IS NO LONGER BEING SUPPORTED, ANY BUGS YOU MAY ENCOUNTER WILL NOT BE FIXED PLEASE USE Loom 4</b>
+https://github.com/OPEnSLab-OSU/Loom-V4
+
 <p align="center">
     <img src="https://github.com/OPEnSLab-OSU/Loom/blob/gh-pages/Aux/OPEnSLogo.png" alt="logo" width="100" height="100">
   </a>
